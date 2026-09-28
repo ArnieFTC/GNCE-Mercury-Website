@@ -789,6 +789,8 @@ form textarea { min-height: 140px; resize: vertical; }
   font-size: 1.5rem; line-height: 1; cursor: pointer;
 }
 .car-btn:hover { border-color: var(--accent); color: var(--accent); }
+.car-btn, .car-dots { position: relative; z-index: 3; }
+.car-btn { position: absolute; } /* keep the arrows pinned on top of the fading slides */
 .car-btn.prev { left: 10px; }
 .car-btn.next { right: 10px; }
 .car-dots { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
