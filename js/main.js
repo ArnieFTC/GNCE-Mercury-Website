@@ -30,7 +30,10 @@ const header = document.createElement("header");
 header.className = "site-header";
 header.innerHTML = `
   <nav class="nav-bar">
-    <a class="brand" href="${root}index.html">GNCE MERCURY <span class="num">#26413</span></a>
+    <a class="brand" href="${root}index.html">
+      <img class="brand-logo" src="${root}images/logo.png" alt="" onerror="this.remove()">
+      GNCE MERCURY <span class="num">#26413</span>
+    </a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
     <ul class="nav-links">
       ${NAV.map(n => `<li><a href="${root}${n.href}" class="${n.href.startsWith(page) && page ? "active" : ""}">${n.label}</a></li>`).join("")}
