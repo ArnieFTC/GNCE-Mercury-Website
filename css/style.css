@@ -39,7 +39,7 @@ body {
   flex-direction: column;
 }
 
-main { flex: 1; }
+main { flex: 1; position: relative; }
 
 a { color: var(--accent-soft); text-decoration: none; }
 a:hover { color: var(--accent); }
@@ -188,7 +188,34 @@ section { padding: 40px 0; }
 
 /* ---------- Hero ---------- */
 
+/* ---------- Starfield (home page top) ---------- */
+
+.starfield {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 900px;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+          mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+main > section { position: relative; z-index: 1; }
+.starfield .dot {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--text);
+}
+.starfield .sparkle {
+  position: absolute;
+  fill: var(--accent-soft);
+  filter: drop-shadow(0 0 6px var(--accent-glow));
+}
+.starfield .twinkle { animation: twinkle var(--dur, 4s) ease-in-out var(--delay, 0s) infinite; }
+@keyframes twinkle { 50% { opacity: 0.15; } }
+@media (prefers-reduced-motion: reduce) { .starfield .twinkle { animation: none; } }
+
 .hero {
+  position: relative;
   text-align: center;
   padding: 90px 0 60px;
 }

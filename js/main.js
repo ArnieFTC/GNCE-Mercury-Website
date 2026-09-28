@@ -172,3 +172,32 @@ if (counters.length) {
   }), { threshold: [0, 0.5] });
   counters.forEach(c => io.observe(c));
 }
+
+// ---------- Starfield (home page) ----------
+// Tiny dots + a few 4-point sparkles like the ones in the logo. Seeded, so the layout is the same on every visit.
+const starfield = document.querySelector(".starfield");
+if (starfield) {
+  let seed = 26413;
+  const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const SPARKLE = "M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z";
+  let html = "";
+
+  for (let i = 0; i < 90; i++) {
+    const size = 1 + rand() * 1.8;
+    const twinkle = rand() < 0.4;
+    html += `<div class="dot${twinkle ? " twinkle" : ""}" style="left:${rand() * 100}%;top:${rand() * 100}%;` +
+      `width:${size}px;height:${size}px;opacity:${0.25 + rand() * 0.5};` +
+      `--dur:${3 + rand() * 4}s;--delay:${-rand() * 6}s"></div>`;
+  }
+
+  // Sparkles stay toward the sides so they don't sit on top of the title text
+  for (let i = 0; i < 14; i++) {
+    const size = 10 + rand() * 16;
+    const x = rand() < 0.5 ? 2 + rand() * 24 : 74 + rand() * 24;
+    html += `<svg class="sparkle twinkle" viewBox="0 0 24 24" style="left:${x}%;top:${3 + rand() * 80}%;` +
+      `width:${size}px;height:${size}px;opacity:${0.5 + rand() * 0.4};` +
+      `--dur:${3 + rand() * 3}s;--delay:${-rand() * 5}s"><path d="${SPARKLE}"/></svg>`;
+  }
+
+  starfield.innerHTML = html;
+}
