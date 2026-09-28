@@ -8,8 +8,8 @@
 const SEASON = {
   kickoff: "2026-09-12",
   events: [
-    { name: "[Qualifier 1 Name]", date: "2026-11-15" },
-    { name: "[Qualifier 2 Name]", date: "2026-12-06" },
+    { name: "Wolfpack Scrimmage", date: "2026-11-15" },
+    { name: "Windsor Scrimmage", date: "2026-12-06" },
   ],
 };
 
@@ -143,7 +143,8 @@ if (cd) {
 }
 
 // ---------- Animated number counters ----------
-// Any element with class "counter" and data-count counts up when it scrolls into view.
+// Any element with class "counter" and data-count counts up every time it scrolls into view,
+// and quietly resets to 0 once it's fully off screen.
 const counters = document.querySelectorAll(".counter[data-count]");
 if (counters.length) {
   const run = el => {
@@ -151,12 +152,20 @@ if (counters.length) {
     const step = () => {
       const p = Math.min(1, (performance.now() - t0) / dur);
       el.textContent = p < 1 ? Math.round(target * (1 - Math.pow(1 - p, 3))) : target + suffix;
-      if (p < 1) setTimeout(step, 16);
+      el._timer = p < 1 ? setTimeout(step, 16) : null;
     };
     step();
   };
   const io = new IntersectionObserver(entries => entries.forEach(e => {
-    if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
-  }), { threshold: 0.5 });
+    const el = e.target;
+    if (e.intersectionRatio >= 0.5 && !el._shown) {
+      el._shown = true;
+      run(el);
+    } else if (!e.isIntersecting && el._shown) {
+      el._shown = false;
+      clearTimeout(el._timer);
+      el.textContent = "0";
+    }
+  }), { threshold: [0, 0.5] });
   counters.forEach(c => io.observe(c));
 }
