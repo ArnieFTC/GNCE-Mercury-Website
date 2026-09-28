@@ -757,8 +757,8 @@ form textarea { min-height: 140px; resize: vertical; }
   filter: blur(26px) brightness(0.4);
 }
 .robot-carousel .frame.native img {
-  position: relative; width: auto; height: auto; max-width: 100%; max-height: 100%;
-  border-radius: 8px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  position: relative; width: auto; height: auto; max-width: calc(100% - 48px); max-height: calc(100% - 48px);
+  border-radius: 8px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.14), 0 0 30px var(--accent-glow);
 }
 .robot-carousel .frame.soon {
   display: flex; align-items: center; justify-content: center; text-align: center;
