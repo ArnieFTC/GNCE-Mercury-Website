@@ -150,12 +150,16 @@ if (cd) {
 // Any element with class "counter" and data-count counts up every time it scrolls into view,
 // and quietly resets to 0 once it's fully off screen.
 const counters = document.querySelectorAll(".counter[data-count]");
+const show0 = el => (el.dataset.prefix || "") + "0" + (el.dataset.unit || "");
 if (counters.length) {
   const run = el => {
-    const target = +el.dataset.count, suffix = el.dataset.suffix || "", dur = 1400, t0 = performance.now();
+    // data-prefix and data-unit always show (e.g. "$" and "k"); data-suffix appears once it finishes (e.g. "+")
+    const target = +el.dataset.count, dur = 1400, t0 = performance.now();
+    const { prefix = "", unit = "", suffix = "" } = el.dataset;
+    const show = n => prefix + n.toLocaleString("en-US") + unit;
     const step = () => {
       const p = Math.min(1, (performance.now() - t0) / dur);
-      el.textContent = p < 1 ? Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString("en-US") : target.toLocaleString("en-US") + suffix;
+      el.textContent = p < 1 ? show(Math.round(target * (1 - Math.pow(1 - p, 3)))) : show(target) + suffix;
       el._timer = p < 1 ? setTimeout(step, 16) : null;
     };
     step();
@@ -168,7 +172,7 @@ if (counters.length) {
     } else if (!e.isIntersecting && el._shown) {
       el._shown = false;
       clearTimeout(el._timer);
-      el.textContent = "0";
+      el.textContent = show0(el);
     }
   }), { threshold: [0, 0.5] });
   counters.forEach(c => io.observe(c));
