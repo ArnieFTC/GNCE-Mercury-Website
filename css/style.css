@@ -673,6 +673,20 @@ form textarea { min-height: 140px; resize: vertical; }
   border-radius: var(--radius);
   background: var(--bg);
 }
-.card-gallery.row4 { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-.card-gallery.row4 img:not(:first-child) { border-radius: 6px; }
+.card-gallery.row3 { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.card-gallery.row3 img:not(:first-child) { border-radius: 6px; }
 .card p + p { margin-top: 10px; }
+.card-quote {
+  margin-top: 14px;
+  padding-left: 12px;
+  border-left: 2px solid var(--accent);
+  color: var(--text);
+  font-style: italic;
+}
+.card-quote cite {
+  display: block;
+  margin-top: 4px;
+  font-style: normal;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
