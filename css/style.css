@@ -736,10 +736,21 @@ form textarea { min-height: 140px; resize: vertical; }
 /* Portfolio photos and robot mechanism cards */
 /* ---------- Robot carousel (home page) ---------- */
 .robot-carousel { position: relative; width: 100%; margin: 48px auto 0; }
-.robot-carousel .slides { position: relative; }
-.robot-carousel .slide { display: none; margin: 0; }
-.robot-carousel .slide.active { display: block; animation: slideFade 0.5s ease; }
-@keyframes slideFade { from { opacity: 0; } }
+/* All slides sit on top of each other; the active one fades in while the old one fades out */
+.robot-carousel .slides { position: relative; display: grid; }
+.robot-carousel .slide {
+  grid-area: 1 / 1;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.9s ease, visibility 0s linear 0.9s;
+}
+.robot-carousel .slide.active { opacity: 1; visibility: visible; transition: opacity 0.9s ease, visibility 0s; z-index: 1; }
+.robot-carousel .slide .frame img { transform: scale(1.03); transition: transform 3.5s ease-out; }
+.robot-carousel .slide.active .frame img { transform: scale(1); }
+@media (prefers-reduced-motion: reduce) {
+  .robot-carousel .slide, .robot-carousel .slide .frame img { transition: none; }
+}
 .robot-carousel .frame {
   aspect-ratio: 16 / 9;
   border: 1px solid var(--border);
