@@ -217,7 +217,7 @@ if (counters.length) {
 }
 
 // ---------- Robot carousel (home page) ----------
-// Rotates every 5 seconds; pauses while the mouse is over it; arrows and dots jump directly.
+// Rotates every 3 seconds; pauses while the mouse is over it; arrows and dots jump directly.
 const carousel = document.querySelector(".robot-carousel");
 if (carousel) {
   const slides = [...carousel.querySelectorAll(".slide")];
@@ -230,7 +230,7 @@ if (carousel) {
     slides.forEach((s, j) => s.classList.toggle("active", j === current));
     dotBtns.forEach((d, j) => d.classList.toggle("active", j === current));
   };
-  const start = () => { clearInterval(timer); timer = setInterval(() => show(current + 1), 5000); };
+  const start = () => { clearInterval(timer); timer = setInterval(() => show(current + 1), 3000); };
   carousel.querySelector(".prev").addEventListener("click", () => { show(current - 1); start(); });
   carousel.querySelector(".next").addEventListener("click", () => { show(current + 1); start(); });
   dotBtns.forEach((d, j) => d.addEventListener("click", () => { show(j); start(); }));
