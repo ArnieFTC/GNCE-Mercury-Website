@@ -8,7 +8,8 @@ Plain HTML/CSS/JS site, hosted on GitHub Pages.
 |---|---|
 | Nav tabs | `js/main.js` → `NAV` list at the top |
 | Colors / fonts | `css/style.css` → `:root` at the top |
-| Countdown date + event | `index.html` → `data-date` and `data-event` on the `countdown` div |
+| Countdown + season timeline | `js/main.js` → `SEASON` list at the top (dates are `YYYY-MM-DD`, Eastern time) |
+| "By the Numbers" stats | `index.html` → the `counter` divs (`data-count`, `data-prefix`, `data-suffix`) |
 | Team members | `team.html` → copy/paste a `card member` block |
 | Season list | `seasons.html` → copy/paste a card |
 | Season robot + qualifiers | `seasons/<year>.html` → copy/paste an `event` block per qualifier |
@@ -25,4 +26,4 @@ Put images in `images/`, then replace a placeholder like
 ## Adding a new season
 
 1. Copy `seasons/2026-2027.html` → `seasons/2027-2028.html` and edit it.
-2. Adds a card for it in `seasons.html`.
+2. Add a card for it in `seasons.html`.
