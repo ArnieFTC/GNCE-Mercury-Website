@@ -662,3 +662,14 @@ form textarea { min-height: 140px; resize: vertical; }
   font-size: 0.85rem;
 }
 .site-footer .brand-line { font-family: var(--font-head); color: var(--text); letter-spacing: 0.08em; }
+.card-gallery .card-video {
+  grid-column: 1 / -1;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+.card-gallery.row4 { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.card-gallery.row4 img:not(:first-child) { border-radius: 6px; }
+.card p + p { margin-top: 10px; }
