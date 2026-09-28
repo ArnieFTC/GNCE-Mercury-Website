@@ -509,7 +509,7 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
 
 .member { text-align: center; }
 .members-grid { grid-template-columns: repeat(5, 1fr); gap: 16px; }
-.members-grid .card { padding: 20px 12px; }
+.members-grid .card { padding: 20px 10px; }
 @media (max-width: 900px) { .members-grid { grid-template-columns: repeat(2, 1fr); } }
 .member .ph { margin-bottom: 14px; }
 .member .role {
@@ -535,13 +535,13 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   letter-spacing: 0.08em;
   box-shadow: 0 0 12px var(--accent-glow);
 }
-.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
 .chip {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 3px 10px;
+  letter-spacing: 0.03em;
+  padding: 3px 8px;
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--surface-2);
