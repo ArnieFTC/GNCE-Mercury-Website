@@ -760,3 +760,9 @@ form textarea { min-height: 140px; resize: vertical; }
 .parts-grid.five { grid-template-columns: repeat(5, 1fr); gap: 14px; }
 .parts-grid.five .part-card div { padding: 14px; }
 @media (max-width: 1000px) { .parts-grid.five { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); } }
+.part-card img.render { aspect-ratio: 4 / 3; object-fit: cover; background: #fff; }
+.robot-photo.cad-hero { background: #fff; }
+.parts-grid.three { grid-template-columns: repeat(3, 1fr); }
+.grid.pair { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 820px) { .parts-grid.three { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .parts-grid.three, .grid.pair { grid-template-columns: 1fr; } }
