@@ -56,7 +56,7 @@ footer.innerHTML = `
   <div class="container">
     <div class="brand-line">GNCE MERCURY · FTC #26413</div>
     <div>Galactic Narwhal Chicken Effect · Weston, MA</div>
-    <div style="margin-top:8px"><a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">Instagram @gnce_mercury</a></div>
+    <div style="margin-top:8px"><a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">Instagram: @gnce_mercury</a></div>
     <div style="margin-top:8px">© ${new Date().getFullYear()} GNCE Mercury</div>
   </div>`;
 document.body.append(footer);
