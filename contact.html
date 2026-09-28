@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | GNCE Mercury</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="contact">
+  <main class="container">
+
+    <div class="page-head">
+      <span class="eyebrow">Get In Touch</span>
+      <h1>Contact Us</h1>
+      <p>Questions, sponsorship, or outreach collabs? We'd love to hear from you.</p>
+    </div>
+
+    <section>
+      <div class="grid two">
+
+        <!-- CONTACT FORM (placeholder). It doesn't send yet. To make it work, sign up
+             for a free form service like Formspree and set the form's action to your URL. -->
+        <div class="card">
+          <h3 style="margin-bottom:18px">Send a Message</h3>
+          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Form coming soon! For now, please email us.');">
+            <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+            <div class="field">
+              <label for="topic">Topic</label>
+              <select id="topic" name="topic">
+                <option>General question</option>
+                <option>Sponsorship</option>
+                <option>Outreach / collaboration</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
+            <button class="btn" type="submit">Send</button>
+          </form>
+          <p class="note">[ Placeholder form: not connected yet ]</p>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3 style="margin-bottom:10px">Reach Us</h3>
+            <ul class="contact-list">
+              <li><span class="k">Email</span><a href="mailto:team@example.com">[team email]</a></li>
+              <li><span class="k">Instagram</span><a href="#">[@handle]</a></li>
+              <li><span class="k">YouTube</span><a href="#">[channel]</a></li>
+              <li><span class="k">Location</span>Weston, MA</li>
+              <li><span class="k">FTC Team #</span><a href="https://ftc-events.firstinspires.org/team/26413" target="_blank" rel="noopener">26413</a></li>
+            </ul>
+          </div>
+
+          <!-- SUPPORT / DONATE: set the button's href to your donation link -->
+          <div class="card" id="support" style="margin-top:20px">
+            <h3>Support Us</h3>
+            <p style="margin:8px 0 18px">
+              Parts, registration, and travel add up. Every donation or sponsorship
+              goes straight to building robots and running outreach.
+            </p>
+            <a class="btn" href="#">Donate</a>
+            <a class="btn ghost" href="mailto:team@example.com?subject=Sponsorship">Sponsor Us</a>
+            <p class="note">[ Placeholder: add donation link ]</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+  <script src="js/main.js"></script>
+</body>
+</html>
