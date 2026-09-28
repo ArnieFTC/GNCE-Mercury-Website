@@ -349,6 +349,103 @@ a.card:hover { border-color: var(--pink); color: var(--text); }
   color: var(--muted);
 }
 
+.countdown .comp-day {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  font-weight: 700;
+  color: var(--pink);
+  text-shadow: 0 0 24px var(--pink-glow);
+  letter-spacing: 0.06em;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+.countdown.live { border-color: var(--pink); box-shadow: 0 0 30px var(--pink-glow); }
+@keyframes pulse { 50% { opacity: 0.6; } }
+
+/* ---------- Season timeline (inside the countdown card) ---------- */
+
+.timeline {
+  position: relative;
+  margin: 60px 40px 8px;
+  height: 64px;
+  text-align: left;
+}
+.tl-track {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+}
+.tl-fill {
+  height: 100%;
+  background: var(--pink);
+  box-shadow: 0 0 10px var(--pink-glow);
+  border-radius: 2px;
+}
+.tl-today {
+  position: absolute;
+  top: -34px;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--pink);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+.tl-today::after {
+  content: "";
+  display: block;
+  width: 2px;
+  height: 14px;
+  background: var(--pink);
+  margin: 4px auto 0;
+}
+.tl-pt {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tl-pt .dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--muted);
+}
+.tl-pt .lbl { margin-top: 10px; text-align: center; white-space: nowrap; }
+.tl-pt .lbl b { display: block; font-family: var(--font-head); font-size: 0.9rem; color: var(--muted); }
+.tl-pt .lbl span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+.tl-pt.first { transform: translateX(-7px); align-items: flex-start; }
+.tl-pt.first .lbl { text-align: left; }
+.tl-pt.last { transform: translateX(calc(-100% + 7px)); align-items: flex-end; }
+.tl-pt.last .lbl { text-align: right; }
+.tl-pt.past .dot { background: var(--pink); border-color: var(--pink); }
+.tl-pt.next .dot, .tl-pt.today .dot { border-color: var(--pink); box-shadow: 0 0 12px var(--pink-glow); }
+.tl-pt.next .lbl b, .tl-pt.today .lbl b { color: var(--text); }
+
+/* Phones: stack the timeline vertically */
+@media (max-width: 600px) {
+  .timeline { height: auto; margin: 36px 0 0; padding-left: 26px; }
+  .tl-track { top: 14px; bottom: 14px; left: 6px; right: auto; width: 3px; height: auto; }
+  .tl-fill, .tl-today { display: none; }
+  .tl-pt, .tl-pt.first, .tl-pt.last {
+    position: relative;
+    left: auto !important;
+    top: auto;
+    transform: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-left: -26px;
+    padding: 8px 0;
+  }
+  .tl-pt .lbl, .tl-pt.first .lbl, .tl-pt.last .lbl { margin-top: 0; text-align: left; }
+}
+
 /* ---------- Team members ---------- */
 
 .member { text-align: center; }

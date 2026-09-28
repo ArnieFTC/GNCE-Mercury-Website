@@ -30,13 +30,24 @@
       <div class="ph hero-img">[ Team / robot photo ]</div>
     </section>
 
-    <!-- COUNTDOWN — edit data-date and data-event to change the next competition -->
+    <!-- COUNTDOWN + SEASON TIMELINE — edit the event list in js/main.js (SEASON, at the top) -->
     <section class="container">
-      <div class="countdown" data-date="2026-11-15T08:00:00-05:00" data-event="Next Competition: [Event Name]">
+      <div class="countdown" id="countdown">
         <span class="eyebrow">Countdown</span>
         <div class="event-name"></div>
         <div class="event-date"></div>
         <div class="timer"></div>
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <!-- BY THE NUMBERS — data-count is the number it counts up to, data-suffix is added after -->
+    <section class="container">
+      <h2 class="section-title">By the Numbers</h2>
+      <div class="stats">
+        <div class="stat"><div class="big counter" data-count="3">0</div><div class="label">Seasons</div></div>
+        <div class="stat"><div class="big counter" data-count="10">0</div><div class="label">Members</div></div>
+        <div class="stat"><div class="big counter" data-count="100" data-suffix="+">0</div><div class="label">Students Impacted</div></div>
       </div>
     </section>
 
@@ -47,7 +58,7 @@
         <div class="stat"><div class="big">2024</div><div class="label">Rookie Year</div></div>
         <div class="stat"><div class="big">Sustain</div><div class="label">Award · WNEU Qualifier</div></div>
         <div class="stat"><div class="big">WA 1st Pick</div><div class="label">Winning Alliance · Ryken RoboBowl</div></div>
-        <div class="stat"><div class="big">States</div><div class="label">Qualified</div></div>
+        <div class="stat"><div class="big">MA States</div><div class="label">Qualified</div></div>
       </div>
     </section>
 
