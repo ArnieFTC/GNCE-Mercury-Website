@@ -155,7 +155,7 @@ if (counters.length) {
     const target = +el.dataset.count, suffix = el.dataset.suffix || "", dur = 1400, t0 = performance.now();
     const step = () => {
       const p = Math.min(1, (performance.now() - t0) / dur);
-      el.textContent = p < 1 ? Math.round(target * (1 - Math.pow(1 - p, 3))) : target + suffix;
+      el.textContent = p < 1 ? Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString("en-US") : target.toLocaleString("en-US") + suffix;
       el._timer = p < 1 ? setTimeout(step, 16) : null;
     };
     step();
