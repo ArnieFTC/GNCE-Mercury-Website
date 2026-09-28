@@ -217,7 +217,7 @@ if (carousel) {
     slides.forEach((s, j) => s.classList.toggle("active", j === current));
     dotBtns.forEach((d, j) => d.classList.toggle("active", j === current));
   };
-  const start = () => { clearInterval(timer); timer = setInterval(() => show(current + 1), 3000); };
+  const start = () => { clearInterval(timer); timer = setInterval(() => show(current + 1), 4000); };
   carousel.querySelector(".prev").addEventListener("click", () => { show(current - 1); start(); });
   carousel.querySelector(".next").addEventListener("click", () => { show(current + 1); start(); });
   dotBtns.forEach((d, j) => d.addEventListener("click", () => { show(j); start(); }));
