@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=12">
+  <link rel="stylesheet" href="../css/style.css?v=13">
 </head>
 <body data-page="seasons" data-root="../">
   <main class="container">
@@ -16,26 +16,58 @@
     <div class="page-head" style="padding-top:28px">
       <span class="eyebrow">2024–2025 Season</span>
       <h1>INTO THE DEEP</h1>
-      <p>Our rookie season.</p>
+      <p>Our rookie season: an evolving robot built to collect samples and hang specimens.</p>
     </div>
 
     <!-- ROBOT -->
     <section>
       <h2 class="section-title">The Robot</h2>
       <div class="robot">
-        <div class="ph">[ Robot photo ]</div>
+        <img class="robot-photo" src="../images/into-the-deep-robot.png" alt="Mercury's Into the Deep robot with an extending intake and specimen lift" width="578" height="432">
         <div>
-          <h3 style="font-size:1.5rem;margin-bottom:10px">[Robot Name]</h3>
-          <p class="muted">[ Placeholder: describe the robot's strategy and coolest mechanisms. ]</p>
+          <h3 style="font-size:1.5rem;margin-bottom:10px">Built for specimens</h3>
+          <p class="muted">Our first design aimed at basket scoring. After testing, we shifted toward collecting samples from the observation zone and hanging specimens on the submersible. The robot combines a claw intake with a separate lift arm for specimen scoring.</p>
           <ul class="specs" style="margin-top:16px">
-            <li><span>Drivetrain</span><span>[ e.g. Mecanum ]</span></li>
-            <li><span>Intake</span><span>[ TBD ]</span></li>
-            <li><span>Scoring</span><span>[ TBD ]</span></li>
-            <li><span>Autonomous</span><span>[ TBD ]</span></li>
-            <li><span>Software</span><span>[ e.g. Road Runner ]</span></li>
+            <li><span>Chassis</span><span>Redesigned from an earlier chassis</span></li>
+            <li><span>Intake</span><span>Extending claw with wrist</span></li>
+            <li><span>Scoring</span><span>Specimen lift and gripper</span></li>
+            <li><span>Lift drive</span><span>1:28 worm gear</span></li>
+            <li><span>Autonomous plan</span><span>Score, collect, hand off, park</span></li>
           </ul>
         </div>
       </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">How the robot changed</h2>
+      <p class="muted narrow center">We prototyped a basket-focused robot with wooden base plates and a sample chamber. A change in game strategy led to a new chassis, an intake for collecting samples, and a lift arm for hanging specimens. These images and design notes come from our Into the Deep portfolio.</p>
+      <div class="parts-grid" style="margin-top:28px">
+        <article class="part-card">
+          <img src="../images/into-the-deep-prototype.png" alt="Mercury's earlier basket-focused robot prototype" width="486" height="422" loading="lazy">
+          <div><h3>Early prototype</h3><p>Our first concept used wooden base plates and a chamber for samples. We later changed the chassis and scoring strategy.</p></div>
+        </article>
+        <article class="part-card">
+          <img src="../images/into-the-deep-intake-iterations.png" alt="Three stages of Mercury's Into the Deep intake development" width="1022" height="428" loading="lazy">
+          <div><h3>Intake iterations</h3><p>We moved from a rubber wheel concept to a claw that can grip samples from different orientations. A wrist helps the intake reach over the submersible.</p></div>
+        </article>
+        <article class="part-card">
+          <img src="../images/into-the-deep-specimen-gripper.png" alt="Close-up of the lift arm's specimen gripper" width="577" height="433" loading="lazy">
+          <div><h3>Specimen gripper</h3><p>A modified gripper gained a wooden alignment piece and a second claw to help keep specimens oriented for hanging.</p></div>
+        </article>
+        <article class="part-card">
+          <img src="../images/into-the-deep-lift-arm.png" alt="Mercury's specimen lift arm and gripper" width="578" height="432" loading="lazy">
+          <div><h3>Lift arm</h3><p>The lift arm picks up and hangs specimens. A wrist was added so the gripper could adjust its angle.</p></div>
+        </article>
+        <article class="part-card">
+          <img src="../images/into-the-deep-worm-gear.png" alt="Worm gear used in Mercury's lift mechanism" width="375" height="666" loading="lazy">
+          <div><h3>Worm gear</h3><p>A 1:28 gear ratio helps keep the lift from dropping under its own weight when power is removed.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="narrow">
+      <h2 class="section-title">Autonomous strategy</h2>
+      <p class="muted">Our portfolio describes a planned route that scores the starting specimen, moves three field samples to the human player for conversion, scores a converted specimen, then parks. The route was designed around the specimen strategy; the portfolio does not include a verified match record for it.</p>
     </section>
 
     <!-- EVENTS: copy/paste a <div class="event"> block for each qualifier/event -->
