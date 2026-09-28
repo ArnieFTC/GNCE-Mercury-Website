@@ -658,6 +658,11 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 .sponsors .ph { aspect-ratio: 3 / 2; }
+.sponsor-band { border-top: 1px solid var(--border); margin-top: 60px; padding-top: 56px; }
+.sponsor-band + .site-footer { margin-top: 40px; }
+.sponsors .sponsor { display: flex; align-items: center; justify-content: center; aspect-ratio: 3 / 2; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.sponsors .sponsor:hover { border-color: var(--accent); }
+.sponsors .sponsor img { max-height: 100%; object-fit: contain; }
 
 /* ---------- Contact form ---------- */
 
@@ -790,3 +795,4 @@ form textarea { min-height: 140px; resize: vertical; }
 @media (max-width: 600px) { .parts-grid.three, .grid.pair { grid-template-columns: 1fr; } }
 @media (max-width: 600px) { .robot-carousel .frame { aspect-ratio: 4 / 3; } }
 .robot-carousel .frame.light { background: #fff; }
+.season-photo.light { background: #fff; }

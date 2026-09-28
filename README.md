@@ -13,7 +13,8 @@ Plain HTML/CSS/JS site, hosted on GitHub Pages.
 | Team members | `team.html` → copy/paste a `card member` block |
 | Season list | `seasons.html` → copy/paste a card |
 | Season robot + qualifiers | `seasons/<year>.html` → copy/paste an `event` block per qualifier |
-| Outreach + sponsors | `outreach.html` |
+| Outreach events | `outreach.html` |
+| Sponsors (shown on every page) | `js/main.js` → `SPONSORS` list |
 | Email, socials, donate link, form | `contact.html` |
 
 ## Adding photos

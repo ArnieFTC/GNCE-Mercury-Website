@@ -21,6 +21,12 @@ const NAV = [
   { label: "Contact",    href: "contact.html" },
 ];
 
+// SPONSORS: shown in a section at the bottom of EVERY page (added below, before the footer).
+// Keep this on all pages. To add a sponsor: { name: "Acme", logo: "images/acme.png", url: "https://acme.com" }.
+// While the list is empty, placeholder logo boxes are shown.
+const SPONSORS = [];
+const SUPPORTERS_NOTE = "Our Into the Deep portfolio names SolidWorks (CAD access), Weston Owl (local coverage), and WEEFC (support for Weston FLL and FTC programs).";
+
 // Pages inside /seasons/ set data-root="../" on <body> so links still work.
 const root = document.body.dataset.root || "";
 const page = document.body.dataset.page || "";
@@ -48,6 +54,27 @@ toggle.addEventListener("click", () => {
   toggle.setAttribute("aria-expanded", open);
   toggle.textContent = open ? "✕" : "☰";
 });
+
+// ---------- Sponsors (every page) ----------
+const sponsorSection = document.createElement("section");
+sponsorSection.className = "sponsor-band";
+sponsorSection.id = "sponsors";
+sponsorSection.innerHTML = `
+  <div class="container">
+    <h2 class="section-title">Our Sponsors</h2>
+    <p class="center muted narrow">Thank you to the sponsors who make our season possible.</p>
+    <div class="sponsors" style="margin-top:28px">
+      ${SPONSORS.length
+        ? SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener"><img src="${root}${s.logo}" alt="${s.name}"></a>`).join("")
+        : `<div class="ph">[ Sponsor logo ]</div>`.repeat(4)}
+    </div>
+    <h3 class="center" style="margin-top:32px">2024–2025 supporters</h3>
+    <p class="center muted narrow">${SUPPORTERS_NOTE}</p>
+    <div class="center" style="margin-top:28px">
+      <a class="btn" href="${root}contact.html#support">Become a Sponsor</a>
+    </div>
+  </div>`;
+(document.querySelector("main") || document.body).after(sponsorSection);
 
 // ---------- Footer ----------
 const footer = document.createElement("footer");
