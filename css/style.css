@@ -308,6 +308,24 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   border-radius: var(--radius);
   margin-bottom: 16px;
 }
+.card-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.card-gallery img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: 8px;
+}
+.card-gallery img:first-child {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+}
 .card p strong { color: var(--text); }
 
 /* Placeholder image box — swap for a real <img> later */
