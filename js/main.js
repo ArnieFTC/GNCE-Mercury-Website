@@ -62,9 +62,20 @@ footer.innerHTML = `
 document.body.append(footer);
 
 // ---------- Countdown + season timeline ----------
+// Everything runs on Eastern time wall-clock (America/New_York), so the countdown hits 00:00
+// at midnight in Massachusetts for every visitor and doesn't jump an hour around daylight saving.
+// Times are stored as "Eastern wall-clock expressed as UTC milliseconds".
 const DAY = 86400000;
-const toDate = str => { const [y, m, d] = str.split("-").map(Number); return new Date(y, m - 1, d); }; // local midnight
-const fmt = (d, opts) => d.toLocaleDateString(undefined, opts);
+const TZ = "America/New_York";
+const toDate = str => { const [y, m, d] = str.split("-").map(Number); return Date.UTC(y, m - 1, d); }; // midnight Eastern
+const easternNow = () => {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-US", {
+    timeZone: TZ, hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric",
+    hour: "numeric", minute: "numeric", second: "numeric",
+  }).formatToParts(new Date()).map(x => [x.type, x.value]));
+  return Date.UTC(+p.year, p.month - 1, +p.day, +p.hour, +p.minute, +p.second);
+};
+const fmt = (d, opts) => new Date(d).toLocaleDateString(undefined, { ...opts, timeZone: "UTC" });
 const LONG = { weekday: "long", month: "long", day: "numeric", year: "numeric" };
 
 const cd = document.getElementById("countdown");
@@ -92,8 +103,8 @@ if (cd) {
 
   let lastState = "";
   const tick = () => {
-    const now = new Date();
-    const isToday = d => now >= d && now < new Date(+d + DAY);
+    const now = easternNow();
+    const isToday = d => now >= d && now < d + DAY;
 
     // Timeline progress + past / today / next markers
     const nowPct = pct(now);
@@ -101,7 +112,7 @@ if (cd) {
     tl.querySelector(".tl-today").style.left = nowPct + "%";
     let nextMarked = false;
     points.forEach((p, i) => {
-      const past = now >= new Date(+p.day + DAY), today = isToday(p.day);
+      const past = now >= p.day + DAY, today = isToday(p.day);
       const next = !past && !today && !nextMarked;
       if (next) nextMarked = true;
       ptEls[i].classList.toggle("past", past);
