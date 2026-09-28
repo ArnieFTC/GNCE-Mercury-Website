@@ -14,7 +14,7 @@ Plain HTML/CSS/JS site, hosted on GitHub Pages.
 | Season list | `seasons.html` → copy/paste a card |
 | Season robot + qualifiers | `seasons/<year>.html` → copy/paste an `event` block per qualifier |
 | Outreach events | `outreach.html` |
-| Sponsors (shown on every page) | `js/main.js` → `SPONSORS` list |
+| Sponsors (footer of every page) | `js/main.js` → `SPONSORS` list |
 | Email, socials, donate link, form | `contact.html` |
 
 ## Adding photos

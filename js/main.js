@@ -21,11 +21,11 @@ const NAV = [
   { label: "Contact",    href: "contact.html" },
 ];
 
-// SPONSORS: shown in a section at the bottom of EVERY page (added below, before the footer).
+// SPONSORS: shown in the footer of EVERY page.
 // Keep this on all pages. To add a sponsor: { name: "Acme", logo: "images/acme.png", url: "https://acme.com" }.
 // While the list is empty, placeholder logo boxes are shown.
 const SPONSORS = [];
-const SUPPORTERS_NOTE = "Our Into the Deep portfolio names SolidWorks (CAD access), Weston Owl (local coverage), and WEEFC (support for Weston FLL and FTC programs).";
+const SUPPORTERS_NOTE = "Thanks also to SolidWorks, Weston Owl, and WEEFC for supporting our team.";
 
 // Pages inside /seasons/ set data-root="../" on <body> so links still work.
 const root = document.body.dataset.root || "";
@@ -55,31 +55,18 @@ toggle.addEventListener("click", () => {
   toggle.textContent = open ? "✕" : "☰";
 });
 
-// ---------- Sponsors (every page) ----------
-const sponsorSection = document.createElement("section");
-sponsorSection.className = "sponsor-band";
-sponsorSection.id = "sponsors";
-sponsorSection.innerHTML = `
-  <div class="container">
-    <h2 class="section-title">Our Sponsors</h2>
-    <p class="center muted narrow">Thank you to the sponsors who make our season possible.</p>
-    <div class="sponsors" style="margin-top:28px">
-      ${SPONSORS.length
-        ? SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener"><img src="${root}${s.logo}" alt="${s.name}"></a>`).join("")
-        : `<div class="ph">[ Sponsor logo ]</div>`.repeat(4)}
-    </div>
-    <h3 class="center" style="margin-top:32px">2024–2025 supporters</h3>
-    <p class="center muted narrow">${SUPPORTERS_NOTE}</p>
-    <div class="center" style="margin-top:28px">
-      <a class="btn" href="${root}contact.html#support">Become a Sponsor</a>
-    </div>
-  </div>`;
-(document.querySelector("main") || document.body).after(sponsorSection);
-
 // ---------- Footer ----------
 const footer = document.createElement("footer");
 footer.className = "site-footer";
+const sponsorLogos = SPONSORS.length
+  ? SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener" title="${s.name}"><img src="${root}${s.logo}" alt="${s.name}"></a>`).join("")
+  : `<span class="sponsor ph">Your logo here</span>`.repeat(4);
 footer.innerHTML = `
+  <div class="container footer-sponsors" id="sponsors">
+    <span class="k">Our Sponsors</span>
+    <div class="sponsor-row">${sponsorLogos}</div>
+    <p class="supporters">${SUPPORTERS_NOTE} <a href="${root}contact.html#support">Become a sponsor →</a></p>
+  </div>
   <div class="container">
     <div class="brand-line">GNCE MERCURY · FTC #26413</div>
     <div>Galactic Narwhal Chicken Effect · Weston, MA</div>

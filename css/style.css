@@ -658,11 +658,6 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 .sponsors .ph { aspect-ratio: 3 / 2; }
-.sponsor-band { border-top: 1px solid var(--border); margin-top: 60px; padding-top: 56px; }
-.sponsor-band + .site-footer { margin-top: 40px; }
-.sponsors .sponsor { display: flex; align-items: center; justify-content: center; aspect-ratio: 3 / 2; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
-.sponsors .sponsor:hover { border-color: var(--accent); }
-.sponsors .sponsor img { max-height: 100%; object-fit: contain; }
 
 /* ---------- Contact form ---------- */
 
@@ -796,3 +791,13 @@ form textarea { min-height: 140px; resize: vertical; }
 @media (max-width: 600px) { .robot-carousel .frame { aspect-ratio: 4 / 3; } }
 .robot-carousel .frame.light { background: #fff; }
 .season-photo.light { background: #fff; }
+
+/* Sponsors strip in the footer (every page) */
+.footer-sponsors { padding-bottom: 22px; margin-bottom: 22px; border-bottom: 1px solid var(--border); }
+.footer-sponsors .k { display: block; font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 12px; }
+.sponsor-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.sponsor-row .sponsor { display: flex; align-items: center; justify-content: center; width: 120px; height: 52px; padding: 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
+.sponsor-row a.sponsor:hover { border-color: var(--accent); }
+.sponsor-row .sponsor img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.sponsor-row .sponsor.ph { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); border-style: dashed; aspect-ratio: auto; }
+.footer-sponsors .supporters { max-width: 640px; margin: 12px auto 0; font-size: 0.8rem; }
