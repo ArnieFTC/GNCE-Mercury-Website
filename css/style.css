@@ -219,22 +219,6 @@ main > section { position: relative; z-index: 1; }
   text-align: center;
   padding: 90px 0 60px;
 }
-.hero-img {
-  max-width: 820px;
-  margin: 48px auto 0;
-}
-figure.hero-img img {
-  width: 100%;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  box-shadow: 0 0 40px var(--accent-glow);
-}
-figure.hero-img figcaption {
-  margin-top: 12px;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--muted);
-}
 .hero-logo {
   width: 190px;
   margin: 0 auto 24px;
@@ -573,6 +557,12 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
 }
 .event-head h3 { font-size: 1.3rem; }
 .event-head .date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); }
+.event-photo {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 18px;
+}
 .event-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
 .event-body .k { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
 .event-body .v { font-family: var(--font-head); font-weight: 600; }
