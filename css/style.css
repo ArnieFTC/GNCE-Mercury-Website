@@ -507,6 +507,26 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   .tl-pt .lbl, .tl-pt.first .lbl, .tl-pt.last .lbl { margin-top: 0; text-align: left; }
 }
 
+.mission {
+  max-width: 640px;
+  margin: 28px auto 0;
+  padding: 22px 26px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  text-align: left;
+}
+.mission h2 {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+.page-head .mission p { color: var(--text); margin: 0; max-width: none; font-size: 1.05rem; }
+
 /* ---------- Team members ---------- */
 
 .member { text-align: center; }
