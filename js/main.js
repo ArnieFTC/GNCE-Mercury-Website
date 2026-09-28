@@ -62,9 +62,20 @@ footer.innerHTML = `
 document.body.append(footer);
 
 // ---------- Countdown + season timeline ----------
+// Everything runs on Eastern time wall-clock (America/New_York), so the countdown hits 00:00
+// at midnight in Massachusetts for every visitor and doesn't jump an hour around daylight saving.
+// Times are stored as "Eastern wall-clock expressed as UTC milliseconds".
 const DAY = 86400000;
-const toDate = str => { const [y, m, d] = str.split("-").map(Number); return new Date(y, m - 1, d); }; // local midnight
-const fmt = (d, opts) => d.toLocaleDateString(undefined, opts);
+const TZ = "America/New_York";
+const toDate = str => { const [y, m, d] = str.split("-").map(Number); return Date.UTC(y, m - 1, d); }; // midnight Eastern
+const easternNow = () => {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-US", {
+    timeZone: TZ, hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric",
+    hour: "numeric", minute: "numeric", second: "numeric",
+  }).formatToParts(new Date()).map(x => [x.type, x.value]));
+  return Date.UTC(+p.year, p.month - 1, +p.day, +p.hour, +p.minute, +p.second);
+};
+const fmt = (d, opts) => new Date(d).toLocaleDateString(undefined, { ...opts, timeZone: "UTC" });
 const LONG = { weekday: "long", month: "long", day: "numeric", year: "numeric" };
 
 const cd = document.getElementById("countdown");
@@ -92,8 +103,8 @@ if (cd) {
 
   let lastState = "";
   const tick = () => {
-    const now = new Date();
-    const isToday = d => now >= d && now < new Date(+d + DAY);
+    const now = easternNow();
+    const isToday = d => now >= d && now < d + DAY;
 
     // Timeline progress + past / today / next markers
     const nowPct = pct(now);
@@ -101,7 +112,7 @@ if (cd) {
     tl.querySelector(".tl-today").style.left = nowPct + "%";
     let nextMarked = false;
     points.forEach((p, i) => {
-      const past = now >= new Date(+p.day + DAY), today = isToday(p.day);
+      const past = now >= p.day + DAY, today = isToday(p.day);
       const next = !past && !today && !nextMarked;
       if (next) nextMarked = true;
       ptEls[i].classList.toggle("past", past);
@@ -150,12 +161,16 @@ if (cd) {
 // Any element with class "counter" and data-count counts up every time it scrolls into view,
 // and quietly resets to 0 once it's fully off screen.
 const counters = document.querySelectorAll(".counter[data-count]");
+const show0 = el => (el.dataset.prefix || "") + "0" + (el.dataset.unit || "");
 if (counters.length) {
   const run = el => {
-    const target = +el.dataset.count, suffix = el.dataset.suffix || "", dur = 1400, t0 = performance.now();
+    // data-prefix and data-unit always show (e.g. "$" and "k"); data-suffix appears once it finishes (e.g. "+")
+    const target = +el.dataset.count, dur = 1400, t0 = performance.now();
+    const { prefix = "", unit = "", suffix = "" } = el.dataset;
+    const show = n => prefix + n.toLocaleString("en-US") + unit;
     const step = () => {
       const p = Math.min(1, (performance.now() - t0) / dur);
-      el.textContent = p < 1 ? Math.round(target * (1 - Math.pow(1 - p, 3))) : target + suffix;
+      el.textContent = p < 1 ? show(Math.round(target * (1 - Math.pow(1 - p, 3)))) : show(target) + suffix;
       el._timer = p < 1 ? setTimeout(step, 16) : null;
     };
     step();
@@ -168,7 +183,7 @@ if (counters.length) {
     } else if (!e.isIntersecting && el._shown) {
       el._shown = false;
       clearTimeout(el._timer);
-      el.textContent = "0";
+      el.textContent = show0(el);
     }
   }), { threshold: [0, 0.5] });
   counters.forEach(c => io.observe(c));

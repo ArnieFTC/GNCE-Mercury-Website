@@ -8,7 +8,8 @@ Plain HTML/CSS/JS site, hosted on GitHub Pages.
 |---|---|
 | Nav tabs | `js/main.js` → `NAV` list at the top |
 | Colors / fonts | `css/style.css` → `:root` at the top |
-| Countdown date + event | `index.html` → `data-date` and `data-event` on the `countdown` div |
+| Countdown + season timeline | `js/main.js` → `SEASON` list at the top (dates are `YYYY-MM-DD`, Eastern time) |
+| "By the Numbers" stats | `index.html` → the `counter` divs (`data-count`, `data-prefix`, `data-suffix`) |
 | Team members | `team.html` → copy/paste a `card member` block |
 | Season list | `seasons.html` → copy/paste a card |
 | Season robot + qualifiers | `seasons/<year>.html` → copy/paste an `event` block per qualifier |
