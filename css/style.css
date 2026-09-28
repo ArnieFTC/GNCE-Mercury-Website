@@ -828,3 +828,13 @@ form textarea { min-height: 140px; resize: vertical; }
 .sponsor-row .sponsor img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .sponsor-row .sponsor.ph { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); border-style: dashed; aspect-ratio: auto; }
 .footer-sponsors .supporters { max-width: 640px; margin: 12px auto 0; font-size: 0.8rem; }
+
+/* Outreach year tabs */
+.year-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 8px; }
+.year-tabs button {
+  font-family: var(--font-head); font-weight: 600; font-size: 0.95rem; letter-spacing: 0.04em;
+  padding: 10px 18px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+}
+.year-tabs button:hover { color: var(--text); border-color: var(--accent); }
+.year-tabs button.active { background: var(--accent); border-color: var(--accent); color: #0a0b0f; box-shadow: 0 0 16px var(--accent-glow); }

@@ -255,3 +255,20 @@ if (starfield) {
 
   starfield.innerHTML = html;
 }
+
+// ---------- Outreach year tabs ----------
+// Each <section class="year-panel" data-tab="..."> becomes a tab; the first one is shown first.
+// Without JavaScript every year simply shows, one after another.
+const tabBar = document.querySelector(".year-tabs");
+if (tabBar) {
+  const panels = [...document.querySelectorAll(".year-panel")];
+  tabBar.innerHTML = panels.map(p => `<button role="tab" aria-controls="${p.id}">${p.dataset.tab}</button>`).join("");
+  const tabs = [...tabBar.children];
+  const select = i => {
+    panels.forEach((p, j) => { p.hidden = j !== i; });
+    tabs.forEach((t, j) => { t.classList.toggle("active", j === i); t.setAttribute("aria-selected", j === i); });
+  };
+  tabs.forEach((t, i) => t.addEventListener("click", () => { select(i); history.replaceState(null, "", "#" + panels[i].id); }));
+  const fromHash = panels.findIndex(p => "#" + p.id === location.hash);
+  select(fromHash >= 0 ? fromHash : 0);
+}
