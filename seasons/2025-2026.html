@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=12">
+  <link rel="stylesheet" href="../css/style.css?v=13">
 </head>
 <body data-page="seasons" data-root="../">
   <main class="container">
@@ -23,18 +23,28 @@
     <section>
       <h2 class="section-title">The Robot</h2>
       <div class="robot">
-        <div class="ph">[ Robot photo ]</div>
+        <img class="robot-photo" src="../images/decode-robot.jpg" alt="Mercury's Decode robot with chassis, intake, and shooter assembly" width="2048" height="1536">
         <div>
-          <h3 style="font-size:1.5rem;margin-bottom:10px">[Robot Name]</h3>
-          <p class="muted">[ Placeholder: describe the robot's strategy and coolest mechanisms. ]</p>
+          <h3 style="font-size:1.5rem;margin-bottom:10px">Built to collect and shoot artifacts</h3>
+          <p class="muted">For Decode, we moved away from an early spinning-indexer concept. Our compact design uses a belt-driven parallel-plate chassis, gecko wheels to collect artifacts, a servo-powered transfer to stage them, and a turntable-mounted shooter that aims without rotating the whole robot.</p>
           <ul class="specs" style="margin-top:16px">
-            <li><span>Drivetrain</span><span>[ e.g. Mecanum ]</span></li>
-            <li><span>Intake</span><span>[ TBD ]</span></li>
-            <li><span>Scoring</span><span>[ TBD ]</span></li>
-            <li><span>Autonomous</span><span>[ TBD ]</span></li>
-            <li><span>Software</span><span>[ e.g. Road Runner ]</span></li>
+            <li><span>Chassis</span><span>Belt-driven parallel plates</span></li>
+            <li><span>Intake</span><span>Gecko wheels and belt-fed ramp</span></li>
+            <li><span>Transfer</span><span>Servo-powered staging</span></li>
+            <li><span>Scoring</span><span>Rotating single-wheel shooter</span></li>
+            <li><span>Autonomous plan</span><span>Far triangle; alliance-friendly</span></li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Mechanisms &amp; iterations</h2>
+      <div class="parts-grid">
+        <article class="part-card"><img src="../images/decode-chassis-cad.png" alt="CAD drawing of Mercury's belt-driven parallel-plate chassis" width="950" height="523" loading="lazy"><div><h3>Chassis</h3><p>We separated the drivetrain assemblies and developed custom plates, testing the layout before the final build.</p></div></article>
+        <article class="part-card"><img src="../images/decode-intake.jpg" alt="Decode intake during a build iteration" width="2048" height="1536" loading="lazy"><div><h3>Intake</h3><p>Two front gecko wheels bring artifacts in; smaller belted wheels move them along the ramp toward the transfer.</p></div></article>
+        <article class="part-card"><img src="../images/decode-transfer.jpg" alt="Decode robot transfer mechanism holding artifacts before a shot" width="2048" height="1536" loading="lazy"><div><h3>Transfer</h3><p>A servo-powered holder stages artifacts until the shooter reaches speed, improving consistency and reducing jams.</p></div></article>
+        <article class="part-card"><img src="../images/decode-mechanism.jpg" alt="Close-up of a mechanism on Mercury's Decode robot" width="2048" height="1536" loading="lazy"><div><h3>Shooter development</h3><p>The final concept puts a single powered wheel on a rotating mount to aim from different field positions without turning the drivetrain.</p></div></article>
       </div>
     </section>
 
@@ -49,7 +59,7 @@
           <div><div class="k">Alliance</div><div class="v">—</div></div>
           <div><div class="k">Awards</div><div class="v">—</div></div>
         </div>
-        <p class="notes">[ Placeholder: recap how the event went. ]</p>
+        <p class="notes">We competed at States after qualifying through our Ryken RoboBowl result.</p>
       </div>
       <div class="event">
         <div class="event-head"><h3>WNEU Qualifier</h3><span class="date">Jan 24, 2026</span></div>
@@ -59,7 +69,7 @@
           <div><div class="k">Alliance</div><div class="v">—</div></div>
           <div><div class="k">Awards</div><div class="v"><span class="award">Sustain Award</span></div></div>
         </div>
-        <p class="notes">[ Placeholder: recap how the event went. ]</p>
+        <p class="notes">Alongside our matches, the team received the Sustain Award at WNEU.</p>
       </div>
       <div class="event">
         <div class="event-head"><h3>Ryken RoboBowl Qualifier</h3><span class="date">Dec 14, 2025</span></div>
