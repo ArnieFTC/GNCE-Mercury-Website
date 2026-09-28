@@ -593,6 +593,9 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   margin-bottom: 16px;
 }
 .event-head h3 { font-size: 1.3rem; }
+.event-head h3 a { color: var(--text); }
+.event-head h3 a:hover { color: var(--accent); }
+.event-head h3 .ext { font-size: 0.8em; color: var(--accent); }
 .event-head .date { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); }
 .event-photo {
   width: 100%;
