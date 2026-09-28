@@ -199,10 +199,10 @@ if (starfield) {
   let html = "";
 
   for (let i = 0; i < 113; i++) {
-    const size = 1 + rand() * 1.8;
+    const size = 1.5 + rand() * 1.8;
     const twinkle = rand() < 0.4;
     html += `<div class="dot${twinkle ? " twinkle" : ""}" style="left:${rand() * 100}%;top:${rand() * 100}%;` +
-      `width:${size}px;height:${size}px;opacity:${0.25 + rand() * 0.5};` +
+      `width:${size}px;height:${size}px;opacity:${0.4 + rand() * 0.45};` +
       `--dur:${3 + rand() * 4}s;--delay:${-rand() * 6}s"></div>`;
   }
 
