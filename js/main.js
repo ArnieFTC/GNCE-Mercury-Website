@@ -189,6 +189,30 @@ if (counters.length) {
   counters.forEach(c => io.observe(c));
 }
 
+// ---------- Robot carousel (home page) ----------
+// Rotates every 5 seconds; pauses while the mouse is over it; arrows and dots jump directly.
+const carousel = document.querySelector(".robot-carousel");
+if (carousel) {
+  const slides = [...carousel.querySelectorAll(".slide")];
+  const dots = carousel.querySelector(".car-dots");
+  dots.innerHTML = slides.map((_, i) => `<button aria-label="Show robot ${i + 1}"></button>`).join("");
+  const dotBtns = [...dots.children];
+  let current = 0, timer;
+  const show = i => {
+    current = (i + slides.length) % slides.length;
+    slides.forEach((s, j) => s.classList.toggle("active", j === current));
+    dotBtns.forEach((d, j) => d.classList.toggle("active", j === current));
+  };
+  const start = () => { clearInterval(timer); timer = setInterval(() => show(current + 1), 5000); };
+  carousel.querySelector(".prev").addEventListener("click", () => { show(current - 1); start(); });
+  carousel.querySelector(".next").addEventListener("click", () => { show(current + 1); start(); });
+  dotBtns.forEach((d, j) => d.addEventListener("click", () => { show(j); start(); }));
+  carousel.addEventListener("mouseenter", () => clearInterval(timer));
+  carousel.addEventListener("mouseleave", start);
+  show(0);
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) start();
+}
+
 // ---------- Starfield (home page) ----------
 // Tiny dots + a few 4-point sparkles like the ones in the logo. Seeded, so the layout is the same on every visit.
 const starfield = document.querySelector(".starfield");

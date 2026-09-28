@@ -711,9 +711,42 @@ form textarea { min-height: 140px; resize: vertical; }
 }
 
 /* Portfolio photos and robot mechanism cards */
-.robot-hero { max-width: 640px; margin: 48px auto 0; }
-.robot-hero img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: var(--radius); background: #000; }
-.robot-hero figcaption { color: var(--muted); font-size: 0.85rem; margin-top: 10px; }
+/* ---------- Robot carousel (home page) ---------- */
+.robot-carousel { position: relative; max-width: 640px; margin: 48px auto 0; }
+.robot-carousel .slides { position: relative; }
+.robot-carousel .slide { display: none; margin: 0; }
+.robot-carousel .slide.active { display: block; animation: slideFade 0.5s ease; }
+@keyframes slideFade { from { opacity: 0; } }
+.robot-carousel .frame {
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #000;
+  overflow: hidden;
+}
+.robot-carousel .frame img { width: 100%; height: 100%; }
+.robot-carousel .frame img.contain { object-fit: contain; }
+.robot-carousel .frame img.cover { object-fit: cover; object-position: center 55%; }
+.robot-carousel .frame.soon {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  background: radial-gradient(circle at 50% 45%, var(--surface-2), var(--bg) 70%);
+}
+.robot-carousel .frame.soon strong { display: block; font-family: var(--font-head); font-size: clamp(1.6rem, 5vw, 2.4rem); color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); margin: 4px 0 8px; }
+.robot-carousel .frame.soon span:last-child { color: var(--muted); }
+.robot-carousel figcaption { color: var(--muted); font-size: 0.9rem; margin-top: 12px; }
+.robot-carousel figcaption b { color: var(--text); font-family: var(--font-head); letter-spacing: 0.04em; }
+.car-btn {
+  position: absolute; top: calc(50% - 22px); transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--border); background: rgba(11, 10, 16, 0.75); color: var(--text);
+  font-size: 1.5rem; line-height: 1; cursor: pointer;
+}
+.car-btn:hover { border-color: var(--accent); color: var(--accent); }
+.car-btn.prev { left: 10px; }
+.car-btn.next { right: 10px; }
+.car-dots { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
+.car-dots button { width: 8px; height: 8px; padding: 0; border-radius: 50%; border: none; background: var(--border); cursor: pointer; }
+.car-dots button.active { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
 .season-photo { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #07070a; border-radius: var(--radius); }
 .robot-photo { width: 100%; height: auto; border-radius: var(--radius); }
 .parts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }

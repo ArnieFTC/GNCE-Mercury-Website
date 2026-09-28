@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=22">
+  <link rel="stylesheet" href="css/style.css?v=23">
 </head>
 <body data-page="index">
   <main>
@@ -29,10 +29,26 @@
         <a class="btn" href="team.html">Meet the Team</a>
         <a class="btn ghost" href="contact.html">Support Us</a>
       </div>
-      <figure class="robot-hero">
-        <img src="images/into-the-deep-robot.png" alt="GNCE Mercury's Into the Deep robot with intake and lift arm" width="578" height="432">
-        <figcaption>Our 2024–2025 Into the Deep robot · <a href="seasons/2024-2025.html">See how we built it</a></figcaption>
-      </figure>
+      <!-- ROBOT CAROUSEL: one <figure class="slide"> per robot. It rotates automatically (js/main.js). -->
+      <div class="robot-carousel" aria-roledescription="carousel" aria-label="Our robots">
+        <div class="slides">
+          <figure class="slide">
+            <div class="frame"><img class="contain" src="images/into-the-deep-robot.png" alt="GNCE Mercury's INTO THE DEEP robot with intake and lift arm" width="578" height="432"></div>
+            <figcaption><b>INTO THE DEEP</b> · 2024–2025 · <a href="seasons/2024-2025.html">See how we built it →</a></figcaption>
+          </figure>
+          <figure class="slide">
+            <div class="frame"><img class="cover" src="images/decode-robot.jpg" alt="GNCE Mercury's DECODE robot with chassis, intake, and shooter" width="900" height="1200" loading="lazy"></div>
+            <figcaption><b>DECODE</b> · 2025–2026 · <a href="seasons/2025-2026.html">See how we built it →</a></figcaption>
+          </figure>
+          <figure class="slide">
+            <div class="frame soon"><div><span class="eyebrow">BIOBUZZ · 2026–2027</span><strong>The Mercinator</strong><span>Build in progress. Photos coming soon.</span></div></div>
+            <figcaption><b>BIOBUZZ</b> · 2026–2027 · <a href="seasons/2026-2027.html">Follow the build →</a></figcaption>
+          </figure>
+        </div>
+        <button class="car-btn prev" aria-label="Previous robot">‹</button>
+        <button class="car-btn next" aria-label="Next robot">›</button>
+        <div class="car-dots"></div>
+      </div>
     </section>
 
     <!-- COUNTDOWN + SEASON TIMELINE — edit the event list in js/main.js (SEASON, at the top) -->
@@ -90,6 +106,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=22"></script>
+  <script src="js/main.js?v=23"></script>
 </body>
 </html>
