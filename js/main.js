@@ -198,7 +198,7 @@ if (starfield) {
   const SPARKLE = "M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z";
   let html = "";
 
-  for (let i = 0; i < 90; i++) {
+  for (let i = 0; i < 113; i++) {
     const size = 1 + rand() * 1.8;
     const twinkle = rand() < 0.4;
     html += `<div class="dot${twinkle ? " twinkle" : ""}" style="left:${rand() * 100}%;top:${rand() * 100}%;` +
@@ -207,7 +207,7 @@ if (starfield) {
   }
 
   // Sparkles stay toward the sides so they don't sit on top of the title text
-  for (let i = 0; i < 14; i++) {
+  for (let i = 0; i < 18; i++) {
     const size = 10 + rand() * 16;
     const x = rand() < 0.5 ? 2 + rand() * 24 : 74 + rand() * 24;
     html += `<svg class="sparkle twinkle" viewBox="0 0 24 24" style="left:${x}%;top:${3 + rand() * 80}%;` +
