@@ -506,6 +506,9 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
 /* ---------- Team members ---------- */
 
 .member { text-align: center; }
+.members-grid { grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.members-grid .card { padding: 20px 12px; }
+@media (max-width: 900px) { .members-grid { grid-template-columns: repeat(2, 1fr); } }
 .member .ph { margin-bottom: 14px; }
 .member .role {
   font-family: var(--font-mono);
