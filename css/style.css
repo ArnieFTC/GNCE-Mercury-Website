@@ -316,6 +316,16 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   letter-spacing: 0.1em;
 }
 
+.card-photo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center 35%;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+}
+.card p strong { color: var(--text); }
+
 /* Placeholder image box — swap for a real <img> later */
 .ph {
   background: repeating-linear-gradient(45deg, var(--surface-2), var(--surface-2) 10px, var(--surface) 10px, var(--surface) 20px);
