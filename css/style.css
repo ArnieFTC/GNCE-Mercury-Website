@@ -542,7 +542,8 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   letter-spacing: 0.08em;
 }
 .member p { font-size: 0.9rem; margin-top: 8px; }
-.member h3 { margin-bottom: 12px; }
+.member h3 { margin-bottom: 4px; }
+.member .exp { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); margin-bottom: 12px; }
 .lead-tag {
   display: inline-block;
   margin: -4px 0 12px;
