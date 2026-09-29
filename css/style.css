@@ -558,6 +558,8 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   letter-spacing: 0.08em;
   box-shadow: 0 0 12px var(--accent-glow);
 }
+.leads { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: -4px 0 12px; }
+.leads .lead-tag { margin: 0; }
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
 .chip {
   font-family: var(--font-mono);
