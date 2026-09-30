@@ -571,8 +571,8 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   font-style: italic;
   color: var(--text);
 }
-.quote::before { content: "C"; }
-.quote::after { content: "D"; }
+.quote::before { content: "\201C"; }
+.quote::after { content: "\201D"; }
 .quote:empty { display: none; }
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
 .chip {
