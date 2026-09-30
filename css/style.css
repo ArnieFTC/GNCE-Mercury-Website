@@ -574,6 +574,7 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
 .quote::before { content: "\201C"; }
 .quote::after { content: "\201D"; }
 .quote:empty { display: none; }
+.quote + .quote { margin-top: 8px; }
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
 .chip {
   font-family: var(--font-mono);
