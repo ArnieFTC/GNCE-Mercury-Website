@@ -8,6 +8,8 @@
 const SEASON = {
   kickoff: "2026-09-12",
   events: [
+    { name: "Onyx Scrimmage (Unofficial)", date: "2026-10-11" },
+    { name: "Ghost Scrimmage", date: "2026-10-25" },
     { name: "Wolfpack Scrimmage", date: "2026-11-15" },
     { name: "Windsor Scrimmage", date: "2026-12-06" },
   ],

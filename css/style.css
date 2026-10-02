@@ -427,7 +427,7 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
 .timeline {
   position: relative;
   margin: 60px 40px 8px;
-  height: 64px;
+  height: 84px;
   text-align: left;
 }
 .tl-track {
@@ -477,8 +477,8 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
   background: var(--bg);
   border: 2px solid var(--muted);
 }
-.tl-pt .lbl { margin-top: 10px; text-align: center; white-space: nowrap; }
-.tl-pt .lbl b { display: block; font-family: var(--font-head); font-size: 0.9rem; color: var(--muted); }
+.tl-pt .lbl { margin-top: 10px; width: 6.5rem; text-align: center; }
+.tl-pt .lbl b { display: block; font-family: var(--font-head); font-size: 0.9rem; line-height: 1.25; margin-bottom: 2px; color: var(--muted); }
 .tl-pt .lbl span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
 .tl-pt.first { transform: translateX(-7px); align-items: flex-start; }
 .tl-pt.first .lbl { text-align: left; }
@@ -504,7 +504,7 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
     margin-left: -26px;
     padding: 8px 0;
   }
-  .tl-pt .lbl, .tl-pt.first .lbl, .tl-pt.last .lbl { margin-top: 0; text-align: left; }
+  .tl-pt .lbl, .tl-pt.first .lbl, .tl-pt.last .lbl { margin-top: 0; width: auto; text-align: left; }
 }
 
 .mission {
