@@ -25,8 +25,9 @@ const NAV = [
 
 // SPONSORS: shown in the footer of EVERY page.
 // Keep this on all pages. To add a sponsor: { name: "Acme", logo: "images/acme.png", url: "https://acme.com" }.
-// While the list is empty, placeholder logo boxes are shown.
+// While the list is empty, "Coming soon" is shown instead.
 const SPONSORS = [];
+const TEAM_EMAIL = "gncemercury26413@gmail.com";
 const SUPPORTERS_NOTE = "Thanks also to SolidWorks, Weston Owl, and WEEFC for supporting our team.";
 
 // Pages inside /seasons/ set data-root="../" on <body> so links still work.
@@ -62,7 +63,7 @@ const footer = document.createElement("footer");
 footer.className = "site-footer";
 const sponsorLogos = SPONSORS.length
   ? SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener" title="${s.name}"><img src="${root}${s.logo}" alt="${s.name}"></a>`).join("")
-  : `<span class="sponsor ph">Your logo here</span>`.repeat(4);
+  : `<span class="sponsor-soon">Coming soon</span>`;
 footer.innerHTML = `
   <div class="container footer-sponsors" id="sponsors">
     <span class="k">Our Sponsors</span>
@@ -73,6 +74,7 @@ footer.innerHTML = `
     <div class="brand-line">GNCE MERCURY · FTC #26413</div>
     <div>Galactic Narwhal Chicken Effect · Weston, MA</div>
     <div style="margin-top:8px"><a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">Instagram: @gnce_mercury</a></div>
+    <div style="margin-top:4px"><a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL}</a></div>
     <div style="margin-top:8px">© ${new Date().getFullYear()} GNCE Mercury</div>
   </div>`;
 document.body.append(footer);
@@ -273,4 +275,67 @@ if (tabBar) {
   tabs.forEach((t, i) => t.addEventListener("click", () => { select(i); history.replaceState(null, "", "#" + panels[i].id); }));
   const fromHash = panels.findIndex(p => "#" + p.id === location.hash);
   select(fromHash >= 0 ? fromHash : 0);
+}
+
+// ---------- Special quotes (team page) ----------
+// The locked quotes are stored encrypted (AES-GCM, key derived from the password with PBKDF2),
+// so neither the quotes nor the password appear in the page source.
+const SPECIAL_QUOTES = {
+  salt: "rqnXEPWc0gRDtiAZzWWHww==",
+  iv: "5iLWcamT14Vqij3Z",
+  data: "LNADRR3AoBI8igyzV4g75+UZtJ4TE1lnYU6WsCx0qhcX5MGQiN4/S0RT1Vx9PHBngHibyKdMjW3DvSAGWk7G9IOM4oCNpO3q/eijhuxTjAST9ZJgKgQ=",
+};
+const sqOpen = document.getElementById("sq-open");
+if (sqOpen) {
+  const form = document.getElementById("sq-form");
+  const pass = document.getElementById("sq-pass");
+  const msg = document.getElementById("sq-msg");
+  const bytes = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+
+  const unlock = async password => {
+    const { subtle } = crypto;
+    const base = await subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"]);
+    const key = await subtle.deriveKey(
+      { name: "PBKDF2", salt: bytes(SPECIAL_QUOTES.salt), iterations: 250000, hash: "SHA-256" },
+      base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+    const plain = await subtle.decrypt({ name: "AES-GCM", iv: bytes(SPECIAL_QUOTES.iv) }, key, bytes(SPECIAL_QUOTES.data));
+    return JSON.parse(new TextDecoder().decode(plain));
+  };
+
+  sqOpen.addEventListener("click", () => {
+    form.hidden = false;
+    sqOpen.hidden = true;
+    pass.focus();
+  });
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    msg.textContent = "Checking…";
+    msg.classList.remove("err");
+    try {
+      const quotes = await unlock(pass.value);
+      document.querySelectorAll(".quote.locked").forEach(q => {
+        q.textContent = quotes[q.dataset.secret] || "";
+        q.classList.remove("locked");
+      });
+      document.getElementById("special-quotes").innerHTML = `<p class="sq-msg">Special quotes unlocked.</p>`;
+    } catch {
+      msg.textContent = "Wrong password.";
+      msg.classList.add("err");
+      pass.select();
+    }
+  });
+}
+
+// ---------- Contact form (contact page) ----------
+// Opens the visitor's email app with the message addressed to the team email.
+const contactForm = document.getElementById("contact-form");
+if (contactForm) {
+  contactForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const f = contactForm.elements;
+    const subject = `${f.topic.value} from ${f.name.value}`;
+    const body = `${f.message.value}\n\n${f.name.value}\n${f.email.value}`;
+    location.href = `mailto:${TEAM_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
 }

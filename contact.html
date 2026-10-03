@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=49">
+  <link rel="stylesheet" href="css/style.css?v=50">
 </head>
 <body data-page="contact">
   <main class="container">
@@ -21,11 +21,11 @@
     <section>
       <div class="grid two">
 
-        <!-- CONTACT FORM (placeholder). It doesn't send yet. To make it work, sign up
-             for a free form service like Formspree and set the form's action to your URL. -->
+        <!-- CONTACT FORM: opens the visitor's email app with a message to the team email, filled in from the form.
+             To send messages straight from the site instead, sign up for a form service like Formspree. -->
         <div class="card">
           <h3 style="margin-bottom:18px">Send a Message</h3>
-          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Form coming soon! For now, please email us.');">
+          <form id="contact-form">
             <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required></div>
             <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
             <div class="field">
@@ -40,14 +40,14 @@
             <div class="field"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
             <button class="btn" type="submit">Send</button>
           </form>
-          <p class="note">[ Placeholder form: not connected yet ]</p>
+          <p class="note">Opens your email app. Or email us directly at <a href="mailto:gncemercury26413@gmail.com">gncemercury26413@gmail.com</a>.</p>
         </div>
 
         <div>
           <div class="card">
             <h3 style="margin-bottom:10px">Reach Us</h3>
             <ul class="contact-list">
-              <li><span class="k">Email</span><a href="mailto:team@example.com">[team email]</a></li>
+              <li><span class="k">Email</span><a href="mailto:gncemercury26413@gmail.com">gncemercury26413@gmail.com</a></li>
               <li><span class="k">Instagram</span><a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">@gnce_mercury</a></li>
               <li><span class="k">Location</span>Weston, MA</li>
               <li><span class="k">FTC Team #</span><a href="https://ftc-events.firstinspires.org/team/26413" target="_blank" rel="noopener">26413</a></li>
@@ -62,7 +62,7 @@
               goes straight to building robots and running outreach.
             </p>
             <a class="btn" href="#">Donate</a>
-            <a class="btn ghost" href="mailto:team@example.com?subject=Sponsorship">Sponsor Us</a>
+            <a class="btn ghost" href="mailto:gncemercury26413@gmail.com?subject=Sponsorship">Sponsor Us</a>
             <p class="note">[ Placeholder: add donation link ]</p>
           </div>
         </div>
@@ -71,6 +71,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=49"></script>
+  <script src="js/main.js?v=50"></script>
 </body>
 </html>

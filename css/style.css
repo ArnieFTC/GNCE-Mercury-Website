@@ -575,6 +575,15 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
 .quote::after { content: "\201D"; }
 .quote:empty { display: none; }
 .quote + .quote { margin-top: 8px; }
+.quote.locked { font-family: var(--font-mono); font-style: normal; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); border-left-style: dashed; }
+.quote.locked::before { content: "\1F512\00A0"; }
+.quote.locked::after { content: none; }
+.special-quotes { display: flex; justify-content: center; margin: -20px 0 50px; text-align: center; }
+.sq-form { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; }
+.sq-form[hidden] { display: none; }
+.sq-form input { width: 220px; }
+.sq-msg { flex-basis: 100%; min-height: 1.2em; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+.sq-msg.err { color: #ff7a8a; }
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
 .chip {
   font-family: var(--font-mono);
@@ -843,6 +852,7 @@ form textarea { min-height: 140px; resize: vertical; }
 .sponsor-row .sponsor { display: flex; align-items: center; justify-content: center; width: 120px; height: 52px; padding: 8px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
 .sponsor-row a.sponsor:hover { border-color: var(--accent); }
 .sponsor-row .sponsor img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.sponsor-soon { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); padding: 6px 0; }
 .sponsor-row .sponsor.ph { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); border-style: dashed; aspect-ratio: auto; }
 .footer-sponsors .supporters { max-width: 640px; margin: 12px auto 0; font-size: 0.8rem; }
 
