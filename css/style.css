@@ -578,6 +578,43 @@ a.card:hover { border-color: var(--accent); color: var(--text); }
 .quote.locked { font-family: var(--font-mono); font-style: normal; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); border-left-style: dashed; }
 .quote.locked::before { content: "\1F512\00A0"; }
 .quote.locked::after { content: none; }
+/* Unlock animation: the lock shakes and opens, then the quote fades in with a shimmer */
+.quote.unlocking { animation: sq-shake 0.5s ease-in-out; border-left-style: solid; border-left-color: var(--accent); }
+.quote.unlocking::before { content: "\1F513\00A0"; }
+@keyframes sq-shake {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  20% { transform: translateX(-4px) rotate(-1deg); }
+  40% { transform: translateX(4px) rotate(1deg); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+/* Unlocked special quote: keeps a badge and a soft glow so it's clear it used to be locked */
+.quote.special { position: relative; overflow: hidden; border-left-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); }
+.quote.special::before, .quote.special::after { content: none; }
+.quote.special .sq-badge { display: block; margin-bottom: 4px; font-family: var(--font-mono); font-style: normal; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); }
+.quote.special .sq-badge::before { content: "\1F513\00A0"; }
+.quote.special .sq-text::before { content: "\201C"; }
+.quote.special .sq-text::after { content: "\201D"; }
+.quote.special.revealing { animation: sq-glow 1.6s ease-out; }
+.quote.special.revealing .sq-badge { animation: sq-fade 0.4s ease-out both; }
+.quote.special.revealing .sq-text { display: inline-block; animation: sq-reveal 0.9s ease-out 0.15s both; }
+.quote.special.revealing::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(214, 201, 255, 0.35) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: sq-shimmer 1.1s ease-in-out 0.3s forwards;
+  pointer-events: none;
+}
+@keyframes sq-glow {
+  0% { box-shadow: 0 0 0 var(--accent-glow); }
+  35% { box-shadow: 0 0 30px 4px var(--accent-glow); }
+  100% { box-shadow: 0 0 12px var(--accent-glow); }
+}
+@keyframes sq-fade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+@keyframes sq-reveal { from { opacity: 0; filter: blur(6px); transform: scale(0.97); } to { opacity: 1; filter: blur(0); transform: none; } }
+@keyframes sq-shimmer { to { transform: translateX(100%); } }
 .special-quotes { display: flex; justify-content: center; margin: -20px 0 50px; text-align: center; }
 .sq-form { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; }
 .sq-form[hidden] { display: none; }

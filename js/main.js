@@ -312,19 +312,43 @@ if (sqOpen) {
     e.preventDefault();
     msg.textContent = "Checking…";
     msg.classList.remove("err");
+    let quotes;
     try {
-      const quotes = await unlock(pass.value);
-      document.querySelectorAll(".quote.locked").forEach(q => {
-        q.textContent = quotes[q.dataset.secret] || "";
-        q.classList.remove("locked");
-      });
-      document.getElementById("special-quotes").innerHTML = `<p class="sq-msg">Special quotes unlocked.</p>`;
+      quotes = await unlock(pass.value);
     } catch {
       msg.textContent = "Wrong password.";
       msg.classList.add("err");
       pass.select();
+      return;
     }
+    document.getElementById("special-quotes").innerHTML = `<p class="sq-msg">Special quotes unlocked.</p>`;
+    revealSpecialQuotes(quotes);
   });
+
+  // Unlock animation: scroll to the quotes, the lock shakes and pops open, then the quote
+  // fades in with a shimmer. Afterwards it keeps a "Special quote" badge and a soft glow.
+  const revealSpecialQuotes = async quotes => {
+    const locked = [...document.querySelectorAll(".quote.locked")];
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const show = q => {
+      q.innerHTML = `<span class="sq-badge">Special quote</span><span class="sq-text"></span>`;
+      q.querySelector(".sq-text").textContent = quotes[q.dataset.secret] || "";
+      q.classList.remove("locked", "unlocking");
+      q.classList.add("special");
+    };
+    if (reduceMotion) return locked.forEach(show);
+
+    locked[0]?.closest(".member").scrollIntoView({ behavior: "smooth", block: "center" });
+    await wait(700);
+    for (const q of locked) {
+      q.classList.add("unlocking");
+      await wait(650);
+      show(q);
+      q.classList.add("revealing");
+      await wait(350);
+    }
+  };
 }
 
 // ---------- Contact form (contact page) ----------
