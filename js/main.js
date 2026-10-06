@@ -365,13 +365,3 @@ if (contactForm) {
     location.href = `mailto:${TEAM_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 }
-
-// ---------- Team: initials avatars ----------
-// Until we have headshots, each person gets their initials on a lavender diamond (the logo's shape).
-document.querySelectorAll(".card.member").forEach(card => {
-  const name = card.querySelector("h3")?.textContent.replace(/\(.*?\)/g, "").trim();
-  if (!name || card.querySelector(".avatar, img")) return;
-  const parts = name.split(/\s+/);
-  const initials = (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : "")).toUpperCase();
-  card.insertAdjacentHTML("afterbegin", `<div class="avatar" aria-hidden="true"><span>${initials}</span></div>`);
-});

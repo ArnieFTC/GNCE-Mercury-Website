@@ -5,44 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GNCE Mercury | FTC 26413</title>
   <meta name="description" content="GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, MA.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=72">
+  <link rel="stylesheet" href="css/style.css?v=81">
 </head>
 <body data-page="index">
   <main>
-    <!-- HERO: logo emblem front and center -->
+    <!-- HERO: light band, logo front and center, giant wordmark (inspired by noth.in) -->
     <section class="hero">
-      <div class="container hero-grid">
+      <div class="container hero-top">
         <div class="hero-copy">
-          <span class="eyebrow">FIRST Tech Challenge · Team #26413 · Weston, MA</span>
-          <h1>GNCE <span class="accent">Mercury</span></h1>
-          <p class="hero-pitch">High schoolers from Weston who design, build, and code competitive robots, and teach younger kids STEM along the way.</p>
-          <p class="hero-sub">Galactic Narwhal Chicken Effect</p>
+          <span class="eyebrow">FIRST Tech Challenge · Team 26413</span>
+          <p class="hero-pitch">High schoolers from Weston, MA who design, build, and code competitive robots, and teach younger kids STEM along the way.</p>
           <div class="actions">
             <a class="btn" href="contact.html?topic=join#contact-form">Join the Team</a>
             <a class="btn ghost" href="contact.html#support">Support Us</a>
           </div>
         </div>
-        <div class="hero-emblem">
-          <img src="images/logo-mark.png" alt="GNCE Mercury logo: the god Mercury holding a staff inside a lavender diamond" width="473" height="505">
-        </div>
+        <img class="hero-emblem" src="images/logo-mark.png" alt="GNCE Mercury logo: the god Mercury holding a staff inside a lavender diamond" width="473" height="505">
+      </div>
+      <h1 class="wordmark"><span class="visually-hidden">GNCE </span>Mercury</h1>
+      <div class="container hero-foot">
+        <span>Galactic Narwhal Chicken Effect</span>
+        <span>Weston, Massachusetts · Est. 2024</span>
+        <a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">Instagram ↗</a>
       </div>
     </section>
 
-    <!-- HIGHLIGHTS STRIP -->
-    <section class="container strip">
-      <div class="badges">
-        <div class="badge"><span class="b-k">Rookie year</span><span class="b-v">2024</span></div>
-        <div class="badge gold"><span class="b-k">Ryken RoboBowl</span><span class="b-v">Winning Alliance · 1st Pick</span></div>
-        <div class="badge gold"><span class="b-k">WNEU Qualifier</span><span class="b-v">Sustain Award</span></div>
-        <div class="badge"><span class="b-k">2026</span><span class="b-v">Qualified for MA States</span></div>
-      </div>
+    <!-- HIGHLIGHTS -->
+    <section class="container strip band-light">
+      <ul class="facts">
+        <li><span class="k">Rookie year</span><span class="v">2024</span></li>
+        <li><span class="k">Ryken RoboBowl</span><span class="v">Winning alliance, 1st pick</span></li>
+        <li><span class="k">WNEU Qualifier</span><span class="v">Sustain Award</span></li>
+        <li><span class="k">2026</span><span class="v">Qualified for MA States</span></li>
+      </ul>
     </section>
 
     <!-- WHO WE ARE: the team photo up front -->
-    <section class="container">
+    <section class="container band-light">
       <div class="feature">
         <img class="feature-img" src="images/team.png" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship" width="927" height="626">
         <div class="feature-copy">
@@ -86,7 +85,7 @@
     <!-- COUNTDOWN + SEASON TIMELINE — edit the event list in js/main.js (SEASON, at the top) -->
     <section class="container">
       <div class="countdown" id="countdown">
-        <span class="eyebrow">Next mission</span>
+        <span class="eyebrow">Next competition</span>
         <div class="event-name"></div>
         <div class="event-date"></div>
         <div class="timer"></div>
@@ -115,15 +114,15 @@
       </div>
       <div class="grid cols-3 explore">
         <a class="card photo-card" href="team.html">
-          <img src="images/decode-team-and-robot.png" alt="GNCE Mercury members with the DECODE robot" loading="lazy" style="object-position:center 15%">
+          <img src="images/decode-team-and-robot.png" alt="GNCE Mercury members with the DECODE robot" style="object-position:center 15%">
           <div class="card-body"><span class="tag">The people</span><h3>Our Team</h3><p>The members and coaches behind Mercury.</p></div>
         </a>
         <a class="card photo-card" href="seasons.html">
-          <img class="light" src="images/decode-robot-cad.jpg" alt="CAD render of the DECODE robot" loading="lazy">
+          <img class="light" src="images/decode-robot-cad.jpg" alt="CAD render of the DECODE robot">
           <div class="card-body"><span class="tag">The robots</span><h3>Seasons</h3><p>Every robot and every qualifier we've competed at.</p></div>
         </a>
         <a class="card photo-card" href="outreach.html">
-          <img src="images/fll_camp_1.jpg" alt="Campers and families at our summer camp showcase" loading="lazy">
+          <img src="images/fll_camp_1.jpg" alt="Campers and families at our summer camp showcase">
           <div class="card-body"><span class="tag">The community</span><h3>Outreach</h3><p>Our summer camp, FLL coaching, and demos around Massachusetts.</p></div>
         </a>
       </div>
@@ -148,6 +147,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=72"></script>
+  <script src="js/main.js?v=81"></script>
 </body>
 </html>
