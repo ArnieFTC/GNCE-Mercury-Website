@@ -159,7 +159,7 @@ if (cd) {
         dateEl.textContent = fmt(today.day, LONG);
         timer.innerHTML = `<div class="comp-day">COMPETITION DAY!</div>`;
       } else if (next) {
-        nameEl.textContent = "Next Competition: " + next.name;
+        nameEl.textContent = next.name;
         dateEl.textContent = fmt(next.day, LONG);
       } else {
         nameEl.textContent = "Season complete!";
@@ -365,3 +365,26 @@ if (contactForm) {
     location.href = `mailto:${TEAM_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 }
+
+// ---------- Reveals: a staggered fade-up on load, then once per block on scroll ----------
+// CSS only hides [data-reveal] when <html> has the "js" class (set in each page's <head>)
+// and the visitor hasn't asked for reduced motion.
+(() => {
+  const fold = innerHeight * 0.92;
+  // below-the-fold blocks get a reveal too, so nothing visible ever flashes
+  document.querySelectorAll("main section > *, main > .breadcrumb + .page-head ~ section > *").forEach(el => {
+    if (!el.hasAttribute("data-reveal") && !el.closest("[data-reveal]") && el.getBoundingClientRect().top > fold) el.setAttribute("data-reveal", "");
+  });
+  const items = [...document.querySelectorAll("[data-reveal]")];
+  if (!("IntersectionObserver" in window)) { items.forEach(el => el.classList.add("in")); return; }
+  // first screen: one orchestrated, staggered entrance
+  let i = 0;
+  items.filter(el => el.getBoundingClientRect().top < fold).forEach(el => {
+    el.style.setProperty("--d", `${0.08 + i++ * 0.12}s`);
+    requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add("in")));
+  });
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }), { rootMargin: "0px 0px -8% 0px" });
+  items.filter(el => !el.classList.contains("in")).forEach(el => io.observe(el));
+})();
