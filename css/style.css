@@ -502,3 +502,25 @@ img.portrait { display: block; border: none; filter: grayscale(1) contrast(1.05)
 .facts .k { font-size: 0.95rem; color: var(--text); }
 .hero-foot { font-size: 0.95rem; }
 .eyebrow { color: var(--text-2); }
+
+/* ---------- Heading scale, balanced ----------
+   Page title (h1)      ~112px   one per page
+   Section title (h2)    ~56px   Members, Events, The Robot…
+   Sub-section (h3 lg)   ~36px   robot summary, event names, join callout
+   Card title (h3)       ~28px   cards, mechanisms, outreach events
+   Name (h3 member)      ~26px
+   Big figures           ~84px   stats and countdown, between h1 and h2 */
+:root {
+  --t-display: clamp(3.2rem, 7.6vw, 7rem);
+  --t-title: clamp(2.3rem, 3.9vw, 3.5rem);
+  --t-sub: clamp(1.75rem, 2.5vw, 2.25rem);
+  --t-h3: clamp(1.45rem, 1.9vw, 1.75rem);
+}
+.page-head h1 { font-size: var(--t-display); }
+.section-title, .feature-copy h2, .closing h2, .countdown .event-name { font-size: var(--t-title); }
+.robot h3, .event-head h3, .cta h2 { font-size: var(--t-sub) !important; letter-spacing: -0.02em; }
+.card h3, .part-card h3 { font-size: var(--t-h3); }
+.people .member h3, .member h3 { font-size: 1.6rem; }
+.stat .big, .countdown .unit .n { font-size: clamp(3rem, 6vw, 5.25rem); }
+.index-list .t { font-size: clamp(1.9rem, 3.2vw, 2.75rem); }
+.facts .v { font-size: 1.5rem; }
