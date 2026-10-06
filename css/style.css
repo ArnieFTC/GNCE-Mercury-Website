@@ -261,10 +261,10 @@ a.card { display: block; color: var(--text); text-decoration: none; }
 
 /* ---------- Countdown ---------- */
 
-.countdown { border-top: 1px solid var(--line); padding-top: 18px; }
-.countdown .event-name { font-family: var(--serif); font-size: var(--t-title); letter-spacing: -0.03em; line-height: 1.02; max-width: 20ch; }
+.countdown { border-top: 1px solid var(--line); padding-top: 18px; text-align: center; }
+.countdown .event-name { font-family: var(--serif); font-size: var(--t-title); letter-spacing: -0.03em; line-height: 1.02; max-width: 20ch; margin-inline: auto; }
 .countdown .event-date { font-family: var(--mono); font-size: var(--t-label); color: var(--muted); margin-top: 18px; }
-.countdown .timer { display: flex; gap: clamp(28px, 5vw, 72px); margin-top: 48px; flex-wrap: wrap; }
+.countdown .timer { display: flex; justify-content: center; gap: clamp(28px, 5vw, 72px); margin-top: 48px; flex-wrap: wrap; }
 .countdown .unit .n { font-family: var(--serif); font-size: clamp(3.4rem, 7vw, 6rem); letter-spacing: -0.04em; line-height: 0.9; font-variant-numeric: lining-nums tabular-nums; }
 .countdown .unit .l { font-family: var(--mono); font-size: var(--t-label); color: var(--muted); margin-top: 12px; }
 .countdown .comp-day { font-family: var(--serif); font-size: var(--t-display); letter-spacing: -0.035em; color: var(--accent); }
