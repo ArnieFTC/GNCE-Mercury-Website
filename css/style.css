@@ -1,6 +1,6 @@
 /* =========================================================
    GNCE Mercury 26413 — site styles
-   Editorial and restrained (after noth.in): a paper-white opening band with a giant
+   Editorial and restrained (after noth.in): one dark palette tinted to the logo, a giant
    wordmark, near-black sections after it, one grotesk for everything, a mono face only
    for small labels, hairlines instead of boxes, and the logo's lavender used sparingly.
    Colors and type sizes live in :root.
@@ -12,16 +12,16 @@
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url(../fonts/ibm-plex-mono-500.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 
 :root {
-  --ink: #0d0d0c;          /* page (dark) */
-  --ink-2: #161614;
-  --ink-3: #1f1f1c;
+  --ink: #0e0c14;          /* page: near-black with the logo's violet tint */
+  --ink-2: #16131f;
+  --ink-3: #1f1b2b;
   --paper: #f1efe9;        /* light band */
   --paper-ink: #121210;
-  --text: #f1efe9;
-  --text-2: #bdbab2;       /* body on dark */
-  --muted: #9a978f;        /* labels on dark */
-  --line: rgba(241, 239, 233, 0.16);
-  --accent: #a98bf5;       /* the logo's lavender */
+  --text: #f2eff8;
+  --text-2: #c2bdd0;       /* body */
+  --muted: #9c96ad;        /* labels */
+  --line: rgba(242, 239, 248, 0.15);
+  --accent: #b69cff;       /* the logo's lavender */
   --accent-ink: #5b3fa8;   /* the logo's deep violet, for use on paper */
   --gutter: clamp(18px, 2.2vw, 32px);
   --max: 1280px;
@@ -85,26 +85,13 @@ strong { font-weight: 600; color: var(--text); }
 .narrow { max-width: 62ch; }
 .center.narrow { margin-inline: auto; }
 
-/* Light (paper) bands: full-bleed background on a centered container */
-.band-light, .hero {
-  background: var(--paper);
-  color: var(--paper-ink);
-  box-shadow: 0 0 0 100vmax var(--paper);
-  clip-path: inset(0 -100vmax);
-  --text: var(--paper-ink);
-  --text-2: #3f3d38;
-  --muted: #6c6961;
-  --line: rgba(18, 18, 16, 0.18);
-  --accent: var(--accent-ink);
-}
-
 /* ---------- Header ---------- */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(13, 13, 12, 0.88);
+  background: rgba(14, 12, 20, 0.86);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
@@ -201,7 +188,6 @@ section { padding-block: clamp(40px, 5vw, 72px); }
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
-.band-light .btn, .hero .btn { color: var(--paper); }
 .btn::after { content: "→"; }
 .btn:hover { background: transparent; color: var(--text); }
 .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
@@ -475,15 +461,6 @@ form textarea { min-height: 130px; resize: vertical; }
 .footer-links a { color: var(--text-2); }
 
 /* ---------- Review fixes ---------- */
-
-/* Home: header takes the paper colour so it sits on the hero instead of a black bar */
-body[data-page="index"] .site-header { background: rgba(241, 239, 233, 0.92); border-bottom-color: transparent; }
-body[data-page="index"] .site-header .brand, body[data-page="index"] .site-header .nav-links a.active { color: var(--paper-ink); }
-body[data-page="index"] .site-header .nav-links a { color: #4a4842; }
-body[data-page="index"] .site-header .nav-links a.active { border-bottom-color: var(--paper-ink); }
-body[data-page="index"] .site-header .brand .num { color: #6c6961; }
-body[data-page="index"] .nav-toggle { color: var(--paper-ink); border-color: rgba(18, 18, 16, 0.25); }
-@media (max-width: 820px) { body[data-page="index"] .nav-links { background: var(--paper); } body[data-page="index"] .nav-links a { border-bottom-color: rgba(18,18,16,.15); } }
 
 /* Hairlines sit on the content edge, not the padding edge */
 .hero-foot, .footer-main { border-top: none; background: linear-gradient(var(--line), var(--line)) content-box top / 100% 1px no-repeat; }
