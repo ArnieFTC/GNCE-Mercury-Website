@@ -612,3 +612,5 @@ form input:focus, form textarea:focus, form select:focus { border-color: var(--l
 
 /* BIOBUZZ robot image aligns left like the others */
 .robot > img.robot-photo { margin: 0 !important; }
+.team-banner { aspect-ratio: 2 / 1; object-position: center 72%; }
+.footer-main { background: none; }
