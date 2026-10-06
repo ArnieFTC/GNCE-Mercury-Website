@@ -614,3 +614,23 @@ form input:focus, form textarea:focus, form select:focus { border-color: var(--l
 .robot > img.robot-photo { margin: 0 !important; }
 .team-banner { aspect-ratio: 2 / 1; object-position: center 72%; }
 .footer-main { background: none; }
+
+/* Round 4: final panel fixes */
+/* CAD renders are cut out (transparent WebP) and sit directly on the dark page */
+img.cutout { background: none !important; padding: 0 !important; object-fit: contain; filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.45)); }
+.season-photo.cutout, .photo-card img.cutout, .part-card img.cutout { background: var(--ink-2) !important; padding: clamp(10px, 1.4vw, 20px) !important; }
+/* Labels without numbers */
+.eyebrow::before { content: none; }
+/* Footer: "Become a sponsor" on its own smaller line */
+.sponsor-row .sponsor.open { flex-basis: 100%; font-size: 1rem; font-weight: 500; letter-spacing: 0; margin-top: 6px; }
+/* Page heads: intro sits on the title's baseline */
+@media (min-width: 900px) { .page-head { align-items: last baseline; } }
+/* Every season's robot image fills its column */
+.robot > img.robot-photo { width: 100%; max-width: none !important; }
+/* Highlights row: one colour */
+.facts li:nth-child(2) .v, .facts li:nth-child(3) .v { color: var(--text); }
+/* Countdown heading can use the full width */
+.countdown .event-name { max-width: none; }
+/* Phone: one member per row so quotes aren't cramped */
+@media (max-width: 480px) { .members-grid { grid-template-columns: 1fr; } }
+.part-card img.render { background: var(--ink-2); padding: 0; object-fit: cover; }
