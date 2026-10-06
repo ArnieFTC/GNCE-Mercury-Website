@@ -7,28 +7,40 @@
   <meta name="description" content="GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, MA.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=51">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=61">
 </head>
 <body data-page="index">
   <main>
-    <!-- Starfield behind the top of the page (generated in js/main.js) -->
-    <div class="starfield" aria-hidden="true"></div>
-
     <!-- HERO -->
-    <section class="hero container">
-      <img class="hero-logo" src="images/logo.png" alt="GNCE Mercury logo" onerror="this.remove()">
-      <span class="eyebrow">FIRST Tech Challenge · Team 26413</span>
-      <h1>GNCE <span class="accent">MERCURY</span></h1>
-      <p class="sub">Galactic Narwhal Chicken Effect · Weston, MA</p>
-      <p class="blurb">
-        We're a third-year FTC team out of Weston, MA. We design, build, and code
-        competitive robots. We have members with experience competing and winning awards at international competitions.
-      </p>
-      <div class="actions">
-        <a class="btn" href="team.html">Meet the Team</a>
-        <a class="btn ghost" href="contact.html">Support Us</a>
+    <section class="hero">
+      <div class="hero-top">
+        <p class="hero-statement">FIRST Tech Challenge Team 26413.<br><span>Galactic Narwhal Chicken Effect · Weston, MA</span></p>
+        <div class="actions">
+          <a class="btn" href="team.html">Meet the Team</a>
+          <a class="btn ghost" href="contact.html">Support Us</a>
+        </div>
       </div>
+      <h1 class="wordmark" aria-label="GNCE Mercury">MERCURY</h1>
+      <div class="hero-foot">
+        <span>GNCE · Est. 2024</span>
+        <span>Design · Build · Code · Outreach</span>
+        <a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">Instagram ↗</a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="container">
+      <div class="split">
+        <div class="split-label"><span class="eyebrow">The team</span></div>
+        <div class="split-body">
+          <h2>A third-year FTC team out of Weston, MA.</h2>
+          <p>We design, build, and code competitive robots. We have members with experience competing and winning awards at international competitions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
       <!-- ROBOT CAROUSEL: one <figure class="slide"> per robot. It rotates automatically (js/main.js). -->
       <div class="robot-carousel" aria-roledescription="carousel" aria-label="Our robots">
         <div class="slides">
@@ -75,7 +87,7 @@
     <!-- HIGHLIGHTS -->
     <section class="container">
       <h2 class="section-title">Highlights</h2>
-      <div class="stats">
+      <div class="stats words">
         <div class="stat"><div class="big">2024</div><div class="label">Rookie Year</div></div>
         <div class="stat"><div class="big">1st Pick</div><div class="label">Winning Alliance · Ryken RoboBowl</div></div>
         <div class="stat"><div class="big">Sustain Award</div><div class="label">WNEU Qualifier</div></div>
@@ -106,6 +118,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=51"></script>
+  <script src="js/main.js?v=61"></script>
 </body>
 </html>
