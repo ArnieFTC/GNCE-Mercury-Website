@@ -506,3 +506,109 @@ section.narrow p { font-size: var(--t-body); line-height: 1.55; max-width: 60ch;
 .season-photo { object-fit: cover; background: var(--ink-2); }
 .season-photo.light { object-fit: contain; padding: 12px; }
 .hero-note { font-size: var(--t-small); color: var(--muted); margin-top: 12px; max-width: 46ch; }
+
+/* =========================================================
+   Round 3: panel feedback (sponsor, 7th grader, FTC judge, grandparent,
+   designer, rival team). "Violet night, silver type": the logo's violets
+   carry through the whole site, labels are bigger and numbered, awards stand out.
+   ========================================================= */
+:root {
+  --ink: #0d0b14;
+  --ink-2: #15111f;
+  --ink-3: #1d1830;
+  --violet-900: #211839;
+  --violet-700: #45336a;
+  --violet-500: #6a55a0;
+  --lavender: #b69cff;
+  --lavender-wash: rgba(182, 156, 255, 0.12);
+  --text: #ece9f3;
+  --text-2: #bcb6cb;
+  --muted: #a8a2b9;
+  --line: rgba(236, 233, 243, 0.13);
+  --accent: var(--lavender);
+  --t-label: 0.8125rem;   /* 13px */
+}
+
+/* Section labels: "01 — Who we are", lavender, no parentheses */
+main { counter-reset: lbl; }
+.eyebrow { counter-increment: lbl; font-size: var(--t-label); text-transform: uppercase; letter-spacing: 0.08em; color: var(--lavender); }
+.eyebrow::before { content: counter(lbl, decimal-leading-zero) " \2014  "; opacity: 0.6; }
+.eyebrow::after { content: none; }
+.fs-head .k::before, .mission h2::before { content: none; }
+.fs-head .k::after, .mission h2::after { content: none; }
+.fs-head .k, .mission h2 { text-transform: uppercase; letter-spacing: 0.08em; color: var(--lavender); font-size: var(--t-label); }
+
+/* Readable navigation */
+.nav-links a { font-family: var(--font); font-size: 0.95rem; text-transform: none; letter-spacing: 0; color: var(--text-2); }
+.nav-links a.active { color: #fff; border-bottom: 2px solid var(--lavender); }
+.brand .num { color: var(--lavender); }
+
+/* Links and buttons in brand colour */
+a { text-decoration-color: rgba(182, 156, 255, 0.5); }
+a:hover { color: var(--lavender); }
+.btn { height: 48px; padding: 0 22px; background: var(--lavender); border-color: var(--lavender); color: var(--ink); font-weight: 600; }
+.btn:hover { background: #cbb8ff; border-color: #cbb8ff; color: var(--ink); }
+.btn.ghost { height: 48px; padding: 0 22px; border: 1px solid var(--violet-500); background: transparent; color: var(--text); text-decoration: none; }
+.btn.ghost:hover { border-color: var(--lavender); background: var(--lavender-wash); color: var(--text); }
+
+/* Hero: lavender full stop on the wordmark, room under the descender */
+.wordmark::after { content: "."; color: var(--lavender); }
+.wordmark { font-size: calc((min(100vw, var(--max)) - 2 * var(--gutter)) / 4.15); padding-bottom: 0.26em; }
+.hero-foot { color: var(--text-2); }
+
+/* Violet bands: stats and countdown change the page's rhythm */
+.band {
+  background: var(--violet-900);
+  box-shadow: 0 0 0 100vmax var(--violet-900);
+  clip-path: inset(0 -100vmax);
+  --line: rgba(236, 233, 243, 0.18);
+}
+.band .stat .big, .band .countdown .unit .n { color: var(--lavender); }
+.stat .big { color: var(--lavender); }
+.countdown .unit .n { color: var(--text); }
+.tl-pt .dot { background: var(--violet-900); }
+.tl-pt .lbl b { font-size: 0.95rem; color: var(--text-2); }
+
+/* Awards and lead roles stand out */
+.award { display: inline-block; font-size: 0.9rem; font-weight: 600; color: var(--lavender); border: 1px solid var(--violet-500); background: var(--lavender-wash); border-radius: 999px; padding: 3px 12px; margin: 2px 6px 2px 0; }
+.lead-tag { color: var(--lavender); }
+.facts .v { color: var(--text); }
+.facts li:nth-child(2) .v, .facts li:nth-child(3) .v { color: var(--lavender); }
+
+/* White CAD renders sit on an intentional silver plate */
+.season-photo.light, .robot-photo.cad-hero, .photo-card img.light, .part-card img.render, .part-card img.cad { background: #e9e6f0; padding: clamp(10px, 1.6vw, 22px); object-fit: contain; }
+.robot-carousel .frame.light { background: #e9e6f0; }
+
+/* Page heads use the full width: title left, intro right */
+@media (min-width: 900px) {
+  .page-head { display: grid; grid-template-columns: 7fr 5fr; column-gap: var(--gutter); align-items: end; }
+  .page-head > * { grid-column: 1 / -1; }
+  .page-head > h1 { grid-column: 1; }
+  .page-head > h1 + p { grid-column: 2; margin-top: 0; max-width: 34ch; }
+  .page-head > .mission { grid-column: 2; margin-top: 28px; }
+  .page-head > .team-banner + .mission { grid-column: 1 / -1; max-width: 62ch; }
+}
+.team-banner { max-width: none; aspect-ratio: 21 / 9; object-fit: cover; object-position: center 40%; }
+
+/* Forms: visible fields */
+form label { font-family: var(--font); font-size: 0.9rem; color: var(--text-2); margin-bottom: 6px; }
+form input, form textarea, form select { border: 1px solid rgba(236, 233, 243, 0.3); background: var(--ink-2); padding: 11px 13px; font-size: 1.05rem; }
+form input:focus, form textarea:focus, form select:focus { border-color: var(--lavender); }
+.note { font-family: var(--font); font-size: 0.9rem; }
+
+/* Footer: its own surface, sponsors readable */
+.site-footer { background: var(--ink-2); }
+.footer-sponsors { padding-top: 56px; padding-bottom: 44px; }
+.sponsor-row .sponsor { font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 600; letter-spacing: -0.015em; color: var(--text); }
+.sponsor-row .sponsor.open { color: var(--lavender); text-decoration: none; }
+.sponsor-row .sponsor.open:hover { text-decoration: underline; }
+.footer-brand small { font-family: var(--font); font-size: 0.85rem; }
+
+/* Cards: gentle hover */
+.photo-card img { transition: transform 0.4s ease, opacity 0.2s; }
+.photo-card:hover img { transform: scale(1.02); opacity: 1; }
+.photo-card { overflow: hidden; }
+.chip { color: var(--text-2); font-size: var(--t-label); }
+
+/* BIOBUZZ robot image aligns left like the others */
+.robot > img.robot-photo { margin: 0 !important; }
