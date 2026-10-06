@@ -487,3 +487,18 @@ img.portrait { display: block; border: none; filter: grayscale(1) contrast(1.05)
 .portrait span { padding: 12px 14px; font-family: var(--mono); font-size: var(--t-label); color: var(--muted); }
 .people .member h3 { font-size: 1.75rem; margin-bottom: 6px; }
 .people .member .exp { margin-bottom: 12px; }
+
+/* Labels: larger and brighter so event names, dates and section labels read clearly */
+:root {
+  --muted: #b3ac9f;
+  --t-label: 0.875rem;   /* 14px */
+}
+.eyebrow, .hero-foot, .facts .k, .event-head .date, .event-body .k, .specs li span:first-child,
+.countdown .event-date, .countdown .unit .l, .stat .label, .member .exp, .card .tag,
+.contact-list .k, .breadcrumb, .fs-head .k, .robot-carousel figcaption, .tl-pt .lbl span {
+  color: var(--text-2);
+  letter-spacing: 0.01em;
+}
+.facts .k { font-size: 0.95rem; color: var(--text); }
+.hero-foot { font-size: 0.95rem; }
+.eyebrow { color: var(--text-2); }
