@@ -64,7 +64,7 @@ footer.className = "site-footer";
 const sponsorItems = [
   ...SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener" title="${s.name}"><img src="${root}${s.logo}" alt="${s.name}"></a>`),
   ...SUPPORTERS.map(n => `<span class="sponsor named">${n}</span>`),
-  `<a class="sponsor open" href="${root}contact.html#support">Your logo here →</a>`,
+  `<a class="sponsor open" href="${root}contact.html#support">Become a sponsor →</a>`,
 ].join("");
 footer.innerHTML = `
   <div class="container footer-sponsors" id="sponsors">
