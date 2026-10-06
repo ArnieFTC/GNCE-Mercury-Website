@@ -25,10 +25,10 @@ const NAV = [
 
 // SPONSORS: shown in the footer of EVERY page.
 // Keep this on all pages. To add a sponsor: { name: "Acme", logo: "images/acme.png", url: "https://acme.com" }.
-// While the list is empty, "Coming soon" is shown instead.
+// SUPPORTERS are named (no logo) until we have their logos. An open "your logo here" slot is always shown.
 const SPONSORS = [];
+const SUPPORTERS = ["SolidWorks", "Weston Owl", "WEEFC"];
 const TEAM_EMAIL = "gncemercury26413@gmail.com";
-const SUPPORTERS_NOTE = "Thanks also to SolidWorks, Weston Owl, and WEEFC for supporting our team.";
 
 // Pages inside /seasons/ set data-root="../" on <body> so links still work.
 const root = document.body.dataset.root || "";
@@ -40,7 +40,7 @@ header.className = "site-header";
 header.innerHTML = `
   <nav class="nav-bar">
     <a class="brand" href="${root}index.html">
-      <img class="brand-logo" src="${root}images/logo.png" alt="" onerror="this.remove()">
+      <img class="brand-logo" src="${root}images/logo-mark.png" alt="" onerror="this.remove()">
       GNCE MERCURY <span class="num">#26413</span>
     </a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">Menu</button>
@@ -61,21 +61,29 @@ toggle.addEventListener("click", () => {
 // ---------- Footer ----------
 const footer = document.createElement("footer");
 footer.className = "site-footer";
-const sponsorLogos = SPONSORS.length
-  ? SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener" title="${s.name}"><img src="${root}${s.logo}" alt="${s.name}"></a>`).join("")
-  : `<span class="sponsor-soon">Coming soon</span>`;
+const sponsorItems = [
+  ...SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener" title="${s.name}"><img src="${root}${s.logo}" alt="${s.name}"></a>`),
+  ...SUPPORTERS.map(n => `<span class="sponsor named">${n}</span>`),
+  `<a class="sponsor open" href="${root}contact.html#support">Your logo here →</a>`,
+].join("");
 footer.innerHTML = `
   <div class="container footer-sponsors" id="sponsors">
-    <span class="k">Our Sponsors</span>
-    <div class="sponsor-row">${sponsorLogos}</div>
-    <p class="supporters">${SUPPORTERS_NOTE} <a href="${root}contact.html#support">Become a sponsor →</a></p>
+    <div class="fs-head">
+      <span class="k">Our Sponsors &amp; Supporters</span>
+      <p>Thank you to everyone who helps us build, compete, and run outreach.</p>
+    </div>
+    <div class="sponsor-row">${sponsorItems}</div>
   </div>
-  <div class="container">
-    <div class="brand-line">GNCE MERCURY · FTC #26413</div>
-    <div>Galactic Narwhal Chicken Effect · Weston, MA</div>
-    <div style="margin-top:8px"><a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">Instagram: @gnce_mercury</a></div>
-    <div style="margin-top:4px"><a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL}</a></div>
-    <div style="margin-top:8px">© ${new Date().getFullYear()} GNCE Mercury</div>
+  <div class="container footer-main">
+    <a class="footer-brand" href="${root}index.html">
+      <img src="${root}images/logo-mark.png" alt="" width="44" height="47">
+      <span><b>GNCE Mercury</b><small>FTC #26413 · Galactic Narwhal Chicken Effect · Weston, MA</small></span>
+    </a>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">Instagram @gnce_mercury</a>
+      <a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL}</a>
+      <span>© ${new Date().getFullYear()} GNCE Mercury</span>
+    </div>
   </div>`;
 document.body.append(footer);
 
@@ -176,34 +184,26 @@ if (cd) {
 }
 
 // ---------- Animated number counters ----------
-// Any element with class "counter" and data-count counts up every time it scrolls into view,
-// and quietly resets to 0 once it's fully off screen.
+// Elements with class "counter" and data-count keep their real number in the HTML, so the right
+// value always shows (link previews, fast scrolling, no JavaScript). When one first scrolls into
+// view it counts up once from 0 as a flourish.
 const counters = document.querySelectorAll(".counter[data-count]");
-const show0 = el => (el.dataset.prefix || "") + "0" + (el.dataset.unit || "");
-if (counters.length) {
+if (counters.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const run = el => {
-    // data-prefix and data-unit always show (e.g. "$" and "k"); data-suffix appears once it finishes (e.g. "+")
+    // data-prefix (e.g. "$") always shows; data-suffix (e.g. "+") appears once it finishes
     const target = +el.dataset.count, dur = 1400, t0 = performance.now();
     const { prefix = "", unit = "", suffix = "" } = el.dataset;
     const show = n => prefix + n.toLocaleString("en-US") + unit;
     const step = () => {
       const p = Math.min(1, (performance.now() - t0) / dur);
       el.textContent = p < 1 ? show(Math.round(target * (1 - Math.pow(1 - p, 3)))) : show(target) + suffix;
-      el._timer = p < 1 ? setTimeout(step, 16) : null;
+      if (p < 1) requestAnimationFrame(step);
     };
     step();
   };
   const io = new IntersectionObserver(entries => entries.forEach(e => {
-    const el = e.target;
-    if (e.intersectionRatio >= 0.5 && !el._shown) {
-      el._shown = true;
-      run(el);
-    } else if (!e.isIntersecting && el._shown) {
-      el._shown = false;
-      clearTimeout(el._timer);
-      el.textContent = show0(el);
-    }
-  }), { threshold: [0, 0.5] });
+    if (e.isIntersecting) { io.unobserve(e.target); run(e.target); }
+  }), { threshold: 0.6 });
   counters.forEach(c => io.observe(c));
 }
 
@@ -355,6 +355,8 @@ if (sqOpen) {
 // Opens the visitor's email app with the message addressed to the team email.
 const contactForm = document.getElementById("contact-form");
 if (contactForm) {
+  // contact.html?topic=join pre-selects "Joining the team" (used by the Join buttons)
+  if (new URLSearchParams(location.search).get("topic") === "join") contactForm.elements.topic.value = "Joining the team";
   contactForm.addEventListener("submit", e => {
     e.preventDefault();
     const f = contactForm.elements;
@@ -363,3 +365,13 @@ if (contactForm) {
     location.href = `mailto:${TEAM_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 }
+
+// ---------- Team: initials avatars ----------
+// Until we have headshots, each person gets their initials on a lavender diamond (the logo's shape).
+document.querySelectorAll(".card.member").forEach(card => {
+  const name = card.querySelector("h3")?.textContent.replace(/\(.*?\)/g, "").trim();
+  if (!name || card.querySelector(".avatar, img")) return;
+  const parts = name.split(/\s+/);
+  const initials = (parts[0][0] + (parts.length > 1 ? parts[parts.length - 1][0] : "")).toUpperCase();
+  card.insertAdjacentHTML("afterbegin", `<div class="avatar" aria-hidden="true"><span>${initials}</span></div>`);
+});

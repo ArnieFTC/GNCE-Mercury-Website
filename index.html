@@ -7,40 +7,60 @@
   <meta name="description" content="GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, MA.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=61">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=72">
 </head>
 <body data-page="index">
   <main>
-    <!-- HERO -->
+    <!-- HERO: logo emblem front and center -->
     <section class="hero">
-      <div class="hero-top">
-        <p class="hero-statement">FIRST Tech Challenge Team 26413.<br><span>Galactic Narwhal Chicken Effect · Weston, MA</span></p>
-        <div class="actions">
-          <a class="btn" href="team.html">Meet the Team</a>
-          <a class="btn ghost" href="contact.html">Support Us</a>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">FIRST Tech Challenge · Team #26413 · Weston, MA</span>
+          <h1>GNCE <span class="accent">Mercury</span></h1>
+          <p class="hero-pitch">High schoolers from Weston who design, build, and code competitive robots, and teach younger kids STEM along the way.</p>
+          <p class="hero-sub">Galactic Narwhal Chicken Effect</p>
+          <div class="actions">
+            <a class="btn" href="contact.html?topic=join#contact-form">Join the Team</a>
+            <a class="btn ghost" href="contact.html#support">Support Us</a>
+          </div>
         </div>
-      </div>
-      <h1 class="wordmark" aria-label="GNCE Mercury">MERCURY</h1>
-      <div class="hero-foot">
-        <span>GNCE · Est. 2024</span>
-        <span>Design · Build · Code · Outreach</span>
-        <a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">Instagram ↗</a>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="container">
-      <div class="split">
-        <div class="split-label"><span class="eyebrow">The team</span></div>
-        <div class="split-body">
-          <h2>A third-year FTC team out of Weston, MA.</h2>
-          <p>We design, build, and code competitive robots. We have members with experience competing and winning awards at international competitions.</p>
+        <div class="hero-emblem">
+          <img src="images/logo-mark.png" alt="GNCE Mercury logo: the god Mercury holding a staff inside a lavender diamond" width="473" height="505">
         </div>
       </div>
     </section>
 
+    <!-- HIGHLIGHTS STRIP -->
+    <section class="container strip">
+      <div class="badges">
+        <div class="badge"><span class="b-k">Rookie year</span><span class="b-v">2024</span></div>
+        <div class="badge gold"><span class="b-k">Ryken RoboBowl</span><span class="b-v">Winning Alliance · 1st Pick</span></div>
+        <div class="badge gold"><span class="b-k">WNEU Qualifier</span><span class="b-v">Sustain Award</span></div>
+        <div class="badge"><span class="b-k">2026</span><span class="b-v">Qualified for MA States</span></div>
+      </div>
+    </section>
+
+    <!-- WHO WE ARE: the team photo up front -->
     <section class="container">
+      <div class="feature">
+        <img class="feature-img" src="images/team.png" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship" width="927" height="626">
+        <div class="feature-copy">
+          <span class="eyebrow">Who we are</span>
+          <h2>A third-year team that builds, competes, and gives back.</h2>
+          <p>We're ten students and four coaches from Weston, MA. We design, build, and code a new robot every season, and we have members with experience competing and winning awards at international competitions.</p>
+          <p>Off the field, we run a summer robotics camp and mentor Weston's FIRST LEGO League teams.</p>
+          <a class="text-link" href="team.html">Meet the team →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR ROBOTS -->
+    <section class="container">
+      <div class="section-head">
+        <span class="eyebrow">Our robots</span>
+        <h2 class="section-title">A new machine every season</h2>
+      </div>
       <!-- ROBOT CAROUSEL: one <figure class="slide"> per robot. It rotates automatically (js/main.js). -->
       <div class="robot-carousel" aria-roledescription="carousel" aria-label="Our robots">
         <div class="slides">
@@ -66,7 +86,7 @@
     <!-- COUNTDOWN + SEASON TIMELINE — edit the event list in js/main.js (SEASON, at the top) -->
     <section class="container">
       <div class="countdown" id="countdown">
-        <span class="eyebrow">Countdown</span>
+        <span class="eyebrow">Next mission</span>
         <div class="event-name"></div>
         <div class="event-date"></div>
         <div class="timer"></div>
@@ -74,50 +94,60 @@
       </div>
     </section>
 
-    <!-- BY THE NUMBERS — data-count = number to count to; data-prefix/data-unit always show; data-suffix is added at the end -->
+    <!-- BY THE NUMBERS — the real number is written in the HTML; data-count makes it count up when scrolled into view -->
     <section class="container">
-      <h2 class="section-title">By the Numbers</h2>
+      <div class="section-head">
+        <span class="eyebrow">By the numbers</span>
+        <h2 class="section-title">Three seasons in</h2>
+      </div>
       <div class="stats">
-        <div class="stat"><div class="big counter" data-count="3">0</div><div class="label">Seasons</div></div>
-        <div class="stat"><div class="big counter" data-count="8000" data-prefix="$" data-suffix="+">$0</div><div class="label">Dollars Raised</div></div>
-        <div class="stat"><div class="big counter" data-count="15000" data-suffix="+">0</div><div class="label">Students Impacted</div></div>
+        <div class="stat"><div class="big counter" data-count="3">3</div><div class="label">Seasons competed</div></div>
+        <div class="stat"><div class="big counter" data-count="8000" data-prefix="$" data-suffix="+">$8,000+</div><div class="label">Raised for robots &amp; outreach</div></div>
+        <div class="stat"><div class="big counter" data-count="15000" data-suffix="+">15,000+</div><div class="label">Students impacted</div></div>
       </div>
     </section>
 
-    <!-- HIGHLIGHTS -->
+    <!-- EXPLORE -->
     <section class="container">
-      <h2 class="section-title">Highlights</h2>
-      <div class="stats words">
-        <div class="stat"><div class="big">2024</div><div class="label">Rookie Year</div></div>
-        <div class="stat"><div class="big">1st Pick</div><div class="label">Winning Alliance · Ryken RoboBowl</div></div>
-        <div class="stat"><div class="big">Sustain Award</div><div class="label">WNEU Qualifier</div></div>
-        <div class="stat"><div class="big">2026 MA States</div><div class="label">Qualified</div></div>
+      <div class="section-head">
+        <span class="eyebrow">Explore</span>
+        <h2 class="section-title">See what we're up to</h2>
+      </div>
+      <div class="grid cols-3 explore">
+        <a class="card photo-card" href="team.html">
+          <img src="images/decode-team-and-robot.png" alt="GNCE Mercury members with the DECODE robot" loading="lazy" style="object-position:center 15%">
+          <div class="card-body"><span class="tag">The people</span><h3>Our Team</h3><p>The members and coaches behind Mercury.</p></div>
+        </a>
+        <a class="card photo-card" href="seasons.html">
+          <img class="light" src="images/decode-robot-cad.jpg" alt="CAD render of the DECODE robot" loading="lazy">
+          <div class="card-body"><span class="tag">The robots</span><h3>Seasons</h3><p>Every robot and every qualifier we've competed at.</p></div>
+        </a>
+        <a class="card photo-card" href="outreach.html">
+          <img src="images/fll_camp_1.jpg" alt="Campers and families at our summer camp showcase" loading="lazy">
+          <div class="card-body"><span class="tag">The community</span><h3>Outreach</h3><p>Our summer camp, FLL coaching, and demos around Massachusetts.</p></div>
+        </a>
       </div>
     </section>
 
-    <!-- QUICK LINKS -->
+    <!-- JOIN + SUPPORT -->
     <section class="container">
-      <h2 class="section-title">Explore</h2>
-      <div class="grid">
-        <a class="card" href="team.html">
-          <span class="tag">01</span>
-          <h3>Our Team</h3>
-          <p>The members and mentors behind Mercury.</p>
-        </a>
-        <a class="card" href="seasons.html">
-          <span class="tag">02</span>
-          <h3>Seasons</h3>
-          <p>Every robot and every qualifier we've competed at.</p>
-        </a>
-        <a class="card" href="outreach.html">
-          <span class="tag">03</span>
-          <h3>Outreach</h3>
-          <p>How we give back, plus the sponsors who make it possible.</p>
-        </a>
+      <div class="cta-pair">
+        <div class="cta">
+          <span class="eyebrow">For students</span>
+          <h2>Want to build robots with us?</h2>
+          <p>We recruit new members every season, and rookies are part of the team. Tell us what you're into: building, coding, CAD, or outreach.</p>
+          <a class="btn" href="contact.html?topic=join#contact-form">Ask about joining</a>
+        </div>
+        <div class="cta">
+          <span class="eyebrow">For sponsors &amp; families</span>
+          <h2>Help us get to the next competition.</h2>
+          <p>Parts, registration, and travel add up. Every donation or sponsorship goes straight to building robots and running outreach.</p>
+          <a class="btn ghost" href="contact.html#support">Support the team</a>
+        </div>
       </div>
     </section>
 
   </main>
-  <script src="js/main.js?v=61"></script>
+  <script src="js/main.js?v=72"></script>
 </body>
 </html>
