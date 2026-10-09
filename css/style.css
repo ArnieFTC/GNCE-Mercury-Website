@@ -325,16 +325,17 @@ section.narrow p { font-size: var(--t-lead); line-height: 1.4; color: var(--text
 .quote::after { content: "\201D"; }
 .quote:empty { display: none; }
 .quote + .quote { margin-top: 12px; }
-.quote.locked { font-family: var(--mono); font-size: var(--t-label); color: var(--muted); border-left-style: dotted; }
+.quote.locked { color: var(--muted); border-left-style: dotted; }
 .quote.locked::before, .quote.locked::after { content: none; }
 .quote.unlocking { animation: sq-shake 0.5s ease-in-out; border-left-color: var(--accent); }
 @keyframes sq-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 50% { transform: translateX(4px); } 75% { transform: translateX(-2px); } }
 .quote.special { position: relative; border-left: 1px solid var(--accent); }
 .quote.special::before, .quote.special::after { content: none; }
-.quote.special .sq-badge { display: block; margin-bottom: 6px; font-family: var(--mono); font-size: var(--t-label); color: var(--accent); }
+.quote.special .sq-badge { display: block; margin-bottom: 6px; color: var(--accent); }
 .quote.special .sq-text::before { content: "\201C"; }
 .quote.special .sq-text::after { content: "\201D"; }
-.quote.special.revealing .sq-badge, .quote.special.revealing .sq-text { display: inline-block; animation: fade-up 0.7s var(--ease) both; }
+.quote.special .sq-text { display: block; }
+.quote.special.revealing .sq-badge, .quote.special.revealing .sq-text { animation: fade-up 0.7s var(--ease) both; }
 .special-quotes { display: flex; margin: 8px 0 0; }
 .sq-form { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .sq-form[hidden] { display: none; }
