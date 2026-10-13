@@ -471,6 +471,15 @@ form textarea { min-height: 150px; resize: vertical; }
 /* ---------- Team: portrait grid ---------- */
 .members-grid.people { grid-template-columns: repeat(4, 1fr); gap: 64px var(--gutter); }
 @media (max-width: 1000px) { .members-grid.people { grid-template-columns: repeat(3, 1fr); } }
+/* 4 per row on desktop. When the last row has 3 (e.g. 4-4-3), space them evenly:
+   equal gaps at both edges and between cards. Card width W = (100% - 3 gutters) / 4,
+   so each of the 4 gaps is (100% - 3W) / 4 = 100%/16 + 9 gutters/16. */
+@media (min-width: 1001px) {
+  .members-grid.people { display: flex; flex-wrap: wrap; }
+  .members-grid.people > .member { flex: 0 0 calc((100% - 3 * var(--gutter)) / 4); }
+  .members-grid.people > .member:nth-child(4n+1):nth-last-child(3) { margin-left: calc(100% / 16 + 9 * var(--gutter) / 16); }
+  .members-grid.people > .member:nth-child(4n+1):nth-last-child(3) ~ .member { margin-left: calc(100% / 16 + 9 * var(--gutter) / 16 - var(--gutter)); }
+}
 @media (max-width: 720px) { .members-grid.people { grid-template-columns: repeat(2, 1fr); gap: 44px 16px; } }
 .people .card.member { border-top: none; padding-top: 0; }
 .portrait {
