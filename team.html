@@ -4,22 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Team | GNCE Mercury</title>
-  <script>document.documentElement.classList.add('js')</script>
-  <link rel="stylesheet" href="css/style.css?v=117">
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
+  <link rel="stylesheet" href="css/style.css?v=118">
+  <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="team">
   <main class="container">
 
-    <div class="page-head" data-reveal>
+    <div class="page-head">
       <h1>The Team</h1>
       <p>Eleven students and four coaches from Weston, MA.</p>
-      <img class="team-banner" src="images/team.png" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship" width="927" height="626">
-      <div class="mission">
-        <h2>Team Mission</h2>
-        <p>
-          We aim to promote and grow FIRST values in our community, both inside and outside of Weston.
-          We strive to teach every member CAD and coding, and to mentor FLL teams along the way.
-        </p>
+      <div class="team-intro">
+        <img class="team-banner" src="images/team.webp" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship" width="927" height="626">
+        <div class="mission">
+          <h2>Team Mission</h2>
+          <p>
+            We aim to promote and grow FIRST values in our community, both inside and outside of Weston.
+            We strive to teach every member CAD and coding, and to mentor FLL teams along the way.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -34,11 +37,11 @@
       </p>
     </section>
 
-    <!-- PHOTOS: replace a member's <div class="portrait">…</div> with <img class="portrait" src="images/team/NAME.jpg" alt="NAME"> (portrait crop, about 4:5).
-         MEMBERS: copy/paste a <div class="card member"><div class="portrait" aria-hidden="true"><span>Photo</span></div> block to add someone. Each <span class="chip"> is a subteam; <div class="lead-tag"> is a lead role; <blockquote class="quote"> is their quote (hidden when empty). -->
+    <!-- PHOTOS: replace a member's <div class="portrait">…</div> with <img class="portrait" src="images/team/NAME.jpg" alt="NAME" width="800" height="1000" loading="lazy"> (portrait crop, 4:5). Until then the plate shows their initials.
+         MEMBERS: copy/paste a <div class="card member"><div class="portrait" aria-hidden="true"><span>Photo</span></div> block to add someone. Each <span class="chip"> is a subteam (the filter buttons above the grid are built from them); <div class="lead-tag"> is a lead role; <blockquote class="quote"> is their quote (hidden when empty). -->
     <section>
       <h2 class="section-title">Members</h2>
-      <div class="grid members-grid people">
+      <div class="grid members-grid people" data-filter>
         <div class="card member"><img class="portrait" src="images/team/andy.jpg" alt="Andy Ding" width="800" height="1000" loading="lazy"><h3>Andy Ding</h3><div class="exp">4th year in FTC</div><div class="lead-tag">Captain</div><div class="chips"><span class="chip">CAD</span><span class="chip">Build</span><span class="chip">Outreach</span><span class="chip">Game Strategy</span></div><blockquote class="quote">I started Mercury with a toolbox, a dream, and no idea how mecanum wheels worked. Three seasons later, look at us.</blockquote><blockquote class="quote locked" data-secret="andy">Special quote</blockquote></div>
         <div class="card member"><img class="portrait" src="images/team/arnie.jpg" alt="Arnie Sreeram" width="800" height="1000" loading="lazy"><h3>Arnie Sreeram</h3><div class="exp">4th year in FTC</div><div class="lead-tag">Software Lead</div><div class="chips"><span class="chip">Game Strategy</span></div><blockquote class="quote">I want to have the best code in all of FTC for the second year in a row.</blockquote></div>
         <div class="card member"><img class="portrait" src="images/team/zade.jpg" alt="Zade Parks" width="800" height="1000" loading="lazy"><h3>Zade (Suzie) Parks</h3><div class="exp">3rd year in FTC</div><div class="lead-tag">CAD Lead</div><div class="chips"><span class="chip">Build</span><span class="chip">Electrical</span><span class="chip">Game Strategy</span></div><blockquote class="quote">Oh wait, it was working. I just didn't turn it on this whole time.</blockquote><blockquote class="quote">If it's open 24/7, it means it doesn't close.</blockquote><blockquote class="quote">Is the custom version cheaper?</blockquote></div>
@@ -85,6 +88,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=117"></script>
+  <script src="js/main.js?v=118"></script>
 </body>
 </html>

@@ -4,53 +4,81 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2026–2027 Season | GNCE Mercury</title>
-  <script>document.documentElement.classList.add('js')</script>
-  <link rel="stylesheet" href="../css/style.css?v=117">
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
+  <link rel="stylesheet" href="../css/style.css?v=118">
+  <link rel="icon" href="../images/logo-mark.png">
 </head>
 <body data-page="seasons" data-root="../">
   <main class="container">
 
     <div class="breadcrumb"><a href="../seasons.html">Seasons</a> / 2026–2027</div>
-    <div class="page-head" data-reveal style="padding-top:28px">
+    <div class="page-head">
       <span class="eyebrow">2026–2027 Season</span>
       <h1>BIOBUZZ</h1>
       <p>Our third season. Currently in progress.</p>
     </div>
+    <!-- SEASON HERO: never lazy-load it (the robot from the home page glides into it) -->
+    <figure class="season-hero pair">
+      <span class="print"><img src="../images/mercinator_v1_fullybuilt.webp" width="610" height="608" fetchpriority="high" alt="The Mercinator, our BIOBUZZ robot, fully built (version 1)" style="view-transition-name: robot-mercinator"></span>
+      <span class="print"><img src="../images/mercinator_v1.jpg" width="794" height="806" alt="The Mercinator V1 on a workbench while it was being built"></span>
+      <figcaption>The Mercinator · Version 1 · in progress</figcaption>
+    </figure>
 
     <!-- ROBOT -->
     <section>
       <h2 class="section-title">The Robot</h2>
       <div class="robot">
-        <img class="robot-photo" style="max-width:600px;margin:0 auto" src="../images/mercinator_v1_fullybuilt.png" alt="The Mercinator, our BIOBUZZ robot, fully built (version 1)" width="610" height="608">
         <div>
-          <h3 style="font-size:1.5rem;margin-bottom:10px">The Mercinator (V1)</h3>
-          <p class="muted">Version 1 of The Mercinator is a pollen-only robot, built on the same ideas as the DECODE robot we took to States.</p>
-          <ul class="specs" style="margin-top:16px">
+          <h3>The Mercinator (V1)</h3>
+          <p>Version 1 of The Mercinator is a pollen-only robot, built on the same ideas as the DECODE robot we took to States.</p>
+        </div>
+        <div class="spec-sheet">
+          <p class="sheet-head"><span>GNCE Mercury · FTC 26413</span><span>BIOBUZZ · 2026–27</span></p>
+          <ul class="specs">
             <li><span>Drivetrain</span><span>Mecanum</span></li>
             <li><span>Intake</span><span>Compliant gecko and vector wheels</span></li>
             <li><span>Scoring</span><span>TBD</span></li>
             <li><span>Autonomous</span><span>TBD</span></li>
             <li><span>Software</span><span>Pedro Pathing 3.0</span></li>
           </ul>
+          <p class="sheet-foot">Version 1 · in progress</p>
         </div>
       </div>
     </section>
 
-    <!-- EVENTS: when a qualifier happens, replace the note below with an event block like this:
-      <div class="event">
-        <div class="event-head"><h3>Event Name</h3><span class="date">Mon DD, 2026</span></div>
-        <div class="event-body">
-          <div><div class="k">Alliance</div><div class="v">—</div></div>
-          <div><div class="k">Awards</div><div class="v">—</div></div>
+    <!-- COUNTDOWN — the event list lives in js/main.js (SEASON, at the top) -->
+    <section>
+      <div class="countdown" id="countdown">
+        <span class="eyebrow">Next competition</span>
+        <div class="event-name"></div>
+        <div class="event-date"></div>
+        <div class="timer"></div>
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <!-- EVENTS: when a qualifier happens, replace the note below with an event list like this:
+      <div class="event-list">
+        <div class="event">
+          <div class="event-head"><h3>Event Name</h3><span class="date">Mon DD, 2026</span></div>
+          <div class="event-body">
+            <div><div class="k">Alliance</div><div class="v">—</div></div>
+            <div><div class="k">Awards</div><div class="v">—</div></div>
+          </div>
         </div>
       </div>
     -->
     <section>
       <h2 class="section-title">Events</h2>
-      <p class="center muted" style="text-align:center">No qualifiers yet this season. Results will show up here after our first event.</p>
+      <p class="empty-note">No qualifiers yet this season. Results will show up here after our first event.</p>
     </section>
 
+    <!-- OTHER SEASONS: one <a> per neighbouring season -->
+    <nav class="season-pager" aria-label="Other seasons">
+      <a rel="prev" href="2025-2026.html"><img src="../images/decode-robot-cad.webp" width="1165" height="1066" loading="lazy" alt="" style="view-transition-name: robot-decode"><span><span class="eyebrow">2025–2026 · 2nd Season</span><b>DECODE</b></span></a>
+    </nav>
+
   </main>
-  <script src="../js/main.js?v=117"></script>
+  <script src="../js/main.js?v=118"></script>
 </body>
 </html>

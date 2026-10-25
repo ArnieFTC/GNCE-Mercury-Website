@@ -4,33 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2025–2026 Season | GNCE Mercury</title>
-  <script>document.documentElement.classList.add('js')</script>
-  <link rel="stylesheet" href="../css/style.css?v=117">
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
+  <link rel="stylesheet" href="../css/style.css?v=118">
+  <link rel="icon" href="../images/logo-mark.png">
 </head>
 <body data-page="seasons" data-root="../">
   <main class="container">
 
     <div class="breadcrumb"><a href="../seasons.html">Seasons</a> / 2025–2026</div>
-    <div class="page-head" data-reveal style="padding-top:28px">
+    <div class="page-head">
       <span class="eyebrow">2025–2026 Season</span>
       <h1>DECODE</h1>
       <p>Our second season: Sustain Award and a trip to States.</p>
     </div>
+    <!-- SEASON HERO: never lazy-load it (the robot from the home page glides into it) -->
+    <figure class="season-hero"><img src="../images/decode-robot-cad.webp" width="1165" height="1066" fetchpriority="high" alt="CAD render of Mercury's DECODE robot with its intake, transfer, and turret shooter" style="view-transition-name: robot-decode"></figure>
 
     <!-- ROBOT — content from our 2025-26 engineering portfolio -->
     <section>
       <h2 class="section-title">The Robot</h2>
       <div class="robot">
-        <img class="robot-photo cutout" src="../images/decode-robot-cad.webp" alt="CAD render of Mercury's DECODE robot with its intake, transfer, and turret shooter" width="1165" height="1066">
         <div>
-          <h3 style="font-size:1.5rem;margin-bottom:10px">Winning alliance, Sustain Award &amp; a trip to States</h3>
-          <p class="muted">
+          <h3>Winning alliance, Sustain Award &amp; a trip to States</h3>
+          <p>
             Early on we considered a sorting indexer so we could score patterns for the ranking point. It would
             have been more complex, less reliable, and slower, so we built a direct-transfer robot instead: a
             parallel-plate chassis, a full-width gecko-wheel intake, a 0.34-second transfer, and a flywheel shooter
             on a 360&deg; turret that tracks the goal with a Limelight.
           </p>
-          <ul class="specs" style="margin-top:16px">
+        </div>
+        <div class="spec-sheet">
+          <p class="sheet-head"><span>GNCE Mercury · FTC 26413</span><span>DECODE · 2025–26</span></p>
+          <ul class="specs">
             <li><span>Chassis</span><span>Parallel plate (V3)</span></li>
             <li><span>Intake</span><span>Compliant gecko-wheel bar</span></li>
             <li><span>Transfer</span><span>Custom rails, 0.34 s</span></li>
@@ -38,31 +43,38 @@
             <li><span>Vision</span><span>Limelight, PD tracking</span></li>
             <li><span>Autonomous</span><span>18-ball close / 9-ball far</span></li>
           </ul>
+          <p class="sheet-foot">From our 2025–26 engineering portfolio</p>
         </div>
       </div>
-      <div class="stats" style="margin-top:28px">
-        <div class="stat"><div class="big">0.34 s</div><div class="label">Transfer time</div></div>
+      <div class="stats figures">
+        <div class="stat"><div class="big">0.34<span class="unit">s</span></div><div class="label">Transfer time</div></div>
         <div class="stat"><div class="big">18</div><div class="label">Ball autonomous</div></div>
         <div class="stat"><div class="big">360&deg;</div><div class="label">Turret rotation</div></div>
         <div class="stat"><div class="big">3</div><div class="label">Sets of gecko wheels</div></div>
       </div>
     </section>
 
+    <!-- MECHANISMS: data-walkthrough turns these cards into a scroll-through tour on big screens -->
     <section>
       <h2 class="section-title">Mechanisms &amp; iterations</h2>
-      <div class="parts-grid three">
-        <article class="part-card"><img class="render" src="../images/decode-chassis-v2.jpg" alt="CAD render of the V2 parallel-plate chassis" loading="lazy"><div><h3>Chassis</h3><p>V1's parallel plates gave us maneuverability and defense but had no mounting holes, and the U-channels we added made it heavy. V2 added holes and cut weight, but its wood plates could break. V3 keeps components easy to remove for maintenance.</p></div></article>
-        <article class="part-card"><img class="render" src="../images/decode-intake.jpg" alt="Mercury's V2 intake with a horizontal bar of gecko wheels" loading="lazy"><div><h3>Intake</h3><p>Two gecko wheels on two motors needed too much precision. V2 used one motor and a horizontal bar of gecko wheels. V3 is compliant, runs the full 14 in width of the chassis, and uses vectored wheels to push balls to the center.</p></div></article>
-        <article class="part-card"><img class="cutout" src="../images/decode-transfer.webp" alt="CAD render of the V3 transfer with custom rails" loading="lazy"><div><h3>Transfer</h3><p>V1 took 1.5 s to bring a ball to the shooter. V2 moved several balls at once in 0.9 s. V3 uses custom CADed rails on a constant incline to shrink the footprint and gets a ball to the shooter in 0.34 s.</p></div></article>
-        <article class="part-card"><img class="render" src="../images/decode-shooter.jpg" alt="CAD render of shooter version 4" loading="lazy"><div><h3>Shooter</h3><p>Four versions: a bulky fixed hood, a sturdier but large build, a smaller modular one that was unstable, and V4 with stable side plates, the motors in front, and a front-mounted Limelight.</p></div></article>
-        <article class="part-card"><img class="cutout" src="../images/decode-turret.webp" alt="CAD of the turret top plate, lazy susan, and herringbone gear" loading="lazy"><div><h3>Turret</h3><p>A pulley drive lost tension and took up space, so we switched to a 1:3 herringbone gear mounted to a lazy susan in the top plate. Spring-loaded key retractors manage the wires through the full 360&deg;.</p></div></article>
-        <article class="part-card"><img class="cutout" src="../images/decode-limelight.webp" alt="CAD render of the Limelight mounted on the front of the shooter" loading="lazy"><div><h3>Limelight</h3><p>After trial and error, we mounted the Limelight directly in front of the shooter. It gives more accurate shots and also helps support the shooter's structure.</p></div></article>
+      <div class="parts-grid three" data-walkthrough>
+        <article class="part-card"><img class="render feather" src="../images/decode-chassis-v2.jpg" width="1400" height="784" alt="CAD render of the V2 parallel-plate chassis" loading="lazy"><div><h3>Chassis</h3><p>V1's parallel plates gave us maneuverability and defense but had no mounting holes, and the U-channels we added made it heavy. V2 added holes and cut weight, but its wood plates could break. V3 keeps components easy to remove for maintenance.</p></div></article>
+        <article class="part-card"><img class="photo" src="../images/decode-intake.jpg" width="1400" height="903" alt="Mercury's V2 intake with a horizontal bar of gecko wheels" loading="lazy"><div><h3>Intake</h3><p>Two gecko wheels on two motors needed too much precision. V2 used one motor and a horizontal bar of gecko wheels. V3 is compliant, runs the full 14 in width of the chassis, and uses vectored wheels to push balls to the center.</p></div></article>
+        <article class="part-card"><img src="../images/decode-transfer.webp" width="1168" height="797" alt="CAD render of the V3 transfer with custom rails" loading="lazy"><div><h3>Transfer</h3><p>V1 took 1.5 s to bring a ball to the shooter. V2 moved several balls at once in 0.9 s. V3 uses custom CADed rails on a constant incline to shrink the footprint and gets a ball to the shooter in 0.34 s.</p>
+          <ul class="bars" aria-label="Transfer time by version">
+            <li style="--v:1.5"><span class="k">V1</span><span class="bar"></span><b>1.5 s</b></li>
+            <li style="--v:0.9"><span class="k">V2</span><span class="bar"></span><b>0.9 s</b></li>
+            <li style="--v:0.34" class="best"><span class="k">V3</span><span class="bar"></span><b>0.34 s</b></li>
+          </ul></div></article>
+        <article class="part-card"><img class="render feather" src="../images/decode-shooter.jpg" width="1280" height="708" alt="CAD render of shooter version 4" loading="lazy"><div><h3>Shooter</h3><p>Four versions: a bulky fixed hood, a sturdier but large build, a smaller modular one that was unstable, and V4 with stable side plates, the motors in front, and a front-mounted Limelight.</p></div></article>
+        <article class="part-card"><img src="../images/decode-turret.webp" width="1153" height="661" alt="CAD of the turret top plate, lazy susan, and herringbone gear" loading="lazy"><div><h3>Turret</h3><p>A pulley drive lost tension and took up space, so we switched to a 1:3 herringbone gear mounted to a lazy susan in the top plate. Spring-loaded key retractors manage the wires through the full 360&deg;.</p></div></article>
+        <article class="part-card"><img class="render" src="../images/decode-limelight.webp" width="754" height="600" alt="CAD render of the Limelight mounted on the front of the shooter" loading="lazy"><div><h3>Limelight</h3><p>After trial and error, we mounted the Limelight directly in front of the shooter. It gives more accurate shots and also helps support the shooter's structure.</p></div></article>
       </div>
     </section>
 
     <section>
       <h2 class="section-title">Software &amp; autonomous</h2>
-      <div class="grid pair">
+      <div class="grid pair software-grid">
         <div class="card">
           <span class="tag">Turret tracking</span>
           <h3>Search, track, lock, hold</h3>
@@ -89,34 +101,42 @@
     <!-- EVENTS: copy/paste a <div class="event"> block for each qualifier/event -->
     <section>
       <h2 class="section-title">Events</h2>
-      <div class="event">
-        <div class="event-head"><h3>Massachusetts State Championship</h3><span class="date">Mar 15, 2026</span></div>
-        <div class="event-body">
-          <div><div class="k">Alliance</div><div class="v">—</div></div>
-          <div><div class="k">Awards</div><div class="v">—</div></div>
+      <div class="event-list">
+        <div class="event">
+          <div class="event-head"><h3>Massachusetts State Championship</h3><span class="date">Mar 15, 2026</span></div>
+          <div class="event-body">
+            <div><div class="k">Alliance</div><div class="v">—</div></div>
+            <div><div class="k">Awards</div><div class="v">—</div></div>
+          </div>
+          <p class="notes">We competed at States after qualifying through our Ryken RoboBowl result.</p>
         </div>
-        <p class="notes">We competed at States after qualifying through our Ryken RoboBowl result.</p>
-      </div>
-      <div class="event">
-        <div class="event-head"><h3>WNEU Qualifier</h3><span class="date">Jan 24, 2026</span></div>
-        <div class="event-body">
-          <div><div class="k">Alliance</div><div class="v">—</div></div>
-          <div><div class="k">Awards</div><div class="v"><span class="award">Sustain Award</span></div></div>
+        <div class="event">
+          <div class="event-head"><h3>WNEU Qualifier</h3><span class="date">Jan 24, 2026</span></div>
+          <div class="event-body">
+            <div><div class="k">Alliance</div><div class="v">—</div></div>
+            <div><div class="k">Awards</div><div class="v"><span class="award">Sustain Award</span></div></div>
+          </div>
+          <p class="notes">Alongside our matches, the team received the Sustain Award at WNEU.</p>
         </div>
-        <p class="notes">Alongside our matches, the team received the Sustain Award at WNEU.</p>
-      </div>
-      <div class="event">
-        <div class="event-head"><h3>Ryken RoboBowl Qualifier</h3><span class="date">Dec 14, 2025</span></div>
-        <img class="event-photo" src="../images/team.png" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship">
-        <div class="event-body">
-          <div><div class="k">Alliance</div><div class="v">Winning Alliance · 1st Pick</div></div>
-          <div><div class="k">Awards</div><div class="v"><span class="award">Winning Alliance</span></div></div>
+        <div class="event">
+          <div class="event-head"><h3>Ryken RoboBowl Qualifier</h3><span class="date">Dec 14, 2025</span></div>
+          <img class="event-photo" src="../images/team.webp" width="927" height="626" loading="lazy" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship">
+          <div class="event-body">
+            <div><div class="k">Alliance</div><div class="v">Winning Alliance · 1st Pick</div></div>
+            <div><div class="k">Awards</div><div class="v"><span class="award">Winning Alliance</span></div></div>
+          </div>
+          <p class="notes">This win earned us our spot at the Massachusetts State Championship.</p>
         </div>
-        <p class="notes">This win earned us our spot at the Massachusetts State Championship.</p>
       </div>
     </section>
 
+    <!-- OTHER SEASONS: one <a> per neighbouring season -->
+    <nav class="season-pager" aria-label="Other seasons">
+      <a rel="prev" href="2024-2025.html"><img src="../images/into-the-deep-robot-ink.webp" width="876" height="558" loading="lazy" alt="" style="view-transition-name: robot-itd"><span><span class="eyebrow">2024–2025 · Rookie</span><b>INTO THE DEEP</b></span></a>
+      <a rel="next" href="2026-2027.html"><img src="../images/mercinator_v1_fullybuilt.webp" width="610" height="608" loading="lazy" alt="" style="view-transition-name: robot-mercinator"><span><span class="eyebrow">2026–2027 · Current</span><b>BIOBUZZ</b></span></a>
+    </nav>
+
   </main>
-  <script src="../js/main.js?v=117"></script>
+  <script src="../js/main.js?v=118"></script>
 </body>
 </html>
