@@ -242,6 +242,7 @@ a.card { display: block; color: var(--text); text-decoration: none; }
 .card-gallery img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 30%; }
 .card-gallery img:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
 .card-gallery.row3 { grid-template-columns: repeat(3, 1fr); }
+.card-gallery.shots img { aspect-ratio: 16 / 9; object-position: center; }
 .card-gallery .card-video { grid-column: 1 / -1; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
 .card.wide { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 4vw, 64px); align-items: start; }
 .card.wide .card-gallery { margin-bottom: 0; }
