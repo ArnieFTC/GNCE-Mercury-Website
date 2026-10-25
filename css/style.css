@@ -491,8 +491,7 @@ form textarea { min-height: 150px; resize: vertical; }
     var(--ink-2);
   border: 1px solid var(--line);
 }
-img.portrait { display: block; border: none; filter: grayscale(1) contrast(1.05); transition: filter 0.5s var(--ease); }
-.member:hover img.portrait { filter: none; }
+img.portrait { display: block; border: none; }
 .portrait span { padding: 12px 14px; font-family: var(--mono); font-size: var(--t-label); color: var(--muted); }
 .people .member h3 { font-size: 1.55rem; margin-bottom: 6px; }
 .people .member .exp { margin-bottom: 12px; }
