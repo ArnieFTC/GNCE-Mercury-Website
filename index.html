@@ -6,7 +6,7 @@
   <title>GNCE Mercury | FTC 26413</title>
   <meta name="description" content="GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, MA.">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <link rel="stylesheet" href="css/style.css?v=118">
+  <link rel="stylesheet" href="css/style.css?v=120">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="index">
@@ -38,7 +38,7 @@
         <li><span class="k">2024</span><span class="v">Rookie season</span></li>
         <li><span class="k">Ryken RoboBowl</span><span class="v">First pick, winning alliance</span></li>
         <li><span class="k">WNEU Qualifier</span><span class="v">Sustain Award</span></li>
-        <li><span class="k">2026</span><span class="v">Massachusetts State Championship</span></li>
+        <li><span class="k">2026</span><span class="v">Qualified for MA States</span></li>
       </ul>
     </section>
 
@@ -60,7 +60,7 @@
       </div>
     </section>
 
-    <!-- ROBOTS: one <article class="model"> per robot, oldest first.
+    <!-- ROBOTS: one <article class="model"> per robot, oldest first. Clicking the robot or its link opens that season.
          The style="view-transition-name: …" lets the robot glide into its season page; each name may appear only once per page. -->
     <section class="container">
       <div class="section-head">
@@ -69,7 +69,7 @@
       </div>
       <div class="models">
         <article class="model" id="into-the-deep">
-          <figure class="model-stage"><img src="images/into-the-deep-robot-ink.webp" width="876" height="558" loading="lazy" alt="GNCE Mercury's INTO THE DEEP robot with intake and lift arm" style="view-transition-name: robot-itd"></figure>
+          <figure class="model-stage"><a class="model-link" href="seasons/2024-2025.html" tabindex="-1"><img src="images/into-the-deep-robot-ink.webp" width="876" height="558" alt="GNCE Mercury's INTO THE DEEP robot with intake and lift arm" style="view-transition-name: robot-itd"></a></figure>
           <div class="model-copy">
             <span class="eyebrow">2024–2025 · Rookie</span>
             <h3 class="model-name">INTO THE DEEP</h3>
@@ -78,7 +78,7 @@
           </div>
         </article>
         <article class="model" id="decode">
-          <figure class="model-stage"><img src="images/decode-robot-cad.webp" width="1165" height="1066" loading="lazy" alt="CAD render of GNCE Mercury's DECODE robot with its intake, transfer, and turret shooter" style="view-transition-name: robot-decode"></figure>
+          <figure class="model-stage"><a class="model-link" href="seasons/2025-2026.html" tabindex="-1"><img src="images/decode-robot-cad.webp" width="1165" height="1066" alt="CAD render of GNCE Mercury's DECODE robot with its intake, transfer, and turret shooter" style="view-transition-name: robot-decode"></a></figure>
           <div class="model-copy">
             <span class="eyebrow">2025–2026 · 2nd Season</span>
             <h3 class="model-name">DECODE</h3>
@@ -88,8 +88,8 @@
         </article>
         <article class="model" id="mercinator">
           <div class="model-stage pair">
-            <figure class="print"><img src="images/mercinator_v1_fullybuilt.webp" width="610" height="608" loading="lazy" alt="The Mercinator, our BIOBUZZ robot, fully built (version 1)" style="view-transition-name: robot-mercinator"></figure>
-            <figure class="print"><img src="images/mercinator_v1.jpg" width="794" height="806" loading="lazy" alt="The Mercinator V1 on a workbench while it was being built"></figure>
+            <figure class="print"><a class="model-link" href="seasons/2026-2027.html" tabindex="-1"><img src="images/mercinator_v1_fullybuilt.webp" width="610" height="608" alt="The Mercinator, our BIOBUZZ robot, fully built (version 1)" style="view-transition-name: robot-mercinator"></a></figure>
+            <figure class="print"><img src="images/mercinator_v1.jpg" width="794" height="806" alt="The Mercinator V1 on a workbench while it was being built"></figure>
           </div>
           <div class="model-copy">
             <span class="eyebrow">2026–2027 · BIOBUZZ · Current</span>
@@ -104,7 +104,7 @@
     <!-- COUNTDOWN + SEASON TIMELINE — edit the event list in js/main.js (SEASON, at the top) -->
     <section class="container">
       <div class="countdown" id="countdown">
-        <span class="eyebrow">Next competition</span>
+        <h2 class="eyebrow">Next competition</h2>
         <div class="event-name"></div>
         <div class="event-date"></div>
         <div class="timer"></div>
@@ -127,7 +127,7 @@
 
     <!-- INDEX of the site. data-preview is the photo shown beside the list on big screens. -->
     <section class="container">
-      <span class="eyebrow">Read more</span>
+      <h2 class="eyebrow">Read more</h2>
       <ol class="index-list">
         <li><a href="team.html" data-preview="images/team.webp"><span class="n">01</span><span class="t">Team</span><span class="d">Members, leads, and coaches</span><span class="ar" aria-hidden="true"></span></a></li>
         <li><a href="seasons.html" data-preview="images/decode-robot-cad.webp" data-fit="contain"><span class="n">02</span><span class="t">Seasons</span><span class="d">Each robot and every qualifier result</span><span class="ar" aria-hidden="true"></span></a></li>
@@ -158,6 +158,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=118"></script>
+  <script src="js/main.js?v=120"></script>
 </body>
 </html>

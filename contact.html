@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | GNCE Mercury</title>
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <link rel="stylesheet" href="css/style.css?v=118">
+  <link rel="stylesheet" href="css/style.css?v=120">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="contact">
@@ -23,10 +23,10 @@
         <!-- CONTACT FORM: opens the visitor's email app with a message to the team email, filled in from the form.
              To send messages straight from the site instead, sign up for a form service like Formspree. -->
         <div class="card">
-          <h3 style="margin-bottom:18px">Send a Message</h3>
+          <h2 style="margin-bottom:18px">Send a Message</h2>
           <form id="contact-form">
-            <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" required></div>
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+            <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
             <fieldset class="field choices">
               <legend>Topic</legend>
               <label class="choice"><input type="radio" name="topic" value="General question" checked><span>General question</span></label>
@@ -44,7 +44,7 @@
 
         <div>
           <div class="card">
-            <h3 style="margin-bottom:10px">Reach Us</h3>
+            <h2 style="margin-bottom:10px">Reach Us</h2>
             <ul class="contact-list">
               <li><span class="k">Email</span><a href="mailto:gncemercury26413@gmail.com">gncemercury26413@gmail.com</a></li>
               <li><span class="k">Instagram</span><a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">@gnce_mercury</a></li>
@@ -54,9 +54,9 @@
           </div>
 
           <!-- SUPPORT / DONATE: set the button's href to your donation link -->
-          <div class="card" id="support" style="margin-top:20px">
+          <div class="card" id="support">
             <span class="eyebrow">Support us</span>
-            <h3>Help us build, compete, and teach</h3>
+            <h2>Help us build, compete, and teach</h2>
             <p style="margin:8px 0 14px">
               Parts, registration, and travel add up. Every donation or sponsorship
               goes straight to building robots and running outreach. Your support helps pay for:
@@ -75,6 +75,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=118"></script>
+  <script src="js/main.js?v=120"></script>
 </body>
 </html>

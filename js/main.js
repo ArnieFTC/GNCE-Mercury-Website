@@ -109,7 +109,7 @@ part("header", () => {
     header.classList.remove("is-hidden");
     setInert(true);
     document.documentElement.style.overflow = "hidden";
-    links.querySelector("a")?.focus();
+    links.querySelector("a")?.focus({ preventScroll: true });
   };
   const close = returnFocus => {
     links.classList.remove("open");
@@ -117,7 +117,7 @@ part("header", () => {
     toggle.textContent = "Menu";
     setInert(false);
     document.documentElement.style.overflow = "";
-    if (returnFocus) toggle.focus();
+    if (returnFocus) toggle.focus({ preventScroll: true });
   };
   toggle.addEventListener("click", () => (isOpen() ? close(true) : open()));
   links.addEventListener("click", e => { if (e.target.closest("a") && isOpen()) close(false); });
@@ -135,9 +135,16 @@ part("header", () => {
 
   // Hide on scroll down, show on scroll up. Never while the menu is open, focus is inside,
   // the page is short, right after an anchor jump, or when the visitor prefers less motion.
-  let lastY = scrollY, ticking = false, quietUntil = 0;
+  let lastY = scrollY, turnY = scrollY, lastDir = 0, ticking = false, quietUntil = 0;
+  // Smooth scrolling only after the page has loaded, so arriving at page#section jumps straight there
+  addEventListener("load", () => requestAnimationFrame(() => document.documentElement.classList.add("smooth")), { once: true });
   const quiet = () => { quietUntil = performance.now() + 600; header.classList.remove("is-hidden"); };
   addEventListener("hashchange", quiet);
+  // Arriving on a page#section: keep the bar visible through the jump to the section
+  if (location.hash) {
+    quietUntil = Infinity;
+    addEventListener("load", () => setTimeout(() => { lastY = scrollY; quiet(); }, 50), { once: true });
+  }
   document.addEventListener("click", e => { if (e.target.closest('a[href*="#"]')) quiet(); });
   header.addEventListener("focusin", () => header.classList.remove("is-hidden"));
   const onScroll = () => {
@@ -146,8 +153,12 @@ part("header", () => {
     header.classList.toggle("at-top", y < 8);
     const canHide = !RM && !isOpen() && !header.matches(":focus-within") && performance.now() > quietUntil
       && document.documentElement.scrollHeight > innerHeight * 2;
-    if (canHide && y > 160 && y - lastY > 6) header.classList.add("is-hidden");
-    else if (lastY - y > 6 || y < 160 || !canHide) header.classList.remove("is-hidden");
+    // measure from where the current scroll direction began, so slow scrolling counts too
+    const dir = Math.sign(y - lastY);
+    if (dir && dir !== lastDir) { turnY = lastY; lastDir = dir; }
+    const travelled = Math.abs(y - turnY);
+    if (canHide && dir > 0 && y > 160 && travelled > 24) header.classList.add("is-hidden");
+    else if (!canHide || y < 160 || (dir < 0 && travelled > 12)) header.classList.remove("is-hidden");
     lastY = y;
   };
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
@@ -213,8 +224,8 @@ part("countdown", () => {
   timer.setAttribute("aria-hidden", "true");
   const sr = document.createElement("p");
   sr.className = "visually-hidden cd-sr";
-  sr.setAttribute("aria-live", "polite");
   cd.append(sr);
+  const eyebrow = cd.querySelector(".eyebrow");
 
   // Timeline positions are % of the way from kickoff to the last event.
   const end = events[events.length - 1].day;
@@ -246,7 +257,8 @@ part("countdown", () => {
     if (tl) {
       const nowPct = pct(now);
       tl.style.setProperty("--pct", nowPct / 100);
-      tl.querySelector(".tl-today").style.left = nowPct + "%";
+      const todayPt = points.find(p => isToday(p.day));
+      tl.querySelector(".tl-today").style.left = (todayPt ? pct(todayPt.day) : nowPct) + "%";
       let nextMarked = false;
       points.forEach((p, i) => {
         const past = now >= p.day + DAY, today = isToday(p.day);
@@ -266,6 +278,7 @@ part("countdown", () => {
       lastState = state;
       lastMinute = -1;
       cd.classList.toggle("live", !!today);
+      if (eyebrow) eyebrow.hidden = !today && !next;
       if (today) {
         nameEl.textContent = today.name;
         dateEl.textContent = fmt(today.day, LONG);
@@ -336,7 +349,8 @@ part("index-preview", () => {
   const preload = () => { if (preloaded) return; preloaded = true; rows.forEach(a => { new Image().src = a.dataset.preview; }); };
   const show = a => {
     if (!fig) return;
-    const y = Math.max(0, Math.min(a.offsetTop + a.offsetHeight / 2 - fig.offsetHeight / 2, list.offsetHeight - fig.offsetHeight));
+    const top = a.getBoundingClientRect().top - list.getBoundingClientRect().top;
+    const y = Math.max(0, Math.min(top + a.offsetHeight / 2 - fig.offsetHeight / 2, list.offsetHeight - fig.offsetHeight));
     fig.style.setProperty("--y", y + "px");
     const target = imgs[1 - cur];
     if (imgs[cur].dataset.src !== a.dataset.preview) {
@@ -349,7 +363,7 @@ part("index-preview", () => {
     }
     fig.classList.add("is-shown");
   };
-  const hide = () => fig?.classList.remove("is-shown");
+  let listIO = null;
   const build = () => {
     if (wrap) return;
     wrap = document.createElement("div");
@@ -362,12 +376,18 @@ part("index-preview", () => {
     wrap.append(plate);
     fig = plate.firstElementChild;
     imgs = [...fig.querySelectorAll("img")];
+    const first = rows[0].dataset.preview;
+    imgs.forEach(im => { im.src = first; im.classList.toggle("contain", rows[0].dataset.fit === "contain"); });
+    imgs[0].dataset.src = first;
+    imgs[0].classList.add("on");
     list.addEventListener("pointerenter", preload);
-    wrap.addEventListener("pointerleave", hide);
-    list.addEventListener("focusout", e => { if (!list.contains(e.relatedTarget)) hide(); });
+    // the plate wipes in beside the first row when the list comes into view, then follows the hovered row
+    listIO = new IntersectionObserver(([e]) => { if (e.isIntersecting) { show(rows[0]); listIO.disconnect(); } }, { rootMargin: "0px 0px -20% 0px" });
+    listIO.observe(list);
   };
   const teardown = () => {
     if (!wrap) return;
+    listIO?.disconnect();
     wrap.before(list);
     wrap.remove();
     wrap = plate = fig = null;
@@ -396,6 +416,16 @@ part("year-tabs", () => {
   }).join("") + `<span class="tab-ind" aria-hidden="true"></span>`;
   const tabs = [...tabBar.querySelectorAll("[role=tab]")];
   const ind = tabBar.querySelector(".tab-ind");
+  const label = j => { const [n, y] = (panels[j].dataset.tab || panels[j].id).split(" · "); return n + (y ? " " + y : ""); };
+  panels.forEach((p, i) => {
+    if (panels.length < 2) return;
+    const nav = document.createElement("nav");
+    nav.className = "year-pager";
+    nav.setAttribute("aria-label", "Other years");
+    nav.innerHTML = (i > 0 ? `<button type="button" class="btn ghost" data-go="${i - 1}">Previous · ${label(i - 1)}</button>` : "")
+      + (i < panels.length - 1 ? `<button type="button" class="btn ghost" data-go="${i + 1}">Next · ${label(i + 1)}</button>` : "");
+    p.append(nav);
+  });
   panels.forEach(p => { p.setAttribute("role", "tabpanel"); p.setAttribute("aria-labelledby", "tab-" + p.id); p.tabIndex = 0; });
   let current = -1;
   const place = () => {
@@ -421,6 +451,14 @@ part("year-tabs", () => {
     if (focus) { tabs[i].focus(); tabs[i].scrollIntoView({ block: "nearest", inline: "nearest" }); }
   };
   tabs.forEach((t, i) => t.addEventListener("click", () => select(i, { user: true })));
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".year-pager [data-go]");
+    if (!b) return;
+    const j = +b.dataset.go;
+    select(j, { user: true });
+    tabBar.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" });
+    tabs[j].focus({ preventScroll: true });
+  });
   tabBar.addEventListener("keydown", e => {
     const keys = { ArrowRight: current + 1, ArrowLeft: current - 1, Home: 0, End: tabs.length - 1 };
     if (!(e.key in keys)) return;
@@ -458,6 +496,9 @@ part("loupe", () => {
   document.body.append(dlg);
   const track = dlg.querySelector(".loupe-track");
   const count = dlg.querySelector(".loupe-count");
+  count.setAttribute("aria-live", "polite");
+  count.setAttribute("aria-atomic", "true");
+  track.tabIndex = -1;
   let opener = null, n = 0, slideIO = null;
   const step = dir => track.scrollBy({ left: dir * track.clientWidth, behavior: RM ? "auto" : "smooth" });
   const openAt = (group, index, from) => {
@@ -473,6 +514,7 @@ part("loupe", () => {
       im.style.maxWidth = `min(92vw, ${src.naturalWidth || src.getAttribute("width") || 1600}px)`;
       const cap = document.createElement("figcaption");
       cap.textContent = src.alt;
+      cap.setAttribute("aria-hidden", "true");
       fig.append(im, cap);
       track.append(fig);
     });
@@ -483,7 +525,9 @@ part("loupe", () => {
     track.scrollLeft = index * track.clientWidth;
     slideIO?.disconnect();
     slideIO = new IntersectionObserver(es => es.forEach(e => {
-      if (e.isIntersecting) count.textContent = `${[...track.children].indexOf(e.target) + 1} / ${n}`;
+      if (!e.isIntersecting) return;
+      count.textContent = `${[...track.children].indexOf(e.target) + 1} / ${n}`;
+      [...track.children].forEach(s => s.setAttribute("aria-hidden", s === e.target ? "false" : "true"));
     }), { root: track, threshold: 0.6 });
     [...track.children].forEach(s => slideIO.observe(s));
   };
@@ -538,7 +582,7 @@ part("walkthrough", () => {
       im.src = src.currentSrc || src.getAttribute("src");
       im.alt = "";
       if (src.width) { im.width = src.getAttribute("width") || src.naturalWidth; im.height = src.getAttribute("height") || src.naturalHeight; }
-      if (src.classList.contains("render")) im.classList.add("feather");
+      if (src.classList.contains("feather")) im.classList.add("feather");
       zoom.append(im);
       return im;
     });
@@ -593,6 +637,8 @@ part("crew-filter", () => {
   if (!grid) return;
   const members = [...grid.querySelectorAll(".member")];
   const chipsOf = m => [...m.querySelectorAll(".chip")].map(c => c.textContent.trim());
+  const leadsOf = m => [...m.querySelectorAll(".lead-tag")].map(t => t.textContent.replace(/\s*Lead$/, "").trim());
+  const tagsOf = m => [...chipsOf(m), ...leadsOf(m)];
   const ORDER = ["CAD", "Build", "Outreach", "Electrical", "Game Strategy"];
   const found = [...new Set(members.flatMap(chipsOf))];
   if (!found.length) return;
@@ -613,13 +659,13 @@ part("crew-filter", () => {
     if (!btn) return;
     const label = btn.textContent;
     bar.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === btn));
-    let shown = 0;
+    const names = [];
     members.forEach(m => {
-      const match = label === "All" || (label === "Leads" ? !!m.querySelector(".lead-tag") : chipsOf(m).includes(label));
+      const match = label === "All" || (label === "Leads" ? !!m.querySelector(".lead-tag") : tagsOf(m).includes(label));
       m.classList.toggle("is-dim", !match);
-      if (match) shown++;
+      if (match) names.push(m.querySelector("h3")?.textContent.trim());
     });
-    live.textContent = label === "All" ? `All ${members.length} members` : `${shown} of ${members.length} members · ${label}`;
+    live.textContent = label === "All" ? `All ${members.length} members` : `${names.length} of ${members.length} members · ${label}: ${names.join(", ")}`;
   });
 });
 
@@ -668,7 +714,8 @@ part("special-quotes", () => {
       pass.select();
       return;
     }
-    document.getElementById("special-quotes").innerHTML = `<p class="sq-msg">Special quotes unlocked.</p>`;
+    form.querySelectorAll("input, button").forEach(el => { el.hidden = true; });
+    msg.textContent = "Special quotes unlocked.";
     revealSpecialQuotes(quotes);
   });
 
@@ -683,7 +730,8 @@ part("special-quotes", () => {
       q.classList.remove("locked", "unlocking");
       q.classList.add("special");
     };
-    if (RM) return locked.forEach(show);
+    const focusFirst = () => { if (!locked[0]) return; locked[0].tabIndex = -1; locked[0].focus({ preventScroll: true }); };
+    if (RM) { locked.forEach(show); focusFirst(); return; }
 
     locked[0]?.closest(".member").scrollIntoView({ behavior: "smooth", block: "center" });
     await wait(700);
@@ -694,6 +742,7 @@ part("special-quotes", () => {
       q.classList.add("revealing");
       await wait(350);
     }
+    focusFirst();
   };
 });
 
@@ -722,6 +771,7 @@ part("copy-email", () => {
   btn.type = "button";
   btn.className = "copy";
   btn.textContent = "Copy";
+  btn.setAttribute("aria-label", "Copy email address");
   const live = document.createElement("span");
   live.className = "visually-hidden";
   live.setAttribute("aria-live", "polite");
@@ -768,13 +818,18 @@ function reveals(html) {
     if (el.classList.contains("frame")) {
       const img = el.querySelector("img");
       if (img) {
-        await img.decode?.().catch(() => {});
-        if (img.clientWidth * 1.06 > (img.naturalWidth || Infinity)) el.style.setProperty("--settle", 1);
+        await Promise.race([img.decode?.().catch(() => {}), new Promise(r => setTimeout(r, 800))]);
+        if (!img.naturalWidth || img.clientWidth * 1.06 > img.naturalWidth) el.style.setProperty("--settle", 1);
       }
     }
     el.classList.add("in");
   }), { rootMargin: "0px 0px -12% 0px" });
   const watch = el => io.observe(el);
+  // anything that receives keyboard focus shows at once
+  document.addEventListener("focusin", e => {
+    const r = e.target.closest?.("[data-reveal]:not(.in)");
+    if (r) { r.classList.add("in"); io.unobserve(r); }
+  });
 
   const mask = el => {
     if (el.querySelector(":scope > .mask")) return;
@@ -787,6 +842,7 @@ function reveals(html) {
     return inner;
   };
   const frame = img => {
+    img.loading = "eager"; // a lazy image inside a closed curtain would never start loading
     const f = document.createElement("span");
     f.className = "frame";
     f.dataset.reveal = "curtain";
@@ -872,5 +928,21 @@ function reveals(html) {
   };
   walk(main, 0);
 }
+
+// ---------- Robot morph ----------
+// The robot you click (or the season you go Back from) is the only one that glides between pages.
+part("morph", () => {
+  const named = [...document.querySelectorAll('img[style*="view-transition-name"]')];
+  if (!named.length) return;
+  named.forEach(el => { el.dataset.vt = el.style.viewTransitionName; });
+  const linkOf = el => (el.closest("a[href]") || el.closest(".model")?.querySelector(".model-copy a[href]"))?.href;
+  addEventListener("pageswap", e => {
+    const to = e.activation?.entry?.url;
+    const back = e.activation?.navigationType === "traverse";
+    const keep = (back && named.find(el => el.closest(".season-hero"))) || named.find(el => to && linkOf(el) === to);
+    named.forEach(el => { el.style.viewTransitionName = el === keep ? el.dataset.vt : "none"; });
+  });
+  addEventListener("pageshow", e => { if (e.persisted) named.forEach(el => { el.style.viewTransitionName = el.dataset.vt; }); });
+});
 
 window.__mercury = true;
