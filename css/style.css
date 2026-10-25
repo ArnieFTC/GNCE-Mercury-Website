@@ -532,3 +532,6 @@ img.portrait { display: block; border: none; }
 .stat .big, .countdown .unit .n { font-size: clamp(3rem, 6vw, 5.25rem); }
 .index-list .t { font-size: clamp(1.9rem, 3.2vw, 2.75rem); }
 .facts .v { font-size: 1.5rem; }
+
+/* Wide outreach cards (gallery beside text) always take a full row */
+.grid > .card.wide { grid-column: 1 / -1; }
