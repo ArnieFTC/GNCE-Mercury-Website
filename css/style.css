@@ -496,16 +496,21 @@ html:not(.js) .special-quotes { display: none; }
 .sq-msg { flex-basis: 100%; min-height: 1.2em; font-family: var(--mono); font-size: var(--t-label); color: var(--text-2); text-align: center; }
 .sq-msg.err { color: #ff8f8f; }
 
-/* Portrait grid: 4-4-3 on desktop, one row per member on phones */
+/* Portrait grid: 5 per row on desktop (narrower cards), 3 on tablets, one row per member on phones */
 .members-grid.people { grid-template-columns: repeat(4, 1fr); gap: 64px var(--gutter); }
 @media (max-width: 1000px) { .members-grid.people { grid-template-columns: repeat(3, 1fr); } }
-/* When the last row has 3 (e.g. 4-4-3), space them evenly: card width W = (100% - 3 gutters) / 4,
-   so each of the 4 gaps is (100% - 3W) / 4 = 100%/16 + 9 gutters/16. */
+/* A short last row is spaced evenly: equal gaps at both edges and between cards.
+   Card width W = (100% - 4 gutters) / 5; with r cards left over, each gap is (100% - r*W) / (r + 1). */
 @media (min-width: 1001px) {
-  .members-grid.people { display: flex; flex-wrap: wrap; justify-content: center; }
-  .members-grid.people > .member { flex: 0 0 calc((100% - 3 * var(--gutter)) / 4); }
-  .members-grid.people > .member:nth-child(4n+1):nth-last-child(3) { margin-left: calc(100% / 16 + 9 * var(--gutter) / 16); }
-  .members-grid.people > .member:nth-child(4n+1):nth-last-child(3) ~ .member { margin-left: calc(100% / 16 + 9 * var(--gutter) / 16 - var(--gutter)); }
+  .members-grid.people { display: flex; flex-wrap: wrap; justify-content: flex-start; }
+  .members-grid.people > .member { flex: 0 0 calc((100% - 4 * var(--gutter)) / 5); }
+  .members-grid.people > .member:nth-child(5n+1):nth-last-child(1) { margin-left: calc(40% + 0.4 * var(--gutter)); }
+  .members-grid.people > .member:nth-child(5n+1):nth-last-child(2) { margin-left: calc(20% + 0.5333 * var(--gutter)); }
+  .members-grid.people > .member:nth-child(5n+1):nth-last-child(2) ~ .member { margin-left: calc(20% + 0.5333 * var(--gutter) - var(--gutter)); }
+  .members-grid.people > .member:nth-child(5n+1):nth-last-child(3) { margin-left: calc(10% + 0.6 * var(--gutter)); }
+  .members-grid.people > .member:nth-child(5n+1):nth-last-child(3) ~ .member { margin-left: calc(10% + 0.6 * var(--gutter) - var(--gutter)); }
+  .members-grid.people > .member:nth-child(5n+1):nth-last-child(4) { margin-left: calc(4% + 0.64 * var(--gutter)); }
+  .members-grid.people > .member:nth-child(5n+1):nth-last-child(4) ~ .member { margin-left: calc(4% + 0.64 * var(--gutter) - var(--gutter)); }
 }
 .people .card.member { border-top: none; padding-top: 0; }
 .portrait { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; margin-bottom: 18px; }
