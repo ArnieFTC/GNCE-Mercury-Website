@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Team | GNCE Mercury</title>
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <link rel="stylesheet" href="css/style.css?v=122">
+  <link rel="stylesheet" href="css/style.css?v=123">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="team">
@@ -37,19 +37,34 @@
       </p>
     </section>
 
-    <!-- CAPTAIN HIGHLIGHT: edit the record rows below (label on the left, achievement on the right) -->
-    <section class="captain" aria-labelledby="captain-name">
-      <figure class="captain-photo"><img src="images/team/andy.jpg?v=2" alt="Andy Ding, GNCE Mercury's co-captain" width="800" height="1000" loading="lazy"></figure>
-      <div class="captain-copy">
-        <span class="eyebrow">Team Co-Captain</span>
-        <h2 id="captain-name">Andy Ding</h2>
-        <p class="captain-meta">4th year in FTC · CAD · Build · Outreach · Game Strategy</p>
-        <ul class="captain-record">
-          <li><span class="k">FIRST Dean's List</span><span class="v">Semifinalist</span></li>
-          <li><span class="k">New England Invitational</span><span class="v">1st place Inspire Award and winning alliance captain at an international event</span></li>
-          <li><span class="k">2026</span><span class="v">Qualified for the Massachusetts State Championship</span></li>
-        </ul>
-      </div>
+    <!-- CO-CAPTAIN HIGHLIGHTS: one <article class="captain"> per co-captain; edit the record rows (label on the left, achievement on the right) -->
+    <section class="captains">
+      <article class="captain" aria-labelledby="captain-andy">
+        <figure class="captain-photo"><img src="images/team/andy.jpg?v=2" alt="Andy Ding, GNCE Mercury's founder and co-captain" width="800" height="1000" loading="lazy"></figure>
+        <div class="captain-copy">
+          <span class="eyebrow">Founder · Team Co-Captain</span>
+          <h2 id="captain-andy">Andy Ding</h2>
+          <p class="captain-meta">4th year in FTC · CAD · Build · Outreach · Game Strategy</p>
+          <ul class="captain-record">
+            <li><span class="k">FIRST Dean's List</span><span class="v">Semifinalist</span></li>
+            <li><span class="k">New England Invitational</span><span class="v">1st place Inspire Award and winning alliance captain at an international event</span></li>
+            <li><span class="k">2026</span><span class="v">Qualified for the Massachusetts State Championship</span></li>
+          </ul>
+        </div>
+      </article>
+      <article class="captain" aria-labelledby="captain-arnie">
+        <figure class="captain-photo"><img src="images/team/arnie.jpg" alt="Arnie Sreeram, GNCE Mercury's co-captain" width="800" height="1000" loading="lazy"></figure>
+        <div class="captain-copy">
+          <span class="eyebrow">Team Co-Captain</span>
+          <h2 id="captain-arnie">Arnie Sreeram</h2>
+          <p class="captain-meta">4th year in FTC · Software Lead · Game Strategy</p>
+          <ul class="captain-record">
+            <li><span class="k">State Championship</span><span class="v">3x state qualifier</span></li>
+            <li><span class="k">Multinational Tech Invitational</span><span class="v">Synergy Award with GNCE Diamond</span></li>
+            <li><span class="k">Michiana</span><span class="v">1st place Control Award</span></li>
+          </ul>
+        </div>
+      </article>
     </section>
 
     <!-- PHOTOS: replace a member's <div class="portrait">…</div> with <img class="portrait" src="images/team/NAME.jpg" alt="NAME" width="800" height="1000" loading="lazy"> (portrait crop, 4:5). Until then the plate shows their initials.
@@ -57,7 +72,7 @@
     <section>
       <h2 class="section-title">Members</h2>
       <div class="grid members-grid people" data-filter>
-        <div class="card member"><img class="portrait" src="images/team/andy.jpg?v=2" alt="Andy Ding" width="800" height="1000" loading="lazy"><h3>Andy Ding</h3><div class="exp">4th year in FTC</div><div class="lead-tag">Co-Captain</div><div class="chips"><span class="chip">CAD</span><span class="chip">Build</span><span class="chip">Outreach</span><span class="chip">Game Strategy</span></div><blockquote class="quote">I started Mercury with a toolbox, a dream, and no idea how mecanum wheels worked. Three seasons later, look at us.</blockquote><blockquote class="quote locked" data-secret="andy">Special quote</blockquote></div>
+        <div class="card member"><img class="portrait" src="images/team/andy.jpg?v=2" alt="Andy Ding" width="800" height="1000" loading="lazy"><h3>Andy Ding</h3><div class="exp">4th year in FTC</div><div class="leads"><div class="lead-tag">Founder</div><div class="lead-tag">Co-Captain</div></div><div class="chips"><span class="chip">CAD</span><span class="chip">Build</span><span class="chip">Outreach</span><span class="chip">Game Strategy</span></div><blockquote class="quote">I started Mercury with a toolbox, a dream, and no idea how mecanum wheels worked. Three seasons later, look at us.</blockquote><blockquote class="quote locked" data-secret="andy">Special quote</blockquote></div>
         <div class="card member"><img class="portrait" src="images/team/arnie.jpg" alt="Arnie Sreeram" width="800" height="1000" loading="lazy"><h3>Arnie Sreeram</h3><div class="exp">4th year in FTC</div><div class="leads"><div class="lead-tag">Co-Captain</div><div class="lead-tag">Software Lead</div></div><div class="chips"><span class="chip">Game Strategy</span></div><blockquote class="quote">I want to have the best code in all of FTC for the second year in a row.</blockquote></div>
         <div class="card member"><img class="portrait" src="images/team/zade.jpg" alt="Zade Parks" width="800" height="1000" loading="lazy"><h3>Zade (Suzie) Parks</h3><div class="exp">3rd year in FTC</div><div class="lead-tag">CAD Lead</div><div class="chips"><span class="chip">Build</span><span class="chip">Electrical</span><span class="chip">Game Strategy</span></div><blockquote class="quote">Oh wait, it was working. I just didn't turn it on this whole time.</blockquote><blockquote class="quote">If it's open 24/7, it means it doesn't close.</blockquote><blockquote class="quote">Is the custom version cheaper?</blockquote></div>
         <div class="card member"><img class="portrait" src="images/team/ethan.jpg" alt="Ethan Xie" width="800" height="1000" loading="lazy"><h3>Ethan Xie</h3><div class="exp">3rd year in FTC</div><div class="leads"><div class="lead-tag">Build Lead</div><div class="lead-tag">Electrical Lead</div></div><div class="chips"><span class="chip">CAD</span><span class="chip">Game Strategy</span></div><blockquote class="quote">If it moves and it isn&rsquo;t supposed to move, use duct tape. If it doesn&rsquo;t move and it&rsquo;s supposed to move, use WD-40.</blockquote></div>
@@ -105,6 +120,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=122"></script>
+  <script src="js/main.js?v=123"></script>
 </body>
 </html>

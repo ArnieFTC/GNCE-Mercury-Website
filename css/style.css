@@ -525,8 +525,10 @@ div.portrait .mono-initials { font-family: var(--serif); font-weight: 300; font-
 }
 
 /* Captain highlight */
-.captain { display: grid; gap: 32px; align-items: end; }
-@media (min-width: 900px) { .captain { grid-template-columns: 5fr 7fr; column-gap: clamp(32px, 5vw, 88px); } }
+/* Co-captains side by side on desktop; each has the photo on top and the text underneath */
+.captains { display: grid; gap: clamp(56px, 7vw, 96px); }
+@media (min-width: 900px) { .captains { grid-template-columns: 1fr 1fr; column-gap: clamp(32px, 5vw, 88px); } }
+.captain { display: grid; gap: 28px; align-content: start; }
 .captain-photo { margin: 0; }
 .captain-photo .frame, .captain-photo img { width: 100%; max-width: 520px; }
 .captain-photo img { aspect-ratio: 4 / 5; object-fit: cover; }
