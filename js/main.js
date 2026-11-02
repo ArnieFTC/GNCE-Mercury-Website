@@ -21,6 +21,7 @@ const NAV = [
   { label: "Team",       href: "team.html" },
   { label: "Seasons",    href: "seasons.html" },
   { label: "Outreach",   href: "outreach.html" },
+  { label: "Resources",  href: "resources.html" },
   { label: "Contact",    href: "contact.html" },
 ];
 
@@ -90,6 +91,7 @@ part("header", () => {
           const active = page && n.href.startsWith(page);
           return `<li><a href="${root}${n.href}"${active ? ' class="active" aria-current="page"' : ""}>${n.label}</a></li>`;
         }).join("")}
+        <li class="nav-cta"><a href="${root}contact.html#support">Sponsor us</a></li>
         <li class="nav-extra"><a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL}</a><a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram @gnce_mercury</a></li>
       </ul>
     </nav>`;

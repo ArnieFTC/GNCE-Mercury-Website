@@ -161,6 +161,10 @@ html.wm-visible .site-header .brand:focus-visible { opacity: 1; }
 .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
 .nav-links a.active::after { background: var(--accent); }
 .nav-extra { display: none; }
+.nav-links { align-items: center; }
+.nav-links .nav-cta a { padding: 7px 16px; border: 1px solid var(--line-2); border-radius: 999px; color: var(--text); }
+.nav-links .nav-cta a::after { display: none; }
+.nav-links .nav-cta a:hover { border-color: var(--accent); }
 .nav-toggle { display: none; min-height: 44px; background: none; border: 1px solid var(--line-2); border-radius: 999px; color: var(--text); font-family: var(--sans); font-size: 0.95rem; padding: 0 18px; cursor: pointer; }
 
 /* Phone: a full-screen ink panel with five numbered serif links */
@@ -188,6 +192,8 @@ html.wm-visible .site-header .brand:focus-visible { opacity: 1; }
     content: ""; display: inline-block; position: static; width: 7px; height: 7px;
     background: var(--accent); transform: rotate(45deg); margin-left: 2px;
   }
+  .nav-links { align-items: stretch; }
+  .nav-links .nav-cta a { padding: 14px 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; }
   .nav-extra { display: flex; flex-direction: column; gap: 4px; margin-top: auto; padding-top: 32px; }
   .nav-extra a { display: flex; align-items: center; min-height: 44px; font-size: 1rem; color: var(--text-2); }
 }
@@ -263,6 +269,19 @@ section.narrow > p { font-family: var(--serif); font-size: var(--t-lead); line-h
 @keyframes rise { from { transform: translateY(105%); } }
 @keyframes fade { from { opacity: 0; } }
 @keyframes draw { from { transform: scaleX(0); } }
+
+/* Hero photo: a wide team photo under the wordmark. Until we have one, an empty frame holds its place. */
+.hero-photo { display: block; width: 100%; aspect-ratio: 21 / 9; margin-top: clamp(24px, 3vw, 40px); object-fit: cover; }
+div.hero-photo { background: var(--ink-2); border: 1px solid var(--line); }
+@media (max-width: 640px) { .hero-photo { aspect-ratio: 4 / 3; } }
+
+/* Credentials: our best results on one line under the hero photo */
+.creds { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 0; margin-top: 20px; font-family: var(--mono); font-size: 0.95rem; color: var(--text-2); text-align: center; }
+.creds li + li::before { content: "·"; margin: 0 14px; color: var(--accent); }
+@media (max-width: 640px) {
+  .creds { flex-direction: column; gap: 6px; }
+  .creds li + li::before { content: none; }
+}
 
 /* Record row */
 .strip { padding-top: clamp(24px, 3vw, 40px); }
@@ -362,6 +381,12 @@ a.card { display: block; color: var(--text); text-decoration: none; }
 
 /* ---------- Stats ---------- */
 
+a.stat { display: block; color: inherit; text-decoration: none; }
+a.stat .label::after { content: " →"; content: " →" / ""; color: var(--text-2); transition: color 0.25s; }
+a.stat[target="_blank"] .label::after { content: " ↗"; content: " ↗" / ""; }
+a.stat:hover .label, a.stat:hover .label::after { color: var(--text); }
+a.stat:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; }
+.feature-links { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 4px; }
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px var(--gutter); }
 .stat { padding-top: 18px; }
 .stat .big { font-family: var(--serif); font-weight: 300; font-size: var(--t-figure); letter-spacing: -0.04em; line-height: 0.95; font-variant-numeric: lining-nums tabular-nums; }
@@ -442,7 +467,7 @@ html:not(.js) .special-quotes { display: none; }
 /* Closing call */
 .closing { padding-bottom: calc(var(--space) * 0.8); }
 .closing h2 { font-size: var(--t-title); letter-spacing: -0.03em; max-width: 20ch; margin-inline: auto; text-align: center; }
-.closing-split { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 5vw, 88px); align-items: end; margin-top: clamp(40px, 5vw, 72px); }
+.closing-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 88px); align-items: end; margin-top: clamp(40px, 5vw, 72px); }
 .closing-fig { margin: 0; }
 .closing-fig img { max-width: min(100%, 560px); }
 .closing-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
