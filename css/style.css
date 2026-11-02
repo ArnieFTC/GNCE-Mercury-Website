@@ -355,8 +355,8 @@ a.card { display: block; color: var(--text); text-decoration: none; }
 .card-quote cite { display: block; margin-top: 10px; font-style: normal; font-family: var(--mono); font-size: var(--t-label); color: var(--text-2); }
 
 /* Hairlines drawn as ::before so they can draw in (see Reveals) */
-.facts li, .stat, .specs li, .index-list li, .closing-cols p, .event, .software-grid > .card { position: relative; border-top: 0; }
-.facts li::before, .stat::before, .specs li::before, .index-list li::before, .closing-cols p::before, .event::before, .software-grid > .card::before {
+.facts li, .stat, .specs li, .index-list li, .closing-cols p, .event, .software-grid > .card, .captain-record li { position: relative; border-top: 0; }
+.facts li::before, .stat::before, .specs li::before, .index-list li::before, .closing-cols p::before, .event::before, .software-grid > .card::before, .captain-record li::before {
   content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--line); transform-origin: left;
 }
 
@@ -523,6 +523,22 @@ div.portrait .mono-initials { font-family: var(--serif); font-weight: 300; font-
   .people .member > .quote { grid-column: 1 / -1; }
   div.portrait .mono-initials { font-size: 1.75rem; }
 }
+
+/* Captain highlight */
+.captain { display: grid; gap: 32px; align-items: end; }
+@media (min-width: 900px) { .captain { grid-template-columns: 5fr 7fr; column-gap: clamp(32px, 5vw, 88px); } }
+.captain-photo { margin: 0; }
+.captain-photo .frame, .captain-photo img { width: 100%; max-width: 520px; }
+.captain-photo img { aspect-ratio: 4 / 5; object-fit: cover; }
+.captain-copy h2 { font-size: var(--t-model); font-weight: 300; letter-spacing: -0.02em; line-height: 1; margin-bottom: 18px; }
+.captain-copy .eyebrow { margin-bottom: 16px; }
+.captain-meta { font-family: var(--mono); font-size: var(--t-label); color: var(--text-2); }
+.captain-record { list-style: none; margin-top: clamp(28px, 3vw, 44px); }
+.captain-record li { display: grid; grid-template-columns: minmax(9rem, 2fr) 5fr; gap: 6px var(--gutter); padding: 16px 0; }
+.captain-record li:last-child { border-bottom: 1px solid var(--line); }
+.captain-record .k { font-family: var(--mono); font-size: var(--t-label); color: var(--text-2); padding-top: 0.3em; }
+.captain-record .v { font-family: var(--serif); font-size: 1.35rem; line-height: 1.25; letter-spacing: -0.01em; }
+@media (max-width: 560px) { .captain-record li { grid-template-columns: 1fr; } }
 
 /* Crew filter */
 .crew-filter { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 24px; margin: 0 auto clamp(32px, 4vw, 56px); }

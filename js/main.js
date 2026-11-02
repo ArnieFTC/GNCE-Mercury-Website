@@ -878,7 +878,7 @@ function reveals(html) {
   });
 
   // Rise: headings and big figures
-  main.querySelectorAll(".section-title, .feature-copy h2, .closing h2, .cta h2, .stat .big").forEach(el => {
+  main.querySelectorAll(".section-title, .feature-copy h2, .closing h2, .cta h2, .captain h2, .stat .big").forEach(el => {
     if (skip(el) || el.closest(".model") || !below(el)) return;
     mask(el);
     if (el.matches(".stat .big")) return; // revealed with its row (rule)
@@ -888,7 +888,7 @@ function reveals(html) {
 
   // Curtain: at most three main photos per page and per outreach year
   const budget = new Map();
-  main.querySelectorAll(".feature-img, .closing-fig img, .chapter-lead img, .event-photo").forEach(img => {
+  main.querySelectorAll(".feature-img, .captain-photo img, .closing-fig img, .chapter-lead img, .event-photo").forEach(img => {
     if (skip(img) || !below(img)) return;
     const scope = img.closest(".year-panel") || main;
     const used = budget.get(scope) || 0;
@@ -898,7 +898,7 @@ function reveals(html) {
   });
 
   // Rule: lists and rows whose hairlines draw in sequence
-  main.querySelectorAll(".facts, .stats, .specs, .index-list, .closing-cols, .event-list, .software-grid, .bars").forEach(el => {
+  main.querySelectorAll(".facts, .stats, .specs, .index-list, .closing-cols, .event-list, .software-grid, .bars, .captain-record").forEach(el => {
     if (skip(el) || el.closest("[data-reveal]") || !below(el)) return;
     el.dataset.reveal = "rule";
     [...el.children].forEach((c, i) => c.style.setProperty("--i", Math.min(i, small ? 2 : 5)));
