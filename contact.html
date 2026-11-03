@@ -18,7 +18,7 @@
   <meta name="theme-color" content="#0f0e0d">
   <link rel="preload" href="fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=129">
+  <link rel="stylesheet" href="css/style.css?v=130">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="contact">
@@ -32,11 +32,13 @@
     <section>
       <div class="grid two">
 
+        <div>
         <!-- CONTACT FORM: opens the visitor's email app with a message to the team email, filled in from the form.
-             To send messages straight from the site instead, sign up for a form service like Formspree. -->
+             To send messages straight from the site instead, sign up for a form service like Formspree.
+             (Without JavaScript, the action below still hands the message to the email app.) -->
         <div class="card">
           <h2>Send us a message</h2>
-          <form id="contact-form">
+          <form id="contact-form" action="mailto:gncemercury26413@gmail.com" method="post" enctype="text/plain">
             <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
             <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" spellcheck="false" required></div>
             <fieldset class="field choices">
@@ -53,6 +55,14 @@
           <p class="note">The button opens your email app with this message filled in. You can also email us directly at <a href="mailto:gncemercury26413@gmail.com">gncemercury26413@gmail.com</a>.</p>
         </div>
 
+          <!-- JOINING: what a new member should know. Add meeting times, who can join, or costs here when they're set. -->
+          <div class="card" id="join">
+            <h2>Joining the team</h2>
+            <p>We recruit new members every season, and rookies are part of the team from day one. Pick “Joining the team” above and tell us what you’re into: building, coding, CAD, or outreach.</p>
+            <a class="text-link" href="team.html">Meet the team</a>
+          </div>
+        </div>
+
         <div>
           <div class="card">
             <h2>Reach us</h2>
@@ -62,13 +72,6 @@
               <li><span class="k">Location</span>Weston, MA</li>
               <li><span class="k">FTC team number</span>26413</li>
             </ul>
-          </div>
-
-          <!-- JOINING: what a new member should know. Add meeting times, who can join, or costs here when they're set. -->
-          <div class="card" id="join">
-            <h2>Joining the team</h2>
-            <p>We recruit new members every season, and rookies are part of the team from day one. Pick “Joining the team” in the form and tell us what you’re into: building, coding, CAD, or outreach.</p>
-            <a class="text-link" href="team.html">Meet the team</a>
           </div>
 
           <!-- SPONSOR US / DONATE: when you have a donation link, add <a class="btn" href="YOUR-LINK">Donate</a> next to the email button -->
@@ -84,7 +87,7 @@
               <li>Outreach like our summer camp and FLL coaching</li>
             </ul>
             <a class="btn" href="mailto:gncemercury26413@gmail.com?subject=Sponsorship">Email us about sponsoring</a>
-            <p class="note">Sponsors are thanked in the footer of every page of this site.</p>
+            <p class="note">We thank every sponsor in the footer of every page of this site.</p>
           </div>
         </div>
 
@@ -92,6 +95,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=129"></script>
+  <script src="js/main.js?v=130"></script>
 </body>
 </html>

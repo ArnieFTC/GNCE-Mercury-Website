@@ -18,17 +18,17 @@
   <meta name="theme-color" content="#0f0e0d">
   <link rel="preload" href="fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=129">
+  <link rel="stylesheet" href="css/style.css?v=130">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="team">
   <main class="container">
 
     <div class="page-head">
-      <h1>The Team</h1>
+      <h1>The team</h1>
       <p>10 students and 4 coaches from Weston, MA.</p>
       <div class="team-intro">
-        <img class="team-banner" src="images/team.webp" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship" width="927" height="626">
+        <img class="team-banner" src="images/team.webp" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship" width="927" height="626" fetchpriority="high">
         <div class="mission">
           <h2>Team mission</h2>
           <p>
@@ -41,9 +41,9 @@
 
     <!-- ABOUT -->
     <section class="narrow">
-      <h2 class="section-title">About <span translate="no">GNCE Mercury</span></h2>
+      <h2 class="section-title">About <span translate="no">GNCE&nbsp;Mercury</span></h2>
       <p>
-        GNCE stands for Galactic Narwhal Chicken Effect. Mercury is one of its FIRST Tech Challenge teams,
+        GNCE stands for <span translate="no">Galactic Narwhal Chicken Effect</span>. Mercury is one of its FIRST Tech Challenge teams,
         founded in Weston, Massachusetts, in 2024. At the Ryken RoboBowl we were the winning alliance’s
         first pick, which sent us to the state championship. At the WNEU Qualifier we won the Sustain Award.
         Our members have competed and won awards at international events.
@@ -60,7 +60,7 @@
           <p class="captain-meta">4th year in FTC · CAD · Build · Outreach · Game Strategy</p>
           <ul class="captain-record">
             <li><span class="k">FIRST Dean’s List</span><span class="v">Semifinalist</span></li>
-            <li><span class="k">New England Invitational</span><span class="v">1st place Inspire Award and winning alliance captain with GNCE Diamond, at an international event</span></li>
+            <li><span class="k">New England Invitational</span><span class="v">1st place Inspire Award and winning alliance captain with <span translate="no">GNCE&nbsp;Diamond</span>, at an international event</span></li>
             <li><span class="k">2026</span><span class="v">Qualified for the Massachusetts State Championship</span></li>
           </ul>
         </div>
@@ -72,7 +72,7 @@
           <h2 id="captain-arnie">Arnie Sreeram</h2>
           <p class="captain-meta">4th year in FTC · Game Strategy</p>
           <ul class="captain-record">
-            <li><span class="k">Multinational Tech Invitational</span><span class="v">Synergy Award with GNCE Diamond</span></li>
+            <li><span class="k">Multinational Tech Invitational</span><span class="v">Synergy Award with <span translate="no">GNCE&nbsp;Diamond</span></span></li>
             <li><span class="k">Michiana</span><span class="v">1st place Control Award</span></li>
             <li><span class="k">State Championship</span><span class="v">3x state qualifier (2024&ndash;2026)</span></li>
           </ul>
@@ -106,7 +106,7 @@
       <button class="btn ghost" type="button" id="sq-open">View special quotes</button>
       <form class="sq-form" id="sq-form" hidden>
         <label for="sq-pass">Password</label>
-        <input type="password" id="sq-pass" autocomplete="off" required>
+        <input type="password" id="sq-pass" name="special-quotes-password" autocomplete="off" required>
         <button class="btn" type="submit">Unlock</button>
         <p class="sq-msg" id="sq-msg" role="status"></p>
       </form>
@@ -117,7 +117,7 @@
       <div class="cta">
         <h2>We recruit new members every season</h2>
         <p>Rookies are part of the team from day one. Tell us what you’re into, whether that’s building, coding, CAD, or outreach, and we’ll get back to you.</p>
-        <a class="btn" href="contact.html?topic=join#contact-form">Ask about joining</a>
+        <a class="btn" href="contact.html?topic=join#contact-form">Join as a student</a>
       </div>
     </section>
 
@@ -133,6 +133,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=129"></script>
+  <script src="js/main.js?v=130"></script>
 </body>
 </html>

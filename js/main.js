@@ -26,7 +26,8 @@ const NAV = [
 ];
 
 // SPONSORS: shown in the footer of EVERY page.
-// Keep this on all pages. To add a sponsor: { name: "Acme", logo: "images/acme.png", url: "https://acme.com" }.
+// Keep this on all pages. To add a sponsor: { name: "Acme", logo: "images/acme.png", width: 240, height: 80, url: "https://acme.com" }
+// (width and height are the logo file's real size in pixels).
 // SUPPORTERS are named (no logo) until we have their logos. An open "Become a sponsor" link is always shown.
 const SPONSORS = [];
 const SUPPORTERS = ["SolidWorks", "Weston Owl", "WEEFC"];
@@ -62,14 +63,14 @@ const fmt = (d, opts) => new Date(d).toLocaleDateString(undefined, { ...opts, ti
 const LONG = { weekday: "long", month: "long", day: "numeric", year: "numeric" };
 const SHORT = { month: "short", day: "numeric" };
 const seasonEvents = () => SEASON.events.map(e => ({ ...e, day: toDate(e.date) }));
-// "Competition day: …", "Next competition: …, Nov 15", or null once the season is over
+// "Event day: …", "Next event: …, Nov 15", or null once the season is over
 const statusLine = () => {
   const now = easternNow();
   const events = seasonEvents();
   const today = events.find(e => now >= e.day && now < e.day + DAY);
-  if (today) return { text: `Competition day: ${today.name}`, live: true };
+  if (today) return { text: `Event day: ${today.name}`, live: true };
   const next = events.find(e => now < e.day);
-  return next ? { text: `Next competition: ${next.name}, ${fmt(next.day, SHORT)}` } : null;
+  return next ? { text: `Next event: ${next.name}, ${fmt(next.day, SHORT)}` } : null;
 };
 
 // ---------- Header ----------
@@ -181,7 +182,7 @@ const footer = document.createElement("footer");
 part("footer", () => {
   footer.className = "site-footer";
   const sponsorItems = [
-    ...SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener" title="${s.name}"><img src="${root}${s.logo}" alt="${s.name}"></a>`),
+    ...SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener" title="${s.name}"><img src="${root}${s.logo}" alt="${s.name}"${s.width ? ` width="${s.width}" height="${s.height}"` : ""}></a>`),
     ...SUPPORTERS.map(n => `<span class="sponsor named">${n}</span>`),
     `<a class="sponsor open text-link" href="${root}contact.html#support">Become a sponsor</a>`,
   ].join("");
@@ -203,7 +204,7 @@ part("footer", () => {
         ${status ? `<a class="footer-next" href="${root}index.html#countdown">${status.text}</a>` : ""}
         <a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram @gnce_mercury</a>
         <a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL}</a>
-        <span>© ${new Date().getFullYear()} GNCE Mercury</span>
+        <span translate="no">© ${new Date().getFullYear()} GNCE Mercury</span>
       </div>
     </div>`;
   document.body.append(footer);
@@ -284,9 +285,9 @@ part("countdown", () => {
       if (today) {
         nameEl.textContent = today.name;
         dateEl.textContent = fmt(today.day, LONG);
-        timer.innerHTML = `<p class="live-line">Competition day · <a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram ↗</a></p>`;
+        timer.innerHTML = `<p class="live-line">Event day. Follow along on <a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a></p>`;
         timer.removeAttribute("aria-hidden");
-        sr.textContent = `Today is competition day: ${today.name}.`;
+        sr.textContent = `Today is event day: ${today.name}.`;
       } else if (next) {
         nameEl.textContent = next.name;
         dateEl.textContent = fmt(next.day, LONG);
@@ -437,7 +438,12 @@ part("loupe", () => {
   count.setAttribute("aria-atomic", "true");
   track.tabIndex = -1;
   let opener = null, n = 0, slideIO = null;
-  const step = dir => track.scrollBy({ left: dir * track.clientWidth, behavior: RM ? "auto" : "smooth" });
+  const step = dir => {
+    const slides = [...track.children];
+    const at = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+    const to = slides[Math.min(slides.length - 1, Math.max(0, at + dir))];
+    if (to) track.scrollTo({ left: to.offsetLeft - track.offsetLeft, behavior: RM ? "auto" : "smooth" });
+  };
   const openAt = (group, index, from) => {
     opener = from;
     n = group.length;
@@ -448,7 +454,7 @@ part("loupe", () => {
       const im = document.createElement("img");
       im.src = src.currentSrc || src.src;
       im.alt = src.alt;
-      im.style.maxWidth = `min(92vw, ${src.naturalWidth || src.getAttribute("width") || 1600}px)`;
+      im.style.maxWidth = `min(100%, ${src.naturalWidth || src.getAttribute("width") || 1600}px)`;
       const cap = document.createElement("figcaption");
       cap.textContent = src.alt;
       cap.setAttribute("aria-hidden", "true");
@@ -568,15 +574,40 @@ part("callouts", () => {
     img.before(stage);
     stage.append(img);
 
+    // the visible note, plus an invisible copy of every note in the same grid cell, so the box
+    // is always as tall as the longest note and nothing below it moves
+    const notes = document.createElement("div");
+    notes.className = "callout-notes";
     const note = document.createElement("div");
     note.className = "callout-note";
     note.id = (box.id || "robot") + "-note";
     note.setAttribute("aria-live", "polite");
+    const sizer = document.createElement("div");
+    sizer.className = "callout-sizer";
+    sizer.setAttribute("aria-hidden", "true");
+    notes.append(note, sizer);
 
     const bar = document.createElement("div");
     bar.className = "callout-bar";
-    bar.setAttribute("role", "group");
+    bar.setAttribute("role", "toolbar");
     bar.setAttribute("aria-label", list.getAttribute("aria-label") || "Parts of the robot");
+
+    const fill = (el, p) => {
+      el.textContent = "";
+      const para = document.createElement("p");
+      const b = document.createElement("b");
+      b.textContent = p.name + ".";
+      para.append(b, " " + p.text);
+      el.append(para);
+      const card = p.card && document.getElementById(p.card);
+      if (card) {
+        const a = document.createElement("a");
+        a.className = "text-link";
+        a.href = "#" + card.id;
+        a.textContent = `More on the ${p.link}`;
+        el.append(a);
+      }
+    };
 
     const parts = items.map((li, i) => {
       const name = li.querySelector("b")?.textContent.trim() || `Part ${i + 1}`;
@@ -585,7 +616,7 @@ part("callouts", () => {
       // the diamond on the render (for mouse and touch; the buttons below are the keyboard path)
       const mark = document.createElement("button");
       mark.type = "button";
-      mark.className = "callout-mark" + (x < 25 ? " at-left" : x > 75 ? " at-right" : "");
+      mark.className = "callout-mark" + (x < 25 ? " at-left" : x > 75 ? " at-right" : "") + (li.dataset.label === "below" ? " below" : "");
       mark.tabIndex = -1;
       mark.setAttribute("aria-hidden", "true");
       mark.style.left = x + "%";
@@ -601,60 +632,60 @@ part("callouts", () => {
       btn.type = "button";
       btn.className = "callout-btn";
       btn.textContent = name;
+      btn.tabIndex = -1;
       btn.setAttribute("aria-pressed", "false");
       btn.setAttribute("aria-controls", note.id);
       bar.append(btn);
-      return { name, text, card: li.dataset.card, mark, btn };
+      // data-link keeps a product name as written ("More on the Limelight")
+      const p = { name, text, card: li.dataset.card, link: li.dataset.link || name.toLowerCase(), mark, btn };
+      const copy = document.createElement("div");
+      fill(copy, p);
+      sizer.append(copy);
+      return p;
     });
 
     list.hidden = true;
-    list.after(bar, note);
+    list.after(bar, notes);
+    box.classList.add("has-callouts");
+
+    // labels only where the render is big enough for them not to cover other diamonds
+    const fit = () => stage.classList.toggle("compact", img.clientWidth < 330);
+    if ("ResizeObserver" in window) new ResizeObserver(fit).observe(img); else fit();
 
     let current = -1;
-    const select = i => {
+    const select = (i, user) => {
       if (i === current) return;
       current = i;
       parts.forEach((p, j) => {
         p.btn.setAttribute("aria-pressed", j === i);
+        p.btn.tabIndex = j === i ? 0 : -1;   // one Tab stop for the whole row; arrows move inside it
         p.mark.classList.toggle("is-on", j === i);
       });
-      const p = parts[i];
-      const card = p.card && document.getElementById(p.card);
-      note.textContent = "";
-      const para = document.createElement("p");
-      const b = document.createElement("b");
-      b.textContent = p.name + ".";
-      para.append(b, " " + p.text);
-      note.append(para);
-      if (card) {
-        const a = document.createElement("a");
-        a.className = "text-link";
-        a.href = "#" + card.id;
-        a.textContent = `More on the ${p.name.toLowerCase()}`;
-        note.append(a);
-      }
-      if (!RM) { note.classList.remove("note-in"); void note.offsetWidth; note.classList.add("note-in"); }
+      fill(note, parts[i]);
+      if (user && !RM) note.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 350, easing: "cubic-bezier(0.16, 1, 0.3, 1)" });
     };
     parts.forEach((p, i) => {
-      p.btn.addEventListener("click", () => select(i));
-      p.mark.addEventListener("click", () => select(i));
+      p.btn.addEventListener("click", () => select(i, true));
+      p.mark.addEventListener("click", () => select(i, true));
       // pointing at a name shows where that part is on the robot
       p.btn.addEventListener("pointerenter", () => p.mark.classList.add("is-hint"));
       p.btn.addEventListener("pointerleave", () => p.mark.classList.remove("is-hint"));
       p.btn.addEventListener("focus", () => p.mark.classList.add("is-hint"));
       p.btn.addEventListener("blur", () => p.mark.classList.remove("is-hint"));
     });
-    // arrow keys step through the parts, like a toolbar
+    // arrow keys (and Home/End) step through the parts, like a toolbar
     bar.addEventListener("keydown", e => {
-      const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
       const at = parts.findIndex(p => p.btn === document.activeElement);
-      if (!step || at < 0) return;
+      if (at < 0) return;
+      const n = parts.length;
+      const to = { ArrowRight: at + 1, ArrowDown: at + 1, ArrowLeft: at - 1, ArrowUp: at - 1, Home: 0, End: n - 1 }[e.key];
+      if (to === undefined) return;
       e.preventDefault();
-      const i = (at + step + parts.length) % parts.length;
+      const i = (to + n) % n;
+      select(i, true);
       parts[i].btn.focus();
-      select(i);
     });
-    select(0);
+    select(0, false);
   });
 });
 
@@ -683,8 +714,9 @@ part("crew-filter", () => {
   const chipsOf = m => [...m.querySelectorAll(".chip")].map(c => c.textContent.trim());
   const leadsOf = m => [...m.querySelectorAll(".lead-tag")].map(t => t.textContent.replace(/\s*Lead$/, "").trim());
   const tagsOf = m => [...chipsOf(m), ...leadsOf(m)];
-  const ORDER = ["CAD", "Build", "Outreach", "Electrical", "Game Strategy"];
-  const found = [...new Set(members.flatMap(chipsOf))];
+  const ORDER = ["CAD", "Build", "Outreach", "Electrical", "Software", "Game Strategy"];
+  const roleTeams = m => [...m.querySelectorAll(".lead-tag")].map(t => t.textContent.trim()).filter(t => / Lead$/.test(t)).map(t => t.replace(/ Lead$/, ""));
+  const found = [...new Set(members.flatMap(m => [...chipsOf(m), ...roleTeams(m)]))];
   if (!found.length) return;
   const labels = [...ORDER.filter(l => found.includes(l)), ...found.filter(l => !ORDER.includes(l))];
   const hasLeads = members.some(m => m.querySelector(".lead-tag"));
@@ -821,7 +853,7 @@ part("contact", () => {
   if (new URLSearchParams(location.search).get("topic") === "join") contactForm.elements.topic.value = "Joining the team";
   // A one-line prompt under "Message" for each topic: what's useful for us to know
   const HINTS = {
-    "Joining the team": "Tell us what you’d like to work on (building, coding, CAD or outreach) and anything you want to ask.",
+    "Joining the team": "Rookies are part of the team from day one. Tell us what you’d like to work on (building, coding, CAD, or outreach) and anything you want to ask.",
     "Sponsorship": "Tell us who you are and how you’d like to help.",
     "Outreach / collaboration": "Tell us about your event, school or group.",
   };

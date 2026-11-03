@@ -31,9 +31,9 @@ so a pasted block can never break a page.
 | `<figure class="season-hero">` + `<nav class="season-pager">` (season pages) | The big robot at the top and the links to the other seasons |
 | `<div class="spec-sheet">` around `<ul class="specs">` | The spec sheet. Write `TBD` for anything not decided yet |
 | `<article class="chapter">` (outreach) | One event: `chapter-lead` photo, optional `chapter-strip` photos, then the text |
-| `<div class="robot-explorer">` + `<ol class="callouts">` (DECODE season page) | Diamonds on the robot render and a row of part names; choosing a part shows its note and links to its mechanism card. Each `<li>` has `data-x` / `data-y` (the diamond's position in % of the image) and `data-card` (the id of that part's card) |
+| `<div class="robot-explorer">` + `<ol class="callouts">` (DECODE season page) | Diamonds on the robot render and a list of part names (beside the render on big screens); choosing a part shows its note and links to its mechanism card. Each `<li>` has `data-x` / `data-y` (the diamond's position in % of the image) and `data-card` (the id of that part's card); optional `data-label="below"` puts the name under the diamond, and `data-link` sets how the part is named in "More on the …" |
 | `data-walkthrough` on a `parts-grid` | Turns the mechanism cards into the scroll-through tour on big screens |
-| `data-filter` on the Members grid | Builds the subteam filter from each member's `chip`s. Filters can be linked to: `team.html?crew=CAD` |
+| `data-filter` on the Members grid | Builds the subteam filter from each member's `chip`s and lead roles ("Software Lead" → Software). Filters can be linked to: `team.html?crew=CAD` |
 | Image classes | `print`: a photo in a thin mat · `on-black`: an image whose own background is black · `render` / `photo`: fill the card's image box · `feather`: soften the edges of a render on black |
 | `style="view-transition-name: robot-…"` | Lets a robot glide from the home page or Seasons into its season page. Each name may appear only once per page, and the season hero must never be `loading="lazy"` |
 

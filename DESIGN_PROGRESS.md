@@ -3,7 +3,7 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-03, round 1 implemented and verified; round 2 review next. Work is committed straight to `main`, Andy's standing instruction; `main` is the live site._
+_Last updated: 2026-11-03, rounds 1 and 2 implemented and verified; final critique and audit next. Work is committed straight to `main`, Andy's standing instruction; `main` is the live site._
 
 ## Goal
 
@@ -131,6 +131,56 @@ Status: ☐ open · ☑ fixed · ⊘ blocked (needs the team). All are **existin
 | A15 | copy | Straight apostrophes | Curly ’ in visible text | grep | ☑ |
 | A16 | `.btn.ghost` | Border 2.82:1 | Stronger border | Contrast calc | ☑ |
 
+### Round 2 review findings (2026-11-03)
+
+The review ran as a workflow of 10 agents with no shared context:
+- Impeccable Assessment A (design review) and Assessment B (detector plus browser overlay);
+- a /vercel audit against the live guidelines;
+- a content-truth check;
+- hands-on interaction QA;
+- for each of those five, a skeptic that tried to refute every finding.
+
+Critique score: **27/40, up from 23**. No P0 or P1 design issues remained; the one P1 was the /vercel
+focus-under-header finding, fixed as R1. "Reg." marks regressions introduced by round 1.
+
+| # | Where | Problem | Fix | Reg. | |
+|---|---|---|---|---|---|
+| R1 | css: html | Shift+Tab could leave focus under the sticky header; the outreach "Next year" button scrolled the tab under it | `scroll-padding-top` on html (replaces `main [id]` scroll-margin) | | ☑ |
+| R2 | DECODE callouts | At 1440×900 the part list and note started below the fold | Render on the left, parts and note beside it at ≥1000 px | yes | ☑ |
+| R3 | DECODE callouts | The active label covered other diamonds on short screens | Limelight and Chassis labels go below; labels hide when the render is narrower than 330 px | yes | ☑ |
+| R4 | DECODE callouts | The note box changed height between parts, moving the page by up to 53 px | Invisible copies of every note size the box | yes | ☑ |
+| R5 | DECODE callouts | Six Tab stops; "More on the limelight" | One roving Tab stop with arrows, Home and End; product name kept as written | yes | ☑ |
+| R6 | DECODE copy | The shooter RPM range read as if it described the distances; "14 in" read as a preposition; units wrapped | Copy rewritten; "14‑inch"; `&nbsp;` before units | yes | ☑ |
+| R7 | DECODE walkthrough | After "More on the Limelight" the sticky stage left the screen | Last card is at least as tall as the stage | yes | ☑ |
+| R8 | photo viewer | The first Next did nothing at 320 and 360 px (slides were wider than the track) | Slides can't exceed the track; Next goes to the neighbouring slide | | ☑ |
+| R9 | photo curtain | The wipe never animated (clip-path can't interpolate to `none`) | A cover that slides away with `transform` | | ☑ |
+| R10 | site-wide | 23 leftover kicker labels above headings; mono used for prose | Software headings fold the topic in; season rows and pagers put the year after the name; outreach dates move under the heading as a dateline (mono for the date only); Resources "Coming soon" tags removed; `.exp`, captain meta, record keys and sheet notes set in sans | | ☑ |
+| R11 | contact | Join visitors on phones never saw the joining note; the right column ran about 550 px past the form | The joining note sits under the form; the join hint opens with "Rookies are part of the team from day one" | yes | ☑ |
+| R12 | team filter | No coding option, though every join prompt asks about coding | Filters also come from lead roles: "Software" (Arnie, Software Lead) | | ☑ |
+| R13 | team filter | Filtered members stayed left-aligned at 641–1000 px | Centred at every column count | yes | ☑ |
+| R14 | home | Credentials wrapped 3+1 at 745–985 px; the WNEU awards had no year | 2×2 up to 999 px; years added from the season pages | yes | ☑ |
+| R15 | home | The hero foot's middle item was three text runs, and "Instagram ↗" read the arrow aloud; at 1440 the Instagram link sat about 11 px lower than the other two items | One text run with real spaces; ↗ is `aria-hidden`; items aligned | yes | ☑ |
+| R16 | home | The photo inside `.hero` broke the hero's first-screen layout; the same credentials were repeated 3 times | Photo moved after the hero; caption trimmed | yes | ☑ |
+| R17 | home closing | Both buttons sat under "Students" | Each audience has its own button | | ☑ |
+| R18 | copy | Title Case outliers ("The Team", "2nd Season", "Made Playoffs", "Winning Alliance · 1st Pick"); "Ask about joining"; passive sponsor note; "Next competition" for scrimmages; mid-sentence counts in words; straight apostrophes in meta descriptions; "October / 9" break | Sentence case; "Join as a student"; "We thank every sponsor…"; "Next event"; numerals; ’; `&nbsp;` | partly | ☑ |
+| R19 | resources | The lead promised code and CAD that are all "on the way" | Lead says what's there now | | ☑ |
+| R20 | 2026–27 | Caption said version 1 was unfinished under a "fully built" photo | Caption describes both photos | yes | ☑ |
+| R21 | perf | Home robots loaded eagerly; LCP images lazy or without priority on Seasons, Team and 2026–27 | `loading="lazy"` / `fetchpriority="high"` where measured | | ☑ |
+| R22 | i18n | Many names still machine-translatable (Limelight, PedroPathing, GNCE Diamond…) | `translate="no"` | partly | ☑ |
+| R23 | misc | Ghost buttons had no pressed state; footer "Next event" had no hover; photo buttons had no hover; chip "/" could start a line; no no-JS fallback for the form; sponsor logos had no size | Fixed; the form posts to mailto without JS; SPONSORS takes width/height | | ☑ |
+| R24 | footer | Round 2's own change made the footer read "© 2026GNCE Mercury" (found in the visual check) | `translate="no"` on the whole line | round 2 | ☑ |
+
+Refuted by the skeptics, so not changed:
+- primary-button hover style (the team's design);
+- an unsaved-changes prompt on the contact form (the browser keeps the text when you go back);
+- a URL for the selected robot part (each note already links to its card);
+- the Resources DECODE link anchor (deliberate);
+- the contact-hint layout shift (caused by the visitor's own click).
+
+Considered and left as is:
+- the DECODE figures row, which repeats the spec sheet but holds the only "3 sets of gecko wheels" fact;
+- "Season Kickoff" on the timeline and "Our Sponsors & Supporters" in the footer, whose case stays unless Andy says so.
+
 ### Blocked: needs facts, assets or accounts from the team
 
 - ⊘ B1 A sharp wide team photo (≥ 2400 px wide). The Ryken photo is used at its real size until then.
@@ -143,6 +193,8 @@ Status: ☐ open · ☑ fixed · ⊘ blocked (needs the team). All are **existin
 - ⊘ B8 2026 MA States results (alliance and awards show "—").
 - ⊘ B9 A cleaner cut-out of the INTO THE DEEP robot (current edges are aliased).
 - ⊘ B10 Plain-language wording for FTC awards (Think, Sustain) for parents and sponsors.
+- ⊘ B12 Which other members code: the Software filter shows only Arnie (Software Lead) until members get a Software chip.
+- ⊘ B13 Whether "Resources" stays in the top nav while it mostly links back to the season pages (it's ArnieFTC's addition).
 - ⊘ B11 Without JavaScript there is no nav, footer or sponsor strip (they're built by `js/main.js`);
   a `<noscript>` copy would fork the single `SPONSORS` list, so it's left as a known limitation.
 
@@ -216,10 +268,28 @@ Round 1, 2026-11-03 (Playwright Chromium, local static server):
     the baseline critique).
   - All `cramped-padding` hits are static misreads: the coach initials plates, and the credentials bar,
     whose text has 13 px of inset.
-- **Not yet done:** round 2 Impeccable critique and /vercel audit of the changed files.
+- **Round 2** (after the R1–R24 fixes):
+  - Render audit of all 9 pages at 320/390/768/1440: no overflow, errors or 404s, one `h1`, no skipped
+    heading levels.
+  - Interaction tests: **41 of 41 pass** (round 1's 28 plus new ones):
+    - ball-path order of the parts;
+    - part list and note inside the first screen at 1440×900;
+    - equal note height for all parts;
+    - one Tab stop for the parts row, and "More on the Limelight";
+    - no label covering another diamond at 1280×720, 900×600 and 1000×700;
+    - walkthrough stage on screen after the last link;
+    - Software filter;
+    - photo viewer Next at 320;
+    - the outreach Next-year button doesn't hide the focused tab;
+    - Shift+Tab through the home page never lands under the header;
+    - the hero foot reads as one sentence.
+  - Detector: 15 hits, all the known static false positives.
+  - Footer and hero-foot text checked in the browser: "© 2026 GNCE Mercury", "Instagram ↗", items level at 1440.
 - **Not tested:** real iOS or Android devices and screen readers. Touch was emulated with clicks only.
 
 ## Next action
 
-Round 2: run the Impeccable critique (two isolated assessments) and the /vercel audit on the changed files,
-verify the findings, fix the real ones, then run the final critique and audit.
+Final pass:
+1. Run the Impeccable critique (two isolated assessments) and the /vercel audit on the files changed in round 2.
+2. Fix anything confirmed.
+3. Then ask Andy for the blocked facts: B2–B8, B10, B12 and B13.
