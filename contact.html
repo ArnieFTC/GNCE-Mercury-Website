@@ -15,15 +15,17 @@
   <meta property="og:image:alt" content="GNCE Mercury logo">
   <meta name="twitter:card" content="summary">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <link rel="stylesheet" href="css/style.css?v=128">
+  <meta name="theme-color" content="#0f0e0d">
+  <link rel="preload" href="fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css?v=129">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="contact">
   <main class="container">
 
     <div class="page-head">
-      <span class="eyebrow">Get In Touch</span>
-      <h1>Contact Us</h1>
+      <h1>Contact us</h1>
       <p>Write to us about joining, sponsoring, or running an event together.</p>
     </div>
 
@@ -33,50 +35,55 @@
         <!-- CONTACT FORM: opens the visitor's email app with a message to the team email, filled in from the form.
              To send messages straight from the site instead, sign up for a form service like Formspree. -->
         <div class="card">
-          <h2 style="margin-bottom:18px">Send a Message</h2>
+          <h2>Send us a message</h2>
           <form id="contact-form">
             <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" spellcheck="false" required></div>
             <fieldset class="field choices">
               <legend>Topic</legend>
               <label class="choice"><input type="radio" name="topic" value="General question" checked><span>General question</span></label>
               <label class="choice"><input type="radio" name="topic" value="Joining the team"><span>Joining the team</span></label>
               <label class="choice"><input type="radio" name="topic" value="Sponsorship"><span>Sponsorship</span></label>
               <label class="choice"><input type="radio" name="topic" value="Outreach / collaboration"><span>Outreach / collaboration</span></label>
-              <label class="choice"><input type="radio" name="topic" value="Other"><span>Other</span></label>
             </fieldset>
-            <div class="field"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
-            <button class="btn" type="submit">Send</button>
+            <div class="field"><label for="message">Message</label><p class="hint" id="message-hint"></p><textarea id="message" name="message" aria-describedby="message-hint" required></textarea></div>
+            <button class="btn" type="submit">Open in your email app</button>
             <p class="note form-status" role="status"></p>
           </form>
-          <p class="note">Opens your email app. Or email us directly at <a href="mailto:gncemercury26413@gmail.com">gncemercury26413@gmail.com</a>.</p>
+          <p class="note">The button opens your email app with this message filled in. You can also email us directly at <a href="mailto:gncemercury26413@gmail.com">gncemercury26413@gmail.com</a>.</p>
         </div>
 
         <div>
           <div class="card">
-            <h2 style="margin-bottom:10px">Reach Us</h2>
+            <h2>Reach us</h2>
             <ul class="contact-list">
               <li><span class="k">Email</span><a href="mailto:gncemercury26413@gmail.com">gncemercury26413@gmail.com</a></li>
               <li><span class="k">Instagram</span><a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">@gnce_mercury</a></li>
               <li><span class="k">Location</span>Weston, MA</li>
-              <li><span class="k">FTC Team #</span>26413</li>
+              <li><span class="k">FTC team number</span>26413</li>
             </ul>
           </div>
 
-          <!-- SUPPORT / DONATE: set the button's href to your donation link -->
+          <!-- JOINING: what a new member should know. Add meeting times, who can join, or costs here when they're set. -->
+          <div class="card" id="join">
+            <h2>Joining the team</h2>
+            <p>We recruit new members every season, and rookies are part of the team from day one. Pick “Joining the team” in the form and tell us what you’re into: building, coding, CAD, or outreach.</p>
+            <a class="text-link" href="team.html">Meet the team</a>
+          </div>
+
+          <!-- SPONSOR US / DONATE: when you have a donation link, add <a class="btn" href="YOUR-LINK">Donate</a> next to the email button -->
           <div class="card" id="support">
-            <span class="eyebrow">Support us</span>
-            <h2>Help us build, compete, and teach</h2>
-            <p style="margin:8px 0 14px">
-              Parts, registration, and travel add up. Every donation or sponsorship
-              goes straight to building robots and running outreach. Your support helps pay for:
+            <h2>Sponsor us</h2>
+            <p>
+              Help us build, compete, and teach. Parts, registration, and travel add up, and every donation
+              or sponsorship goes straight to building robots and running outreach. Your support helps pay for:
             </p>
             <ul class="support-list">
               <li>Robot parts and tools for a new robot every season</li>
               <li>Competition registration and travel</li>
               <li>Outreach like our summer camp and FLL coaching</li>
             </ul>
-            <a class="btn" href="mailto:gncemercury26413@gmail.com?subject=Sponsorship">Become a sponsor</a>
+            <a class="btn" href="mailto:gncemercury26413@gmail.com?subject=Sponsorship">Email us about sponsoring</a>
             <p class="note">Sponsors are thanked in the footer of every page of this site.</p>
           </div>
         </div>
@@ -85,6 +92,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=128"></script>
+  <script src="js/main.js?v=129"></script>
 </body>
 </html>

@@ -83,7 +83,7 @@ part("header", () => {
     <nav class="nav-bar" aria-label="Main">
       <a class="brand" href="${root}index.html">
         <img class="brand-logo" src="${root}images/logo-mark.png" alt="" width="30" height="32" onerror="this.remove()">
-        GNCE MERCURY <span class="num">#26413</span>
+        <span translate="no">GNCE MERCURY</span> <span class="num">#26413</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">Menu</button>
       <ul class="nav-links" id="site-menu">
@@ -197,7 +197,7 @@ part("footer", () => {
     <div class="container footer-main">
       <a class="footer-brand" href="${root}index.html">
         <img src="${root}images/logo-mark.png" alt="" width="44" height="47">
-        <span><b>GNCE Mercury</b><small>FTC #26413 · Galactic Narwhal Chicken Effect · Weston, MA</small></span>
+        <span><b translate="no">GNCE Mercury</b><small>FTC #26413 · <span translate="no">Galactic Narwhal Chicken Effect</span> · Weston, MA</small></span>
       </a>
       <div class="footer-links">
         ${status ? `<a class="footer-next" href="${root}index.html#countdown">${status.text}</a>` : ""}
@@ -227,7 +227,7 @@ part("countdown", () => {
   const sr = document.createElement("p");
   sr.className = "visually-hidden cd-sr";
   cd.append(sr);
-  const eyebrow = cd.querySelector(".eyebrow");
+  const head = cd.querySelector(".cd-head");
 
   // Timeline positions are % of the way from kickoff to the last event.
   const end = events[events.length - 1].day;
@@ -280,7 +280,7 @@ part("countdown", () => {
       lastState = state;
       lastMinute = -1;
       cd.classList.toggle("live", !!today);
-      if (eyebrow) eyebrow.hidden = !today && !next;
+      if (head) head.hidden = !today && !next;
       if (today) {
         nameEl.textContent = today.name;
         dateEl.textContent = fmt(today.day, LONG);
@@ -339,71 +339,6 @@ part("countdown", () => {
   run();
 });
 
-// ---------- Index preview plate (home) ----------
-// On a big screen with a mouse, hovering a row in "Read more" shows a photo beside the list.
-part("index-preview", () => {
-  const list = document.querySelector(".index-list");
-  if (!list) return;
-  const rows = [...list.querySelectorAll("a[data-preview]")];
-  if (!rows.length) return;
-  const mq = matchMedia("(hover: hover) and (pointer: fine) and (min-width: 1000px)");
-  let wrap = null, plate = null, fig = null, imgs = [], cur = 0, preloaded = false;
-  const preload = () => { if (preloaded) return; preloaded = true; rows.forEach(a => { new Image().src = a.dataset.preview; }); };
-  const show = a => {
-    if (!fig) return;
-    const top = a.getBoundingClientRect().top - list.getBoundingClientRect().top;
-    const y = Math.max(0, Math.min(top + a.offsetHeight / 2 - fig.offsetHeight / 2, list.offsetHeight - fig.offsetHeight));
-    fig.style.setProperty("--y", y + "px");
-    const target = imgs[1 - cur];
-    if (imgs[cur].dataset.src !== a.dataset.preview) {
-      target.src = a.dataset.preview;
-      target.dataset.src = a.dataset.preview;
-      target.classList.toggle("contain", a.dataset.fit === "contain");
-      imgs[cur].classList.remove("on");
-      target.classList.add("on");
-      cur = 1 - cur;
-    }
-    fig.classList.add("is-shown");
-  };
-  let listIO = null;
-  const build = () => {
-    if (wrap) return;
-    wrap = document.createElement("div");
-    wrap.className = "index-wrap has-preview";
-    list.before(wrap);
-    wrap.append(list);
-    plate = document.createElement("div");
-    plate.className = "index-plate";
-    plate.innerHTML = `<figure class="index-preview" aria-hidden="true"><img alt=""><img alt=""></figure>`;
-    wrap.append(plate);
-    fig = plate.firstElementChild;
-    imgs = [...fig.querySelectorAll("img")];
-    const first = rows[0].dataset.preview;
-    imgs.forEach(im => { im.src = first; im.classList.toggle("contain", rows[0].dataset.fit === "contain"); });
-    imgs[0].dataset.src = first;
-    imgs[0].classList.add("on");
-    list.addEventListener("pointerenter", preload);
-    // the plate wipes in beside the first row when the list comes into view, then follows the hovered row
-    listIO = new IntersectionObserver(([e]) => { if (e.isIntersecting) { show(rows[0]); listIO.disconnect(); } }, { rootMargin: "0px 0px -20% 0px" });
-    listIO.observe(list);
-  };
-  const teardown = () => {
-    if (!wrap) return;
-    listIO?.disconnect();
-    wrap.before(list);
-    wrap.remove();
-    wrap = plate = fig = null;
-    imgs = [];
-  };
-  rows.forEach(a => {
-    a.addEventListener("pointerenter", () => show(a));
-    a.addEventListener("focus", () => { preload(); show(a); });
-  });
-  const sync = () => (mq.matches ? build() : teardown());
-  mq.addEventListener("change", sync);
-  sync();
-});
-
 // ---------- Outreach year tabs ----------
 // Each <section class="year-panel" data-tab="Third Year · 2026–27"> becomes a tab; the first one is shown first.
 // Without JavaScript every year simply shows, one after another.
@@ -418,17 +353,17 @@ part("year-tabs", () => {
   }).join("") + `<span class="tab-ind" aria-hidden="true"></span>`;
   const tabs = [...tabBar.querySelectorAll("[role=tab]")];
   const ind = tabBar.querySelector(".tab-ind");
-  const label = j => { const [n, y] = (panels[j].dataset.tab || panels[j].id).split(" · "); return n + (y ? " " + y : ""); };
+  const label = j => { const [n, y] = (panels[j].dataset.tab || panels[j].id).split(" · "); return n + (y ? ", " + y : ""); };
   panels.forEach((p, i) => {
     if (panels.length < 2) return;
     const nav = document.createElement("nav");
     nav.className = "year-pager";
     nav.setAttribute("aria-label", "Other years");
-    nav.innerHTML = (i > 0 ? `<button type="button" class="btn ghost" data-go="${i - 1}">Previous · ${label(i - 1)}</button>` : "")
-      + (i < panels.length - 1 ? `<button type="button" class="btn ghost" data-go="${i + 1}">Next · ${label(i + 1)}</button>` : "");
+    nav.innerHTML = (i > 0 ? `<button type="button" class="btn ghost" data-go="${i - 1}">Previous: ${label(i - 1)}</button>` : "")
+      + (i < panels.length - 1 ? `<button type="button" class="btn ghost" data-go="${i + 1}">Next: ${label(i + 1)}</button>` : "");
     p.append(nav);
   });
-  panels.forEach(p => { p.setAttribute("role", "tabpanel"); p.setAttribute("aria-labelledby", "tab-" + p.id); p.tabIndex = 0; });
+  panels.forEach(p => { p.setAttribute("role", "tabpanel"); p.setAttribute("aria-labelledby", "tab-" + p.id); });
   let current = -1;
   const place = () => {
     const t = tabs[current];
@@ -616,6 +551,113 @@ part("walkthrough", () => {
   sync();
 });
 
+// ---------- Robot callouts (season pages) ----------
+// Inside <div class="robot-explorer">: the season hero <figure> and an <ol class="callouts"> with one
+// <li data-x data-y data-card> per part (marker position in % of the image; data-card = the id of that
+// part's mechanism card). Without JavaScript the list shows as written. With it, each part gets a
+// diamond on the render and a button underneath; choosing one lights its diamond and shows its note.
+part("callouts", () => {
+  document.querySelectorAll(".robot-explorer").forEach(box => {
+    const list = box.querySelector(".callouts");
+    const img = box.querySelector(".season-hero img");
+    const items = list ? [...list.querySelectorAll(":scope > li")].filter(li => li.dataset.x && li.dataset.y) : [];
+    if (!img || items.length < 2) return;
+
+    const stage = document.createElement("span");
+    stage.className = "callout-stage";
+    img.before(stage);
+    stage.append(img);
+
+    const note = document.createElement("div");
+    note.className = "callout-note";
+    note.id = (box.id || "robot") + "-note";
+    note.setAttribute("aria-live", "polite");
+
+    const bar = document.createElement("div");
+    bar.className = "callout-bar";
+    bar.setAttribute("role", "group");
+    bar.setAttribute("aria-label", list.getAttribute("aria-label") || "Parts of the robot");
+
+    const parts = items.map((li, i) => {
+      const name = li.querySelector("b")?.textContent.trim() || `Part ${i + 1}`;
+      const text = li.querySelector("span")?.textContent.trim() || "";
+      const x = parseFloat(li.dataset.x), y = parseFloat(li.dataset.y);
+      // the diamond on the render (for mouse and touch; the buttons below are the keyboard path)
+      const mark = document.createElement("button");
+      mark.type = "button";
+      mark.className = "callout-mark" + (x < 25 ? " at-left" : x > 75 ? " at-right" : "");
+      mark.tabIndex = -1;
+      mark.setAttribute("aria-hidden", "true");
+      mark.style.left = x + "%";
+      mark.style.top = y + "%";
+      mark.style.setProperty("--i", i);
+      const tag = document.createElement("span");
+      tag.className = "callout-label";
+      tag.textContent = name;
+      mark.append(tag);
+      stage.append(mark);
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "callout-btn";
+      btn.textContent = name;
+      btn.setAttribute("aria-pressed", "false");
+      btn.setAttribute("aria-controls", note.id);
+      bar.append(btn);
+      return { name, text, card: li.dataset.card, mark, btn };
+    });
+
+    list.hidden = true;
+    list.after(bar, note);
+
+    let current = -1;
+    const select = i => {
+      if (i === current) return;
+      current = i;
+      parts.forEach((p, j) => {
+        p.btn.setAttribute("aria-pressed", j === i);
+        p.mark.classList.toggle("is-on", j === i);
+      });
+      const p = parts[i];
+      const card = p.card && document.getElementById(p.card);
+      note.textContent = "";
+      const para = document.createElement("p");
+      const b = document.createElement("b");
+      b.textContent = p.name + ".";
+      para.append(b, " " + p.text);
+      note.append(para);
+      if (card) {
+        const a = document.createElement("a");
+        a.className = "text-link";
+        a.href = "#" + card.id;
+        a.textContent = `More on the ${p.name.toLowerCase()}`;
+        note.append(a);
+      }
+      if (!RM) { note.classList.remove("note-in"); void note.offsetWidth; note.classList.add("note-in"); }
+    };
+    parts.forEach((p, i) => {
+      p.btn.addEventListener("click", () => select(i));
+      p.mark.addEventListener("click", () => select(i));
+      // pointing at a name shows where that part is on the robot
+      p.btn.addEventListener("pointerenter", () => p.mark.classList.add("is-hint"));
+      p.btn.addEventListener("pointerleave", () => p.mark.classList.remove("is-hint"));
+      p.btn.addEventListener("focus", () => p.mark.classList.add("is-hint"));
+      p.btn.addEventListener("blur", () => p.mark.classList.remove("is-hint"));
+    });
+    // arrow keys step through the parts, like a toolbar
+    bar.addEventListener("keydown", e => {
+      const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+      const at = parts.findIndex(p => p.btn === document.activeElement);
+      if (!step || at < 0) return;
+      e.preventDefault();
+      const i = (at + step + parts.length) % parts.length;
+      parts[i].btn.focus();
+      select(i);
+    });
+    select(0);
+  });
+});
+
 // ---------- Team: monogram plates and the crew filter ----------
 part("monograms", () => {
   document.querySelectorAll("div.portrait").forEach(p => {
@@ -652,23 +694,45 @@ part("crew-filter", () => {
   bar.setAttribute("role", "group");
   bar.setAttribute("aria-label", "Filter members by subteam");
   bar.innerHTML = all.map((l, i) => `<button type="button" aria-pressed="${i === 0}">${l}</button>`).join("");
-  const live = document.createElement("p");
-  live.className = "visually-hidden";
-  live.setAttribute("aria-live", "polite");
-  grid.before(bar, live);
-  bar.addEventListener("click", e => {
-    const btn = e.target.closest("button");
-    if (!btn) return;
-    const label = btn.textContent;
-    bar.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b === btn));
-    const names = [];
+  // the count is visible and read out; the grid shows only the members who match
+  const count = document.createElement("p");
+  count.className = "crew-count";
+  count.setAttribute("aria-live", "polite");
+  grid.before(bar, count);
+  const apply = (label, user) => {
+    bar.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.textContent === label));
+    const shown = [];
     members.forEach(m => {
       const match = label === "All" || (label === "Leads" ? !!m.querySelector(".lead-tag") : tagsOf(m).includes(label));
-      m.classList.toggle("is-dim", !match);
-      if (match) names.push(m.querySelector("h3")?.textContent.trim());
+      const appearing = match && m.hidden;
+      m.hidden = !match;
+      if (match) shown.push(m.querySelector("h3")?.textContent.trim());
+      if (appearing && user && !RM) m.animate([{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }], { duration: 320, easing: "cubic-bezier(0.16, 1, 0.3, 1)" });
     });
-    live.textContent = label === "All" ? `All ${members.length} members` : `${names.length} of ${members.length} members · ${label}: ${names.join(", ")}`;
+    grid.classList.toggle("is-filtered", label !== "All");
+    // short on screen; screen readers also hear the names
+    count.textContent = "";
+    if (label !== "All") {
+      count.append(`${shown.length} of ${members.length} members ${label === "Leads" ? "are leads" : "in " + label}`);
+      const names = document.createElement("span");
+      names.className = "visually-hidden";
+      names.textContent = `: ${shown.join(", ")}`;
+      count.append(names);
+    }
+    // keep the choice in the address so a filtered view can be shared (team.html?crew=CAD)
+    if (user) {
+      const url = new URL(location.href);
+      if (label === "All") url.searchParams.delete("crew"); else url.searchParams.set("crew", label);
+      history.replaceState(null, "", url);
+    }
+  };
+  bar.addEventListener("click", e => {
+    const btn = e.target.closest("button");
+    if (btn) apply(btn.textContent, true);
   });
+  const fromUrl = (new URLSearchParams(location.search).get("crew") || "").toLowerCase();
+  const start = all.find(l => l.toLowerCase() === fromUrl);
+  if (start) apply(start, false);
 });
 
 // ---------- Special quotes (team page) ----------
@@ -711,7 +775,7 @@ part("special-quotes", () => {
     try {
       quotes = await unlock(pass.value);
     } catch {
-      msg.textContent = "Wrong password.";
+      msg.textContent = "That password didn’t work. Check it and try again.";
       msg.classList.add("err");
       pass.select();
       return;
@@ -755,6 +819,16 @@ part("contact", () => {
   if (!contactForm) return;
   // contact.html?topic=join pre-selects "Joining the team" (used by the Join buttons)
   if (new URLSearchParams(location.search).get("topic") === "join") contactForm.elements.topic.value = "Joining the team";
+  // A one-line prompt under "Message" for each topic: what's useful for us to know
+  const HINTS = {
+    "Joining the team": "Tell us what you’d like to work on (building, coding, CAD or outreach) and anything you want to ask.",
+    "Sponsorship": "Tell us who you are and how you’d like to help.",
+    "Outreach / collaboration": "Tell us about your event, school or group.",
+  };
+  const hint = document.getElementById("message-hint");
+  const showHint = () => { if (hint) hint.textContent = HINTS[contactForm.elements.topic.value] || ""; };
+  contactForm.addEventListener("change", e => { if (e.target.name === "topic") showHint(); });
+  showHint();
   const status = contactForm.querySelector(".form-status");
   contactForm.addEventListener("submit", e => {
     e.preventDefault();
@@ -762,7 +836,7 @@ part("contact", () => {
     const subject = `${f.topic.value} from ${f.name.value}`;
     const body = `${f.message.value}\n\n${f.name.value}\n${f.email.value}`;
     location.href = `mailto:${TEAM_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    if (status) status.textContent = `Opening your email app. If nothing opens, email us directly at ${TEAM_EMAIL}.`;
+    if (status) status.textContent = `Opening your email app… If nothing opens, email us at ${TEAM_EMAIL}.`;
   });
 });
 
@@ -794,12 +868,14 @@ part("specs", () => {
 });
 
 // ---------- Reveals ----------
-// The motion is chosen by element type, so pages need no attributes:
-//   rise    — headings, robot names and big figures lift once from behind their baseline
-//   curtain — one to three main photos per page wipe open
-//   rule    — hairlines in lists and figure rows draw left to right
-//   fade    — everything else (paragraphs, labels, cards) only changes opacity
-// Anything already on screen when the page loads stays as it is, so nothing flashes.
+// Motion is kept for the things worth watching, chosen by element type so pages need no attributes:
+//   page head — the title rises and its lead fades in once, on load
+//   robots    — on the home page each robot rises, then its name, then its copy
+//   curtain   — up to three main photos per page (and per outreach year) wipe open
+//   rule      — hairlines in data lists (stats, specs, events, records) draw left to right
+//   cards     — members and mechanism cards fade in one by one as a list
+// Headings and paragraphs elsewhere simply appear. Anything already on screen when the page
+// loads stays as it is, so nothing flashes; anything reached by keyboard shows at once.
 part("reveals", () => {
   const html = document.documentElement;
   // if anything below fails, show everything rather than leave a block hidden
@@ -810,8 +886,6 @@ function reveals(html) {
     html.classList.add("reveal-all");
     return;
   }
-  const fold = innerHeight * 0.92;
-  const below = el => !!el.closest("[hidden]") || el.getBoundingClientRect().top > fold;
   const small = innerWidth < 700;
   const io = new IntersectionObserver(es => es.forEach(async e => {
     if (!e.isIntersecting) return;
@@ -820,17 +894,25 @@ function reveals(html) {
     if (el.classList.contains("frame")) {
       const img = el.querySelector("img");
       if (img) {
+        img.loading = "eager";
         await Promise.race([img.decode?.().catch(() => {}), new Promise(r => setTimeout(r, 800))]);
         if (!img.naturalWidth || img.clientWidth * 1.06 > img.naturalWidth) el.style.setProperty("--settle", 1);
       }
     }
     el.classList.add("in");
   }), { rootMargin: "0px 0px -12% 0px" });
+  // a photo inside a closed curtain can't trigger its own lazy load, so start it a screen early
+  const near = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    near.unobserve(e.target);
+    const img = e.target.querySelector("img");
+    if (img) img.loading = "eager";
+  }), { rootMargin: "100% 0px 100% 0px" });
   const watch = el => io.observe(el);
-  // anything that receives keyboard focus shows at once
+  // anything that receives keyboard focus shows at once, without its entrance delay
   document.addEventListener("focusin", e => {
     const r = e.target.closest?.("[data-reveal]:not(.in)");
-    if (r) { r.classList.add("in"); io.unobserve(r); }
+    if (r) { r.classList.add("now", "in"); io.unobserve(r); }
   });
 
   const mask = el => {
@@ -844,12 +926,12 @@ function reveals(html) {
     return inner;
   };
   const frame = img => {
-    img.loading = "eager"; // a lazy image inside a closed curtain would never start loading
     const f = document.createElement("span");
     f.className = "frame";
     f.dataset.reveal = "curtain";
     img.before(f);
     f.append(img);
+    near.observe(f);
     return f;
   };
 
@@ -858,7 +940,6 @@ function reveals(html) {
   if (head) {
     const ready = [];
     const add = (el, kind, d) => { el.dataset.reveal = kind; el.style.setProperty("--d", d + "ms"); ready.push(el); };
-    head.querySelectorAll(":scope > .eyebrow").forEach(el => add(el, "fade", 0));
     head.querySelectorAll(":scope > h1").forEach(el => { mask(el); add(el, "rise", 0); });
     head.querySelectorAll(":scope > p").forEach(el => add(el, "fade", 150));
     head.querySelectorAll(".team-banner").forEach(img => { const f = frame(img); f.style.setProperty("--d", "250ms"); ready.push(f); });
@@ -867,31 +948,28 @@ function reveals(html) {
     requestAnimationFrame(() => requestAnimationFrame(() => ready.forEach(el => el.classList.add("in"))));
   }
 
-  const SKIP = ".hero, .page-head, .year-tabs, .season-hero, .wt-stage, .crew-filter, .special-quotes, .index-plate, .breadcrumb";
-  const skip = el => !!el.closest(SKIP);
+  // Read every position first, then change the DOM, so the page lays out once
+  const models = [...main.querySelectorAll(".model")];
+  const photos = [...main.querySelectorAll(".hero-photo img, .feature-img, .captain-photo img, .closing-fig img, .chapter-lead img, .event-photo")]
+    .filter(img => !img.closest(".page-head, .season-hero, .wt-stage"));
+  const lists = [...main.querySelectorAll(".stats, .specs, .closing-cols, .event-list, .software-grid, .bars, .captain-record")]
+    .filter(el => !el.closest(".page-head"));
+  const cards = [...main.querySelectorAll(".members-grid > .member, .parts-grid > .part-card")];
+  const fold = innerHeight * 0.92;
+  const below = new Set([...models, ...photos, ...lists, ...cards]
+    .filter(el => !!el.closest("[hidden]") || el.getBoundingClientRect().top > fold));
 
-  // Robot chapters: the robot rises, then its name, then the copy
-  main.querySelectorAll(".model").forEach(m => {
-    if (!below(m)) return;
+  // Robots: the robot rises, then its name, then the copy
+  models.filter(m => below.has(m)).forEach(m => {
     m.dataset.reveal = "model";
     m.querySelectorAll(".model-name").forEach(n => { const inner = mask(n); inner?.style.setProperty("--d", "150ms"); });
     m.querySelectorAll(".model-copy > :not(.model-name)").forEach(el => { el.dataset.reveal = "fade"; el.style.setProperty("--d", "300ms"); watch(el); });
     watch(m);
   });
 
-  // Rise: headings and big figures
-  main.querySelectorAll(".section-title, .feature-copy h2, .closing h2, .cta h2, .captain h2, .stat .big").forEach(el => {
-    if (skip(el) || el.closest(".model") || !below(el)) return;
-    mask(el);
-    if (el.matches(".stat .big")) return; // revealed with its row (rule)
-    el.dataset.reveal = "rise";
-    watch(el);
-  });
-
   // Curtain: at most three main photos per page and per outreach year
   const budget = new Map();
-  main.querySelectorAll(".feature-img, .captain-photo img, .closing-fig img, .chapter-lead img, .event-photo").forEach(img => {
-    if (skip(img) || !below(img)) return;
+  photos.filter(img => below.has(img)).forEach(img => {
     const scope = img.closest(".year-panel") || main;
     const used = budget.get(scope) || 0;
     if (used >= 3) return;
@@ -899,36 +977,22 @@ function reveals(html) {
     watch(frame(img));
   });
 
-  // Rule: lists and rows whose hairlines draw in sequence
-  main.querySelectorAll(".facts, .stats, .specs, .index-list, .closing-cols, .event-list, .software-grid, .bars, .captain-record").forEach(el => {
-    if (skip(el) || el.closest("[data-reveal]") || !below(el)) return;
+  // Rule: data lists whose hairlines draw in sequence (big figures rise with their row)
+  lists.filter(el => below.has(el)).forEach(el => {
     el.dataset.reveal = "rule";
+    el.querySelectorAll(".stat .big").forEach(mask);
     [...el.children].forEach((c, i) => c.style.setProperty("--i", Math.min(i, small ? 2 : 5)));
     watch(el);
   });
 
-  // Fade: the largest remaining blocks; cards in a grid fade one by one
-  const GRIDS = ".members-grid, .grid, .parts-grid";
-  const walk = (el, depth) => {
-    for (const c of el.children) {
-      if (c.matches("script, style, template, dialog") || c.dataset.reveal || skip(c)) continue;
-      if (c.matches(GRIDS) && !c.querySelector("[data-reveal]")) {
-        const perRow = c.matches(".members-grid") ? 4 : 3;
-        [...c.children].forEach((card, i) => {
-          if (!below(card)) return;
-          card.dataset.reveal = "fade";
-          card.style.setProperty("--d", (i % perRow) * 80 + "ms");
-          watch(card);
-        });
-        continue;
-      }
-      if (c.querySelector("[data-reveal], " + SKIP)) { if (depth < 8) walk(c, depth + 1); continue; }
-      if (!below(c)) continue;
-      c.dataset.reveal = "fade";
-      watch(c);
-    }
-  };
-  walk(main, 0);
+  // Cards: members and mechanism cards fade in one by one, row by row
+  cards.filter(c => below.has(c)).forEach(card => {
+    const perRow = card.closest(".members-grid") ? (small ? 1 : 5) : (small ? 1 : 3);
+    const i = [...card.parentElement.children].indexOf(card);
+    card.dataset.reveal = "fade";
+    card.style.setProperty("--d", (i % perRow) * 80 + "ms");
+    watch(card);
+  });
 }
 
 // ---------- Robot morph ----------

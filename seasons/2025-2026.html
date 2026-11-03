@@ -15,24 +15,39 @@
   <meta property="og:image:alt" content="GNCE Mercury logo">
   <meta name="twitter:card" content="summary">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <link rel="stylesheet" href="../css/style.css?v=128">
+  <meta name="theme-color" content="#0f0e0d">
+  <link rel="preload" href="../fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.css?v=129">
   <link rel="icon" href="../images/logo-mark.png">
 </head>
 <body data-page="seasons" data-root="../">
   <main class="container">
 
-    <div class="breadcrumb"><a href="../seasons.html">Seasons</a> / 2025–2026</div>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../seasons.html">Seasons</a></li><li aria-current="page">2025–2026</li></ol></nav>
     <div class="page-head">
-      <span class="eyebrow">2025–2026 Season</span>
-      <h1>DECODE</h1>
+      <h1 translate="no">DECODE</h1>
       <p>Our second season: Sustain Award and a trip to States.</p>
     </div>
     <!-- SEASON HERO: never lazy-load it (the robot from the home page glides into it) -->
-    <figure class="season-hero"><img src="../images/decode-robot-cad.webp" width="1165" height="1066" fetchpriority="high" alt="CAD render of Mercury's DECODE robot with its intake, transfer, and turret shooter" style="view-transition-name: robot-decode"></figure>
+    <div class="robot-explorer" id="robot">
+      <figure class="season-hero"><img src="../images/decode-robot-cad.webp" width="1165" height="1066" fetchpriority="high" alt="CAD render of Mercury’s DECODE robot with its intake, transfer, and turret shooter" style="view-transition-name: robot-decode"></figure>
+      <!-- ROBOT CALLOUTS: one <li> per part, in the order a ball travels through the robot.
+           data-x / data-y place the part's diamond on the render (% from the left / from the top);
+           data-card is the id of that part's card under "Mechanisms & iterations". -->
+      <ol class="callouts" aria-label="Parts of the robot">
+        <li data-x="78" data-y="75" data-card="intake"><b>Intake</b> <span>A compliant bar of gecko wheels that runs the full 14 in width of the chassis. Vectored wheels push the balls to the center.</span></li>
+        <li data-x="57" data-y="63" data-card="transfer"><b>Transfer</b> <span>Custom rails on a constant incline get a ball to the shooter in 0.34 s. Our first transfer took 1.5 s.</span></li>
+        <li data-x="44" data-y="45" data-card="turret"><b>Turret</b> <span>A 1:3 herringbone gear on a lazy susan turns the shooter through a full 360° to track the goal.</span></li>
+        <li data-x="73" data-y="26" data-card="shooter"><b>Shooter</b> <span>Version 4 of our flywheel shooter has stable side plates and the motors in front. Its speed comes from a table of 7 calibrated distances, 3000 to 3975 RPM.</span></li>
+        <li data-x="74" data-y="39" data-card="limelight"><b>Limelight</b> <span>The Limelight camera sits right in front of the shooter. A PD controller uses it to hold the turret within ±1° of the target.</span></li>
+        <li data-x="36" data-y="58" data-card="chassis"><b>Chassis</b> <span>Parallel plates (version 3) that keep parts easy to remove for maintenance and let us play defense.</span></li>
+      </ol>
+    </div>
 
     <!-- ROBOT — content from our 2025-26 engineering portfolio -->
     <section>
-      <h2 class="section-title">The Robot</h2>
+      <h2 class="section-title">The robot</h2>
       <div class="robot">
         <div>
           <h3>Winning alliance, Sustain Award &amp; a trip to States</h3>
@@ -66,20 +81,20 @@
     </section>
 
     <!-- MECHANISMS: data-walkthrough turns these cards into a scroll-through tour on big screens -->
-    <section>
+    <section id="mechanisms">
       <h2 class="section-title">Mechanisms &amp; iterations</h2>
       <div class="parts-grid three" data-walkthrough>
-        <article class="part-card"><img class="render feather" src="../images/decode-chassis-v2-ink2.jpg" width="1400" height="784" alt="CAD render of the V2 parallel-plate chassis" loading="lazy"><div><h3>Chassis</h3><p>V1's parallel plates gave us maneuverability and defense but had no mounting holes, and the U-channels we added made it heavy. V2 added holes and cut weight, but its wood plates could break. V3 keeps components easy to remove for maintenance.</p></div></article>
-        <article class="part-card"><img class="photo" src="../images/decode-intake.jpg" width="1400" height="903" alt="Mercury's V2 intake with a horizontal bar of gecko wheels" loading="lazy"><div><h3>Intake</h3><p>Two gecko wheels on two motors needed too much precision. V2 used one motor and a horizontal bar of gecko wheels. V3 is compliant, runs the full 14 in width of the chassis, and uses vectored wheels to push balls to the center.</p></div></article>
-        <article class="part-card"><img src="../images/decode-transfer.webp" width="1168" height="797" alt="CAD render of the V3 transfer with custom rails" loading="lazy"><div><h3>Transfer</h3><p>V1 took 1.5 s to bring a ball to the shooter. V2 moved several balls at once in 0.9 s. V3 uses custom CADed rails on a constant incline to shrink the footprint and gets a ball to the shooter in 0.34 s.</p>
+        <article class="part-card" id="chassis"><img class="render feather" src="../images/decode-chassis-v2-ink2.jpg" width="1400" height="784" alt="CAD render of the V2 parallel-plate chassis" loading="lazy"><div><h3>Chassis</h3><p>V1’s parallel plates gave us maneuverability and defense but had no mounting holes, and the U-channels we added made it heavy. V2 added holes and cut weight, but its wood plates could break. V3 keeps components easy to remove for maintenance.</p></div></article>
+        <article class="part-card" id="intake"><img class="photo" src="../images/decode-intake.jpg" width="1400" height="903" alt="Mercury’s V2 intake with a horizontal bar of gecko wheels" loading="lazy"><div><h3>Intake</h3><p>Two gecko wheels on two motors needed too much precision. V2 used one motor and a horizontal bar of gecko wheels. V3 is compliant, runs the full 14 in width of the chassis, and uses vectored wheels to push balls to the center.</p></div></article>
+        <article class="part-card" id="transfer"><img src="../images/decode-transfer.webp" width="1168" height="797" alt="CAD render of the V3 transfer with custom rails" loading="lazy"><div><h3>Transfer</h3><p>V1 took 1.5 s to bring a ball to the shooter. V2 moved several balls at once in 0.9 s. V3 uses custom CADed rails on a constant incline to shrink the footprint and gets a ball to the shooter in 0.34 s.</p>
           <ul class="bars" aria-label="Transfer time by version">
             <li style="--v:1.5"><span class="k">V1</span><span class="bar"></span><b>1.5 s</b></li>
             <li style="--v:0.9"><span class="k">V2</span><span class="bar"></span><b>0.9 s</b></li>
             <li style="--v:0.34" class="best"><span class="k">V3</span><span class="bar"></span><b>0.34 s</b></li>
           </ul></div></article>
-        <article class="part-card"><img class="render feather" src="../images/decode-shooter.jpg" width="1280" height="708" alt="CAD render of shooter version 4" loading="lazy"><div><h3>Shooter</h3><p>Four versions: a bulky fixed hood, a sturdier but large build, a smaller modular one that was unstable, and V4 with stable side plates, the motors in front, and a front-mounted Limelight.</p></div></article>
-        <article class="part-card"><img src="../images/decode-turret.webp" width="1153" height="661" alt="CAD of the turret top plate, lazy susan, and herringbone gear" loading="lazy"><div><h3>Turret</h3><p>A pulley drive lost tension and took up space, so we switched to a 1:3 herringbone gear mounted to a lazy susan in the top plate. Spring-loaded key retractors manage the wires through the full 360&deg;.</p></div></article>
-        <article class="part-card"><img class="render" src="../images/decode-limelight.webp" width="754" height="600" alt="CAD render of the Limelight mounted on the front of the shooter" loading="lazy"><div><h3>Limelight</h3><p>After trial and error, we mounted the Limelight directly in front of the shooter. It gives more accurate shots and also helps support the shooter's structure.</p></div></article>
+        <article class="part-card" id="shooter"><img class="render feather" src="../images/decode-shooter.jpg" width="1280" height="708" alt="CAD render of shooter version 4" loading="lazy"><div><h3>Shooter</h3><p>Four versions: a bulky fixed hood, a sturdier but large build, a smaller modular one that was unstable, and V4 with stable side plates, the motors in front, and a front-mounted Limelight.</p></div></article>
+        <article class="part-card" id="turret"><img src="../images/decode-turret.webp" width="1153" height="661" alt="CAD of the turret top plate, lazy susan, and herringbone gear" loading="lazy"><div><h3>Turret</h3><p>A pulley drive lost tension and took up space, so we switched to a 1:3 herringbone gear mounted to a lazy susan in the top plate. Spring-loaded key retractors manage the wires through the full 360&deg;.</p></div></article>
+        <article class="part-card" id="limelight"><img class="render" src="../images/decode-limelight.webp" width="754" height="600" alt="CAD render of the Limelight mounted on the front of the shooter" loading="lazy"><div><h3>Limelight</h3><p>After trial and error, we mounted the Limelight directly in front of the shooter. It gives more accurate shots and also helps support the shooter’s structure.</p></div></article>
       </div>
     </section>
 
@@ -148,6 +163,6 @@
     </nav>
 
   </main>
-  <script src="../js/main.js?v=128"></script>
+  <script src="../js/main.js?v=129"></script>
 </body>
 </html>

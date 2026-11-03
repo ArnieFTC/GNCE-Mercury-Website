@@ -21,4 +21,5 @@ When a task is about improving the website's design, UX, copy, accessibility or 
 3. Check the rendered pages at about 390, 768 and 1440 px wide plus the narrowest width (320),
    with keyboard and reduced motion, before saying something works.
 4. Never invent team facts, results, quotes, sponsors or numbers; list missing ones as blockers.
-5. Do design work on a working branch; merging to `main` (which deploys the site) is a separate step.
+5. Commit and push website work to `main` (Andy's standing instruction), not to a side branch.
+   `main` is the live site, so verify a round before pushing it.

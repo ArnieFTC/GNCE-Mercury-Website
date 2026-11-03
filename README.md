@@ -9,6 +9,8 @@ Plain HTML/CSS/JS site, hosted on GitHub Pages. No build step: edit a file, comm
 | Nav tabs | `js/main.js` → `NAV` list at the top |
 | Colors, fonts, type sizes, motion timings | `css/style.css` → `:root` at the top |
 | Countdown, season timeline, "Next competition" line in the footer | `js/main.js` → `SEASON` at the top (dates are `YYYY-MM-DD`, Eastern time) |
+| Results row at the top of the home page | `index.html` → the `<ul class="credentials">` list |
+| Team photo under the wordmark | `index.html` → `<figure class="hero-photo">` (see the comment there) |
 | "The record so far" numbers | `index.html` → edit the numbers in the `stat` blocks directly |
 | Robots on the home page | `index.html` → one `<article class="model">` per robot |
 | Team members | `team.html` → copy/paste a `card member` block |
@@ -29,9 +31,9 @@ so a pasted block can never break a page.
 | `<figure class="season-hero">` + `<nav class="season-pager">` (season pages) | The big robot at the top and the links to the other seasons |
 | `<div class="spec-sheet">` around `<ul class="specs">` | The spec sheet. Write `TBD` for anything not decided yet |
 | `<article class="chapter">` (outreach) | One event: `chapter-lead` photo, optional `chapter-strip` photos, then the text |
-| `data-preview="images/…"` on the home "Read more" links | The photo that appears beside the list on big screens |
+| `<div class="robot-explorer">` + `<ol class="callouts">` (DECODE season page) | Diamonds on the robot render and a row of part names; choosing a part shows its note and links to its mechanism card. Each `<li>` has `data-x` / `data-y` (the diamond's position in % of the image) and `data-card` (the id of that part's card) |
 | `data-walkthrough` on a `parts-grid` | Turns the mechanism cards into the scroll-through tour on big screens |
-| `data-filter` on the Members grid | Builds the subteam filter from each member's `chip`s |
+| `data-filter` on the Members grid | Builds the subteam filter from each member's `chip`s. Filters can be linked to: `team.html?crew=CAD` |
 | Image classes | `print`: a photo in a thin mat · `on-black`: an image whose own background is black · `render` / `photo`: fill the card's image box · `feather`: soften the edges of a render on black |
 | `style="view-transition-name: robot-…"` | Lets a robot glide from the home page or Seasons into its season page. Each name may appear only once per page, and the season hero must never be `loading="lazy"` |
 
@@ -47,10 +49,14 @@ Until then the plate shows their initials.
 
 ## Motion rules
 
-Things arrive once, slowly, and then stay still. Headings rise as one block, the main photo or two on a
-page wipe open, hairlines draw, everything else fades. Nothing loops, autoplays, follows the cursor or
-is tied to the scrollbar, and there's never more than one big effect on screen at a time. Please keep it
-that way: no new animation libraries.
+The robots carry the motion: they rise in on the home page, glide into their season page, and the DECODE
+callouts answer a tap. Each page title rises once on load, up to three main photos per page wipe open,
+and hairlines in data lists (stats, specs, events) draw in. Plain headings and paragraphs simply appear.
+Nothing loops, autoplays, follows the cursor or is tied to the scrollbar, and there's never more than one
+big effect on screen at a time. Please keep it that way: no new animation libraries.
+
+Type: Newsreader for headings, General Sans for text and labels, and IBM Plex Mono only for data (dates,
+measurements, spec keys, counts). Headings are in sentence case, and there are no small labels above headings.
 
 Before you push a bigger change, check it with reduced motion turned on, with JavaScript off, and on a
 phone. Add `?now=2026-10-25T09:00` to an address to see the countdown and footer as they'll look at that moment.

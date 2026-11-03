@@ -15,28 +15,30 @@
   <meta property="og:image:alt" content="GNCE Mercury logo">
   <meta name="twitter:card" content="summary">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <link rel="stylesheet" href="../css/style.css?v=128">
+  <meta name="theme-color" content="#0f0e0d">
+  <link rel="preload" href="../fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.css?v=129">
   <link rel="icon" href="../images/logo-mark.png">
 </head>
 <body data-page="seasons" data-root="../">
   <main class="container">
 
-    <div class="breadcrumb"><a href="../seasons.html">Seasons</a> / 2026–2027</div>
+    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../seasons.html">Seasons</a></li><li aria-current="page">2026–2027</li></ol></nav>
     <div class="page-head">
-      <span class="eyebrow">2026–2027 Season</span>
-      <h1>BIOBUZZ</h1>
+      <h1 translate="no">BIOBUZZ</h1>
       <p>Our third season. Currently in progress.</p>
     </div>
     <!-- SEASON HERO: never lazy-load it (the robot from the home page glides into it) -->
     <figure class="season-hero pair">
       <span class="print"><img src="../images/mercinator_v1_fullybuilt.webp" width="610" height="608" fetchpriority="high" alt="The Mercinator, our BIOBUZZ robot, fully built (version 1)" style="view-transition-name: robot-mercinator"></span>
       <span class="print"><img src="../images/mercinator_v1.jpg" width="794" height="806" alt="The Mercinator V1 on a workbench while it was being built"></span>
-      <figcaption>The Mercinator · Version 1 · in progress</figcaption>
+      <figcaption><span translate="no">The Mercinator</span>, version 1, still in progress</figcaption>
     </figure>
 
     <!-- ROBOT -->
     <section>
-      <h2 class="section-title">The Robot</h2>
+      <h2 class="section-title">The robot</h2>
       <div class="robot">
         <div>
           <h3>The Mercinator (V1)</h3>
@@ -59,7 +61,7 @@
     <!-- COUNTDOWN — the event list lives in js/main.js (SEASON, at the top) -->
     <section>
       <div class="countdown" id="countdown">
-        <h2 class="eyebrow">Next competition</h2>
+        <h2 class="cd-head">Next competition</h2>
         <div class="event-name"></div>
         <div class="event-date"></div>
         <div class="timer"></div>
@@ -89,6 +91,6 @@
     </nav>
 
   </main>
-  <script src="../js/main.js?v=128"></script>
+  <script src="../js/main.js?v=129"></script>
 </body>
 </html>
