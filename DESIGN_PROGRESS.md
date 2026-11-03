@@ -63,8 +63,8 @@ What it is now (5 bands, 4,284px at 1440):
   package, and the three proof columns.
 - **Become a sponsor** (stage): Margaret, the package's promise to respond promptly, the PDF, and other ways
   to help (in-kind, student visits, demonstrations).
-- **Shares** are now worked out from the amounts: Growth shows **6%** ($2,950 of $52,000 is 5.7%); the PDF
-  prints 5% so its column adds to 100. A note under the table says shares are rounded.
+- **Shares** match the package: Growth shows **5%** (Andy's call; $2,950 of $52,000 is 5.7%, and the package
+  rounds so the column adds to 100%). The note under the table says so. The slices are drawn from the amounts.
 - Colour: the tier metals and a nine-colour budget palette (copper/bronze/gold family plus verdigris and blued
   steel), validated with the dataviz script on Stage Black (all PASS); used only on the partners page.
 
@@ -220,8 +220,9 @@ Reduced motion makes every change instant.
 - ⊘ B10 Better robot images: a clean side-on photo of each robot on a plain background would make the
   line-up sharper (the INTO THE DEEP cut-out comes from an older rough cut-out; the Mercinator one from an
   upscaled mask).
-- ⊘ B12 Sponsorship package fixes for its next export: Growth should read 6% (not 5%); make the email a
-  clickable link; confirm where the QR code points.
+- ◐ B12 Sponsorship package: the email is now a clickable link in `docs/` (added to the PDF directly, pages
+  unchanged; redo it after a new Canva export, or turn the email into a link in Canva). Still to confirm: where
+  the QR code points.
 - ⊘ B13 One line each on what "Growth" (budget) and "Can request media" (Platinum) mean, and WEEFC's full name.
 - ⊘ B14 Matching gifts and gifts under $500: who receives payment and how, so a parent at a company with a
   matching program can act (the page sends those questions to Margaret for now).
@@ -367,7 +368,7 @@ server):
 
 1. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
    joining facts, States results, a sharp wide team photo, coach photos, and the package questions (B12–B14:
-   Growth 6% in the next PDF export, what "Growth" and "Can request media" mean, matching gifts).
+   the QR code's target, what "Growth" and "Can request media" mean, matching gifts).
 2. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
 3. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events.
 4. For every change: check at 320/390/768/1440 with keyboard and reduced motion, run `/vercel` on the changed
