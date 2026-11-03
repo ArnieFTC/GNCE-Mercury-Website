@@ -24,6 +24,7 @@ the system; `DESIGN_PROGRESS.md` holds the history, open questions and next step
 | Outreach events | `outreach.html` → copy/paste an `<article class="program">` into a year's `programs` |
 | Partner page | `partners.html` |
 | Email, Instagram, the contact form | `contact.html` (the address itself is `TEAM_EMAIL` in `js/main.js`) |
+| Sponsorship email (margaret@mercury26413.org) | `SPONSOR_EMAIL` in `js/main.js` (used by the form's Sponsorship topic), plus the "Email us about sponsoring" buttons in `partners.html` and `contact.html` |
 
 `js/main.js` attaches behaviour by class name and quietly skips any block that's missing what it needs,
 so a pasted block can never break a page.

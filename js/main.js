@@ -33,6 +33,9 @@ const NAV = [
 const SPONSORS = [];
 const SUPPORTERS = ["SolidWorks", "Weston Owl", "WEEFC"];
 const TEAM_EMAIL = "gncemercury26413@gmail.com";
+// Sponsorship emails (the "Email us about sponsoring" buttons and the contact form's Sponsorship topic) go here.
+// The buttons on partners.html and contact.html have this address written in them too: change both together.
+const SPONSOR_EMAIL = "margaret@mercury26413.org";
 const INSTAGRAM = "https://www.instagram.com/gnce_mercury/";
 
 // Pages inside /seasons/ set data-root="../" on <body> so links still work.
@@ -574,11 +577,12 @@ part("contact", () => {
     const f = form.elements;
     const subject = `${f.topic.value} from ${f.name.value}`;
     const body = `${f.message.value}\n\n${f.name.value}\n${f.email.value}`;
-    const url = `mailto:${TEAM_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const to = f.topic.value === "Sponsorship" ? SPONSOR_EMAIL : TEAM_EMAIL;
+    const url = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     location.href = url;
     if (status) status.textContent = url.length > 1900
-      ? `Opening your email app… Long messages can get cut short in some email apps, so check the whole message is in the draft. If it isn’t, email us at ${TEAM_EMAIL}.`
-      : `Opening your email app… If nothing opens, email us at ${TEAM_EMAIL}.`;
+      ? `Opening your email app… Long messages can get cut short in some email apps, so check the whole message is in the draft. If it isn’t, email us at ${to}.`
+      : `Opening your email app… If nothing opens, email us at ${to}.`;
   });
 });
 
