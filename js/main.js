@@ -172,7 +172,7 @@ part("footer", () => {
         <div>
           <h2>Reach us</h2>
           <ul>
-            <li><a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL}</a></li>
+            <li><a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL.replace("@", "<wbr>@")}</a></li>
             <li><a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram @gnce_mercury</a></li>
             <li><a href="${root}contact.html?topic=join#contact-form">Join the team</a></li>
           </ul>
@@ -673,6 +673,8 @@ part("budget-chart", () => {
     a0 = a1;
   });
   const [cb, cs] = donut.querySelector(".donut-centre").children;
+  let ptr = "";
+  svg.addEventListener("pointerdown", e => { ptr = e.pointerType; });
   const reset = () => {
     delete fig.dataset.active;
     data.forEach(d => { d.r.classList.remove("is-on"); d.p.classList.remove("is-on"); });
@@ -688,7 +690,13 @@ part("budget-chart", () => {
   };
   data.forEach((d, i) => {
     for (const el of [d.r, d.p]) el.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") on(i); });
-    d.p.addEventListener("click", () => (fig.dataset.active === String(i) ? reset() : on(i))); // a tap on a slice, for touch
+    d.p.addEventListener("click", () => {
+      if (ptr === "mouse") return on(i);
+      fig.dataset.active === String(i) ? reset() : on(i); // a tap toggles a slice, for touch
+    });
+  });
+  document.addEventListener("pointerdown", e => {
+    if (e.pointerType !== "mouse" && fig.dataset.active && !e.target.closest(".donut path")) reset();
   });
   fig.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") reset(); });
   reset();

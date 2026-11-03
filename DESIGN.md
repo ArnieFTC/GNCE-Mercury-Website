@@ -168,7 +168,8 @@ is the accent. There is no brand hue: colour comes only from the robots, the pho
 (kept as-is) and, on the partners page, the sponsorship package's four tier metals and the budget donut's
 validated palette (Andy asked for that page to be colourful, like the package).
 
-Two grounds carry the site. The stage (home launch, every season head, the partners head, and the closing
+Two grounds carry the site. The stage (home launch, every season head, the partners package sheet (head, tier
+chart and budget donut), and the closing
 "join or partner" bands on the home, team and partners pages) and the reading ground (white, with
 aluminium-grey bands and tiles). Sections are separated by a change of ground, never by hairlines.
 Content sits on flat, filled, rounded tiles (10/14/18px), buttons are pills, and nothing casts a shadow
@@ -207,12 +208,12 @@ A cool, logo-tinted grey scale from near-black to white, with four metals for th
 
 ### Tertiary: the tier metals and the budget palette
 - **Bronze** #C27A3A, **Silver** #C3C7CF, **Gold** #D9AC3C, **Platinum** #E6E6E4: the header fills of the tier table in the team's 2026–27 sponsorship package (`docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`, sampled from page 4), used as solid header blocks with ink text (5.3:1 to 14.6:1) and as each tier's tick colour. Each has a dark wash for its column on the stage (`--bronze-wash` #2C1E17, `--silver-wash` #2C2C32, `--gold-wash` #302717, `--platinum-wash` #323235); every tick is 4.7:1 or more on its wash.
-- **Budget palette** (`--budget-travel` … `--budget-first`): #895012, #BC8647, #9E440B, #08A29C, #AE7E02, #97463E, #3F87BD, #806000, #CA7873, one per budget line in ring order. Built with the dataviz method in the package's copper/bronze/gold family, widened by two cool steps (verdigris, blued steel) to pass; validated in dark mode on Stage Black: every slice 3:1 or more, worst adjacent pair ΔE 14.6 colour-blind / 16.9 normal, including the wrap from the last slice to the first. The package's own nine browns fail the validator, so they are not copied.
+- **Budget palette** (`--budget-travel` … `--budget-first`): #895012, #BC8647, #9E440B, #08A29C, #AE7E02, #97463E, #3F87BD, #6B8E23, #CA7873, one per budget line in ring order. Built with the dataviz method in the package's copper/bronze/gold family, widened by two cool steps (verdigris, blued steel) and an olive for Tools to pass; validated in dark mode on Stage Black: every slice 3:1 or more, worst adjacent pair ΔE 8.4 colour-blind (FIRST/Tools) / 16.9 normal, including the wrap from the last slice to the first, and still passing with the 1% FIRST sliver treated as absent (so Tools and Travel count as neighbours). The package's own nine browns fail the validator, so they are not copied.
 
 ### Named Rules
 **The Light Is The Accent Rule.** There is no brand colour. Emphasis on the stage is brightness (a spotlight, full colour against dimmed grey); on light pages it is ink and weight. Don't introduce a hue for links, buttons or highlights.
 
-**The Two Grounds Rule.** The stage is for launching a machine, opening the partners page and the closing call to join or partner. Write-ups, people, records and forms sit on paper or aluminium.
+**The Two Grounds Rule.** The stage is for launching a machine, the partners package sheet (its head, tier chart and budget donut) and the closing call to join or partner. Other write-ups, people, records and forms sit on paper or aluminium.
 
 **The Metals Stay On The Partners Page Rule.** The tier metals and the budget palette colour the tier chart and the budget donut only. Text never wears them, except the tier names and amounts printed in ink on a metal fill; nowhere else on the site gets a brand colour from them.
 
@@ -247,7 +248,7 @@ Archivo is self-hosted as one variable file, `fonts/archivo-latin.woff2` (Google
 - **Home stage (`.launch`):** h1 and team line (from 1200px the head uses the line-up's columns, so the team line starts on the season card's left edge), then the line-up: three bays with the chosen season's card to the right from 1100px; the chosen bay widens (1.7fr desktop, 1.9fr at 720px and under). Below 1100px the card drops under the bays and a short partner credit replaces the partner strip. On short laptops (1100px+ wide, 880px tall or less) the stage tightens, and at 760px tall or less the short plain-text spec list under the results hides, so "Supported by … / Partner with us" stays in the first screen.
 - **Header:** sticky, 56px, stage black; turns translucent (80% opacity) with an 18px blur once the page scrolls (a tint change, not movement; it is the only element that reacts to scrolling). The nav collapses into a Menu button at 1080px and under; the header "Partner with us" pill hides at 560px and under.
 - **Parts explorer (2025–26 page):** choose a part with its button, its marker or the arrow keys; scrolling never changes it and nothing pins.
-- **Breakpoints in use:** 359, 520, 559/560, 700, 720, 760, 800, 860, 900, 960, 1000, 1080 (the menu; 1081 in `js/main.js`), 1099/1100, 1200px; height queries at 760 and 880/881px, plus 700px for the explorer pin (in `js/main.js`); a 460px container query on the contact list. Check 320, 390, 768 and 1440px.
+- **Breakpoints in use:** 359, 520, 559/560, 700, 720, 760, 800, 860, 900, 960, 1000, 1080 (the menu; 1081 in `js/main.js`), 1099/1100, 1200px; height queries at 760 and 880/881px; a 460px container query on the contact list. Check 320, 390, 768 and 1440px.
 - **Photos never larger than their pixels:** wrap a photo in `.photo` with `style="--w: <image width>px"`; entry images use `object-fit: scale-down` in a 16:10 mat unless `.cover`; `.on-black` puts black-background shots on #000.
 
 ## Elevation & Depth
@@ -286,7 +287,7 @@ Quiet ink pills; the stage versions invert.
 
 ### Cards / Containers
 - **Corner Style:** 14px (`--r-md`), 18px for captains and the explorer figure.
-- **Background:** the opposite of the band: aluminium tiles on white bands, white tiles on grey bands, Stage Step tiles on the stage. The CSS swaps this automatically for `.tile`, `.facts`, `.figures`, `.event`, `.calendar li`, `.spec`, `.pull`, `.quote`, `.resource-list li`, `.coaches li`, `.contact-list`, `.table-scroll`.
+- **Background:** the opposite of the band: aluminium tiles on white bands, white tiles on grey bands, Stage Step tiles on the stage. The CSS swaps this automatically for `.tile`, `.facts`, `.figures`, `.event`, `.calendar li`, `.spec`, `.pull`, `.quote`, `.resource-list li`, `.coaches li`, `.contact-list`.
 - **Shadow Strategy:** none (see Elevation & Depth).
 - **Border:** none; 1px Data Line only between rows inside a tile.
 - **Internal Padding:** 18–36px; quotes, the part list and season-fact tiles use 12–18px.
@@ -328,7 +329,7 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 
 ### Do:
 - **Do** change colours, sizes, radii and spacing in `:root` in `css/style.css`, never in a component rule.
-- **Do** use the stage only for a launch (home, season heads), the partners head and the closing call to join or partner; put everything else on paper or aluminium.
+- **Do** use the stage only for a launch (home, season heads), the partners head with its tier and budget sheet, and the closing call to join or partner; put everything else on paper or aluminium.
 - **Do** put content on a filled tile in the opposite ground (aluminium on white, white on grey, Stage Step on the stage) with 14px corners.
 - **Do** make every button, toggle, tag and chip a pill; use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.
 - **Do** set only robot and game names at 125% width and 700; keep everything else at normal width.

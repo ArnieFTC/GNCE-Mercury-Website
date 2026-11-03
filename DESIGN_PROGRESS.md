@@ -3,9 +3,10 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-03. **Round 2 ("Keynote stage")** replaced the violet livery with a new colour world,
-type use, surfaces and motion, and added the 2026–27 sponsorship package; see "Round 2" below. Work is
-committed straight to `main`, Andy's standing instruction; `main` is the live site._
+_Last updated: 2026-11-03. **Round 3** rebuilt the Partners page as the sponsorship package's "sheet" (colour
+tier chart and budget donut), put outreach two programs per row, and removed every scroll-triggered motion;
+see "Round 3" below. **Round 2 ("Keynote stage")** set the colour world, type and surfaces. Work is committed
+straight to `main`, Andy's standing instruction; `main` is the live site._
 
 ## What happened
 
@@ -229,6 +230,24 @@ Reduced motion makes every change instant.
 
 ## Skills and checks actually used
 
+**Round 3:**
+- **Workflows (ultracode):** a design panel (three critics: design director, data editor, sponsor journey; a
+  palette designer; three competing page plans; stopped before its judges once the build had moved past the
+  plans), then a five-lens review (Impeccable finish reviewer, /vercel, content against the PDF, dataviz,
+  regression and motion sweep) with an independent skeptic re-checking every finding: 13 confirmed and fixed,
+  10 rejected or already fixed.
+- **Impeccable 4.8.0:** craft floor read before the edits; the finish reviewer ran in the review (its first pass
+  asked for recaptures because lazy photos were blank in full-page shots; recaptured with every image loaded,
+  then the closing verdict below); rendered detector: 0 findings; the file-only hook's low-contrast and
+  cramped-padding reports on partners.html are false positives (it reads the stage text as black and cannot
+  evaluate `clamp()` padding) and are recorded as file-scoped exceptions in `.impeccable/config.json`.
+- **/vercel:** the live guidelines (fetched, HTTP 200) applied by the review's /vercel lens to every changed file.
+- **dataviz:** palette built and checked with its validator; donut built to its marks and interaction rules
+  (2px gaps, legend in ring order, drawn from the amounts, table fallback); the skill ranks donuts low for 9
+  parts, and Andy asked for one, so it ships with the full legend table.
+- **anthropic-skills:no-slop-writing** rules applied to the new copy (no em dashes in prose, plain verbs).
+- **frontend-design:** not installed; its guidance applied directly (as in rounds 1 and 2).
+
 **Round 2:**
 - **Impeccable 4.8.0**: invoked. `impeccable context`; references read: new-work, colorize, animate, typeset,
   delight, craft floor (before every UI edit). `concept-seed` roll (seed:df12dec937d8ef74), Andy's choice
@@ -266,7 +285,27 @@ Reduced motion makes every change instant.
 
 ## Latest verification
 
-**Round 2, 2026-11-03** (Playwright Chromium, local static server):
+**Round 3, 2026-11-03** (Playwright Chromium, local static server):
+- Interaction tests: **57 of 57 pass**. New ones: the DECODE explorer changes only on click and arrow keys and
+  never on scroll; on 6 pages nothing animates or changes after scrolling down and back up (no reveal classes,
+  no running animations, no changed opacity or transform).
+- Render audit, all 10 pages at 320 / 390 / 768 / 1440: no horizontal overflow, no console or page errors, no
+  failed requests, one `h1` per page, no skipped heading levels. Also no overflow at 396–450px (the footer
+  address now breaks before "@"; it used to force sideways scroll on large phones).
+- Partners: tier chart 888×439px at 1440; all four tiers on screen at 390 and 320 with no sideways scroll; the
+  donut draws 9 slices from the amounts and is not drawn if the lines do not add up; hover and touch tap tested
+  (a mouse click keeps the slice lit; a tap toggles; a tap elsewhere clears); without JavaScript the table stands
+  alone; in forced-colours mode the table takes the full width and ticks follow the theme; print keeps the
+  legend swatches. Ticks 4.7:1 or more on their washes, ink on every metal 5.3:1 or more, every slice 3:1 or
+  more on the stage; palette passes the dataviz validator, also with the 1% slice treated as absent.
+- Content: every tier cell, budget line, amount and share checked against the package; no invented facts
+  (the cumulative-tier sentence and the free-demo item were removed after review).
+- Contrast on the rendered pages (reduced motion): AA on every page. Impeccable rendered detector: 0 findings.
+- Not tested: real iOS/Android devices, screen readers, Safari and Firefox.
+
+**Round 2, 2026-11-03** (superseded where round 3 changed things: the tier table no longer scrolls inside a box,
+the explorer no longer steps on scroll, and there are no one-shot reveals) (Playwright Chromium, local static
+server):
 - Render audit, all 10 pages at 320 / 390 / 768 / 1440: no horizontal overflow, no console or page errors, no
   failed requests, one `h1` per page, no skipped heading levels. The tier table scrolls inside its own box on
   phones (its sticky first column stays put); the hidden "Included / Not included" labels are contained.
@@ -321,11 +360,12 @@ Reduced motion makes every change instant.
 ## Next action
 
 1. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
-   joining facts, States results, a sharp wide team photo, coach photos.
+   joining facts, States results, a sharp wide team photo, coach photos, and the package questions (B12–B14:
+   Growth 6% in the next PDF export, what "Growth" and "Can request media" mean, matching gifts).
 2. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
 3. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events.
 4. For every change: check at 320/390/768/1440 with keyboard and reduced motion, run `/vercel` on the changed
    files, push to `main`.
 
-The scratchpad test scripts (`audit.js`, `itest2.js`, `cscan.js`, `states2.js`, `reveal-check.js`) live outside
+The scratchpad test scripts (`audit.js`, `itest3.js`, `cscan.js`, `states2.js`, `full.js`, `fixcheck.js`) live outside
 the repo and won't survive a new session. Recreate them from the checks listed above if needed.

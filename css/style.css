@@ -44,7 +44,8 @@
   --platinum-wash: #323235;
 
   /* the budget donut on the stage: one colour per budget line, never by rank (dataviz validator, dark mode on
-     #0B0A0F: all slices 3:1 or more, worst adjacent pair 14.6 dE colour-blind / 16.9 normal) */
+     #0B0A0F: all slices 3:1 or more, worst adjacent pair 8.4 dE colour-blind (FIRST/Tools) / 16.9 normal; it also
+     passes with the 1% FIRST sliver treated as absent, so Tools and Travel count as neighbours) */
   --budget-travel: #895012;
   --budget-robot: #BC8647;
   --budget-comp: #9E440B;
@@ -52,7 +53,7 @@
   --budget-growth: #AE7E02;
   --budget-outreach: #97463E;
   --budget-marketing: #3F87BD;
-  --budget-tools: #806000;
+  --budget-tools: #6B8E23;
   --budget-first: #CA7873;
 
   --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
@@ -699,8 +700,8 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .program-media > .photo:first-child img { aspect-ratio: 4 / 3; object-fit: contain; background: var(--alu); }
 .program-media.photo > img:first-child { aspect-ratio: 4 / 3; object-fit: cover; }
 .program-media .strip { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 10px; }
-.program-media .strip img { aspect-ratio: 1; object-fit: cover; border-radius: var(--r-sm); }
-.program-media .strip.fit img { aspect-ratio: auto; object-fit: contain; background: var(--alu); }
+.program-media .strip:not(.fit) img { aspect-ratio: 1; object-fit: cover; border-radius: var(--r-sm); }
+.program-media .strip.fit img { object-fit: contain; background: var(--alu); border-radius: var(--r-sm); } /* no aspect-ratio: the width/height attributes hold the space while it loads */
 .program-media .strip.wide img { aspect-ratio: 16 / 9; }
 .program-media video { width: 100%; background: var(--ink); border-radius: var(--r-md); }
 .program-text { max-width: 62ch; }
@@ -859,7 +860,13 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .budget-figure[data-active] tbody tr:not(.is-on) .key { opacity: 0.3; }
 @media (hover: hover) { .budget-figure.has-chart tbody tr { cursor: default; } }
 .budget-note { font-size: 0.875rem; color: var(--on-stage-2); margin: 12px 0 0; }
-@media (forced-colors: active) { .donut { display: none !important; } .budget .key { display: none !important; } }
+@media (forced-colors: active) {
+  .donut { display: none !important; }
+  .budget .key { display: none !important; }
+  .budget-figure.has-chart { grid-template-columns: minmax(0, 1fr); }
+  .budget-figure.has-chart tbody th { padding-left: 0; text-indent: 0; }
+  .tiers .tick { color: CanvasText; }
+}
 
 /* proof: photo beside the FTC explainer and a coach's words, then three ruled columns */
 .proof-lead { margin-bottom: clamp(40px, 5vw, 64px); }
@@ -952,4 +959,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
   .callouts[hidden] { display: grid !important; }
   .callout-note { display: none !important; }
   .launch *, .season-head *, .band--stage * { color: #000 !important; }
+  .tiers td { background: none !important; }
+  .budget .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .budget tfoot tr > * { border-top-color: #000; }
 }

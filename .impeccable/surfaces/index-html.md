@@ -32,8 +32,10 @@ black stage, lit, then calm light pages that explain it and the people and partn
 the purple "AI" palette, the dark startup hero with neon accents, and the broadsheet of hairlines.
 
 OWN-WORLD: Two grounds and no brand hue: an almost-black stage tinted from the logo's outline (#0B0A0F)
-for launches, season heads, the partner head and the closing call, and white with a cool grey (#F1F1F4)
-for reading. Colour comes only from the robots, photos, the logo and the four tier metals. Archivo at
+for launches, season heads, the partners package sheet (head, tier chart, budget donut) and the closing call,
+and white with a cool grey (#F1F1F4) for reading. Colour comes only from the robots, photos, the logo and,
+on the partners page only, the package's tier metals and a validated budget palette (Andy, round 3: "not
+colorful, I want an actual chart kinda like in the PDF"). Nothing moves on scroll (Andy, round 3). Archivo at
 normal width in two weights for text and headings; robot names set extra wide (125%) as the team's voice.
 Flat filled tiles (14–18px corners, no shadows), pill buttons, no section hairlines; light is the accent.
 

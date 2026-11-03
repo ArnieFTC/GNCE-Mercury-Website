@@ -419,10 +419,6 @@
         "value": "min-height 881px"
       },
       {
-        "name": "explorer-pin",
-        "value": "min-height 700px (js/main.js)"
-      },
-      {
         "name": "contact-list",
         "value": "container 460px"
       }
@@ -504,7 +500,7 @@
   ],
   "narrative": {
     "northStar": "The Keynote Stage",
-    "overview": "Each season's robot is launched the way a hardware company launches a product: the machine alone on an almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners. Light is the accent. There is no brand hue: colour comes only from the robots, the photos, the Mercury logo (kept as-is) and, on the partners page, the sponsorship package's four tier metals and the budget donut's validated palette (Andy asked for that page to be colourful, like the package).\n\nTwo grounds carry the site. The stage (home launch, every season head, the partners head, and the closing \"join or partner\" bands on the home, team and partners pages) and the reading ground (white, with aluminium-grey bands and tiles). Sections are separated by a change of ground, never by hairlines. Content sits on flat, filled, rounded tiles (10/14/18px), buttons are pills, and nothing casts a shadow except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).\n\nThe neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple, TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.",
+    "overview": "Each season's robot is launched the way a hardware company launches a product: the machine alone on an almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners. Light is the accent. There is no brand hue: colour comes only from the robots, the photos, the Mercury logo (kept as-is) and, on the partners page, the sponsorship package's four tier metals and the budget donut's validated palette (Andy asked for that page to be colourful, like the package).\n\nTwo grounds carry the site. The stage (home launch, every season head, the partners package sheet (head, tier chart and budget donut), and the closing \"join or partner\" bands on the home, team and partners pages) and the reading ground (white, with aluminium-grey bands and tiles). Sections are separated by a change of ground, never by hairlines. Content sits on flat, filled, rounded tiles (10/14/18px), buttons are pills, and nothing casts a shadow except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).\n\nThe neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple, TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.",
     "keyCharacteristics": [
       "Two grounds: the near-black stage for launches and closing calls, white and aluminium grey for reading.",
       "No brand hue; light, robots, photos, the logo carry the colour, plus the tier metals and the budget palette on the partners page.",
@@ -521,7 +517,7 @@
       },
       {
         "name": "The Two Grounds Rule",
-        "body": "The stage is for launching a machine, opening the partners page and the closing call to join or partner. Write-ups, people, records and forms sit on paper or aluminium.",
+        "body": "The stage is for launching a machine, the partners package sheet (its head, tier chart and budget donut) and the closing call to join or partner. Other write-ups, people, records and forms sit on paper or aluminium.",
         "section": "colors"
       },
       {
@@ -547,7 +543,7 @@
     ],
     "dos": [
       "Do change colours, sizes, radii and spacing in `:root` in `css/style.css`, never in a component rule.",
-      "Do use the stage only for a launch (home, season heads), the partners head and the closing call to join or partner; put everything else on paper or aluminium.",
+      "Do use the stage only for a launch (home, season heads), the partners head with its tier and budget sheet, and the closing call to join or partner; put everything else on paper or aluminium.",
       "Do put content on a filled tile in the opposite ground (aluminium on white, white on grey, Stage Step on the stage) with 14px corners.",
       "Do make every button, toggle, tag and chip a pill; use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.",
       "Do set only robot and game names at 125% width and 700; keep everything else at normal width.",
