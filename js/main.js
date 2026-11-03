@@ -642,6 +642,60 @@ part("specs", () => {
   document.querySelectorAll(".spec dd").forEach(d => { if (d.textContent.trim() === "TBD") d.classList.add("tbd"); });
 });
 
+// ---------- Budget donut (partners) ----------
+// Draws the season budget as a donut from the "Up to" amounts in <table class="budget">, which stays the
+// source and the legend. Slices run clockwise from 12 o'clock in the table's order (largest first), each in
+// its row's --c colour. If the lines do not add up to the total row, nothing is drawn (the table still reads).
+// Pointing at a slice or a row lights both and shows that line in the centre; nothing moves on scroll.
+part("budget-chart", () => {
+  const fig = document.querySelector(".budget-figure");
+  if (!fig) return;
+  const table = fig.querySelector("table.budget"), donut = fig.querySelector(".donut"), svg = donut?.querySelector("svg");
+  if (!table || !svg || !table.tFoot) return;
+  const money = el => Number((el?.textContent || "").replace(/[^0-9.]/g, ""));
+  const data = [...table.tBodies[0].rows].map(r => ({ r, v: money(r.querySelector(".amt")) }));
+  const totalCell = table.tFoot.querySelector(".amt");
+  const total = money(totalCell), sum = data.reduce((s, d) => s + d.v, 0);
+  if (!sum || sum !== total || data.some(d => !(d.v > 0))) {
+    console.warn(`[mercury] budget lines add up to ${sum}, not ${total}: the chart is not drawn`);
+    return;
+  }
+  const C = 120, R = 118, r = 73, NS = "http://www.w3.org/2000/svg";
+  const pt = (rad, a) => [C + rad * Math.sin(a), C - rad * Math.cos(a)].map(n => n.toFixed(2)).join(" ");
+  let a0 = 0;
+  data.forEach((d, i) => {
+    const a1 = a0 + (d.v / sum) * 2 * Math.PI, big = a1 - a0 > Math.PI ? 1 : 0;
+    const p = document.createElementNS(NS, "path");
+    p.setAttribute("d", `M${pt(R, a0)}A${R} ${R} 0 ${big} 1 ${pt(R, a1)}L${pt(r, a1)}A${r} ${r} 0 ${big} 0 ${pt(r, a0)}Z`);
+    p.style.fill = getComputedStyle(d.r).getPropertyValue("--c").trim();
+    svg.append(p);
+    d.p = p;
+    a0 = a1;
+  });
+  const [cb, cs] = donut.querySelector(".donut-centre").children;
+  const reset = () => {
+    delete fig.dataset.active;
+    data.forEach(d => { d.r.classList.remove("is-on"); d.p.classList.remove("is-on"); });
+    cb.textContent = totalCell.textContent.trim();
+    cs.textContent = "maximum, all lines";
+  };
+  const on = i => {
+    fig.dataset.active = i;
+    data.forEach((d, j) => { d.r.classList.toggle("is-on", i === j); d.p.classList.toggle("is-on", i === j); });
+    const d = data[i];
+    cb.textContent = d.r.querySelector(".amt").textContent.trim();
+    cs.textContent = `${d.r.querySelector("th").textContent.trim()}, ${d.r.querySelector(".pct").textContent.trim()}`;
+  };
+  data.forEach((d, i) => {
+    for (const el of [d.r, d.p]) el.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") on(i); });
+    d.p.addEventListener("click", () => (fig.dataset.active === String(i) ? reset() : on(i))); // a tap on a slice, for touch
+  });
+  fig.addEventListener("pointerleave", e => { if (e.pointerType === "mouse") reset(); });
+  reset();
+  fig.classList.add("has-chart");
+  donut.hidden = false;
+});
+
 // ---------- Robot morph ----------
 // Robots carry style="view-transition-name: …". Only the robot you are heading to (or coming back
 // from) keeps its name, so it is the one that glides between pages in browsers that support it.

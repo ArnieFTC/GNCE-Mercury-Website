@@ -23,7 +23,7 @@ holds the history, open questions and next steps.
 | Season list | `seasons.html` → one `<li class="season-row">` per season |
 | Team members | `team.html` → copy/paste an `<article class="member">` |
 | Outreach events | `outreach.html` → copy/paste an `<article class="program">` into a year's `programs` |
-| Partner page | `partners.html` (tiers table, budget table, visits and demos) |
+| Partner page | `partners.html` (tiers table, budget table and donut, other ways to help) |
 | Sponsorship package PDF | `docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf` (replace the file to update every download link) |
 | Email, Instagram, the contact form | `contact.html` (the address itself is `TEAM_EMAIL` in `js/main.js`) |
 | Sponsorship email (margaret@mercury26413.org) | `SPONSOR_EMAIL` in `js/main.js` (used by the form's Sponsorship topic), plus the "Email us about sponsoring" buttons in `partners.html` and `contact.html` |
@@ -43,7 +43,7 @@ so a pasted block can never break a page.
 | `<dl class="spec">` | A spec sheet. Write `TBD` for anything not decided yet; it shows in grey |
 | `<div data-explorer>` + `<ol class="callouts">` (DECODE page) | Markers on the robot render and a button per part. Each `<li>` has `data-x` / `data-y` (the marker's position in % of the image) and `data-card` (the id of that part's mechanism); optional `data-label="below"` puts the name under the marker, and `data-link` sets how the part is named in "More on the …". Choose a part with its button, its marker or the arrow keys; scrolling never changes it |
 | `<ol class="events">` | One `<li class="event">` per event: date, name and notes, then Alliance / Awards |
-| `<table class="tiers">` / `<table class="budget">` (partners) | The sponsorship tiers and the season budget, typed from the package. In the budget each row's `--share` draws its bar; keep rows largest first |
+| `<table class="tiers">` / `<table class="budget">` (partners) | The sponsorship tiers and the season budget, typed from the package. The donut is drawn from the budget table's "Up to" amounts: keep rows largest first, keep the total row equal to their sum (otherwise no chart is drawn), give each row a `--budget-…` colour, and work out each share as amount ÷ total, rounded |
 | `<ol class="calendar" data-calendar>` / `<span data-next-event>` | Filled from `SEASON`: past events turn grey, the next one is marked with how many days are left |
 | `<div class="members" data-filter>` (team) | Builds the subteam filter from each member's `chip`s and lead roles ("Software Lead" counts as Software). Filters can be linked to: `team.html?crew=CAD` |
 | `<div class="year-tabs">` + `<section class="year-panel" data-tab="Third year · 2026–27">` (outreach) | One tab per year, built from `data-tab` (name, then year). Without JavaScript the years simply follow each other |

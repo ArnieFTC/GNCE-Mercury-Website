@@ -24,7 +24,7 @@ committed straight to `main`, Andy's standing instruction; `main` is the live si
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
 
-## Round 3: no scroll motion, two-column outreach, Partners rework (in progress)
+## Round 3: no scroll motion, two-column outreach, Partners rework
 
 Andy (2026-11-03): the tier table is "so large" and "not colorful"; he wants "an actual chart kinda like in the
 pdf", a pie chart, a better-formatted table, the "price distribution" fixed, the whole sponsorship page
@@ -38,8 +38,34 @@ Done and pushed first (verified on its own):
 - **Outreach two per row** from 860px (photo on top, story below; lead photos in a shared 4:3 frame, the
   portrait video-call grid letterboxed, not cropped); one per row on phones.
 
-Next: the Partners page rework from a design-panel spec (3 critics, a validated chart palette, 3 competing
-plans, 2 judges, one synthesis), then /vercel, Impeccable review and the documenter.
+**Partners page rebuilt** ("the package sheet"). A design panel ran first: three critics (design director,
+data editor, sponsor journey), a palette designer using the dataviz validator, and three competing page plans.
+I built from the package-faithful plan (it had a working prototype) with the sponsor-first plan's best ideas,
+and stopped the panel before its judges, since the page had moved past the plans. The critics found:
+- the old tier table hid Gold and Platinum behind a sideways scroll on phones and ran about 790px tall there;
+- the "price distribution" was drawn wrong: bars came from the rounded percentages against a hard-coded 38,
+  so Travel read as 100% and Growth ($2,950) drew the same as the $2,500 lines;
+- a head tile, "2026 / MA State Championship", read as a States win;
+- the money story was told four times in seven bands (5,458px tall at 1440).
+
+What it is now (5 bands, 4,284px at 1440):
+- **Head on the stage:** "Sponsor GNCE Mercury", who the team is (package page 2), the tier range, Margaret's
+  name, portrait and address in plain view, the PDF. The fact tiles are gone.
+- **Sponsorship tiers on the same dark sheet:** the package's page 4 as a chart: solid metal header blocks
+  (the PDF's own fills, ink text), each column washed in its metal, metal ticks, compact 40px rows, 880px wide,
+  439px tall. At 640px and under it becomes a grid with each benefit on its own line, so all four tiers show
+  at 320px with no sideways scroll.
+- **Season budget:** a donut (Andy's pie chart) drawn from the dollar amounts by `js/main.js`, largest first
+  from 12 o'clock, with the package's sentence about what sponsorship covers and the real table as its legend.
+  Pointing at a slice or row lights both and shows that line in the centre; tap a slice on phones.
+- **What you would be supporting** (white): team photo, the FTC explainer, Jessie Chan's quote from the
+  package, and the three proof columns.
+- **Become a sponsor** (stage): Margaret, the package's promise to respond promptly, the PDF, and other ways
+  to help (in-kind, student visits, demonstrations).
+- **Shares** are now worked out from the amounts: Growth shows **6%** ($2,950 of $52,000 is 5.7%); the PDF
+  prints 5% so its column adds to 100. A note under the table says shares are rounded.
+- Colour: the tier metals and a nine-colour budget palette (copper/bronze/gold family plus verdigris and blued
+  steel), validated with the dataviz script on Stage Black (all PASS); used only on the partners page.
 
 ## Round 2: Keynote stage
 
@@ -193,6 +219,11 @@ Reduced motion makes every change instant.
 - ⊘ B10 Better robot images: a clean side-on photo of each robot on a plain background would make the
   line-up sharper (the INTO THE DEEP cut-out comes from an older rough cut-out; the Mercinator one from an
   upscaled mask).
+- ⊘ B12 Sponsorship package fixes for its next export: Growth should read 6% (not 5%); make the email a
+  clickable link; confirm where the QR code points.
+- ⊘ B13 One line each on what "Growth" (budget) and "Can request media" (Platinum) mean, and WEEFC's full name.
+- ⊘ B14 Matching gifts and gifts under $500: who receives payment and how, so a parent at a company with a
+  matching program can act (the page sends those questions to Margaret for now).
 - ⊘ B11 Which other members code: the Software filter shows only Arnie (Software Lead) until members get a
   Software chip.
 

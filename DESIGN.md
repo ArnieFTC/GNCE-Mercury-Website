@@ -13,10 +13,10 @@ colors:
   ink: "#16141C"
   steel: "#5C5967"
   quiet: "#8B8896"
-  bronze: "#A8692F"
-  silver: "#9AA0A8"
-  gold: "#C29A2A"
-  platinum: "#D6D9DE"
+  bronze: "#C27A3A"
+  silver: "#C3C7CF"
+  gold: "#D9AC3C"
+  platinum: "#E6E6E4"
 typography:
   display:
     fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
@@ -151,11 +151,11 @@ properties in `:root` at the top of `css/style.css` (`--stage`, `--alu`, `--fs-l
 `--ease` and so on). Change them there, never inside a component rule. (A few one-off values are still typed
 straight into rules: the greys #CFCDD8, #BAB8C4, #CBC9D3, #D6D4DE, #B8B6C2 and #A9ADB5, the error red
 #B3261E, #8B8896 for the inactive part markers, which repeats `--quiet`, and the smaller 0.875 / 0.8125rem
-label sizes.) Interactions and the scroll reveal live in `js/main.js`, each in its own `part("…")` block; the
-load animation, the scroll-linked stage dim and every keyframe are in the Motion section at the end of
-`css/style.css`. The sponsor strip is built in `js/main.js` from `SPONSORS` / `SUPPORTERS`, the season
+label sizes.) Interactions (and the budget donut) live in `js/main.js`, each in its own `part("…")` block; the
+load animation and every keyframe are in the Motion section at the end of `css/style.css`. The sponsor strip is built in `js/main.js` from `SPONSORS` / `SUPPORTERS`, the season
 calendar from `SEASON`. Everything below describes the files as they ship
-(round 2, "Keynote stage"); it replaces the earlier violet "Season Program" record entirely.
+(round 2, "Keynote stage", with round 3's changes: no scroll motion, a coloured tier chart and budget donut on
+the partners page, two-column outreach); it replaces the earlier violet "Season Program" record entirely.
 
 ## Overview
 
@@ -165,7 +165,8 @@ Each season's robot is launched the way a hardware company launches a product: t
 almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white
 and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners. Light
 is the accent. There is no brand hue: colour comes only from the robots, the photos, the Mercury logo
-(kept as-is) and the four tier metals from the 2026–27 sponsorship package.
+(kept as-is) and, on the partners page, the sponsorship package's four tier metals and the budget donut's
+validated palette (Andy asked for that page to be colourful, like the package).
 
 Two grounds carry the site. The stage (home launch, every season head, the partners head, and the closing
 "join or partner" bands on the home, team and partners pages) and the reading ground (white, with
@@ -180,18 +181,18 @@ greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii h
 
 **Key Characteristics:**
 - Two grounds: the near-black stage for launches and closing calls, white and aluminium grey for reading.
-- No brand hue; light, robots, photos, the logo and the tier metals carry all colour.
+- No brand hue; light, robots, photos, the logo carry the colour, plus the tier metals and the budget palette on the partners page.
 - Archivo only: normal width at 600 for headings, 125% width at 700 for robot names, tabular figures for every number.
 - Flat filled tiles with 10/14/18px corners, pill buttons, no section hairlines, no card shadows.
 - Selection shown as light brightening (the chosen robot steps into a spotlight), never as a sliding bar.
-- One authored load moment on the stage, one scroll reveal for content, everything else answers the visitor.
+- One authored load moment on the stage; everything else answers a click, tap or key. Nothing moves, fades, pins or changes while scrolling.
 
 ## Colors
 
-A cool, logo-tinted grey scale from near-black to white, with four metals reserved for sponsorship tiers.
+A cool, logo-tinted grey scale from near-black to white, with four metals for the sponsorship tiers and a nine-colour budget palette, both used only on the partners page.
 
 ### Primary
-- **Logo Outline Ink** (ink): primary text on light grounds, primary buttons, pressed toggles, lead tags, the chosen calendar tile, the best bar in a chart and every budget bar, focus rings on light. It is tinted from the logo's near-black outline, so the "accent" on light pages is simply ink.
+- **Logo Outline Ink** (ink): primary text on light grounds, primary buttons, pressed toggles, lead tags, the chosen calendar tile, the best bar in a chart, focus rings on light. It is tinted from the logo's near-black outline, so the "accent" on light pages is simply ink.
 
 ### Neutral
 - **Stage Black** (stage): the stage ground (`.launch`, `.season-head`, `.band--stage`), the header, the robot mats in the Seasons index and pager, and the hover fill of the primary button.
@@ -204,15 +205,16 @@ A cool, logo-tinted grey scale from near-black to white, with four metals reserv
 - **Steel** (steel): secondary text on light (dates, captions, labels, hints); 6:1 on aluminium.
 - **Quiet** (quiet): non-text marks only (inactive explorer markers). Never text.
 
-### Tertiary: the tier metals
-- **Bronze**, **Silver**, **Gold**, **Platinum** (bronze, silver, gold, platinum): the four tiers of the team's 2026–27 sponsorship package (`docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`); the hex values are the site's own (see Assets and Provenance). Used only as the small round swatch beside each tier name in the partners table (`.tier--bronze` etc. set `--metal`).
+### Tertiary: the tier metals and the budget palette
+- **Bronze** #C27A3A, **Silver** #C3C7CF, **Gold** #D9AC3C, **Platinum** #E6E6E4: the header fills of the tier table in the team's 2026–27 sponsorship package (`docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`, sampled from page 4), used as solid header blocks with ink text (5.3:1 to 14.6:1) and as each tier's tick colour. Each has a dark wash for its column on the stage (`--bronze-wash` #2C1E17, `--silver-wash` #2C2C32, `--gold-wash` #302717, `--platinum-wash` #323235); every tick is 4.7:1 or more on its wash.
+- **Budget palette** (`--budget-travel` … `--budget-first`): #895012, #BC8647, #9E440B, #08A29C, #AE7E02, #97463E, #3F87BD, #806000, #CA7873, one per budget line in ring order. Built with the dataviz method in the package's copper/bronze/gold family, widened by two cool steps (verdigris, blued steel) to pass; validated in dark mode on Stage Black: every slice 3:1 or more, worst adjacent pair ΔE 14.6 colour-blind / 16.9 normal, including the wrap from the last slice to the first. The package's own nine browns fail the validator, so they are not copied.
 
 ### Named Rules
 **The Light Is The Accent Rule.** There is no brand colour. Emphasis on the stage is brightness (a spotlight, full colour against dimmed grey); on light pages it is ink and weight. Don't introduce a hue for links, buttons or highlights.
 
 **The Two Grounds Rule.** The stage is for launching a machine, opening the partners page and the closing call to join or partner. Write-ups, people, records and forms sit on paper or aluminium.
 
-**The Metals Are Swatches Rule.** The four metals appear only as tier swatches, never as text, fills or borders.
+**The Metals Stay On The Partners Page Rule.** The tier metals and the budget palette colour the tier chart and the budget donut only. Text never wears them, except the tier names and amounts printed in ink on a metal fill; nowhere else on the site gets a brand colour from them.
 
 ## Typography
 
@@ -243,8 +245,8 @@ Archivo is self-hosted as one variable file, `fonts/archivo-latin.woff2` (Google
 - **Vertical rhythm:** `.band` is padded by `--section` (64–128px); `.band--tight` by 44–76px. `.section-head` (heading left, short note right) sits 32–56px above its content.
 - **Grids:** `.split` runs 7:5 from 900px (`--flip` 5:7, `--even`, `--center`). `.entries--2/--3` go 1 → 2 columns at 760px → 3 at 1100px. Facts, figures and the calendar use `auto-fit` grids of tiles with a 12px gap; coaches use `auto-fill` (12px gap) and the season facts `auto-fit` with a 10px gap.
 - **Home stage (`.launch`):** h1 and team line (from 1200px the head uses the line-up's columns, so the team line starts on the season card's left edge), then the line-up: three bays with the chosen season's card to the right from 1100px; the chosen bay widens (1.7fr desktop, 1.9fr at 720px and under). Below 1100px the card drops under the bays and a short partner credit replaces the partner strip. On short laptops (1100px+ wide, 880px tall or less) the stage tightens, and at 760px tall or less the short plain-text spec list under the results hides, so "Supported by … / Partner with us" stays in the first screen.
-- **Header:** sticky, 56px, stage black; turns translucent (80% opacity) with an 18px blur once the page scrolls. The nav collapses into a Menu button at 1080px and under; the header "Partner with us" pill hides at 560px and under (it is the last item of the open menu).
-- **Parts explorer (2025–26 page):** at 960px+ wide and 700px+ tall the explorer pins while the page scrolls one step per part (60svh each); smaller screens keep the part buttons.
+- **Header:** sticky, 56px, stage black; turns translucent (80% opacity) with an 18px blur once the page scrolls (a tint change, not movement; it is the only element that reacts to scrolling). The nav collapses into a Menu button at 1080px and under; the header "Partner with us" pill hides at 560px and under.
+- **Parts explorer (2025–26 page):** choose a part with its button, its marker or the arrow keys; scrolling never changes it and nothing pins.
 - **Breakpoints in use:** 359, 520, 559/560, 700, 720, 760, 800, 860, 900, 960, 1000, 1080 (the menu; 1081 in `js/main.js`), 1099/1100, 1200px; height queries at 760 and 880/881px, plus 700px for the explorer pin (in `js/main.js`); a 460px container query on the contact list. Check 320, 390, 768 and 1440px.
 - **Photos never larger than their pixels:** wrap a photo in `.photo` with `style="--w: <image width>px"`; entry images use `object-fit: scale-down` in a 16:10 mat unless `.cover`; `.on-black` puts black-background shots on #000.
 
@@ -308,19 +310,19 @@ Stage ground, breadcrumb, machine name, lead, the robot cut-out in its fixed spo
 
 ### Data: results, specs, tiers, budget
 - **Specs and results:** spec sheets are two-column rows (steel term, 600 tabular value) inside a tile, 1px Data Line between rows. The home results table (date, event, result, robot) sits straight on the band with the same lines; event tiles on season pages give results as term/value pairs (600 values) without lines. Missing values read "TBD" in steel (`.tbd`); missing results show an em dash announced as "Not recorded". The results table stacks at 720px.
-- **Tiers (`.tiers`):** a real table in a scrolling 14px tile; metal swatch beside each tier name, inline SVG ticks, an em dash for "not included"; the benefit column stays sticky on phones.
-- **Budget (`.budget`):** a real table ranked largest first; one ink bar per line drawn to scale against the largest share (38%), with amount and percentage in tabular figures and a 2px ink total rule. It follows dataviz guidance (ranked bars, one ink, inside a table) rather than the package's donut.
+- **Tiers (`.tiers`, partners):** a real table on the stage, at most 880px wide, like package page 4: four solid metal header blocks (name 15px/600 and amount 22px/600 in ink, 10px top corners), each column washed in its metal, ticks in the metal, an en dash for "not included" with hidden "Not included" text, 1px stage rules between rows, `table-layout: fixed` with a 36% benefit column. At 640px and under the same table is laid out as a grid: four header blocks, then each benefit on its own line with four cells under it, so all four tiers show down to 320px with no sideways scroll (`role` attributes keep it a table for screen readers).
+- **Budget (`.budget` + `.donut`, partners):** a real table, largest line first, is the source and the legend (a 12px swatch per row once the chart is drawn). The `budget-chart` part in `js/main.js` draws a donut from the "Up to" amounts (never from the rounded shares), clockwise from 12 o'clock in table order, inner radius 0.62, 2px Stage Black gaps, "$52,000 / maximum, all lines" in the centre; it is not drawn if the lines do not add up to the total row. Pointing at a slice or a row (or tapping a slice) lights both, dims the rest to 30% and shows that line in the centre. Shares are each line's amount out of the total, rounded. Without JavaScript, or in forced-colours mode, the table stands alone.
 - **Transfer bars (`.bars`):** grey bars on an aluminium track, the best value in ink.
 
 ### Partner Strip and Sponsor Row
 The home stage ends in a partner strip ("Supported by …", a Stage Light "Partner with us" pill, "Join as a student"). Every page's footer, on aluminium, carries Our Sponsors & Supporters, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names in white tiles, 600), plus an outlined "Become a sponsor" tile. Never remove or move it.
 
 ### Motion
-One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)`; only the scroll-linked stage dim and the parts progress line run linear (`--ease-in-out` is defined in `:root` but unused).
+One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined in `:root` but unused).
 - **Load (stage only, once):** the h1 and line rise 26px (900ms, second line +120ms); the robots step in from 40px and 94% scale one after another (1100ms at 220/340/460ms); the floor line draws from the centre (1200ms); labels, card and partner strip fade in at 640ms. Season and page heads use the same rise; the season-head robot steps in.
-- **Scroll:** the stage dims to 35% and scales to 0.96 as it leaves the screen (scroll-linked, `animation-timeline: view()`, supporting browsers only). Below-the-fold photos, tiles and data blocks rise 24px and fade in once (800ms, siblings 80ms apart, capped at 5); chart bars grow from the left 200ms later. The `reveal` part in `js/main.js` lists which selectors take part; anything already on screen, any page without JavaScript, and keyboard focus show at once. The pinned parts explorer advances one part per scroll step with a progress line.
+- **Scroll:** nothing. No scroll reveals, no scroll-linked effects, no pinned sections, no sticky columns (Andy, round 3). Content is simply there. The only thing that reacts to scrolling is the header tint.
 - **Answers to the visitor:** colour changes 160–200ms; segmented tabs 260ms; header tint and menu open 320ms; panels and part notes fade up 8px (420–480ms); filtered crew members fade up 8px (320ms); bay light and robot dim 600–700ms; hovered photos zoom to 1.03 (700ms); a locked quote shakes 600ms. The next calendar event's dot pulses twice.
-- **Reduced motion:** every animation and transition is cut to 0.01ms, the reveal never hides anything, smooth scrolling and view transitions are off.
+- **Reduced motion:** every animation and transition is cut to 0.01ms; smooth scrolling and view transitions are off.
 
 ## Do's and Don'ts
 
@@ -332,7 +334,7 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)`; only the scroll-linked sta
 - **Do** set only robot and game names at 125% width and 700; keep everything else at normal width.
 - **Do** give every date, amount, spec and result tabular figures.
 - **Do** show a chosen state as light (brighter, full colour, filled dot) and write it to the URL when it is a view someone might share.
-- **Do** add a new below-the-fold block to the `reveal` selector list rather than writing a new entrance animation.
+- **Do** let new content simply be there: no entrance animation for anything below the first screen.
 - **Do** set `--w` to the image's pixel width on every `.photo`.
 - **Do** keep the sponsor strip in every footer, built from `SPONSORS` / `SUPPORTERS` in `js/main.js`.
 - **Do** add raster images only as the team's own photos or CAD renders, and record how any edited one was made (Assets and Provenance below).
@@ -342,7 +344,7 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)`; only the scroll-linked sta
 - **Don't** copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.
 - **Don't** separate sections with hairlines; change the ground instead. Lines belong inside data only.
 - **Don't** put shadows on tiles, buttons, menus or panels, or nest a tile inside a tile.
-- **Don't** use the tier metals for anything but the tier swatches.
+- **Don't** use the tier metals or the budget palette outside the partners page's tier chart and donut, and don't set text in them.
 - **Don't** add a second font family or system display faces.
 - **Don't** put small labels (eyebrows) above headings or number the seasons 01/02/03.
 - **Don't** add new load animations outside the stage, counters that tick up, or motion that ignores reduced motion.

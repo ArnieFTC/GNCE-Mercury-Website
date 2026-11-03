@@ -172,61 +172,61 @@
       "bronze": {
         "role": "tertiary",
         "displayName": "Bronze",
-        "canonical": "#A8692F",
+        "canonical": "#C27A3A",
         "tonalRamp": [
-          "#3A230F",
-          "#5A3618",
-          "#7D4C22",
-          "#A8692F",
-          "#C08552",
-          "#D4A47B",
-          "#E7C8AB",
-          "#F6EBE0"
+          "#3E2410",
+          "#5F3818",
+          "#844F24",
+          "#C27A3A",
+          "#D39563",
+          "#E2B48E",
+          "#F0D5BD",
+          "#FAF0E6"
         ]
       },
       "silver": {
         "role": "tertiary",
         "displayName": "Silver",
-        "canonical": "#9AA0A8",
+        "canonical": "#C3C7CF",
         "tonalRamp": [
-          "#2E3135",
-          "#474B51",
-          "#646970",
-          "#9AA0A8",
-          "#B3B8BE",
-          "#C9CDD2",
-          "#DEE1E4",
-          "#F2F3F5"
+          "#2C2C32",
+          "#4A4D54",
+          "#6E727A",
+          "#999DA6",
+          "#C3C7CF",
+          "#D6D9DF",
+          "#E7E9ED",
+          "#F5F6F8"
         ]
       },
       "gold": {
         "role": "tertiary",
         "displayName": "Gold",
-        "canonical": "#C29A2A",
+        "canonical": "#D9AC3C",
         "tonalRamp": [
-          "#3F310B",
-          "#5F4A11",
-          "#8A6C1B",
-          "#C29A2A",
-          "#D2B14E",
-          "#E0C77E",
-          "#EDDDAF",
-          "#F8F2E0"
+          "#302717",
+          "#5A4513",
+          "#87661B",
+          "#B38A28",
+          "#D9AC3C",
+          "#E5C26E",
+          "#F0DAA4",
+          "#FAF2DD"
         ]
       },
       "platinum": {
         "role": "tertiary",
         "displayName": "Platinum",
-        "canonical": "#D6D9DE",
+        "canonical": "#E6E6E4",
         "tonalRamp": [
-          "#3A3C40",
-          "#5A5D62",
-          "#7E8187",
-          "#A6A9AE",
-          "#C2C5CA",
-          "#D6D9DE",
-          "#E6E8EB",
-          "#F5F6F7"
+          "#323235",
+          "#55555A",
+          "#7D7D80",
+          "#A8A8A9",
+          "#CFCFCB",
+          "#E6E6E4",
+          "#F0F0EE",
+          "#FAFAF9"
         ]
       }
     },
@@ -291,7 +291,7 @@
       {
         "name": "ease",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "The one easing for every transition and animation (--ease); only the scroll-linked stage dim and the parts progress line run linear. --ease-in-out is defined but unused."
+        "purpose": "The one easing for every transition and animation (--ease). --ease-in-out is defined but unused."
       },
       {
         "name": "state",
@@ -329,14 +329,14 @@
         "purpose": "Once on load, stage and heads only: h1 rises 26px, robots step in at 220/340/460ms, floor line draws, labels fade at 640ms."
       },
       {
-        "name": "stage-out",
-        "value": "scroll-linked",
-        "purpose": "Stage dims to 0.35 and scales to 0.96 as it leaves (animation-timeline: view())."
+        "name": "no-scroll-motion",
+        "value": "none",
+        "purpose": "Nothing moves, fades, pins or changes while scrolling (Andy, round 3); only the header tint reacts to scroll."
       },
       {
-        "name": "reveal",
-        "value": "800ms, +80ms per sibling (max 5)",
-        "purpose": "Below-the-fold blocks rise 24px and fade once; chart bars grow 200ms later."
+        "name": "donut-highlight",
+        "value": "160ms",
+        "purpose": "Partners budget donut: the pointed slice and its legend row stay lit, the rest dim to 30%."
       },
       {
         "name": "page-morph",
@@ -346,7 +346,7 @@
       {
         "name": "reduced-motion",
         "value": "0.01ms",
-        "purpose": "prefers-reduced-motion cuts all animation and transitions, disables reveal hiding and view transitions."
+        "purpose": "prefers-reduced-motion cuts all animation and transitions and turns off view transitions."
       }
     ],
     "breakpoints": [
@@ -494,24 +494,24 @@
       "css": ".ds-bay{background:#0B0A0F;color:#EFEEF3;padding:20px;text-align:center;font-family:var(--font,Archivo,sans-serif);border-radius:18px;width:260px}.ds-bay-stage{position:relative;height:160px;display:flex;align-items:flex-end;justify-content:center;border-bottom:1px solid rgba(239,238,243,0.16)}.ds-bay-stage::before{content:'';position:absolute;inset:-20% -12% -2px;background:radial-gradient(45% 16% at 50% 94%,rgba(255,255,255,0.22),transparent 72%),linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,0.07) 55%,rgba(255,255,255,0));clip-path:polygon(38% 0,62% 0,100% 100%,0 100%)}.ds-robot{position:relative;width:90px;height:100px;margin-bottom:14px;border-radius:10px;background:linear-gradient(160deg,#9AA0A8,#45424F);filter:drop-shadow(0 22px 22px rgba(0,0,0,0.6))}.ds-bay-no{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:12px;font-size:0.875rem;font-variant-numeric:tabular-nums}.ds-bay-no i{width:6px;height:6px;border-radius:50%;background:#EFEEF3}.ds-bay-name{font-stretch:125%;font-weight:700;font-size:1.25rem}"
     },
     {
-      "name": "Budget Row",
+      "name": "Budget Donut Legend",
       "kind": "custom",
       "refersTo": "",
-      "description": "Ranked budget table row: label, tabular amount, one ink bar to scale.",
-      "html": "<table class=\"ds-budget\"><tr><th>Travel</th><td class=\"a\">$19,950</td><td><span class=\"bar\" style=\"--s:38\"></span></td><td class=\"p\">38%</td></tr><tr><th>Robot parts and electronics</th><td class=\"a\">$11,950</td><td><span class=\"bar\" style=\"--s:23\"></span></td><td class=\"p\">23%</td></tr></table>",
-      "css": ".ds-budget{border-collapse:collapse;width:420px;font-family:var(--font,Archivo,sans-serif);font-size:0.9375rem;color:#16141C}.ds-budget th{text-align:left;font-weight:500;padding:10px 12px 10px 0}.ds-budget td{padding:10px 0}.ds-budget tr+tr th,.ds-budget tr+tr td{border-top:1px solid #DCDBE2}.ds-budget .a{text-align:right;padding-right:16px;font-weight:600;font-variant-numeric:tabular-nums}.ds-budget .p{text-align:right;color:#5C5967;font-variant-numeric:tabular-nums;width:3em}.ds-budget .bar{display:block;height:8px;width:calc(var(--s)/38*100%);min-width:4px;border-radius:999px;background:#16141C}"
+      "description": "Partners budget: the real table is the donut's legend; a 12px swatch in the line's colour, the line, its tabular amount and share, on the stage.",
+      "html": "<table class=\"ds-budget\"><tr><th><i style=\"background:#895012\"></i>Travel</th><td class=\"a\">$19,950</td><td class=\"p\">38%</td></tr><tr><th><i style=\"background:#BC8647\"></i>Robot parts and electronics</th><td class=\"a\">$11,950</td><td class=\"p\">23%</td></tr></table>",
+      "css": ".ds-budget{background:#0B0A0F;color:#EFEEF3;border-collapse:collapse;font-family:var(--font,Archivo,sans-serif);font-size:15px;width:420px}.ds-budget th,.ds-budget td{padding:8px 12px;border-top:1px solid rgba(239,238,243,0.14);text-align:left;font-weight:500}.ds-budget i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:10px;vertical-align:-1px}.ds-budget .a{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}.ds-budget .p{text-align:right;color:#A09DAC;font-variant-numeric:tabular-nums}"
     }
   ],
   "narrative": {
     "northStar": "The Keynote Stage",
-    "overview": "Each season's robot is launched the way a hardware company launches a product: the machine alone on an almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners. Light is the accent. There is no brand hue: colour comes only from the robots, the photos, the Mercury logo (kept as-is) and the four tier metals from the 2026–27 sponsorship package.\n\nTwo grounds carry the site. The stage (home launch, every season head, the partners head, and the closing \"join or partner\" bands on the home, team and partners pages) and the reading ground (white, with aluminium-grey bands and tiles). Sections are separated by a change of ground, never by hairlines. Content sits on flat, filled, rounded tiles (10/14/18px), buttons are pills, and nothing casts a shadow except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).\n\nThe neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple, TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.",
+    "overview": "Each season's robot is launched the way a hardware company launches a product: the machine alone on an almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners. Light is the accent. There is no brand hue: colour comes only from the robots, the photos, the Mercury logo (kept as-is) and, on the partners page, the sponsorship package's four tier metals and the budget donut's validated palette (Andy asked for that page to be colourful, like the package).\n\nTwo grounds carry the site. The stage (home launch, every season head, the partners head, and the closing \"join or partner\" bands on the home, team and partners pages) and the reading ground (white, with aluminium-grey bands and tiles). Sections are separated by a change of ground, never by hairlines. Content sits on flat, filled, rounded tiles (10/14/18px), buttons are pills, and nothing casts a shadow except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).\n\nThe neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple, TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.",
     "keyCharacteristics": [
       "Two grounds: the near-black stage for launches and closing calls, white and aluminium grey for reading.",
-      "No brand hue; light, robots, photos, the logo and the tier metals carry all colour.",
+      "No brand hue; light, robots, photos, the logo carry the colour, plus the tier metals and the budget palette on the partners page.",
       "Archivo only: normal width at 600 for headings, 125% width at 700 for robot names, tabular figures for every number.",
       "Flat filled tiles with 10/14/18px corners, pill buttons, no section hairlines, no card shadows.",
       "Selection shown as light brightening (the chosen robot steps into a spotlight), never as a sliding bar.",
-      "One authored load moment on the stage, one scroll reveal for content, everything else answers the visitor."
+      "One authored load moment on the stage; everything else answers a click, tap or key. Nothing moves, fades, pins or changes while scrolling."
     ],
     "rules": [
       {
@@ -525,8 +525,8 @@
         "section": "colors"
       },
       {
-        "name": "The Metals Are Swatches Rule",
-        "body": "The four metals appear only as tier swatches, never as text, fills or borders.",
+        "name": "The Metals Stay On The Partners Page Rule",
+        "body": "The tier metals and the budget palette colour the tier chart and the budget donut only. Text never wears them, except the tier names and amounts printed in ink on a metal fill; nowhere else on the site gets a brand colour from them.",
         "section": "colors"
       },
       {
@@ -553,7 +553,7 @@
       "Do set only robot and game names at 125% width and 700; keep everything else at normal width.",
       "Do give every date, amount, spec and result tabular figures.",
       "Do show a chosen state as light (brighter, full colour, filled dot) and write it to the URL when it is a view someone might share.",
-      "Do add a new below-the-fold block to the `reveal` selector list rather than writing a new entrance animation.",
+      "Do let new content simply be there: no entrance animation for anything below the first screen.",
       "Do set `--w` to the image's pixel width on every `.photo`.",
       "Do keep the sponsor strip in every footer, built from `SPONSORS` / `SUPPORTERS` in `js/main.js`.",
       "Do add raster images only as the team's own photos or CAD renders, and record how any edited one was made (Assets and Provenance below)."
@@ -563,7 +563,7 @@
       "Don't copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.",
       "Don't separate sections with hairlines; change the ground instead. Lines belong inside data only.",
       "Don't put shadows on tiles, buttons, menus or panels, or nest a tile inside a tile.",
-      "Don't use the tier metals for anything but the tier swatches.",
+      "Don't use the tier metals or the budget palette outside the partners page's tier chart and donut, and don't set text in them.",
       "Don't add a second font family or system display faces.",
       "Don't put small labels (eyebrows) above headings or number the seasons 01/02/03.",
       "Don't add new load animations outside the stage, counters that tick up, or motion that ignores reduced motion.",
