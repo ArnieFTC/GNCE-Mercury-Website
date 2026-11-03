@@ -624,8 +624,8 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .band--grey .chip { background: var(--paper); }
 .chips:empty { display: none; }
 .member-record { list-style: none; display: grid; gap: 4px; font-size: 0.875rem; line-height: 1.4; }
-.member-record li { display: flex; gap: 8px; align-items: baseline; }
-.member-record li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--ink); flex: none; transform: translateY(-2px); }
+.member-record li { position: relative; padding-left: 13px; }
+.member-record li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 5px; height: 5px; border-radius: 50%; background: var(--ink); }
 .member .text-link { font-size: var(--fs-sm); justify-self: start; }
 .quote { font-size: var(--fs-sm); line-height: 1.5; padding: 12px 14px; margin-top: 4px; border-radius: var(--r-sm); background: var(--alu); }
 .band--grey .quote { background: var(--paper); }
@@ -659,6 +659,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
   .member .exp { margin-bottom: 8px; }
   .member .leads, .member .chips, .member .member-record { margin-bottom: 6px; }
   .member .quote { clear: both; }
+  .member .quote + .text-link { margin-top: 8px; }
 }
 
 /* ---------- Outreach ---------- */
