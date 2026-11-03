@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>2026–2027 Season | GNCE Mercury</title>
   <meta name="description" content="GNCE Mercury’s 2026–27 BIOBUZZ season and The Mercinator.">
   <!-- Link previews: when the custom domain is live, change the address in og:url and og:image -->
@@ -14,83 +14,122 @@
   <meta property="og:image" content="https://arnieftc.github.io/GNCE-Mercury-Website/images/logo-mark.png">
   <meta property="og:image:alt" content="GNCE Mercury logo">
   <meta name="twitter:card" content="summary">
-  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <meta name="theme-color" content="#0f0e0d">
-  <link rel="preload" href="../fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="../fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../css/style.css?v=131">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.css?v=200">
   <link rel="icon" href="../images/logo-mark.png">
 </head>
 <body data-page="seasons" data-root="../">
-  <main class="container">
+  <noscript><nav class="nojs-nav container" aria-label="Main"><a href="../index.html">Home</a><a href="../seasons.html">Seasons</a><a href="../team.html">Team</a><a href="../outreach.html">Outreach</a><a href="../partners.html">Partners</a><a href="../resources.html">Resources</a><a href="../contact.html">Contact</a></nav></noscript>
+  <main id="main">
 
-    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../seasons.html">Seasons</a></li><li aria-current="page">2026–2027</li></ol></nav>
-    <div class="page-head">
-      <h1 translate="no">BIOBUZZ</h1>
-      <p>Our third season. Currently in progress.</p>
-    </div>
-    <!-- SEASON HERO: never lazy-load it (the robot from the home page glides into it) -->
-    <figure class="season-hero pair">
-      <span class="print"><img src="../images/mercinator_v1_fullybuilt.webp" width="610" height="608" fetchpriority="high" alt="The Mercinator, our BIOBUZZ robot, fully built (version 1)" style="view-transition-name: robot-mercinator"></span>
-      <span class="print"><img src="../images/mercinator_v1.jpg" width="794" height="806" fetchpriority="high" alt="The Mercinator V1 on a workbench while it was being built"></span>
-      <figcaption><span translate="no">The Mercinator</span>, version 1: fully built (left) and on the workbench (right). The robot is still in progress.</figcaption>
-    </figure>
-
-    <!-- ROBOT -->
-    <section>
-      <h2 class="section-title">The robot</h2>
-      <div class="robot">
-        <div>
-          <h3><span translate="no">The Mercinator</span> (V1)</h3>
-          <p>Version 1 of <span translate="no">The Mercinator</span> is a pollen-only robot, built on the same ideas as the <span translate="no">DECODE</span> robot we took to States.</p>
+    <!-- SEASON HEAD: the season's launch. Never lazy-load the robot (the robot from the home page glides into it).
+         The facts row under it: one <div> per fact or result. Add a <div> when a result comes in. -->
+    <section class="season-head" aria-labelledby="season-title">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../seasons.html">Seasons</a></li><li aria-current="page">2026–27</li></ol></nav>
+        <div class="season-head-grid">
+          <div>
+            <h1 id="season-title" translate="no">BIOBUZZ</h1>
+            <p class="lead">Our third season. Currently in progress.</p>
+          </div>
+          <figure class="season-head-figure">
+            <img src="../images/mercinator-v1-cut.webp" width="479" height="511" fetchpriority="high" alt="The Mercinator, our BIOBUZZ robot (version 1)" style="view-transition-name: robot-mercinator">
+          </figure>
         </div>
-        <div class="spec-sheet">
-          <p class="sheet-head"><span><span translate="no">GNCE Mercury</span> · FTC 26413</span><span><span translate="no">BIOBUZZ</span> · 2026–27</span></p>
-          <ul class="specs">
-            <li><span>How it scores</span><span>Pollen only (V1)</span></li>
-            <li><span>Drivetrain</span><span>Mecanum</span></li>
-            <li><span>Intake</span><span>Compliant gecko and vector wheels</span></li>
-            <li><span>Autonomous</span><span>TBD</span></li>
-            <li><span>Software</span><span><span translate="no">Pedro Pathing</span> 3.0</span></li>
-          </ul>
-          <p class="sheet-foot">Version 1 · in progress</p>
-        </div>
+        <dl class="season-facts">
+          <div><dt>Season</dt><dd>2026–27, our third</dd></div>
+          <div><dt>Robot</dt><dd><span translate="no">The Mercinator</span>, version 1</dd></div>
+        </dl>
       </div>
     </section>
 
-    <!-- COUNTDOWN — the event list lives in js/main.js (SEASON, at the top) -->
-    <section>
-      <div class="countdown" id="countdown">
-        <h2 class="cd-head">Next event</h2>
-        <div class="event-name"></div>
-        <div class="event-date"></div>
-        <div class="timer"></div>
-        <div class="timeline" id="timeline"></div>
-      </div>
-    </section>
-
-    <!-- EVENTS: when a qualifier happens, replace the note below with an event list like this:
-      <div class="event-list">
-        <div class="event">
-          <div class="event-head"><h3>Event Name</h3><span class="date">Mon DD, 2026</span></div>
-          <div class="event-body">
-            <div><div class="k">Alliance</div><div class="v">—</div></div>
-            <div><div class="k">Awards</div><div class="v">—</div></div>
+    <!-- ROBOT: the two photos sit side by side as squares, never bigger than their real size (the column is
+         narrower than either photo). Use nearly square photos here. One <div> per row of the spec sheet;
+         a row that says TBD is greyed out automatically. -->
+    <section class="band" aria-labelledby="robot-title">
+      <div class="container">
+        <div class="split">
+          <div>
+            <div class="prose">
+              <h2 id="robot-title">The robot</h2>
+              <h3 style="margin-bottom: 14px"><span translate="no">The Mercinator</span> (V1)</h3>
+              <p>Version 1 of <span translate="no">The Mercinator</span> is a pollen-only robot, built on the same ideas as the <span translate="no">DECODE</span> robot we took to States.</p>
+            </div>
+            <figure class="program-media" style="margin-top: clamp(28px, 3vw, 40px)">
+              <div class="strip">
+                <img src="../images/mercinator_v1_fullybuilt.webp" width="610" height="608" loading="lazy" alt="The Mercinator, our BIOBUZZ robot, fully built (version 1)">
+                <img src="../images/mercinator_v1.jpg" width="794" height="806" loading="lazy" alt="The Mercinator V1 on a workbench while it was being built">
+              </div>
+              <figcaption><span translate="no">The Mercinator</span>, version 1: fully built (left) and on the workbench (right). The robot is still in progress.</figcaption>
+            </figure>
+          </div>
+          <div>
+            <p class="spec-title"><span><span translate="no">GNCE Mercury</span>, FTC 26413</span><span><span translate="no">BIOBUZZ</span>, 2026–27</span></p>
+            <dl class="spec">
+              <div><dt>How it scores</dt><dd>Pollen only (V1)</dd></div>
+              <div><dt>Drivetrain</dt><dd>Mecanum</dd></div>
+              <div><dt>Intake</dt><dd>Compliant gecko and vector wheels</dd></div>
+              <div><dt>Autonomous</dt><dd>TBD</dd></div>
+              <div><dt>Software</dt><dd><span translate="no">Pedro Pathing</span> 3.0</dd></div>
+            </dl>
+            <p class="spec-source">Version 1, in progress</p>
           </div>
         </div>
       </div>
-    -->
-    <section>
-      <h2 class="section-title">Events</h2>
-      <p class="empty-note">No qualifiers yet this season. Results will show up here after our first event.</p>
     </section>
 
-    <!-- OTHER SEASONS: one <a> per neighbouring season -->
-    <nav class="season-pager" aria-label="Other seasons">
-      <a rel="prev" href="2025-2026.html"><img src="../images/decode-robot-cad.webp" width="1165" height="1066" loading="lazy" alt="" style="view-transition-name: robot-decode"><span><b translate="no">DECODE</b><span class="pager-meta">2025–26, our second season</span></span></a>
+    <!-- NEXT EVENT: the line and the calendar are filled in from SEASON at the top of js/main.js.
+         To change the dates, edit SEASON there, not this page. -->
+    <section class="band band--grey" id="countdown" aria-labelledby="next-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="next-title">Next event</h2>
+          <p><span data-next-event></span></p>
+        </div>
+        <ol class="calendar" data-calendar aria-label="2026–27 season calendar"></ol>
+        <noscript><p>Our season dates are on <a href="https://www.instagram.com/gnce_mercury/">Instagram @gnce_mercury</a>.</p></noscript>
+      </div>
+    </section>
+
+    <!-- EVENTS: when a qualifier happens, replace the <p class="empty-note"> below with a list like this one
+         (the same markup as the Events list in seasons/2025-2026.html). One <li class="event"> per event,
+         newest first. For anything not recorded, copy the "—" value as it is (screen readers hear "Not recorded"). For an award, put <span class="dia" aria-hidden="true"></span>
+         in front of its name.
+      <ol class="events">
+        <li class="event">
+          <time datetime="YYYY-MM-DD">Mon D, YYYY</time>
+          <div>
+            <h3>Event name</h3>
+            <p>One sentence about how it went.</p>
+          </div>
+          <dl>
+            <div><dt>Alliance</dt><dd><span aria-hidden="true">—</span><span class="visually-hidden">Not recorded</span></dd></div>
+            <div><dt>Awards</dt><dd><span aria-hidden="true">—</span><span class="visually-hidden">Not recorded</span></dd></div>
+          </dl>
+        </li>
+      </ol>
+    -->
+    <section class="band" aria-labelledby="events-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="events-title">Events</h2>
+        </div>
+        <p class="empty-note">No qualifiers yet this season. Results will show up here after our first event.</p>
+      </div>
+    </section>
+
+    <!-- OTHER SEASONS: one <a> per neighbouring season (rel="prev" for the one before, rel="next" for the one after) -->
+    <nav class="band band--tight" aria-label="Other seasons">
+      <div class="container"><div class="pager">
+        <a rel="prev" href="2025-2026.html">
+          <span class="pager-media"><img src="../images/decode-robot-cad.webp" width="1165" height="1066" loading="lazy" alt="" style="view-transition-name: robot-decode"></span>
+          <span><small>Previous season, 2025–26, our&nbsp;second</small><b translate="no">DECODE</b></span>
+        </a>
+      </div></div>
     </nav>
 
   </main>
-  <script src="../js/main.js?v=131"></script>
+  <script src="../js/main.js?v=200"></script>
 </body>
 </html>

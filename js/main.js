@@ -1,12 +1,12 @@
 // =========================================================
-// GNCE Mercury 26413 — shared header, footer, countdown, and page behaviour
-// The nav tabs and the sponsors are defined ONCE here, so every page stays in sync.
+// GNCE Mercury 26413: shared header, footer, season line-up and page behaviour
+// The nav and the sponsors are defined ONCE here, so every page stays in sync.
 // Every section below is wrapped in part(), and each one quietly skips a page that
 // doesn't have its block, so a pasted or missing block can never break a page.
 // =========================================================
 
-// SEASON SCHEDULE: drives the countdown + timeline and the "Next competition" line in the footer.
-// Dates are "YYYY-MM-DD". List events in order; the countdown moves to the next one automatically.
+// SEASON SCHEDULE: drives the season calendar on the home page, the "next event" lines and
+// the footer. Dates are "YYYY-MM-DD", in order. Past events stay listed and turn grey.
 const SEASON = {
   kickoff: "2026-09-12",
   events: [
@@ -17,18 +17,19 @@ const SEASON = {
 };
 
 const NAV = [
-  { label: "Home",       href: "index.html" },
-  { label: "Team",       href: "team.html" },
-  { label: "Seasons",    href: "seasons.html" },
-  { label: "Outreach",   href: "outreach.html" },
-  { label: "Resources",  href: "resources.html" },
-  { label: "Contact",    href: "contact.html" },
+  { label: "Seasons",   href: "seasons.html",   page: "seasons" },
+  { label: "Team",      href: "team.html",      page: "team" },
+  { label: "Outreach",  href: "outreach.html",  page: "outreach" },
+  { label: "Partners",  href: "partners.html",  page: "partners" },
+  { label: "Resources", href: "resources.html", page: "resources" },
+  { label: "Contact",   href: "contact.html",   page: "contact" },
 ];
 
-// SPONSORS: shown in the footer of EVERY page.
-// Keep this on all pages. To add a sponsor: { name: "Acme", logo: "images/acme.png", width: 240, height: 80, url: "https://acme.com" }
+// SPONSORS: shown in the footer of EVERY page (and named in the strip on the home page).
+// Keep this on all pages. To add a sponsor with a logo:
+//   { name: "Acme", logo: "images/acme.png", width: 240, height: 80, url: "https://acme.com" }
 // (width and height are the logo file's real size in pixels).
-// SUPPORTERS are named (no logo) until we have their logos. An open "Become a sponsor" link is always shown.
+// SUPPORTERS are named (no logo) until we have their logos. A "Become a sponsor" link is always shown.
 const SPONSORS = [];
 const SUPPORTERS = ["SolidWorks", "Weston Owl", "WEEFC"];
 const TEAM_EMAIL = "gncemercury26413@gmail.com";
@@ -39,354 +40,265 @@ const root = document.body.dataset.root || "";
 const page = document.body.dataset.page || "";
 const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const part = (name, fn) => { try { fn(); } catch (e) { console.error("[mercury] " + name, e); } };
-const main = document.querySelector("main");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 // ---------- Time helpers ----------
-// Everything runs on Eastern time wall-clock (America/New_York), so the countdown hits 00:00
-// at midnight in Massachusetts for every visitor and doesn't jump an hour around daylight saving.
-// Times are stored as "Eastern wall-clock expressed as UTC milliseconds".
-// Testing: add ?now=2026-10-25T09:00 to the address to see the site as it will look at that moment.
+// Everything runs on Eastern wall-clock time (America/New_York), so "next event" flips at
+// midnight in Massachusetts for every visitor.
+// Testing: add ?now=2026-11-15T09:00 to the address to see the site as it will look then.
 const DAY = 86400000;
-const TZ = "America/New_York";
-const toDate = str => { const [y, m, d] = str.split("-").map(Number); return Date.UTC(y, m - 1, d); }; // midnight Eastern
+const toDate = str => { const [y, m, d] = str.split("-").map(Number); return Date.UTC(y, m - 1, d); };
 const NOW_OVERRIDE = Date.parse((new URLSearchParams(location.search).get("now") || "") + "Z");
-const LOADED_AT = Date.now();
 const easternNow = () => {
-  if (!isNaN(NOW_OVERRIDE)) return NOW_OVERRIDE + (Date.now() - LOADED_AT);
+  if (!isNaN(NOW_OVERRIDE)) return NOW_OVERRIDE;
   const p = Object.fromEntries(new Intl.DateTimeFormat("en-US", {
-    timeZone: TZ, hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric",
+    timeZone: "America/New_York", hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric",
     hour: "numeric", minute: "numeric", second: "numeric",
   }).formatToParts(new Date()).map(x => [x.type, x.value]));
   return Date.UTC(+p.year, p.month - 1, +p.day, +p.hour, +p.minute, +p.second);
 };
-const fmt = (d, opts) => new Date(d).toLocaleDateString(undefined, { ...opts, timeZone: "UTC" });
-const LONG = { weekday: "long", month: "long", day: "numeric", year: "numeric" };
+const fmt = (d, opts) => new Date(d).toLocaleDateString("en-US", { ...opts, timeZone: "UTC" });
 const SHORT = { month: "short", day: "numeric" };
-const seasonEvents = () => SEASON.events.map(e => ({ ...e, day: toDate(e.date) }));
-// "Event day: …", "Next event: …, Nov 15", or null once the season is over
-const statusLine = () => {
+const LONG = { weekday: "long", month: "long", day: "numeric" };
+const iso = d => new Date(d).toISOString().slice(0, 10);
+const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+
+// The season's points (kickoff first), each marked past / today / next
+const seasonPoints = () => {
   const now = easternNow();
-  const events = seasonEvents();
-  const today = events.find(e => now >= e.day && now < e.day + DAY);
-  if (today) return { text: `Event day: ${today.name}`, live: true };
-  const next = events.find(e => now < e.day);
-  return next ? { text: `Next event: ${next.name}, ${fmt(next.day, SHORT)}` } : null;
+  let nextMarked = false;
+  return [{ name: "Season kickoff", day: toDate(SEASON.kickoff) },
+    ...SEASON.events.map(e => ({ name: e.name, day: toDate(e.date) }))].map(p => {
+    const past = now >= p.day + DAY;
+    const today = now >= p.day && now < p.day + DAY;
+    const next = !past && !today && !nextMarked;
+    if (next) nextMarked = true;
+    return { ...p, past, today, next, days: Math.ceil((p.day - now) / DAY) };
+  });
+};
+// "Today: …", "Wolfpack Scrimmage, Saturday, November 15 (in 12 days)", or null once the season is over
+const nextEvent = () => {
+  const pts = seasonPoints().slice(1);
+  const today = pts.find(p => p.today);
+  if (today) return { text: `Today: ${today.name}`, short: `Today: ${today.name}` };
+  const next = pts.find(p => p.next);
+  if (!next) return null;
+  const when = next.days === 1 ? "tomorrow" : `in ${plural(next.days, "day")}`;
+  return { text: `${next.name}, ${fmt(next.day, LONG)} (${when})`, short: `${next.name}, ${fmt(next.day, SHORT)}` };
 };
 
 // ---------- Header ----------
-// Solid bar; hides while scrolling down a long page and returns on any scroll up.
-// Under 821px the links open as a full-screen menu.
-const header = document.createElement("header");
+// A solid bar with the nav and "Partner with us". Under 1081px the links open from a Menu button.
 part("header", () => {
-  header.className = "site-header at-top";
+  const header = document.createElement("header");
+  header.className = "site-header";
+  const links = NAV.map(n => `<a href="${root}${n.href}"${n.page === page ? ' aria-current="page"' : ""}>${n.label}</a>`).join("");
   header.innerHTML = `
-    <a class="skip-link" href="#main">Skip to content</a>
-    <nav class="nav-bar" aria-label="Main">
-      <a class="brand" href="${root}index.html">
-        <img class="brand-logo" src="${root}images/logo-mark.png" alt="" width="30" height="32" onerror="this.remove()">
-        <span translate="no">GNCE MERCURY</span> <span class="num">#26413</span>
+    <div class="container bar">
+      <a class="brand" href="${root}index.html" aria-label="GNCE Mercury, home">
+        <img src="${root}images/logo-mark.png" alt="" width="473" height="505">
+        <span class="brand-name"><b translate="no">GNCE Mercury</b><small>FTC team 26413</small></span>
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">Menu</button>
-      <ul class="nav-links" id="site-menu">
-        ${NAV.map(n => {
-          const active = page && n.href.startsWith(page);
-          return `<li><a href="${root}${n.href}"${active ? ' class="active" aria-current="page"' : ""}>${n.label}</a></li>`;
-        }).join("")}
-        <li class="nav-cta"><a href="${root}contact.html#support">Sponsor us</a></li>
-        <li class="nav-extra"><a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL}</a><a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram @gnce_mercury</a></li>
-      </ul>
-    </nav>`;
-  document.body.prepend(header);
-  if (main) { main.id ||= "main"; main.tabIndex = -1; }
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+        <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 5h14M2 13h14"/></svg>
+        <span>Menu</span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Main">${links}<a class="btn nav-cta" href="${root}partners.html">Partner with us</a></nav>
+      <a class="btn header-cta" href="${root}partners.html"${page === "partners" ? ' aria-current="page"' : ""}>Partner with us</a>
+    </div>`;
+  const skip = document.createElement("a");
+  skip.className = "skip-link";
+  skip.href = "#main";
+  skip.textContent = "Skip to content";
+  document.body.prepend(skip, header);
 
-  const toggle = header.querySelector(".nav-toggle");
-  const links = header.querySelector(".nav-links");
-  const items = [...links.querySelectorAll("li")];
-  items.forEach((li, i) => li.style.setProperty("--i", i));
-  const isOpen = () => links.classList.contains("open");
-  const setInert = on => { [main, document.querySelector(".site-footer")].forEach(el => { if (el) el.inert = on; }); };
-  const open = () => {
-    links.classList.add("open");
-    toggle.setAttribute("aria-expanded", "true");
-    toggle.textContent = "Close";
-    header.classList.remove("is-hidden");
-    setInert(true);
-    document.documentElement.style.overflow = "hidden";
-    links.querySelector("a")?.focus({ preventScroll: true });
+  const btn = header.querySelector(".menu-btn");
+  const label = btn.querySelector("span");
+  const icon = btn.querySelector("path");
+  const set = open => {
+    header.classList.toggle("is-open", open);
+    btn.setAttribute("aria-expanded", open);
+    label.textContent = open ? "Close" : "Menu";
+    icon.setAttribute("d", open ? "M3 3l12 12M15 3L3 15" : "M2 5h14M2 13h14");
   };
-  const close = returnFocus => {
-    links.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.textContent = "Menu";
-    setInert(false);
-    document.documentElement.style.overflow = "";
-    if (returnFocus) toggle.focus({ preventScroll: true });
-  };
-  toggle.addEventListener("click", () => (isOpen() ? close(true) : open()));
-  links.addEventListener("click", e => { if (e.target.closest("a") && isOpen()) close(false); });
+  btn.addEventListener("click", () => set(!header.classList.contains("is-open")));
   document.addEventListener("keydown", e => {
-    if (!isOpen()) return;
-    if (e.key === "Escape") { e.preventDefault(); close(true); return; }
-    if (e.key !== "Tab") return;
-    // keep focus inside the menu: the Close button plus every link
-    const focusables = [toggle, ...links.querySelectorAll("a")];
-    const first = focusables[0], last = focusables[focusables.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    if (e.key === "Escape" && header.classList.contains("is-open")) { set(false); btn.focus(); }
   });
-  matchMedia("(min-width: 821px)").addEventListener("change", e => { if (e.matches && isOpen()) close(false); });
-
-  // Hide on scroll down, show on scroll up. Never while the menu is open, focus is inside,
-  // the page is short, right after an anchor jump, or when the visitor prefers less motion.
-  let lastY = scrollY, turnY = scrollY, lastDir = 0, ticking = false, quietUntil = 0;
-  // Smooth scrolling only after the page has loaded, so arriving at page#section jumps straight there
-  addEventListener("load", () => requestAnimationFrame(() => document.documentElement.classList.add("smooth")), { once: true });
-  const quiet = () => { quietUntil = performance.now() + 600; header.classList.remove("is-hidden"); };
-  addEventListener("hashchange", quiet);
-  // Arriving on a page#section: keep the bar visible through the jump to the section
-  if (location.hash) {
-    quietUntil = Infinity;
-    addEventListener("load", () => setTimeout(() => { lastY = scrollY; quiet(); }, 50), { once: true });
-  }
-  document.addEventListener("click", e => { if (e.target.closest('a[href*="#"]')) quiet(); });
-  header.addEventListener("focusin", () => header.classList.remove("is-hidden"));
-  const onScroll = () => {
-    ticking = false;
-    const y = scrollY;
-    header.classList.toggle("at-top", y < 8);
-    const canHide = !RM && !isOpen() && !header.matches(":focus-within") && performance.now() > quietUntil
-      && document.documentElement.scrollHeight > innerHeight * 2;
-    // measure from where the current scroll direction began, so slow scrolling counts too
-    const dir = Math.sign(y - lastY);
-    if (dir && dir !== lastDir) { turnY = lastY; lastDir = dir; }
-    const travelled = Math.abs(y - turnY);
-    if (canHide && dir > 0 && y > 160 && travelled > 24) header.classList.add("is-hidden");
-    else if (!canHide || y < 160 || (dir < 0 && travelled > 12)) header.classList.remove("is-hidden");
-    lastY = y;
-  };
-  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
-  onScroll();
-
-  // Home: the big wordmark and the small brand never share a screen
-  const wordmark = document.querySelector(".wordmark");
-  if (wordmark && "IntersectionObserver" in window) {
-    const html = document.documentElement;
-    html.classList.toggle("wm-visible", wordmark.getBoundingClientRect().bottom > 0);
-    new IntersectionObserver(([e]) => html.classList.toggle("wm-visible", e.isIntersecting)).observe(wordmark);
-  }
+  header.querySelector(".nav").addEventListener("click", e => { if (e.target.closest("a")) set(false); });
+  matchMedia("(min-width: 1081px)").addEventListener("change", e => { if (e.matches) set(false); });
+  // the open menu covers the page, so it closes as soon as keyboard focus leaves the header
+  header.addEventListener("focusout", e => {
+    if (header.classList.contains("is-open") && e.relatedTarget && !header.contains(e.relatedTarget)) set(false);
+  });
 });
 
-// ---------- Footer ----------
-// First block on every page: Our Sponsors & Supporters (from SPONSORS and SUPPORTERS above).
-const footer = document.createElement("footer");
+// ---------- Footer: sponsors on every page ----------
 part("footer", () => {
+  const footer = document.createElement("footer");
   footer.className = "site-footer";
   const sponsorItems = [
-    ...SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener" title="${s.name}" translate="no"><img src="${root}${s.logo}" alt="${s.name}"${s.width ? ` width="${s.width}" height="${s.height}"` : ""}></a>`),
-    ...SUPPORTERS.map(n => `<span class="sponsor named" translate="no">${n}</span>`),
-    `<a class="sponsor open text-link" href="${root}contact.html#support">Become a sponsor</a>`,
+    ...SPONSORS.map(s => `<li><a class="sponsor" href="${esc(s.url)}" target="_blank" rel="noopener" translate="no"><img src="${root}${esc(s.logo)}" alt="${esc(s.name)}"${s.width ? ` width="${s.width}" height="${s.height}"` : ""}></a></li>`),
+    ...SUPPORTERS.map(n => `<li class="named" translate="no">${esc(n)}</li>`),
+    `<li class="open"><a href="${root}partners.html">Become a sponsor</a></li>`,
   ].join("");
-  const status = statusLine();
+  const next = nextEvent();
   footer.innerHTML = `
     <div class="container footer-sponsors" id="sponsors">
-      <div class="fs-head">
-        <span class="k">Our Sponsors &amp; Supporters</span>
+      <div>
+        <h2>Our Sponsors &amp; Supporters</h2>
         <p>Thank you to everyone who helps us build, compete, and run outreach.</p>
       </div>
-      <div class="sponsor-row">${sponsorItems}</div>
+      <ul class="sponsor-row" aria-label="Sponsors and supporters">${sponsorItems}</ul>
     </div>
     <div class="container footer-main">
       <a class="footer-brand" href="${root}index.html">
-        <img src="${root}images/logo-mark.png" alt="" width="44" height="47">
-        <span><b translate="no">GNCE Mercury</b><small>FTC #26413 · <span translate="no">Galactic Narwhal Chicken Effect</span> · Weston, MA</small></span>
+        <img src="${root}images/logo-mark.png" alt="" width="473" height="505" loading="lazy">
+        <span><b translate="no">GNCE Mercury</b><small>FTC team 26413, Weston, MA</small></span>
       </a>
-      <div class="footer-links">
-        ${status ? `<a class="footer-next" href="${root}index.html#countdown">${status.text}</a>` : ""}
-        <a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram @gnce_mercury</a>
-        <a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL}</a>
-        <span translate="no">© ${new Date().getFullYear()} GNCE Mercury</span>
+      <div class="footer-cols">
+        <div>
+          <h3>Pages</h3>
+          <ul>${NAV.map(n => `<li><a href="${root}${n.href}">${n.label}</a></li>`).join("")}</ul>
+        </div>
+        <div>
+          <h3>Reach us</h3>
+          <ul>
+            <li><a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL}</a></li>
+            <li><a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram @gnce_mercury</a></li>
+            <li><a href="${root}contact.html?topic=join#contact-form">Join the team</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Next event</h3>
+          <p>${next ? esc(next.short) : "The season is over. See you next season."}</p>
+        </div>
       </div>
+    </div>
+    <div class="container footer-legal">
+      <span>© ${new Date().getFullYear()} <span translate="no">GNCE Mercury</span>, <span translate="no">Galactic Narwhal Chicken Effect</span></span>
+      <span>FIRST Tech Challenge team 26413, founded 2024</span>
     </div>`;
   document.body.append(footer);
 });
 
-// ---------- Countdown + season timeline ----------
-// The digits are built once and only their text changes. The clock only ticks while the
-// countdown is on screen and the tab is visible. Screen readers get one sentence a minute.
-part("countdown", () => {
-  const cd = document.getElementById("countdown");
-  if (!cd) return;
-  const events = seasonEvents();
-  const kickoff = toDate(SEASON.kickoff);
-  const nameEl = cd.querySelector(".event-name");
-  const dateEl = cd.querySelector(".event-date");
-  const timer = cd.querySelector(".timer");
-  const tl = document.getElementById("timeline");
-  if (!nameEl || !dateEl || !timer || !events.length) return;
-  cd.classList.add("ready");
-  timer.setAttribute("aria-hidden", "true");
-  const sr = document.createElement("p");
-  sr.className = "visually-hidden cd-sr";
-  cd.append(sr);
-  const head = cd.querySelector(".cd-head");
+// "Supported by …" lines (home page strip, partners page) read the same list as the footer
+part("supporters", () => {
+  const names = [...SPONSORS.map(s => s.name), ...SUPPORTERS];
+  if (!names.length) return;
+  const text = names.length > 1 ? names.slice(0, -1).join(", ") + " and " + names[names.length - 1] : names[0];
+  const html = names.map(n => `<span translate="no">${esc(n)}</span>`);
+  const joined = html.length > 1 ? html.slice(0, -1).join(", ") + " and " + html[html.length - 1] : html[0];
+  document.querySelectorAll("[data-supporters]").forEach(el => { el.innerHTML = joined; });
+});
 
-  // Timeline positions are % of the way from kickoff to the last event.
-  const end = events[events.length - 1].day;
-  const pct = d => Math.min(100, Math.max(0, (d - kickoff) / (end - kickoff) * 100));
-  const points = [{ name: "Season Kickoff", day: kickoff }, ...events];
-  let ptEls = [];
-  if (tl) {
-    tl.innerHTML = `
-      <div class="tl-track"><div class="tl-fill"></div></div>
-      <div class="tl-today"><span>Today</span></div>
-      ${points.map((p, i) => `
-        <div class="tl-pt ${i === 0 ? "first" : ""} ${i === points.length - 1 ? "last" : ""}" style="left:${pct(p.day)}%;--i:${i}">
-          <div class="dot"></div>
-          <div class="lbl"><b>${p.name}</b><span>${fmt(p.day, SHORT)}</span></div>
-        </div>`).join("")}`;
-    ptEls = [...tl.querySelectorAll(".tl-pt")];
-  }
+// ---------- Season calendar + next event ----------
+// <ol class="calendar" data-calendar></ol> lists the season from SEASON above.
+// <span data-next-event></span> is filled with the next event and how far away it is.
+part("calendar", () => {
+  const pts = seasonPoints();
+  document.querySelectorAll("[data-calendar]").forEach(el => {
+    el.innerHTML = pts.map(p => {
+      const state = p.today ? "Today" : p.next ? (p.days === 1 ? "Next, tomorrow" : `Next, in ${plural(p.days, "day")}`) : "";
+      const cls = p.today ? "is-today" : p.next ? "is-next" : p.past ? "is-past" : "";
+      return `<li class="${cls}"><time datetime="${iso(p.day)}">${fmt(p.day, { weekday: "short", ...SHORT })}</time><b>${esc(p.name)}</b>${state ? `<span class="cal-state"><span class="dia" aria-hidden="true"></span>${state}</span>` : ""}</li>`;
+    }).join("");
+  });
+  const next = nextEvent();
+  document.querySelectorAll("[data-next-event]").forEach(el => {
+    el.textContent = next ? next.text : "No more events this season. Results will show up here after the season.";
+  });
+});
 
-  const UNITS = ["Days", "Hours", "Min", "Sec"];
-  let digits = [], lastState = "", lastMinute = -1;
-  const buildUnits = () => {
-    timer.innerHTML = UNITS.map(l => `<div class="unit"><div class="n">00</div><div class="l">${l}</div></div>`).join("");
-    digits = [...timer.querySelectorAll(".n")];
+// ---------- Home: the season line-up ----------
+// Each .bay is a link to its season page. With JavaScript the bays become tabs: choosing one
+// lights its robot and shows that season's card. Ctrl/Cmd-click still opens the season page.
+// data-default on the line-up picks the season shown first.
+part("lineup", () => {
+  const lu = document.querySelector("[data-lineup]");
+  if (!lu) return;
+  const list = lu.querySelector(".bays");
+  const bays = [...lu.querySelectorAll(".bay")];
+  const cards = bays.map(b => document.getElementById(b.dataset.card));
+  if (!list || bays.length < 2 || cards.some(c => !c)) return;
+  list.setAttribute("role", "tablist");
+  list.setAttribute("aria-label", "Our seasons");
+  bays.forEach((b, i) => {
+    if (!b.id) b.id = "bay-" + i;
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-controls", cards[i].id);
+    cards[i].setAttribute("role", "tabpanel");
+    cards[i].setAttribute("aria-labelledby", b.id);
+  });
+  let current = -1;
+  const select = (i, { user = false, focus = false } = {}) => {
+    if (i === current) { if (focus) bays[i].focus(); return; }
+    current = i;
+    bays.forEach((b, j) => { b.setAttribute("aria-selected", j === i); b.tabIndex = j === i ? 0 : -1; });
+    cards.forEach((c, j) => { c.hidden = j !== i; c.classList.toggle("is-current", j === i); });
+    if (user && !RM) {
+      const c = cards[i];
+      c.classList.remove("is-entering");
+      void c.offsetWidth;
+      c.classList.add("is-entering");
+    }
+    if (focus) bays[i].focus();
   };
-  const tick = () => {
-    const now = easternNow();
-    const isToday = d => now >= d && now < d + DAY;
-
-    if (tl) {
-      const nowPct = pct(now);
-      tl.style.setProperty("--pct", nowPct / 100);
-      const todayPt = points.find(p => isToday(p.day));
-      tl.querySelector(".tl-today").style.left = (todayPt ? pct(todayPt.day) : nowPct) + "%";
-      let nextMarked = false;
-      points.forEach((p, i) => {
-        const past = now >= p.day + DAY, today = isToday(p.day);
-        const next = !past && !today && !nextMarked;
-        if (next) nextMarked = true;
-        ptEls[i].classList.toggle("past", past);
-        ptEls[i].classList.toggle("today", today);
-        ptEls[i].classList.toggle("next", next);
-      });
-    }
-
-    // Event today → competition day, else count down to the next event, else season over
-    const today = events.find(e => isToday(e.day));
-    const next = events.find(e => now < e.day);
-    const state = today ? "today" + today.date : next ? "next" + next.date : "done";
-    if (state !== lastState) {
-      lastState = state;
-      lastMinute = -1;
-      cd.classList.toggle("live", !!today);
-      if (head) { head.hidden = !today && !next; head.textContent = today ? "Today" : "Next event"; }
-      if (today) {
-        nameEl.textContent = today.name;
-        dateEl.textContent = fmt(today.day, LONG);
-        timer.innerHTML = `<p class="live-line">Event day. Follow along on <a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a></p>`;
-        timer.removeAttribute("aria-hidden");
-        sr.textContent = `Today is event day: ${today.name}.`;
-      } else if (next) {
-        nameEl.textContent = next.name;
-        dateEl.textContent = fmt(next.day, LONG);
-        buildUnits();
-        timer.setAttribute("aria-hidden", "true");
-      } else {
-        nameEl.textContent = "Season complete!";
-        dateEl.textContent = "Thanks for following along. See you next season.";
-        timer.innerHTML = "";
-        sr.textContent = "";
-      }
-    }
-
-    if (!today && next) {
-      let diff = Math.max(0, next.day - now);
-      const d = Math.floor(diff / DAY);     diff %= DAY;
-      const h = Math.floor(diff / 3600000); diff %= 3600000;
-      const m = Math.floor(diff / 60000);   diff %= 60000;
-      const s = Math.floor(diff / 1000);
-      [d, h, m, s].forEach((v, i) => {
-        const t = String(v).padStart(2, "0");
-        if (digits[i] && digits[i].textContent !== t) digits[i].textContent = t;
-      });
-      const minuteKey = d * 1440 + h * 60 + m;
-      if (minuteKey !== lastMinute) {
-        lastMinute = minuteKey;
-        const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
-        sr.textContent = `${plural(d, "day")}, ${plural(h, "hour")} and ${plural(m, "minute")} until ${next.name}.`;
-      }
-    }
-  };
-  tick();
-
-  // Only tick while the countdown is visible
-  let interval = null, onScreen = true;
-  const run = () => {
-    const want = onScreen && document.visibilityState === "visible";
-    if (want && !interval) { tick(); interval = setInterval(tick, 1000); }
-    if (!want && interval) { clearInterval(interval); interval = null; }
-  };
-  if ("IntersectionObserver" in window) {
-    new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; run(); }).observe(cd);
-    // The timeline draws once, the first time it comes into view
-    if (tl) {
-      const tio = new IntersectionObserver(([e]) => { if (e.isIntersecting) { tl.classList.add("drawn"); tio.disconnect(); } }, { rootMargin: "0px 0px -10% 0px" });
-      tio.observe(tl);
-    }
-  } else if (tl) tl.classList.add("drawn");
-  document.addEventListener("visibilitychange", run);
-  run();
+  bays.forEach((b, i) => b.addEventListener("click", e => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    select(i, { user: true });
+  }));
+  list.addEventListener("keydown", e => {
+    const keys = { ArrowRight: current + 1, ArrowLeft: current - 1, ArrowDown: current + 1, ArrowUp: current - 1, Home: 0, End: bays.length - 1 };
+    if (!(e.key in keys)) return;
+    e.preventDefault();
+    select((keys[e.key] + bays.length) % bays.length, { user: true, focus: true });
+  });
+  const start = bays.findIndex(b => b.dataset.season === lu.dataset.default);
+  select(start >= 0 ? start : bays.length - 1);
+  lu.classList.add("is-ready");
 });
 
 // ---------- Outreach year tabs ----------
-// Each <section class="year-panel" data-tab="Third Year · 2026–27"> becomes a tab; the first one is shown first.
+// Each <section class="year-panel" data-tab="Third year · 2026–27"> becomes a tab; the first one shows first.
 // Without JavaScript every year simply shows, one after another.
 part("year-tabs", () => {
   const tabBar = document.querySelector(".year-tabs");
-  if (!tabBar) return;
   const panels = [...document.querySelectorAll(".year-panel")];
-  if (!panels.length) return;
+  if (!tabBar || panels.length < 2) return;
+  const parts = p => (p.dataset.tab || p.id).split(" · ");
+  tabBar.setAttribute("role", "tablist");
   tabBar.innerHTML = panels.map(p => {
-    const [name, year] = (p.dataset.tab || p.id).split(" · ");
-    return `<button type="button" role="tab" id="tab-${p.id}" aria-controls="${p.id}">${year ? `<span class="tab-year">${year}</span>` : ""}<span class="tab-name">${name}</span></button>`;
-  }).join("") + `<span class="tab-ind" aria-hidden="true"></span>`;
+    const [name, year] = parts(p);
+    return `<button type="button" role="tab" id="tab-${p.id}" aria-controls="${p.id}"><span class="tab-name">${esc(name)}</span>${year ? `<span class="tab-year">${esc(year)}</span>` : ""}</button>`;
+  }).join("");
   const tabs = [...tabBar.querySelectorAll("[role=tab]")];
-  const ind = tabBar.querySelector(".tab-ind");
-  const label = j => { const [n, y] = (panels[j].dataset.tab || panels[j].id).split(" · "); return n + (y ? ", " + y : ""); };
+  const label = j => { const [n, y] = parts(panels[j]); return n + (y ? ", " + y : ""); };
   panels.forEach((p, i) => {
-    if (panels.length < 2) return;
+    p.setAttribute("role", "tabpanel");
+    p.setAttribute("aria-labelledby", "tab-" + p.id);
     const nav = document.createElement("nav");
     nav.className = "year-pager";
     nav.setAttribute("aria-label", "Other years");
-    nav.innerHTML = (i > 0 ? `<button type="button" class="btn ghost" data-go="${i - 1}">Previous: ${label(i - 1)}</button>` : "")
-      + (i < panels.length - 1 ? `<button type="button" class="btn ghost" data-go="${i + 1}">Next: ${label(i + 1)}</button>` : "");
+    nav.innerHTML = (i > 0 ? `<button type="button" class="btn btn--line" data-go="${i - 1}">Previous: ${esc(label(i - 1))}</button>` : "<span></span>")
+      + (i < panels.length - 1 ? `<button type="button" class="btn btn--line" data-go="${i + 1}">Next: ${esc(label(i + 1))}</button>` : "");
     p.append(nav);
   });
-  panels.forEach(p => { p.setAttribute("role", "tabpanel"); p.setAttribute("aria-labelledby", "tab-" + p.id); });
   let current = -1;
-  const place = () => {
-    const t = tabs[current];
-    if (!t) return;
-    ind.style.setProperty("--x", t.offsetLeft + "px");
-    ind.style.setProperty("--w", t.offsetWidth / 100);
-  };
   const select = (i, { focus = false, user = false } = {}) => {
     const changed = i !== current;
     current = i;
     panels.forEach((p, j) => { p.hidden = j !== i; });
     tabs.forEach((t, j) => { t.setAttribute("aria-selected", j === i); t.tabIndex = j === i ? 0 : -1; });
-    place();
     if (changed && user && !RM) {
       const p = panels[i];
       p.classList.remove("panel-in");
       void p.offsetWidth;
       p.classList.add("panel-in");
-      p.addEventListener("animationend", () => p.classList.remove("panel-in"), { once: true });
     }
     if (user) history.replaceState(null, "", "#" + panels[i].id);
-    if (focus) { tabs[i].focus(); tabs[i].scrollIntoView({ block: "nearest", inline: "nearest" }); }
+    if (focus) tabs[i].focus();
   };
   tabs.forEach((t, i) => t.addEventListener("click", () => select(i, { user: true })));
   document.addEventListener("click", e => {
@@ -403,333 +315,113 @@ part("year-tabs", () => {
     e.preventDefault();
     select((keys[e.key] + tabs.length) % tabs.length, { focus: true, user: true });
   });
-  addEventListener("resize", place);
-  document.fonts?.ready.then(place);
   const fromHash = panels.findIndex(p => "#" + p.id === location.hash);
   select(fromHash >= 0 ? fromHash : 0);
-});
-
-// ---------- Photo viewer (Loupe) ----------
-// Outreach photos, mechanism images and event photos open full screen.
-// Swipe or use the arrow keys to move through the photos of the same event.
-part("loupe", () => {
-  if (typeof HTMLDialogElement !== "function") return;
-  const imgs = [...document.querySelectorAll(".chapter img, .parts-grid img, .event-photo")].filter(img => !img.closest("a, button"));
-  if (!imgs.length) return;
-  imgs.forEach(img => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "zoom";
-    btn.setAttribute("aria-label", "Enlarge photo: " + (img.alt || "photo"));
-    img.before(btn);
-    btn.append(img);
+  addEventListener("hashchange", () => {
+    const j = panels.findIndex(p => "#" + p.id === location.hash);
+    if (j >= 0) select(j);
   });
-  const dlg = document.createElement("dialog");
-  dlg.className = "loupe";
-  dlg.setAttribute("aria-label", "Photo viewer");
-  dlg.innerHTML = `
-    <div class="loupe-bar"><span class="loupe-count"></span><button type="button" class="loupe-close">Close</button></div>
-    <div class="loupe-track"></div>
-    <div class="loupe-nav"><button type="button" class="loupe-prev">Previous</button><button type="button" class="loupe-next">Next</button></div>`;
-  document.body.append(dlg);
-  const track = dlg.querySelector(".loupe-track");
-  const count = dlg.querySelector(".loupe-count");
-  count.setAttribute("aria-live", "polite");
-  count.setAttribute("aria-atomic", "true");
-  track.tabIndex = -1;
-  let opener = null, n = 0, slideIO = null;
-  const step = dir => {
-    const slides = [...track.children];
-    const at = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
-    const to = slides[Math.min(slides.length - 1, Math.max(0, at + dir))];
-    if (to) track.scrollTo({ left: to.offsetLeft - track.offsetLeft, behavior: RM ? "auto" : "smooth" });
-  };
-  const openAt = (group, index, from) => {
-    opener = from;
-    n = group.length;
-    track.innerHTML = "";
-    group.forEach(src => {
-      const fig = document.createElement("figure");
-      fig.className = "loupe-slide";
-      const im = document.createElement("img");
-      im.src = src.currentSrc || src.src;
-      im.alt = src.alt;
-      im.style.maxWidth = `min(100%, ${src.naturalWidth || src.getAttribute("width") || 1600}px)`;
-      const cap = document.createElement("figcaption");
-      cap.textContent = src.alt;
-      cap.setAttribute("aria-hidden", "true");
-      fig.append(im, cap);
-      track.append(fig);
-    });
-    dlg.classList.toggle("single", n < 2);
-    count.textContent = `${index + 1} / ${n}`;
-    dlg.showModal();
-    document.documentElement.classList.add("loupe-open");
-    track.scrollLeft = index * track.clientWidth;
-    slideIO?.disconnect();
-    slideIO = new IntersectionObserver(es => es.forEach(e => {
-      if (!e.isIntersecting) return;
-      count.textContent = `${[...track.children].indexOf(e.target) + 1} / ${n}`;
-      [...track.children].forEach(s => s.setAttribute("aria-hidden", s === e.target ? "false" : "true"));
-    }), { root: track, threshold: 0.6 });
-    [...track.children].forEach(s => slideIO.observe(s));
-  };
-  document.addEventListener("click", e => {
-    const btn = e.target.closest(".zoom");
-    if (!btn) return;
-    const img = btn.querySelector("img") || btn.closest(".wt")?.querySelector(".part-card.is-current img");
-    if (!img) return;
-    const groupEl = btn.closest(".chapter, .parts-grid, .event, .wt");
-    const group = groupEl ? [...groupEl.querySelectorAll(".part-card img, .chapter img, .event-photo")].filter(i => !i.closest(".wt-stage")) : [img];
-    const target = btn.classList.contains("wt-zoom") ? groupEl.querySelector(".part-card.is-current img") : img;
-    openAt(group, Math.max(0, group.indexOf(target)), btn);
-  });
-  dlg.querySelector(".loupe-close").addEventListener("click", () => dlg.close());
-  dlg.querySelector(".loupe-prev").addEventListener("click", () => step(-1));
-  dlg.querySelector(".loupe-next").addEventListener("click", () => step(1));
-  dlg.addEventListener("keydown", e => {
-    if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
-    if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
-  });
-  dlg.addEventListener("click", e => { if (e.target === dlg || e.target === track || e.target.classList.contains("loupe-slide")) dlg.close(); });
-  dlg.addEventListener("close", () => {
-    document.documentElement.classList.remove("loupe-open");
-    slideIO?.disconnect();
-    opener?.focus();
-  });
-});
-
-// ---------- Mechanism walkthrough (DECODE) ----------
-// On a big screen, the mechanism cards scroll past on the right while their image holds still on the left.
-// Opt in with data-walkthrough on a .parts-grid. Phones and small windows keep the normal card grid.
-part("walkthrough", () => {
-  const grid = document.querySelector("[data-walkthrough]");
-  if (!grid) return;
-  const cards = [...grid.querySelectorAll(".part-card")].filter(c => c.querySelector("img") && c.querySelector("h3"));
-  if (cards.length < 2) return;
-  const mq = matchMedia("(min-width: 1000px) and (min-height: 700px)");
-  const pad = n => String(n).padStart(2, "0");
-  let wt = null, io = null;
-  const build = () => {
-    if (wt) return;
-    wt = document.createElement("div");
-    wt.className = "wt";
-    grid.before(wt);
-    const stage = document.createElement("figure");
-    stage.className = "wt-stage";
-    stage.innerHTML = `<button type="button" class="zoom wt-zoom"></button><span class="wt-count"></span><span class="wt-rail" style="--n:${cards.length}"><i></i></span>`;
-    const zoom = stage.querySelector(".wt-zoom");
-    const clones = cards.map(c => {
-      const src = c.querySelector("img");
-      const im = document.createElement("img");
-      im.src = src.currentSrc || src.getAttribute("src");
-      im.alt = "";
-      if (src.width) { im.width = src.getAttribute("width") || src.naturalWidth; im.height = src.getAttribute("height") || src.naturalHeight; }
-      if (src.classList.contains("feather")) im.classList.add("feather");
-      zoom.append(im);
-      return im;
-    });
-    wt.append(stage, grid);
-    const count = stage.querySelector(".wt-count");
-    const rail = stage.querySelector(".wt-rail i");
-    const setCurrent = i => {
-      cards.forEach((c, j) => c.classList.toggle("is-current", j === i));
-      clones.forEach((c, j) => c.classList.toggle("is-current", j === i));
-      const name = cards[i].querySelector("h3").textContent;
-      count.textContent = `${pad(i + 1)} / ${pad(cards.length)} · ${name}`;
-      rail.style.setProperty("--k", i);
-      zoom.setAttribute("aria-label", "Enlarge photo: " + (cards[i].querySelector("img").alt || name));
-    };
-    setCurrent(0);
-    io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setCurrent(cards.indexOf(e.target)); }), { rootMargin: "-45% 0px -45% 0px" });
-    cards.forEach(c => io.observe(c));
-  };
-  const teardown = () => {
-    if (!wt) return;
-    io?.disconnect();
-    wt.before(grid);
-    wt.remove();
-    wt = null;
-    cards.forEach(c => c.classList.remove("is-current"));
-  };
-  const sync = () => (mq.matches ? build() : teardown());
-  mq.addEventListener("change", sync);
-  sync();
 });
 
 // ---------- Robot callouts (season pages) ----------
-// Inside <div class="robot-explorer">: the season hero <figure> and an <ol class="callouts"> with one
-// <li data-x data-y data-card> per part (marker position in % of the image; data-card = the id of that
-// part's mechanism card). Without JavaScript the list shows as written. With it, each part gets a
-// diamond on the render and a button underneath; choosing one lights its diamond and shows its note.
+// <ol class="callouts" data-x data-y data-card> inside a <figure> with the robot render.
+// Without JavaScript it is a plain list of parts. With it, each part gets a diamond on the
+// render and a button; choosing one shows its note and lights its diamond.
 part("callouts", () => {
-  document.querySelectorAll(".robot-explorer").forEach(box => {
-    const list = box.querySelector(".callouts");
-    const img = box.querySelector(".season-hero img");
-    const items = list ? [...list.querySelectorAll(":scope > li")].filter(li => li.dataset.x && li.dataset.y) : [];
+  document.querySelectorAll(".callouts").forEach(list => {
+    const fig = list.closest("[data-explorer]");
+    const img = fig?.querySelector("img");
+    const items = [...list.querySelectorAll(":scope > li")].filter(li => li.dataset.x && li.dataset.y);
     if (!img || items.length < 2) return;
 
+    // the diamonds sit in a box exactly the size of the image
     const stage = document.createElement("span");
     stage.className = "callout-stage";
     img.before(stage);
     stage.append(img);
 
-    // the visible note, plus an invisible copy of every note in the same grid cell, so the box
-    // is always as tall as the longest note and nothing below it moves
-    const notes = document.createElement("div");
-    notes.className = "callout-notes";
     const note = document.createElement("div");
     note.className = "callout-note";
-    note.id = (box.id || "robot") + "-note";
+    note.id = (list.id || "callouts") + "-note";
     note.setAttribute("aria-live", "polite");
-    const sizer = document.createElement("div");
-    sizer.className = "callout-sizer";
-    sizer.setAttribute("aria-hidden", "true");
-    notes.append(note, sizer);
+
+    const parts = items.map((li, i) => {
+      const name = li.querySelector("b")?.textContent.trim() || "Part " + (i + 1);
+      const m = document.createElement("button");
+      m.type = "button";
+      m.className = "callout-mark" + (li.dataset.label === "below" ? " below" : "");
+      m.tabIndex = -1; // the buttons in the bar are the keyboard path
+      m.setAttribute("aria-hidden", "true");
+      m.style.left = li.dataset.x + "%";
+      m.style.top = li.dataset.y + "%";
+      m.innerHTML = `<span class="callout-label">${esc(name)}</span>`;
+      stage.append(m);
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "callout-btn";
+      b.textContent = name;
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-controls", note.id);
+      return { li, m, b, name };
+    });
 
     const bar = document.createElement("div");
     bar.className = "callout-bar";
-    bar.setAttribute("role", "toolbar");
+    bar.setAttribute("role", "group");
     bar.setAttribute("aria-label", list.getAttribute("aria-label") || "Parts of the robot");
-
-    const fill = (el, p) => {
-      el.textContent = "";
-      const para = document.createElement("p");
-      const b = document.createElement("b");
-      b.textContent = p.name + ".";
-      if (p.keep) b.translate = false;
-      // copy the note's own markup so names inside it keep translate="no"
-      const body = p.textEl ? p.textEl.cloneNode(true) : document.createTextNode(p.text);
-      para.append(b, " ", body);
-      el.append(para);
-      const card = p.card && document.getElementById(p.card);
-      if (card) {
-        const a = document.createElement("a");
-        a.className = "text-link";
-        a.href = "#" + card.id;
-        // one inline run inside the flex link, so the space before the name survives
-        const label = document.createElement("span");
-        const nm = document.createElement("span");
-        nm.textContent = p.link;
-        if (p.keep) nm.translate = false;
-        label.append("More on the ", nm);
-        a.append(label);
-        el.append(a);
-      }
-    };
-
-    const parts = items.map((li, i) => {
-      const name = li.querySelector("b")?.textContent.trim() || `Part ${i + 1}`;
-      const textEl = li.querySelector(":scope > span");
-      const text = textEl?.textContent.trim() || "";
-      const keep = li.querySelector("b")?.getAttribute("translate") === "no";
-      const x = parseFloat(li.dataset.x), y = parseFloat(li.dataset.y);
-      // the diamond on the render (for mouse and touch; the buttons below are the keyboard path)
-      const mark = document.createElement("button");
-      mark.type = "button";
-      mark.className = "callout-mark" + (x < 25 ? " at-left" : x > 75 ? " at-right" : "") + (li.dataset.label === "below" ? " below" : "");
-      mark.tabIndex = -1;
-      mark.setAttribute("aria-hidden", "true");
-      mark.style.left = x + "%";
-      mark.style.top = y + "%";
-      mark.style.setProperty("--i", i);
-      const tag = document.createElement("span");
-      tag.className = "callout-label";
-      tag.textContent = name;
-      if (keep) tag.translate = false;
-      mark.append(tag);
-      stage.append(mark);
-
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "callout-btn";
-      btn.textContent = name;
-      if (keep) btn.translate = false;
-      btn.tabIndex = -1;
-      btn.setAttribute("aria-pressed", "false");
-      btn.setAttribute("aria-controls", note.id);
-      bar.append(btn);
-      // data-link keeps a product name as written ("More on the Limelight")
-      const p = { name, text, textEl, keep, card: li.dataset.card, link: li.dataset.link || name.toLowerCase(), mark, btn };
-      const copy = document.createElement("div");
-      fill(copy, p);
-      sizer.append(copy);
-      return p;
-    });
-
+    parts.forEach(x => bar.append(x.b));
     list.hidden = true;
-    list.after(bar, notes);
-    box.classList.add("has-callouts");
-
-    // labels only where the render is big enough for them not to cover other diamonds
-    const fit = () => stage.classList.toggle("compact", img.clientWidth < 330);
-    if ("ResizeObserver" in window) new ResizeObserver(fit).observe(img); else fit();
+    list.after(bar, note);
 
     let current = -1;
     const select = (i, user) => {
       if (i === current) return;
       current = i;
-      parts.forEach((p, j) => {
-        p.btn.setAttribute("aria-pressed", j === i);
-        p.btn.tabIndex = j === i ? 0 : -1;   // one Tab stop for the whole row; arrows move inside it
-        p.mark.classList.toggle("is-on", j === i);
+      parts.forEach((x, j) => {
+        x.b.setAttribute("aria-pressed", j === i);
+        x.m.classList.toggle("is-on", j === i);
       });
-      fill(note, parts[i]);
-      if (user && !RM) note.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 350, easing: "cubic-bezier(0.16, 1, 0.3, 1)" });
+      stage.classList.add("has-on");
+      const { li, name } = parts[i];
+      const text = li.querySelector(":scope > span")?.textContent.trim() || "";
+      const card = li.dataset.card && document.getElementById(li.dataset.card);
+      note.innerHTML = `<p><b></b><span></span></p>${card ? `<a class="text-link" href="#${card.id}"></a>` : ""}`;
+      note.querySelector("b").textContent = name;
+      note.querySelector("span").textContent = text;
+      const a = note.querySelector("a");
+      if (a) a.textContent = `More on the ${li.dataset.link || name.toLowerCase()}`;
+      if (user && !RM) { note.classList.remove("note-in"); void note.offsetWidth; note.classList.add("note-in"); }
     };
-    parts.forEach((p, i) => {
-      p.btn.addEventListener("click", () => select(i, true));
-      p.mark.addEventListener("click", () => select(i, true));
-      // pointing at a name shows where that part is on the robot
-      p.btn.addEventListener("pointerenter", () => p.mark.classList.add("is-hint"));
-      p.btn.addEventListener("pointerleave", () => p.mark.classList.remove("is-hint"));
-      p.btn.addEventListener("focus", () => p.mark.classList.add("is-hint"));
-      p.btn.addEventListener("blur", () => p.mark.classList.remove("is-hint"));
+    parts.forEach((x, i) => {
+      x.b.addEventListener("click", () => select(i, true));
+      x.m.addEventListener("click", () => { select(i, true); x.b.focus({ preventScroll: true }); });
+      x.b.addEventListener("pointerenter", () => x.m.classList.add("is-hint"));
+      x.b.addEventListener("pointerleave", () => x.m.classList.remove("is-hint"));
     });
-    // arrow keys (and Home/End) step through the parts, like a toolbar
+    // arrow keys move between parts, like a toolbar
     bar.addEventListener("keydown", e => {
-      const at = parts.findIndex(p => p.btn === document.activeElement);
-      if (at < 0) return;
-      const n = parts.length;
-      const to = { ArrowRight: at + 1, ArrowDown: at + 1, ArrowLeft: at - 1, ArrowUp: at - 1, Home: 0, End: n - 1 }[e.key];
-      if (to === undefined) return;
+      const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+      if (!k) return;
       e.preventDefault();
-      const i = (to + n) % n;
+      const i = (parts.findIndex(x => x.b === document.activeElement) + k + parts.length) % parts.length;
+      parts[i].b.focus();
       select(i, true);
-      parts[i].btn.focus();
     });
     select(0, false);
   });
 });
 
-// ---------- Team: monogram plates and the crew filter ----------
-part("monograms", () => {
-  document.querySelectorAll("div.portrait").forEach(p => {
-    const h = p.closest(".member")?.querySelector("h3");
-    if (!h) return;
-    const words = h.textContent.replace(/\(.*?\)/g, "").trim().split(/\s+/);
-    const initials = (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : "")).toUpperCase();
-    p.innerHTML = `<span class="mono-initials">${initials}</span>`;
-  });
-  // real portraits get a clipping box for the slow hover zoom
-  document.querySelectorAll(".member > img.portrait").forEach(img => {
-    const box = document.createElement("div");
-    box.className = "portrait-box";
-    img.before(box);
-    box.append(img);
-  });
-});
-
+// ---------- Team: the crew filter ----------
+// Built from the <span class="chip"> subteams and <span class="lead-tag"> roles on each member.
 part("crew-filter", () => {
   const grid = document.querySelector("[data-filter]");
   if (!grid) return;
   const members = [...grid.querySelectorAll(".member")];
   const chipsOf = m => [...m.querySelectorAll(".chip")].map(c => c.textContent.trim());
-  const leadsOf = m => [...m.querySelectorAll(".lead-tag")].map(t => t.textContent.replace(/\s*Lead$/, "").trim());
-  const tagsOf = m => [...chipsOf(m), ...leadsOf(m)];
-  const ORDER = ["CAD", "Build", "Outreach", "Electrical", "Software", "Game Strategy"];
   const roleTeams = m => [...m.querySelectorAll(".lead-tag")].map(t => t.textContent.trim()).filter(t => / Lead$/.test(t)).map(t => t.replace(/ Lead$/, ""));
-  const found = [...new Set(members.flatMap(m => [...chipsOf(m), ...roleTeams(m)]))];
+  const tagsOf = m => [...chipsOf(m), ...roleTeams(m)];
+  const ORDER = ["CAD", "Build", "Outreach", "Electrical", "Software", "Game Strategy"];
+  const found = [...new Set(members.flatMap(tagsOf))];
   if (!found.length) return;
   const labels = [...ORDER.filter(l => found.includes(l)), ...found.filter(l => !ORDER.includes(l))];
   const hasLeads = members.some(m => m.querySelector(".lead-tag"));
@@ -738,8 +430,7 @@ part("crew-filter", () => {
   bar.className = "crew-filter";
   bar.setAttribute("role", "group");
   bar.setAttribute("aria-label", "Filter members by subteam");
-  bar.innerHTML = all.map((l, i) => `<button type="button" aria-pressed="${i === 0}">${l}</button>`).join("");
-  // the count is visible and read out; the grid shows only the members who match
+  bar.innerHTML = all.map((l, i) => `<button type="button" aria-pressed="${i === 0}">${esc(l)}</button>`).join("");
   const count = document.createElement("p");
   count.className = "crew-count";
   count.setAttribute("aria-live", "polite");
@@ -754,8 +445,6 @@ part("crew-filter", () => {
       if (match) shown.push(m.querySelector("h3")?.textContent.trim());
       if (appearing && user && !RM) m.animate([{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }], { duration: 320, easing: "cubic-bezier(0.16, 1, 0.3, 1)" });
     });
-    grid.classList.toggle("is-filtered", label !== "All");
-    // short on screen; screen readers also hear the names
     count.textContent = "";
     if (label !== "All") {
       count.append(`${shown.length} of ${members.length} members ${label === "Leads" ? "are leads" : "in " + label}`);
@@ -794,8 +483,9 @@ part("special-quotes", () => {
   const form = document.getElementById("sq-form");
   const pass = document.getElementById("sq-pass");
   const msg = document.getElementById("sq-msg");
+  if (!form || !pass || !msg || !window.crypto?.subtle) return;
+  sqOpen.closest(".sq")?.removeAttribute("hidden"); // the lock only works with JavaScript, so it starts hidden
   const bytes = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-
   const unlock = async password => {
     const { subtle } = crypto;
     const base = await subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"]);
@@ -805,13 +495,11 @@ part("special-quotes", () => {
     const plain = await subtle.decrypt({ name: "AES-GCM", iv: bytes(SPECIAL_QUOTES.iv) }, key, bytes(SPECIAL_QUOTES.data));
     return JSON.parse(new TextDecoder().decode(plain));
   };
-
   sqOpen.addEventListener("click", () => {
     form.hidden = false;
     sqOpen.hidden = true;
     pass.focus();
   });
-
   form.addEventListener("submit", async e => {
     e.preventDefault();
     msg.textContent = "Checking…";
@@ -825,14 +513,14 @@ part("special-quotes", () => {
       pass.select();
       return;
     }
-    form.querySelectorAll("input, button").forEach(el => { el.hidden = true; });
+    msg.tabIndex = -1;
+    msg.focus({ preventScroll: true });
+    form.hidden = true;
     msg.textContent = "Special quotes unlocked.";
-    revealSpecialQuotes(quotes);
+    reveal(quotes);
   });
-
-  // Unlock animation: scroll to the quotes, the lock shakes and pops open, then the quote
-  // fades in. Afterwards it keeps a "Special quote" badge.
-  const revealSpecialQuotes = async quotes => {
+  // the lock shakes and opens, then the quote appears; afterwards it keeps a "Special quote" badge
+  const reveal = async quotes => {
     const locked = [...document.querySelectorAll(".quote.locked")];
     const wait = ms => new Promise(r => setTimeout(r, ms));
     const show = q => {
@@ -841,17 +529,21 @@ part("special-quotes", () => {
       q.classList.remove("locked", "unlocking");
       q.classList.add("special");
     };
-    const focusFirst = () => { if (!locked[0]) return; locked[0].tabIndex = -1; locked[0].focus({ preventScroll: true }); };
+    const focusFirst = () => {
+      const a = document.activeElement;
+      if (!locked[0] || (a !== msg && a !== document.body)) return; // the visitor has moved on: leave focus alone
+      locked[0].tabIndex = -1;
+      locked[0].focus({ preventScroll: true });
+    };
     if (RM) { locked.forEach(show); focusFirst(); return; }
-
-    locked[0]?.closest(".member").scrollIntoView({ behavior: "smooth", block: "center" });
-    await wait(700);
+    locked[0]?.closest(".member")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    await wait(600);
     for (const q of locked) {
       q.classList.add("unlocking");
-      await wait(650);
+      await wait(600);
       show(q);
       q.classList.add("revealing");
-      await wait(350);
+      await wait(300);
     }
     focusFirst();
   };
@@ -860,10 +552,12 @@ part("special-quotes", () => {
 // ---------- Contact form (contact page) ----------
 // Opens the visitor's email app with the message addressed to the team email.
 part("contact", () => {
-  const contactForm = document.getElementById("contact-form");
-  if (!contactForm) return;
-  // contact.html?topic=join pre-selects "Joining the team" (used by the Join buttons)
-  if (new URLSearchParams(location.search).get("topic") === "join") contactForm.elements.topic.value = "Joining the team";
+  const form = document.getElementById("contact-form");
+  if (!form) return;
+  // contact.html?topic=join (or sponsor / outreach) pre-selects the topic
+  const TOPICS = { join: "Joining the team", sponsor: "Sponsorship", outreach: "Outreach / collaboration" };
+  const asked = TOPICS[new URLSearchParams(location.search).get("topic")];
+  if (asked && form.elements.topic) form.elements.topic.value = asked;
   // A one-line prompt under "Message" for each topic: what's useful for us to know
   const HINTS = {
     "Joining the team": "Rookies are part of the team from day one. Tell us what you’d like to work on (building, coding, CAD, or outreach) and anything you want to ask.",
@@ -871,23 +565,26 @@ part("contact", () => {
     "Outreach / collaboration": "Tell us about your event, school or group.",
   };
   const hint = document.getElementById("message-hint");
-  const showHint = () => { if (hint) hint.textContent = HINTS[contactForm.elements.topic.value] || ""; };
-  contactForm.addEventListener("change", e => { if (e.target.name === "topic") showHint(); });
+  const showHint = () => { if (hint) hint.textContent = HINTS[form.elements.topic?.value] || ""; };
+  form.addEventListener("change", e => { if (e.target.name === "topic") showHint(); });
   showHint();
-  const status = contactForm.querySelector(".form-status");
-  contactForm.addEventListener("submit", e => {
+  const status = form.querySelector(".form-status");
+  form.addEventListener("submit", e => {
     e.preventDefault();
-    const f = contactForm.elements;
+    const f = form.elements;
     const subject = `${f.topic.value} from ${f.name.value}`;
     const body = `${f.message.value}\n\n${f.name.value}\n${f.email.value}`;
-    location.href = `mailto:${TEAM_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    if (status) status.textContent = `Opening your email app… If nothing opens, email us at ${TEAM_EMAIL}.`;
+    const url = `mailto:${TEAM_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    location.href = url;
+    if (status) status.textContent = url.length > 1900
+      ? `Opening your email app… Long messages can get cut short in some email apps, so check the whole message is in the draft. If it isn’t, email us at ${TEAM_EMAIL}.`
+      : `Opening your email app… If nothing opens, email us at ${TEAM_EMAIL}.`;
   });
 });
 
 part("copy-email", () => {
-  const row = document.querySelector(".contact-list a[href^='mailto:']");
-  if (!row || !navigator.clipboard || !window.isSecureContext) return;
+  const link = document.querySelector(".contact-list a[href^='mailto:']");
+  if (!link || !navigator.clipboard || !window.isSecureContext) return;
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "copy";
@@ -896,161 +593,37 @@ part("copy-email", () => {
   const live = document.createElement("span");
   live.className = "visually-hidden";
   live.setAttribute("aria-live", "polite");
-  row.after(btn, live);
+  link.after(btn, live);
   btn.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(TEAM_EMAIL);
       btn.textContent = "Copied";
       live.textContent = "Email address copied";
       setTimeout(() => { btn.textContent = "Copy"; live.textContent = ""; }, 1600);
-    } catch { /* clipboard blocked: the address is still on screen */ }
-  });
-});
-
-// Spec sheets: "TBD" values are set in the label font so they read as not-yet-known
-part("specs", () => {
-  document.querySelectorAll(".specs li > span:last-child").forEach(s => { if (s.textContent.trim() === "TBD") s.classList.add("tbd"); });
-});
-
-// ---------- Reveals ----------
-// Motion is kept for the things worth watching, chosen by element type so pages need no attributes:
-//   page head — the title rises and its lead fades in once, on load
-//   robots    — on the home page each robot rises, then its name, then its copy
-//   curtain   — up to three main photos per page (and per outreach year) wipe open
-//   rule      — hairlines in data lists (stats, specs, events, records) draw left to right
-//   cards     — members and mechanism cards fade in one by one as a list
-// Headings and paragraphs elsewhere simply appear. Anything already on screen when the page
-// loads stays as it is, so nothing flashes; anything reached by keyboard shows at once.
-part("reveals", () => {
-  const html = document.documentElement;
-  // if anything below fails, show everything rather than leave a block hidden
-  try { reveals(html); } catch (e) { html.classList.add("reveal-all"); throw e; }
-});
-function reveals(html) {
-  if (RM || !("IntersectionObserver" in window) || html.classList.contains("reveal-all") || !main) {
-    html.classList.add("reveal-all");
-    return;
-  }
-  const small = innerWidth < 700;
-  const io = new IntersectionObserver(es => es.forEach(async e => {
-    if (!e.isIntersecting) return;
-    io.unobserve(e.target);
-    const el = e.target;
-    if (el.classList.contains("frame")) {
-      const img = el.querySelector("img");
-      if (img) {
-        img.loading = "eager";
-        await Promise.race([img.decode?.().catch(() => {}), new Promise(r => setTimeout(r, 800))]);
-        if (!img.naturalWidth || img.clientWidth * 1.06 > img.naturalWidth) el.style.setProperty("--settle", 1);
-      }
+    } catch {
+      btn.textContent = "Copy failed";
+      live.textContent = "Couldn’t copy. Select the address and copy it.";
+      setTimeout(() => { btn.textContent = "Copy"; live.textContent = ""; }, 2400);
     }
-    el.classList.add("in");
-  }), { rootMargin: "0px 0px -12% 0px" });
-  // a photo inside a closed curtain can't trigger its own lazy load, so start it a screen early
-  const near = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
-    near.unobserve(e.target);
-    const img = e.target.querySelector("img");
-    if (img) img.loading = "eager";
-  }), { rootMargin: "100% 0px 100% 0px" });
-  const watch = el => io.observe(el);
-  // anything that receives keyboard focus shows at once, without its entrance delay
-  document.addEventListener("focusin", e => {
-    const r = e.target.closest?.("[data-reveal]:not(.in)");
-    if (r) { r.classList.add("now", "in"); io.unobserve(r); }
   });
+});
 
-  const mask = el => {
-    if (el.querySelector(":scope > .mask")) return;
-    const outer = document.createElement("span");
-    outer.className = "mask";
-    const inner = document.createElement("span");
-    inner.append(...el.childNodes);
-    outer.append(inner);
-    el.append(outer);
-    return inner;
-  };
-  const frame = img => {
-    const f = document.createElement("span");
-    f.className = "frame";
-    f.dataset.reveal = "curtain";
-    img.before(f);
-    f.append(img);
-    near.observe(f);
-    return f;
-  };
-
-  // Page heads: one orchestrated entrance on load
-  const head = main.querySelector(".page-head");
-  if (head) {
-    const ready = [];
-    const add = (el, kind, d) => { el.dataset.reveal = kind; el.style.setProperty("--d", d + "ms"); ready.push(el); };
-    head.querySelectorAll(":scope > h1").forEach(el => { mask(el); add(el, "rise", 0); });
-    head.querySelectorAll(":scope > p").forEach(el => add(el, "fade", 150));
-    head.querySelectorAll(".team-banner").forEach(img => { const f = frame(img); f.style.setProperty("--d", "250ms"); ready.push(f); });
-    head.querySelectorAll(".mission").forEach(el => add(el, "fade", 400));
-    head.classList.add("is-split");
-    requestAnimationFrame(() => requestAnimationFrame(() => ready.forEach(el => el.classList.add("in"))));
-  }
-
-  // Read every position first, then change the DOM, so the page lays out once
-  const models = [...main.querySelectorAll(".model")];
-  const photos = [...main.querySelectorAll(".hero-photo img, .feature-img, .captain-photo img, .closing-fig img, .chapter-lead img, .event-photo")]
-    .filter(img => !img.closest(".page-head, .season-hero, .wt-stage"));
-  const lists = [...main.querySelectorAll(".stats, .specs, .closing-cols, .event-list, .software-grid, .bars, .captain-record")]
-    .filter(el => !el.closest(".page-head"));
-  const cards = [...main.querySelectorAll(".members-grid > .member, .parts-grid > .part-card")];
-  const fold = innerHeight * 0.92;
-  const below = new Set([...models, ...photos, ...lists, ...cards]
-    .filter(el => !!el.closest("[hidden]") || el.getBoundingClientRect().top > fold));
-
-  // Robots: the robot rises, then its name, then the copy
-  models.filter(m => below.has(m)).forEach(m => {
-    m.dataset.reveal = "model";
-    m.querySelectorAll(".model-name").forEach(n => { const inner = mask(n); inner?.style.setProperty("--d", "150ms"); });
-    m.querySelectorAll(".model-copy > :not(.model-name)").forEach(el => { el.dataset.reveal = "fade"; el.style.setProperty("--d", "300ms"); watch(el); });
-    watch(m);
-  });
-
-  // Curtain: at most three main photos per page and per outreach year
-  const budget = new Map();
-  photos.filter(img => below.has(img)).forEach(img => {
-    const scope = img.closest(".year-panel") || main;
-    const used = budget.get(scope) || 0;
-    if (used >= 3) return;
-    budget.set(scope, used + 1);
-    watch(frame(img));
-  });
-
-  // Rule: data lists whose hairlines draw in sequence (big figures rise with their row)
-  lists.filter(el => below.has(el)).forEach(el => {
-    el.dataset.reveal = "rule";
-    el.querySelectorAll(".stat .big").forEach(mask);
-    [...el.children].forEach((c, i) => c.style.setProperty("--i", Math.min(i, small ? 2 : 5)));
-    watch(el);
-  });
-
-  // Cards: members and mechanism cards fade in one by one, row by row
-  cards.filter(c => below.has(c)).forEach(card => {
-    const perRow = card.closest(".members-grid") ? (small ? 1 : 5) : (small ? 1 : 3);
-    const i = [...card.parentElement.children].indexOf(card);
-    card.dataset.reveal = "fade";
-    card.style.setProperty("--d", (i % perRow) * 80 + "ms");
-    watch(card);
-  });
-}
+// Spec sheets: "TBD" values read as not-yet-known
+part("specs", () => {
+  document.querySelectorAll(".spec dd").forEach(d => { if (d.textContent.trim() === "TBD") d.classList.add("tbd"); });
+});
 
 // ---------- Robot morph ----------
-// The robot you click (or the season you go Back from) is the only one that glides between pages.
+// Robots carry style="view-transition-name: …". Only the robot you are heading to (or coming back
+// from) keeps its name, so it is the one that glides between pages in browsers that support it.
 part("morph", () => {
   const named = [...document.querySelectorAll('img[style*="view-transition-name"]')];
   if (!named.length) return;
   named.forEach(el => { el.dataset.vt = el.style.viewTransitionName; });
-  const linkOf = el => (el.closest("a[href]") || el.closest(".model")?.querySelector(".model-copy a[href]"))?.href;
   addEventListener("pageswap", e => {
     const to = e.activation?.entry?.url;
     const back = e.activation?.navigationType === "traverse";
-    const keep = (back && named.find(el => el.closest(".season-hero"))) || named.find(el => to && linkOf(el) === to);
+    const keep = (back && named.find(el => el.closest(".season-head"))) || named.find(el => to && el.closest("a[href]")?.href === to);
     named.forEach(el => { el.style.viewTransitionName = el === keep ? el.dataset.vt : "none"; });
   });
   addEventListener("pageshow", e => { if (e.persisted) named.forEach(el => { el.style.viewTransitionName = el.dataset.vt; }); });

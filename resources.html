@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Resources | GNCE Mercury</title>
   <meta name="description" content="Code, CAD, and engineering documents from GNCE Mercury, FTC team 26413.">
   <!-- Link previews: when the custom domain is live, change the address in og:url and og:image -->
@@ -14,55 +14,71 @@
   <meta property="og:image" content="https://arnieftc.github.io/GNCE-Mercury-Website/images/logo-mark.png">
   <meta property="og:image:alt" content="GNCE Mercury logo">
   <meta name="twitter:card" content="summary">
-  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <meta name="theme-color" content="#0f0e0d">
-  <link rel="preload" href="fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=131">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css?v=200">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="resources">
-  <main class="container">
+  <noscript><nav class="nojs-nav container" aria-label="Main"><a href="index.html">Home</a><a href="seasons.html">Seasons</a><a href="team.html">Team</a><a href="outreach.html">Outreach</a><a href="partners.html">Partners</a><a href="resources.html">Resources</a><a href="contact.html">Contact</a></nav></noscript>
+  <main id="main">
 
-    <div class="page-head">
+    <div class="page-head container">
       <h1>Resources</h1>
-      <p>How our robots work and how they changed, written up so other teams can learn from them. Our code, CAD, and portfolio are on the way.</p>
+      <p class="lead">How our robots work and how they changed, written up so other teams can learn from them. Our code, CAD, and portfolio are on the way.</p>
     </div>
 
-    <!-- AVAILABLE NOW: one <li> per thing other teams can read today -->
-    <section>
-      <h2 class="section-title">Available now</h2>
-      <ul class="resource-list">
-        <li><a href="seasons/2025-2026.html#robot"><b><span translate="no">DECODE</span> robot, 2025–26</b><span>Each mechanism and how it changed, our turret tracking and shooter software, and our autonomous routines. From our engineering portfolio.</span></a></li>
-        <li><a href="seasons/2024-2025.html"><b><span translate="no">INTO THE DEEP</span> robot, 2024–25</b><span>How our rookie robot changed, from the first prototype to the specimen lift, and our planned autonomous route.</span></a></li>
-      </ul>
+    <!-- AVAILABLE NOW: one <li> per thing other teams can read today:
+         <li><h3><a href="WHERE-IT-IS">Its name</a></h3><p>One sentence on what's in it.</p></li>
+         For a link to another site, add target="_blank" rel="noopener" to the <a>. -->
+    <section class="band" aria-labelledby="now-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="now-title">Available now</h2>
+        </div>
+        <ul class="resource-list">
+          <li>
+            <h3><a href="seasons/2025-2026.html#mechanisms"><span translate="no">DECODE</span> robot, 2025–26</a></h3>
+            <p>Each mechanism and how it changed, our turret tracking and shooter software, and our autonomous routines. From our engineering portfolio.</p>
+          </li>
+          <li>
+            <h3><a href="seasons/2024-2025.html"><span translate="no">INTO THE DEEP</span> robot, 2024–25</a></h3>
+            <p>How our rookie robot changed, from the first prototype to the specimen lift, and our planned autonomous route.</p>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <!-- ON THE WAY: when something is ready, move it up to "Available now" as an <li>, or
-         add a link to its card here, e.g. <a class="text-link" href="https://github.com/…" target="_blank" rel="noopener">View on GitHub</a> -->
-    <section>
-      <h2 class="section-title">On the way</h2>
-      <div class="grid cols-2">
-        <div class="card">
-          <h3>Code</h3>
-          <p>Our robot code for each season, including autonomous routines and path following.</p>
+    <!-- ON THE WAY: one <li> per thing we're still preparing. When one is ready, move its <li> up to
+         "Available now" and wrap its name in a link, e.g.
+         <h3><a href="https://github.com/…" target="_blank" rel="noopener">Code</a></h3> -->
+    <section class="band band--grey" aria-labelledby="soon-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="soon-title">On the way</h2>
         </div>
-        <div class="card">
-          <h3>CAD</h3>
-          <p>Full robot CAD models, from early prototypes to the version we competed with.</p>
-        </div>
-        <div class="card">
-          <h3>Engineering portfolio</h3>
-          <p>The portfolio we submit for judging, covering our design process, testing, and outreach.</p>
-        </div>
-        <div class="card">
-          <h3>Build log</h3>
-          <p>Notes and photos from build sessions as each robot comes together.</p>
-        </div>
+        <ul class="resource-list">
+          <li>
+            <h3>Code</h3>
+            <p>Our robot code for each season, including autonomous routines and path following.</p>
+          </li>
+          <li>
+            <h3>CAD</h3>
+            <p>Full robot CAD models, from early prototypes to the version we competed with.</p>
+          </li>
+          <li>
+            <h3>Engineering portfolio</h3>
+            <p>The portfolio we submit for judging, covering our design process, testing, and outreach.</p>
+          </li>
+          <li>
+            <h3>Build log</h3>
+            <p>Notes and photos from build sessions as each robot comes together.</p>
+          </li>
+        </ul>
       </div>
     </section>
 
   </main>
-  <script src="js/main.js?v=131"></script>
+  <script src="js/main.js?v=200"></script>
 </body>
 </html>

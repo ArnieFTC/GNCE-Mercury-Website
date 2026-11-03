@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GNCE Mercury | FTC 26413</title>
-  <meta name="description" content="GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, MA.">
+  <meta name="description" content="GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, MA. Three seasons, three robots, and the partners who make them possible.">
   <!-- Link previews: when the custom domain is live, change the address in og:url and og:image -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="GNCE Mercury">
@@ -14,153 +14,250 @@
   <meta property="og:image" content="https://arnieftc.github.io/GNCE-Mercury-Website/images/logo-mark.png">
   <meta property="og:image:alt" content="GNCE Mercury logo">
   <meta name="twitter:card" content="summary">
-  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <meta name="theme-color" content="#0f0e0d">
-  <link rel="preload" href="fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=131">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css?v=200">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="index">
-  <main>
-    <!-- CREDENTIALS: our best results, in one still row at the top of the home page. Add, edit or reorder the <li>s. -->
-    <div class="credentials-bar">
-      <ul class="container credentials" aria-label="Team highlights">
-        <li>MA States qualifier, 2026</li>
-        <li>Sustain Award, WNEU Qualifier 2026</li>
-        <li>Winning alliance, Ryken RoboBowl 2025</li>
-        <li>Think Award, WNEU Qualifier 2025</li>
-      </ul>
-    </div>
+  <noscript><nav class="nojs-nav container" aria-label="Main"><a href="index.html">Home</a><a href="seasons.html">Seasons</a><a href="team.html">Team</a><a href="outreach.html">Outreach</a><a href="partners.html">Partners</a><a href="resources.html">Resources</a><a href="contact.html">Contact</a></nav></noscript>
+  <main id="main">
 
-    <!-- HERO: logo, one statement, the wordmark -->
-    <section class="hero">
-      <div class="container hero-top">
-        <div class="hero-copy">
-          <p class="hero-pitch">A high school FIRST Tech Challenge team in Weston, Massachusetts. We build a new competition robot every year and teach younger students to do the same.</p>
-          <div class="actions">
-            <a class="btn" href="contact.html?topic=join#contact-form">Join as a student</a>
-            <a class="btn ghost" href="contact.html#support">Sponsor us</a>
+    <!-- LAUNCH: the first screen. Three garage bays hold the three robots; choosing a bay shows that
+         season's card on the right. One <a class="bay"> and one <article class="season-card"> per season,
+         oldest first. data-card on a bay is the id of its card; data-default on the line-up is the
+         season shown first. The "Supported by" names are filled in from SUPPORTERS in js/main.js. -->
+    <section class="launch" aria-labelledby="launch-title">
+      <div class="container">
+        <div class="launch-head">
+          <h1 id="launch-title" translate="no">GNCE Mercury</h1>
+          <p>A high school <b><span translate="no">FIRST Tech Challenge</span></b> team in Weston, Massachusetts: team&nbsp;26413, founded in 2024. We build a new competition robot every year and teach younger students to do the same.</p>
+        </div>
+
+        <div class="lineup" data-lineup data-default="2025">
+          <div class="bays">
+            <a class="bay" id="bay-2024" href="seasons/2024-2025.html" data-season="2024" data-card="card-2024">
+              <span class="bay-stage"><img src="images/into-the-deep-robot-cut.webp" width="802" height="482" alt="" style="view-transition-name: robot-itd"></span>
+              <span class="bay-label">
+                <span class="bay-no"><span class="dia" aria-hidden="true"></span><span>2024–25</span></span>
+                <span class="bay-name" translate="no">INTO THE DEEP</span>
+                <span class="bay-status">Rookie season</span>
+              </span>
+            </a>
+            <a class="bay" id="bay-2025" href="seasons/2025-2026.html" data-season="2025" data-card="card-2025">
+              <span class="bay-stage"><img src="images/decode-robot-cad.webp" width="1165" height="1066" alt="" fetchpriority="high" style="view-transition-name: robot-decode"></span>
+              <span class="bay-label">
+                <span class="bay-no"><span class="dia" aria-hidden="true"></span><span>2025–26</span></span>
+                <span class="bay-name" translate="no">DECODE</span>
+                <span class="bay-status">Second season</span>
+              </span>
+            </a>
+            <a class="bay" id="bay-2026" href="seasons/2026-2027.html" data-season="2026" data-card="card-2026">
+              <span class="bay-stage"><img src="images/mercinator-v1-cut.webp" width="479" height="511" alt="" style="view-transition-name: robot-mercinator"></span>
+              <span class="bay-label">
+                <span class="bay-no"><span class="dia" aria-hidden="true"></span><span>2026–27</span></span>
+                <span class="bay-name" translate="no">BIOBUZZ</span>
+                <span class="bay-status">This season, in progress</span>
+              </span>
+            </a>
+          </div>
+
+          <!-- on phones and tablets the partner credit sits here, inside the first screen (the strip below is for desktops) -->
+          <p class="lineup-credit"><span>Supported by <b data-supporters>SolidWorks, Weston Owl and WEEFC</b></span> <a class="btn btn--livery" href="partners.html">Partner with us</a></p>
+
+          <div class="season-cards">
+            <article class="season-card" id="card-2024">
+              <h2 translate="no">INTO THE DEEP</h2>
+              <p class="sc-sub">2024–25, our rookie season: an evolving robot built to collect samples and hang specimens.</p>
+              <ul class="sc-results" aria-label="INTO THE DEEP results">
+                <li><time datetime="2025-02-22">Feb 22, 2025</time><div><b>MA Hawk Nest Havoc! Xaverian Qualifier</b><span>Competed</span></div></li>
+                <li><time datetime="2025-02-23">Feb 23, 2025</time><div><b>WNEU Qualifier</b><span>Think Award, made playoffs</span></div></li>
+              </ul>
+              <dl class="sc-specs">
+                <div><dt>Intake</dt><dd>Extending claw with wrist</dd></div>
+                <div><dt>Scoring</dt><dd>Specimen lift and gripper</dd></div>
+                <div><dt>Lift drive</dt><dd>1:28 worm gear</dd></div>
+              </dl>
+              <a class="text-link" href="seasons/2024-2025.html">See how we built it</a>
+            </article>
+            <article class="season-card" id="card-2025">
+              <h2 translate="no">DECODE</h2>
+              <p class="sc-sub">2025–26, our second season: Sustain Award, first pick on the winning alliance, and a trip to MA States.</p>
+              <ul class="sc-results" aria-label="DECODE results">
+                <li><time datetime="2025-12-14">Dec 14, 2025</time><div><b>Ryken&nbsp;RoboBowl Qualifier</b><span>Winning alliance, 1st pick</span></div></li>
+                <li><time datetime="2026-01-24">Jan 24, 2026</time><div><b>WNEU Qualifier</b><span>Sustain Award</span></div></li>
+                <li><time datetime="2026-03-15">Mar 15, 2026</time><div><b>Massachusetts State Championship</b><span>Qualified through our Ryken&nbsp;RoboBowl result</span></div></li>
+              </ul>
+              <dl class="sc-specs">
+                <div><dt>Transfer</dt><dd>Custom rails, 0.34&nbsp;s</dd></div>
+                <div><dt>Shooter</dt><dd>Flywheel on a 360° turret</dd></div>
+                <div><dt>Vision</dt><dd><span translate="no">Limelight</span>, PD tracking</dd></div>
+              </dl>
+              <a class="text-link" href="seasons/2025-2026.html">See how we built it</a>
+            </article>
+            <article class="season-card" id="card-2026">
+              <h2 translate="no">BIOBUZZ</h2>
+              <p class="sc-sub">2026–27, this season: <span translate="no">The Mercinator</span> (version 1) is a pollen-only robot built on the same ideas as the DECODE robot we took to States.</p>
+              <ul class="sc-results" aria-label="BIOBUZZ results">
+                <li><span>Next</span><div><b data-next-event>See the season calendar below</b><span>No qualifiers yet this season</span></div></li>
+              </ul>
+              <dl class="sc-specs">
+                <div><dt>Drivetrain</dt><dd>Mecanum</dd></div>
+                <div><dt>Intake</dt><dd>Compliant gecko and vector wheels</dd></div>
+                <div><dt>Software</dt><dd><span translate="no">Pedro Pathing</span> 3.0</dd></div>
+              </dl>
+              <a class="text-link" href="seasons/2026-2027.html">Follow the build</a>
+            </article>
           </div>
         </div>
-        <img class="hero-emblem" src="images/logo-mark.png" alt="GNCE Mercury logo: the god Mercury holding a staff inside a lavender diamond" width="473" height="505" fetchpriority="high">
       </div>
-      <h1 class="wordmark" translate="no"><span class="visually-hidden">GNCE </span><span class="wm-mask"><span class="wm">Mercury</span></span></h1>
-      <div class="container hero-foot">
-        <span class="gnce" translate="no">Galactic Narwhal Chicken Effect</span>
-        <span>FTC team <span class="num">26413</span>, founded 2024</span>
-        <a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a>
+
+      <div class="partner-strip">
+        <div class="container row">
+          <p>Supported by <b data-supporters>SolidWorks, Weston Owl and WEEFC</b></p>
+          <div class="actions">
+            <a class="btn btn--livery" href="partners.html">Partner with us</a>
+            <a href="contact.html?topic=join#contact-form">Join as a student</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- HERO PHOTO: the team photo under the wordmark, shown no wider than its real size (927px here). For a bigger
-         photo, swap the src, width and height, and set style="--photo-w: 1200px" on the <figure> to its width. -->
-    <figure class="container hero-photo">
-      <img src="images/team.webp" width="927" height="626" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship">
-      <figcaption>The team at the Ryken RoboBowl, December 2025.</figcaption>
-    </figure>
+    <!-- RECORD: every competition so far, newest first. Add a <tr> when a new result comes in.
+         The impact numbers below it link to where they come from. -->
+    <section class="band" aria-labelledby="record-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="record-title">The record so far</h2>
+          <p>Every qualifier and championship we have competed at, from our first qualifier in February 2025 to the Massachusetts State Championship.</p>
+        </div>
+        <table class="results-table">
+          <thead>
+            <tr><th scope="col">Date</th><th scope="col">Event</th><th scope="col">Result</th><th scope="col">Robot</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><time datetime="2026-03-15">Mar 15, 2026</time></td>
+              <td class="r-event">Massachusetts State Championship</td>
+              <td class="r-result">Competed after qualifying through our Ryken&nbsp;RoboBowl result</td>
+              <td class="r-season"><a href="seasons/2025-2026.html" translate="no">DECODE</a></td>
+            </tr>
+            <tr>
+              <td><time datetime="2026-01-24">Jan 24, 2026</time></td>
+              <td class="r-event">WNEU Qualifier</td>
+              <td class="r-result"><span class="dia" aria-hidden="true"></span><span>Sustain Award</span></td>
+              <td class="r-season"><a href="seasons/2025-2026.html" translate="no">DECODE</a></td>
+            </tr>
+            <tr>
+              <td><time datetime="2025-12-14">Dec 14, 2025</time></td>
+              <td class="r-event">Ryken&nbsp;RoboBowl Qualifier</td>
+              <td class="r-result"><span class="dia" aria-hidden="true"></span><span>Winning alliance, 1st pick</span></td>
+              <td class="r-season"><a href="seasons/2025-2026.html" translate="no">DECODE</a></td>
+            </tr>
+            <tr>
+              <td><time datetime="2025-02-23">Feb 23, 2025</time></td>
+              <td class="r-event">WNEU Qualifier</td>
+              <td class="r-result"><span class="dia" aria-hidden="true"></span><span>Think Award, made playoffs</span></td>
+              <td class="r-season"><a href="seasons/2024-2025.html" translate="no">INTO THE DEEP</a></td>
+            </tr>
+            <tr>
+              <td><time datetime="2025-02-22">Feb 22, 2025</time></td>
+              <td class="r-event">MA Hawk Nest Havoc! Xaverian Qualifier</td>
+              <td class="r-result">Competed</td>
+              <td class="r-season"><a href="seasons/2024-2025.html" translate="no">INTO THE DEEP</a></td>
+            </tr>
+          </tbody>
+        </table>
 
-    <!-- ROBOTS: one <article class="model"> per robot, oldest first. Clicking the robot or its link opens that season.
-         The style="view-transition-name: …" lets the robot glide into its season page; each name may appear only once per page. -->
-    <section class="container">
-      <div class="section-head">
-        <h2 class="section-title">A new robot every season</h2>
-      </div>
-      <div class="models">
-        <article class="model" id="into-the-deep">
-          <figure class="model-stage"><a class="model-link" href="seasons/2024-2025.html" tabindex="-1"><img src="images/into-the-deep-robot-ink.webp" width="876" height="558" loading="lazy" decoding="async" alt="GNCE Mercury’s INTO THE DEEP robot with intake and lift arm" style="view-transition-name: robot-itd"></a></figure>
-          <div class="model-copy">
-            <h3 class="model-name" translate="no">INTO THE DEEP</h3>
-            <p>Our 2024–25 rookie season, with a Think Award at the WNEU Qualifier.</p>
-            <a class="text-link" href="seasons/2024-2025.html">See how we built it</a>
-          </div>
-        </article>
-        <article class="model" id="decode">
-          <figure class="model-stage"><a class="model-link" href="seasons/2025-2026.html" tabindex="-1"><img src="images/decode-robot-cad.webp" width="1165" height="1066" loading="lazy" decoding="async" alt="CAD render of GNCE Mercury’s DECODE robot with its intake, transfer, and turret shooter" style="view-transition-name: robot-decode"></a></figure>
-          <div class="model-copy">
-            <h3 class="model-name" translate="no">DECODE</h3>
-            <p>Our second season, 2025–26: Sustain Award, first pick on the winning alliance, and a trip to MA States.</p>
-            <a class="text-link" href="seasons/2025-2026.html">See how we built it</a>
-          </div>
-        </article>
-        <article class="model" id="mercinator">
-          <div class="model-stage pair">
-            <figure class="print"><a class="model-link" href="seasons/2026-2027.html" tabindex="-1"><img src="images/mercinator_v1_fullybuilt.webp" width="610" height="608" loading="lazy" decoding="async" alt="The Mercinator, our BIOBUZZ robot, fully built (version 1)" style="view-transition-name: robot-mercinator"></a></figure>
-            <figure class="print"><img src="images/mercinator_v1.jpg" width="794" height="806" loading="lazy" decoding="async" alt="The Mercinator V1 on a workbench while it was being built"></figure>
-          </div>
-          <div class="model-copy">
-            <h3 class="model-name" translate="no">The Mercinator</h3>
-            <p>Our robot for this season’s game, <span translate="no">BIOBUZZ</span> (2026–27), still in progress.</p>
-            <a class="text-link" href="seasons/2026-2027.html">Follow the build</a>
-          </div>
-        </article>
+        <dl class="facts" style="margin-top: clamp(40px, 5vw, 64px)">
+          <div><dt>Students directly impacted</dt><dd><a href="outreach.html">1,000</a></dd></div>
+          <div><dt>Raised for parts, travel, and outreach</dt><dd><a href="partners.html">$8,000+</a></dd></div>
+          <div><dt>Students reached</dt><dd><a href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener">100,000+</a></dd></div>
+        </dl>
       </div>
     </section>
 
-    <!-- RECORD: the numbers (each links to its proof), then the countdown. Edit the numbers directly below;
-         edit the event list in js/main.js (SEASON, at the top) -->
-    <section class="container">
-      <div class="section-head">
-        <h2 class="section-title">The record so far</h2>
-      </div>
-      <div class="stats">
-        <a class="stat" href="outreach.html"><div class="big">1,000</div><div class="label">Students directly impacted</div></a>
-        <a class="stat" href="contact.html#support"><div class="big">$8,000+</div><div class="label">Raised for parts, travel, and outreach</div></a>
-        <a class="stat" href="https://www.instagram.com/gnce_mercury/" target="_blank" rel="noopener"><div class="big">100,000+</div><div class="label">Students reached</div></a>
-      </div>
-      <div class="countdown" id="countdown">
-        <h2 class="cd-head">Next event</h2>
-        <div class="event-name"></div>
-        <div class="event-date"></div>
-        <div class="timer"></div>
-        <div class="timeline" id="timeline"></div>
+    <!-- THIS SEASON: the calendar is built from SEASON at the top of js/main.js -->
+    <section class="band band--grey band--tight" id="countdown" aria-labelledby="calendar-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="calendar-title">The 2026–27 season so far</h2>
+          <p><a class="text-link" href="seasons/2026-2027.html">Follow the build of <span translate="no">The Mercinator</span></a></p>
+        </div>
+        <ol class="calendar" data-calendar aria-label="2026–27 season calendar"></ol>
+        <noscript><p>Our season dates are on <a href="https://www.instagram.com/gnce_mercury/">Instagram @gnce_mercury</a>.</p></noscript>
       </div>
     </section>
 
-    <!-- TEAM & OUTREACH -->
-    <section class="container">
-      <div class="feature">
-        <figure class="feature-fig">
-          <img class="feature-img" src="images/fll_camp_3.jpg" alt="Team members helping campers troubleshoot a VEX IQ robot" width="1400" height="1050" loading="lazy">
-          <figcaption>Our summer robotics camp, August 2026.</figcaption>
+    <!-- TEAM: the team photo is shown no wider than its real size (927px). For a bigger photo,
+         swap the src, width and height, and change --w on the <figure> to its width. -->
+    <section class="band" aria-labelledby="team-title">
+      <div class="container split split--center">
+        <figure class="photo" style="--w: 927px">
+          <img src="images/team.webp" width="927" height="626" loading="lazy" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship">
+          <figcaption>The team at the Ryken&nbsp;RoboBowl, December 2025.</figcaption>
         </figure>
-        <div class="feature-copy">
-          <h2>10 students and 4 coaches</h2>
+        <div>
+          <h2 id="team-title">10 students and 4 coaches</h2>
           <p>We design, build, wire, and program one robot each season.</p>
           <p>Our members have competed at international events and won awards there.</p>
-          <p>In the summer we run a robotics camp, and during the school year we coach Weston’s FIRST LEGO League teams.</p>
-          <div class="feature-links">
+          <p>In the summer we run a robotics camp, and during the school year we coach Weston’s <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> teams.</p>
+          <div class="links" style="margin-top: 24px">
             <a class="text-link" href="team.html">Meet the team</a>
-            <a class="text-link" href="outreach.html">See our outreach</a>
+            <a class="text-link" href="contact.html?topic=join#contact-form">Join as a student</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTREACH: two highlights from outreach.html -->
+    <section class="band band--grey" aria-labelledby="outreach-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="outreach-title">From 4 <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> teams in Weston to 17</h2>
+          <p><a class="text-link" href="outreach.html">See all our outreach</a></p>
+        </div>
+        <div class="entries entries--2">
+          <article class="entry">
+            <figure class="photo">
+              <img src="images/fll_camp_3.jpg" width="1400" height="1050" loading="lazy" alt="Team members helping campers troubleshoot a VEX IQ robot">
+              <figcaption>Our summer robotics camp, August 2026.</figcaption>
+            </figure>
+            <h3>Coaching and camps</h3>
+            <p>We helped Weston’s <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> program grow from 4 teams to 17 teams and 122 students. In August we ran a week-long robotics and engineering camp for about 13 students in grades 4–8.</p>
+          </article>
+          <article class="entry">
+            <figure class="photo">
+              <img src="images/mit_lab_2.jpg" width="900" height="900" loading="lazy" alt="Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench">
+              <figcaption><span translate="no">Francis Bitter</span> Magnet Laboratory, MIT, October&nbsp;9, 2026.</figcaption>
+            </figure>
+            <h3>Learning from scientists and engineers</h3>
+            <p>We spent an afternoon at MIT’s <span translate="no">Francis Bitter</span> Magnet Laboratory, cooling a superconductor with liquid nitrogen, and toured <span translate="no">VulcanForms</span> to see how metal parts are 3D printed.</p>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- CLOSING: join or support -->
-    <section class="container closing">
-      <div class="closing-split">
-        <figure class="closing-fig">
-          <img src="images/mit_lab_2.jpg" width="900" height="900" loading="lazy" alt="Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench">
-          <figcaption>Francis Bitter Magnet Laboratory, MIT, October&nbsp;9, 2026.</figcaption>
-        </figure>
-        <div class="closing-body">
-          <h2>Build with us, or help us get to the next event</h2>
-          <div class="closing-cols">
-            <div>
-              <p><b>Students.</b> Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.</p>
-              <a class="btn" href="contact.html?topic=join#contact-form">Join as a student</a>
-            </div>
-            <div>
-              <p><b>Families and sponsors.</b> Donations pay for robot parts, competition registration, and travel.</p>
-              <a class="btn ghost" href="contact.html#support">Sponsor us</a>
-            </div>
+    <section class="band band--violet" aria-labelledby="closing-title">
+      <div class="container">
+        <h2 id="closing-title" style="max-width: 20ch; margin-bottom: clamp(28px, 4vw, 48px)">Build with us, or help us get to the next event</h2>
+        <div class="split split--even">
+          <div class="ruled" style="border-color: var(--rule-violet)">
+            <h3>Students</h3>
+            <p>Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.</p>
+            <a class="btn btn--ghost-dark" href="contact.html?topic=join#contact-form">Join as a student</a>
+          </div>
+          <div class="ruled" style="border-color: var(--rule-violet)">
+            <h3>Families and sponsors</h3>
+            <p>Donations pay for robot parts, competition registration, and travel.</p>
+            <a class="btn btn--livery" href="partners.html">Partner with us</a>
           </div>
         </div>
       </div>
     </section>
 
   </main>
-  <script src="js/main.js?v=131"></script>
+  <script src="js/main.js?v=200"></script>
 </body>
 </html>

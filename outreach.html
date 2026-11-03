@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Outreach | GNCE Mercury</title>
   <meta name="description" content="Camps, FLL coaching, and STEM demonstrations run by GNCE Mercury, FTC team 26413.">
   <!-- Link previews: when the custom domain is live, change the address in og:url and og:image -->
@@ -14,203 +14,240 @@
   <meta property="og:image" content="https://arnieftc.github.io/GNCE-Mercury-Website/images/logo-mark.png">
   <meta property="og:image:alt" content="GNCE Mercury logo">
   <meta name="twitter:card" content="summary">
-  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <meta name="theme-color" content="#0f0e0d">
-  <link rel="preload" href="fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=131">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css?v=200">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="outreach">
-  <main class="container">
+  <noscript><nav class="nojs-nav container" aria-label="Main"><a href="index.html">Home</a><a href="seasons.html">Seasons</a><a href="team.html">Team</a><a href="outreach.html">Outreach</a><a href="partners.html">Partners</a><a href="resources.html">Resources</a><a href="contact.html">Contact</a></nav></noscript>
+  <main id="main">
 
-    <div class="page-head">
+    <div class="page-head container">
       <h1>Outreach</h1>
-      <p>Camps, coaching, and demonstrations, sorted by season.</p>
+      <p class="lead">Camps, coaching, and demonstrations, sorted by season.</p>
     </div>
 
-    <!-- OUTREACH BY YEAR: one tab per season (tabs are built in js/main.js from the sections below).
-         To add an event, copy/paste an <article class="chapter"> block into that year's <div class="chapters">.
-         The first photo (chapter-lead) is the big one; chapter-strip holds up to three more (use class="chapter-strip shots" for two 16:9 screenshots, or "chapter-strip fit" for two photos that must not be cropped). Every photo opens full screen when clicked. -->
-    <div class="year-tabs" role="tablist" aria-label="Outreach by season"></div>
+    <!-- OUTREACH BY YEAR: js/main.js turns each <section class="year-panel"> into a tab, newest year first.
+         data-tab is the tab's text: the name, then " · ", then the season years (the page shows them on two lines).
+         Keep the ids (year-3, year-2, year-1): outreach.html#year-2 opens that year. Without JavaScript every year shows.
 
-    <section class="year-panel" id="year-3" data-tab="Third year · 2026–27">
-      <h2 class="section-title">Third-year outreach</h2>
-      <div class="chapters">
+         To add an event, copy an <article class="program"> block into that year's <div class="programs">:
+         - <div class="program-media">: the first photo is the big one. Put up to three more in <div class="strip">
+           (square crops). Use class="strip wide" for 16:9 screenshots or slides, or class="strip fit" for photos
+           that must not be cropped.
+         - A photo narrower than about 900 px goes in <figure class="photo" style="--w: 557px"> with its real width,
+           so it is never stretched past its pixels.
+         - Every <img> needs width and height (the file's real size) and loading="lazy".
+         - <div class="program-text">: the <h3> title, then the dateline (<time class="d"> holds the date and its
+           datetime="YYYY-MM-DD"; a second <span> holds the place or season), then the paragraphs.
+         - A quote: <blockquote class="pull"><p>“Their exact words.”</p><footer>Name, role</footer></blockquote> -->
+    <div class="band band--tight">
+      <div class="container">
+        <div class="year-tabs" aria-label="Outreach by season"></div>
 
-        <article class="chapter">
-          <figure class="chapter-lead"><img src="images/mit_lab_1.jpg" alt="Team members gathered in front of a foil-wrapped vacuum chamber in a research lab at MIT" width="1400" height="1050" fetchpriority="high"></figure>
-          <div class="chapter-strip">
-            <img src="images/mit_lab_2.jpg" alt="Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench" width="900" height="900" loading="lazy">
-            <img src="images/mit_lab_3.jpg" alt="Our host holds up copper Bitter magnet plates for team members" width="900" height="900" loading="lazy">
-            <img src="images/mit_lab_4.jpg" alt="A team member points at a vintage instrument rack while our host explains it" width="900" height="900" loading="lazy">
-          </div>
-          <div class="chapter-text">
-            <h3>Francis Bitter Magnet Laboratory at MIT</h3>
-            <p class="dateline"><span class="d">Oct 9, 2026</span><span>MIT, Cambridge</span></p>
-            <p>
-              We spent an afternoon at MIT’s <strong>Francis Bitter Magnet Laboratory</strong>, now part of the Plasma Science
-              and Fusion Center. <strong>Dr. Jagadeesh Moodera</strong>, a senior research scientist in MIT Physics, hosted us.
-              His group studies thin films of magnetic and superconducting materials.
-            </p>
-            <p>
-              He showed us copper plates from the lab’s Bitter magnets and walked us through the vacuum systems and cryostats
-              his group uses. We finished at a lab bench, cooling a superconductor with liquid nitrogen and testing it with
-              small magnets.
-            </p>
-            <p>Thank you to Dr. Moodera for hosting us.</p>
-          </div>
-        </article>
+        <section class="year-panel" id="year-3" data-tab="Third year · 2026–27">
+          <h2>Third-year outreach</h2>
+          <div class="programs">
 
-        <article class="chapter">
-          <figure class="chapter-lead"><img src="images/vulcanforms_1.jpg" alt="Six GNCE Mercury members in the lobby at VulcanForms, in front of the company’s logo wall" width="1400" height="1050" loading="lazy"></figure>
-          <div class="chapter-text">
-            <h3>Touring VulcanForms</h3>
-            <p class="dateline"><span class="d">2026</span><span>Metal 3D printing</span></p>
-            <p>
-              We toured <strong>VulcanForms</strong>, a Massachusetts company that makes metal parts with 3D printing.
-              It prints them on <strong>laser powder bed fusion</strong> machines it designs and builds itself, where
-              dozens of lasers melt fine metal powder one thin layer at a time. The parts are then machined and inspected
-              in-house before they go to customers in aerospace, medical, energy, and other industries.
-            </p>
-            <p>Tours like this show us how engineers work outside of FTC. Thank you to VulcanForms for having us.</p>
-          </div>
-        </article>
+            <article class="program">
+              <div class="program-media">
+                <img src="images/mit_lab_1.jpg" alt="Team members gathered in front of a foil-wrapped vacuum chamber in a research lab at MIT" width="1400" height="1050" fetchpriority="high">
+                <div class="strip">
+                  <img src="images/mit_lab_2.jpg" alt="Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench" width="900" height="900" loading="lazy">
+                  <img src="images/mit_lab_3.jpg" alt="Our host holds up copper Bitter magnet plates for team members" width="900" height="900" loading="lazy">
+                  <img src="images/mit_lab_4.jpg" alt="A team member points at a vintage instrument rack while our host explains it" width="900" height="900" loading="lazy">
+                </div>
+              </div>
+              <div class="program-text">
+                <h3><span translate="no">Francis Bitter</span> Magnet Laboratory at MIT</h3>
+                <p class="dateline"><time class="d" datetime="2026-10-09">Oct 9, 2026</time><span>MIT, Cambridge</span></p>
+                <p>
+                  We spent an afternoon at MIT’s <strong><span translate="no">Francis Bitter</span> Magnet Laboratory</strong>, now part of the Plasma Science
+                  and Fusion Center. <strong>Dr. Jagadeesh Moodera</strong>, a senior research scientist in MIT Physics, hosted us.
+                  His group studies thin films of magnetic and superconducting materials.
+                </p>
+                <p>
+                  He showed us copper plates from the lab’s Bitter magnets and walked us through the vacuum systems and cryostats
+                  his group uses. We finished at a lab bench, cooling a superconductor with liquid nitrogen and testing it with
+                  small magnets.
+                </p>
+                <p>Thank you to Dr. Moodera for hosting us.</p>
+              </div>
+            </article>
 
-        <article class="chapter">
-          <figure class="chapter-lead"><img src="images/pyt_call.jpg" alt="Video call grid from our meeting with Phuthanang Youth Trust, with members of our team and PYT on camera" width="756" height="996" loading="lazy"></figure>
-          <div class="chapter-strip shots">
-            <img src="images/pyt_1.jpg" alt="Slide from our call: a map tracing a line from Boston to South Africa, titled “STEM Connects Us” and “GNCE Mercury FTC Team × Phuthanang Youth Trust (PYT)”" width="1012" height="569" loading="lazy">
-            <img src="images/pyt_2.jpg" alt="Slide from our call explaining FIRST Tech Challenge: the yearly game, the robot, the pit area, and the skills students build" width="1012" height="569" loading="lazy">
-          </div>
-          <div class="chapter-text">
-            <h3>Mentoring Phuthanang Youth Trust</h3>
-            <p class="dateline"><span>Ongoing</span><span>Online, South Africa</span></p>
-            <p>
-              <strong>Phuthanang Youth Trust (PYT)</strong> is a community organisation in Soweto, South Africa. Since 2004 it
-              has helped young people in Jabavu with skills training and education. We meet with their students over video
-              calls to help them get started in FIRST Tech Challenge.
-            </p>
-            <p>
-              On our first call we explained how an FTC season works: a new game every year, a robot you design, build, and
-              program yourself, and matches played in alliances with other teams. We also talked about what robotics has
-              taught us, from strategy and technical skills to leading a team.
-            </p>
-            <p>We’ll keep meeting with them to answer questions and share what our first 2 seasons taught us.</p>
-          </div>
-        </article>
+            <article class="program">
+              <div class="program-media">
+                <img src="images/vulcanforms_1.jpg" alt="Six GNCE Mercury members in the lobby at VulcanForms, in front of the company’s logo wall" width="1400" height="1050" loading="lazy">
+              </div>
+              <div class="program-text">
+                <h3>Touring <span translate="no">VulcanForms</span></h3>
+                <p class="dateline"><time class="d" datetime="2026">2026</time><span>Metal 3D printing</span></p>
+                <p>
+                  We toured <strong><span translate="no">VulcanForms</span></strong>, a Massachusetts company that makes metal parts with 3D printing.
+                  It prints them on <strong>laser powder bed fusion</strong> machines it designs and builds itself, where
+                  dozens of lasers melt fine metal powder one thin layer at a time. The parts are then machined and inspected
+                  in-house before they go to customers in aerospace, medical, energy, and other industries.
+                </p>
+                <p>Tours like this show us how engineers work outside of FTC. Thank you to <span translate="no">VulcanForms</span> for having us.</p>
+              </div>
+            </article>
 
-        <article class="chapter">
-          <figure class="chapter-lead"><img src="images/fll_camp_1.jpg" alt="Campers and families gathered around the FLL table for the Friday showcase" width="1400" height="1050" loading="lazy"></figure>
-          <div class="chapter-strip">
-            <img src="images/fll_camp_2.jpg" alt="A camper driving a VEX IQ robot on the competition field" width="1400" height="1055" loading="lazy">
-            <img src="images/fll_camp_3.jpg" alt="Team members helping campers troubleshoot a VEX IQ robot" width="1400" height="1050" loading="lazy">
-            <img src="images/fll_camp_5.jpg" alt="Programming a VEX IQ robot with block code on a laptop" width="1400" height="1055" loading="lazy">
-          </div>
-          <figure class="chapter-film">
-            <video src="images/fll_camp_video.mp4" poster="images/fll_camp_video_poster.jpg" controls muted playsinline preload="none" aria-label="A camper’s VEX IQ robot scoring on the field"></video>
-          </figure>
-          <div class="chapter-text">
-            <h3>Robotics and engineering summer camp</h3>
-            <p class="dateline"><span>Week of <span class="d">Aug 17, 2026</span></span></p>
-            <p>
-              We spent a week of the summer running a robotics and engineering camp for about <strong>13 students in grades 4&ndash;8</strong>.
-              Campers learned the basics of both <strong>VEX IQ</strong> and <strong>FIRST LEGO League</strong>: building
-              drivetrains and mechanisms, writing block code, and running missions on a real FLL table.
-            </p>
-            <p>
-              Between robot sessions, campers took on hands-on <strong>engineering challenges</strong>, like an
-              <strong>egg drop</strong> and designing and flying their own <strong>airplane gliders</strong>.
-            </p>
-            <p>
-              On Friday, the last day, campers showed off their robots to their families at a <strong>showcase</strong>,
-              driving VEX robots on the field and running their FLL missions.
-            </p>
-          </div>
-        </article>
+            <article class="program">
+              <div class="program-media">
+                <figure class="photo" style="--w: 756px"><img src="images/pyt_call.jpg" alt="Video call grid from our meeting with Phuthanang Youth Trust, with members of our team and PYT on camera" width="756" height="996" loading="lazy"></figure>
+                <div class="strip wide">
+                  <img src="images/pyt_1.jpg" alt="Slide from our call: a map tracing a line from Boston to South Africa, titled “STEM Connects Us” and “GNCE Mercury FTC Team × Phuthanang Youth Trust (PYT)”" width="1012" height="569" loading="lazy">
+                  <img src="images/pyt_2.jpg" alt="Slide from our call explaining FIRST Tech Challenge: the yearly game, the robot, the pit area, and the skills students build" width="1012" height="569" loading="lazy">
+                </div>
+              </div>
+              <div class="program-text">
+                <h3>Mentoring Phuthanang Youth Trust</h3>
+                <p class="dateline"><span class="d">Ongoing</span><span>Online, South Africa</span></p>
+                <p>
+                  <strong>Phuthanang Youth Trust (PYT)</strong> is a community organisation in Soweto, South Africa. Since 2004 it
+                  has helped young people in Jabavu with skills training and education. We meet with their students over video
+                  calls to help them get started in <span translate="no">FIRST Tech Challenge</span>.
+                </p>
+                <p>
+                  On our first call we explained how an FTC season works: a new game every year, a robot you design, build, and
+                  program yourself, and matches played in alliances with other teams. We also talked about what robotics has
+                  taught us, from strategy and technical skills to leading a team.
+                </p>
+                <p>We’ll keep meeting with them to answer questions and share what our first 2 seasons taught us.</p>
+              </div>
+            </article>
 
+            <!-- The camp video never plays by itself: it loads only when someone presses play. -->
+            <article class="program">
+              <div class="program-media">
+                <img src="images/fll_camp_1.jpg" alt="Campers and families gathered around the FLL table for the Friday showcase" width="1400" height="1050" loading="lazy">
+                <div class="strip fit">
+                  <img src="images/fll_camp_2.jpg" alt="A camper driving a VEX IQ robot on the competition field" width="1400" height="1055" loading="lazy">
+                  <img src="images/fll_camp_3.jpg" alt="Team members helping campers troubleshoot a VEX IQ robot" width="1400" height="1050" loading="lazy">
+                  <img src="images/fll_camp_5.jpg" alt="Programming a VEX IQ robot with block code on a laptop" width="1400" height="1055" loading="lazy">
+                </div>
+                <figure>
+                  <video controls muted playsinline preload="none" poster="images/fll_camp_video_poster.jpg" width="956" height="720" aria-label="A camper’s VEX IQ robot scoring on the field">
+                    <source src="images/fll_camp_video.mp4" type="video/mp4">
+                  </video>
+                  <figcaption>A camper’s VEX IQ robot scoring on the field</figcaption>
+                </figure>
+              </div>
+              <div class="program-text">
+                <h3>Robotics and engineering summer camp</h3>
+                <p class="dateline"><span>Week of <time class="d" datetime="2026-08-17">Aug 17, 2026</time></span></p>
+                <p>
+                  We spent a week of the summer running a robotics and engineering camp for about <strong>13 students in grades 4&ndash;8</strong>.
+                  Campers learned the basics of both <strong>VEX IQ</strong> and <strong><span translate="no">FIRST&nbsp;LEGO&nbsp;League</span></strong>: building
+                  drivetrains and mechanisms, writing block code, and running missions on a real FLL table.
+                </p>
+                <p>
+                  Between robot sessions, campers took on hands-on <strong>engineering challenges</strong>, like an
+                  <strong>egg drop</strong> and designing and flying their own <strong>airplane gliders</strong>.
+                </p>
+                <p>
+                  On Friday, the last day, campers showed off their robots to their families at a <strong>showcase</strong>,
+                  driving VEX robots on the field and running their FLL missions.
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section class="year-panel" id="year-2" data-tab="Second year · 2025–26">
+          <h2>Second-year outreach</h2>
+          <div class="programs">
+
+            <article class="program">
+              <div class="program-media">
+                <img src="images/fll_camp_4.jpg" alt="GNCE Mercury members coaching young students at an FLL table" width="1400" height="1055" loading="lazy">
+              </div>
+              <div class="program-text">
+                <h3>Coaching Weston’s FLL teams</h3>
+                <p class="dateline"><time class="d" datetime="2025-09-23">Sep 23, 2025</time><span>2025&ndash;26 FLL season</span></p>
+                <p>
+                  We helped Weston’s <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> program grow from 4 teams to <strong>17 teams and 122 students</strong>,
+                  including <strong>10 brand-new 4th and 5th grade teams</strong> at Field School. Money raised from our summer
+                  camp covered registration for all 10 of those teams, and the camp helped recruit and train new parent coaches.
+                </p>
+                <p>
+                  On Sep 23 we ran a <strong>practice scrimmage</strong> so the teams could get a feel for a real qualifier.
+                  All season we mentored coaches and students on running weekly meetings, programming their robots, and
+                  managing their time. <strong>9 of the 10</strong> Field School teams competed at MA qualifiers, and
+                  <strong>2 advanced to States</strong>.
+                </p>
+                <blockquote class="pull">
+                  <p>“The FLL season for the elementary teams would not have been a success if not for the support and
+                  guidance from the high school FTC 26413 team.”</p>
+                  <footer>Jessie Chan, lead coach, Field School FLL</footer>
+                </blockquote>
+                <blockquote class="pull">
+                  <p>“It was so well organized. The teams learned a lot today.”</p>
+                  <footer>FLL coach, after the scrimmage</footer>
+                </blockquote>
+              </div>
+            </article>
+
+            <!-- These photos are small (557 px wide at most), so "photo" with --w keeps the whole column at the first
+                 photo's real width. The strip's two columns follow each photo's shape (width ÷ height: 406/493 and
+                 585/275), so both photos come out the same height. -->
+            <article class="program">
+              <div class="program-media photo" style="--w: 557px">
+                <img src="images/cus_1.webp" alt="GNCE Mercury members showing our robot to visitors at the Clark University robotics showcase" width="557" height="468" loading="lazy">
+                <div class="strip fit" style="grid-template-columns: minmax(0, 0.824fr) minmax(0, 2.127fr)">
+                  <img src="images/cus_2.webp" alt="Team members explaining the robot to a visitor at Clark University" width="406" height="493" loading="lazy">
+                  <img src="images/cus_3.webp" alt="Team member demonstrating the robot to students at Clark University" width="585" height="275" loading="lazy">
+                </div>
+              </div>
+              <div class="program-text">
+                <h3>Clark University Robotics Showcase</h3>
+                <p class="dateline"><time class="d" datetime="2026-02">Feb 2026</time></p>
+                <p>
+                  We mentored and took part in a robotics showcase at Clark University hosted by
+                  <strong translate="no">Galactic Einsteins</strong>, a team we’ve supported for a long time. Made up mostly of
+                  students from South Africa, <span translate="no">Galactic Einsteins</span> is helping make <span translate="no">FIRST</span> more inclusive and spread
+                  its values to a wider community.
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section class="year-panel" id="year-1" data-tab="Rookie year · 2024–25">
+          <h2>Rookie-year outreach</h2>
+          <div class="programs">
+
+            <article class="program">
+              <div class="program-media">
+                <img src="images/2024-cambridge-science-festival.jpg" alt="Mercury members talking with visitors at the Cambridge Science Festival" width="1200" height="761" loading="lazy">
+              </div>
+              <div class="program-text">
+                <h3>Cambridge Science Festival</h3>
+                <p class="dateline"><time class="d" datetime="2024-09-29">Sep 29, 2024</time></p>
+                <p>We ran FTC robot demonstrations with our sister team, <span translate="no">GNCE&nbsp;Diamond</span>, and explained <span translate="no">FIRST</span> to visitors.</p>
+              </div>
+            </article>
+
+            <article class="program">
+              <div class="program-media">
+                <img src="images/2024-fll-mock-qualifier.jpg" alt="FLL teams practicing a robot game at Mercury’s mock qualifier" width="1200" height="900" loading="lazy">
+              </div>
+              <div class="program-text">
+                <h3>FLL mock qualifier</h3>
+                <p class="dateline"><time class="d" datetime="2024-11-23">Nov 23, 2024</time></p>
+                <p>We hosted a practice qualifier for 5 Weston <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> teams. We ran robot matches and judged each team the way a real qualifier would.</p>
+              </div>
+            </article>
+
+          </div>
+        </section>
       </div>
-    </section>
-
-    <section class="year-panel" id="year-2" data-tab="Second year · 2025–26">
-      <h2 class="section-title">Second-year outreach</h2>
-      <div class="chapters">
-
-        <article class="chapter">
-          <figure class="chapter-lead"><img src="images/fll_camp_4.jpg" alt="GNCE Mercury members coaching young students at an FLL table" width="1400" height="1055" loading="lazy"></figure>
-          <div class="chapter-text">
-            <h3>Coaching Weston’s FLL teams</h3>
-            <p class="dateline"><span class="d">Sep 23, 2025</span><span>2025&ndash;26 FLL season</span></p>
-            <p>
-              We helped Weston’s FIRST LEGO League program grow from 4 teams to <strong>17 teams and 122 students</strong>,
-              including <strong>10 brand-new 4th and 5th grade teams</strong> at Field School. Money raised from our summer
-              camp covered registration for all 10 of those teams, and the camp helped recruit and train new parent coaches.
-            </p>
-            <p>
-              On Sep 23 we ran a <strong>practice scrimmage</strong> so the teams could get a feel for a real qualifier.
-              All season we mentored coaches and students on running weekly meetings, programming their robots, and
-              managing their time. <strong>9 of the 10</strong> Field School teams competed at MA qualifiers, and
-              <strong>2 advanced to States</strong>.
-            </p>
-          </div>
-          <blockquote class="card-quote">
-            &ldquo;The FLL season for the elementary teams would not have been a success if not for the support and
-            guidance from the high school FTC 26413 team.&rdquo;
-            <cite>Jessie Chan, lead coach, Field School FLL</cite>
-          </blockquote>
-          <blockquote class="card-quote">
-            &ldquo;It was so well organized. The teams learned a lot today.&rdquo;
-            <cite>FLL coach, after the scrimmage</cite>
-          </blockquote>
-        </article>
-
-        <article class="chapter">
-          <figure class="chapter-lead"><img src="images/cus_1.webp" alt="GNCE Mercury members showing our robot to visitors at the Clark University robotics showcase" width="557" height="468" loading="lazy"></figure>
-          <div class="chapter-strip fit">
-            <img src="images/cus_2.webp" alt="Team members explaining the robot to a visitor at Clark University" width="406" height="493" loading="lazy">
-            <img src="images/cus_3.webp" alt="Team member demonstrating the robot to students at Clark University" width="585" height="275" loading="lazy">
-          </div>
-          <div class="chapter-text">
-            <h3>Clark University Robotics Showcase</h3>
-            <p class="dateline"><span class="d">Feb 2026</span></p>
-            <p>
-              We mentored and took part in a robotics showcase at Clark University hosted by
-              <strong translate="no">Galactic Einsteins</strong>, a team we’ve supported for a long time. Made up mostly of
-              students from South Africa, <span translate="no">Galactic Einsteins</span> is helping make FIRST more inclusive and spread
-              its values to a wider community.
-            </p>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <section class="year-panel" id="year-1" data-tab="Rookie year · 2024–25">
-      <h2 class="section-title">Rookie-year outreach</h2>
-      <div class="chapters">
-
-        <article class="chapter">
-          <figure class="chapter-lead"><img src="images/2024-cambridge-science-festival.jpg" alt="Mercury members talking with visitors at the Cambridge Science Festival" width="1200" height="761" loading="lazy"></figure>
-          <div class="chapter-text">
-            <h3>Cambridge Science Festival</h3>
-            <p class="dateline"><span class="d">Sep 29, 2024</span></p>
-            <p>We ran FTC robot demonstrations with our sister team, <span translate="no">GNCE&nbsp;Diamond</span>, and explained FIRST to visitors.</p>
-          </div>
-        </article>
-
-        <article class="chapter">
-          <figure class="chapter-lead"><img src="images/2024-fll-mock-qualifier.jpg" alt="FLL teams practicing a robot game at Mercury’s mock qualifier" width="1200" height="900" loading="lazy"></figure>
-          <div class="chapter-text">
-            <h3>FLL mock qualifier</h3>
-            <p class="dateline"><span class="d">Nov 23, 2024</span></p>
-            <p>We hosted a practice qualifier for 5 Weston FIRST LEGO League teams. We ran robot matches and judged each team the way a real qualifier would.</p>
-          </div>
-        </article>
-
-      </div>
-    </section>
+    </div>
 
   </main>
-  <script src="js/main.js?v=131"></script>
+  <script src="js/main.js?v=200"></script>
 </body>
 </html>

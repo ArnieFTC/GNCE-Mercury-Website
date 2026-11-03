@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>2024–2025 Season | GNCE Mercury</title>
   <meta name="description" content="GNCE Mercury’s 2024–25 INTO THE DEEP robot and rookie season.">
   <!-- Link previews: when the custom domain is live, change the address in og:url and og:image -->
@@ -14,107 +14,154 @@
   <meta property="og:image" content="https://arnieftc.github.io/GNCE-Mercury-Website/images/logo-mark.png">
   <meta property="og:image:alt" content="GNCE Mercury logo">
   <meta name="twitter:card" content="summary">
-  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__mercury)document.documentElement.classList.add('reveal-all')},2500)</script>
-  <meta name="theme-color" content="#0f0e0d">
-  <link rel="preload" href="../fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="../fonts/general-sans-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../css/style.css?v=131">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.css?v=200">
   <link rel="icon" href="../images/logo-mark.png">
 </head>
 <body data-page="seasons" data-root="../">
-  <main class="container">
+  <noscript><nav class="nojs-nav container" aria-label="Main"><a href="../index.html">Home</a><a href="../seasons.html">Seasons</a><a href="../team.html">Team</a><a href="../outreach.html">Outreach</a><a href="../partners.html">Partners</a><a href="../resources.html">Resources</a><a href="../contact.html">Contact</a></nav></noscript>
+  <main id="main">
 
-    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../seasons.html">Seasons</a></li><li aria-current="page">2024–2025</li></ol></nav>
-    <div class="page-head">
-      <h1 translate="no">INTO THE DEEP</h1>
-      <p>Our rookie season: an evolving robot built to collect samples and hang specimens.</p>
-    </div>
-    <!-- SEASON HERO: never lazy-load it (the robot from the home page glides into it) -->
-    <figure class="season-hero"><img src="../images/into-the-deep-robot-ink.webp" width="876" height="558" fetchpriority="high" alt="Mercury’s Into the Deep robot with an extending intake and specimen lift" style="view-transition-name: robot-itd"></figure>
-
-    <!-- ROBOT -->
-    <section>
-      <h2 class="section-title">The robot</h2>
-      <div class="robot">
-        <div>
-          <h3>Think Award &amp; a playoff run</h3>
-          <p>Our first design aimed at basket scoring. After testing, we shifted toward collecting samples from the observation zone and hanging specimens on the submersible. The robot combines a claw intake with a separate lift arm for specimen scoring.</p>
-        </div>
-        <div class="spec-sheet">
-          <p class="sheet-head"><span><span translate="no">GNCE Mercury</span> · FTC 26413</span><span><span translate="no">INTO THE DEEP</span> · 2024–25</span></p>
-          <ul class="specs">
-            <li><span>How it scores</span><span>Collects samples and hangs specimens on the submersible</span></li>
-            <li><span>Chassis</span><span>Redesigned from an earlier chassis</span></li>
-            <li><span>Intake</span><span>Extending claw with wrist</span></li>
-            <li><span>Scoring</span><span>Specimen lift and gripper</span></li>
-            <li><span>Lift drive</span><span>1:28 worm gear</span></li>
-            <li><span>Autonomous plan</span><span>Score, collect, hand off, park</span></li>
-          </ul>
-          <p class="sheet-foot">From our <span translate="no">Into the Deep</span> portfolio</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW IT CHANGED: one part-card per step or part -->
-    <section>
-      <h2 class="section-title">How the robot changed</h2>
-      <p class="lede">We prototyped a basket-focused robot with wooden base plates and a sample chamber. A change in game strategy led to a new chassis, an intake for collecting samples, and a lift arm for hanging specimens. These images and design notes come from our <span translate="no">Into the Deep</span> portfolio.</p>
-      <div class="parts-grid five" style="margin-top:clamp(40px, 5vw, 72px)">
-        <article class="part-card">
-          <img class="on-black" src="../images/into-the-deep-prototype.png" alt="Mercury’s earlier basket-focused robot prototype" width="486" height="422" loading="lazy">
-          <div><h3>Early prototype</h3><p>Our first concept used wooden base plates and a chamber for samples. We later changed the chassis and scoring strategy.</p></div>
-        </article>
-        <article class="part-card">
-          <img src="../images/into-the-deep-intake-iterations.webp" alt="Three stages of Mercury’s Into the Deep intake development" width="1022" height="428" loading="lazy">
-          <div><h3>Intake iterations</h3><p>We moved from a rubber wheel concept to a claw that can grip samples from different orientations. A wrist helps the intake reach over the submersible.</p></div>
-        </article>
-        <article class="part-card">
-          <img class="on-black" src="../images/into-the-deep-specimen-gripper.png" alt="Close-up of the lift arm’s specimen gripper" width="577" height="433" loading="lazy">
-          <div><h3>Specimen gripper</h3><p>A modified gripper gained a wooden alignment piece and a second claw to help keep specimens oriented for hanging.</p></div>
-        </article>
-        <article class="part-card">
-          <img class="on-black" src="../images/into-the-deep-lift-arm.png" alt="Mercury’s specimen lift arm and gripper" width="578" height="432" loading="lazy">
-          <div><h3>Lift arm</h3><p>The lift arm picks up and hangs specimens. A wrist was added so the gripper could adjust its angle.</p></div>
-        </article>
-        <article class="part-card">
-          <img class="on-black" src="../images/into-the-deep-worm-gear.png" alt="Worm gear used in Mercury’s lift mechanism" width="375" height="666" loading="lazy">
-          <div><h3>Worm gear</h3><p>A 1:28 gear ratio helps keep the lift from dropping under its own weight when power is removed.</p></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="narrow">
-      <h2 class="section-title">Autonomous strategy</h2>
-      <p>Our portfolio describes a planned route that scores the starting specimen, moves 3 field samples to the human player for conversion, scores a converted specimen, then parks. The route was designed around the specimen strategy; the portfolio does not include a verified match record for it.</p>
-    </section>
-
-    <!-- EVENTS: copy/paste a <div class="event"> block for each qualifier/event -->
-    <section>
-      <h2 class="section-title">Events</h2>
-      <div class="event-list">
-        <div class="event">
-          <div class="event-head"><h3>WNEU Qualifier</h3><span class="date">Feb 23, 2025</span></div>
-          <div class="event-body">
-            <div><div class="k">Alliance</div><div class="v">Made playoffs</div></div>
-            <div><div class="k">Awards</div><div class="v"><span class="award">Think Award</span></div></div>
+    <!-- SEASON HEAD: the season's launch. Never lazy-load the robot (the robot from the home page glides into it).
+         The facts row under it: one <div> per result. -->
+    <section class="season-head" aria-labelledby="season-title">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../seasons.html">Seasons</a></li><li aria-current="page">2024–25</li></ol></nav>
+        <div class="season-head-grid">
+          <div>
+            <h1 id="season-title" translate="no">INTO THE DEEP</h1>
+            <p class="lead">Our rookie season: an evolving robot built to collect samples and hang specimens.</p>
           </div>
+          <figure class="season-head-figure">
+            <img src="../images/into-the-deep-robot-cut.webp" width="802" height="482" fetchpriority="high" alt="Mercury’s Into the Deep robot with an extending intake and specimen lift" style="view-transition-name: robot-itd">
+          </figure>
         </div>
-        <div class="event">
-          <div class="event-head"><h3>MA Hawk Nest Havoc! Xaverian Qualifier</h3><span class="date">Feb 22, 2025</span></div>
-          <div class="event-body">
-            <div><div class="k">Alliance</div><div class="v">—</div></div>
-            <div><div class="k">Awards</div><div class="v">—</div></div>
+        <dl class="season-facts">
+          <div><dt>Season</dt><dd>2024–25, our rookie season</dd></div>
+          <div><dt>WNEU Qualifier, Feb&nbsp;23,&nbsp;2025</dt><dd>Think Award, made playoffs</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ROBOT: content from our Into the Deep portfolio. One <div> per row of the spec sheet. -->
+    <section class="band" aria-labelledby="robot-title">
+      <div class="container">
+        <div class="split">
+          <div class="prose">
+            <h2 id="robot-title">The robot</h2>
+            <h3 style="margin-bottom: 14px">Think Award &amp; a playoff run</h3>
+            <p>Our first design aimed at basket scoring. After testing, we shifted toward collecting samples from the observation zone and hanging specimens on the submersible. The robot combines a claw intake with a separate lift arm for specimen scoring.</p>
+          </div>
+          <div>
+            <p class="spec-title"><span><span translate="no">GNCE Mercury</span>, FTC 26413</span><span><span translate="no">INTO THE DEEP</span>, 2024–25</span></p>
+            <dl class="spec">
+              <div><dt>How it scores</dt><dd>Collects samples and hangs specimens on the submersible</dd></div>
+              <div><dt>Chassis</dt><dd>Redesigned from an earlier chassis</dd></div>
+              <div><dt>Intake</dt><dd>Extending claw with wrist</dd></div>
+              <div><dt>Scoring</dt><dd>Specimen lift and gripper</dd></div>
+              <div><dt>Lift drive</dt><dd>1:28 worm gear</dd></div>
+              <div><dt>Autonomous plan</dt><dd>Score, collect, hand off, park</dd></div>
+            </dl>
+            <p class="spec-source">From our <span translate="no">Into the Deep</span> portfolio</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- OTHER SEASONS: one <a> per neighbouring season -->
-    <nav class="season-pager" aria-label="Other seasons">
-      <a rel="next" href="2025-2026.html"><img src="../images/decode-robot-cad.webp" width="1165" height="1066" loading="lazy" alt="" style="view-transition-name: robot-decode"><span><b translate="no">DECODE</b><span class="pager-meta">2025–26, our second season</span></span></a>
+    <!-- HOW IT CHANGED: one <article class="entry"> per step or part, in the order we built them.
+         The picture is never cropped or blown up past its real size (object-fit: scale-down).
+         Pictures shot on a black background get class="entry-media on-black" so they sit flush. -->
+    <section class="band band--grey" aria-labelledby="changed-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="changed-title">How the robot changed</h2>
+          <p>We prototyped a basket-focused robot with wooden base plates and a sample chamber. A change in game strategy led to a new chassis, an intake for collecting samples, and a lift arm for hanging specimens. These images and design notes come from our <span translate="no">Into the Deep</span> portfolio.</p>
+        </div>
+        <div class="entries entries--3">
+          <article class="entry">
+            <div class="entry-media on-black"><img src="../images/into-the-deep-prototype.png" width="486" height="422" loading="lazy" alt="Mercury’s earlier basket-focused robot prototype"></div>
+            <h3>Early prototype</h3>
+            <p>Our first concept used wooden base plates and a chamber for samples. We later changed the chassis and scoring strategy.</p>
+          </article>
+          <article class="entry">
+            <div class="entry-media"><img src="../images/into-the-deep-intake-iterations.webp" width="1022" height="428" loading="lazy" alt="Three stages of Mercury’s Into the Deep intake development"></div>
+            <h3>Intake iterations</h3>
+            <p>We moved from a rubber wheel concept to a claw that can grip samples from different orientations. A wrist helps the intake reach over the submersible.</p>
+          </article>
+          <article class="entry">
+            <div class="entry-media on-black"><img src="../images/into-the-deep-specimen-gripper.png" width="577" height="433" loading="lazy" alt="Close-up of the lift arm’s specimen gripper"></div>
+            <h3>Specimen gripper</h3>
+            <p>A modified gripper gained a wooden alignment piece and a second claw to help keep specimens oriented for hanging.</p>
+          </article>
+          <article class="entry">
+            <div class="entry-media on-black"><img src="../images/into-the-deep-lift-arm.png" width="578" height="432" loading="lazy" alt="Mercury’s specimen lift arm and gripper"></div>
+            <h3>Lift arm</h3>
+            <p>The lift arm picks up and hangs specimens. We added a wrist so the gripper could adjust its angle.</p>
+          </article>
+          <article class="entry">
+            <div class="entry-media on-black"><img src="../images/into-the-deep-worm-gear.png" width="375" height="666" loading="lazy" alt="Worm gear used in Mercury’s lift mechanism"></div>
+            <h3>Worm gear</h3>
+            <p>A 1:28 gear ratio helps keep the lift from dropping under its own weight when power is removed.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="auto-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="auto-title">Autonomous strategy</h2>
+        </div>
+        <div class="prose">
+          <p>Our portfolio describes a planned route that scores the starting specimen, moves 3 field samples to the human player for conversion, scores a converted specimen, then parks. We designed the route around the specimen strategy; the portfolio does not include a verified match record for it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENTS: one <li class="event"> per qualifier or event, newest first. For anything not recorded, copy the "—" value as it is (screen readers hear "Not recorded").
+         For an award, put <span class="dia" aria-hidden="true"></span> in front of its name. -->
+    <section class="band band--grey" aria-labelledby="events-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="events-title">Events</h2>
+        </div>
+        <ol class="events">
+          <li class="event">
+            <time datetime="2025-02-23">Feb 23, 2025</time>
+            <div>
+              <h3>WNEU Qualifier</h3>
+            </div>
+            <dl>
+              <div><dt>Alliance</dt><dd>Made playoffs</dd></div>
+              <div><dt>Awards</dt><dd><span class="dia" aria-hidden="true"></span>Think Award</dd></div>
+            </dl>
+          </li>
+          <li class="event">
+            <time datetime="2025-02-22">Feb 22, 2025</time>
+            <div>
+              <h3>MA Hawk Nest Havoc! Xaverian Qualifier</h3>
+            </div>
+            <dl>
+              <div><dt>Alliance</dt><dd><span aria-hidden="true">—</span><span class="visually-hidden">Not recorded</span></dd></div>
+              <div><dt>Awards</dt><dd><span aria-hidden="true">—</span><span class="visually-hidden">Not recorded</span></dd></div>
+            </dl>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- OTHER SEASONS: one <a> per neighbouring season (rel="prev" for the one before, rel="next" for the one after) -->
+    <nav class="band band--tight" aria-label="Other seasons">
+      <div class="container"><div class="pager">
+        <a rel="next" href="2025-2026.html">
+          <span class="pager-media"><img src="../images/decode-robot-cad.webp" width="1165" height="1066" loading="lazy" alt="" style="view-transition-name: robot-decode"></span>
+          <span><small>Next season, 2025–26, our&nbsp;second</small><b translate="no">DECODE</b></span>
+        </a>
+      </div></div>
     </nav>
 
   </main>
-  <script src="../js/main.js?v=131"></script>
+  <script src="../js/main.js?v=200"></script>
 </body>
 </html>

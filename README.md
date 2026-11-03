@@ -2,67 +2,74 @@
 
 Plain HTML/CSS/JS site, hosted on GitHub Pages. No build step: edit a file, commit, and it's live.
 
+The look is a motorsport season program in the team's own livery: a violet field (from the logo) for the
+season launches and the partner panels, white and light grey for everything else, one typeface (Archivo,
+self-hosted in `fonts/`), square corners, and the logo's diamond as the only marker. `DESIGN.md` describes
+the system; `DESIGN_PROGRESS.md` holds the history, open questions and next steps.
+
 ## Quick edit guide
 
 | What | Where |
 |---|---|
-| Nav tabs | `js/main.js` → `NAV` list at the top |
-| Colors, fonts, type sizes, motion timings | `css/style.css` → `:root` at the top |
-| Countdown, season timeline, "Next competition" line in the footer | `js/main.js` → `SEASON` at the top (dates are `YYYY-MM-DD`, Eastern time) |
-| Results row at the top of the home page | `index.html` → the `<ul class="credentials">` list |
-| Team photo under the wordmark | `index.html` → `<figure class="hero-photo">` (see the comment there) |
-| "The record so far" numbers | `index.html` → edit the numbers in the `stat` blocks directly |
-| Robots on the home page | `index.html` → one `<article class="model">` per robot |
-| Team members | `team.html` → copy/paste a `card member` block |
-| Season list | `seasons.html` → copy/paste a row |
-| Season robot + qualifiers | `seasons/<year>.html` → copy/paste an `event` block per qualifier |
-| Outreach events | `outreach.html` → copy/paste an `<article class="chapter">` into a year's `chapters` |
-| Sponsors (footer of every page) | `js/main.js` → `SPONSORS` / `SUPPORTERS` lists |
-| Email, socials, donate link, form | `contact.html` |
+| Nav links | `js/main.js` → `NAV` list at the top |
+| Sponsors and supporters (footer of every page, "Supported by" line on the home page) | `js/main.js` → `SPONSORS` / `SUPPORTERS` |
+| This season's dates (home calendar, "next event" lines, footer) | `js/main.js` → `SEASON` (dates are `YYYY-MM-DD`, Eastern time) |
+| Colors, type sizes, spacing | `css/style.css` → `:root` at the top |
+| The three robots on the home page | `index.html` → one `<a class="bay">` per season plus its `<article class="season-card">` |
+| Which season the home page shows first | `index.html` → `data-default="2025"` on the `<div class="lineup">` |
+| Every competition result | `index.html` → the table under "The record so far" (one `<tr>` per event), and the season page's `events` list |
+| Season pages | `seasons/<year>.html` → `season-head` at the top, spec sheet (`<dl class="spec">`), mechanisms, `events` |
+| Season list | `seasons.html` → one `<li class="season-row">` per season |
+| Team members | `team.html` → copy/paste an `<article class="member">` |
+| Outreach events | `outreach.html` → copy/paste an `<article class="program">` into a year's `programs` |
+| Partner page | `partners.html` |
+| Email, Instagram, the contact form | `contact.html` (the address itself is `TEAM_EMAIL` in `js/main.js`) |
 
 `js/main.js` attaches behaviour by class name and quietly skips any block that's missing what it needs,
 so a pasted block can never break a page.
 
-## Design blocks
+## Building blocks
 
 | Block | What it does |
 |---|---|
-| `<article class="model">` (home) | One robot staged on the page, with its name and a link to its season |
-| `<figure class="season-hero">` + `<nav class="season-pager">` (season pages) | The big robot at the top and the links to the other seasons |
-| `<div class="spec-sheet">` around `<ul class="specs">` | The spec sheet. Write `TBD` for anything not decided yet |
-| `<article class="chapter">` (outreach) | One event: `chapter-lead` photo, optional `chapter-strip` photos, then the text |
-| `<div class="robot-explorer">` + `<ol class="callouts">` (DECODE season page) | Diamonds on the robot render and a list of part names (beside the render on big screens); choosing a part shows its note and links to its mechanism card. Each `<li>` has `data-x` / `data-y` (the diamond's position in % of the image) and `data-card` (the id of that part's card); optional `data-label="below"` puts the name under the diamond, and `data-link` sets how the part is named in "More on the …" |
-| `data-walkthrough` on a `parts-grid` | Turns the mechanism cards into the scroll-through tour on big screens |
-| `data-filter` on the Members grid | Builds the subteam filter from each member's `chip`s and lead roles ("Software Lead" → Software). Filters can be linked to: `team.html?crew=CAD` |
-| Image classes | `print`: a photo in a thin mat · `on-black`: an image whose own background is black · `render` / `photo`: fill the card's image box · `feather`: soften the edges of a render on black |
-| `style="view-transition-name: robot-…"` | Lets a robot glide from the home page or Seasons into its season page. Each name may appear only once per page, and the season hero must never be `loading="lazy"` |
+| `<section class="band">` (`band--grey`, `band--violet`) | A full-width section. Sections are told apart by their background, not by boxes |
+| `<div class="lineup" data-lineup>` (home) | The season line-up: three garage bays. Each `<a class="bay">` links to its season and names its card in `data-card`; with JavaScript the bays become tabs that light their robot and swap the card. Arrow keys move between seasons |
+| `<section class="season-head">` (season pages) | The season's launch: name, one line, the robot, and a row of facts (`<dl class="season-facts">`) |
+| `<dl class="spec">` | A spec sheet. Write `TBD` for anything not decided yet; it shows in grey |
+| `<div data-explorer>` + `<ol class="callouts">` (DECODE page) | Diamonds on the robot render and a button per part. Each `<li>` has `data-x` / `data-y` (the diamond's position in % of the image) and `data-card` (the id of that part's mechanism); optional `data-label="below"` puts the name under the diamond, and `data-link` sets how the part is named in "More on the …" |
+| `<ol class="events">` | One `<li class="event">` per event: date, name and notes, then Alliance / Awards |
+| `<ol class="calendar" data-calendar>` / `<span data-next-event>` | Filled from `SEASON`: past events turn grey, the next one is marked with how many days are left |
+| `<div class="members" data-filter>` (team) | Builds the subteam filter from each member's `chip`s and lead roles ("Software Lead" counts as Software). Filters can be linked to: `team.html?crew=CAD` |
+| `<div class="year-tabs">` + `<section class="year-panel" data-tab="Third year · 2026–27">` (outreach) | One tab per year, built from `data-tab` (name, then year). Without JavaScript the years simply follow each other |
+| `<figure class="photo" style="--w: 927px">` | A photo that is never shown wider than its real pixels (set `--w` to the image's width) |
+| `style="view-transition-name: robot-…"` | Lets a robot glide from the home page or Seasons into its season page in browsers that support it. Each name may appear only once per page, and the season-head robot must never be `loading="lazy"` |
 
 ## Adding photos
 
 Put images in `images/` (`../images/...` inside the `seasons/` folder). Give every `<img>` its real
-`width` and `height` and good `alt` text. Images are square-cornered and are never shown larger than
-their real pixel size, so use a photo that's at least as big as where it goes.
+`width` and `height` and good `alt` text. Photos are never shown larger than their real pixel size, so use
+one that's at least as big as where it goes.
 
-Team portraits: replace a member's `<div class="portrait">…</div>` with
-`<img class="portrait" src="images/team/NAME.jpg" alt="NAME" width="800" height="1000" loading="lazy">` (4:5 crop).
-Until then the plate shows their initials.
+Robot cut-outs (`*-cut.webp`) have a transparent background so they can stand on the violet field:
+- `into-the-deep-robot-cut.webp` was cut from `into-the-deep-robot.png` by removing its black background.
+- `mercinator-v1-cut.webp` was cut from `mercinator_v1_fullybuilt.png` with Canva's background remover.
+
+Team portraits: `<img class="portrait" src="images/team/NAME.jpg" alt="NAME" width="800" height="1000" loading="lazy">` (4:5 crop).
 
 ## Motion rules
 
-The robots carry the motion: they rise in on the home page, glide into their season page, and the DECODE
-callouts answer a tap. Each page title rises once on load, up to three main photos per page wipe open,
-and hairlines in data lists (stats, specs, events) draw in. Plain headings and paragraphs simply appear.
-Nothing loops, autoplays, follows the cursor or is tied to the scrollbar, and there's never more than one
-big effect on screen at a time. Please keep it that way: no new animation libraries.
+Motion only answers what you do: choosing a season lights its robot and slides its card in, choosing a part
+of the DECODE robot moves the marker, filters and tabs swap their content, and a robot glides into its season
+page. Nothing moves on its own, loops, autoplays, or is tied to scrolling. With reduced motion turned on,
+everything changes instantly. Please keep it that way: no animation libraries.
 
-Type: Newsreader for headings, General Sans for text and labels, and IBM Plex Mono only for data (dates,
-measurements, spec keys, counts). Headings are in sentence case, and there are no small labels above headings.
-
-Before you push a bigger change, check it with reduced motion turned on, with JavaScript off, and on a
-phone. Add `?now=2026-10-25T09:00` to an address to see the countdown and footer as they'll look at that moment.
+Before you push a bigger change, check it on a phone, with the keyboard, with reduced motion turned on, and
+with JavaScript off. Add `?now=2026-11-15T09:00` to an address to see the calendar and footer as they will
+look at that moment.
 
 ## Adding a new season
 
 1. Copy `seasons/2026-2027.html` → `seasons/2027-2028.html` and edit it.
-2. Add a row for it in `seasons.html`, and a `model` on the home page.
-3. Update the season pager links at the bottom of the neighbouring season page.
+2. Add a `season-row` for it in `seasons.html`.
+3. On the home page add a `bay` and a `season-card` for it (and change `data-default` when its results come in).
+4. Update the pager links at the bottom of the neighbouring season page, and `SEASON` in `js/main.js`.
