@@ -41,7 +41,7 @@ so a pasted block can never break a page.
 | `<div class="lineup" data-lineup>` (home; `index.html?season=2024` opens a season) | The season line-up: three garage bays. Each `<a class="bay">` links to its season and names its card in `data-card`; with JavaScript the bays become tabs that light their robot and swap the card. Arrow keys move between seasons |
 | `<section class="season-head">` (season pages) | The season's launch: name, one line, the robot, and a row of facts (`<dl class="season-facts">`) |
 | `<dl class="spec">` | A spec sheet. Write `TBD` for anything not decided yet; it shows in grey |
-| `<div class="parts-scroll">` around `<div data-explorer>` + `<ol class="callouts">` (DECODE page) | Markers on the robot render and a button per part. Each `<li>` has `data-x` / `data-y` (the marker's position in % of the image) and `data-card` (the id of that part's mechanism); optional `data-label="below"` puts the name under the marker, and `data-link` sets how the part is named in "More on the …". On big screens the explorer stays pinned while the page scrolls through the parts, one part per step |
+| `<div data-explorer>` + `<ol class="callouts">` (DECODE page) | Markers on the robot render and a button per part. Each `<li>` has `data-x` / `data-y` (the marker's position in % of the image) and `data-card` (the id of that part's mechanism); optional `data-label="below"` puts the name under the marker, and `data-link` sets how the part is named in "More on the …". Choose a part with its button, its marker or the arrow keys; scrolling never changes it |
 | `<ol class="events">` | One `<li class="event">` per event: date, name and notes, then Alliance / Awards |
 | `<table class="tiers">` / `<table class="budget">` (partners) | The sponsorship tiers and the season budget, typed from the package. In the budget each row's `--share` draws its bar; keep rows largest first |
 | `<ol class="calendar" data-calendar>` / `<span data-next-event>` | Filled from `SEASON`: past events turn grey, the next one is marked with how many days are left |
@@ -65,11 +65,11 @@ Team portraits: `<img class="portrait" src="images/team/NAME.jpg" alt="NAME" wid
 ## Motion rules
 
 One authored moment: when a page opens, its title rises and the robots step into the light one after another.
-After that, motion answers the visitor. Scrolling dims the stage behind you, opens photos like a lens, draws
-the budget and transfer bars to their value, and walks the DECODE parts explorer through its parts. Choosing a
-season moves the spotlight and brings its card up out of a blur; filters, tabs and parts swap their content; a
-robot glides into its season page. The only loop is the small pulse on the next event. The header slides away
-while you read down and comes back when you scroll up. Everything is visible without the motion, and with
+After that, motion only answers a click, a tap or a key: choosing a season moves the spotlight and brings its
+card up; filters, tabs and parts swap their content; a robot glides into its season page in browsers that
+support it. **Nothing moves, fades, pins or changes while you scroll** (Andy's rule, round 3): no scroll
+reveals, no scroll-linked effects, no sticky sections other than the header. The only loop is the small
+pulse on the next event, and it stops after two beats. Everything is visible without the motion, and with
 reduced motion turned on it all changes instantly. Please keep it that way: no animation libraries.
 
 Before you push a bigger change, check it on a phone, with the keyboard, with reduced motion turned on, and

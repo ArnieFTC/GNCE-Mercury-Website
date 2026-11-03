@@ -408,42 +408,7 @@ part("callouts", () => {
       if (card) { noteLink.href = "#" + card.id; noteLink.textContent = `More on the ${li.dataset.link || name.toLowerCase()}`; }
       if (user && !RM) { note.classList.remove("note-in"); void note.offsetWidth; note.classList.add("note-in"); }
     };
-    // Pinned mode (big screens): the explorer stays on screen while the page scrolls through the parts,
-    // one part per step, like a product page. Choosing a part scrolls to its step. Small screens keep the buttons.
-    const wrap = fig.closest(".parts-scroll");
-    const explorer = fig;
-    const progress = document.createElement("div");
-    progress.className = "parts-progress";
-    progress.setAttribute("aria-hidden", "true");
-    progress.innerHTML = "<span></span>";
-    note.after(progress);
-    const roomy = matchMedia("(min-width: 960px) and (min-height: 700px)");
-    wrap?.style.setProperty("--parts", parts.length); // the scroll length per part lives in css (.parts-scroll.is-pinned::after)
-    let pinned = false, lockUntil = 0;
-    const offset = () => parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 76;
-    const travel = () => wrap.offsetHeight - explorer.offsetHeight;
-    const layout = () => {
-      if (!wrap) return;
-      pinned = roomy.matches && explorer.offsetHeight <= innerHeight - offset();
-      wrap.classList.toggle("is-pinned", pinned);
-      follow();
-    };
-    const follow = () => {
-      if (!pinned) return;
-      const p = Math.min(1, Math.max(0, (offset() - wrap.getBoundingClientRect().top) / Math.max(1, travel())));
-      progress.style.setProperty("--p", p);
-      if (performance.now() > lockUntil) select(Math.min(parts.length - 1, Math.floor(p * parts.length)), true);
-    };
-    const goTo = i => {
-      select(i, true);
-      if (!pinned) return;
-      lockUntil = performance.now() + 900;
-      const top = scrollY + wrap.getBoundingClientRect().top - offset() + ((i + 0.5) / parts.length) * travel();
-      scrollTo({ top, behavior: RM ? "auto" : "smooth" });
-    };
-    addEventListener("scroll", () => requestAnimationFrame(follow), { passive: true });
-    addEventListener("resize", layout);
-    roomy.addEventListener("change", layout);
+    const goTo = i => select(i, true);
     parts.forEach((x, i) => {
       x.b.addEventListener("click", () => goTo(i));
       x.m.addEventListener("click", () => { goTo(i); x.b.focus({ preventScroll: true }); });
@@ -460,7 +425,6 @@ part("callouts", () => {
       goTo(i);
     });
     select(0, false);
-    layout();
   });
 });
 
@@ -676,34 +640,6 @@ part("copy-email", () => {
 // Spec sheets: "TBD" values read as not-yet-known
 part("specs", () => {
   document.querySelectorAll(".spec dd").forEach(d => { if (d.textContent.trim() === "TBD") d.classList.add("tbd"); });
-});
-
-// ---------- One reveal pattern ----------
-// Photos, tiles and data blocks that start below the fold rise 24px and fade in once, the first time they
-// come into view; siblings in the same row follow 80ms apart. Nothing is hidden without JavaScript, with
-// reduced motion, or if it is already on screen when the page opens.
-part("reveal", () => {
-  if (RM || !("IntersectionObserver" in window)) return;
-  const SELECTOR = [
-    ".photo", ".entry", ".program-media", ".season-row", ".explorer-figure", ".event", ".calendar li",
-    ".facts > div", ".figures > div", ".table-scroll", ".budget", ".captain", ".member", ".resource-list li",
-    ".coaches li", ".sponsor-row li", ".pager a", ".pull", ".bars",
-  ].join(",");
-  const items = [...document.querySelectorAll(SELECTOR)].filter(el => !el.closest("[hidden], .launch, .season-head") && !el.parentElement.closest(SELECTOR));
-  const fold = innerHeight;
-  const io = new IntersectionObserver(entries => {
-    entries.filter(e => e.isIntersecting).forEach(e => { e.target.classList.add("is-revealed"); io.unobserve(e.target); });
-  }, { rootMargin: "0px 0px -8% 0px" });
-  const tops = items.map(el => el.getBoundingClientRect().top); // read every position first, then write
-  items.forEach((el, i) => {
-    if (tops[i] < fold * 0.92) return; // already on screen: leave it alone
-    const sibs = [...el.parentElement.children].filter(c => c.matches(SELECTOR));
-    el.style.setProperty("--delay", Math.min(sibs.indexOf(el), 5) * 80 + "ms");
-    el.classList.add("will-reveal");
-    io.observe(el);
-  });
-  // a keyboard user who tabs into a block that hasn't revealed yet sees it at once
-  document.addEventListener("focusin", e => { const el = e.target.closest(".will-reveal:not(.is-revealed)"); if (el) el.classList.add("is-revealed"); });
 });
 
 // ---------- Robot morph ----------

@@ -24,6 +24,23 @@ committed straight to `main`, Andy's standing instruction; `main` is the live si
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
 
+## Round 3: no scroll motion, two-column outreach, Partners rework (in progress)
+
+Andy (2026-11-03): the tier table is "so large" and "not colorful"; he wants "an actual chart kinda like in the
+pdf", a pie chart, a better-formatted table, the "price distribution" fixed, the whole sponsorship page
+reworked; outreach in two columns; and "make it so that the things don't move as I scroll".
+
+Done and pushed first (verified on its own):
+- **No scroll motion anywhere.** Removed the one-shot scroll reveal (JS part and CSS), the scroll-linked stage
+  dim (`animation-timeline: view()`), the pinned DECODE explorer (it now changes only on click, tap or arrow
+  keys), and the sticky outreach text column. Only the header stays sticky. Load-time entrances and click
+  feedback remain. New test: on 6 pages nothing animates or changes after scrolling down and back up.
+- **Outreach two per row** from 860px (photo on top, story below; lead photos in a shared 4:3 frame, the
+  portrait video-call grid letterboxed, not cropped); one per row on phones.
+
+Next: the Partners page rework from a design-panel spec (3 critics, a validated chart palette, 3 competing
+plans, 2 judges, one synthesis), then /vercel, Impeccable review and the documenter.
+
 ## Round 2: Keynote stage
 
 **Reference study** (Playwright, all five reachable; Prada partly): the UI stays neutral and the imagery

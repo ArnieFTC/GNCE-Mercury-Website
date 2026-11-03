@@ -494,12 +494,10 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .bars li.best .bar::before { background: var(--ink); }
 .bars b { font-variant-numeric: tabular-nums; font-weight: 600; text-align: right; }
 
-/* ---------- Parts explorer (DECODE): pinned while you scroll through the parts ---------- */
+/* ---------- Parts explorer (DECODE): choose a part with its button or its marker ---------- */
 .explorer { display: grid; gap: 28px clamp(28px, 4vw, 64px); grid-template-columns: minmax(0, 1fr); align-items: center; }
 @media (min-width: 960px) { .explorer { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } }
 .explorer-figure { background: var(--paper); border-radius: var(--r-lg); padding: clamp(14px, 2.2vw, 32px); }
-.parts-scroll.is-pinned { position: relative; }
-.parts-scroll.is-pinned .explorer { position: sticky; top: calc(var(--header-h) + 12px); }
 .callout-stage { position: relative; display: block; }
 .callout-stage img { width: 100%; }
 .callout-mark {
@@ -538,10 +536,6 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .callout-note b { display: block; font-weight: 600; font-size: var(--fs-lg); margin-bottom: 8px; letter-spacing: -0.016em; }
 .callout-note.note-in { animation: panel-in 420ms var(--ease) both; }
 @keyframes panel-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-.parts-progress { display: none; }
-.parts-scroll.is-pinned .parts-progress { display: block; height: 3px; border-radius: var(--pill); background: var(--alu-deep); margin-top: 18px; overflow: hidden; }
-.parts-progress span { display: block; height: 100%; width: 100%; background: var(--ink); border-radius: inherit; transform: scaleX(var(--p, 0)); transform-origin: left; transition: transform 160ms linear; }
-.parts-scroll.is-pinned::after { content: ""; display: block; height: calc(var(--parts, 6) * 60svh); } /* the scroll length of the walk-through: one step per part */
 .callouts { display: grid; gap: 12px; list-style: none; }
 .callouts li { background: var(--paper); border-radius: var(--r-sm); padding: 14px 16px; }
 .callouts li b { display: block; }
@@ -680,11 +674,16 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
   .year-tabs .tab-name { font-size: 0.9375rem; }
 }
 
-.programs { display: grid; gap: clamp(56px, 7vw, 104px); }
-.program { display: grid; gap: 22px clamp(28px, 4vw, 60px); grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 960px) { .program { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } }
+/* programs: two per row from 860px (photo on top, story below), one per row on phones; nothing moves on scroll */
+.programs { display: grid; gap: clamp(48px, 6vw, 88px) clamp(28px, 3.6vw, 56px); grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 860px) { .programs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.program { display: grid; gap: 22px; align-content: start; }
 .program-media { display: grid; gap: 10px; align-content: start; }
 .program-media img { width: 100%; border-radius: var(--r-md); }
+/* every lead photo takes the same 4:3 shape so the two columns line up; a portrait (the video call) is letterboxed, never cropped */
+.program-media > img:first-child { aspect-ratio: 4 / 3; object-fit: cover; }
+.program-media > .photo:first-child img { aspect-ratio: 4 / 3; object-fit: contain; background: var(--alu); }
+.program-media.photo > img:first-child { aspect-ratio: 4 / 3; object-fit: cover; }
 .program-media .strip { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 10px; }
 .program-media .strip img { aspect-ratio: 1; object-fit: cover; border-radius: var(--r-sm); }
 .program-media .strip.fit img { aspect-ratio: auto; object-fit: contain; background: var(--alu); }
@@ -692,8 +691,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .program-media video { width: 100%; background: var(--ink); border-radius: var(--r-md); }
 .program-text { max-width: 62ch; }
 .program-text p { max-width: none; }
-@media (min-width: 960px) { .program-text { position: sticky; top: calc(var(--header-h) + 28px); align-self: start; } }
-.program-text h3 { font-size: clamp(1.5rem, 1.05rem + 1.1vw, 2rem); font-weight: 600; letter-spacing: -0.016em; margin-bottom: 12px; }
+.program-text h3 { font-size: clamp(1.375rem, 1.05rem + 0.7vw, 1.75rem); font-weight: 600; letter-spacing: -0.016em; margin-bottom: 12px; }
 .dateline { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: var(--fs-sm); color: var(--steel); margin-bottom: 18px; }
 .dateline .d { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
 .pull { padding: 20px 22px; border-radius: var(--r-md); background: var(--alu); margin-top: 22px; }
@@ -854,28 +852,11 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
   .season-head h1, .page-head h1 { animation: rise 900ms var(--ease) backwards; }
   .season-head .lead, .page-head .lead { animation: rise 900ms 120ms var(--ease) backwards; }
   .season-head-figure img { animation: step-in 1200ms 200ms var(--ease) backwards; }
-
-  /* scroll-linked: the stage dims and the robots settle back as you scroll past it */
-  @supports (animation-timeline: view()) {
-    .launch .lineup, .season-head-grid {
-      animation: stage-out linear both; animation-timeline: view(); animation-range: exit 10% exit 100%;
-    }
-  }
 }
 @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes step-in { from { opacity: 0; transform: translateY(40px) scale(0.94); } }
 @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes stage-out { to { opacity: 0.35; transform: scale(0.96); } }
-@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-
-/* one reveal pattern, fired once as a block comes into view (js/main.js marks what is still below the
-   fold; anything already on screen, or any page without JavaScript, simply shows) */
-@media (prefers-reduced-motion: no-preference) {
-  .will-reveal { opacity: 0; transform: translateY(24px); }
-  .will-reveal.is-revealed { opacity: 1; transform: none; transition: opacity 800ms var(--ease) var(--delay, 0ms), transform 800ms var(--ease) var(--delay, 0ms); }
-  .will-reveal.is-revealed .bar::before { animation: grow 900ms var(--ease) calc(var(--delay, 0ms) + 200ms) both; }
-}
 
 /* ---------- Robot morph between pages (supporting browsers only) ---------- */
 @view-transition { navigation: auto; }
@@ -892,8 +873,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
   .site-header, .menu-btn, .crew-filter, .year-tabs, .callout-bar, .footer-cols { display: none !important; }
   .launch, .season-head, .band--stage { background: none !important; color: #000 !important; }
   .year-panel[hidden] { display: block !important; }
-  .will-reveal { opacity: 1 !important; transform: none !important; }
   .callouts[hidden] { display: grid !important; }
-  .callout-note, .parts-progress { display: none !important; }
+  .callout-note { display: none !important; }
   .launch *, .season-head *, .band--stage * { color: #000 !important; }
 }

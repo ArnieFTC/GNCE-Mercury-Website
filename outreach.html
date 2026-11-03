@@ -32,8 +32,11 @@
          data-tab is the tab's text: the name, then " · ", then the season years (the page shows them on two lines).
          Keep the ids (year-3, year-2, year-1): outreach.html#year-2 opens that year. Without JavaScript every year shows.
 
-         To add an event, copy an <article class="program"> block into that year's <div class="programs">:
-         - <div class="program-media">: the first photo is the big one. Put up to three more in <div class="strip">
+         To add an event, copy an <article class="program"> block into that year's <div class="programs">.
+         Programs sit two per row on wider screens (in the order you write them: left, right, then the next row)
+         and one per row on phones.
+         - <div class="program-media">: the first photo is the big one; it is shown in a 4:3 frame (a portrait
+           photo inside <figure class="photo"> is letterboxed, not cropped). Put up to three more in <div class="strip">
            (square crops). Use class="strip wide" for 16:9 screenshots or slides, or class="strip fit" for photos
            that must not be cropped.
          - A photo narrower than about 900 px goes in <figure class="photo" style="--w: 557px"> with its real width,
