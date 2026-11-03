@@ -52,7 +52,9 @@ mechanism changed, and teaches younger students through camps and FLL coaching.
   sister team.
 - **Voice:** the team speaks as "we", in plain sentences.
 - **Must not feel like:** a generic tech startup, or something childish (Andy, 2026-11-03). It should be
-  professional, somewhat interactive and not AI-looking.
+  professional, somewhat interactive and not AI-looking. Round 2 (same day): the violet/lavender livery read
+  AI-like and the site felt too static; references Apple, TechCrunch, Vogue, The New York Times Company and
+  Prada; layout and placement were fine.
 
 ## Evidence on Hand
 
@@ -85,8 +87,16 @@ mechanism changed, and teaches younger students through camps and FLL coaching.
 - **Numbers on the home page:** 1,000 students directly impacted, $8,000+ raised, 100,000+ students reached.
   The team has not yet given sources for these.
 - **Supporters:** SolidWorks, Weston Owl and WEEFC, as names only. There are no logos and no other sponsors.
+- **Sponsorship package 2026–27** (Andy's Canva PDF, `docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`):
+  - tiers per season: Bronze $500+, Silver $1,500+, Gold $3,000+, Platinum $7,500+, and what each includes;
+  - season budget of up to $52,000 across nine lines (travel up to $19,950 is the largest; travel depends on
+    qualifying); sponsors get a quarterly financial report;
+  - Margaret Yang is head of sponsorship and the sponsor contact (margaret@mercury26413.org);
+  - student-leader records for Andy, Arnie, Zade, Ethan and Margaret; Ashna works on CAD and the website;
+  - a "What is FTC?" explainer, the tours-and-visits ask, in-kind donations and on-site robot demos;
+  - the DECODE robot scores 12 balls in autonomous (Andy confirmed this over the portfolio's 18/9).
 - **Absent, never to be invented:**
-  - sponsor tiers or benefits, and a donation link;
+  - a donation link, and any tier or benefit not in the package;
   - joining eligibility, meeting schedule and cost;
   - States results;
   - coach photos, and a high-resolution wide team photo;

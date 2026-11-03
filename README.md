@@ -2,10 +2,11 @@
 
 Plain HTML/CSS/JS site, hosted on GitHub Pages. No build step: edit a file, commit, and it's live.
 
-The look is a motorsport season program in the team's own livery: a violet field (from the logo) for the
-season launches and the partner panels, white and light grey for everything else, one typeface (Archivo,
-self-hosted in `fonts/`), square corners, and the logo's diamond as the only marker. `DESIGN.md` describes
-the system; `DESIGN_PROGRESS.md` holds the history, open questions and next steps.
+The look is a product keynote stage: each season's robot is launched alone on a black stage, lit like a
+product, and calm white and aluminium-grey pages explain it, the people and the partners. There is no brand
+colour: colour comes from the robots, the photos, the logo and the four tier metals. One typeface (Archivo,
+self-hosted in `fonts/`), rounded tiles, pill buttons. `DESIGN.md` describes the system; `DESIGN_PROGRESS.md`
+holds the history, open questions and next steps.
 
 ## Quick edit guide
 
@@ -22,7 +23,8 @@ the system; `DESIGN_PROGRESS.md` holds the history, open questions and next step
 | Season list | `seasons.html` → one `<li class="season-row">` per season |
 | Team members | `team.html` → copy/paste an `<article class="member">` |
 | Outreach events | `outreach.html` → copy/paste an `<article class="program">` into a year's `programs` |
-| Partner page | `partners.html` |
+| Partner page | `partners.html` (tiers table, budget table, visits and demos) |
+| Sponsorship package PDF | `docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf` (replace the file to update every download link) |
 | Email, Instagram, the contact form | `contact.html` (the address itself is `TEAM_EMAIL` in `js/main.js`) |
 | Sponsorship email (margaret@mercury26413.org) | `SPONSOR_EMAIL` in `js/main.js` (used by the form's Sponsorship topic), plus the "Email us about sponsoring" buttons in `partners.html` and `contact.html` |
 
@@ -33,12 +35,15 @@ so a pasted block can never break a page.
 
 | Block | What it does |
 |---|---|
-| `<section class="band">` (`band--grey`, `band--violet`) | A full-width section. Sections are told apart by their background, not by boxes |
-| `<div class="lineup" data-lineup>` (home) | The season line-up: three garage bays. Each `<a class="bay">` links to its season and names its card in `data-card`; with JavaScript the bays become tabs that light their robot and swap the card. Arrow keys move between seasons |
+| `<section class="band">` (`band--grey`, `band--stage`) | A full-width section: white, aluminium grey, or the black stage. Sections are told apart by their ground, not by lines |
+| `.tile` | A rounded, flat, filled box (white on grey, grey on white). Never put a tile inside a tile |
+| Buttons | `btn` (black pill), `btn--line` (outline), and on the black stage `btn--light` (white pill) and `btn--outline-light` |
+| `<div class="lineup" data-lineup>` (home; `index.html?season=2024` opens a season) | The season line-up: three garage bays. Each `<a class="bay">` links to its season and names its card in `data-card`; with JavaScript the bays become tabs that light their robot and swap the card. Arrow keys move between seasons |
 | `<section class="season-head">` (season pages) | The season's launch: name, one line, the robot, and a row of facts (`<dl class="season-facts">`) |
 | `<dl class="spec">` | A spec sheet. Write `TBD` for anything not decided yet; it shows in grey |
-| `<div data-explorer>` + `<ol class="callouts">` (DECODE page) | Diamonds on the robot render and a button per part. Each `<li>` has `data-x` / `data-y` (the diamond's position in % of the image) and `data-card` (the id of that part's mechanism); optional `data-label="below"` puts the name under the diamond, and `data-link` sets how the part is named in "More on the …" |
+| `<div class="parts-scroll">` around `<div data-explorer>` + `<ol class="callouts">` (DECODE page) | Markers on the robot render and a button per part. Each `<li>` has `data-x` / `data-y` (the marker's position in % of the image) and `data-card` (the id of that part's mechanism); optional `data-label="below"` puts the name under the marker, and `data-link` sets how the part is named in "More on the …". On big screens the explorer stays pinned while the page scrolls through the parts, one part per step |
 | `<ol class="events">` | One `<li class="event">` per event: date, name and notes, then Alliance / Awards |
+| `<table class="tiers">` / `<table class="budget">` (partners) | The sponsorship tiers and the season budget, typed from the package. In the budget each row's `--share` draws its bar; keep rows largest first |
 | `<ol class="calendar" data-calendar>` / `<span data-next-event>` | Filled from `SEASON`: past events turn grey, the next one is marked with how many days are left |
 | `<div class="members" data-filter>` (team) | Builds the subteam filter from each member's `chip`s and lead roles ("Software Lead" counts as Software). Filters can be linked to: `team.html?crew=CAD` |
 | `<div class="year-tabs">` + `<section class="year-panel" data-tab="Third year · 2026–27">` (outreach) | One tab per year, built from `data-tab` (name, then year). Without JavaScript the years simply follow each other |
@@ -51,7 +56,7 @@ Put images in `images/` (`../images/...` inside the `seasons/` folder). Give eve
 `width` and `height` and good `alt` text. Photos are never shown larger than their real pixel size, so use
 one that's at least as big as where it goes.
 
-Robot cut-outs (`*-cut.webp`) have a transparent background so they can stand on the violet field:
+Robot cut-outs (`*-cut.webp`) have a transparent background so they can stand on the black stage:
 - `into-the-deep-robot-cut.webp` was cut from `into-the-deep-robot.png` by removing its black background.
 - `mercinator-v1-cut.webp` was cut from `mercinator_v1_fullybuilt.png` with Canva's background remover.
 
@@ -59,10 +64,13 @@ Team portraits: `<img class="portrait" src="images/team/NAME.jpg" alt="NAME" wid
 
 ## Motion rules
 
-Motion only answers what you do: choosing a season lights its robot and slides its card in, choosing a part
-of the DECODE robot moves the marker, filters and tabs swap their content, and a robot glides into its season
-page. Nothing moves on its own, loops, autoplays, or is tied to scrolling. With reduced motion turned on,
-everything changes instantly. Please keep it that way: no animation libraries.
+One authored moment: when a page opens, its title rises and the robots step into the light one after another.
+After that, motion answers the visitor. Scrolling dims the stage behind you, opens photos like a lens, draws
+the budget and transfer bars to their value, and walks the DECODE parts explorer through its parts. Choosing a
+season moves the spotlight and brings its card up out of a blur; filters, tabs and parts swap their content; a
+robot glides into its season page. The only loop is the small pulse on the next event. The header slides away
+while you read down and comes back when you scroll up. Everything is visible without the motion, and with
+reduced motion turned on it all changes instantly. Please keep it that way: no animation libraries.
 
 Before you push a bigger change, check it on a phone, with the keyboard, with reduced motion turned on, and
 with JavaScript off. Add `?now=2026-11-15T09:00` to an address to see the calendar and footer as they will

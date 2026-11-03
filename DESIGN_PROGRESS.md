@@ -3,9 +3,9 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-03. **Full redesign** ("Motorsport season program") built across all pages; see
-"Latest verification" for what was checked. Work is committed straight to `main`, Andy's standing
-instruction; `main` is the live site._
+_Last updated: 2026-11-03. **Round 2 ("Keynote stage")** replaced the violet livery with a new colour world,
+type use, surfaces and motion, and added the 2026–27 sponsorship package; see "Round 2" below. Work is
+committed straight to `main`, Andy's standing instruction; `main` is the live site._
 
 ## What happened
 
@@ -19,6 +19,51 @@ instruction; `main` is the live site._
 3. **This redesign** replaces the whole visual world, layout, components and interactions. Kept: every piece
    of content (text, facts, photos, renders, quotes), the Mercury logo, the sponsor strip on every page,
    the special-quotes lock, and the behaviour students rely on (`SEASON`, `SPONSORS`, crew filter links).
+
+4. **Round 2 (same day).** Andy: the colour "is so AI-like", the site "feels too static"; the boxes and
+   placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
+   Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
+
+## Round 2: Keynote stage
+
+**Reference study** (Playwright, all five reachable; Prada partly): the UI stays neutral and the imagery
+carries the colour; two weights, sentence case, tracking tightening with size; no shadows; motion is scarce
+and one-shot (Apple: a 30px rise over ~0.9s and one sticky pin per story beat; no site uses scroll-scrubbed
+timelines or hides its header); partners as sentences or wordmarks, never a logo wall. The synthesis named
+why the violet read AI-like (the logo's hue flooded every wall and button; every heading wide and heavy;
+nothing answered the visitor) and warned that a first pass of this round used Apple's exact neutrals
+(#F5F5F7, #A1A1A6) and 28px cards, which would swap one cliché for a copy. Those values were replaced.
+
+**Direction:** Impeccable `concept-seed` (seed:df12dec937d8ef74) assigned my #6 of seven grounded
+candidates (a TechCrunch-style newsroom). Andy chose my pick card, **Keynote stage**: each season's robot
+launched on an almost-black stage, lit, then calm light pages. Raises from the dealt hand: colour only for
+what matters now (glass partition), one control transforms the stage (drawcord cape), every chosen state
+addressable (`?season=`), fixed-place tabular figures for money (nixie), declared phone density steps,
+lines drawn in sequence on load.
+
+**Answers:** DECODE scores **12 balls** in autonomous (the package's number replaces 18/9); show the tiers,
+the budget and the PDF on the partners page.
+
+**Design plan (frontend-design, applied directly):**
+- Palette: stage #0B0A0F (the logo's outline, almost black) with text #EFEEF3 / #A09DAC; paper #FFFFFF;
+  cool grey #F1F1F4; ink #16141C; steel #5C5967; tier metals bronze #A8692F, silver #9AA0A8, gold #C29A2A,
+  platinum #D6D9DE as swatches only. No brand hue: the logo keeps its violet, the walls do not.
+- Type: Archivo at normal width in 400/600, tracking by size; robot names at 125% width, the team's voice.
+- Layout: unchanged (Andy: boxes and placement are fine). Surfaces: flat filled tiles (14–18px corners), pill
+  buttons, no section hairlines, no shadows except the robots' floor shadows.
+- Motion thesis: one authored moment (on load the title rises and the robots step into the light one after
+  another, the floor line draws); after that motion answers the visitor: the spotlight moves with the chosen
+  season and its card comes up out of a blur; one-shot reveals (24px rise, 0.8s, 80ms stagger) for photos,
+  tiles and data, bars drawing to their value; the DECODE explorer pins and walks through its six parts as
+  you scroll; the stage dims as you scroll past it; a pulse on the next event. Reduced motion: all instant.
+- Review against the clusters: near-black + one neon accent (no accent at all); SaaS card kit (tiles are flat,
+  unshadowed, two radii by hierarchy, not everything is a tile); broadsheet hairlines (removed); Apple copy
+  (own values, wide robot names, no blue).
+
+**Sponsorship package on the site:** the PDF at `docs/`; partners page tiers table, ranked budget bars
+(dataviz guidance: ranked bars in one ink, not the package's nine-colour donut), FTC explainer, visits and
+demos; Margaret as head of sponsorship (team page record and email link); student-leader records for Zade
+and Ethan; Ashna's Website chip; the camp line about VEX teams.
 
 ## Goal and audiences (from `PRODUCT.md`)
 
@@ -119,7 +164,8 @@ Reduced motion makes every change instant.
 
 - ⊘ B1 A sharp wide team photo (≥ 2400 px wide). The Ryken photo is shown at its real 927 px until then.
 - ⊘ B2 Joining facts: who can join (grades/schools), meeting schedule, time commitment, cost.
-- ⊘ B3 Sponsoring: tiers or amounts, a donation link, a sponsor packet, an adult contact.
+- ◐ B3 Sponsoring: tiers, budget, packet and contact (Margaret) now come from the 2026–27 package. Still missing:
+  a donation link.
 - ⊘ B4 A form service (e.g. Formspree) so the contact form sends without a mail app; needs a team account.
 - ⊘ B5 Sources for "1,000 students directly impacted", "$8,000+ raised", "100,000+ students reached".
 - ⊘ B6 Coach photos (the coaches are listed by name only).
@@ -135,6 +181,27 @@ Reduced motion makes every change instant.
 
 ## Skills and checks actually used
 
+**Round 2:**
+- **Impeccable 4.8.0**: invoked. `impeccable context`; references read: new-work, colorize, animate, typeset,
+  delight, craft floor (before every UI edit). `concept-seed` roll (seed:df12dec937d8ef74), Andy's choice
+  recorded (`--kind pick`), `surface-brief write` (contract updated twice: the choice, then the retune after the
+  study). Rendered detector: 0 findings on all 10 pages. Finish reviewer: disposition "fix" with 4 confirmed
+  material fixes, all applied; a verdict pass and the documenter followed (see "Latest verification").
+- **/vercel**: invoked via the Skill tool; live guidelines fetched (HTTP 200, identical to the bundled snapshot,
+  so no fallback); the audit ran in two review sub-agents over all 10 pages plus `css/style.css` and
+  `js/main.js`, each finding re-checked by a separate verifier: 30 confirmed and fixed, 3 rejected.
+- **anthropic-skills:website-building**: invoked; only its SKILL.md is installed here (its sub-files and palette
+  generator are missing), so its top-level guidance was applied: research first, derive the palette from the
+  subject, Playwright QA at desktop and mobile. Its "generate images" and "custom SVG logo" steps were skipped
+  on purpose: the site uses only the team's real photos and keeps the Mercury logo.
+- **anthropic-skills:no-slop-writing**: invoked for the new partners copy (banned-pattern sweep, no em dashes in
+  prose, plain verbs).
+- **dataviz**: invoked before the budget chart: ranked bars in one ink inside a real table, largest first,
+  instead of the package's nine-colour donut.
+- **frontend-design**: still not installed; its guidance was applied directly (the plan in "Round 2" above).
+- **Reference study**: a 6-agent workflow studied the five sites in Playwright and wrote a synthesis.
+
+**Round 1:**
 - **frontend-design**: not installed in this environment (the Skill call failed; the plugin install card was
   shown). Its published guidance was **applied directly, not invoked**: the two-pass plan above, the cluster
   review, and the restraint rules.
@@ -151,71 +218,66 @@ Reduced motion makes every change instant.
 
 ## Latest verification
 
-Redesign round, 2026-11-03 (Playwright Chromium against a local static server):
+**Round 2, 2026-11-03** (Playwright Chromium, local static server):
+- Render audit, all 10 pages at 320 / 390 / 768 / 1440: no horizontal overflow, no console or page errors, no
+  failed requests, one `h1` per page, no skipped heading levels. The tier table scrolls inside its own box on
+  phones (its sticky first column stays put); the hidden "Included / Not included" labels are contained.
+- Interaction tests: **49 of 49 pass**, the round-1 suite plus `?season=` links, the chosen season written to
+  the address, and the DECODE explorer stepping through all six parts in order as the page scrolls.
+- One-shot reveals: every revealed block appears after scrolling, on 8 pages at 1440 and 390 (none stuck).
+- Contrast measured on the rendered pages with reduced motion: AA on every page. (Without reduced motion the
+  scan reads unrevealed blocks as invisible, which is the reveal working, not a contrast failure.)
+- Impeccable detector on the rendered pages: 0 findings. The file-only hook still reports low contrast for
+  stage text and cramped padding on bands, which it cannot see correctly; left standing, not suppressed.
+- Finish review: the reviewer judged that the build mostly meets the Keynote-stage contract and mostly no
+  longer reads AI-like ("the DECODE season page reads like a real hardware launch"); fixes applied:
+  - home: the chosen robot now takes the middle of the stage (1.7× bay) and the stage is taller on tall screens;
+  - seasons: no cards inside cards;
+  - partners: plain lists instead of pill tiles, one duplicate sentence removed;
+  - phone line-up labels aligned from the top.
+- Verdict pass on those fixes: seasons and phone labels resolved; two partial, then fixed:
+  - home: the three spec tiles in the season card became small plain text under the results, so the stage stays the subject; on
+    short laptops (880px tall or less) the robots get more height, and at 760px or less the spec line gives way.
+    Measured: the partner strip stays in the first screen at 1280×720, 1366×768, 1536×864 and 1440×900, and the
+    chosen robot is 248–339px wide;
+  - partners: "What you would be supporting" is three plain columns under an ink rule (no cards), and the
+    FTC / visit / demo row is an unboxed two-column split.
+  - Second verdict pass: **ship** (both resolved, no regression). Its two small notes were applied: at 760–1099px
+    the lone third column spans the row, and from 1200px the team line on the home stage now starts exactly on
+    the season card's left edge (it sat 7–9px off). This clearance covers those fixes, not the whole site.
+- Documenter: `DESIGN.md` and `.impeccable/design.json` rewritten for the Keynote stage world from the shipped
+  CSS and JS; a checker then compared every claim with the code and corrected 20 mismatches. It also listed
+  eight colours still typed straight into rules instead of `:root` and two stale class names (`.ruled`,
+  `.dia`); recorded in `DESIGN.md`, not changed.
+- Content check against the package PDF: every tier cell, budget line, amount and percentage matches; no
+  invented fact. Fixed:
+  - the demo line now offers to talk about a demonstration (private demos are a Platinum benefit);
+  - the DECODE spec sheet credits the package for the 12-ball count;
+  - the budget bars have no full-width track (the longest bar is the largest line, not 100%);
+  - the lead no longer says every dollar goes "straight to building robots" (travel is 38% of the budget).
+- /vercel fixes include:
+  - the pinned explorer only pins where it fits;
+  - focus survives part changes;
+  - print shows every block;
+  - leaving an unsent contact message asks first;
+  - the year pager uses real links;
+  - footer headings are in order;
+  - theme-color matches the dark header;
+  - the next-event pulse stops after two beats;
+  - hover states;
+  - `translate="no"` on event names.
+- Not tested: real iOS/Android devices, screen readers, Safari and Firefox (Chromium only).
 
-- **Render audit**, all 10 pages at 320 / 390 / 768 / 1440: no horizontal overflow, no console or page
-  errors, no failed requests, one `h1` per page, no skipped heading levels, no image missing `alt`.
-  Targets under 24 px are only links inside sentences and the contact radios (their whole 48 px label is
-  the target), which WCAG 2.5.8 allows.
-- **Interaction tests: 45 of 45 pass** (scratchpad `itest2.js`): the line-up tabs (click, arrow keys, Home/
-  End, card swap, no navigation on a plain click), the next event and calendar from `SEASON`, the
-  sponsor strip and "Supported by" line from `SUPPORTERS`, the partner strip inside the first screen at
-  1440×900 and 1366×768, no animation under reduced motion, every season card and robot visible without
-  JavaScript, the phone menu (opens, Esc closes and returns focus), the DECODE parts (6 buttons, notes, arrow
-  keys, diamonds out of the tab order and on the render), the crew filter and `?crew=` links, the special-
-  quotes lock (opens, wrong password message), outreach tabs, `#year-1` links and no video autoplay,
-  `?topic=join|sponsor` on the contact form and an empty submit stopping at Name, no image painted wider than
-  its pixels on any page, and every internal link and anchor resolving.
-- **Contrast** measured on the rendered pages: all visible text passes WCAG AA on every page.
-- **Impeccable detector** on the rendered pages (desktop and 390 px): 0 anti-patterns. The file-only hook
-  still reports "low-contrast #c4bcdf on #ffffff" and "cramped-padding section.band"; both are static
-  misreads (it cannot see the violet bands or the container gutter) and were left standing, not suppressed.
-- **Finish review** (Impeccable finish reviewer, then an independent verifier): first attempt stopped at the
-  evidence check because my full-page captures were taken while scrolled; recaptured, then reviewed.
-  Verdict: "at desktop the build meets the direction contract… nothing in it looks like generic AI output".
-  Confirmed fixes, all applied:
-  - the impact figures were styled as a hero-metric row → now set as data, label first;
-  - results-table cells were flex boxes (rules misaligned) → table cells again;
-  - an eyebrow year above each name on Seasons → removed;
-  - phones lost the partner strip and the line-up → a partner credit under the bays, and the chosen bay
-    widens;
-  - the partners page opened on a plain white head → it opens on the violet partner panel with a facts row;
-  - the contact topic diamonds touched their box edge → padding restored.
-  Rejected after verification: the PYT call screenshot (added by Andy before the redesign), the repeated
-  Ryken team photo (the only team photo, blocker B1), the near-black footer ground (documented instead).
-- **/vercel audit**: 20 findings confirmed and fixed, 13 rejected as not applicable. Fixed:
-  - focus could slip behind the open phone menu (P1);
-  - focus on the contact radios was invisible;
-  - hover states lowered contrast;
-  - `touch-action` and `overscroll-behavior` were missing;
-  - the breadcrumb separator was read aloud;
-  - proper names lacked `translate="no"`;
-  - names and dates broke across lines;
-  - "—" now reads as "Not recorded";
-  - two passive sentences;
-  - the copy button gave no failure message;
-  - long `mailto:` messages could be cut short;
-  - the year tabs ignored `hashchange`;
-  - the special-quotes reveal stole focus;
-  - partners photo priority.
-- **Content fidelity** (diff of every old page against the new site, plus a trace of every new factual
-  claim): nothing lost, nothing invented. Fixed:
-  - "every event" overstated the record → "every qualifier and championship";
-  - "Learning from engineers" → "…from scientists and engineers";
-  - three camp photos were cropped → shown whole;
-  - the old `#robot` and `#countdown` anchors → restored.
-- **Not tested:** real iOS/Android devices, screen readers, Safari and Firefox (Chromium only).
+**Round 1** (violet "Season Program"; superseded): see this file's git history at commit 4f09c6c.
 
 ## Next action
 
-1. Ask Andy for the blocked facts and assets (B1–B11), above all partner logos, sponsor tiers or packet,
-   a donation link, and sources for the three impact figures.
-2. Ideas the finish reviewer raised as the design's ceiling (not defects), for a later round if Andy wants
-   more: the team number 26413 used as a livery number on the launch panel, the logo's diamond as a large
-   mark, the lavender stripe as a real band of livery, and a floor or plinth in the garage bays.
+1. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
+   joining facts, States results, a sharp wide team photo, coach photos.
+2. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
 3. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events.
 4. For every change: check at 320/390/768/1440 with keyboard and reduced motion, run `/vercel` on the changed
    files, push to `main`.
 
-The scratchpad test scripts (`audit.js`, `itest2.js`, `cscan.js`, `states.js`) live outside the repo and
-won't survive a new session. Recreate them from the checks listed above if needed.
+The scratchpad test scripts (`audit.js`, `itest2.js`, `cscan.js`, `states2.js`, `reveal-check.js`) live outside
+the repo and won't survive a new session. Recreate them from the checks listed above if needed.

@@ -1,314 +1,363 @@
 ---
 name: GNCE Mercury
-description: FTC team #26413 presented as a motorsport team's season program, in the livery of its logo.
+description: FTC team #26413, each season's robot launched alone on a black stage, then explained on calm light pages.
 colors:
-  violet: "#2A2346"
-  lavender: "#B9A6F2"
-  action: "#5B3FC4"
-  action-deep: "#4A31A8"
-  on-violet: "#FFFFFF"
-  on-violet-2: "#C4BCDF"
+  stage: "#0B0A0F"
+  stage-raise: "#18161F"
+  on-stage: "#EFEEF3"
+  on-stage-2: "#A09DAC"
   paper: "#FFFFFF"
-  paddock: "#F2F2F0"
-  hairline: "#DCDCD8"
-  ink: "#1C1A26"
-  steel: "#585C65"
-  footer: "#18161F"
+  alu: "#F1F1F4"
+  alu-deep: "#E3E2E8"
+  line: "#DCDBE2"
+  ink: "#16141C"
+  steel: "#5C5967"
+  quiet: "#8B8896"
+  bronze: "#A8692F"
+  silver: "#9AA0A8"
+  gold: "#C29A2A"
+  platinum: "#D6D9DE"
 typography:
   display:
     fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
-    fontSize: "clamp(2.75rem, 1rem + 6vw, 6rem)"
-    fontWeight: 840
-    lineHeight: 0.92
-    letterSpacing: "-0.03em"
+    fontSize: "clamp(3rem, 1rem + 6.2vw, 6rem)"
+    fontWeight: 600
+    lineHeight: 0.96
+    letterSpacing: "-0.025em"
+  machine-name:
+    fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
+    fontSize: "clamp(2.75rem, 0.9rem + 5.6vw, 5.5rem)"
+    fontWeight: 700
+    lineHeight: 0.95
+    letterSpacing: "-0.015em"
     fontVariation: "'wdth' 125"
   headline:
     fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
-    fontSize: "clamp(2.25rem, 1.3rem + 3.4vw, 4rem)"
-    fontWeight: 800
-    lineHeight: 0.98
-    letterSpacing: "-0.025em"
-    fontVariation: "'wdth' 122"
+    fontSize: "clamp(2.5rem, 1.3rem + 3.8vw, 4.5rem)"
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: "-0.022em"
   title:
     fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
-    fontSize: "clamp(1.625rem, 1.15rem + 1.6vw, 2.375rem)"
-    fontWeight: 750
-    lineHeight: 1.1
-    letterSpacing: "-0.015em"
-    fontVariation: "'wdth' 112"
+    fontSize: "clamp(1.75rem, 1.15rem + 1.9vw, 2.75rem)"
+    fontWeight: 600
+    lineHeight: 1.08
+    letterSpacing: "-0.016em"
   subtitle:
     fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
-    fontSize: "1.25rem"
-    fontWeight: 650
-    lineHeight: 1.25
-    letterSpacing: "-0.005em"
+    fontSize: "1.3125rem"
+    fontWeight: 600
+    lineHeight: 1.24
+    letterSpacing: "-0.006em"
   body:
     fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
     fontSize: "1.0625rem"
     fontWeight: 400
-    lineHeight: 1.6
+    lineHeight: 1.55
   label:
     fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
     fontSize: "0.9375rem"
-    fontWeight: 650
+    fontWeight: 600
     lineHeight: 1.2
     fontFeature: "'tnum' 1, 'lnum' 1"
 rounded:
-  none: "0px"
+  sm: "10px"
+  md: "14px"
+  lg: "18px"
+  pill: "999px"
 spacing:
-  gutter: "clamp(16px, 4vw, 40px)"
-  section: "clamp(56px, 7vw, 112px)"
-  section-tight: "clamp(40px, 5vw, 72px)"
-  max: "1280px"
-  header: "68px"
+  gutter: "clamp(16px, 4vw, 44px)"
+  section: "clamp(64px, 8vw, 128px)"
+  section-tight: "clamp(44px, 5vw, 76px)"
+  max: "1240px"
+  header: "56px"
 components:
   button-primary:
-    backgroundColor: "{colors.action}"
+    backgroundColor: "{colors.ink}"
     textColor: "{colors.paper}"
     typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "12px 22px"
-    height: "48px"
+    rounded: "{rounded.pill}"
+    padding: "11px 24px"
+    height: "46px"
   button-primary-hover:
-    backgroundColor: "{colors.action-deep}"
+    backgroundColor: "{colors.stage}"
     textColor: "{colors.paper}"
   button-line:
     backgroundColor: "transparent"
-    textColor: "{colors.action}"
-    rounded: "{rounded.none}"
-    padding: "12px 22px"
-    height: "48px"
-  button-livery:
-    backgroundColor: "{colors.lavender}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    padding: "12px 22px"
-    height: "48px"
-  button-livery-hover:
+    rounded: "{rounded.pill}"
+    padding: "11px 24px"
+    height: "46px"
+  button-light:
+    backgroundColor: "{colors.on-stage}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pill}"
+    padding: "11px 24px"
+    height: "46px"
+  button-light-hover:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-  button-ghost-dark:
+  button-outline-light:
     backgroundColor: "transparent"
-    textColor: "{colors.on-violet}"
-    rounded: "{rounded.none}"
-    padding: "12px 22px"
-    height: "48px"
+    textColor: "{colors.on-stage}"
+    rounded: "{rounded.pill}"
+    padding: "11px 24px"
+    height: "46px"
   toggle:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    padding: "8px 16px"
-    height: "44px"
+    rounded: "{rounded.pill}"
+    padding: "8px 18px"
+    height: "42px"
   toggle-pressed:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.paper}"
   text-field:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    padding: "12px 14px"
-    height: "48px"
+    rounded: "{rounded.sm}"
+    padding: "13px 16px"
+    height: "50px"
+  tile:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+    padding: "clamp(22px, 3vw, 36px)"
+  tile-on-white:
+    backgroundColor: "{colors.alu}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.md}"
+  stage-tile:
+    backgroundColor: "{colors.stage-raise}"
+    textColor: "{colors.on-stage}"
+    rounded: "{rounded.md}"
+    padding: "14px 18px 16px"
   lead-tag:
-    backgroundColor: "{colors.violet}"
+    backgroundColor: "{colors.ink}"
     textColor: "{colors.paper}"
-    rounded: "{rounded.none}"
-    padding: "3px 8px"
+    rounded: "{rounded.pill}"
+    padding: "4px 10px"
+  chip:
+    backgroundColor: "{colors.alu}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pill}"
+    padding: "3px 10px"
 ---
 
 # Design System: GNCE Mercury
 
-The named colors, the type scale (`--fs-*`) and the main spacing live in `:root` at the top of `css/style.css`.
-Change them there, never inside a component. A few values are still typed into component rules: the smaller
-type sizes (0.875rem, 0.8125rem and some per-component clamps) and five colors (footer text #E4E1EE and
-#ABA6BE, field border #A9A9A3, error red #A3243B, inactive explorer marker #8F86AE). Everything below
-describes what is in that file and the pages as they ship.
+**Where things live.** The palette, the type scale (`--fs-*`), the radii and the main spacing are custom
+properties in `:root` at the top of `css/style.css` (`--stage`, `--alu`, `--fs-lg`, `--r-md`, `--section`,
+`--ease` and so on). Change them there, never inside a component rule. (A few one-off values are still typed
+straight into rules: the greys #CFCDD8, #BAB8C4, #CBC9D3, #D6D4DE, #B8B6C2 and #A9ADB5, the error red
+#B3261E, #8B8896 for the inactive part markers, which repeats `--quiet`, and the smaller 0.875 / 0.8125rem
+label sizes.) Interactions and the scroll reveal live in `js/main.js`, each in its own `part("…")` block; the
+load animation, the scroll-linked stage dim and every keyframe are in the Motion section at the end of
+`css/style.css`. The sponsor strip is built in `js/main.js` from `SPONSORS` / `SUPPORTERS`, the season
+calendar from `SEASON`. Everything below describes the files as they ship
+(round 2, "Keynote stage"); it replaces the earlier violet "Season Program" record entirely.
 
 ## Overview
 
-**Creative North Star: "The Season Program"**
+**Creative North Star: "The Keynote Stage"**
 
-The site reads like a motorsport team's season launch and partner programme. Each season's robot is
-launched on a deep violet field, specified with a spec sheet and dated results, and the partners who made
-it possible are credited at the foot of the panel and in every footer. The look comes from the team's own
-logo: its violet, its lavender diamond and its dark outline.
+Each season's robot is launched the way a hardware company launches a product: the machine alone on an
+almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white
+and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners. Light
+is the accent. There is no brand hue: colour comes only from the robots, the photos, the Mercury logo
+(kept as-is) and the four tier metals from the 2026–27 sponsorship package.
 
-Two grounds carry the site. The violet field is for launches and partners (the home launch panel, the head
-of each season page, the partner panel) and for the closing calls to join or partner on the home, team and
-partners pages. White and paddock grey carry everything else: records, write-ups,
-people, forms. A near-black footer is an extra ground, used only for the footer. Sections are separated by a change of
-ground or by a hairline rule, never by boxes or cards. Corners are square everywhere. One type family,
-Archivo, does all the work: set extra wide and heavy for machine names and page titles, plain for reading.
+Two grounds carry the site. The stage (home launch, every season head, the partners head, and the closing
+"join or partner" bands on the home, team and partners pages) and the reading ground (white, with
+aluminium-grey bands and tiles). Sections are separated by a change of ground, never by hairlines.
+Content sits on flat, filled, rounded tiles (10/14/18px), buttons are pills, and nothing casts a shadow
+except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the
+halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).
 
-Motion happens only in answer to the visitor: choosing a season, picking a robot part, filtering the crew,
-switching an outreach year, moving between pages. Nothing animates on load or on scroll, and reduced motion
-turns all of it off.
+The neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple,
+TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact
+greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.
 
 **Key Characteristics:**
-- Violet field for launches, partners and closing calls to join; white and paddock grey for everything else.
-- One family (Archivo), wide and heavy for machine names, plain for text, tabular figures for every date and spec.
-- Square corners on everything; rules and grounds instead of cards.
-- The logo's diamond is the only marker.
-- Robots stand on the violet as cut-outs at one scale, with a soft floor shadow.
-- Motion only in answer to the visitor.
+- Two grounds: the near-black stage for launches and closing calls, white and aluminium grey for reading.
+- No brand hue; light, robots, photos, the logo and the tier metals carry all colour.
+- Archivo only: normal width at 600 for headings, 125% width at 700 for robot names, tabular figures for every number.
+- Flat filled tiles with 10/14/18px corners, pill buttons, no section hairlines, no card shadows.
+- Selection shown as light brightening (the chosen robot steps into a spotlight), never as a sliding bar.
+- One authored load moment on the stage, one scroll reveal for content, everything else answers the visitor.
 
 ## Colors
 
-The team's livery: one deep violet, one bright lavender stripe, one action violet, set on white and a warm paddock grey.
+A cool, logo-tinted grey scale from near-black to white, with four metals reserved for sponsorship tiers.
 
 ### Primary
-- **Mercury Violet** (violet): the launch and partner field. Home launch panel, season page heads, the partner panel, the closing join-or-partner bands (`band--violet` on the home, team and partners pages), the backdrop behind robot thumbnails (season index rows, pager), and member lead tags.
-- **Action Violet** (action): links and buttons on light grounds, the nav underline, the active outreach tab bar, focus rings on light, the "next event" marker in the calendar, the best bar in data bars. Its hover is **Deep Action Violet** (action-deep).
-
-### Secondary
-- **Livery Lavender** (lavender): the stripe. Used only on violet or the footer: the 3px rule over the partner strip, the phone partner credit, season facts and sponsor row; the bar over the chosen bay; the chosen bay's filled diamond; the livery button; focus rings on dark grounds. The exceptions are text selection (lavender on every ground) and the touch tap highlight (lavender at 25%).
+- **Logo Outline Ink** (ink): primary text on light grounds, primary buttons, pressed toggles, lead tags, the chosen calendar tile, the best bar in a chart and every budget bar, focus rings on light. It is tinted from the logo's near-black outline, so the "accent" on light pages is simply ink.
 
 ### Neutral
-- **Paper** (paper): the default page ground and form field fill.
-- **Paddock Grey** (paddock): alternate bands (`band--grey`) and the mat behind entry images and portraits.
-- **Hairline** (hairline): 1px rules between rows, header border, quiet button outlines.
-- **Ink** (ink): all text on light, the 2px rule that opens a list or table, pressed toggles, callout labels. Taken from the logo's outline.
-- **Steel** (steel): secondary text on light (dates, labels, captions, hints).
-- **On-Violet** and **On-Violet Soft** (on-violet, on-violet-2): primary and secondary text on the violet field. Hairlines on violet are on-violet-2 at 22% (`--rule-violet`).
-- **Footer Night** (footer): the footer ground only, with text in #E4E1EE and secondary text in #ABA6BE. The direction contract named only violet, white and grey; this fourth ground was added in the build to close every page and is used nowhere else.
+- **Stage Black** (stage): the stage ground (`.launch`, `.season-head`, `.band--stage`), the header, the robot mats in the Seasons index and pager, and the hover fill of the primary button.
+- **Stage Step** (stage-raise): a step up on the stage: season-fact tiles, the `.ruled` tiles in the home page's closing stage band, the phone partner credit.
+- **Stage Light** (on-stage) and **Stage Dim** (on-stage-2): primary and secondary text on the stage (Stage Dim is 7.4:1 on Stage Black, 6.7:1 on Stage Step). Rules on the stage are on-stage at 14% (`--rule-stage`): the line-up card's results rows, the partner-strip top edge, the open menu's rows and, without JavaScript, the lines between the stacked season cards. The floor line is the same light at 16%.
+- **Paper** (paper): the default reading ground, form fields, tiles on grey bands, the sponsor tiles.
+- **Aluminium** (alu): alternate bands (`band--grey`), tiles on white bands, the footer.
+- **Aluminium Deep** (alu-deep): chart tracks, the parts progress track, the pager hover fill.
+- **Data Line** (line): 1px separators inside data (table rows, spec rows, contact rows, record lists), the footer divisions, and the 1px borders of toggles and the Copy button.
+- **Steel** (steel): secondary text on light (dates, captions, labels, hints); 6:1 on aluminium.
+- **Quiet** (quiet): non-text marks only (inactive explorer markers). Never text.
+
+### Tertiary: the tier metals
+- **Bronze**, **Silver**, **Gold**, **Platinum** (bronze, silver, gold, platinum): the four tiers of the team's 2026–27 sponsorship package (`docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`); the hex values are the site's own (see Assets and Provenance). Used only as the small round swatch beside each tier name in the partners table (`.tier--bronze` etc. set `--metal`).
 
 ### Named Rules
-**The Livery Stripe Rule.** Lavender lives on dark grounds only (violet or footer); text selection and the tap highlight are the only exceptions. On white, the accent is Action Violet. Never put lavender text or rules on paper.
+**The Light Is The Accent Rule.** There is no brand colour. Emphasis on the stage is brightness (a spotlight, full colour against dimmed grey); on light pages it is ink and weight. Don't introduce a hue for links, buttons or highlights.
 
-**The Two Grounds Rule.** Violet is for launching machines, crediting partners and the closing call to join or partner. Write-ups, people, records and forms sit on paper or paddock grey.
+**The Two Grounds Rule.** The stage is for launching a machine, opening the partners page and the closing call to join or partner. Write-ups, people, records and forms sit on paper or aluminium.
+
+**The Metals Are Swatches Rule.** The four metals appear only as tier swatches, never as text, fills or borders.
 
 ## Typography
 
 **Display Font:** Archivo (with Helvetica Neue, Arial, sans-serif)
 **Body Font:** Archivo, the same family
-**Label/Mono Font:** none; labels are Archivo with tabular figures
 
-Archivo is self-hosted as one variable file, `fonts/archivo-latin.woff2` (Google Fonts latin subset, SIL Open Font License), carrying weight 100–900 and width 62–125%. The width axis is set with `font-stretch`.
+Archivo is self-hosted as one variable file, `fonts/archivo-latin.woff2` (Google Fonts latin subset, SIL Open Font License), weight 100–900, width 62–125%. Width is set with `font-stretch`.
 
-**Character:** One family with two voices. Stretched to 118–125% and weighted 780–840 it becomes the machine-name voice of a team livery; at normal width and 400 it is a plain, readable text face.
+**Character:** One quiet, engineered sans at normal width for everything a reader reads; the same face stretched to 125% and set at 700 becomes the team's voice for robot names.
 
 ### Hierarchy
-- **Display** (840, 125% width, `--fs-display` 2.75–6rem, line-height 0.92): the season page h1 (machine name). The home h1 "GNCE Mercury" uses the same voice at 820, capped at 5.25rem.
-- **Headline** (800, 122% width, `--fs-xl` 2.25–4rem, line-height 0.98): inner page h1 and the partner panel h1.
-- **Machine name** (800–820, 125% width; 122% in the pager): season names in the bays, the line-up card, season index rows and pager, each set in its own component rule and sized to context. The `.machine` helper class in the CSS is not used on any page.
-- **Title** (750, 112% width, `--fs-lg` 1.625–2.375rem, line-height 1.1): section h2.
-- **Subtitle** (650, `--fs-md` 1.25rem, line-height 1.25): h3, lead paragraphs (400, steel, line-height 1.5, 60ch).
-- **Body** (400, `--fs-base` 1.0625rem, line-height 1.6): running text, held to 62ch.
-- **Label** (`--fs-sm` 0.9375rem, 0.875rem, or 0.8125rem for tags; 550 for nav, 650 for buttons, 400 for most spec terms, dates and captions): nav, buttons (108% width), spec terms, dates, captions. Sentence case, no tracking.
+- **Display** (600, `--fs-hero` 3–6rem, line-height 0.96, -0.025em): the home h1 "GNCE Mercury" only.
+- **Machine name** (700, 125% width): season-head h1 (2.75–5.5rem), line-up card h2 (1.875–3rem), Seasons index rows (1.75–3rem), bay labels (0.875–1.25rem) and the pager (1.3125rem). Robot and game names only.
+- **Headline** (600, `--fs-xl` 2.5–4.5rem, line-height 1, -0.022em): inner page h1 and the partners head h1 (normal width there).
+- **Title** (600, `--fs-lg` 1.75–2.75rem, line-height 1.08, -0.016em): section h2.
+- **Subtitle** (600, `--fs-md` 1.3125rem, line-height 1.24): h3 and `.h3`. Lead paragraphs (`.lead`) use the same size at 400 in steel, line-height 1.42, 54ch.
+- **Body** (400, `--fs-base` 1.0625rem, line-height 1.55): running text, held to 62ch (`.prose`).
+- **Label** (`--fs-sm` 0.9375rem, or 0.875 / 0.8125rem; 600 for buttons and values, 500 for nav and table heads, 400 for terms and captions): buttons, nav, spec terms, dates, captions. Sentence case, no tracking.
 
 ### Named Rules
-**The Tabular Figures Rule.** Every date, spec and number uses tabular lining figures (`<time>` and `.num` get them automatically; spec, facts and figures values set them).
+**The Width Is The Voice Rule.** Only robot and game names go wide (125%, 700). Page titles, section heads and reading text stay at normal width.
 
-**The Width Is The Voice Rule.** Emphasis comes from the width axis plus weight, not from a second family, all-caps tracking or color. Wide is for names and titles, with a lighter 108–112% on buttons, tabs and the phone menu; reading text stays at normal width.
+**The Fixed-Place Figures Rule.** Every date, amount, spec and result uses tabular lining figures (`<time>` and `.num` get them automatically; spec, facts, figures, budget and season-fact values set them).
 
 ## Layout
 
-- **Container:** content max 1280px (`--max`) plus a fluid gutter of 16–40px (`--gutter`) each side.
-- **Vertical rhythm:** bands are padded by `--section` (56–112px); tight bands by 40–72px. Section heads sit 28–48px above their content.
-- **Grids:** two-column splits run 7:5 (or 5:7 flipped, or even) from 900px. Entry grids go 1 → 2 columns at 760px → 3 at 1100px. Data lists (spec sheets, events, results, resources, contacts) are full-width rows ruled with hairlines; the season calendar is a ruled grid of columns (150px minimum).
-- **Home launch panel:** h1 and the team line, then the line-up: three garage bays side by side with the chosen season's card to the right from 1100px; below 1100px the card drops under the bays and a short partner credit replaces the full partner strip. On phones (720px and under) the chosen bay widens to 1.9fr. On short laptop screens (1100px+ and 860px tall or less) the panel tightens so the partner strip stays in the first screen.
-- **Header:** sticky, 68px, white with a hairline. The nav collapses into a Menu button at 1080px and under; the header "Partner with us" button hides at 560px and under (it moves into the open menu).
-- **Breakpoints in use:** 359, 480, 520, 560, 700, 720, 760, 800, 860, 900, 960, 1000, 1080/1100, 1200px, plus the 860px-tall short-screen query and a 460px container query on the contact list. Check every page at 320, 390, 768 and 1440px.
-- **Photos never larger than their pixels:** wrap a photo in `.photo` with `style="--w: <image width>px"`; entry images use `object-fit: scale-down` in a 16:10 mat, except `.cover` entries, which fill it (`object-fit: cover`).
+- **Container:** `.container`, content max 1240px (`--max`) plus a 16–44px fluid gutter (`--gutter`).
+- **Vertical rhythm:** `.band` is padded by `--section` (64–128px); `.band--tight` by 44–76px. `.section-head` (heading left, short note right) sits 32–56px above its content.
+- **Grids:** `.split` runs 7:5 from 900px (`--flip` 5:7, `--even`, `--center`). `.entries--2/--3` go 1 → 2 columns at 760px → 3 at 1100px. Facts, figures and the calendar use `auto-fit` grids of tiles with a 12px gap; coaches use `auto-fill` (12px gap) and the season facts `auto-fit` with a 10px gap.
+- **Home stage (`.launch`):** h1 and team line (from 1200px the head uses the line-up's columns, so the team line starts on the season card's left edge), then the line-up: three bays with the chosen season's card to the right from 1100px; the chosen bay widens (1.7fr desktop, 1.9fr at 720px and under). Below 1100px the card drops under the bays and a short partner credit replaces the partner strip. On short laptops (1100px+ wide, 880px tall or less) the stage tightens, and at 760px tall or less the short plain-text spec list under the results hides, so "Supported by … / Partner with us" stays in the first screen.
+- **Header:** sticky, 56px, stage black; turns translucent (80% opacity) with an 18px blur once the page scrolls. The nav collapses into a Menu button at 1080px and under; the header "Partner with us" pill hides at 560px and under (it is the last item of the open menu).
+- **Parts explorer (2025–26 page):** at 960px+ wide and 700px+ tall the explorer pins while the page scrolls one step per part (60svh each); smaller screens keep the part buttons.
+- **Breakpoints in use:** 359, 520, 559/560, 700, 720, 760, 800, 860, 900, 960, 1000, 1080 (the menu; 1081 in `js/main.js`), 1099/1100, 1200px; height queries at 760 and 880/881px, plus 700px for the explorer pin (in `js/main.js`); a 460px container query on the contact list. Check 320, 390, 768 and 1440px.
+- **Photos never larger than their pixels:** wrap a photo in `.photo` with `style="--w: <image width>px"`; entry images use `object-fit: scale-down` in a 16:10 mat unless `.cover`; `.on-black` puts black-background shots on #000.
 
 ## Elevation & Depth
 
-The system is flat. Depth comes from the change of ground (violet, paper, paddock, footer) and from rules: a 2px ink rule opens a list, 1px hairlines separate its rows, and a 3px lavender stripe opens a partner or facts block on violet. Nothing on the page floats over anything else except the sticky header, the open mobile menu and the parts-explorer diamonds and labels on their render; the header and menu have no shadow.
+The system is flat. Depth comes from the two grounds, from tiles one step lighter or darker than their band, and from light on the stage. Shadow is reserved for things that physically stand somewhere.
 
 ### Shadow Vocabulary
-- **Robot floor shadow** (`filter: drop-shadow(0 18px 18px rgba(8, 6, 20, 0.45))`, 24px/0.5 on season heads, 14px on season rows): only under robot cut-outs standing on violet, so they sit on the floor.
-- **Garage light** (`radial-gradient(60% 55% at 50% 100%, rgba(185, 166, 242, 0.26), transparent 70%)`): a pool of light under the chosen bay only.
-- **Callout marker lift** (`box-shadow: 0 2px 6px rgba(28, 26, 38, 0.35)`): the diamond markers on the parts explorer, so they read over a render.
+- **Robot on the floor** (`filter: drop-shadow(0 22px 22px rgba(0, 0, 0, 0.6))`; 28px/0.65 on season heads, 16px on Seasons index rows): robot cut-outs on the stage only.
+- **Spotlight** (a clipped cone `linear-gradient` plus `radial-gradient(45% 16% at 50% 94%, rgba(255,255,255,0.22), transparent 72%)`): the chosen bay; a softer fixed version sits behind the season-head robot and in Seasons index mats.
+- **Explorer marker** (`box-shadow: 0 0 0 3px #fff, 0 3px 10px rgba(0,0,0,0.3)`): part markers on the DECODE render, so they read over it.
+- **Chosen segment** (`box-shadow: 0 1px 2px rgba(22,20,28,0.08), 0 4px 14px rgba(22,20,28,0.08)`): the selected outreach year pill only.
+- **Hover halo** (`box-shadow: 0 0 0 3px rgba(22,20,28,0.14)`, on the stage `rgba(239,238,243,0.28)`): a ring, not a drop shadow, on hovered pill buttons and focused fields.
 
 ### Named Rules
-**The Flat Paddock Rule.** No shadows on buttons, cards, menus or panels. Shadow belongs to robots on the floor and to markers on a render, nothing else.
+**The Flat Tile Rule.** Tiles, cards, menus and panels never cast shadows and never nest. A tile is a filled rounded rectangle on a contrasting ground, nothing more.
 
 ## Shapes
 
-Every corner is square (0px): buttons, fields, chips, tags, images, panels. The only other shape is the logo's diamond, a square rotated 45°. It is used as a filled or outlined marker (7–14px): season markers in the bays (outlined, filled when chosen), result and event markers, list bullets on support lists, radio buttons on the contact form, the locked-quote marker, and the parts-explorer callouts. Bars and stripes (2–3px) mark the active nav item, outreach tab and chosen bay.
-
-**The One Marker Rule.** The diamond is the only marker. No circles, checkmarks, arrows or icon glyphs as bullets or badges; the only SVG icon is the Menu button's.
+Gently rounded and consistent: 10px (`--r-sm`) for small images, the pager's robot mats, inputs, quotes and the part list (`.callouts`); 14px (`--r-md`) for content tiles, photos, facts, spec sheets, events and table wrappers; 18px (`--r-lg`) for captain tiles, the explorer figure and stage media. Every button, toggle, tag, chip, segmented control and chart bar is a pill (`--pill`). Markers are small filled circles (`.dia`, 7px); in the line-up they are 6px, outlined when idle and filled when chosen. No section hairlines: 1px lines appear only inside data (tables, spec rows, results, lists), between the footer's parts and on the stage (floor line, partner-strip edge, menu rows). The one heavier line is the 2px ink rule over each column of `.entries--ruled` ("What you would be supporting" on the partners page; from 760 to 1099px a lone third column spans the row).
 
 ## Components
 
 ### Buttons
-Solid, square and plain; the color does the work.
-- **Shape:** square (0px), 48px tall (44px with 10px 18px padding in the header and partner credit; 52px and borderless in the open mobile menu), 2px border the same color as the fill.
-- **Primary:** Action Violet with white text, 650 weight, 108% width, 12px 22px padding. "Partner with us" in the header is always primary.
-- **Hover / Focus:** fill deepens to Deep Action Violet over 160ms; focus is a 2px outline offset 3px (Action Violet on light, Lavender on dark).
-- **Line:** transparent with an Action Violet border and text; fills on hover.
-- **Livery:** Lavender fill with ink text, for the main action on violet; turns white on hover.
-- **Ghost dark:** transparent with an On-Violet Soft border on violet; fills white on hover.
-- **Text link:** underlined 1px, 2px on hover, 650 weight, for secondary actions beside a button ("Join as a student", "See how we built it").
+Quiet ink pills; the stage versions invert.
+- **Shape:** pill, 46px tall, 11px 24px padding, 1.5px border in the fill colour, 600 at 0.9375rem. Header pill 36px; phone partner credit 42px; open-menu pill 52px.
+- **Primary (`.btn`):** ink fill, white text. Hover: stage-black fill plus a 3px soft halo; press scales to 0.97 (200ms).
+- **Line (`.btn--line`):** transparent, ink text, #BAB8C4 border; fills ink on hover.
+- **On the stage:** `.btn--light` (Stage Light fill, ink text, turns white on hover) for the main action; `.btn--outline-light` (40% on-stage border) for the second.
+- **Text link (`.text-link`):** 600, underlined 1px, 2px on hover, for secondary actions ("Join as a student", "See how we built it").
+- **Focus:** 2px outline, 3px offset, ink on light and Stage Light on the stage.
 
-### Chips
-- **Toggle buttons** (crew filter, parts-explorer buttons): white, 1px hairline border, ink text, 44px tall; border goes ink on hover; pressed state is solid ink with white text.
-- **Lead tag:** violet fill, white text, 0.8125rem 650. **Subteam chip:** 1px hairline outline, ink text.
+### Chips and toggles
+- **Toggles** (`.callout-btn`, `.crew-filter button`): paper pill with a 1px Data Line border (aluminium, borderless, on white bands); ink border on hover; pressed = ink fill, white text.
+- **Year tabs** (`.year-tabs`): a segmented control on aluminium; the chosen year is a white lifted pill.
+- **Lead tag** (`.lead-tag`): ink pill, white, 0.8125rem 600. **Subteam chip** (`.chip`): aluminium pill, ink, 500.
 
 ### Cards / Containers
-There are no cards. Content sits in rows and columns separated by rules.
-- **Corner Style:** square.
-- **Background:** the band's ground; images sit on a paddock (or paper, on grey bands) mat; black-background photos sit on black (`on-black`).
+- **Corner Style:** 14px (`--r-md`), 18px for captains and the explorer figure.
+- **Background:** the opposite of the band: aluminium tiles on white bands, white tiles on grey bands, Stage Step tiles on the stage. The CSS swaps this automatically for `.tile`, `.facts`, `.figures`, `.event`, `.calendar li`, `.spec`, `.pull`, `.quote`, `.resource-list li`, `.coaches li`, `.contact-list`, `.table-scroll`.
 - **Shadow Strategy:** none (see Elevation & Depth).
-- **Border:** 2px ink top rule to open a list, 1px hairline between rows; 3px lavender stripe on violet.
-- **Internal Padding:** rows 10–24px vertical (24–40px on the Seasons index rows), no left inset.
+- **Border:** none; 1px Data Line only between rows inside a tile.
+- **Internal Padding:** 18–36px; quotes, the part list and season-fact tiles use 12–18px.
 
 ### Inputs / Fields
-- **Style:** white, 1px #A9A9A3 border, square, 48px tall, 12px 14px padding; labels 650 above the field; hints in steel 0.875rem.
-- **Focus:** border and a 2px outline in Action Violet, no offset.
-- **Choices:** the topic radios are square tiles with a diamond radio; the checked tile gets a 2px Action Violet edge (its 1px border plus a 1px inset ring).
+- **Style:** white, 1px #CBC9D3 border, 10px corners, 50px tall, 13px 16px padding; 600 labels above, a steel hint (the message hint) between the label and the field.
+- **Focus:** ink border plus the 3px soft halo; no outline.
+- **Choices:** topic radios are 50px rounded tiles; checked = ink edge (border plus 1px inset ring); radios take `accent-color: ink`.
+- **Error:** #B3261E text (secret-quote message only).
 
 ### Navigation
-- **Desktop:** 550-weight ink links, 44px tall; hover and current page draw a 2px Action Violet underline from the left (200ms); current page is 700.
-- **Mobile (1080px and under):** a Menu button opens a full-width panel of 56px rows at 1.25rem/112% width with hairlines, ending in a full "Partner with us" button. Without JavaScript a plain link row (`nojs-nav`) shows instead.
-- **Breadcrumbs:** small, slash-separated, at the top of each season head, above the machine name. Other inner pages have none.
+- **Desktop:** pill links on the stage-black header, #CFCDD8 at 500, 40px tall; hover and current page brighten to white on an 8–12% light fill.
+- **Mobile (1080px and under):** a pill Menu button opens a translucent black panel of 56px rows at 1.5rem 600 with stage rules, ending in a full Stage Light "Partner with us" pill. Without JavaScript a plain link row (`.nojs-nav`) shows.
+- **Breadcrumbs:** slash-separated, 0.9375rem, at the top of season heads.
 
 ### The Season Line-up (signature)
-Three garage bays hold the three robots side by side at one scale, oldest first, each labeled with an outlined diamond, the season years, the machine name and a status line. With JavaScript the bays are tabs: the chosen bay is lit (lavender bar on top, garage light, full-color robot, filled diamond) and the others wait dimmed and slightly smaller; the season card beside them swaps in its results, specs and a link. The home line-up opens on DECODE (`data-default="2025"`). The season tabs carry no 01/02/03 numbers; the years are the labels. Without JavaScript every season card shows, stacked.
+Three bays hold the three robots side by side, oldest first, on one continuous floor line. Each label: a small circle and the season years, the machine name (125%, 700), a status line. With JavaScript the bays become tabs (arrow keys, Home/End): the chosen robot stands full colour in a spotlight cone and its column widens; the others dim to 32% grey and step back. The season card beside them fades in from an 8px blur (520ms). The choice is written to the URL (`?season=2025`); the home page opens on `data-default`. Without JavaScript every season card shows, stacked.
 
 ### Season Head
-The top of each season page: violet field, breadcrumb, display-size machine name, lead, the robot cut-out on the right with its floor shadow, and a season facts row under a lavender stripe. The robot keeps its `view-transition-name`, so in supporting browsers it morphs between the home bay, the Seasons index row, the season head and the pager.
+Stage ground, breadcrumb, machine name, lead, the robot cut-out in its fixed spotlight, then a row of Stage Step fact tiles. Robots carry a `view-transition-name`, so in supporting browsers the robot morphs between the home bay, the Seasons index row, the season head and the pager (480ms).
 
-### Spec Sheet and Records
-Two-column definition rows (steel term, 600 tabular value) under a 2px ink rule. Missing spec values read "TBD" and are set in steel (`.tbd`); missing event results show an em dash announced as "Not recorded". Neither is ever guessed. Results tables collapse into stacked rows at 720px.
+### Data: results, specs, tiers, budget
+- **Specs and results:** spec sheets are two-column rows (steel term, 600 tabular value) inside a tile, 1px Data Line between rows. The home results table (date, event, result, robot) sits straight on the band with the same lines; event tiles on season pages give results as term/value pairs (600 values) without lines. Missing values read "TBD" in steel (`.tbd`); missing results show an em dash announced as "Not recorded". The results table stacks at 720px.
+- **Tiers (`.tiers`):** a real table in a scrolling 14px tile; metal swatch beside each tier name, inline SVG ticks, an em dash for "not included"; the benefit column stays sticky on phones.
+- **Budget (`.budget`):** a real table ranked largest first; one ink bar per line drawn to scale against the largest share (38%), with amount and percentage in tabular figures and a 2px ink total rule. It follows dataviz guidance (ranked bars, one ink, inside a table) rather than the package's donut.
+- **Transfer bars (`.bars`):** grey bars on an aluminium track, the best value in ink.
 
 ### Partner Strip and Sponsor Row
-A partner strip under a 3px lavender stripe closes the home launch panel ("Supported by ...", livery button, a plain "Join as a student" link). Every page's footer carries the Our Sponsors & Supporters row, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names set wide and bold in white), with a "Become a sponsor" link. Never remove or move it.
+The home stage ends in a partner strip ("Supported by …", a Stage Light "Partner with us" pill, "Join as a student"). Every page's footer, on aluminium, carries Our Sponsors & Supporters, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names in white tiles, 600), plus an outlined "Become a sponsor" tile. Never remove or move it.
 
 ### Motion
-One easing for everything: `cubic-bezier(0.16, 1, 0.3, 1)`. State colors 160ms; underlines and small marker changes 200ms; explorer diamonds scale in 260ms; tab bars 300ms; bay light, livery bar and robot 420–520ms; entering cards, panels, part notes and filtered crew members 320–380ms (fade up 8–10px); a Seasons-index robot lifts 4px on hover (320ms); a locked quote shakes for 600ms before it opens. Page-to-page robot morph 420ms via view transitions. All of it is cut to near zero under reduced motion.
+One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)`; only the scroll-linked stage dim and the parts progress line run linear (`--ease-in-out` is defined in `:root` but unused).
+- **Load (stage only, once):** the h1 and line rise 26px (900ms, second line +120ms); the robots step in from 40px and 94% scale one after another (1100ms at 220/340/460ms); the floor line draws from the centre (1200ms); labels, card and partner strip fade in at 640ms. Season and page heads use the same rise; the season-head robot steps in.
+- **Scroll:** the stage dims to 35% and scales to 0.96 as it leaves the screen (scroll-linked, `animation-timeline: view()`, supporting browsers only). Below-the-fold photos, tiles and data blocks rise 24px and fade in once (800ms, siblings 80ms apart, capped at 5); chart bars grow from the left 200ms later. The `reveal` part in `js/main.js` lists which selectors take part; anything already on screen, any page without JavaScript, and keyboard focus show at once. The pinned parts explorer advances one part per scroll step with a progress line.
+- **Answers to the visitor:** colour changes 160–200ms; segmented tabs 260ms; header tint and menu open 320ms; panels and part notes fade up 8px (420–480ms); filtered crew members fade up 8px (320ms); bay light and robot dim 600–700ms; hovered photos zoom to 1.03 (700ms); a locked quote shakes 600ms. The next calendar event's dot pulses twice.
+- **Reduced motion:** every animation and transition is cut to 0.01ms, the reveal never hides anything, smooth scrolling and view transitions are off.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** change colors, sizes and spacing in `:root` in `css/style.css`, never in a component rule.
-- **Do** use the violet field only for launching a machine, crediting partners or a closing call to join or partner; put everything else on paper or paddock grey.
-- **Do** use Action Violet (#5B3FC4) for links and buttons on light, and Lavender (#B9A6F2) only on violet or the footer.
-- **Do** set machine names and page titles wide (118–125%) and heavy (780–840); keep reading text at normal width.
-- **Do** give every date, spec and number tabular figures.
-- **Do** separate content with a 2px ink rule over a list and 1px hairlines between rows.
-- **Do** set `--w` to the image's pixel width on every `.photo` so photos are never upscaled.
+- **Do** change colours, sizes, radii and spacing in `:root` in `css/style.css`, never in a component rule.
+- **Do** use the stage only for a launch (home, season heads), the partners head and the closing call to join or partner; put everything else on paper or aluminium.
+- **Do** put content on a filled tile in the opposite ground (aluminium on white, white on grey, Stage Step on the stage) with 14px corners.
+- **Do** make every button, toggle, tag and chip a pill; use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.
+- **Do** set only robot and game names at 125% width and 700; keep everything else at normal width.
+- **Do** give every date, amount, spec and result tabular figures.
+- **Do** show a chosen state as light (brighter, full colour, filled dot) and write it to the URL when it is a view someone might share.
+- **Do** add a new below-the-fold block to the `reveal` selector list rather than writing a new entrance animation.
+- **Do** set `--w` to the image's pixel width on every `.photo`.
 - **Do** keep the sponsor strip in every footer, built from `SPONSORS` / `SUPPORTERS` in `js/main.js`.
-- **Do** add new raster images only as the team's own photos or CAD renders, and record how any edited one was made.
-- **Do** make motion an answer to a click, tap or key, with the shared easing, and let reduced motion turn it off.
+- **Do** add raster images only as the team's own photos or CAD renders, and record how any edited one was made (Assets and Provenance below).
 
 ### Don't:
-- **Don't** round corners anywhere.
+- **Don't** add a brand hue, a purple or violet accent, or neon on black.
+- **Don't** copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.
+- **Don't** separate sections with hairlines; change the ground instead. Lines belong inside data only.
+- **Don't** put shadows on tiles, buttons, menus or panels, or nest a tile inside a tile.
+- **Don't** use the tier metals for anything but the tier swatches.
 - **Don't** add a second font family or system display faces.
-- **Don't** add shadows to buttons, panels or menus; shadow is only for robots on the floor and explorer markers.
-- **Don't** use any marker other than the diamond: no icon glyphs, emoji, checkmarks or arrows as bullets.
-- **Don't** number the season tabs (01/02/03) or put small labels (eyebrows) above headings.
-- **Don't** animate on page load or on scroll, and don't add counters that tick up.
-- **Don't** put content in boxed cards with borders and shadows; use rows and grounds.
-- **Don't** generate or invent images, results, sponsors or numbers; leave a `tbd` instead.
+- **Don't** put small labels (eyebrows) above headings or number the seasons 01/02/03.
+- **Don't** add new load animations outside the stage, counters that tick up, or motion that ignores reduced motion.
+- **Don't** generate or invent images, results, sponsors or numbers; leave "TBD" instead.
 - **Don't** show a photo larger than its own pixels.
 
 ## Assets and Provenance
 
 - **Font:** Archivo variable (weight 100–900, width 62–125%), self-hosted latin subset `fonts/archivo-latin.woff2`, from Google Fonts, SIL Open Font License.
-- **Logo:** `images/logo-mark.png` is the emblem cut out onto transparency from `images/logo.png`, a screenshot with chat text and faded copies behind the emblem (commit d5e93d6). Only `logo-mark.png` is used on the site.
-- **`images/into-the-deep-robot-cut.webp`:** made from `images/into-the-deep-robot.png` (the robot on black: an older rough cut-out, upscaled 2x in commit 24b928e by a method that is not recorded) with a flood-fill matte of the black background, gaps inside the robot cleared by hand, leftover specks dropped, and a 0.8px feathered alpha edge.
+- **Logo:** `images/logo-mark.png` is the emblem cut out onto transparency from `images/logo.png`, a screenshot with chat text and faded copies behind the emblem (commit d5e93d6). Only `logo-mark.png` is used on the site, unchanged in colour.
+- **Tier metals:** the four tiers come from the team's 2026–27 sponsorship package (`docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`, Andy's Canva PDF). The swatch hex values are the site's own: none of them appears in the PDF, whose tier colours are lighter, and how they were picked is not recorded.
+- **`images/into-the-deep-robot-cut.webp`:** made from `images/into-the-deep-robot.png` (the robot on black: an older rough cut-out, upscaled 2x in commit 24b928e by a method that is not recorded) with a flood-fill matte of the black background, enclosed gaps inside the robot cleared, leftover specks removed, and a 0.8px feathered alpha edge.
 - **`images/mercinator-v1-cut.webp`:** made from `images/mercinator_v1_fullybuilt.png` (team photo) with Canva's background remover; the mask was taken from Canva's preview, upscaled and applied to the original photo.
 - **`images/decode-chassis-v2-ink2.jpg`** (shipped on the 2025–26 page) is a variant of `images/decode-chassis-v2.jpg` from an earlier redesign commit; how it was edited is not recorded. Record it here when known.
 - **`images/decode-robot-cad.webp`, `decode-transfer.webp`, `decode-turret.webp`, `decode-limelight.webp`:** the team's CAD renders with their white backgrounds removed to transparency (commit a5620f9).
-- **Team portraits** (`images/team/*.jpg`): re-cropped to a matching 4:5 framing, two of them shrunk (commit 30b6c14); one comes from the team's sponsorship package (commit 810a339).
-- **Every other image** is the team's own photo or CAD render, unchanged apart from re-encoding to WebP where a .webp copy exists, as far as the git history records. No image on the site was generated; the method of the 2x upscale above is not recorded.
+- **Team portraits** (`images/team/*.jpg`, all 4:5): commit 30b6c14 re-cropped eight of the ten (all but Avo's and Margaret's) to matching framing; Tucker's went from 720×900 to 800×1000 in it, from a source that is not recorded. Margaret's comes from the team's sponsorship package (commit 810a339).
+- **Outreach photos** `images/mit_lab_1.jpg` and `images/vulcanforms_1.jpg` were shrunk from 1600×1200 to 1400×1050 in commit 30b6c14 (these are the commit's "two photos shrunk").
+- **Every other image** is the team's own photo or CAD render, unchanged apart from re-encoding to WebP where a .webp copy exists, as far as the git history records. No image on the site was generated.

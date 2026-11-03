@@ -134,6 +134,11 @@ part("header", () => {
   header.addEventListener("focusout", e => {
     if (header.classList.contains("is-open") && e.relatedTarget && !header.contains(e.relatedTarget)) set(false);
   });
+  // once the page scrolls under it, the bar turns translucent so the content shows through
+  let ticking = false;
+  const tint = () => { header.classList.toggle("is-scrolled", scrollY > 8); ticking = false; };
+  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(tint); } }, { passive: true });
+  tint();
 });
 
 // ---------- Footer: sponsors on every page ----------
@@ -161,11 +166,11 @@ part("footer", () => {
       </a>
       <div class="footer-cols">
         <div>
-          <h3>Pages</h3>
+          <h2>Pages</h2>
           <ul>${NAV.map(n => `<li><a href="${root}${n.href}">${n.label}</a></li>`).join("")}</ul>
         </div>
         <div>
-          <h3>Reach us</h3>
+          <h2>Reach us</h2>
           <ul>
             <li><a href="mailto:${TEAM_EMAIL}">${TEAM_EMAIL}</a></li>
             <li><a href="${INSTAGRAM}" target="_blank" rel="noopener">Instagram @gnce_mercury</a></li>
@@ -173,14 +178,14 @@ part("footer", () => {
           </ul>
         </div>
         <div>
-          <h3>Next event</h3>
+          <h2>Next event</h2>
           <p>${next ? esc(next.short) : "The season is over. See you next season."}</p>
         </div>
       </div>
     </div>
     <div class="container footer-legal">
       <span>© ${new Date().getFullYear()} <span translate="no">GNCE Mercury</span>, <span translate="no">Galactic Narwhal Chicken Effect</span></span>
-      <span>FIRST Tech Challenge team 26413, founded 2024</span>
+      <span><span translate="no">FIRST&nbsp;Tech&nbsp;Challenge</span> team&nbsp;26413, founded 2024</span>
     </div>`;
   document.body.append(footer);
 });
@@ -246,6 +251,11 @@ part("lineup", () => {
       c.classList.add("is-entering");
     }
     if (focus) bays[i].focus();
+    if (user) {
+      const url = new URL(location.href);
+      url.searchParams.set("season", bays[i].dataset.season);
+      history.replaceState(null, "", url);
+    }
   };
   bays.forEach((b, i) => b.addEventListener("click", e => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
@@ -258,8 +268,9 @@ part("lineup", () => {
     e.preventDefault();
     select((keys[e.key] + bays.length) % bays.length, { user: true, focus: true });
   });
-  const start = bays.findIndex(b => b.dataset.season === lu.dataset.default);
-  select(start >= 0 ? start : bays.length - 1);
+  const asked = new URLSearchParams(location.search).get("season");
+  const start = [asked, lu.dataset.default].map(v => bays.findIndex(b => b.dataset.season === v)).find(i => i >= 0);
+  select(start ?? bays.length - 1);
   lu.classList.add("is-ready");
 });
 
@@ -284,8 +295,8 @@ part("year-tabs", () => {
     const nav = document.createElement("nav");
     nav.className = "year-pager";
     nav.setAttribute("aria-label", "Other years");
-    nav.innerHTML = (i > 0 ? `<button type="button" class="btn btn--line" data-go="${i - 1}">Previous: ${esc(label(i - 1))}</button>` : "<span></span>")
-      + (i < panels.length - 1 ? `<button type="button" class="btn btn--line" data-go="${i + 1}">Next: ${esc(label(i + 1))}</button>` : "");
+    nav.innerHTML = (i > 0 ? `<a class="btn btn--line" href="#${panels[i - 1].id}" data-go="${i - 1}">Previous: ${esc(label(i - 1))}</a>` : "<span></span>")
+      + (i < panels.length - 1 ? `<a class="btn btn--line" href="#${panels[i + 1].id}" data-go="${i + 1}">Next: ${esc(label(i + 1))}</a>` : "");
     p.append(nav);
   });
   let current = -1;
@@ -306,7 +317,8 @@ part("year-tabs", () => {
   tabs.forEach((t, i) => t.addEventListener("click", () => select(i, { user: true })));
   document.addEventListener("click", e => {
     const b = e.target.closest(".year-pager [data-go]");
-    if (!b) return;
+    if (!b || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
     const j = +b.dataset.go;
     select(j, { user: true });
     tabBar.scrollIntoView({ block: "start", behavior: RM ? "auto" : "smooth" });
@@ -328,8 +340,8 @@ part("year-tabs", () => {
 
 // ---------- Robot callouts (season pages) ----------
 // <ol class="callouts" data-x data-y data-card> inside a <figure> with the robot render.
-// Without JavaScript it is a plain list of parts. With it, each part gets a diamond on the
-// render and a button; choosing one shows its note and lights its diamond.
+// Without JavaScript it is a plain list of parts. With it, each part gets a marker on the
+// render and a button; choosing one shows its note and lights its marker.
 part("callouts", () => {
   document.querySelectorAll(".callouts").forEach(list => {
     const fig = list.closest("[data-explorer]");
@@ -337,7 +349,7 @@ part("callouts", () => {
     const items = [...list.querySelectorAll(":scope > li")].filter(li => li.dataset.x && li.dataset.y);
     if (!img || items.length < 2) return;
 
-    // the diamonds sit in a box exactly the size of the image
+    // the markers sit in a box exactly the size of the image
     const stage = document.createElement("span");
     stage.className = "callout-stage";
     img.before(stage);
@@ -347,6 +359,8 @@ part("callouts", () => {
     note.className = "callout-note";
     note.id = (list.id || "callouts") + "-note";
     note.setAttribute("aria-live", "polite");
+    note.innerHTML = '<p><b></b><span></span></p><a class="text-link"></a>';
+    const noteName = note.querySelector("b"), noteText = note.querySelector("span"), noteLink = note.querySelector("a");
 
     const parts = items.map((li, i) => {
       const name = li.querySelector("b")?.textContent.trim() || "Part " + (i + 1);
@@ -388,16 +402,51 @@ part("callouts", () => {
       const { li, name } = parts[i];
       const text = li.querySelector(":scope > span")?.textContent.trim() || "";
       const card = li.dataset.card && document.getElementById(li.dataset.card);
-      note.innerHTML = `<p><b></b><span></span></p>${card ? `<a class="text-link" href="#${card.id}"></a>` : ""}`;
-      note.querySelector("b").textContent = name;
-      note.querySelector("span").textContent = text;
-      const a = note.querySelector("a");
-      if (a) a.textContent = `More on the ${li.dataset.link || name.toLowerCase()}`;
+      noteName.textContent = name;
+      noteText.textContent = text;
+      noteLink.hidden = !card;
+      if (card) { noteLink.href = "#" + card.id; noteLink.textContent = `More on the ${li.dataset.link || name.toLowerCase()}`; }
       if (user && !RM) { note.classList.remove("note-in"); void note.offsetWidth; note.classList.add("note-in"); }
     };
+    // Pinned mode (big screens): the explorer stays on screen while the page scrolls through the parts,
+    // one part per step, like a product page. Choosing a part scrolls to its step. Small screens keep the buttons.
+    const wrap = fig.closest(".parts-scroll");
+    const explorer = fig;
+    const progress = document.createElement("div");
+    progress.className = "parts-progress";
+    progress.setAttribute("aria-hidden", "true");
+    progress.innerHTML = "<span></span>";
+    note.after(progress);
+    const roomy = matchMedia("(min-width: 960px) and (min-height: 700px)");
+    wrap?.style.setProperty("--parts", parts.length); // the scroll length per part lives in css (.parts-scroll.is-pinned::after)
+    let pinned = false, lockUntil = 0;
+    const offset = () => parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 76;
+    const travel = () => wrap.offsetHeight - explorer.offsetHeight;
+    const layout = () => {
+      if (!wrap) return;
+      pinned = roomy.matches && explorer.offsetHeight <= innerHeight - offset();
+      wrap.classList.toggle("is-pinned", pinned);
+      follow();
+    };
+    const follow = () => {
+      if (!pinned) return;
+      const p = Math.min(1, Math.max(0, (offset() - wrap.getBoundingClientRect().top) / Math.max(1, travel())));
+      progress.style.setProperty("--p", p);
+      if (performance.now() > lockUntil) select(Math.min(parts.length - 1, Math.floor(p * parts.length)), true);
+    };
+    const goTo = i => {
+      select(i, true);
+      if (!pinned) return;
+      lockUntil = performance.now() + 900;
+      const top = scrollY + wrap.getBoundingClientRect().top - offset() + ((i + 0.5) / parts.length) * travel();
+      scrollTo({ top, behavior: RM ? "auto" : "smooth" });
+    };
+    addEventListener("scroll", () => requestAnimationFrame(follow), { passive: true });
+    addEventListener("resize", layout);
+    roomy.addEventListener("change", layout);
     parts.forEach((x, i) => {
-      x.b.addEventListener("click", () => select(i, true));
-      x.m.addEventListener("click", () => { select(i, true); x.b.focus({ preventScroll: true }); });
+      x.b.addEventListener("click", () => goTo(i));
+      x.m.addEventListener("click", () => { goTo(i); x.b.focus({ preventScroll: true }); });
       x.b.addEventListener("pointerenter", () => x.m.classList.add("is-hint"));
       x.b.addEventListener("pointerleave", () => x.m.classList.remove("is-hint"));
     });
@@ -407,10 +456,11 @@ part("callouts", () => {
       if (!k) return;
       e.preventDefault();
       const i = (parts.findIndex(x => x.b === document.activeElement) + k + parts.length) % parts.length;
-      parts[i].b.focus();
-      select(i, true);
+      parts[i].b.focus({ preventScroll: true });
+      goTo(i);
     });
     select(0, false);
+    layout();
   });
 });
 
@@ -498,6 +548,7 @@ part("special-quotes", () => {
     const plain = await subtle.decrypt({ name: "AES-GCM", iv: bytes(SPECIAL_QUOTES.iv) }, key, bytes(SPECIAL_QUOTES.data));
     return JSON.parse(new TextDecoder().decode(plain));
   };
+  pass.addEventListener("input", () => pass.removeAttribute("aria-invalid"));
   sqOpen.addEventListener("click", () => {
     form.hidden = false;
     sqOpen.hidden = true;
@@ -513,6 +564,7 @@ part("special-quotes", () => {
     } catch {
       msg.textContent = "That password didn’t work. Check it and try again.";
       msg.classList.add("err");
+      pass.setAttribute("aria-invalid", "true");
       pass.select();
       return;
     }
@@ -572,6 +624,13 @@ part("contact", () => {
   form.addEventListener("change", e => { if (e.target.name === "topic") showHint(); });
   showHint();
   const status = form.querySelector(".form-status");
+  // a typed message is not lost by accident: the browser asks before leaving the page
+  let dirty = false;
+  const warn = e => { e.preventDefault(); e.returnValue = ""; };
+  form.addEventListener("input", () => {
+    const d = !!form.elements.message?.value.trim();
+    if (d !== dirty) { dirty = d; (d ? addEventListener : removeEventListener)("beforeunload", warn); }
+  });
   form.addEventListener("submit", e => {
     e.preventDefault();
     const f = form.elements;
@@ -579,6 +638,8 @@ part("contact", () => {
     const body = `${f.message.value}\n\n${f.name.value}\n${f.email.value}`;
     const to = f.topic.value === "Sponsorship" ? SPONSOR_EMAIL : TEAM_EMAIL;
     const url = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    dirty = false;
+    removeEventListener("beforeunload", warn);
     location.href = url;
     if (status) status.textContent = url.length > 1900
       ? `Opening your email app… Long messages can get cut short in some email apps, so check the whole message is in the draft. If it isn’t, email us at ${to}.`
@@ -615,6 +676,34 @@ part("copy-email", () => {
 // Spec sheets: "TBD" values read as not-yet-known
 part("specs", () => {
   document.querySelectorAll(".spec dd").forEach(d => { if (d.textContent.trim() === "TBD") d.classList.add("tbd"); });
+});
+
+// ---------- One reveal pattern ----------
+// Photos, tiles and data blocks that start below the fold rise 24px and fade in once, the first time they
+// come into view; siblings in the same row follow 80ms apart. Nothing is hidden without JavaScript, with
+// reduced motion, or if it is already on screen when the page opens.
+part("reveal", () => {
+  if (RM || !("IntersectionObserver" in window)) return;
+  const SELECTOR = [
+    ".photo", ".entry", ".program-media", ".season-row", ".explorer-figure", ".event", ".calendar li",
+    ".facts > div", ".figures > div", ".table-scroll", ".budget", ".captain", ".member", ".resource-list li",
+    ".coaches li", ".sponsor-row li", ".pager a", ".pull", ".bars",
+  ].join(",");
+  const items = [...document.querySelectorAll(SELECTOR)].filter(el => !el.closest("[hidden], .launch, .season-head") && !el.parentElement.closest(SELECTOR));
+  const fold = innerHeight;
+  const io = new IntersectionObserver(entries => {
+    entries.filter(e => e.isIntersecting).forEach(e => { e.target.classList.add("is-revealed"); io.unobserve(e.target); });
+  }, { rootMargin: "0px 0px -8% 0px" });
+  const tops = items.map(el => el.getBoundingClientRect().top); // read every position first, then write
+  items.forEach((el, i) => {
+    if (tops[i] < fold * 0.92) return; // already on screen: leave it alone
+    const sibs = [...el.parentElement.children].filter(c => c.matches(SELECTOR));
+    el.style.setProperty("--delay", Math.min(sibs.indexOf(el), 5) * 80 + "ms");
+    el.classList.add("will-reveal");
+    io.observe(el);
+  });
+  // a keyboard user who tabs into a block that hasn't revealed yet sees it at once
+  document.addEventListener("focusin", e => { const el = e.target.closest(".will-reveal:not(.is-revealed)"); if (el) el.classList.add("is-revealed"); });
 });
 
 // ---------- Robot morph ----------

@@ -14,7 +14,7 @@
   <meta property="og:image" content="https://arnieftc.github.io/GNCE-Mercury-Website/images/logo-mark.png">
   <meta property="og:image:alt" content="GNCE Mercury logo">
   <meta name="twitter:card" content="summary">
-  <meta name="theme-color" content="#FFFFFF">
+  <meta name="theme-color" content="#0B0A0F">
   <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../css/style.css?v=201">
   <link rel="icon" href="../images/logo-mark.png">
@@ -39,7 +39,7 @@
         </div>
         <dl class="season-facts">
           <div><dt>Season</dt><dd>2025–26, our second</dd></div>
-          <div><dt>Ryken&nbsp;RoboBowl, Dec&nbsp;14,&nbsp;2025</dt><dd>Winning alliance, 1st pick</dd></div>
+          <div><dt><span translate="no">Ryken&nbsp;RoboBowl</span>, Dec&nbsp;14,&nbsp;2025</dt><dd>Winning alliance, 1st pick</dd></div>
           <div><dt>WNEU Qualifier, Jan&nbsp;24,&nbsp;2026</dt><dd>Sustain Award</dd></div>
           <div><dt>Mar&nbsp;15,&nbsp;2026</dt><dd>MA State Championship</dd></div>
         </dl>
@@ -69,14 +69,14 @@
               <div><dt>Transfer</dt><dd>Custom rails, 0.34&nbsp;s</dd></div>
               <div><dt>Shooter</dt><dd>Flywheel on a lazy-susan turret</dd></div>
               <div><dt>Vision</dt><dd><span translate="no">Limelight</span>, PD tracking</dd></div>
-              <div><dt>Autonomous</dt><dd>18-ball close / 9-ball far</dd></div>
+              <div><dt>Autonomous</dt><dd>12 balls</dd></div>
             </dl>
-            <p class="spec-source">From our 2025–26 engineering portfolio</p>
+            <p class="spec-source">From our 2025–26 engineering portfolio; the autonomous count is from our 2026–27 sponsorship package</p>
           </div>
         </div>
         <dl class="figures">
           <div><dt>Transfer time</dt><dd>0.34&nbsp;s</dd></div>
-          <div><dt>Ball autonomous</dt><dd>18</dd></div>
+          <div><dt>Balls scored in autonomous</dt><dd>12</dd></div>
           <div><dt>Turret rotation</dt><dd>360&deg;</dd></div>
           <div><dt>Sets of gecko wheels</dt><dd>3</dd></div>
         </dl>
@@ -85,9 +85,9 @@
 
     <!-- PARTS OF THE ROBOT: one <li> per part, in the order a ball travels: intake, transfer, shooter (aimed by
          the turret and the Limelight), then the chassis that carries it all.
-         data-x / data-y place the part's diamond on the render (% from the left / from the top);
+         data-x / data-y place the part's marker on the render (% from the left / from the top);
          data-card is the id of that part under "Mechanisms and iterations";
-         data-label="below" puts the part's name under its diamond instead of above;
+         data-label="below" puts the part's name under its marker instead of above;
          data-link is how the part is named in "More on the …" when it isn't lowercase. -->
     <section class="band band--grey" aria-labelledby="parts-title">
       <div class="container">
@@ -95,6 +95,8 @@
           <h2 id="parts-title">Parts of the robot</h2>
           <p>Follow a ball through the robot: choose a part to see what it does.</p>
         </div>
+        <!-- the parts-scroll wrapper lets the explorer stay pinned while the page scrolls through the parts -->
+        <div class="parts-scroll">
         <div class="explorer" data-explorer>
           <figure class="explorer-figure">
             <img src="../images/decode-robot-cad.webp" width="1165" height="1066" loading="lazy" alt="CAD render of the DECODE robot, with each part marked">
@@ -109,6 +111,7 @@
               <li data-x="36" data-y="58" data-card="chassis" data-label="below"><b>Chassis</b> <span>Parallel plates (version 3) that keep parts easy to remove for maintenance and let us play defense.</span></li>
             </ol>
           </div>
+        </div>
         </div>
       </div>
     </section>
@@ -143,7 +146,7 @@
           <article class="entry" id="shooter">
             <div class="entry-media cover"><img src="../images/decode-shooter.jpg" width="1280" height="708" alt="CAD render of shooter version 4" loading="lazy"></div>
             <h3>Shooter</h3>
-            <p>Four versions: a bulky fixed hood, a sturdier but large build, a smaller modular one that was unstable, and V4 with stable side plates, the motors in front, and a front-mounted <span translate="no">Limelight</span>.</p>
+            <p>4 versions: a bulky fixed hood, a sturdier but large build, a smaller modular one that was unstable, and V4 with stable side plates, the motors in front, and a front-mounted <span translate="no">Limelight</span>.</p>
           </article>
           <article class="entry" id="turret">
             <div class="entry-media"><img src="../images/decode-turret.webp" width="1153" height="661" alt="CAD of the turret top plate, lazy susan, and herringbone gear" loading="lazy"></div>
@@ -174,8 +177,8 @@
             <p>A lookup table maps 7 calibrated distances (1.1&ndash;3.34&nbsp;m) to flywheel speeds from 3000 to 3975&nbsp;RPM, with linear interpolation in between and a PIDF loop holding the speed. Inside 1.3&nbsp;m, the hood angle changes for short shots.</p>
           </div>
           <div class="entry ruled-strong">
-            <h3>Autonomous: 18-ball close, 9-ball far</h3>
-            <p>We use <span translate="no">PedroPathing</span>, and thanks to other teams we ran a newer, unreleased version that made our autonomous much more consistent. The close-side routine shoots the preload, then collects and scores triples 3 more times for 18 balls. The far side scores 9.</p>
+            <h3>Autonomous: 12 balls</h3>
+            <p>We use <span translate="no">Pedro&nbsp;Pathing</span>, and thanks to other teams we ran a newer, unreleased version that made our autonomous much more consistent. The close-side routine shoots the preload, then collects and scores triples 3 more times for 12 balls.</p>
           </div>
           <div class="entry ruled-strong">
             <h3>Strategy: defense with a parallel plate</h3>
@@ -196,7 +199,7 @@
             <time datetime="2026-03-15">Mar 15, 2026</time>
             <div>
               <h3>Massachusetts State Championship</h3>
-              <p>We competed at States after qualifying through our Ryken&nbsp;RoboBowl result.</p>
+              <p>We competed at States after qualifying through our <span translate="no">Ryken&nbsp;RoboBowl</span> result.</p>
             </div>
             <dl>
               <div><dt>Alliance</dt><dd><span aria-hidden="true">—</span><span class="visually-hidden">Not recorded</span></dd></div>
@@ -217,7 +220,7 @@
           <li class="event">
             <time datetime="2025-12-14">Dec 14, 2025</time>
             <div>
-              <h3>Ryken&nbsp;RoboBowl Qualifier</h3>
+              <h3><span translate="no">Ryken&nbsp;RoboBowl</span> Qualifier</h3>
               <p>This win earned us our spot at the Massachusetts State Championship.</p>
               <img class="event-photo" src="../images/team.webp" width="927" height="626" loading="lazy" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship">
             </div>
