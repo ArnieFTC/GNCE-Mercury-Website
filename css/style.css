@@ -630,6 +630,8 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .quote { font-size: var(--fs-sm); line-height: 1.5; padding: 12px 14px; margin-top: 4px; border-radius: var(--r-sm); background: var(--alu); }
 .band--grey .quote { background: var(--paper); }
 .quote:empty { display: none; }
+.quote:not(.locked):not(.special)::before, .quote.special .sq-text::before { content: "\201C"; }
+.quote:not(.locked):not(.special)::after, .quote.special .sq-text::after { content: "\201D"; }
 .quote.locked { color: var(--steel); display: flex; align-items: center; gap: 10px; }
 .quote.locked::before { content: ""; width: 10px; height: 12px; border: 1.5px solid currentColor; border-radius: 3px 3px 2px 2px; flex: none; }
 .quote.special .sq-badge { display: block; font-size: 0.8125rem; font-weight: 600; margin-bottom: 2px; }
