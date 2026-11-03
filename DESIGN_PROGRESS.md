@@ -301,6 +301,12 @@ Reduced motion makes every change instant.
 - Content: every tier cell, budget line, amount and share checked against the package; no invented facts
   (the cumulative-tier sentence and the free-demo item were removed after review).
 - Contrast on the rendered pages (reduced motion): AA on every page. Impeccable rendered detector: 0 findings.
+- Closing Impeccable finish verdict on fresh captures: the partners page passes on every one of Andy's points
+  (compact, colourful tier chart like page 4; honest donut with a sorted legend; no visual defect at 320, 390,
+  768 or 1440). Its two material fixes were applied: the sheet's hairlines above the tiers and the budget are
+  gone (space alone separates them, per the contract), and the camp card on outreach now leads with its video
+  in the same 4:3 frame (its photos moved into the strip), so the two columns end within about 50px of each
+  other instead of leaving a 1,100px gap.
 - Not tested: real iOS/Android devices, screen readers, Safari and Firefox.
 
 **Round 2, 2026-11-03** (superseded where round 3 changed things: the tier table no longer scrolls inside a box,

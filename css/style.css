@@ -704,6 +704,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .program-media .strip.fit img { object-fit: contain; background: var(--alu); border-radius: var(--r-sm); } /* no aspect-ratio: the width/height attributes hold the space while it loads */
 .program-media .strip.wide img { aspect-ratio: 16 / 9; }
 .program-media video { width: 100%; background: var(--ink); border-radius: var(--r-md); }
+.program-media > figure:first-child video { aspect-ratio: 4 / 3; object-fit: cover; } /* a video can lead a card in the same 4:3 frame */
 .program-text { max-width: 62ch; }
 .program-text p { max-width: none; }
 .program-text h3 { font-size: clamp(1.375rem, 1.05rem + 0.7vw, 1.75rem); font-weight: 600; letter-spacing: -0.016em; margin-bottom: 12px; }
@@ -789,9 +790,9 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .contact-person span { color: var(--on-stage-2); }
 .contact-person a { color: var(--on-stage); margin-top: 6px; overflow-wrap: anywhere; }
 
-/* the sheet: tiers and budget continue the head's stage, each under a quiet rule */
+/* the sheet: tiers and budget continue the head's stage, separated by space alone (no section hairlines) */
 .sheet { padding-top: 0; padding-bottom: clamp(44px, 5vw, 76px); }
-.sheet-grid { border-top: 1px solid var(--rule-stage); padding-top: clamp(36px, 4vw, 56px); display: grid; gap: 24px 48px; }
+.sheet-grid { padding-top: clamp(40px, 4.4vw, 64px); display: grid; gap: 24px 48px; }
 @media (min-width: 1100px) { .sheet-grid { grid-template-columns: minmax(240px, 1fr) minmax(0, 880px); align-items: start; } }
 .rail h2 { margin-bottom: 14px; }
 .rail p { color: var(--on-stage-2); max-width: 46ch; margin: 0 0 0.8em; }
