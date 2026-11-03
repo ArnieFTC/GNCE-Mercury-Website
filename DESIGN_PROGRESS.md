@@ -3,7 +3,7 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-03, rounds 1 and 2 implemented and verified; final critique and audit next. Work is committed straight to `main`, Andy's standing instruction; `main` is the live site._
+_Last updated: 2026-11-03. Rounds 1–3 done and verified; the final critique and /vercel audit are in, and their confirmed findings are fixed. Work is committed straight to `main`, Andy's standing instruction; `main` is the live site._
 
 ## Goal
 
@@ -181,6 +181,34 @@ Considered and left as is:
 - the DECODE figures row, which repeats the spec sheet but holds the only "3 sets of gecko wheels" fact;
 - "Season Kickoff" on the timeline and "Our Sponsors & Supporters" in the footer, whose case stays unless Andy says so.
 
+### Final review findings (round 3, 2026-11-03)
+
+The final review ran Impeccable A (design review) and B (detector plus overlay) and a /vercel audit, each checked
+by a skeptic. A usage limit stopped it once; it was resumed after the reset.
+
+Critique score: **29/40** (it was 23, then 27).
+
+| # | Where | Problem | Fix | Reg. | |
+|---|---|---|---|---|---|
+| F1 | spec sheets | The key-label rule also hit names nested in values ("Limelight", "Pedro Pathing" turned mono mid-value) | Child combinators: `.specs li > span` | round 2 | ☑ |
+| F2 | home credentials | With years added, the row wrapped 3+1 at 1000–1124 px | 2×2 up to 1139 px | round 2 | ☑ |
+| V1 | DECODE walkthrough | The photo hover rule replaced the stage crossfade on mouse devices | Hover rule skips the stage | round 2 | ☑ |
+| F3 | DECODE, short laptops | Parts and note ran past the fold at 1366×768 and 1280×720 | Tighter season head, 36 px part rows, render capped by screen height on ≤900 px-tall screens | | ☑ |
+| B1/V5 | DECODE copy | "0.9 s" split from its unit at 560–570 px | `&nbsp;` before every unit on the page | | ☑ |
+| B2 | team captain records | Line height 1.25 | 1.3 | | ☑ |
+| CB-1 | 2024–25 lede | One-word last line at 360–390 px | `text-wrap: pretty` for ledes | | ☑ |
+| V2–V4 | i18n | Names lost `translate="no"` when the callouts were rebuilt; supporters, Galactic Einsteins, GNCE Diamond, Mercury and Into the Deep were left out | Carried over and added | | ☑ |
+| V6 | DECODE intake | Counts in words mid-sentence | "Our first intake, 2 gecko wheels on 2 motors… V2 used 1 motor" | | ☑ |
+| V7 | outreach | LCP photo had no priority | `fetchpriority="high"` | | ☑ |
+| V8 | header/footer | Menu toggle and logo links had no hover state | Border and underline on hover | | ☑ |
+| V9 | countdown | Said "Next event" on event day | Says "Today" | | ☑ |
+| minor | outreach datelines | Mono on words ("Ongoing", "Week of") | Mono on the date only | | ☑ |
+| minor | captain role lines | Mono costume | Sans, same position and text | | ☑ |
+| minor | home | "Meet the team" / "See our outreach" stacked 72 px apart on phones | Even spacing | | ☑ |
+| minor | contact | Join link put the form heading under the header | `scroll-margin-top` on the form | | ☑ |
+
+Refuted: hiding the special-quotes feature (it works, and members use it).
+
 ### Blocked: needs facts, assets or accounts from the team
 
 - ⊘ B1 A sharp wide team photo (≥ 2400 px wide). The Ryken photo is used at its real size until then.
@@ -195,6 +223,16 @@ Considered and left as is:
 - ⊘ B10 Plain-language wording for FTC awards (Think, Sustain) for parents and sponsors.
 - ⊘ B12 Which other members code: the Software filter shows only Arnie (Software Lead) until members get a Software chip.
 - ⊘ B13 Whether "Resources" stays in the top nav while it mostly links back to the season pages (it's ArnieFTC's addition).
+- ⊘ B14 **Decisions for Andy** raised by the final critique:
+  1. Wordmark size on short screens: should "Mercury" shrink on laptops under about 820 px tall, so the team
+     name line fits the first screen? At full measure it can't fit at 1366×768.
+  2. "The record so far": keep the three big numbers, or turn them into one sourced sentence?
+  3. Special quotes: keep them public, or reach them only through a link members know?
+  4. Season pages: try a less uniform rhythm than eight centred section titles?
+  5. Mechanism-card order: the callouts follow the ball path (intake first) but the cards start with the chassis.
+     Reorder the cards?
+  6. The DECODE "Strategy" card opens with a sentence about code organisation. Move it to the software cards?
+  7. "Season Kickoff" (timeline) and "Our Sponsors & Supporters" (footer): sentence case?
 - ⊘ B11 Without JavaScript there is no nav, footer or sponsor strip (they're built by `js/main.js`);
   a `<noscript>` copy would fork the single `SPONSORS` list, so it's left as a known limitation.
 
@@ -229,8 +267,13 @@ Considered and left as is:
   - Critique ran dual-agent: design review plus detector/browser. Result: 23/40, P0 0, P1 3.
   - Snapshot: `.impeccable/critique/2026-11-03T03-15-48Z__index-html.md`.
   - Detector: 23 warnings. marquee is real on index; tight-leading and cramped-padding are false positives.
-- **/vercel**: invoked via the Skill tool. Live guidelines fetched 2026-11-03 (HTTP 200); identical to the
-  bundled snapshot, so **no fallback was needed**. Baseline findings are folded into F/A above.
+- **/vercel**: invoked via the Skill tool for the baseline. Round 2 and the final audit followed the same skill
+  procedure inside review sub-agents. Live guidelines were fetched each time (HTTP 200) and matched the bundled
+  snapshot, so **no fallback was ever needed**. Findings are folded into the F/A, R and round-3 tables.
+- **Impeccable critique runs**:
+  - baseline 23/40 (dual-agent; snapshot in `.impeccable/critique/`);
+  - round 2 27/40 (dual-agent inside the review workflow);
+  - final 29/40 (dual-agent; resumed once after a usage limit).
 - **Rendering**: Playwright Chromium at 320/390/768/1440 on all 9 pages. Baseline: no overflow, no console
   errors, no 404s.
 
@@ -289,7 +332,11 @@ Round 1, 2026-11-03 (Playwright Chromium, local static server):
 
 ## Next action
 
-Final pass:
-1. Run the Impeccable critique (two isolated assessments) and the /vercel audit on the files changed in round 2.
-2. Fix anything confirmed.
-3. Then ask Andy for the blocked facts: B2–B8, B10, B12 and B13.
+No design work is pending. Next:
+1. Ask Andy for the blocked facts and assets (B1–B10, B12, B13) and for the decisions in B14.
+2. Fold each answer in as its own small round: edit, check at 320/390/768/1440 with keyboard and reduced motion,
+   run `/vercel` on the changed files, push to `main`.
+3. Re-run the Impeccable critique after any change that touches layout.
+
+The scratchpad test scripts (`audit.js`, `itest.js`) live outside the repo and won't survive a new session.
+Recreate them from the checks listed above if needed.

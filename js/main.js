@@ -182,8 +182,8 @@ const footer = document.createElement("footer");
 part("footer", () => {
   footer.className = "site-footer";
   const sponsorItems = [
-    ...SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener" title="${s.name}"><img src="${root}${s.logo}" alt="${s.name}"${s.width ? ` width="${s.width}" height="${s.height}"` : ""}></a>`),
-    ...SUPPORTERS.map(n => `<span class="sponsor named">${n}</span>`),
+    ...SPONSORS.map(s => `<a class="sponsor" href="${s.url}" target="_blank" rel="noopener" title="${s.name}" translate="no"><img src="${root}${s.logo}" alt="${s.name}"${s.width ? ` width="${s.width}" height="${s.height}"` : ""}></a>`),
+    ...SUPPORTERS.map(n => `<span class="sponsor named" translate="no">${n}</span>`),
     `<a class="sponsor open text-link" href="${root}contact.html#support">Become a sponsor</a>`,
   ].join("");
   const status = statusLine();
@@ -281,7 +281,7 @@ part("countdown", () => {
       lastState = state;
       lastMinute = -1;
       cd.classList.toggle("live", !!today);
-      if (head) head.hidden = !today && !next;
+      if (head) { head.hidden = !today && !next; head.textContent = today ? "Today" : "Next event"; }
       if (today) {
         nameEl.textContent = today.name;
         dateEl.textContent = fmt(today.day, LONG);
@@ -597,21 +597,32 @@ part("callouts", () => {
       const para = document.createElement("p");
       const b = document.createElement("b");
       b.textContent = p.name + ".";
-      para.append(b, " " + p.text);
+      if (p.keep) b.translate = false;
+      // copy the note's own markup so names inside it keep translate="no"
+      const body = p.textEl ? p.textEl.cloneNode(true) : document.createTextNode(p.text);
+      para.append(b, " ", body);
       el.append(para);
       const card = p.card && document.getElementById(p.card);
       if (card) {
         const a = document.createElement("a");
         a.className = "text-link";
         a.href = "#" + card.id;
-        a.textContent = `More on the ${p.link}`;
+        // one inline run inside the flex link, so the space before the name survives
+        const label = document.createElement("span");
+        const nm = document.createElement("span");
+        nm.textContent = p.link;
+        if (p.keep) nm.translate = false;
+        label.append("More on the ", nm);
+        a.append(label);
         el.append(a);
       }
     };
 
     const parts = items.map((li, i) => {
       const name = li.querySelector("b")?.textContent.trim() || `Part ${i + 1}`;
-      const text = li.querySelector("span")?.textContent.trim() || "";
+      const textEl = li.querySelector(":scope > span");
+      const text = textEl?.textContent.trim() || "";
+      const keep = li.querySelector("b")?.getAttribute("translate") === "no";
       const x = parseFloat(li.dataset.x), y = parseFloat(li.dataset.y);
       // the diamond on the render (for mouse and touch; the buttons below are the keyboard path)
       const mark = document.createElement("button");
@@ -625,6 +636,7 @@ part("callouts", () => {
       const tag = document.createElement("span");
       tag.className = "callout-label";
       tag.textContent = name;
+      if (keep) tag.translate = false;
       mark.append(tag);
       stage.append(mark);
 
@@ -632,12 +644,13 @@ part("callouts", () => {
       btn.type = "button";
       btn.className = "callout-btn";
       btn.textContent = name;
+      if (keep) btn.translate = false;
       btn.tabIndex = -1;
       btn.setAttribute("aria-pressed", "false");
       btn.setAttribute("aria-controls", note.id);
       bar.append(btn);
       // data-link keeps a product name as written ("More on the Limelight")
-      const p = { name, text, card: li.dataset.card, link: li.dataset.link || name.toLowerCase(), mark, btn };
+      const p = { name, text, textEl, keep, card: li.dataset.card, link: li.dataset.link || name.toLowerCase(), mark, btn };
       const copy = document.createElement("div");
       fill(copy, p);
       sizer.append(copy);
@@ -896,7 +909,7 @@ part("copy-email", () => {
 
 // Spec sheets: "TBD" values are set in the label font so they read as not-yet-known
 part("specs", () => {
-  document.querySelectorAll(".specs li span:last-child").forEach(s => { if (s.textContent.trim() === "TBD") s.classList.add("tbd"); });
+  document.querySelectorAll(".specs li > span:last-child").forEach(s => { if (s.textContent.trim() === "TBD") s.classList.add("tbd"); });
 });
 
 // ---------- Reveals ----------
