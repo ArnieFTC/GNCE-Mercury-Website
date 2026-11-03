@@ -4,3 +4,6 @@ Thumbs.db
 # Impeccable: the engine binary is re-downloaded (checksum-verified) on first use; hooks are per-person
 .claude/skills/impeccable/scripts/bin/
 .claude/settings.local.json
+
+# Impeccable live-preview server state (local only)
+.impeccable/live/
