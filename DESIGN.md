@@ -117,8 +117,11 @@ components:
 
 # Design System: GNCE Mercury
 
-All colors, type sizes and spacing live in `:root` at the top of `css/style.css`. Change them there, never
-inside a component. Everything below describes what is in that file and the pages as they ship.
+The named colors, the type scale (`--fs-*`) and the main spacing live in `:root` at the top of `css/style.css`.
+Change them there, never inside a component. A few values are still typed into component rules: the smaller
+type sizes (0.875rem, 0.8125rem and some per-component clamps) and five colors (footer text #E4E1EE and
+#ABA6BE, field border #A9A9A3, error red #A3243B, inactive explorer marker #8F86AE). Everything below
+describes what is in that file and the pages as they ship.
 
 ## Overview
 
@@ -130,7 +133,8 @@ it possible are credited at the foot of the panel and in every footer. The look 
 logo: its violet, its lavender diamond and its dark outline.
 
 Two grounds carry the site. The violet field is for launches and partners (the home launch panel, the head
-of each season page, the partner panel). White and paddock grey carry everything else: records, write-ups,
+of each season page, the partner panel) and for the closing calls to join or partner on the home, team and
+partners pages. White and paddock grey carry everything else: records, write-ups,
 people, forms. A near-black footer is an extra ground, used only for the footer. Sections are separated by a change of
 ground or by a hairline rule, never by boxes or cards. Corners are square everywhere. One type family,
 Archivo, does all the work: set extra wide and heavy for machine names and page titles, plain for reading.
@@ -140,7 +144,7 @@ switching an outreach year, moving between pages. Nothing animates on load or on
 turns all of it off.
 
 **Key Characteristics:**
-- Violet field for launches and partners; white and paddock grey for everything else.
+- Violet field for launches, partners and closing calls to join; white and paddock grey for everything else.
 - One family (Archivo), wide and heavy for machine names, plain for text, tabular figures for every date and spec.
 - Square corners on everything; rules and grounds instead of cards.
 - The logo's diamond is the only marker.
@@ -152,11 +156,11 @@ turns all of it off.
 The team's livery: one deep violet, one bright lavender stripe, one action violet, set on white and a warm paddock grey.
 
 ### Primary
-- **Mercury Violet** (violet): the launch and partner field. Home launch panel, season page heads, the partner panel, the backdrop behind robot thumbnails (season index rows, pager), and member lead tags.
+- **Mercury Violet** (violet): the launch and partner field. Home launch panel, season page heads, the partner panel, the closing join-or-partner bands (`band--violet` on the home, team and partners pages), the backdrop behind robot thumbnails (season index rows, pager), and member lead tags.
 - **Action Violet** (action): links and buttons on light grounds, the nav underline, the active outreach tab bar, focus rings on light, the "next event" marker in the calendar, the best bar in data bars. Its hover is **Deep Action Violet** (action-deep).
 
 ### Secondary
-- **Livery Lavender** (lavender): the stripe. Used only on violet or the footer: the 3px rule over the partner strip, season facts and sponsor row; the bar over the chosen bay; the chosen bay's filled diamond; the livery button; focus rings on dark grounds; text selection.
+- **Livery Lavender** (lavender): the stripe. Used only on violet or the footer: the 3px rule over the partner strip, the phone partner credit, season facts and sponsor row; the bar over the chosen bay; the chosen bay's filled diamond; the livery button; focus rings on dark grounds. The exceptions are text selection (lavender on every ground) and the touch tap highlight (lavender at 25%).
 
 ### Neutral
 - **Paper** (paper): the default page ground and form field fill.
@@ -168,9 +172,9 @@ The team's livery: one deep violet, one bright lavender stripe, one action viole
 - **Footer Night** (footer): the footer ground only, with text in #E4E1EE and secondary text in #ABA6BE. The direction contract named only violet, white and grey; this fourth ground was added in the build to close every page and is used nowhere else.
 
 ### Named Rules
-**The Livery Stripe Rule.** Lavender lives on dark grounds only (violet or footer). On white, the accent is Action Violet. Never put lavender text or rules on paper.
+**The Livery Stripe Rule.** Lavender lives on dark grounds only (violet or footer); text selection and the tap highlight are the only exceptions. On white, the accent is Action Violet. Never put lavender text or rules on paper.
 
-**The Two Grounds Rule.** Violet is for launching machines and crediting partners. Write-ups, people, records and forms sit on paper or paddock grey.
+**The Two Grounds Rule.** Violet is for launching machines, crediting partners and the closing call to join or partner. Write-ups, people, records and forms sit on paper or paddock grey.
 
 ## Typography
 
@@ -185,30 +189,30 @@ Archivo is self-hosted as one variable file, `fonts/archivo-latin.woff2` (Google
 ### Hierarchy
 - **Display** (840, 125% width, `--fs-display` 2.75–6rem, line-height 0.92): the season page h1 (machine name). The home h1 "GNCE Mercury" uses the same voice at 820, capped at 5.25rem.
 - **Headline** (800, 122% width, `--fs-xl` 2.25–4rem, line-height 0.98): inner page h1 and the partner panel h1.
-- **Machine name** (`.machine`, 800–820, 125% width): season names in the line-up card, season index rows and pager; sized to context.
+- **Machine name** (800–820, 125% width; 122% in the pager): season names in the bays, the line-up card, season index rows and pager, each set in its own component rule and sized to context. The `.machine` helper class in the CSS is not used on any page.
 - **Title** (750, 112% width, `--fs-lg` 1.625–2.375rem, line-height 1.1): section h2.
-- **Subtitle** (650, `--fs-md` 1.25rem, line-height 1.25): h3, lead paragraphs (400, steel, 60ch).
+- **Subtitle** (650, `--fs-md` 1.25rem, line-height 1.25): h3, lead paragraphs (400, steel, line-height 1.5, 60ch).
 - **Body** (400, `--fs-base` 1.0625rem, line-height 1.6): running text, held to 62ch.
-- **Label** (550–650, `--fs-sm` 0.9375rem or 0.875rem): nav, buttons (108% width), spec terms, dates, captions. Sentence case, no tracking.
+- **Label** (`--fs-sm` 0.9375rem, 0.875rem, or 0.8125rem for tags; 550 for nav, 650 for buttons, 400 for most spec terms, dates and captions): nav, buttons (108% width), spec terms, dates, captions. Sentence case, no tracking.
 
 ### Named Rules
 **The Tabular Figures Rule.** Every date, spec and number uses tabular lining figures (`<time>` and `.num` get them automatically; spec, facts and figures values set them).
 
-**The Width Is The Voice Rule.** Emphasis comes from the width axis plus weight, not from a second family, all-caps tracking or color. Wide is for machine names and titles only; reading text stays at normal width.
+**The Width Is The Voice Rule.** Emphasis comes from the width axis plus weight, not from a second family, all-caps tracking or color. Wide is for names and titles, with a lighter 108–112% on buttons, tabs and the phone menu; reading text stays at normal width.
 
 ## Layout
 
 - **Container:** content max 1280px (`--max`) plus a fluid gutter of 16–40px (`--gutter`) each side.
 - **Vertical rhythm:** bands are padded by `--section` (56–112px); tight bands by 40–72px. Section heads sit 28–48px above their content.
-- **Grids:** two-column splits run 7:5 (or 5:7 flipped, or even) from 900px. Entry grids go 1 → 2 columns at 760px → 3 at 1100px. Data lists (spec sheets, events, results, calendar, resources, contacts) are full-width rows ruled with hairlines.
+- **Grids:** two-column splits run 7:5 (or 5:7 flipped, or even) from 900px. Entry grids go 1 → 2 columns at 760px → 3 at 1100px. Data lists (spec sheets, events, results, resources, contacts) are full-width rows ruled with hairlines; the season calendar is a ruled grid of columns (150px minimum).
 - **Home launch panel:** h1 and the team line, then the line-up: three garage bays side by side with the chosen season's card to the right from 1100px; below 1100px the card drops under the bays and a short partner credit replaces the full partner strip. On phones (720px and under) the chosen bay widens to 1.9fr. On short laptop screens (1100px+ and 860px tall or less) the panel tightens so the partner strip stays in the first screen.
 - **Header:** sticky, 68px, white with a hairline. The nav collapses into a Menu button at 1080px and under; the header "Partner with us" button hides at 560px and under (it moves into the open menu).
-- **Breakpoints in use:** 480, 520, 560, 720, 760, 800, 860, 900, 960, 1000, 1080/1100, 1200px. Check every page at 320, 390, 768 and 1440px.
-- **Photos never larger than their pixels:** wrap a photo in `.photo` with `style="--w: <image width>px"`; entry images use `object-fit: scale-down` in a 16:10 mat.
+- **Breakpoints in use:** 359, 480, 520, 560, 700, 720, 760, 800, 860, 900, 960, 1000, 1080/1100, 1200px, plus the 860px-tall short-screen query and a 460px container query on the contact list. Check every page at 320, 390, 768 and 1440px.
+- **Photos never larger than their pixels:** wrap a photo in `.photo` with `style="--w: <image width>px"`; entry images use `object-fit: scale-down` in a 16:10 mat, except `.cover` entries, which fill it (`object-fit: cover`).
 
 ## Elevation & Depth
 
-The system is flat. Depth comes from the change of ground (violet, paper, paddock, footer) and from rules: a 2px ink rule opens a list, 1px hairlines separate its rows, and a 3px lavender stripe opens a partner or facts block on violet. Nothing on the page floats over anything else except the sticky header and the open mobile menu, and neither has a shadow.
+The system is flat. Depth comes from the change of ground (violet, paper, paddock, footer) and from rules: a 2px ink rule opens a list, 1px hairlines separate its rows, and a 3px lavender stripe opens a partner or facts block on violet. Nothing on the page floats over anything else except the sticky header, the open mobile menu and the parts-explorer diamonds and labels on their render; the header and menu have no shadow.
 
 ### Shadow Vocabulary
 - **Robot floor shadow** (`filter: drop-shadow(0 18px 18px rgba(8, 6, 20, 0.45))`, 24px/0.5 on season heads, 14px on season rows): only under robot cut-outs standing on violet, so they sit on the floor.
@@ -228,7 +232,7 @@ Every corner is square (0px): buttons, fields, chips, tags, images, panels. The 
 
 ### Buttons
 Solid, square and plain; the color does the work.
-- **Shape:** square (0px), 48px tall (44px in the header and partner credit), 2px border the same color as the fill.
+- **Shape:** square (0px), 48px tall (44px with 10px 18px padding in the header and partner credit; 52px and borderless in the open mobile menu), 2px border the same color as the fill.
 - **Primary:** Action Violet with white text, 650 weight, 108% width, 12px 22px padding. "Partner with us" in the header is always primary.
 - **Hover / Focus:** fill deepens to Deep Action Violet over 160ms; focus is a 2px outline offset 3px (Action Violet on light, Lavender on dark).
 - **Line:** transparent with an Action Violet border and text; fills on hover.
@@ -246,40 +250,40 @@ There are no cards. Content sits in rows and columns separated by rules.
 - **Background:** the band's ground; images sit on a paddock (or paper, on grey bands) mat; black-background photos sit on black (`on-black`).
 - **Shadow Strategy:** none (see Elevation & Depth).
 - **Border:** 2px ink top rule to open a list, 1px hairline between rows; 3px lavender stripe on violet.
-- **Internal Padding:** rows 10–24px vertical, no side padding.
+- **Internal Padding:** rows 10–24px vertical (24–40px on the Seasons index rows), no left inset.
 
 ### Inputs / Fields
 - **Style:** white, 1px #A9A9A3 border, square, 48px tall, 12px 14px padding; labels 650 above the field; hints in steel 0.875rem.
 - **Focus:** border and a 2px outline in Action Violet, no offset.
-- **Choices:** the topic radios are square tiles with a diamond radio; the checked tile gets an Action Violet border.
+- **Choices:** the topic radios are square tiles with a diamond radio; the checked tile gets a 2px Action Violet edge (its 1px border plus a 1px inset ring).
 
 ### Navigation
 - **Desktop:** 550-weight ink links, 44px tall; hover and current page draw a 2px Action Violet underline from the left (200ms); current page is 700.
 - **Mobile (1080px and under):** a Menu button opens a full-width panel of 56px rows at 1.25rem/112% width with hairlines, ending in a full "Partner with us" button. Without JavaScript a plain link row (`nojs-nav`) shows instead.
-- **Breadcrumbs:** small, slash-separated, above inner page titles.
+- **Breadcrumbs:** small, slash-separated, at the top of each season head, above the machine name. Other inner pages have none.
 
 ### The Season Line-up (signature)
 Three garage bays hold the three robots side by side at one scale, oldest first, each labeled with an outlined diamond, the season years, the machine name and a status line. With JavaScript the bays are tabs: the chosen bay is lit (lavender bar on top, garage light, full-color robot, filled diamond) and the others wait dimmed and slightly smaller; the season card beside them swaps in its results, specs and a link. The home line-up opens on DECODE (`data-default="2025"`). The season tabs carry no 01/02/03 numbers; the years are the labels. Without JavaScript every season card shows, stacked.
 
 ### Season Head
-The top of each season page: violet field, breadcrumb, display-size machine name, lead, the robot cut-out on the right with its floor shadow, and a season facts row under a lavender stripe. The robot keeps its `view-transition-name`, so in supporting browsers it morphs between the home bay, the season head and the pager.
+The top of each season page: violet field, breadcrumb, display-size machine name, lead, the robot cut-out on the right with its floor shadow, and a season facts row under a lavender stripe. The robot keeps its `view-transition-name`, so in supporting browsers it morphs between the home bay, the Seasons index row, the season head and the pager.
 
 ### Spec Sheet and Records
-Two-column definition rows (steel term, 600 tabular value) under a 2px ink rule. Missing values are marked `tbd` in steel, never guessed. Results tables collapse into stacked rows at 720px.
+Two-column definition rows (steel term, 600 tabular value) under a 2px ink rule. Missing spec values read "TBD" and are set in steel (`.tbd`); missing event results show an em dash announced as "Not recorded". Neither is ever guessed. Results tables collapse into stacked rows at 720px.
 
 ### Partner Strip and Sponsor Row
-A partner strip under a 3px lavender stripe closes the home launch panel ("Supported by ...", livery button, text link). Every page's footer carries the Our Sponsors & Supporters row, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names set wide and bold in white), with a "Become a sponsor" link. Never remove or move it.
+A partner strip under a 3px lavender stripe closes the home launch panel ("Supported by ...", livery button, a plain "Join as a student" link). Every page's footer carries the Our Sponsors & Supporters row, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names set wide and bold in white), with a "Become a sponsor" link. Never remove or move it.
 
 ### Motion
-One easing for everything: `cubic-bezier(0.16, 1, 0.3, 1)`. State colors 160ms; underlines 200ms; tab bars 300ms; bay light and robot 420–520ms; entering cards and panels 320–380ms (fade up 10px). Page-to-page robot morph 420ms via view transitions. All of it is cut to near zero under reduced motion.
+One easing for everything: `cubic-bezier(0.16, 1, 0.3, 1)`. State colors 160ms; underlines and small marker changes 200ms; explorer diamonds scale in 260ms; tab bars 300ms; bay light, livery bar and robot 420–520ms; entering cards, panels, part notes and filtered crew members 320–380ms (fade up 8–10px); a Seasons-index robot lifts 4px on hover (320ms); a locked quote shakes for 600ms before it opens. Page-to-page robot morph 420ms via view transitions. All of it is cut to near zero under reduced motion.
 
 ## Do's and Don'ts
 
 ### Do:
 - **Do** change colors, sizes and spacing in `:root` in `css/style.css`, never in a component rule.
-- **Do** use the violet field only for launching a machine or crediting partners; put everything else on paper or paddock grey.
+- **Do** use the violet field only for launching a machine, crediting partners or a closing call to join or partner; put everything else on paper or paddock grey.
 - **Do** use Action Violet (#5B3FC4) for links and buttons on light, and Lavender (#B9A6F2) only on violet or the footer.
-- **Do** set machine names and titles wide (118–125%) and heavy (780–840); keep reading text at normal width.
+- **Do** set machine names and page titles wide (118–125%) and heavy (780–840); keep reading text at normal width.
 - **Do** give every date, spec and number tabular figures.
 - **Do** separate content with a 2px ink rule over a list and 1px hairlines between rows.
 - **Do** set `--w` to the image's pixel width on every `.photo` so photos are never upscaled.
@@ -301,8 +305,10 @@ One easing for everything: `cubic-bezier(0.16, 1, 0.3, 1)`. State colors 160ms; 
 ## Assets and Provenance
 
 - **Font:** Archivo variable (weight 100–900, width 62–125%), self-hosted latin subset `fonts/archivo-latin.woff2`, from Google Fonts, SIL Open Font License.
-- **Logo:** `images/logo-mark.png` and `images/logo.png`, used as-is.
-- **`images/into-the-deep-robot-cut.webp`:** made from `images/into-the-deep-robot.png` (the team's photo on black) with a flood-fill matte of the black background, gaps inside the robot cleared by hand, and a 0.8px feathered alpha edge.
+- **Logo:** `images/logo-mark.png` is the emblem cut out onto transparency from `images/logo.png`, a screenshot with chat text and faded copies behind the emblem (commit d5e93d6). Only `logo-mark.png` is used on the site.
+- **`images/into-the-deep-robot-cut.webp`:** made from `images/into-the-deep-robot.png` (the robot on black: an older rough cut-out, upscaled 2x in commit 24b928e by a method that is not recorded) with a flood-fill matte of the black background, gaps inside the robot cleared by hand, leftover specks dropped, and a 0.8px feathered alpha edge.
 - **`images/mercinator-v1-cut.webp`:** made from `images/mercinator_v1_fullybuilt.png` (team photo) with Canva's background remover; the mask was taken from Canva's preview, upscaled and applied to the original photo.
 - **`images/decode-chassis-v2-ink2.jpg`** (shipped on the 2025–26 page) is a variant of `images/decode-chassis-v2.jpg` from an earlier redesign commit; how it was edited is not recorded. Record it here when known.
-- **Every other image** is the team's own photo or CAD render, unchanged apart from conversion to WebP where a .webp copy exists. No image on the site was generated.
+- **`images/decode-robot-cad.webp`, `decode-transfer.webp`, `decode-turret.webp`, `decode-limelight.webp`:** the team's CAD renders with their white backgrounds removed to transparency (commit a5620f9).
+- **Team portraits** (`images/team/*.jpg`): re-cropped to a matching 4:5 framing, two of them shrunk (commit 30b6c14); one comes from the team's sponsorship package (commit 810a339).
+- **Every other image** is the team's own photo or CAD render, unchanged apart from re-encoding to WebP where a .webp copy exists, as far as the git history records. No image on the site was generated; the method of the 2x upscale above is not recorded.

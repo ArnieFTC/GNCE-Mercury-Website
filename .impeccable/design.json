@@ -21,7 +21,7 @@
       "display": { "displayName": "Display", "purpose": "Season page h1 (machine name); the home h1 uses the same voice at 820, capped at 5.25rem. Set with font-stretch: 125%." },
       "headline": { "displayName": "Headline", "purpose": "Inner page and partner panel h1. font-stretch: 122%." },
       "title": { "displayName": "Title", "purpose": "Section h2. font-stretch: 112%." },
-      "subtitle": { "displayName": "Subtitle", "purpose": "h3 and lead paragraphs (lead at 400 in steel, 60ch)." },
+      "subtitle": { "displayName": "Subtitle", "purpose": "h3 and lead paragraphs (lead at 400 in steel, line-height 1.5, 60ch)." },
       "body": { "displayName": "Body", "purpose": "Running text, held to 62ch." },
       "label": { "displayName": "Label", "purpose": "Nav, buttons (font-stretch 108%), spec terms, dates, captions; tabular lining figures for every number." }
     },
@@ -34,8 +34,11 @@
       { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The one easing for every transition and animation." },
       { "name": "state", "value": "160ms", "purpose": "Button, toggle and field color changes." },
       { "name": "underline", "value": "200ms", "purpose": "Nav underline and small marker changes." },
+      { "name": "marker-scale", "value": "260ms", "purpose": "Parts-explorer diamonds scale up when hinted or chosen." },
       { "name": "tab-bar", "value": "300ms", "purpose": "Outreach year tab bar." },
-      { "name": "enter", "value": "320-380ms", "purpose": "Season card, explorer note and year panel fade up 10px when chosen." },
+      { "name": "enter", "value": "320-380ms", "purpose": "Season card, explorer note, year panel and revealed quote fade up 10px when chosen; filtered crew members fade up 8px (320ms)." },
+      { "name": "row-lift", "value": "320ms", "purpose": "A Seasons-index robot lifts 4px when its row is hovered." },
+      { "name": "quote-shake", "value": "600ms", "purpose": "A locked quote shakes before it opens (team page special quotes)." },
       { "name": "bay", "value": "420-520ms", "purpose": "Bay light, livery bar and robot dim/scale in the line-up." },
       { "name": "page-morph", "value": "420ms", "purpose": "Cross-page view transition of the robot (view-transition-name per robot)." },
       { "name": "reduced-motion", "value": "0.01ms", "purpose": "prefers-reduced-motion cuts all animation and transitions and disables view transitions." }
@@ -43,12 +46,21 @@
     "breakpoints": [
       { "name": "phone-narrow", "value": "359px" },
       { "name": "phone", "value": "480px" },
+      { "name": "year-tabs-compact", "value": "520px" },
       { "name": "phone-wide", "value": "560px" },
+      { "name": "pager", "value": "700px" },
       { "name": "tablet-narrow", "value": "720px" },
+      { "name": "entries-2", "value": "760px" },
+      { "name": "rows", "value": "800px" },
+      { "name": "events", "value": "860px" },
       { "name": "tablet", "value": "900px" },
+      { "name": "explorer", "value": "960px" },
+      { "name": "captains", "value": "1000px" },
       { "name": "menu", "value": "1080px" },
       { "name": "lineup", "value": "1100px" },
-      { "name": "wide", "value": "1200px" }
+      { "name": "wide", "value": "1200px" },
+      { "name": "short-screen-height", "value": "860px" },
+      { "name": "contact-list-container", "value": "460px" }
     ]
   },
   "components": [
@@ -65,7 +77,7 @@
       "kind": "button",
       "refersTo": "button-line",
       "description": "Secondary action on light grounds.",
-      "html": "<a class=\"ds-btn-line\" href=\"#\">All seasons</a>",
+      "html": "<a class=\"ds-btn-line\" href=\"#\">Email us about sponsoring</a>",
       "css": ".ds-btn-line { display: inline-flex; align-items: center; min-height: 48px; padding: 12px 22px; background: transparent; color: var(--action, #5B3FC4); border: 2px solid var(--action, #5B3FC4); border-radius: 0; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-weight: 650; font-size: 0.9375rem; font-stretch: 108%; text-decoration: none; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-line:hover { background: var(--action, #5B3FC4); color: #fff; } .ds-btn-line:focus-visible { outline: 2px solid var(--action, #5B3FC4); outline-offset: 3px; }"
     },
     {
@@ -81,7 +93,7 @@
       "kind": "chip",
       "refersTo": "toggle",
       "description": "Crew filter and parts-explorer buttons; pressed is solid ink.",
-      "html": "<div class=\"ds-toggles\"><button class=\"ds-toggle\" aria-pressed=\"true\">Everyone</button><button class=\"ds-toggle\" aria-pressed=\"false\">Build</button><button class=\"ds-toggle\" aria-pressed=\"false\">Code</button></div>",
+      "html": "<div class=\"ds-toggles\"><button class=\"ds-toggle\" aria-pressed=\"true\">All</button><button class=\"ds-toggle\" aria-pressed=\"false\">Build</button><button class=\"ds-toggle\" aria-pressed=\"false\">Software</button></div>",
       "css": ".ds-toggles { display: flex; flex-wrap: wrap; gap: 8px; } .ds-toggle { min-height: 44px; padding: 8px 16px; background: var(--paper, #fff); border: 1px solid var(--hairline, #DCDCD8); border-radius: 0; color: var(--ink, #1C1A26); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 0.9375rem; cursor: pointer; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), border-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-toggle:hover { border-color: var(--ink, #1C1A26); } .ds-toggle[aria-pressed=\"true\"] { background: var(--ink, #1C1A26); border-color: var(--ink, #1C1A26); color: #fff; } .ds-toggle:focus-visible { outline: 2px solid var(--action, #5B3FC4); outline-offset: 3px; }"
     },
     {
@@ -89,7 +101,7 @@
       "kind": "input",
       "refersTo": "text-field",
       "description": "Contact form field: square, label above, Action Violet focus.",
-      "html": "<label class=\"ds-field\"><span>Your email</span><input type=\"email\" placeholder=\"name@example.com\"></label>",
+      "html": "<label class=\"ds-field\"><span>Email</span><input type=\"email\" autocomplete=\"email\"></label>",
       "css": ".ds-field { display: grid; gap: 6px; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; } .ds-field span { font-weight: 650; font-size: 0.9375rem; color: var(--ink, #1C1A26); } .ds-field input { min-height: 48px; padding: 12px 14px; background: #fff; border: 1px solid #A9A9A3; border-radius: 0; color: var(--ink, #1C1A26); font: inherit; font-size: 1rem; transition: border-color 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-field input:hover { border-color: var(--steel, #585C65); } .ds-field input:focus-visible { outline: 2px solid var(--action, #5B3FC4); outline-offset: 0; border-color: var(--action, #5B3FC4); }"
     },
     {
@@ -103,8 +115,8 @@
       "name": "Garage Bay",
       "kind": "custom",
       "description": "Signature: one bay of the season line-up on violet; chosen bay gets the lavender bar, filled diamond and garage light.",
-      "html": "<div class=\"ds-bays\"><button class=\"ds-bay\" aria-selected=\"true\"><span class=\"ds-stage\"></span><span class=\"ds-no\"><span class=\"ds-dia\"></span>2025–26</span><b>DECODE</b><small>Second season</small></button><button class=\"ds-bay\" aria-selected=\"false\"><span class=\"ds-stage\"></span><span class=\"ds-no\"><span class=\"ds-dia\"></span>2026–27</span><b>BIOBUZZ</b><small>This season</small></button></div>",
-      "css": ".ds-bays { display: grid; grid-template-columns: 1fr 1fr; background: var(--violet, #2A2346); border-left: 1px solid rgba(196,188,223,0.22); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; } .ds-bay { position: relative; display: grid; gap: 2px; padding: 16px; text-align: left; background: transparent; border: 0; border-right: 1px solid rgba(196,188,223,0.22); color: #fff; cursor: pointer; } .ds-bay::after { content: ''; position: absolute; left: -1px; right: -1px; top: 0; height: 3px; background: var(--lavender, #B9A6F2); transform: scaleX(0); transform-origin: left; transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-bay[aria-selected=\"true\"]::after { transform: scaleX(1); } .ds-stage { height: 96px; border-bottom: 1px solid rgba(196,188,223,0.22); margin-bottom: 12px; background: radial-gradient(60% 55% at 50% 100%, rgba(185,166,242,0.26), transparent 70%); opacity: 0.2; transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-bay[aria-selected=\"true\"] .ds-stage { opacity: 1; } .ds-no { display: flex; align-items: center; gap: 10px; font-size: 0.9375rem; color: var(--on-violet-2, #C4BCDF); font-variant-numeric: tabular-nums; } .ds-dia { width: 8px; height: 8px; border: 1.5px solid currentColor; transform: rotate(45deg); } .ds-bay[aria-selected=\"true\"] .ds-dia { background: var(--lavender, #B9A6F2); border-color: var(--lavender, #B9A6F2); } .ds-bay b { font-stretch: 125%; font-weight: 800; font-size: 1.375rem; line-height: 1.1; } .ds-bay small { font-size: 0.8125rem; color: var(--lavender, #B9A6F2); } .ds-bay:focus-visible { outline: 2px solid var(--lavender, #B9A6F2); outline-offset: -4px; }"
+      "html": "<div class=\"ds-bays\"><button class=\"ds-bay\" aria-selected=\"true\"><span class=\"ds-stage\"></span><span class=\"ds-no\"><span class=\"ds-dia\"></span>2025–26</span><b>DECODE</b><small>Second season</small></button><button class=\"ds-bay\" aria-selected=\"false\"><span class=\"ds-stage\"></span><span class=\"ds-no\"><span class=\"ds-dia\"></span>2026–27</span><b>BIOBUZZ</b><small>This season, in progress</small></button></div>",
+      "css": ".ds-bays { display: grid; grid-template-columns: 1fr 1fr; background: var(--violet, #2A2346); border-left: 1px solid rgba(196,188,223,0.22); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; } .ds-bay { position: relative; display: grid; gap: 2px; padding: 16px; text-align: left; background: transparent; border: 0; border-right: 1px solid rgba(196,188,223,0.22); color: #fff; cursor: pointer; } .ds-bay::after { content: ''; position: absolute; left: -1px; right: -1px; top: 0; height: 3px; background: var(--lavender, #B9A6F2); transform: scaleX(0); transform-origin: left; transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-bay[aria-selected=\"true\"]::after { transform: scaleX(1); } .ds-stage { height: 96px; border-bottom: 1px solid rgba(196,188,223,0.22); margin-bottom: 12px; background: radial-gradient(60% 55% at 50% 100%, rgba(185,166,242,0.26), transparent 70%); opacity: 0; transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-bay[aria-selected=\"true\"] .ds-stage { opacity: 1; } .ds-no { display: flex; align-items: center; gap: 10px; font-size: 0.9375rem; color: var(--on-violet-2, #C4BCDF); font-variant-numeric: tabular-nums; } .ds-dia { width: 8px; height: 8px; border: 1.5px solid currentColor; transform: rotate(45deg); } .ds-bay[aria-selected=\"true\"] .ds-dia { background: var(--lavender, #B9A6F2); border-color: var(--lavender, #B9A6F2); } .ds-bay b { font-stretch: 125%; font-weight: 800; font-size: 1.375rem; line-height: 1.1; } .ds-bay small { font-size: 0.8125rem; color: var(--lavender, #B9A6F2); } .ds-bay:focus-visible { outline: 2px solid var(--lavender, #B9A6F2); outline-offset: -4px; }"
     },
     {
       "name": "Spec Sheet",
@@ -123,9 +135,9 @@
   ],
   "narrative": {
     "northStar": "The Season Program",
-    "overview": "The site reads like a motorsport team's season launch and partner programme. Each season's robot is launched on a deep violet field, specified with a spec sheet and dated results, and the partners who made it possible are credited at the foot of the panel and in every footer. The look comes from the team's own logo: its violet, its lavender diamond and its dark outline.\n\nTwo grounds carry the site. The violet field is for launches and partners (the home launch panel, the head of each season page, the partner panel). White and paddock grey carry everything else: records, write-ups, people, forms. A near-black footer is an extra ground, used only for the footer. Sections are separated by a change of ground or by a hairline rule, never by boxes or cards. Corners are square everywhere. One type family, Archivo, does all the work: set extra wide and heavy for machine names and page titles, plain for reading.\n\nMotion happens only in answer to the visitor: choosing a season, picking a robot part, filtering the crew, switching an outreach year, moving between pages. Nothing animates on load or on scroll, and reduced motion turns all of it off.",
+    "overview": "The site reads like a motorsport team's season launch and partner programme. Each season's robot is launched on a deep violet field, specified with a spec sheet and dated results, and the partners who made it possible are credited at the foot of the panel and in every footer. The look comes from the team's own logo: its violet, its lavender diamond and its dark outline.\n\nTwo grounds carry the site. The violet field is for launches and partners (the home launch panel, the head of each season page, the partner panel) and for the closing calls to join or partner on the home, team and partners pages. White and paddock grey carry everything else: records, write-ups, people, forms. A near-black footer is an extra ground, used only for the footer. Sections are separated by a change of ground or by a hairline rule, never by boxes or cards. Corners are square everywhere. One type family, Archivo, does all the work: set extra wide and heavy for machine names and page titles, plain for reading.\n\nMotion happens only in answer to the visitor: choosing a season, picking a robot part, filtering the crew, switching an outreach year, moving between pages. Nothing animates on load or on scroll, and reduced motion turns all of it off.",
     "keyCharacteristics": [
-      "Violet field for launches and partners; white and paddock grey for everything else.",
+      "Violet field for launches, partners and closing calls to join; white and paddock grey for everything else.",
       "One family (Archivo), wide and heavy for machine names, plain for text, tabular figures for every date and spec.",
       "Square corners on everything; rules and grounds instead of cards.",
       "The logo's diamond is the only marker.",
@@ -133,18 +145,18 @@
       "Motion only in answer to the visitor."
     ],
     "rules": [
-      { "name": "The Livery Stripe Rule", "body": "Lavender lives on dark grounds only (violet or footer). On white, the accent is Action Violet. Never put lavender text or rules on paper.", "section": "colors" },
-      { "name": "The Two Grounds Rule", "body": "Violet is for launching machines and crediting partners. Write-ups, people, records and forms sit on paper or paddock grey.", "section": "colors" },
+      { "name": "The Livery Stripe Rule", "body": "Lavender lives on dark grounds only (violet or footer); text selection and the tap highlight are the only exceptions. On white, the accent is Action Violet. Never put lavender text or rules on paper.", "section": "colors" },
+      { "name": "The Two Grounds Rule", "body": "Violet is for launching machines, crediting partners and the closing call to join or partner. Write-ups, people, records and forms sit on paper or paddock grey.", "section": "colors" },
       { "name": "The Tabular Figures Rule", "body": "Every date, spec and number uses tabular lining figures (<time> and .num get them automatically; spec, facts and figures values set them).", "section": "typography" },
-      { "name": "The Width Is The Voice Rule", "body": "Emphasis comes from the width axis plus weight, not from a second family, all-caps tracking or color. Wide is for machine names and titles only; reading text stays at normal width.", "section": "typography" },
+      { "name": "The Width Is The Voice Rule", "body": "Emphasis comes from the width axis plus weight, not from a second family, all-caps tracking or color. Wide is for names and titles, with a lighter 108–112% on buttons, tabs and the phone menu; reading text stays at normal width.", "section": "typography" },
       { "name": "The Flat Paddock Rule", "body": "No shadows on buttons, cards, menus or panels. Shadow belongs to robots on the floor and to markers on a render, nothing else.", "section": "elevation" },
       { "name": "The One Marker Rule", "body": "The diamond is the only marker. No circles, checkmarks, arrows or icon glyphs as bullets or badges; the only SVG icon is the Menu button's.", "section": "shapes" }
     ],
     "dos": [
       "Do change colors, sizes and spacing in :root in css/style.css, never in a component rule.",
-      "Do use the violet field only for launching a machine or crediting partners; put everything else on paper or paddock grey.",
+      "Do use the violet field only for launching a machine, crediting partners or a closing call to join or partner; put everything else on paper or paddock grey.",
       "Do use Action Violet (#5B3FC4) for links and buttons on light, and Lavender (#B9A6F2) only on violet or the footer.",
-      "Do set machine names and titles wide (118–125%) and heavy (780–840); keep reading text at normal width.",
+      "Do set machine names and page titles wide (118–125%) and heavy (780–840); keep reading text at normal width.",
       "Do give every date, spec and number tabular figures.",
       "Do separate content with a 2px ink rule over a list and 1px hairlines between rows.",
       "Do set --w to the image's pixel width on every .photo so photos are never upscaled.",
