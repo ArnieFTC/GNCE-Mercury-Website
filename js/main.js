@@ -708,6 +708,30 @@ part("budget-chart", () => {
   donut.hidden = false;
 });
 
+// ---------- Opening ----------
+// index.html's <head> adds .intro (the overlay) and .intro-stage (the stage's entrance waits for it) on the
+// first visit of a session. Here: end it after its 1.7s, or at once on a click, tap, wheel or key, pulling the
+// stage's entrance forward by the time that was skipped so nothing sits waiting in the dark.
+part("intro", () => {
+  const rootEl = document.documentElement;
+  if (!rootEl.classList.contains("intro")) return;
+  const t0 = performance.now();
+  const end = () => rootEl.classList.remove("intro");
+  let timer = setTimeout(end, 1750);
+  const skip = () => {
+    if (!rootEl.classList.contains("intro") || rootEl.classList.contains("intro-skip")) return;
+    clearTimeout(timer);
+    const shift = Math.max(0, 1100 - (performance.now() - t0));
+    document.getAnimations().forEach(a => {
+      const el = a.effect && a.effect.target;
+      if (shift && el && el.closest && el.closest(".launch") && a.currentTime != null) a.currentTime += shift;
+    });
+    rootEl.classList.add("intro-skip");
+    timer = setTimeout(end, 200);
+  };
+  ["pointerdown", "keydown", "wheel"].forEach(t => addEventListener(t, skip, { once: true, passive: true }));
+});
+
 // ---------- Robot morph ----------
 // Robots carry style="view-transition-name: …". Only the robot you are heading to (or coming back
 // from) keeps its name, so it is the one that glides between pages in browsers that support it.

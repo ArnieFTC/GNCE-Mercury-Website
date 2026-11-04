@@ -65,7 +65,11 @@ Team portraits: `<img class="portrait" src="images/team/NAME.jpg" alt="NAME" wid
 
 ## Motion rules
 
-One authored moment: when a page opens, its title rises and the robots step into the light one after another.
+Opening: on the first visit of a session the home page opens with the spotlight coming up on the Mercury mark,
+then opening like an iris onto the stage (about 1.7s; any click or key skips it; add `?intro` to the address to
+see it again). Moving between pages, the page you leave dims and the next one rises into place (cross-page view
+transitions; the header stays put). Both are set up by a small script at the top of each page's `<head>`: keep
+it when you copy a page. When a page opens, its title rises and the robots step into the light one after another.
 After that, motion only answers a click, a tap or a key: choosing a season moves the spotlight and brings its
 card up; filters, tabs and parts swap their content; a robot glides into its season page in browsers that
 support it. **Nothing moves, fades, pins or changes while you scroll** (Andy's rule, round 3): no scroll

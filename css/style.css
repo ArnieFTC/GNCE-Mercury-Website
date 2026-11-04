@@ -946,9 +946,10 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .nojs-nav { display: flex; flex-wrap: wrap; gap: 4px 20px; padding-block: 14px; font-weight: 600; }
 
 /* =========================================================
-   Motion. One authored moment (the stage lights up on load), then motion that answers scrolling
-   and choosing. Everything is visible by default: these only run when the browser supports them
-   and the visitor has not asked for reduced motion.
+   Motion. The opening (the spotlight opens onto the home stage, once per visit), the stage lighting
+   up, page transitions, and motion that answers choosing. Nothing moves on scroll. Everything is
+   visible by default: these only run when the browser supports them and the visitor has not asked
+   for reduced motion.
    ========================================================= */
 @media (prefers-reduced-motion: no-preference) {
   /* the stage lights up: the name rises, the robots step into the light one after another */
@@ -968,9 +969,67 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 @keyframes step-in { from { opacity: 0; transform: translateY(40px) scale(0.94); } }
 @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-/* ---------- Robot morph between pages (supporting browsers only) ---------- */
+/* ---------- Opening (home page, first visit of a session): the spotlight opens onto the stage ----------
+   An inline script in index.html's <head> adds .intro and .intro-stage to <html> before the first paint, once
+   per browser session and never with reduced motion (add ?intro to the address to see it again). The light
+   comes up on the Mercury mark, the name rises under it, then the spotlight opens like an iris onto the page
+   (the page is already there underneath). A click, tap, wheel or key skips it (part "intro" in js/main.js).
+   Every layer ends hidden on its own, so a failed script can never leave the page covered. */
+@property --iris { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@media (prefers-reduced-motion: no-preference) {
+  html.intro::before, html.intro body::before, html.intro body::after { position: fixed; inset: 0; pointer-events: auto; }
+  html.intro::before { /* the dark stage, with a hole that opens from the mark */
+    content: ""; z-index: 1000; background: var(--stage);
+    -webkit-mask: radial-gradient(circle at 50% 46%, transparent var(--iris), #000 calc(var(--iris) + 1px));
+    mask: radial-gradient(circle at 50% 46%, transparent var(--iris), #000 calc(var(--iris) + 1px));
+    animation: intro-iris 640ms cubic-bezier(0.7, 0, 0.2, 1) 1040ms forwards, intro-gone 1ms 1700ms forwards;
+  }
+  html.intro body::before { /* the light from above, and the mark coming up in it */
+    content: ""; z-index: 1001;
+    background: /* a length here places the image's top edge: the mark sits just above the 46% line */
+      url("../images/logo-mark.png") center calc(46vh - 122px) / 104px auto no-repeat,
+      radial-gradient(circle at 50% calc(46vh - 66px), rgba(239, 238, 243, 0.13), transparent min(30vmin, 220px)),
+      conic-gradient(from 166deg at 50% -30vh, transparent 0deg, rgba(239, 238, 243, 0.055) 9deg 19deg, transparent 28deg);
+    animation: intro-mark 760ms var(--ease) 80ms backwards, intro-out 220ms cubic-bezier(0.4, 0, 1, 1) 1000ms forwards;
+  }
+  html.intro body::after { /* the name under the mark */
+    content: "GNCE Mercury" / ""; z-index: 1002; display: flex; justify-content: center; align-items: flex-start;
+    padding-top: calc(46vh + 18px); color: var(--on-stage); font: 600 clamp(1.75rem, 1rem + 2.4vw, 2.75rem) / 1 var(--font);
+    letter-spacing: -0.022em;
+    animation: intro-word 760ms var(--ease) 300ms backwards, intro-out 220ms cubic-bezier(0.4, 0, 1, 1) 1000ms forwards;
+  }
+  html.intro.intro-skip::before, html.intro.intro-skip body::before, html.intro.intro-skip body::after { animation: intro-out 180ms ease-in forwards; }
+
+  /* the home stage's own entrance waits for the spotlight to open (part "intro" pulls it forward on a skip) */
+  html.intro-stage .launch-head h1 { animation-delay: 1100ms; }
+  html.intro-stage .launch-head p { animation-delay: 1220ms; }
+  html.intro-stage .bays .bay:nth-child(1) .bay-stage img { animation-delay: 1320ms; }
+  html.intro-stage .bays .bay:nth-child(2) .bay-stage img { animation-delay: 1440ms; }
+  html.intro-stage .bays .bay:nth-child(3) .bay-stage img { animation-delay: 1560ms; }
+  html.intro-stage .bay-stage::after { animation-delay: 1300ms; }
+  html.intro-stage .bay-label, html.intro-stage .season-cards, html.intro-stage .partner-strip, html.intro-stage .lineup-credit { animation-delay: 1740ms; }
+}
+@keyframes intro-mark { from { opacity: 0; transform: scale(0.94); filter: brightness(0.3); } }
+@keyframes intro-word { from { opacity: 0; transform: translateY(14px); } }
+@keyframes intro-out { to { opacity: 0; visibility: hidden; } }
+@keyframes intro-iris { to { --iris: 150vmax; } }
+@keyframes intro-gone { to { visibility: hidden; } }
+
+/* ---------- Page transitions: the lights go down on the page you leave, the next one rises ----------
+   Cross-page view transitions (Chrome, Edge, Safari 18.2+). The header keeps its own name so it stays put;
+   season robots keep theirs (part "morph" in js/main.js) and glide between pages. Browsers without them get
+   a short entrance instead (.page-enter, set in each page's <head>). */
 @view-transition { navigation: auto; }
+.site-header { view-transition-name: site-header; }
 ::view-transition-group(*) { animation-duration: 480ms; animation-timing-function: var(--ease); }
+::view-transition-old(root) { animation: vt-down 240ms cubic-bezier(0.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vt-rise 520ms var(--ease) 90ms both; }
+::view-transition-old(site-header), ::view-transition-new(site-header) { animation-duration: 200ms; }
+@keyframes vt-down { to { opacity: 0; transform: scale(0.985); filter: brightness(0.5); } }
+@keyframes vt-rise { from { opacity: 0; transform: translateY(18px); } }
+@media (prefers-reduced-motion: no-preference) {
+  html.page-enter main { animation: vt-rise 520ms var(--ease) both; }
+}
 
 /* ---------- Motion preferences ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -985,6 +1044,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
   .year-panel[hidden] { display: block !important; }
   .callouts[hidden] { display: grid !important; }
   .callout-note { display: none !important; }
+  html.intro::before, html.intro body::before, html.intro body::after { display: none !important; }
   .launch *, .season-head *, .band--stage * { color: #000 !important; }
   .tiers td { background: none !important; }
   .budget .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }

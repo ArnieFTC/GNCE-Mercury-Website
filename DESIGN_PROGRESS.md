@@ -25,6 +25,19 @@ straight to `main`, Andy's standing instruction; `main` is the live site._
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
 
+## Round 5: opening animation and page transitions (2026-11-04)
+
+Andy: "make me a opening animation and transition animation between sits".
+- **Opening** (home, first visit of a session): the spotlight comes up on the Mercury mark, the name rises under
+  it, then the stage opens like an iris onto the home page and the robots step in. About 1.7s, skippable, never
+  with reduced motion or without JavaScript, `?intro` replays it. Built from the site's own spotlight idea.
+- **Page transitions:** the page you leave dims like stage lights going down, the next one rises into place; the
+  header stays put; season robots still glide between pages. Fallback entrance where unsupported.
+- Verified: 68 of 68 interaction tests (10 new: plays once, clears itself, nothing left covering the page, click
+  skips and the stage is lit within 1.3s, `?intro`, reduced motion, no JavaScript, a real Team to News navigation
+  runs a view transition, the header holds still); frame-by-frame captures at 1440 and 390; all 11 pages clean at
+  320/390/768/1440; contrast AA.
+
 ## Round 4b: budget section redone (2026-11-04)
 
 Andy: "wording and formatting is still off and i dont really like it please redo" (the Season budget section;

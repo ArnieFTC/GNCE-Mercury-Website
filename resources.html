@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>/* page entrance where cross-page view transitions are missing (css/style.css "Page transitions") */
+  (function (d) { try { if (!("onpagereveal" in window)) d.classList.add("page-enter"); } catch (e) {} })(document.documentElement);</script>
   <title>Resources | GNCE Mercury</title>
   <meta name="description" content="Code, CAD, and engineering documents from GNCE Mercury, FTC team 26413.">
   <!-- Link previews: when the custom domain is live, change the address in og:url and og:image -->
@@ -16,7 +18,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#0B0A0F">
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=209">
+  <link rel="stylesheet" href="css/style.css?v=210">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="resources">
@@ -79,6 +81,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=209"></script>
+  <script src="js/main.js?v=210"></script>
 </body>
 </html>
