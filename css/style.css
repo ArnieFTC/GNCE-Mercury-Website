@@ -1099,6 +1099,13 @@ h2.h3 { font-weight: 600; } /* card titles set as h2 keep the h3 weight */
 .site-footer :focus-visible { outline-color: var(--on-stage); }
 .footer-sponsors p, .footer-brand small, .footer-cols h2, .footer-legal { color: var(--on-stage-2); }
 .footer-main, .footer-legal { border-top-color: var(--rule-stage); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.footer-links a { color: var(--on-stage-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(239, 238, 243, 0.35); padding-block: 4px; }
+.footer-links a:hover { color: var(--on-stage); text-decoration-color: currentColor; }
+/* the terms page: prose sections */
+.terms h2 { margin: 1.8em 0 0.5em; }
+.terms h2:first-child { margin-top: 0; }
+.terms code { font: inherit; font-weight: 600; font-feature-settings: "tnum" 1; }
 .sponsor-row li { color: var(--ink); border-radius: var(--r-md); }
 .sponsor-row li a { color: var(--ink); }
 .sponsor-row .open { background: transparent; box-shadow: inset 0 0 0 1px rgba(239, 238, 243, 0.5); }

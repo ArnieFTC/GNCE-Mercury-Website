@@ -1,0 +1,145 @@
+{
+  "site": "https://mercury26413.org/",
+  "organization": {
+    "name": "GNCE Mercury",
+    "teamNumber": "26413",
+    "program": "FIRST Tech Challenge",
+    "description": "A high school FIRST Tech Challenge team in Weston, Massachusetts: team 26413, founded in 2024. We build a new competition robot every year and teach younger students to do the same.",
+    "founded": "2024",
+    "location": "Weston, MA, US",
+    "parentOrganization": "GNCE (Galactic Narwhal Chicken Effect)",
+    "email": "gncemercury26413@gmail.com",
+    "sponsorshipEmail": "margaret@mercury26413.org",
+    "sponsorshipContact": "Margaret Yang, head of sponsorship",
+    "instagram": "https://www.instagram.com/gnce_mercury/",
+    "sameAs": [
+      "https://www.instagram.com/gnce_mercury/",
+      "https://ftc-events.firstinspires.org/team/26413",
+      "https://ftcscout.org/teams/26413",
+      "https://theorangealliance.org/teams/26413"
+    ],
+    "website": "https://mercury26413.org/",
+    "sponsorsAndSupporters": [
+      "VulcanForms",
+      "SolidWorks",
+      "Weston Owl",
+      "WEEFC"
+    ]
+  },
+  "season": {
+    "kickoff": "2026-09-12",
+    "events": [
+      {
+        "name": "Ghost Scrimmage",
+        "date": "2026-10-25"
+      },
+      {
+        "name": "Wolfpack Scrimmage",
+        "date": "2026-11-15"
+      },
+      {
+        "name": "Windsor Scrimmage",
+        "date": "2026-12-06"
+      }
+    ],
+    "timeZone": "America/New_York"
+  },
+  "pages": [
+    {
+      "slug": "index",
+      "title": "GNCE Mercury | FTC 26413",
+      "description": "GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, MA. 3 seasons, 3 robots, and the partners who make them possible.",
+      "url": "https://mercury26413.org/",
+      "markdownUrl": "https://mercury26413.org/index.html.md",
+      "markdownFile": "index.html.md"
+    },
+    {
+      "slug": "seasons",
+      "title": "Seasons | GNCE Mercury",
+      "description": "Every GNCE Mercury robot and every qualifier we’ve competed at.",
+      "url": "https://mercury26413.org/seasons.html",
+      "markdownUrl": "https://mercury26413.org/seasons.html.md",
+      "markdownFile": "seasons.html.md"
+    },
+    {
+      "slug": "seasons/2026-2027",
+      "title": "2026–2027 Season | GNCE Mercury",
+      "description": "GNCE Mercury’s 2026–27 BIOBUZZ season and The Mercinator.",
+      "url": "https://mercury26413.org/seasons/2026-2027.html",
+      "markdownUrl": "https://mercury26413.org/seasons/2026-2027.html.md",
+      "markdownFile": "seasons/2026-2027.html.md"
+    },
+    {
+      "slug": "seasons/2025-2026",
+      "title": "2025–2026 Season | GNCE Mercury",
+      "description": "GNCE Mercury’s 2025–26 DECODE robot: Sustain Award and a trip to MA States.",
+      "url": "https://mercury26413.org/seasons/2025-2026.html",
+      "markdownUrl": "https://mercury26413.org/seasons/2025-2026.html.md",
+      "markdownFile": "seasons/2025-2026.html.md"
+    },
+    {
+      "slug": "seasons/2024-2025",
+      "title": "2024–2025 Season | GNCE Mercury",
+      "description": "GNCE Mercury’s 2024–25 INTO THE DEEP robot and rookie season.",
+      "url": "https://mercury26413.org/seasons/2024-2025.html",
+      "markdownUrl": "https://mercury26413.org/seasons/2024-2025.html.md",
+      "markdownFile": "seasons/2024-2025.html.md"
+    },
+    {
+      "slug": "team",
+      "title": "Team | GNCE Mercury",
+      "description": "Meet the students and coaches of GNCE Mercury, FTC team 26413 from Weston, MA.",
+      "url": "https://mercury26413.org/team.html",
+      "markdownUrl": "https://mercury26413.org/team.html.md",
+      "markdownFile": "team.html.md"
+    },
+    {
+      "slug": "outreach",
+      "title": "Outreach | GNCE Mercury",
+      "description": "Camps, FLL coaching, and STEM demonstrations run by GNCE Mercury, FTC team 26413.",
+      "url": "https://mercury26413.org/outreach.html",
+      "markdownUrl": "https://mercury26413.org/outreach.html.md",
+      "markdownFile": "outreach.html.md"
+    },
+    {
+      "slug": "news",
+      "title": "News | GNCE Mercury",
+      "description": "News from GNCE Mercury, FTC team 26413: thank-yous to our sponsors and updates from the team.",
+      "url": "https://mercury26413.org/news.html",
+      "markdownUrl": "https://mercury26413.org/news.html.md",
+      "markdownFile": "news.html.md"
+    },
+    {
+      "slug": "partners",
+      "title": "Sponsor us | GNCE Mercury",
+      "description": "Sponsor GNCE Mercury, FTC team 26413 from Weston, MA: four tiers from $500 to $7,500 and up per season, the season budget, and how to reach Margaret, our head of sponsorship.",
+      "url": "https://mercury26413.org/partners.html",
+      "markdownUrl": "https://mercury26413.org/partners.html.md",
+      "markdownFile": "partners.html.md"
+    },
+    {
+      "slug": "resources",
+      "title": "Resources | GNCE Mercury",
+      "description": "Code, CAD, and engineering documents from GNCE Mercury, FTC team 26413.",
+      "url": "https://mercury26413.org/resources.html",
+      "markdownUrl": "https://mercury26413.org/resources.html.md",
+      "markdownFile": "resources.html.md"
+    },
+    {
+      "slug": "contact",
+      "title": "Contact | GNCE Mercury",
+      "description": "Contact GNCE Mercury about joining, sponsoring, or running an event together.",
+      "url": "https://mercury26413.org/contact.html",
+      "markdownUrl": "https://mercury26413.org/contact.html.md",
+      "markdownFile": "contact.html.md"
+    },
+    {
+      "slug": "terms",
+      "title": "Terms and privacy | GNCE Mercury",
+      "description": "How the GNCE Mercury website handles your information, and how you, search engines and AI tools may use what's on it.",
+      "url": "https://mercury26413.org/terms.html",
+      "markdownUrl": "https://mercury26413.org/terms.html.md",
+      "markdownFile": "terms.html.md"
+    }
+  ]
+}

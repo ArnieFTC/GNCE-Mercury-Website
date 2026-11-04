@@ -1,0 +1,185 @@
+{
+    "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+    "name": "org.mercury26413/site",
+    "version": "1.0.0",
+    "title": "GNCE Mercury (FTC 26413)",
+    "description": "Read-only facts, pages and season schedule of FIRST Tech Challenge team GNCE Mercury 26413.",
+    "websiteUrl": "https://mercury26413.org/",
+    "icons": [
+        {
+            "src": "https://mercury26413.org/images/logo-mark.png",
+            "mimeType": "image/png",
+            "sizes": [
+                "any"
+            ]
+        }
+    ],
+    "remotes": [
+        {
+            "type": "streamable-http",
+            "url": "https://mercury26413.org/mcp",
+            "supportedProtocolVersions": [
+                "2025-11-25",
+                "2025-06-18",
+                "2025-03-26",
+                "2024-11-05"
+            ]
+        }
+    ],
+    "protocolVersion": "2025-11-25",
+    "serverInfo": {
+        "name": "org.mercury26413/site",
+        "title": "GNCE Mercury (FTC 26413)",
+        "version": "1.0.0"
+    },
+    "url": "https://mercury26413.org/mcp",
+    "transport": {
+        "type": "streamable-http",
+        "endpoint": "/mcp",
+        "url": "https://mercury26413.org/mcp"
+    },
+    "capabilities": {
+        "tools": {
+            "listChanged": false
+        },
+        "resources": {
+            "subscribe": false,
+            "listChanged": false
+        }
+    },
+    "authentication": {
+        "required": false
+    },
+    "documentationUrl": "https://mercury26413.org/llms.txt",
+    "instructions": "Read-only facts about GNCE Mercury, FIRST Tech Challenge team 26413 (Weston, Massachusetts). Start with get_team_info or list_pages; read_page returns a whole page as Markdown and search_site finds the sections that mention something. Everything comes from https://mercury26413.org/; cite the page url when you quote it.",
+    "tools": [
+        {
+            "name": "get_team_info",
+            "title": "Team facts and contacts",
+            "description": "Facts about GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, Massachusetts: what the team is, when it was founded, where it is, how to reach it (general and sponsorship email, Instagram) and its sponsors and supporters.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+            },
+            "annotations": {
+                "title": "Team facts and contacts",
+                "readOnlyHint": true,
+                "destructiveHint": false,
+                "idempotentHint": true,
+                "openWorldHint": false
+            }
+        },
+        {
+            "name": "list_pages",
+            "title": "List the website pages",
+            "description": "Every page of mercury26413.org with its title, a one-line description, its web address and the address of its Markdown version. Use read_page to read one.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+            },
+            "annotations": {
+                "title": "List the website pages",
+                "readOnlyHint": true,
+                "destructiveHint": false,
+                "idempotentHint": true,
+                "openWorldHint": false
+            }
+        },
+        {
+            "name": "read_page",
+            "title": "Read a page",
+            "description": "The full text of one page of the website, as Markdown. Pages: index (home: robots, competition record, season calendar), seasons and seasons/<years> (each robot), team (members and captains), outreach, news, partners (sponsorship tiers and budget), resources, contact, terms.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "string",
+                        "enum": [
+                            "index",
+                            "seasons",
+                            "seasons/2026-2027",
+                            "seasons/2025-2026",
+                            "seasons/2024-2025",
+                            "team",
+                            "outreach",
+                            "news",
+                            "partners",
+                            "resources",
+                            "contact",
+                            "terms"
+                        ],
+                        "description": "The page to read, e.g. \"team\" or \"seasons/2025-2026\"."
+                    }
+                },
+                "required": [
+                    "page"
+                ],
+                "additionalProperties": false
+            },
+            "annotations": {
+                "title": "Read a page",
+                "readOnlyHint": true,
+                "destructiveHint": false,
+                "idempotentHint": true,
+                "openWorldHint": false
+            }
+        },
+        {
+            "name": "search_site",
+            "title": "Search the website",
+            "description": "Find the sections of the website that mention some words, for example \"Sustain Award\", \"summer camp\" or \"Platinum\". Returns the best matching sections with the page they are on.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "minLength": 2,
+                        "maxLength": 200,
+                        "description": "Words to look for."
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 10,
+                        "default": 5,
+                        "description": "How many sections to return (1 to 10)."
+                    }
+                },
+                "required": [
+                    "query"
+                ],
+                "additionalProperties": false
+            },
+            "annotations": {
+                "title": "Search the website",
+                "readOnlyHint": true,
+                "destructiveHint": false,
+                "idempotentHint": true,
+                "openWorldHint": false
+            }
+        },
+        {
+            "name": "get_season_schedule",
+            "title": "This season's events",
+            "description": "The current season's kickoff and events (scrimmages and competitions) with their dates, which are past, which is today and which is next, in Massachusetts time.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+            },
+            "annotations": {
+                "title": "This season's events",
+                "readOnlyHint": true,
+                "destructiveHint": false,
+                "idempotentHint": true,
+                "openWorldHint": false
+            }
+        }
+    ],
+    "resources": [
+        "dynamic"
+    ],
+    "prompts": []
+}

@@ -146,8 +146,11 @@ part("header", () => {
 });
 
 // ---------- Footer: sponsors on every page ----------
+// Each page ends in <footer class="site-footer"> holding only the legal row (plain HTML, so About, Contact and
+// Terms work without JavaScript). The sponsors strip and the page links are added above that row here.
 part("footer", () => {
-  const footer = document.createElement("footer");
+  const legal = document.querySelector(".site-footer .footer-legal");
+  const footer = legal ? legal.parentElement : document.createElement("footer");
   footer.className = "site-footer";
   const sponsorItems = [
     ...SPONSORS.map(s => `<li><a class="sponsor" href="${esc(s.url)}" target="_blank" rel="noopener" translate="no"><img src="${root}${esc(s.logo)}" alt="${esc(s.name)}"${s.width ? ` width="${s.width}" height="${s.height}"` : ""}></a></li>`),
@@ -155,7 +158,7 @@ part("footer", () => {
     `<li class="open"><a href="${root}partners.html">Become a sponsor</a></li>`,
   ].join("");
   const next = nextEvent();
-  footer.innerHTML = `
+  const top = `
     <div class="container footer-sponsors" id="sponsors">
       <div>
         <h2>Our Sponsors &amp; Supporters</h2>
@@ -186,12 +189,19 @@ part("footer", () => {
           <p>${next ? esc(next.short) : "The season is over. See you next season."}</p>
         </div>
       </div>
-    </div>
-    <div class="container footer-legal">
-      <span>© ${new Date().getFullYear()} <span translate="no">GNCE Mercury</span>, <span translate="no">Galactic Narwhal Chicken Effect</span></span>
-      <span><span translate="no">FIRST&nbsp;Tech&nbsp;Challenge</span> team&nbsp;26413, founded 2024</span>
     </div>`;
-  document.body.append(footer);
+  if (legal) {
+    legal.insertAdjacentHTML("beforebegin", top);
+  } else {
+    footer.innerHTML = top + `
+    <div class="container footer-legal">
+      <span>© <span data-year></span> <span translate="no">GNCE Mercury</span>, <span translate="no">Galactic Narwhal Chicken Effect</span></span>
+      <span><span translate="no">FIRST&nbsp;Tech&nbsp;Challenge</span> team&nbsp;26413, founded 2024</span>
+      <nav class="footer-links" aria-label="About and legal"><a href="${root}team.html#about">About</a><a href="${root}contact.html">Contact</a><a href="${root}terms.html">Terms and privacy</a></nav>
+    </div>`;
+    document.body.append(footer);
+  }
+  footer.querySelectorAll("[data-year]").forEach(el => { el.textContent = new Date().getFullYear(); });
 });
 
 // "Supported by …" lines (home page strip, partners page) read the same list as the footer
@@ -527,10 +537,114 @@ part("contact", () => {
     dirty = false;
     removeEventListener("beforeunload", warn);
     location.href = url;
+    // An AI agent filled the form through WebMCP (toolname on the <form>): tell it what happened
+    if (e.agentInvoked && typeof e.respondWith === "function") {
+      e.respondWith(Promise.resolve(`Opened an email draft to ${to} in the visitor's email app. Nothing is sent until the visitor presses Send there.`));
+    }
     if (status) status.textContent = url.length > 1900
       ? `Opening your email app… Long messages can get cut short in some email apps, so check the whole message is in the draft. If it isn’t, email us at ${to}.`
       : `Opening your email app… If nothing opens, email us at ${to}.`;
   });
+});
+
+// ---------- WebMCP: read-only tools for AI agents in the browser ----------
+// Browsers with WebMCP (document.modelContext) let an agent call these instead of scraping the page.
+// They read the same files as the MCP server (mcp.php): agent/pages.json and the *.html.md pages that
+// tools/agent_files.py writes. The contact form is a tool too (toolname on its <form> in contact.html).
+part("webmcp", () => {
+  const mc = document.modelContext || navigator.modelContext;
+  if (!mc || typeof mc.registerTool !== "function" || window.__mercuryWebMcp) return;
+  window.__mercuryWebMcp = true;
+  let site = null;
+  const getSite = async () => site || (site = await fetch(`${root}agent/pages.json`).then(r => {
+    if (!r.ok) throw new Error(`Site index unavailable (${r.status})`);
+    return r.json();
+  }));
+  const getText = async file => {
+    const r = await fetch(root + file);
+    if (!r.ok) throw new Error(`${file} unavailable (${r.status})`);
+    return r.text();
+  };
+  const noInput = { type: "object", properties: {}, additionalProperties: false };
+  const readOnly = { readOnlyHint: true };
+  const tools = [
+    {
+      name: "get_team_info",
+      title: "Team facts and contacts",
+      description: "Facts about GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, Massachusetts: what the team is, when it was founded, how to reach it (general and sponsorship email, Instagram) and its sponsors and supporters.",
+      inputSchema: noInput,
+      annotations: readOnly,
+      execute: async () => (await getSite()).organization,
+    },
+    {
+      name: "list_pages",
+      title: "List the website pages",
+      description: "Every page of this website with its title, a one-line description, its address and the address of its Markdown version. Use read_page to read one.",
+      inputSchema: noInput,
+      annotations: readOnly,
+      execute: async () => ({ pages: (await getSite()).pages.map(p => ({ page: p.slug, title: p.title, description: p.description, url: p.url, markdownUrl: p.markdownUrl })) }),
+    },
+    {
+      name: "read_page",
+      title: "Read a page",
+      description: "The full text of one page of this website as Markdown. Pages: index (home: robots, competition record, season calendar), seasons and seasons/<years> (each robot), team, outreach, news, partners (sponsorship tiers and budget), resources, contact, terms.",
+      inputSchema: { type: "object", properties: { page: { type: "string", description: "The page to read, e.g. \"index\", \"team\" or \"seasons/2025-2026\" (list_pages gives them all)." } }, required: ["page"], additionalProperties: false },
+      annotations: readOnly,
+      execute: async ({ page: slug } = {}) => {
+        const want = String(slug || "index").replace(/^\/+|\/+$/g, "").replace(/\.html(\.md)?$/, "") || "index";
+        const p = (await getSite()).pages.find(x => x.slug === want);
+        if (!p) return { error: `No page called "${slug}". Use list_pages to see the pages.` };
+        return { page: p.slug, url: p.url, markdown: await getText(p.markdownFile) };
+      },
+    },
+    {
+      name: "search_site",
+      title: "Search the website",
+      description: "Find the sections of this website that mention some words, for example \"Sustain Award\", \"summer camp\" or \"Platinum\". Returns the best matching sections with the page they are on.",
+      inputSchema: { type: "object", properties: { query: { type: "string", minLength: 2, maxLength: 200, description: "Words to look for." }, limit: { type: "integer", minimum: 1, maximum: 10, default: 5, description: "How many sections to return (1 to 10)." } }, required: ["query"], additionalProperties: false },
+      annotations: readOnly,
+      execute: async ({ query = "", limit = 5 } = {}) => {
+        const q = String(query).trim().toLowerCase();
+        if (q.length < 2) return { error: "Give a query of at least 2 characters." };
+        const terms = q.split(/[^\p{L}\p{N}$+.\-]+/u).filter(t => t.length >= 2);
+        const { pages } = await getSite();
+        const hits = [];
+        for (const p of pages) {
+          const md = (await getText(p.markdownFile)).replace(/^---\n[\s\S]*?\n---\n/, "").split("\n* * *\n")[0];
+          for (const section of ("\n" + md).split(/\n(?=#{1,3} )/)) {
+            const low = section.toLowerCase();
+            const matched = terms.filter(t => low.includes(t)).length;
+            if (!matched) continue;
+            const score = 4 * matched + (low.includes(q) ? 10 : 0) + terms.reduce((s, t) => s + Math.min(low.split(t).length - 1, 5), 0);
+            const heading = (section.match(/^#{1,3} (.+)$/m) || [])[1] || p.title;
+            const plain = section.replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]*)\]\([^)]*\)/g, "$1").replace(/[*#>|`_\\]+|\s+/g, " ").trim();
+            const at = Math.max(0, plain.toLowerCase().indexOf(terms[0] || q) - 120);
+            hits.push({ score, page: p.slug, pageTitle: p.title, section: heading, url: p.url, snippet: (at ? "…" : "") + plain.slice(at, at + 360) + (plain.length > at + 360 ? "…" : "") });
+          }
+        }
+        hits.sort((a, b) => b.score - a.score);
+        const results = hits.slice(0, Math.max(1, Math.min(10, Number(limit) || 5))).map(({ score, ...h }) => h);
+        return results.length ? { query, results } : { query, results, note: "Nothing on the site matches. Try fewer or different words." };
+      },
+    },
+    {
+      name: "get_season_schedule",
+      title: "This season's events",
+      description: "This season's kickoff and events (scrimmages and competitions) with their dates, which are past, which is today and which is next, in Massachusetts time.",
+      inputSchema: noInput,
+      annotations: readOnly,
+      execute: async () => {
+        const pts = seasonPoints();
+        const row = p => ({ name: p.name, date: iso(p.day), weekday: fmt(p.day, { weekday: "long" }), status: p.past ? "past" : p.today ? "today" : "upcoming", daysAway: p.past ? undefined : p.days });
+        const next = pts.find(p => p.today || p.next);
+        return { timeZone: "America/New_York", next: next ? row(next) : null, events: pts.map(row) };
+      },
+    },
+  ];
+  for (const tool of tools) {
+    try { Promise.resolve(mc.registerTool(tool)).catch(err => console.warn("[mercury] WebMCP", tool.name, err)); }
+    catch (err) { console.warn("[mercury] WebMCP", tool.name, err); }
+  }
 });
 
 part("copy-email", () => {

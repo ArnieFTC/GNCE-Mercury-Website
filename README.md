@@ -1,11 +1,13 @@
 # GNCE Mercury — FTC 26413 Website
 
-Plain HTML/CSS/JS site, hosted on GitHub Pages. No build step: edit a file, commit, and it's live.
+Plain HTML/CSS/JS site. No build step: edit a file, commit to `main`, and it's live at https://mercury26413.org/
+(Hostinger, which deploys `main` automatically and reads `.htaccess`; GitHub Pages keeps a mirror).
+After editing a page, run `python3 tools/agent_files.py` (see "AI agents" below).
 
 The look is a product keynote stage: each season's robot is launched alone on a black stage, lit like a
 product, and calm white and aluminium-grey pages explain it, the people and the partners. There is no brand
 colour: colour comes from the robots, the photos, the logo and the four tier metals. One typeface (Archivo,
-self-hosted in `fonts/`), rounded tiles, pill buttons. `DESIGN.md` describes the system; `DESIGN_PROGRESS.md`
+self-hosted in `fonts/`), near-square boxes with a thin line, pill buttons. `DESIGN.md` describes the system; `DESIGN_PROGRESS.md`
 holds the history, open questions and next steps.
 
 ## Quick edit guide
@@ -27,6 +29,8 @@ holds the history, open questions and next steps.
 | Partner page | `partners.html` (tiers table, budget table and donut, other ways to help) |
 | Sponsorship package PDF | `docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf` (replace the file to update every download link) |
 | Email, Instagram, the contact form | `contact.html` (the address itself is `TEAM_EMAIL` in `js/main.js`) |
+| Footer: About, Contact and Terms links and the © line | the `<footer class="site-footer">` at the bottom of every page (plain HTML; `js/main.js` adds the sponsors strip and page links above it) |
+| Terms and privacy | `terms.html` (keep it true: update it if the site ever adds cookies, analytics or a form service) |
 | Sponsorship email (margaret@mercury26413.org) | `SPONSOR_EMAIL` in `js/main.js` (used by the form's Sponsorship topic), plus the "Email us about sponsoring" buttons in `partners.html` and `contact.html` |
 
 `js/main.js` attaches behaviour by class name and quietly skips any block that's missing what it needs,
@@ -87,3 +91,17 @@ look at that moment.
 2. Add a `season-row` for it in `seasons.html`.
 3. On the home page add a `bay` and a `season-card` for it (and change `data-default` when its results come in).
 4. Update the pager links at the bottom of the neighbouring season page, and `SEASON` in `js/main.js`.
+5. Add the new page to `PAGES` in `tools/agent_files.py` and run `python3 tools/agent_files.py`.
+
+## AI agents
+
+The site is set up so AI assistants and agents can read it without scraping:
+
+| What | Where |
+|---|---|
+| Crawl rules, how our content may be used (`Content-Signal: search=yes, ai-input=yes, ai-train=no`), sitemap pointer | `robots.txt` (hand-written; keep the signal the same as in `terms.html` and `.htaccess`) |
+| Every page as Markdown (`team.html.md` …), `llms.txt`, `llms-full.txt`, `sitemap.xml`, `agent/pages.json`, and each page's canonical link and JSON-LD (the `agent:begin` … `agent:end` block in `<head>`) | written by `python3 tools/agent_files.py` from the pages and `js/main.js`. Never edit them by hand. Run it after every page edit; `--check` only reports what is out of date |
+| Team facts for the JSON-LD (founding year, location, verified profiles for `sameAs`) | `ORG` and `EXTRA_SAME_AS` at the top of `tools/agent_files.py` |
+| Markdown for `Accept: text/markdown`, Link headers, the `/mcp` address | `.htaccess` (Hostinger only; the per-page part is written by the script) |
+| MCP server (read-only tools: team info, pages, search, season schedule) and its server card | `mcp.php`, at https://mercury26413.org/mcp and `/.well-known/mcp/server-card.json` (built from `mcp.php`; the script saves a copy for hosts without PHP) |
+| WebMCP tools for agents in the browser, and the contact form as a tool | the `webmcp` part of `js/main.js`; `toolname` / `toolparamdescription` on the form in `contact.html` |

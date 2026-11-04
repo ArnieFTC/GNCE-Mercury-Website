@@ -1,0 +1,37 @@
+# GNCE Mercury
+
+> GNCE Mercury is FIRST Tech Challenge (FTC) team 26413, a high school robotics team in Weston, Massachusetts, founded in 2024. We build a new competition robot every season and coach younger students in FIRST LEGO League.
+
+Every page is also available as Markdown: add `.md` to its address (for example https://mercury26413.org/team.html.md), or request any page with the header `Accept: text/markdown`. Read-only tools for agents: the MCP server described at https://mercury26413.org/.well-known/mcp/server-card.json, and WebMCP tools registered on every page.
+
+- General questions and joining the team: gncemercury26413@gmail.com
+- Sponsorship: margaret@mercury26413.org (Margaret Yang, head of sponsorship)
+- Instagram: https://www.instagram.com/gnce_mercury/
+- Sponsors and supporters: VulcanForms, SolidWorks, Weston Owl and WEEFC
+
+## Main pages
+
+- [GNCE Mercury | FTC 26413](https://mercury26413.org/index.html.md): GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, MA. 3 seasons, 3 robots, and the partners who make them possible.
+- [Team | GNCE Mercury](https://mercury26413.org/team.html.md): Meet the students and coaches of GNCE Mercury, FTC team 26413 from Weston, MA.
+- [News | GNCE Mercury](https://mercury26413.org/news.html.md): News from GNCE Mercury, FTC team 26413: thank-yous to our sponsors and updates from the team.
+- [Sponsor us | GNCE Mercury](https://mercury26413.org/partners.html.md): Sponsor GNCE Mercury, FTC team 26413 from Weston, MA: four tiers from $500 to $7,500 and up per season, the season budget, and how to reach Margaret, our head of sponsorship.
+- [Contact | GNCE Mercury](https://mercury26413.org/contact.html.md): Contact GNCE Mercury about joining, sponsoring, or running an event together.
+
+## Seasons and robots
+
+- [Seasons | GNCE Mercury](https://mercury26413.org/seasons.html.md): Every GNCE Mercury robot and every qualifier we’ve competed at.
+- [2026–2027 Season | GNCE Mercury](https://mercury26413.org/seasons/2026-2027.html.md): GNCE Mercury’s 2026–27 BIOBUZZ season and The Mercinator.
+- [2025–2026 Season | GNCE Mercury](https://mercury26413.org/seasons/2025-2026.html.md): GNCE Mercury’s 2025–26 DECODE robot: Sustain Award and a trip to MA States.
+- [2024–2025 Season | GNCE Mercury](https://mercury26413.org/seasons/2024-2025.html.md): GNCE Mercury’s 2024–25 INTO THE DEEP robot and rookie season.
+
+## More
+
+- [Outreach | GNCE Mercury](https://mercury26413.org/outreach.html.md): Camps, FLL coaching, and STEM demonstrations run by GNCE Mercury, FTC team 26413.
+- [Resources | GNCE Mercury](https://mercury26413.org/resources.html.md): Code, CAD, and engineering documents from GNCE Mercury, FTC team 26413.
+
+## Optional
+
+- [Sponsorship package, 2026–27 (PDF)](https://mercury26413.org/docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf): tiers, budget and contacts
+- [Terms and privacy](https://mercury26413.org/terms.html.md): how the site and its content may be used
+- [Whole site in one file](https://mercury26413.org/llms-full.txt): every page above as Markdown
+- [Sitemap](https://mercury26413.org/sitemap.xml)

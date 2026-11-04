@@ -324,7 +324,7 @@ Stage ground, breadcrumb, machine name, lead, the robot cut-out in its fixed spo
 - **Transfer bars (`.bars`):** grey bars on an aluminium track, the best value in ink.
 
 ### Partner Strip and Sponsor Row
-The home stage ends in a partner strip ("Supported by …", a Stage Light "Partner with us" pill, "Join as a student"). Every page's footer, on the stage, carries Our Sponsors & Supporters, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names in white tiles, 600), plus an outlined "Become a sponsor" tile. Never remove or move it.
+The home stage ends in a partner strip ("Supported by …", a Stage Light "Partner with us" pill, "Join as a student"). Every page's footer, on the stage, carries Our Sponsors & Supporters, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names in white tiles, 600), plus an outlined "Become a sponsor" tile. Never remove or move it. The footer's last row (©, team number, and small underlined About · Contact · Terms and privacy links in Stage Light 2) is plain HTML in every page, so it works without JavaScript; the script adds the sponsors strip and page links above it.
 
 ### Motion
 One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined in `:root` but unused).

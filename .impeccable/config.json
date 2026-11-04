@@ -67,6 +67,16 @@
         ],
         "createdAt": "2026-11-04T03:53:19.762Z",
         "reason": "The sponsor's name (VulcanForms) in the prose of the thank-you post and the tour write-up (heading, sentences, link), copy Andy approved; not a template label repeated into slots"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "resources.html",
+          "terms.html"
+        ],
+        "createdAt": "2026-11-04T12:38:41.229Z",
+        "reason": "File-only analysis misses padding: the static footer-legal row has padding-block 18px 28px under its 1px top rule, and .band/.resource-list li use clamp() padding; the rendered detector passes on both pages"
       }
     ]
   }

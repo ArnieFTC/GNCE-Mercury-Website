@@ -25,6 +25,16 @@ straight to `main`, Andy's standing instruction; `main` is the live site._
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
 
+## Agent readiness (2026-11-04)
+
+Andy asked to fix 16 findings from an agent-readiness scan of mercury26413.org (robots.txt, Content Signals,
+sitemap, canonical, JSON-LD, sameAs, about/terms links, machine-readable contact, llms.txt, Markdown for
+`Accept: text/markdown`, Link headers, WebMCP tools, MCP server card). Not a design round, but two visible changes:
+- **Footer:** the legal row is now static HTML on every page and gains small About · Contact · Terms and privacy
+  links (underlined, Stage Light 2, 0.8125rem); the sponsors strip and page links are still built by js/main.js.
+- **New page:** terms.html (Terms and privacy), a stage page head and one prose column, linked from the footer.
+- Everything else is for machines: see README "AI agents" and tools/agent_files.py.
+
 ## Round 7: no floating panels; boxes after VulcanForms (2026-11-04)
 
 Andy: "i dont like the rounded pop out panel can you go back cuz it looks so ai and reference vulcanform website".

@@ -23,3 +23,14 @@ When a task is about improving the website's design, UX, copy, accessibility or 
 4. Never invent team facts, results, quotes, sponsors or numbers; list missing ones as blockers.
 5. Commit and push website work to `main` (Andy's standing instruction), not to a side branch.
    `main` is the live site, so verify a round before pushing it.
+
+## Agent files (llms.txt, Markdown copies, JSON-LD, sitemap, MCP)
+
+- After changing any page, `js/main.js` (`SEASON`, `SPONSORS`, `SUPPORTERS`, the emails, Instagram) or
+  `mcp.php`, run `python3 tools/agent_files.py` and commit what it writes. `--check` exits 1 if anything is
+  stale. Never hand-edit the `*.html.md` files, `llms.txt`, `llms-full.txt`, `sitemap.xml`, `agent/pages.json`,
+  `.well-known/mcp/server-card.json` or the `agent:begin` … `agent:end` blocks.
+- A new page must be added to `PAGES` in `tools/agent_files.py` (the script stops until it is) and needs the
+  static `<footer class="site-footer">` row that every page has.
+- `.htaccess` runs on the live host (Hostinger). A broken line there can take the whole site down, so test
+  changes to it with Apache before pushing, and check https://mercury26413.org/ right after.
