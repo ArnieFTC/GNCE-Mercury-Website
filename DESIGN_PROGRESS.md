@@ -25,6 +25,26 @@ straight to `main`, Andy's standing instruction; `main` is the live site._
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
 
+## Round 7: no floating panels; boxes after VulcanForms (2026-11-04)
+
+Andy: "i dont like the rounded pop out panel can you go back cuz it looks so ai and reference vulcanform website".
+- **Reference study (vulcanforms.com, captured at 1440 and 390):** full-width sections on white with photography
+  edge to edge; content in boxes drawn with a thin grey line and near-square 5–7px corners, like a spec sheet;
+  bold headings; a small uppercase tracked menu; pill buttons; a black footer. Their bronze accent (#A58B64) was
+  not adopted: the site keeps colour only from robots, photos, the logo and the partners page's tier metals.
+- **Gone:** the grey page ground, the rounded section panels and their gaps (round 6). Sections run the full width
+  again; inner page heads are full-width stage bands.
+- **Boxes:** every tile, write-up, member, program, season row, post, fact, spec sheet, event, contact list,
+  resource row and the results table is a white box with a 1px #C4C3CC line and 6px corners (Stage Step with a
+  light line on the stage). Radii are now 4/6/8px. Inside a box, quotes, chips and photo frames are flat aluminium.
+- **Type and chrome:** h1 and h2 at 700; the menu is 0.8125rem 600 uppercase with 0.06em tracking (fits one row
+  from 1081px); the footer is black like the header, with the sponsor logos on white tiles.
+- **Fixes in the round:** the results table's rows are padded inside their box on phones and the header row has
+  room under the top line.
+- Verified: itest4 67/67; audit of all 11 pages at 320/390/768/1440 (no overflow, one h1, no skipped headings);
+  rendered contrast scan AA on every page; rendered detector clean except "VulcanForms" named 3× in the outreach
+  tour card and 6× in the news post, which is the sponsor's name in prose, left as written.
+
 ## Round 6: contrast, defined boxes, fixes (2026-11-04)
 
 Andy: "make the whole website more interactive and more contrasting", then "no, I don't really want the

@@ -66,9 +66,9 @@
   --fs-xl: clamp(2.5rem, 1.3rem + 3.8vw, 4.5rem);
   --fs-hero: clamp(3rem, 1rem + 6.2vw, 6rem);
 
-  --r-lg: 18px;              /* stage media and big tiles */
-  --r-md: 14px;              /* content tiles and photos */
-  --r-sm: 10px;              /* small images, inputs */
+  --r-lg: 8px;               /* stage media and big boxes (near-square, after VulcanForms) */
+  --r-md: 6px;               /* boxes and photos */
+  --r-sm: 4px;               /* small images, inputs */
   --pill: 999px;
 
   --gutter: clamp(16px, 4vw, 44px);
@@ -1039,41 +1039,70 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 }
 
 /* =========================================================
-   Panels and cards: every section is a defined box on the page ground, and the things inside a
-   section sit on cards of their own (Andy, round 6: "more contrast colors and defined boxes, not just
-   long pages of stuff"). White panels hold grey cards, grey panels hold white cards, stage panels
-   hold Stage Step cards; anything inside a card takes the card's opposite.
+   Boxes (round 7; Andy: "reference the VulcanForms website"). Sections run the full width of the
+   page on white, aluminium or the stage; nothing floats. Every card and tile is a white box drawn with
+   a 1px line and near-square corners (6px), the way an engineering spec sheet draws its cells. On the
+   stage the boxes are Stage Step with a light line. Inside a box, quotes, chips and photo frames are
+   filled aluminium, never boxed again.
    ========================================================= */
-:root { --ground: #D3D3DB; --panel-gap: 12px; --r-panel: 28px; }
-@media (max-width: 720px) { :root { --panel-gap: 8px; --r-panel: 20px; } }
-body { background: var(--ground); }
-main { display: flex; flex-direction: column; gap: var(--panel-gap); padding: var(--panel-gap) var(--panel-gap) 0; }
-main > * { border-radius: var(--r-panel); overflow: clip; }
-main > .band:not(.band--grey):not(.band--stage), main > :not(.band):not(.launch):not(.season-head) { background: var(--paper); }
-.site-footer { margin: var(--panel-gap); border-radius: var(--r-panel); }
+:root { --box-line: #C4C3CC; --box-line-stage: rgba(239, 238, 243, 0.26); }
 
-/* inner page heads are stage panels */
+/* inner page heads are full-width stage bands */
 .page-band { padding-block: 0; }
 .page-band .page-head { color: var(--on-stage); }
 .page-band .page-head .lead { color: var(--on-stage-2); }
 
-/* what a card and the things inside it are filled with, by panel */
-.band, main > * { --card: var(--alu); --card-in: var(--paper); }
-.band--grey { --card: var(--paper); --card-in: var(--alu); }
-.band--stage, .launch, .season-head { --card: var(--stage-raise); --card-in: var(--stage); }
-
-/* the cards */
-.entry:not(.ruled):not(.ruled-strong):not(.tile), .member, .program, .season-row, .post, .entries--ruled > .entry {
-  background: var(--card); border-radius: var(--r-lg); padding: clamp(16px, 2vw, 24px);
+/* the boxes */
+:is(.tile, .ruled, .ruled-strong, .facts > div, .figures > div, .calendar li, .spec, .event, .empty-note, .pager a, .captain, .coaches li,
+    .pull, .contact-list, .resource-list li, .sponsor-card, .results-table, .callouts li, .explorer-figure,
+    .entry:not(.ruled):not(.ruled-strong):not(.tile), .member, .program, .season-row, .post) {
+  background: var(--paper); border: 1px solid var(--box-line); border-radius: var(--r-md);
 }
-.entries--ruled > .entry { border-top: 0; }
-.entry .entry-media, .program-media .strip.fit img, .program-media > .photo:first-child img, .member .portrait, .member .quote, .member .chip { background: var(--card-in); }
+:is(.entry:not(.ruled):not(.ruled-strong):not(.tile), .member, .program, .season-row, .post) { padding: clamp(16px, 2vw, 24px); }
+.entries--ruled > .entry { border-top: 1px solid var(--box-line); }
+:is(.band--stage, .launch, .season-head) :is(.tile, .ruled, .ruled-strong, .facts > div, .figures > div, .entry:not(.ruled):not(.ruled-strong):not(.tile), .pull),
+.season-facts > div, .lineup-credit {
+  background: var(--stage-raise); border: 1px solid var(--box-line-stage);
+}
+.calendar li.is-next, .calendar li.is-today { border-color: var(--ink); }
+
+/* inside a box: filled aluminium, no second line */
+:is(.member, .captain, .entry, .program, .post) :is(.quote, .chip, .entry-media, .portrait, .pull) { background: var(--alu); border: 0; }
+.member .quote, .captain .quote { margin-top: 4px; }
+.program-media > .photo:first-child img, .program-media .strip.fit img, .post-media img { background: var(--alu); }
 .season-row { gap: 20px clamp(24px, 4vw, 56px); }
-.season-rows { gap: var(--panel-gap); }
-.results-table { background: var(--card); border-radius: var(--r-lg); border-collapse: separate; border-spacing: 0; overflow: hidden; }
+.posts { gap: clamp(20px, 2.5vw, 32px); } /* the boxes separate the posts */
+
+/* the results table is a box of rows */
+.results-table { border-collapse: separate; border-spacing: 0; overflow: hidden; }
 .results-table th:first-child, .results-table td:first-child { padding-left: clamp(14px, 2vw, 22px); }
 .results-table th:last-child, .results-table td:last-child { padding-right: clamp(14px, 2vw, 22px); }
-.post-media img { background: var(--card-in); }
+.results-table th { padding-top: 14px; }
+.results-table tbody tr:hover td:first-child { border-radius: 0; }
+@media (max-width: 720px) {
+  .results-table tr { padding-inline: 14px; }
+  .results-table tbody tr:first-child { border-top: 0; }
+  .results-table td:first-child, .results-table td:last-child { padding-inline: 0; }
+}
+
+/* type: section and page headings carry more weight */
+h1, h2 { font-weight: 700; }
+h2.h3 { font-weight: 600; } /* card titles set as h2 keep the h3 weight */
+.launch-head h1, .page-head h1, .partner-head h1 { font-weight: 700; }
+
+/* the menu: small, uppercase, tracked */
+.nav a { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* the footer closes every page on the stage, like the header opens it */
+.site-footer { background: var(--stage); color: var(--on-stage); }
+.site-footer a { color: var(--on-stage); }
+.site-footer :focus-visible { outline-color: var(--on-stage); }
+.footer-sponsors p, .footer-brand small, .footer-cols h2, .footer-legal { color: var(--on-stage-2); }
+.footer-main, .footer-legal { border-top-color: var(--rule-stage); }
+.sponsor-row li { color: var(--ink); border-radius: var(--r-md); }
+.sponsor-row li a { color: var(--ink); }
+.sponsor-row .open { background: transparent; box-shadow: inset 0 0 0 1px rgba(239, 238, 243, 0.5); }
+.sponsor-row .open a { color: var(--on-stage); }
 
 /* while the page scrolls the content ignores the pointer, so nothing reacts to a resting mouse (part "scroll-calm") */
 html.is-scrolling main, html.is-scrolling .site-footer { pointer-events: none; }

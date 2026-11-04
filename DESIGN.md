@@ -13,7 +13,7 @@ colors:
   ink: "#16141C"
   steel: "#4A4755"
   quiet: "#7F7C8A"
-  ground: "#D3D3DB"
+  box-line: "#C4C3CC"
   ink-lift: "#2C2935"
   on-stage-3: "#A09DAC"
   bronze: "#C27A3A"
@@ -64,9 +64,9 @@ typography:
     lineHeight: 1.2
     fontFeature: "'tnum' 1, 'lnum' 1"
 rounded:
-  sm: "10px"
-  md: "14px"
-  lg: "18px"
+  sm: "4px"
+  md: "6px"
+  lg: "8px"
   pill: "999px"
 spacing:
   gutter: "clamp(16px, 4vw, 44px)"
@@ -174,8 +174,8 @@ validated palette (Andy asked for that page to be colourful, like the package).
 Two grounds carry the site. The stage (home launch, every season head, the partners package sheet (head, tier
 chart and budget donut), and the closing
 "join or partner" bands on the home, team and partners pages) and the reading ground (white, with
-aluminium-grey bands and tiles). Sections are separated by a change of ground, never by hairlines.
-Since round 6 every page is a stack of defined boxes: each section is a rounded panel (28px corners, 20px on phones) on a mid-grey page ground (#D3D3DB) with 12px gaps (8px on phones), and the things inside a section sit on cards of their own. Content sits on flat, filled, rounded tiles (10/14/18px), buttons are pills, and nothing casts a shadow
+aluminium-grey bands). Sections run the full width of the page and are separated by a change of ground, never by hairlines.
+Since round 7 (Andy: "reference the VulcanForms website") the things inside a section are boxes drawn like the cells of an engineering spec sheet: white, a 1px #C4C3CC line and near-square 6px corners (Stage Step with a light line on the stage). Nothing floats: the rounded panels on a grey ground from round 6 were removed because Andy said they looked "so AI". Buttons are pills, and nothing casts a shadow
 except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the
 halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).
 
@@ -186,8 +186,8 @@ greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii h
 **Key Characteristics:**
 - Two grounds: the near-black stage for launches and closing calls, white and aluminium grey for reading.
 - No brand hue; light, robots, photos, the logo carry the colour, plus the tier metals and the budget palette on the partners page.
-- Archivo only: normal width at 600 for headings, 125% width at 700 for robot names, tabular figures for every number.
-- Sections are panels on the page ground; items are cards inside them. Flat filled tiles with 10/14/18px corners, pill buttons, no section hairlines, no card shadows.
+- Archivo only: normal width at 700 for h1 and h2 (600 below), 125% width at 700 for robot names, uppercase tracked 600 menu links, tabular figures for every number.
+- Full-width sections; every item (a write-up, a member, a program, a season, a post, a table, a tile) is a white box with a 1px line and 6px corners. Pill buttons, no section hairlines, no shadows.
 - Selection shown as light brightening (the chosen robot steps into a spotlight), never as a sliding bar.
 - One authored load moment on the stage; everything else answers a click, tap or key. Nothing moves, fades, pins or changes while scrolling.
 
@@ -199,11 +199,11 @@ A cool, logo-tinted grey scale from near-black to white, with four metals for th
 - **Logo Outline Ink** (ink): primary text on light grounds, primary buttons, pressed toggles, lead tags, the chosen calendar tile, the best bar in a chart, focus rings on light. It is tinted from the logo's near-black outline, so the "accent" on light pages is simply ink.
 
 ### Neutral
-- **Stage Black** (stage): the stage ground (`.launch`, `.season-head`, `.band--stage`), the header, the robot mats in the Seasons index and pager, and the hover fill of the primary button.
+- **Stage Black** (stage): the stage ground (`.launch`, `.season-head`, `.band--stage`), the header and the footer, the robot mats in the Seasons index and pager, and the hover fill of the primary button.
 - **Stage Step** (stage-raise): a step up on the stage: season-fact tiles, the `.ruled` tiles in the home page's closing stage band, the phone partner credit.
 - **Stage Light** (on-stage) and **Stage Dim** (on-stage-2): primary and secondary text on the stage (Stage Dim is 7.4:1 on Stage Black, 6.7:1 on Stage Step). Rules on the stage are on-stage at 14% (`--rule-stage`): the line-up card's results rows, the partner-strip top edge, the open menu's rows and, without JavaScript, the lines between the stacked season cards. The floor line is the same light at 16%.
 - **Paper** (paper): the default reading ground, form fields, tiles on grey bands, the sponsor tiles.
-- **Aluminium** (alu): alternate bands (`band--grey`), tiles on white bands, the footer.
+- **Aluminium** (alu): alternate bands (`band--grey`), and quotes, chips and photo frames inside a box.
 - **Aluminium Deep** (alu-deep): chart tracks, the parts progress track, the pager hover fill.
 - **Data Line** (line): 1px separators inside data (table rows, spec rows, contact rows, record lists), the footer divisions, and the 1px borders of toggles and the Copy button.
 - **Steel** (steel): secondary text on light (dates, captions, labels, hints); 6:1 on aluminium.
@@ -216,7 +216,7 @@ A cool, logo-tinted grey scale from near-black to white, with four metals for th
 ### Named Rules
 **The Light Is The Accent Rule.** There is no brand colour. Emphasis on the stage is brightness (a spotlight, full colour against dimmed grey); on light pages it is ink and weight. Don't introduce a hue for links, buttons or highlights.
 
-**The Panel Rule.** Every section is a panel on the grey page ground: white panels for reading, aluminium panels for alternate sections, stage panels for launches, every page head, the partners package sheet and the closing calls. The things inside a panel sit on cards in the opposite fill (aluminium cards in white panels, white cards in aluminium panels, Stage Step cards on the stage), and whatever sits inside a card takes the card's opposite (`--card` / `--card-in`, set per panel in css/style.css "Panels and cards"). The footer is a panel too.
+**The Spec Box Rule.** Sections are full-width bands (white, aluminium or the stage); every inner page head is a stage band. Inside a section, each item is a box: paper fill, 1px `--box-line`, `--r-md` (6px) corners, on white and aluminium bands alike; on the stage, Stage Step with a 1px light line (`--box-line-stage`). Inside a box, quotes, chips and photo frames are filled aluminium, never boxed again (css/style.css "Boxes"). The footer is a stage band that closes every page the way the header opens it.
 
 **The Metals Stay On The Partners Page Rule.** The tier metals and the budget palette colour the tier chart and the budget donut only. Text never wears them, except the tier names and amounts printed in ink on a metal fill; nowhere else on the site gets a brand colour from them.
 
@@ -266,11 +266,11 @@ The system is flat. Depth comes from the two grounds, from tiles one step lighte
 - **Hover halo** (`box-shadow: 0 0 0 3px rgba(22,20,28,0.14)`, on the stage `rgba(239,238,243,0.28)`): a ring, not a drop shadow, on hovered pill buttons and focused fields.
 
 ### Named Rules
-**The Flat Tile Rule.** Tiles, cards, menus and panels never cast shadows. A card sits inside a panel (that is the system), but a card never holds another card: inside a card, quotes, chips and photo frames take the opposite fill instead.
+**The Flat Tile Rule.** Boxes, menus and buttons never cast shadows, and a box never holds another box: inside a box, quotes, chips and photo frames take a flat aluminium fill instead.
 
 ## Shapes
 
-Gently rounded and consistent: 10px (`--r-sm`) for small images, the pager's robot mats, inputs, quotes and the part list (`.callouts`); 14px (`--r-md`) for content tiles, photos, facts, spec sheets, events and table wrappers; 18px (`--r-lg`) for captain tiles, the explorer figure and stage media. Every button, toggle, tag, chip, segmented control and chart bar is a pill (`--pill`). Markers are small filled circles (`.dia`, 7px); in the line-up they are 6px, outlined when idle and filled when chosen. No section hairlines: 1px lines appear only inside data (tables, spec rows, results, lists), between the footer's parts and on the stage (floor line, partner-strip edge, menu rows). The one heavier line is the 2px ink rule over each column of `.entries--ruled` ("What you would be supporting" on the partners page; from 760 to 1099px a lone third column spans the row).
+Near-square and consistent, after VulcanForms: 4px (`--r-sm`) for small images, the pager's robot mats, inputs, quotes and the part list (`.callouts`); 6px (`--r-md`) for every box (tiles, write-ups, members, programs, season rows, posts, facts, spec sheets, events, the results table); 8px (`--r-lg`) for stage media. Every button, toggle, tag, chip, segmented control and chart bar is a pill (`--pill`), as VulcanForms' own buttons are. Markers are small filled circles (`.dia`, 7px); in the line-up they are 6px, outlined when idle and filled when chosen. No section hairlines: 1px lines draw the boxes and sit inside data (tables, spec rows, results, lists), between the footer's parts and on the stage (floor line, partner-strip edge, menu rows). The one heavier line is the 2px ink rule over each column of `.entries--ruled` ("What you would be supporting" on the partners page; from 760 to 1099px a lone third column spans the row).
 
 ## Components
 
@@ -289,10 +289,10 @@ Quiet ink pills; the stage versions invert.
 - **Lead tag** (`.lead-tag`): ink pill, white, 0.8125rem 600. **Subteam chip** (`.chip`): aluminium pill, ink, 500.
 
 ### Cards / Containers
-- **Corner Style:** 14px (`--r-md`), 18px for captains and the explorer figure.
-- **Background:** the opposite of the band: aluminium tiles on white bands, white tiles on grey bands, Stage Step tiles on the stage. The CSS swaps this automatically for `.tile`, `.facts`, `.figures`, `.event`, `.calendar li`, `.spec`, `.pull`, `.quote`, `.resource-list li`, `.coaches li`, `.contact-list`.
+- **Corner Style:** 6px (`--r-md`) for every box.
+- **Background:** paper with a 1px `--box-line` border on white and aluminium bands; Stage Step with a 1px `--box-line-stage` border on the stage. Inside a box, quotes, chips and photo frames are aluminium with no border.
 - **Shadow Strategy:** none (see Elevation & Depth).
-- **Border:** none; 1px Data Line only between rows inside a tile.
+- **Border:** 1px `--box-line` (#C4C3CC) around the box; 1px Data Line between rows inside it.
 - **Internal Padding:** 18–36px; quotes, the part list and season-fact tiles use 12–18px.
 
 ### Inputs / Fields
@@ -313,7 +313,7 @@ Three bays hold the three robots side by side, oldest first, on one continuous f
 Stage ground, breadcrumb, machine name, lead, the robot cut-out in its fixed spotlight, then a row of Stage Step fact tiles. Robots carry a `view-transition-name`, so in supporting browsers the robot morphs between the home bay, the Seasons index row, the season head and the pager (480ms).
 
 ### News and sponsors
-- **News post (`.post`, news.html):** one `<article>` per post, newest first; the picture (`.post-media`, 18px corners) beside the story from 900px (5:6), stacked on phones; h2 title, the outreach dateline (date in 600 ink, then the topic), a 1.1875rem lead paragraph, plain paragraphs at 62ch and text links. Sponsor posts name the tier and its range, never an amount.
+- **News post (`.post`, news.html):** one `<article>` per post, newest first; the picture (`.post-media`, 8px corners) beside the story from 900px (5:6), stacked on phones; h2 title, the outreach dateline (date in 600 ink, then the topic), a 1.1875rem lead paragraph, plain paragraphs at 62ch and text links. Sponsor posts name the tier and its range, never an amount.
 - **Sponsor card (`.sponsor-card`, partners):** a white card on the grey band per sponsor, highest tier first: the logo (36–48px tall, linking to the sponsor), a tier tag (a pill filled with that tier's metal, ink text, a faint inset ring so Platinum shows on white) with the tier's range, and a link to the thank-you post.
 - **Sponsor logos:** dark artwork on a transparent background in `images/sponsors/`, so they sit on the footer's white tiles; a white-on-black logo is converted (luminance to alpha, near-black clipped to fully transparent), never shown on a black box in the footer.
 
@@ -324,7 +324,7 @@ Stage ground, breadcrumb, machine name, lead, the robot cut-out in its fixed spo
 - **Transfer bars (`.bars`):** grey bars on an aluminium track, the best value in ink.
 
 ### Partner Strip and Sponsor Row
-The home stage ends in a partner strip ("Supported by …", a Stage Light "Partner with us" pill, "Join as a student"). Every page's footer, on aluminium, carries Our Sponsors & Supporters, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names in white tiles, 600), plus an outlined "Become a sponsor" tile. Never remove or move it.
+The home stage ends in a partner strip ("Supported by …", a Stage Light "Partner with us" pill, "Join as a student"). Every page's footer, on the stage, carries Our Sponsors & Supporters, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names in white tiles, 600), plus an outlined "Become a sponsor" tile. Never remove or move it.
 
 ### Motion
 One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined in `:root` but unused).
@@ -340,7 +340,7 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 ### Do:
 - **Do** change colours, sizes, radii and spacing in `:root` in `css/style.css`, never in a component rule.
 - **Do** use the stage only for a launch (home, season heads), the partners head with its tier and budget sheet, and the closing call to join or partner; put everything else on paper or aluminium.
-- **Do** put each section in a panel and each item (a write-up, a member, a program, a season, a post, a table) on a card in the opposite fill, with 18px corners and 16–24px padding.
+- **Do** run sections the full width and put each item (a write-up, a member, a program, a season, a post, a table) in a white box with a 1px `--box-line` border, 6px corners and 16–24px padding.
 - **Do** make every button, toggle, tag and chip a pill; use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.
 - **Do** set only robot and game names at 125% width and 700; keep everything else at normal width.
 - **Do** give every date, amount, spec and result tabular figures.
@@ -353,8 +353,8 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 ### Don't:
 - **Don't** add a brand hue, a purple or violet accent, or neon on black.
 - **Don't** copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.
-- **Don't** separate sections with hairlines; change the ground instead. Lines belong inside data only.
-- **Don't** put shadows on tiles, buttons, menus or panels, or put a card inside a card.
+- **Don't** separate sections with hairlines; change the ground instead. Lines draw boxes and sit inside data, nowhere else.
+- **Don't** put shadows on boxes, buttons or menus, put a box inside a box, or float sections as rounded panels on a grey ground (round 6, removed in round 7 at Andy's request).
 - **Don't** use the tier metals or the budget palette outside the partners page's tier chart and donut, and don't set text in them.
 - **Don't** add a second font family or system display faces.
 - **Don't** put small labels (eyebrows) above headings or number the seasons 01/02/03.
