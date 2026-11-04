@@ -25,6 +25,29 @@ straight to `main`, Andy's standing instruction; `main` is the live site._
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
 
+## Round 6: contrast, defined boxes, fixes (2026-11-04)
+
+Andy: "make the whole website more interactive and more contrasting", then "no, I don't really want the
+highlight where my mouse moves stuff on the background; what I want is more contrast colors and defined boxes,
+not just long pages of stuff". Also: fix the captain award table overlap, remove the special quotes and their
+password prompt, the VulcanForms tour was Oct 31, and money raised is $20,000+.
+- **Defined boxes:** every section is now a rounded panel on a mid-grey page ground (#D3D3DB, 12px gaps), every
+  inner page head is a dark stage panel, and the footer is a panel. Inside, write-ups, members, outreach programs,
+  season rows, the news post, the proof columns and the results table sit on cards in the opposite fill.
+- **Contrast:** secondary text 9:1 on white and 10.9:1 on the stage; control edges (inputs, toggles, Copy, choice
+  tiles) reach 3:1 (`--quiet` #7F7C8A); line buttons have ink borders; ink buttons visibly lighten on hover with a
+  4px ring; the current nav item is bolder and brighter; the chosen outreach year is solid ink; stage rules and
+  the home floor line are brighter; Stage Step tiles show against the stage.
+- **Interaction:** the tier chart lights the column and row under the pointer; links have a heavier underline that
+  tightens on hover; hover effects pause while the page scrolls. The pointer-following stage light was removed.
+- **Fixes:** captain award tables share one column grid and never let the event column go narrower than its
+  longest word (captains sit side by side from 1100px); special quotes and the password prompt removed (HTML, JS
+  with its encrypted data, CSS, test); VulcanForms tour dated Oct 31, 2026 (outreach and the news post); home
+  "Raised for parts, travel, and outreach" is $20,000+.
+- Audit workflow (contrast + interaction auditors, merged list of 18): built items 2, 3, 4, 5, 10, 11, 12 and the
+  scroll calm (a simpler form of item 1); the rest (photo viewer, tier "Ask" links, row links, chip filtering and
+  others) wait for Andy, since he asked for contrast and boxes rather than more pointer effects.
+
 ## Round 5: opening animation and page transitions (2026-11-04)
 
 Andy: "make me a opening animation and transition animation between sits".
@@ -253,7 +276,7 @@ Reduced motion makes every change instant.
 - ◐ B3 Sponsoring: tiers, budget, packet and contact (Margaret) now come from the 2026–27 package. Still missing:
   a donation link.
 - ⊘ B4 A form service (e.g. Formspree) so the contact form sends without a mail app; needs a team account.
-- ⊘ B5 Sources for "1,000 students directly impacted", "$8,000+ raised", "100,000+ students reached".
+- ◐ B5 Sources for "1,000 students directly impacted" and "100,000+ students reached". The amount raised is now $20,000+ (Andy, 2026-11-04).
 - ⊘ B6 Coach photos (the coaches are listed by name only).
 - ⊘ B7 Resources links: code, CAD, portfolio, build log.
 - ⊘ B8 2026 MA States results (alliance and awards show "—").

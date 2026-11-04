@@ -490,88 +490,6 @@ part("crew-filter", () => {
   if (start) apply(start, false);
 });
 
-// ---------- Special quotes (team page) ----------
-// The locked quotes are stored encrypted (AES-GCM, key derived from the password with PBKDF2),
-// so neither the quotes nor the password appear in the page source.
-const SPECIAL_QUOTES = {
-  salt: "rqnXEPWc0gRDtiAZzWWHww==",
-  iv: "5iLWcamT14Vqij3Z",
-  data: "LNADRR3AoBI8igyzV4g75+UZtJ4TE1lnYU6WsCx0qhcX5MGQiN4/S0RT1Vx9PHBngHibyKdMjW3DvSAGWk7G9IOM4oCNpO3q/eijhuxTjAST9ZJgKgQ=",
-};
-part("special-quotes", () => {
-  const sqOpen = document.getElementById("sq-open");
-  if (!sqOpen) return;
-  const form = document.getElementById("sq-form");
-  const pass = document.getElementById("sq-pass");
-  const msg = document.getElementById("sq-msg");
-  if (!form || !pass || !msg || !window.crypto?.subtle) return;
-  sqOpen.closest(".sq")?.removeAttribute("hidden"); // the lock only works with JavaScript, so it starts hidden
-  const bytes = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
-  const unlock = async password => {
-    const { subtle } = crypto;
-    const base = await subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveKey"]);
-    const key = await subtle.deriveKey(
-      { name: "PBKDF2", salt: bytes(SPECIAL_QUOTES.salt), iterations: 250000, hash: "SHA-256" },
-      base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
-    const plain = await subtle.decrypt({ name: "AES-GCM", iv: bytes(SPECIAL_QUOTES.iv) }, key, bytes(SPECIAL_QUOTES.data));
-    return JSON.parse(new TextDecoder().decode(plain));
-  };
-  pass.addEventListener("input", () => pass.removeAttribute("aria-invalid"));
-  sqOpen.addEventListener("click", () => {
-    form.hidden = false;
-    sqOpen.hidden = true;
-    pass.focus();
-  });
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    msg.textContent = "Checking…";
-    msg.classList.remove("err");
-    let quotes;
-    try {
-      quotes = await unlock(pass.value);
-    } catch {
-      msg.textContent = "That password didn’t work. Check it and try again.";
-      msg.classList.add("err");
-      pass.setAttribute("aria-invalid", "true");
-      pass.select();
-      return;
-    }
-    msg.tabIndex = -1;
-    msg.focus({ preventScroll: true });
-    form.hidden = true;
-    msg.textContent = "Special quotes unlocked.";
-    reveal(quotes);
-  });
-  // the lock shakes and opens, then the quote appears; afterwards it keeps a "Special quote" badge
-  const reveal = async quotes => {
-    const locked = [...document.querySelectorAll(".quote.locked")];
-    const wait = ms => new Promise(r => setTimeout(r, ms));
-    const show = q => {
-      q.innerHTML = `<span class="sq-badge">Special quote</span><span class="sq-text"></span>`;
-      q.querySelector(".sq-text").textContent = quotes[q.dataset.secret] || "";
-      q.classList.remove("locked", "unlocking");
-      q.classList.add("special");
-    };
-    const focusFirst = () => {
-      const a = document.activeElement;
-      if (!locked[0] || (a !== msg && a !== document.body)) return; // the visitor has moved on: leave focus alone
-      locked[0].tabIndex = -1;
-      locked[0].focus({ preventScroll: true });
-    };
-    if (RM) { locked.forEach(show); focusFirst(); return; }
-    locked[0]?.closest(".member")?.scrollIntoView({ behavior: "smooth", block: "center" });
-    await wait(600);
-    for (const q of locked) {
-      q.classList.add("unlocking");
-      await wait(600);
-      show(q);
-      q.classList.add("revealing");
-      await wait(300);
-    }
-    focusFirst();
-  };
-});
-
 // ---------- Contact form (contact page) ----------
 // Opens the visitor's email app with the message addressed to the team email.
 part("contact", () => {
@@ -708,21 +626,17 @@ part("budget-chart", () => {
   donut.hidden = false;
 });
 
-// ---------- Pointer light ----------
-// On the dark stage sections a soft light follows a mouse or trackpad (css "Pointer light"). Only fine pointers,
-// never with reduced motion; it moves with the pointer, never with scrolling.
-part("stage-light", () => {
-  if (RM || !matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-  document.querySelectorAll(".launch, .season-head, .band--stage").forEach(el => {
-    let raf = 0, x = 0, y = 0;
-    el.addEventListener("pointerenter", () => el.classList.add("has-light"));
-    el.addEventListener("pointerleave", () => el.classList.remove("has-light"));
-    el.addEventListener("pointermove", e => {
-      const r = el.getBoundingClientRect();
-      x = e.clientX - r.left; y = e.clientY - r.top;
-      if (!raf) raf = requestAnimationFrame(() => { raf = 0; el.style.setProperty("--mx", x + "px"); el.style.setProperty("--my", y + "px"); });
-    }, { passive: true });
-  });
+// ---------- Calm while scrolling ----------
+// While the page scrolls, the content ignores the pointer, so a resting mouse never sets off hover effects
+// (photo zooms, lit rows) as things pass under it; hover comes back the moment scrolling stops.
+part("scroll-calm", () => {
+  const rootEl = document.documentElement;
+  let t = 0;
+  addEventListener("scroll", () => {
+    if (!t) rootEl.classList.add("is-scrolling");
+    clearTimeout(t);
+    t = setTimeout(() => { rootEl.classList.remove("is-scrolling"); t = 0; }, 160);
+  }, { passive: true });
 });
 
 // ---------- Opening ----------

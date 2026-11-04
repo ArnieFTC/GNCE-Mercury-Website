@@ -84,7 +84,7 @@ mechanism changed, and teaches younger students through camps and FLL coaching.
   - Cambridge Science Festival;
   - FLL mock qualifier.
   - Coach quotes from the FLL coaching.
-- **Numbers on the home page:** 1,000 students directly impacted, $8,000+ raised, 100,000+ students reached.
+- **Numbers on the home page:** 1,000 students directly impacted, $20,000+ raised (Andy, 2026-11-04), 100,000+ students reached.
   The team has not yet given sources for these.
 - **Supporters:** SolidWorks, Weston Owl and WEEFC, as names only. There are no logos and no other sponsors.
 - **Sponsorship package 2026–27** (Andy's Canva PDF, `docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`):

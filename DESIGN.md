@@ -3,16 +3,19 @@ name: GNCE Mercury
 description: FTC team #26413, each season's robot launched alone on a black stage, then explained on calm light pages.
 colors:
   stage: "#0B0A0F"
-  stage-raise: "#18161F"
+  stage-raise: "#201E29"
   on-stage: "#EFEEF3"
-  on-stage-2: "#B8B5C4"
+  on-stage-2: "#C2BFCD"
   paper: "#FFFFFF"
-  alu: "#ECECF0"
-  alu-deep: "#DDDCE3"
-  line: "#D2D1DA"
+  alu: "#E9E9EE"
+  alu-deep: "#DAD9E1"
+  line: "#CDCCD6"
   ink: "#16141C"
   steel: "#4A4755"
-  quiet: "#8B8896"
+  quiet: "#7F7C8A"
+  ground: "#D3D3DB"
+  ink-lift: "#2C2935"
+  on-stage-3: "#A09DAC"
   bronze: "#C27A3A"
   silver: "#C3C7CF"
   gold: "#D9AC3C"
@@ -172,7 +175,7 @@ Two grounds carry the site. The stage (home launch, every season head, the partn
 chart and budget donut), and the closing
 "join or partner" bands on the home, team and partners pages) and the reading ground (white, with
 aluminium-grey bands and tiles). Sections are separated by a change of ground, never by hairlines.
-Content sits on flat, filled, rounded tiles (10/14/18px), buttons are pills, and nothing casts a shadow
+Since round 6 every page is a stack of defined boxes: each section is a rounded panel (28px corners, 20px on phones) on a mid-grey page ground (#D3D3DB) with 12px gaps (8px on phones), and the things inside a section sit on cards of their own. Content sits on flat, filled, rounded tiles (10/14/18px), buttons are pills, and nothing casts a shadow
 except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the
 halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).
 
@@ -184,7 +187,7 @@ greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii h
 - Two grounds: the near-black stage for launches and closing calls, white and aluminium grey for reading.
 - No brand hue; light, robots, photos, the logo carry the colour, plus the tier metals and the budget palette on the partners page.
 - Archivo only: normal width at 600 for headings, 125% width at 700 for robot names, tabular figures for every number.
-- Flat filled tiles with 10/14/18px corners, pill buttons, no section hairlines, no card shadows.
+- Sections are panels on the page ground; items are cards inside them. Flat filled tiles with 10/14/18px corners, pill buttons, no section hairlines, no card shadows.
 - Selection shown as light brightening (the chosen robot steps into a spotlight), never as a sliding bar.
 - One authored load moment on the stage; everything else answers a click, tap or key. Nothing moves, fades, pins or changes while scrolling.
 
@@ -213,7 +216,7 @@ A cool, logo-tinted grey scale from near-black to white, with four metals for th
 ### Named Rules
 **The Light Is The Accent Rule.** There is no brand colour. Emphasis on the stage is brightness (a spotlight, full colour against dimmed grey); on light pages it is ink and weight. Don't introduce a hue for links, buttons or highlights.
 
-**The Two Grounds Rule.** The stage is for launching a machine, the partners package sheet (its head, tier chart and budget donut) and the closing call to join or partner. Other write-ups, people, records and forms sit on paper or aluminium.
+**The Panel Rule.** Every section is a panel on the grey page ground: white panels for reading, aluminium panels for alternate sections, stage panels for launches, every page head, the partners package sheet and the closing calls. The things inside a panel sit on cards in the opposite fill (aluminium cards in white panels, white cards in aluminium panels, Stage Step cards on the stage), and whatever sits inside a card takes the card's opposite (`--card` / `--card-in`, set per panel in css/style.css "Panels and cards"). The footer is a panel too.
 
 **The Metals Stay On The Partners Page Rule.** The tier metals and the budget palette colour the tier chart and the budget donut only. Text never wears them, except the tier names and amounts printed in ink on a metal fill; nowhere else on the site gets a brand colour from them.
 
@@ -263,7 +266,7 @@ The system is flat. Depth comes from the two grounds, from tiles one step lighte
 - **Hover halo** (`box-shadow: 0 0 0 3px rgba(22,20,28,0.14)`, on the stage `rgba(239,238,243,0.28)`): a ring, not a drop shadow, on hovered pill buttons and focused fields.
 
 ### Named Rules
-**The Flat Tile Rule.** Tiles, cards, menus and panels never cast shadows and never nest. A tile is a filled rounded rectangle on a contrasting ground, nothing more.
+**The Flat Tile Rule.** Tiles, cards, menus and panels never cast shadows. A card sits inside a panel (that is the system), but a card never holds another card: inside a card, quotes, chips and photo frames take the opposite fill instead.
 
 ## Shapes
 
@@ -328,7 +331,7 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 - **Opening (home, first visit of a session):** the spotlight comes up on the Mercury mark (760ms, from 30% brightness and 94% scale), "GNCE Mercury" rises under it (from 300ms), both fade at 1000ms, then the stage opens like an iris from just under the mark (640ms, `mask` with an animated `--iris` radius) onto the home page, whose own entrance is held back 1.1s to follow it. About 1.7s; a click, tap, wheel or key skips it and pulls the stage's entrance forward. Set by an inline script in index.html's `<head>` (sessionStorage `mercury-intro`; `?intro` replays it); never with reduced motion or without JavaScript; every layer hides itself at the end even if a script fails.
 - **Load (stage only, once):** the h1 and line rise 26px (900ms, second line +120ms); the robots step in from 40px and 94% scale one after another (1100ms at 220/340/460ms); the floor line draws from the centre (1200ms); labels, card and partner strip fade in at 640ms. Season and page heads use the same rise; the season-head robot steps in.
 - **Page transitions:** cross-page view transitions (`@view-transition { navigation: auto; }`): the page you leave dims and settles back (240ms to 0 opacity, 0.985 scale, 50% brightness), the next one rises 18px into place (520ms, from 90ms); the header has its own `view-transition-name` so it stays put, and season robots glide between pages. Where cross-page transitions are missing, `.page-enter` (set in each page's `<head>`) gives `main` the same rise on load.
-- **Scroll:** nothing. No scroll reveals, no scroll-linked effects, no pinned sections, no sticky columns (Andy, round 3). Content is simply there. The only thing that reacts to scrolling is the header tint.
+- **Scroll:** nothing. No scroll reveals, no scroll-linked effects, no pinned sections, no sticky columns (Andy, round 3). Content is simply there. The only thing that reacts to scrolling is the header tint. While the page scrolls the content also ignores the pointer (`html.is-scrolling`, part "scroll-calm"), so a resting mouse never sets off a hover effect as things pass under it. (A pointer-following light on the stage was tried in round 6 and removed at Andy's request.)
 - **Answers to the visitor:** colour changes 160–200ms; segmented tabs 260ms; header tint and menu open 320ms; panels and part notes fade up 8px (420–480ms); filtered crew members fade up 8px (320ms); bay light and robot dim 600–700ms; hovered photos zoom to 1.03 (700ms); a locked quote shakes 600ms. The next calendar event's dot pulses twice.
 - **Reduced motion:** every animation and transition is cut to 0.01ms; smooth scrolling and view transitions are off.
 
@@ -337,7 +340,7 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 ### Do:
 - **Do** change colours, sizes, radii and spacing in `:root` in `css/style.css`, never in a component rule.
 - **Do** use the stage only for a launch (home, season heads), the partners head with its tier and budget sheet, and the closing call to join or partner; put everything else on paper or aluminium.
-- **Do** put content on a filled tile in the opposite ground (aluminium on white, white on grey, Stage Step on the stage) with 14px corners.
+- **Do** put each section in a panel and each item (a write-up, a member, a program, a season, a post, a table) on a card in the opposite fill, with 18px corners and 16–24px padding.
 - **Do** make every button, toggle, tag and chip a pill; use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.
 - **Do** set only robot and game names at 125% width and 700; keep everything else at normal width.
 - **Do** give every date, amount, spec and result tabular figures.
@@ -351,7 +354,7 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 - **Don't** add a brand hue, a purple or violet accent, or neon on black.
 - **Don't** copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.
 - **Don't** separate sections with hairlines; change the ground instead. Lines belong inside data only.
-- **Don't** put shadows on tiles, buttons, menus or panels, or nest a tile inside a tile.
+- **Don't** put shadows on tiles, buttons, menus or panels, or put a card inside a card.
 - **Don't** use the tier metals or the budget palette outside the partners page's tier chart and donut, and don't set text in them.
 - **Don't** add a second font family or system display faces.
 - **Don't** put small labels (eyebrows) above headings or number the seasons 01/02/03.

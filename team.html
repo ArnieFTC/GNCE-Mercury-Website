@@ -18,16 +18,18 @@
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#0B0A0F">
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=211">
+  <link rel="stylesheet" href="css/style.css?v=216">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="team">
   <noscript><nav class="nojs-nav container" aria-label="Main"><a href="index.html">Home</a><a href="seasons.html">Seasons</a><a href="team.html">Team</a><a href="outreach.html">Outreach</a><a href="news.html">News</a><a href="partners.html">Partners</a><a href="resources.html">Resources</a><a href="contact.html">Contact</a></nav></noscript>
   <main id="main">
 
-    <div class="page-head container">
-      <h1>The team</h1>
-      <p class="lead">9 students and 4 coaches from Weston, MA.</p>
+    <div class="band band--stage page-band">
+      <div class="page-head container">
+        <h1>The team</h1>
+        <p class="lead">9 students and 4 coaches from Weston, MA.</p>
+      </div>
     </div>
 
     <!-- MISSION AND ABOUT: the team photo is shown no wider than its real size (927px). For a bigger
@@ -101,8 +103,7 @@
            an optional <ul class="member-record"> with one <li> per result or role (from the sponsorship package),
            one <blockquote class="quote"> per quote.
          The filter buttons above the grid are built from the chips and from lead roles that end in " Lead"
-         (Software Lead adds a "Software" button). A <blockquote class="quote locked" data-secret="…"> is a
-         special quote: its text is stored encrypted in js/main.js and shows after the password is entered. -->
+         (Software Lead adds a "Software" button). -->
     <section class="band" aria-labelledby="members-title">
       <div class="container">
         <div class="section-head">
@@ -116,7 +117,6 @@
             <div class="leads"><span class="lead-tag">Founder</span><span class="lead-tag">Co-Captain</span></div>
             <div class="chips"><span class="chip">CAD</span><span class="chip">Build</span><span class="chip">Outreach</span><span class="chip">Game Strategy</span><span class="chip">Website</span></div>
             <blockquote class="quote">I started <span translate="no">Mercury</span> with a toolbox, a dream, and no idea how mecanum wheels worked. Three seasons later, look at us.</blockquote>
-            <blockquote class="quote locked" data-secret="andy">Special quote</blockquote>
           </article>
           <article class="member">
             <img class="portrait" src="images/team/arnie.jpg" width="800" height="1000" loading="lazy" alt="Arnie Sreeram">
@@ -185,7 +185,6 @@
               <li>Experience competing with <span translate="no">GNCE Electrified Chickens</span> 26111</li>
             </ul>
             <blockquote class="quote">Job finished? I don’t think so.</blockquote>
-            <blockquote class="quote locked" data-secret="tucker">Special quote</blockquote>
           </article>
           <article class="member">
             <img class="portrait" src="images/team/kai.jpg" width="800" height="1000" loading="lazy" alt="Kai Kassekert">
@@ -220,20 +219,6 @@
           </article>
           -->
         </div>
-
-        <!-- SPECIAL QUOTES: the locked quotes above are encrypted; the password unlocks them (logic in js/main.js,
-             which looks for the ids sq-open, sq-form, sq-pass and sq-msg, so keep them). -->
-        <div class="sq" id="special-quotes" hidden>
-          <button class="btn btn--line" id="sq-open" type="button">View special quotes</button>
-          <form id="sq-form" hidden>
-            <div class="field">
-              <label for="sq-pass">Password</label>
-              <input type="password" id="sq-pass" name="special-quotes-password" autocomplete="off" aria-describedby="sq-msg" required>
-            </div>
-            <button class="btn" type="submit">Unlock</button>
-          </form>
-          <p class="sq-msg" id="sq-msg" role="status"></p>
-        </div>
       </div>
     </section>
 
@@ -266,6 +251,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=215"></script>
+  <script src="js/main.js?v=216"></script>
 </body>
 </html>
