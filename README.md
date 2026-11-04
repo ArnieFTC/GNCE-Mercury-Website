@@ -13,7 +13,8 @@ holds the history, open questions and next steps.
 | What | Where |
 |---|---|
 | Nav links | `js/main.js` → `NAV` list at the top |
-| Sponsors and supporters (footer of every page, "Supported by" line on the home page) | `js/main.js` → `SPONSORS` / `SUPPORTERS` |
+| Sponsors and supporters (footer of every page, "Supported by" lines) | `js/main.js` → `SPONSORS` (with logo files in `images/sponsors/`) / `SUPPORTERS`; also the "Our 2026–27 sponsors" cards on `partners.html` |
+| News posts (sponsor thank-yous, team updates) | `news.html` → copy an `<article class="post">` above the others (newest first) |
 | This season's dates (home calendar, "next event" lines, footer) | `js/main.js` → `SEASON` (dates are `YYYY-MM-DD`, Eastern time) |
 | Colors, type sizes, spacing | `css/style.css` → `:root` at the top |
 | The three robots on the home page | `index.html` → one `<a class="bay">` per season plus its `<article class="season-card">` |

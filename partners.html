@@ -16,11 +16,11 @@
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#0B0A0F">
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=207">
+  <link rel="stylesheet" href="css/style.css?v=208">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="partners">
-  <noscript><nav class="nojs-nav container" aria-label="Main"><a href="index.html">Home</a><a href="seasons.html">Seasons</a><a href="team.html">Team</a><a href="outreach.html">Outreach</a><a href="partners.html">Partners</a><a href="resources.html">Resources</a><a href="contact.html">Contact</a></nav></noscript>
+  <noscript><nav class="nojs-nav container" aria-label="Main"><a href="index.html">Home</a><a href="seasons.html">Seasons</a><a href="team.html">Team</a><a href="outreach.html">Outreach</a><a href="news.html">News</a><a href="partners.html">Partners</a><a href="resources.html">Resources</a><a href="contact.html">Contact</a></nav></noscript>
   <main id="main">
 
     <!-- SOURCE: this page is the web version of our 2026–27 sponsorship package
@@ -46,7 +46,7 @@
               <a class="btn btn--light" href="mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury">Email Margaret about sponsoring</a>
               <a class="btn btn--outline-light" href="docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf" download>Download the package <span class="btn-meta">PDF, 1.8&nbsp;MB</span></a>
             </div>
-            <p class="supported">Supported by <b data-supporters>SolidWorks, Weston Owl and WEEFC</b></p>
+            <p class="supported">Supported by <b data-supporters>VulcanForms, SolidWorks, Weston Owl and WEEFC</b></p>
           </div>
           <div class="contact-person">
             <img src="images/team/margaret.jpg" width="600" height="750" alt="">
@@ -141,6 +141,25 @@
       </div>
     </section>
 
+    <!-- OUR SPONSORS: one <li> per sponsor, highest tier first. Copy a <li>, change the tier (tier-tag--platinum,
+         --gold, --silver or --bronze, and the word), the logo (from images/sponsors/, with its real width and
+         height), the link and the thank-you post. Keep SPONSORS in js/main.js in step: it puts the same logos in
+         every footer. Never print what a sponsor gave; the tier name and range are enough. -->
+    <section class="band band--grey band--tight" aria-labelledby="sponsors-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="sponsors-title">Our 2026–27 sponsors</h2>
+        </div>
+        <ul class="sponsor-cards">
+          <li class="sponsor-card">
+            <a class="sponsor-card-logo" href="https://www.vulcanforms.com/" target="_blank" rel="noopener"><img src="images/sponsors/vulcanforms-logo.png" width="782" height="164" alt="VulcanForms" loading="lazy"></a>
+            <p><span class="tier-tag tier-tag--platinum">Platinum</span> <span class="num">$7,500+</span></p>
+            <a class="text-link" href="news.html#vulcanforms-platinum">Read our thank-you</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <!-- WHAT YOU WOULD BE SUPPORTING: who the money backs. The photo, the FTC explainer (package page 2) and the
          coach's words (package page 3, also on outreach.html), then three columns of facts from the season and
          outreach pages; each column links to where its facts come from. Add a result as a new <li> in "Awards and
@@ -230,6 +249,6 @@
     </section>
 
   </main>
-  <script src="js/main.js?v=204"></script>
+  <script src="js/main.js?v=208"></script>
 </body>
 </html>

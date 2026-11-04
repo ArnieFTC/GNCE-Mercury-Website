@@ -25,6 +25,19 @@ straight to `main`, Andy's standing instruction; `main` is the live site._
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
 
+## Round 4: first Platinum sponsor and a News page (2026-11-04)
+
+Andy: add VulcanForms (logo sent as a white-on-black 1200×630 image) as a sponsor, and make a blog section
+thanking them for sponsoring at the Platinum level; no exact amount, "$7,500+" for now.
+- **Sponsor:** `SPONSORS` in `js/main.js` now holds VulcanForms (logo `images/sponsors/vulcanforms-logo.png`, made
+  from Andy's image: black on transparent, so it sits on the footer's white tiles; links to vulcanforms.com). It
+  shows in every footer and in the "Supported by" lines (home and partners).
+- **News page** (`news.html`, new, in the main nav after Outreach and in every page's no-JS nav): the first post,
+  "Thank you, VulcanForms" (Nov 4, 2026), with Andy's banner image. Facts only from Andy (Platinum, $7,500+),
+  the package (what the tier includes, what sponsorship funds cover) and the outreach page (the tour).
+- **Partners:** an "Our 2026–27 sponsors" band (grey, after the budget) with a card for VulcanForms: logo,
+  Platinum tag, $7,500+, and a link to the thank-you post.
+
 ## Round 3: no scroll motion, two-column outreach, Partners rework
 
 Andy (2026-11-03): the tier table is "so large" and "not colorful"; he wants "an actual chart kinda like in the
@@ -215,7 +228,7 @@ Reduced motion makes every change instant.
 - ⊘ B6 Coach photos (the coaches are listed by name only).
 - ⊘ B7 Resources links: code, CAD, portfolio, build log.
 - ⊘ B8 2026 MA States results (alliance and awards show "—").
-- ⊘ B9 Partner logos (SolidWorks, Weston Owl, WEEFC are typeset names until logo files arrive) and one true
+- ◐ B9 Partner logos: VulcanForms has its logo (round 4). SolidWorks, Weston Owl and WEEFC are still typeset names until logo files arrive; also one true
   sentence per partner about what they gave.
 - ⊘ B10 Better robot images: a clean side-on photo of each robot on a plain background would make the
   line-up sharper (the INTO THE DEEP cut-out comes from an older rough cut-out; the Mercinator one from an

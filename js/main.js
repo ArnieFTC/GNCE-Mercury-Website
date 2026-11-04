@@ -20,6 +20,7 @@ const NAV = [
   { label: "Seasons",   href: "seasons.html",   page: "seasons" },
   { label: "Team",      href: "team.html",      page: "team" },
   { label: "Outreach",  href: "outreach.html",  page: "outreach" },
+  { label: "News",      href: "news.html",      page: "news" },
   { label: "Partners",  href: "partners.html",  page: "partners" },
   { label: "Resources", href: "resources.html", page: "resources" },
   { label: "Contact",   href: "contact.html",   page: "contact" },
@@ -30,7 +31,10 @@ const NAV = [
 //   { name: "Acme", logo: "images/acme.png", width: 240, height: 80, url: "https://acme.com" }
 // (width and height are the logo file's real size in pixels).
 // SUPPORTERS are named (no logo) until we have their logos. A "Become a sponsor" link is always shown.
-const SPONSORS = [];
+const SPONSORS = [
+  // Platinum, 2026–27 (thank-you post: news.html#vulcanforms-platinum)
+  { name: "VulcanForms", logo: "images/sponsors/vulcanforms-logo.png", width: 782, height: 164, url: "https://www.vulcanforms.com/" },
+];
 const SUPPORTERS = ["SolidWorks", "Weston Owl", "WEEFC"];
 const TEAM_EMAIL = "gncemercury26413@gmail.com";
 // Sponsorship emails (the "Email us about sponsoring" buttons and the contact form's Sponsorship topic) go here.

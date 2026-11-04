@@ -890,6 +890,26 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .help-list b { display: block; color: var(--on-stage); font-weight: 600; margin-bottom: 4px; }
 .help-list a { color: var(--on-stage); }
 
+/* sponsors this season (partners): a white card per sponsor with its logo, tier and thank-you */
+.sponsor-cards { list-style: none; display: grid; gap: 10px; }
+.sponsor-card { display: grid; gap: 14px 32px; align-items: center; padding: clamp(20px, 2.6vw, 28px) clamp(20px, 3vw, 36px); border-radius: var(--r-md); background: var(--paper); }
+@media (min-width: 760px) { .sponsor-card { grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto; } }
+.sponsor-card-logo { display: inline-block; justify-self: start; padding-block: 4px; }
+.sponsor-card-logo img { height: clamp(36px, 3.4vw, 48px); width: auto; max-width: 100%; }
+.sponsor-card p { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; color: var(--steel); }
+.tier-tag { display: inline-block; padding: 4px 12px; border-radius: var(--pill); background: var(--metal); color: var(--ink); font-weight: 600; font-size: 0.875rem; box-shadow: inset 0 0 0 1px rgba(22, 20, 28, 0.14); }
+.tier-tag--bronze { --metal: var(--bronze); } .tier-tag--silver { --metal: var(--silver); } .tier-tag--gold { --metal: var(--gold); } .tier-tag--platinum { --metal: var(--platinum); }
+
+/* ---------- News: one post per article, picture beside the story on wide screens ---------- */
+.posts { display: grid; gap: clamp(56px, 7vw, 96px); }
+.post { display: grid; gap: 24px clamp(28px, 4vw, 64px); align-items: start; }
+@media (min-width: 900px) { .post { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+.post-media img { width: 100%; height: auto; border-radius: var(--r-lg); background: var(--alu); }
+.post-text { max-width: 62ch; }
+.post-text h2 { margin-bottom: 12px; }
+.post-lead { font-size: var(--fs-md); line-height: 1.45; color: var(--ink); }
+.post-text .links { margin-top: 24px; }
+
 /* ---------- Footer: aluminium, with every sponsor ---------- */
 .site-footer { background: var(--alu); color: var(--ink); padding-top: clamp(52px, 6vw, 84px); }
 .site-footer a { color: var(--ink); }
