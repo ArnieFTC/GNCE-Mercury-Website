@@ -47,6 +47,26 @@
         ],
         "createdAt": "2026-11-04T03:24:53.914Z",
         "reason": "File-only analysis cannot evaluate clamp() padding on bands, cards (24px) and event tiles (30px); the rendered detector passes (round 6)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "contact.html",
+          "team.html"
+        ],
+        "createdAt": "2026-11-04T03:53:14.128Z",
+        "reason": "File-only analysis cannot evaluate clamp() padding: .ruled / .ruled-strong boxes render with 22-32px padding inside their 1px line (measured at 320 and 1440, round 7); the rendered detector passes"
+      },
+      {
+        "rule": "repeated-container-text",
+        "value": "*",
+        "files": [
+          "news.html",
+          "outreach.html"
+        ],
+        "createdAt": "2026-11-04T03:53:19.762Z",
+        "reason": "The sponsor's name (VulcanForms) in the prose of the thank-you post and the tour write-up (heading, sentences, link), copy Andy approved; not a template label repeated into slots"
       }
     ]
   }
