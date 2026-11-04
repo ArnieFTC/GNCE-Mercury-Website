@@ -708,6 +708,23 @@ part("budget-chart", () => {
   donut.hidden = false;
 });
 
+// ---------- Pointer light ----------
+// On the dark stage sections a soft light follows a mouse or trackpad (css "Pointer light"). Only fine pointers,
+// never with reduced motion; it moves with the pointer, never with scrolling.
+part("stage-light", () => {
+  if (RM || !matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  document.querySelectorAll(".launch, .season-head, .band--stage").forEach(el => {
+    let raf = 0, x = 0, y = 0;
+    el.addEventListener("pointerenter", () => el.classList.add("has-light"));
+    el.addEventListener("pointerleave", () => el.classList.remove("has-light"));
+    el.addEventListener("pointermove", e => {
+      const r = el.getBoundingClientRect();
+      x = e.clientX - r.left; y = e.clientY - r.top;
+      if (!raf) raf = requestAnimationFrame(() => { raf = 0; el.style.setProperty("--mx", x + "px"); el.style.setProperty("--my", y + "px"); });
+    }, { passive: true });
+  });
+});
+
 // ---------- Opening ----------
 // index.html's <head> adds .intro (the overlay) and .intro-stage (the stage's entrance waits for it) on the
 // first visit of a session. Here: end it after its 1.7s, or at once on a click, tap, wheel or key, pulling the

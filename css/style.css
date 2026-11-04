@@ -20,16 +20,16 @@
   --stage: #0B0A0F;          /* launches, season heads, the partner head, closing calls (the logo's outline, almost black) */
   --stage-raise: #18161F;    /* a step up on the stage (tiles, tracks) */
   --on-stage: #EFEEF3;       /* text on the stage */
-  --on-stage-2: #A09DAC;     /* secondary text on the stage (7.4:1) */
+  --on-stage-2: #B8B5C4;     /* secondary text on the stage (9.8:1; 8.9:1 on Stage Step) */
   --rule-stage: rgba(239, 238, 243, 0.14);
 
   /* the reading pages */
   --paper: #FFFFFF;
-  --alu: #F1F1F4;            /* aluminium grey: alternate bands, tiles, the footer */
-  --alu-deep: #E3E2E8;       /* tracks and pressed fills on aluminium */
-  --line: #DCDBE2;           /* separators inside data only */
+  --alu: #ECECF0;            /* aluminium grey: alternate bands, tiles, the footer */
+  --alu-deep: #DDDCE3;       /* tracks and pressed fills on aluminium */
+  --line: #D2D1DA;           /* separators inside data only */
   --ink: #16141C;            /* text and buttons: the logo's outline */
-  --steel: #5C5967;          /* secondary text (6:1 on aluminium) */
+  --steel: #4A4755;          /* secondary text (9:1 on white, 7.6:1 on aluminium) */
   --quiet: #8B8896;          /* non-text marks only */
 
   /* the four tier metals: the header fills of the 2026–27 sponsorship package (ink text on each, 5.3:1 or more),
@@ -170,8 +170,8 @@ h2.h3 { font-size: var(--fs-md); letter-spacing: -0.012em; }
 .btn-meta { font-weight: 450; opacity: 0.72; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 
-.text-link { display: inline-block; padding-block: 4px; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.28em; }
-.text-link:hover { text-decoration-thickness: 2px; }
+.text-link { display: inline-block; padding-block: 4px; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 0.3em; transition: text-decoration-thickness 160ms var(--ease), text-underline-offset 160ms var(--ease); }
+.text-link:hover { text-decoration-thickness: 3px; text-underline-offset: 0.2em; }
 .links { display: flex; flex-wrap: wrap; gap: 10px 28px; }
 
 /* ---------- Header: a dark translucent bar that steps out of the way while you read ---------- */
@@ -1029,6 +1029,33 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 @keyframes vt-rise { from { opacity: 0; transform: translateY(18px); } }
 @media (prefers-reduced-motion: no-preference) {
   html.page-enter main { animation: vt-rise 520ms var(--ease) both; }
+}
+
+/* ---------- Pointer light: on the dark stage sections, a soft light follows a mouse or trackpad ----------
+   Fine pointers only, never with reduced motion, never driven by scrolling (part "stage-light" in js/main.js).
+   It sits in the section's background, behind every robot and word. */
+@property --light { syntax: "<number>"; inherits: false; initial-value: 0; }
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .launch, .season-head, .band--stage {
+    background-image: radial-gradient(620px circle at var(--mx, 50%) var(--my, 30%), rgb(239 238 243 / calc(var(--light) * 0.12)), transparent 70%);
+    transition: --light 500ms var(--ease);
+  }
+  .has-light { --light: 1; }
+}
+
+/* ---------- Tier chart: the column and the row under the pointer light up ---------- */
+@media (hover: hover) {
+  .tiers td, .tiers .tier { transition: background-color 160ms var(--ease), box-shadow 160ms var(--ease), color 160ms var(--ease); }
+  .tiers:has(:is(th, td):nth-child(2):hover) :is(th, td):nth-child(2),
+  .tiers:has(:is(th, td):nth-child(3):hover) :is(th, td):nth-child(3),
+  .tiers:has(:is(th, td):nth-child(4):hover) :is(th, td):nth-child(4),
+  .tiers:has(:is(th, td):nth-child(5):hover) :is(th, td):nth-child(5) { --wash: color-mix(in oklab, var(--metal) 30%, var(--stage)); }
+  .tiers:has(.tier:nth-child(2):hover, td:nth-child(2):hover) .tier:nth-child(2),
+  .tiers:has(.tier:nth-child(3):hover, td:nth-child(3):hover) .tier:nth-child(3),
+  .tiers:has(.tier:nth-child(4):hover, td:nth-child(4):hover) .tier:nth-child(4),
+  .tiers:has(.tier:nth-child(5):hover, td:nth-child(5):hover) .tier:nth-child(5) { box-shadow: 0 0 0 2px var(--on-stage); }
+  .tiers tbody tr:hover > th { color: #fff; }
+  .tiers tbody tr:hover > td { background-color: color-mix(in oklab, var(--wash) 82%, var(--on-stage)); }
 }
 
 /* ---------- Motion preferences ---------- */
