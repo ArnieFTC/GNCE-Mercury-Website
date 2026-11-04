@@ -25,6 +25,16 @@ straight to `main`, Andy's standing instruction; `main` is the live site._
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
 
+## Round 4b: budget section redone (2026-11-04)
+
+Andy: "wording and formatting is still off and i dont really like it please redo" (the Season budget section;
+his screenshot showed the intro running wide and the table caption floating apart from it at a mid width).
+- Renamed "Where the money goes". Plain intro from the package's facts only: the $52,000 maximum, what it pays
+  for, "Every line is a maximum: travel depends on which events we qualify for", the quarterly report.
+- New layout: text and donut on the left, the table on the right, top-aligned, from 760px; stacked on phones.
+  The table caption is visually hidden (it was the floating line); the donut centre reads "season maximum".
+- Also: the in-kind help link now reads "Tell us" (still emails Margaret).
+
 ## Round 4: first Platinum sponsor and a News page (2026-11-04)
 
 Andy: add VulcanForms (logo sent as a white-on-black 1200×630 image) as a sponsor, and make a blog section

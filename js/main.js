@@ -683,7 +683,7 @@ part("budget-chart", () => {
     delete fig.dataset.active;
     data.forEach(d => { d.r.classList.remove("is-on"); d.p.classList.remove("is-on"); });
     cb.textContent = totalCell.textContent.trim();
-    cs.textContent = "maximum, all lines";
+    cs.textContent = "season maximum";
   };
   const on = i => {
     fig.dataset.active = i;
