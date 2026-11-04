@@ -6,6 +6,10 @@
 <IfModule mod_mime.c>
   AddType text/markdown .md
   AddCharset UTF-8 .md .txt .json .xml
+  # "team.html.md" has two extensions: make sure the server doesn't call it HTML
+  <FilesMatch "\.md$">
+    ForceType text/markdown
+  </FilesMatch>
 </IfModule>
 
 <IfModule mod_rewrite.c>
@@ -36,8 +40,12 @@
   # Markdown copies: say how the content may be used (same as robots.txt), and keep shared caches from
   # handing a Markdown answer to a browser
   <FilesMatch "\.md$">
+    Header set Content-Type "text/markdown; charset=utf-8"
     Header set Content-Signal "search=yes, ai-input=yes, ai-train=no"
     Header set Cache-Control "private, max-age=300"
+  </FilesMatch>
+  <FilesMatch "\.txt$">
+    Header set Content-Type "text/plain; charset=utf-8"
   </FilesMatch>
   # Files meant for agents can be read from any site
   <FilesMatch "\.(md|txt|xml|json)$">
