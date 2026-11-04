@@ -34,6 +34,10 @@ sitemap, canonical, JSON-LD, sameAs, about/terms links, machine-readable contact
   links (underlined, Stage Light 2, 0.8125rem); the sponsors strip and page links are still built by js/main.js.
 - **New page:** terms.html (Terms and privacy), a stage page head and one prose column, linked from the footer.
 - Everything else is for machines: see README "AI agents" and tools/agent_files.py.
+- Verified live (2026-11-04): all 57 agent checks pass on https://mercury26413.org/ (scratchpad agent-test.js);
+  Cloudflare's isitagentready.com scan moved from level 0 to level 4 "Agent-Integrated". Hostinger notes:
+  LiteSpeed needs single-quoted Header values and ForceType for *.html.md; its CDN sometimes shows a JS bot check
+  (403) to data-centre clients and answers GPTBot (OpenAI's training crawler) with 429, which fits ai-train=no.
 
 ## Round 7: no floating panels; boxes after VulcanForms (2026-11-04)
 
