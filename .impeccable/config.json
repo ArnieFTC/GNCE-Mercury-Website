@@ -20,6 +20,33 @@
         ],
         "createdAt": "2026-11-04T01:14:18.936Z",
         "reason": "File-only analysis cannot evaluate clamp() padding: .band (clamp 44-76px block + container gutter) and .sponsor-card (clamp 20-28px / 20-36px) render well inset; the rendered detector passes"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "index.html",
+          "seasons/2024-2025.html",
+          "seasons/2025-2026.html",
+          "seasons/2026-2027.html"
+        ],
+        "createdAt": "2026-11-04T03:24:53.903Z",
+        "reason": "File-only analysis reads text on Stage Step tiles (#201E29) as #000; the real text is #EFEEF3 (13:1). Rendered detector and measured contrast scan pass (round 6)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html",
+          "news.html",
+          "outreach.html",
+          "seasons.html",
+          "seasons/2024-2025.html",
+          "seasons/2025-2026.html",
+          "seasons/2026-2027.html"
+        ],
+        "createdAt": "2026-11-04T03:24:53.914Z",
+        "reason": "File-only analysis cannot evaluate clamp() padding on bands, cards (24px) and event tiles (30px); the rendered detector passes (round 6)"
       }
     ]
   }
