@@ -103,5 +103,8 @@ The site is set up so AI assistants and agents can read it without scraping:
 | Every page as Markdown (`team.html.md` …), `llms.txt`, `llms-full.txt`, `sitemap.xml`, `agent/pages.json`, and each page's canonical link and JSON-LD (the `agent:begin` … `agent:end` block in `<head>`) | written by `python3 tools/agent_files.py` from the pages and `js/main.js`. Never edit them by hand. Run it after every page edit; `--check` only reports what is out of date |
 | Team facts for the JSON-LD (founding year, location, verified profiles for `sameAs`) | `ORG` and `EXTRA_SAME_AS` at the top of `tools/agent_files.py` |
 | Markdown for `Accept: text/markdown`, Link headers, the `/mcp` address | `.htaccess` (Hostinger only; the per-page part is written by the script) |
+
+To check the live server: `curl -sI -H 'Accept: text/markdown' https://mercury26413.org/` should answer
+`content-type: text/markdown; charset=utf-8`, and `curl -sI https://mercury26413.org/` should show a `link:` header.
 | MCP server (read-only tools: team info, pages, search, season schedule) and its server card | `mcp.php`, at https://mercury26413.org/mcp and `/.well-known/mcp/server-card.json` (built from `mcp.php`; the script saves a copy for hosts without PHP) |
 | WebMCP tools for agents in the browser, and the contact form as a tool | the `webmcp` part of `js/main.js`; `toolname` / `toolparamdescription` on the form in `contact.html` |
