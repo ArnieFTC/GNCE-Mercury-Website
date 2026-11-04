@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-11-03T19:51:31.316Z",
         "reason": "File-only analysis misses the stage's inherited text colour (it reports #000 text, even on the h1); rendered detector and measured contrast scan pass: tier cells #EFEEF3 on their washes are 11-14:1"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "partners.html"
+        ],
+        "createdAt": "2026-11-04T01:14:18.936Z",
+        "reason": "File-only analysis cannot evaluate clamp() padding: .band (clamp 44-76px block + container gutter) and .sponsor-card (clamp 20-28px / 20-36px) render well inset; the rendered detector passes"
       }
     ]
   }

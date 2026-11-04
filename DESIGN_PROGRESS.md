@@ -28,13 +28,19 @@ straight to `main`, Andy's standing instruction; `main` is the live site._
 ## Round 4: first Platinum sponsor and a News page (2026-11-04)
 
 Andy: add VulcanForms (logo sent as a white-on-black 1200×630 image) as a sponsor, and make a blog section
-thanking them for sponsoring at the Platinum level; no exact amount, "$7,500+" for now.
+thanking them "for applying for the platinum level sponsoring"; no exact amount, "$7,500+" for now (the deal is
+not confirmed as final, so the post says "applying to sponsor" and promises no deliverables).
 - **Sponsor:** `SPONSORS` in `js/main.js` now holds VulcanForms (logo `images/sponsors/vulcanforms-logo.png`, made
   from Andy's image: black on transparent, so it sits on the footer's white tiles; links to vulcanforms.com). It
   shows in every footer and in the "Supported by" lines (home and partners).
 - **News page** (`news.html`, new, in the main nav after Outreach and in every page's no-JS nav): the first post,
-  "Thank you, VulcanForms" (Nov 4, 2026), with Andy's banner image. Facts only from Andy (Platinum, $7,500+),
-  the package (what the tier includes, what sponsorship funds cover) and the outreach page (the tour).
+  "Thank you, VulcanForms" (Nov 4, 2026), with Andy's banner image: thanks them for applying to sponsor at the
+  Platinum level ($7,500+). Facts only from Andy, the package (what sponsorship funds cover) and the outreach
+  page (the tour, now linked straight to `outreach.html#vulcanforms-tour`).
+- **Review** (3 lenses, each finding re-checked by a skeptic): 6 confirmed and fixed (the post had stated the
+  sponsorship as settled and promised Platinum deliverables; the tour link; a phone line break in "2026–27"; the
+  banner's fetch priority; this log's wording), 5 rejected. The file-only hook's cramped-padding reports on
+  partners.html are `clamp()` false positives, recorded as a file-scoped exception.
 - **Partners:** an "Our 2026–27 sponsors" band (grey, after the budget) with a card for VulcanForms: logo,
   Platinum tag, $7,500+, and a link to the thank-you post.
 
@@ -239,6 +245,8 @@ Reduced motion makes every change instant.
 - ⊘ B13 One line each on what "Growth" (budget) and "Can request media" (Platinum) mean, and WEEFC's full name.
 - ⊘ B14 Matching gifts and gifts under $500: who receives payment and how, so a parent at a company with a
   matching program can act (the page sends those questions to Margaret for now).
+- ⊘ B15 VulcanForms: confirm the Platinum sponsorship is final and what the amount is. Until then the post says
+  "applying to sponsor" and shows $7,500+; once it is final, change its lead to "signing on to sponsor".
 - ⊘ B11 Which other members code: the Software filter shows only Arnie (Software Lead) until members get a
   Software chip.
 
@@ -381,7 +389,8 @@ server):
 
 1. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
    joining facts, States results, a sharp wide team photo, coach photos, and the package questions (B12–B14:
-   the QR code's target, what "Growth" and "Can request media" mean, matching gifts).
+   the QR code's target, what "Growth" and "Can request media" mean, matching gifts), and B15 (is the
+   VulcanForms Platinum sponsorship final, and the amount).
 2. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
 3. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events.
 4. For every change: check at 320/390/768/1440 with keyboard and reduced motion, run `/vercel` on the changed
