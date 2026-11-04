@@ -178,7 +178,28 @@ def skipped(n):
     if n.tag in SKIP_TAGS or n.tag.startswith("!"):
         return True
     a = n.attrs
-    return a.get("aria-hidden") == "true" or "hidden" in a or n.tag == "input" and a.get("type") == "hidden"
+    return (a.get("aria-hidden") == "true" or "hidden" in a or "data-md-skip" in a
+            or n.tag == "input" and a.get("type") == "hidden")
+
+
+HEADINGS = ("h1", "h2", "h3", "h4", "h5", "h6")
+
+
+def has_heading(n):
+    return n.tag in HEADINGS or n.find(lambda x: x.tag in HEADINGS) is not None
+
+
+def is_media(n):
+    """A photo/video block with no words of its own apart from captions (it belongs under the next heading)."""
+    if has_heading(n):
+        return False
+    if n.tag not in ("img", "video", "figure", "picture") and n.find(lambda x: x.tag in ("img", "video")) is None:
+        return False
+
+    def words(x):
+        return "".join(c if isinstance(c, str) else ("" if c.tag in ("figcaption", "caption") or skipped(c) else words(c))
+                       for c in x.children)
+    return not words(n).strip()
 
 
 def has_block(n):
@@ -210,15 +231,29 @@ class Converter:
             return ""
         parts = []
         prev_el = False
+        # an element made only of other elements (a name, a role and an email; a row of links) lists them as items
+        items_only = t in ("p", "div", "li", "dd", "td", "th", "span") and sum(
+            1 for c in n.children if isinstance(c, Node) and not skipped(c)) > 1 and all(
+            isinstance(c, Node) or not c.strip() for c in n.children)
         for c in n.children:
             if not isinstance(c, str) and skipped(c):
                 continue
+            if items_only and isinstance(c, str):
+                continue
             piece = self.inline(c, in_link or t == "a")
-            if not piece:
+            if not piece.strip():
+                if piece and not items_only:
+                    parts.append(piece)
                 continue
             is_el = not isinstance(c, str)
-            if is_el and prev_el and parts and not parts[-1].endswith((" ", "\n")) and not piece.startswith((" ", "\n", ",", ".", ")", ":", ";")):
+            glued = parts and not parts[-1].endswith((" ", "\n"))
+            if items_only and parts:
                 parts.append(" · ")
+                piece = piece.strip()
+            elif is_el and prev_el and glued and not piece.startswith((" ", "\n", ",", ".", ")", ":", ";")):
+                parts.append(" · ")
+            elif not is_el and prev_el and glued and piece[:1].isalnum():
+                parts.append(" · ")  # e.g. <b>Host a student visit</b>We tour… (the bold is its own line on the page)
             parts.append(piece)
             prev_el = is_el
         s = "".join(parts)
@@ -268,21 +303,45 @@ class Converter:
             if text:
                 out.append(text.replace("\n", "  \n"))
 
+        # Cards put their photo first and their heading after it. Move the photos to just under that heading,
+        # so each section of the Markdown holds its own pictures.
+        els = [c for c in n.children if isinstance(c, Node) and not skipped(c)]
+        lead = []
+        for c in els:
+            if not is_media(c):
+                break
+            lead.append(c)
+        anchor = els[len(lead)] if lead and len(lead) < len(els) and has_heading(els[len(lead)]) else None
+        if anchor is not None and any(isinstance(c, str) and c.strip() for c in n.children[:n.children.index(anchor)]):
+            anchor = None
+        media_blocks = []
+        if anchor is not None:
+            for c in lead:
+                media_blocks.extend(self.block(c) if (c.tag in TRUE_BLOCK or c.tag in CONTAINER or has_block(c))
+                                    else [x for x in [self.line(c)] if x])
+
         for c in n.children:
             if isinstance(c, str):
                 buf.append(self.inline(c))
                 continue
-            if skipped(c):
+            if skipped(c) or (anchor is not None and c in lead):
                 continue
+            start = len(out)
             hook = next((h for h in self.hooks if h in c.attrs), None)
             if hook:
                 flush()
+                start = len(out)
                 out.extend(self.hooks[hook](c))
             elif c.tag in TRUE_BLOCK or c.tag in CONTAINER or has_block(c):
                 flush()
+                start = len(out)
                 out.extend(self.block(c))
             else:
                 buf.append(self.inline(c))
+            if c is anchor:
+                flush()
+                at = next((i + 1 for i in range(start, len(out)) if out[i].startswith("#")), len(out))
+                out[at:at] = media_blocks
         flush()
         return out
 
@@ -301,7 +360,13 @@ class Converter:
         if t == "table":
             return self.table(n)
         if t == "blockquote":
-            inner = "\n\n".join(self.blocks(n))
+            cite = [c for c in n.children if isinstance(c, Node) and c.tag == "footer" and not skipped(c)]
+            parts = self.blocks(n) if not cite else []
+            if cite:
+                body = Node("div")
+                body.children = [c for c in n.children if c not in cite]
+                parts = self.blocks(body) + ["— " + self.line(c) for c in cite]
+            inner = "\n\n".join(parts)
             return ["\n".join("> " + l if l else ">" for l in inner.split("\n"))] if inner else []
         if t == "hr":
             return ["* * *"]
@@ -412,6 +477,9 @@ class Converter:
                 continue
             if c.tag == "figcaption":
                 text = self.line(c)
+                vid = n.find(lambda x: x.tag == "video")
+                if vid is not None and ws(vid.attrs.get("aria-label", "")).strip() == ws(c.text()).strip():
+                    continue
                 if text:
                     out.append(f"*{text}*" if "*" not in text else text)
             else:
@@ -473,12 +541,21 @@ def read_main_js():
     events = re.findall(r'\{\s*name:\s*"([^"]+)",\s*date:\s*"(\d{4}-\d{2}-\d{2})"\s*\}', season)
     if not kickoff:
         sys.exit("agent_files: SEASON.kickoff not found in js/main.js")
-    sponsors = re.findall(r'name:\s*"([^"]+)"', block("SPONSORS", "[", "]"))
-    supporters = re.findall(r'"([^"]+)"', block("SUPPORTERS", "[", "]"))
-    nav = re.findall(r'label:\s*"([^"]+)",\s*href:\s*"([^"]+)"', block("NAV", "[", "]"))
+    def array(name):
+        m = re.search(rf"const {name} = \[([^\[\]]*)\];", js_nc)
+        if not m:
+            sys.exit(f"agent_files: could not find {name} in js/main.js")
+        return m.group(1)
+
+    sponsor_objs = re.findall(r"\{[^{}]*\}", array("SPONSORS"))
+    sponsors = [re.search(r'name:\s*"([^"]+)"', o).group(1) for o in sponsor_objs if re.search(r'name:\s*"', o)]
+    sponsor_urls = {re.search(r'name:\s*"([^"]+)"', o).group(1): re.search(r'url:\s*"([^"]+)"', o).group(1)
+                    for o in sponsor_objs if re.search(r'name:\s*"', o) and re.search(r'url:\s*"', o)}
+    supporters = re.findall(r'"([^"]+)"', array("SUPPORTERS"))
+    nav = re.findall(r'label:\s*"([^"]+)",\s*href:\s*"([^"]+)"', array("NAV"))
     return {
         "kickoff": kickoff.group(1), "events": [{"name": n, "date": d} for n, d in events],
-        "sponsors": sponsors, "supporters": supporters, "nav": nav,
+        "sponsors": sponsors, "sponsor_urls": sponsor_urls, "supporters": supporters, "nav": nav,
         "team_email": const_str("TEAM_EMAIL"), "sponsor_email": const_str("SPONSOR_EMAIL"),
         "instagram": const_str("INSTAGRAM"),
     }
@@ -597,21 +674,25 @@ def head_block(page, title, desc, site, root):
     return ("<!-- agent:begin: written by tools/agent_files.py (run it after editing this page; don't edit by hand) -->\n"
             f'  <link rel="canonical" href="{url}">\n'
             f'  <link rel="alternate" type="text/markdown" href="{md_url(page["path"])}" title="This page as Markdown">\n'
+            f'  <link rel="describedby" type="text/plain" href="{BASE}llms.txt" title="Site guide for AI agents">\n'
             f'  <script type="application/ld+json">\n  {ld}\n  </script>\n'
             "  <!-- agent:end -->")
 
 
 def footer_md(site):
-    names = site["sponsors"] + site["supporters"]
+    names = [f"[{n}]({site['sponsor_urls'][n]})" if n in site["sponsor_urls"] else n for n in site["sponsors"]]
+    names += site["supporters"]
     pages = " · ".join(f"[{label}]({page_url(href)})" for label, href in [("Home", "index.html")] + site["nav"])
     return "\n\n".join([
         "* * *",
-        f"**{ORG['name']}**, FIRST Tech Challenge team {ORG['teamNumber']}, Weston, MA, founded {ORG['foundingDate']}.",
+        f"**{ORG['name']}** ({ORG['parent']}), FIRST Tech Challenge team {ORG['teamNumber']}, Weston, MA, "
+        f"founded {ORG['foundingDate']}.",
         f"Sponsors and supporters: {and_list(names)}. [Become a sponsor]({BASE}partners.html)." if names else
         f"[Become a sponsor]({BASE}partners.html).",
         f"Email [{site['team_email']}](mailto:{site['team_email']}) · Sponsorship [{site['sponsor_email']}](mailto:{site['sponsor_email']}) · "
-        f"[Instagram @gnce\\_mercury]({site['instagram']})",
-        f"Pages: {pages} · [Terms and privacy]({BASE}terms.html)",
+        f"[Instagram @gnce\\_mercury]({site['instagram']}) · [Join the team]({BASE}contact.html?topic=join#contact-form)",
+        f"Pages: {pages}",
+        f"[About]({BASE}team.html#about) · [Contact]({BASE}contact.html) · [Terms and privacy]({BASE}terms.html)",
     ])
 
 
@@ -625,7 +706,9 @@ def convert(page, site):
 
     def calendar(_node):
         pts = [("Season kickoff", site["kickoff"])] + [(e["name"], e["date"]) for e in site["events"]]
-        return ["\n".join(f"- {long_date(d)}: {esc_text(n)}" for n, d in pts)]
+        return ["Season calendar, oldest first, in Massachusetts (Eastern) time. The next event is the first date "
+                "that hasn't passed yet.",
+                "\n".join(f"- {long_date(d)}: {esc_text(n)}" for n, d in pts)]
 
     conv = Converter(page["path"], {"data-calendar": calendar})
     body = "\n\n".join(b for b in conv.blocks(main) if b.strip())
@@ -672,9 +755,10 @@ def llms_txt(infos, site):
         f"Massachusetts, founded in {ORG['foundingDate']}. We build a new competition robot every season and coach younger "
         "students in FIRST LEGO League.",
         "",
-        f"Every page is also available as Markdown: add `.md` to its address (for example {md_url('team.html')}), or "
-        "request any page with the header `Accept: text/markdown`. Read-only tools for agents: the MCP server described at "
-        f"{BASE}.well-known/mcp/server-card.json, and WebMCP tools registered on every page.",
+        "Every page is also available as Markdown: add `.md` to a page's `.html` address (for example "
+        f"{md_url('team.html')}; the home page is {md_url('index.html')}), or request any page with the header "
+        f"`Accept: text/markdown`. Read-only tools for agents: the MCP server at <{BASE}mcp> (server card: "
+        f"<{BASE}.well-known/mcp/server-card.json>), and WebMCP tools registered on every page.",
         "",
         f"- General questions and joining the team: {site['team_email']}",
         f"- Sponsorship: {site['sponsor_email']} ({ORG['sponsorContact']})",

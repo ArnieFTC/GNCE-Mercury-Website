@@ -9,9 +9,7 @@ Source: https://mercury26413.org/ (one section per page, in site order).
 
 A high school **FIRST Tech Challenge** team in Weston, Massachusetts: team 26413, founded in 2024. We build a new competition robot every year and teach younger students to do the same.
 
-[2024–25 INTO THE DEEP Rookie season](https://mercury26413.org/seasons/2024-2025.html) [2025–26 DECODE Second season](https://mercury26413.org/seasons/2025-2026.html) [2026–27 BIOBUZZ This season, in progress](https://mercury26413.org/seasons/2026-2027.html)
-
-Supported by **VulcanForms, SolidWorks, Weston Owl and WEEFC** [Partner with us](https://mercury26413.org/partners.html)
+[2024–25 · INTO THE DEEP · Rookie season](https://mercury26413.org/seasons/2024-2025.html) · [2025–26 · DECODE · Second season](https://mercury26413.org/seasons/2025-2026.html) · [2026–27 · BIOBUZZ · This season, in progress](https://mercury26413.org/seasons/2026-2027.html)
 
 ## INTO THE DEEP
 
@@ -54,7 +52,7 @@ Supported by **VulcanForms, SolidWorks, Weston Owl and WEEFC** [Partner with us]
 
 Supported by **VulcanForms, SolidWorks, Weston Owl and WEEFC**
 
-[Partner with us](https://mercury26413.org/partners.html) [Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
+[Partner with us](https://mercury26413.org/partners.html) · [Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
 
 ## The record so far
 
@@ -76,16 +74,18 @@ Every qualifier and championship we have competed at, from our first qualifier i
 
 [Follow the build of The Mercinator](https://mercury26413.org/seasons/2026-2027.html)
 
+Season calendar, oldest first, in Massachusetts (Eastern) time. The next event is the first date that hasn't passed yet.
+
 - Saturday, September 12, 2026: Season kickoff
 - Sunday, October 25, 2026: Ghost Scrimmage
 - Sunday, November 15, 2026: Wolfpack Scrimmage
 - Sunday, December 6, 2026: Windsor Scrimmage
 
+## 9 students and 4 coaches
+
 ![GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship](https://mercury26413.org/images/team.webp)
 
 *The team at the Ryken RoboBowl, December 2025.*
-
-## 9 students and 4 coaches
 
 We design, build, wire, and program one robot each season.
 
@@ -93,25 +93,25 @@ Our members have competed at international events and won awards there.
 
 In the summer we run a robotics camp, and during the school year we coach Weston’s FIRST LEGO League teams.
 
-[Meet the team](https://mercury26413.org/team.html) [Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
+[Meet the team](https://mercury26413.org/team.html) · [Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
 
 ## From 4 FIRST LEGO League teams in Weston to 17
 
 [See all our outreach](https://mercury26413.org/outreach.html)
 
+### Coaching and camps
+
 ![Team members helping campers troubleshoot a VEX IQ robot](https://mercury26413.org/images/fll_camp_3.jpg)
 
 *Our summer robotics camp, August 2026.*
 
-### Coaching and camps
-
 We helped Weston’s FIRST LEGO League grow from 4 teams to 17 teams and 122 students. In August we ran a week-long robotics and engineering camp for about 13 students in grades 4–8.
+
+### Learning from scientists and engineers
 
 ![Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench](https://mercury26413.org/images/mit_lab_2.jpg)
 
 *Francis Bitter Magnet Laboratory, MIT, October 9, 2026.*
-
-### Learning from scientists and engineers
 
 We spent an afternoon at MIT’s Francis Bitter Magnet Laboratory, cooling a superconductor with liquid nitrogen, and toured VulcanForms to see how metal parts are 3D printed.
 
@@ -131,13 +131,15 @@ Donations pay for robot parts, competition registration, and travel.
 
 * * *
 
-**GNCE Mercury**, FIRST Tech Challenge team 26413, Weston, MA, founded 2024.
+**GNCE Mercury** (GNCE (Galactic Narwhal Chicken Effect)), FIRST Tech Challenge team 26413, Weston, MA, founded 2024.
 
-Sponsors and supporters: VulcanForms, SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
+Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
 
-Email [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com) · Sponsorship [margaret@mercury26413.org](mailto:margaret@mercury26413.org) · [Instagram @gnce\_mercury](https://www.instagram.com/gnce_mercury/)
+Email [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com) · Sponsorship [margaret@mercury26413.org](mailto:margaret@mercury26413.org) · [Instagram @gnce\_mercury](https://www.instagram.com/gnce_mercury/) · [Join the team](https://mercury26413.org/contact.html?topic=join#contact-form)
 
-Pages: [Home](https://mercury26413.org/) · [Seasons](https://mercury26413.org/seasons.html) · [Team](https://mercury26413.org/team.html) · [Outreach](https://mercury26413.org/outreach.html) · [News](https://mercury26413.org/news.html) · [Partners](https://mercury26413.org/partners.html) · [Resources](https://mercury26413.org/resources.html) · [Contact](https://mercury26413.org/contact.html) · [Terms and privacy](https://mercury26413.org/terms.html)
+Pages: [Home](https://mercury26413.org/) · [Seasons](https://mercury26413.org/seasons.html) · [Team](https://mercury26413.org/team.html) · [Outreach](https://mercury26413.org/outreach.html) · [News](https://mercury26413.org/news.html) · [Partners](https://mercury26413.org/partners.html) · [Resources](https://mercury26413.org/resources.html) · [Contact](https://mercury26413.org/contact.html)
+
+[About](https://mercury26413.org/team.html#about) · [Contact](https://mercury26413.org/contact.html) · [Terms and privacy](https://mercury26413.org/terms.html)
 
 
 <!-- page: https://mercury26413.org/seasons.html -->
@@ -183,7 +185,7 @@ Our third season. Currently in progress.
 
 Version 1 of The Mercinator is a pollen-only robot, built on the same ideas as the DECODE robot we took to States.
 
-![The Mercinator, our BIOBUZZ robot, fully built (version 1)](https://mercury26413.org/images/mercinator_v1_fullybuilt.webp) ![The Mercinator V1 on a workbench while it was being built](https://mercury26413.org/images/mercinator_v1.jpg)
+![The Mercinator, our BIOBUZZ robot, fully built (version 1)](https://mercury26413.org/images/mercinator_v1_fullybuilt.webp) · ![The Mercinator V1 on a workbench while it was being built](https://mercury26413.org/images/mercinator_v1.jpg)
 
 *The Mercinator, version 1: fully built (left) and on the workbench (right). The robot is still in progress.*
 
@@ -198,6 +200,10 @@ GNCE Mercury, FTC 26413 · BIOBUZZ, 2026–27
 Version 1, in progress
 
 ## Next event
+
+See the calendar below.
+
+Season calendar, oldest first, in Massachusetts (Eastern) time. The next event is the first date that hasn't passed yet.
 
 - Saturday, September 12, 2026: Season kickoff
 - Sunday, October 25, 2026: Ghost Scrimmage
@@ -256,30 +262,30 @@ Follow a ball through the robot: choose a part to see what it does.
 
 ![CAD render of the DECODE robot, with each part marked](https://mercury26413.org/images/decode-robot-cad.webp)
 
-1. **Intake** A compliant bar of gecko wheels that runs the full 14‑inch width of the chassis. Vectored wheels push the balls to the center.
-2. **Transfer** Custom rails on a constant incline get a ball to the shooter in 0.34 s. Our first transfer took 1.5 s.
-3. **Shooter** Version 4 of our flywheel shooter has stable side plates with the motors in front. A lookup table of 7 calibrated distances (1.1–3.34 m) sets its speed, from 3000 to 3975 RPM.
-4. **Turret** A 1:3 herringbone gear on a lazy susan turns the shooter through a full 360° to track the goal.
-5. **Limelight** The Limelight camera sits right in front of the shooter. A PD controller uses it to hold the turret within ±1° of the target.
-6. **Chassis** Parallel plates (version 3) that keep parts easy to remove for maintenance and let us play defense.
+1. **Intake** · A compliant bar of gecko wheels that runs the full 14‑inch width of the chassis. Vectored wheels push the balls to the center.
+2. **Transfer** · Custom rails on a constant incline get a ball to the shooter in 0.34 s. Our first transfer took 1.5 s.
+3. **Shooter** · Version 4 of our flywheel shooter has stable side plates with the motors in front. A lookup table of 7 calibrated distances (1.1–3.34 m) sets its speed, from 3000 to 3975 RPM.
+4. **Turret** · A 1:3 herringbone gear on a lazy susan turns the shooter through a full 360° to track the goal.
+5. **Limelight** · The Limelight camera sits right in front of the shooter. A PD controller uses it to hold the turret within ±1° of the target.
+6. **Chassis** · Parallel plates (version 3) that keep parts easy to remove for maintenance and let us play defense.
 
 ## Mechanisms & iterations
 
-![CAD render of the V2 parallel-plate chassis](https://mercury26413.org/images/decode-chassis-v2-ink2.jpg)
-
 ### Chassis
+
+![CAD render of the V2 parallel-plate chassis](https://mercury26413.org/images/decode-chassis-v2-ink2.jpg)
 
 V1’s parallel plates gave us maneuverability and defense but had no mounting holes, and the U-channels we added made it heavy. V2 added holes and cut weight, but its wood plates could break. V3 keeps components easy to remove for maintenance.
 
-![Mercury’s V2 intake with a horizontal bar of gecko wheels](https://mercury26413.org/images/decode-intake.jpg)
-
 ### Intake
+
+![Mercury’s V2 intake with a horizontal bar of gecko wheels](https://mercury26413.org/images/decode-intake.jpg)
 
 Our first intake, 2 gecko wheels on 2 motors, needed too much precision. V2 used 1 motor and a horizontal bar of gecko wheels. V3 is compliant, runs the full 14‑inch width of the chassis, and uses vectored wheels to push balls to the center.
 
-![CAD render of the V3 transfer with custom rails](https://mercury26413.org/images/decode-transfer.webp)
-
 ### Transfer
+
+![CAD render of the V3 transfer with custom rails](https://mercury26413.org/images/decode-transfer.webp)
 
 V1 took 1.5 s to bring a ball to the shooter. V2 moved several balls at once in 0.9 s. V3 uses custom CADed rails on a constant incline to shrink the footprint and gets a ball to the shooter in 0.34 s.
 
@@ -287,21 +293,21 @@ V1 took 1.5 s to bring a ball to the shooter. V2 moved several balls at once in 
 - V2 · **0.9 s**
 - V3 · **0.34 s**
 
-![CAD render of shooter version 4](https://mercury26413.org/images/decode-shooter.jpg)
-
 ### Shooter
+
+![CAD render of shooter version 4](https://mercury26413.org/images/decode-shooter.jpg)
 
 4 versions: a bulky fixed hood, a sturdier but large build, a smaller modular one that was unstable, and V4 with stable side plates, the motors in front, and a front-mounted Limelight.
 
-![CAD of the turret top plate, lazy susan, and herringbone gear](https://mercury26413.org/images/decode-turret.webp)
-
 ### Turret
+
+![CAD of the turret top plate, lazy susan, and herringbone gear](https://mercury26413.org/images/decode-turret.webp)
 
 A pulley drive lost tension and took up space, so we switched to a 1:3 herringbone gear mounted to a lazy susan in the top plate. Spring-loaded key retractors manage the wires through the full 360°.
 
-![CAD render of the Limelight mounted on the front of the shooter](https://mercury26413.org/images/decode-limelight.webp)
-
 ### Limelight
+
+![CAD render of the Limelight mounted on the front of the shooter](https://mercury26413.org/images/decode-limelight.webp)
 
 After trial and error, we mounted the Limelight directly in front of the shooter. It gives more accurate shots and also helps support the shooter’s structure.
 
@@ -352,7 +358,7 @@ Our code is organized into subsystems, and we tune our turret, flywheel, and aut
    **Alliance:** Winning alliance, 1st pick  
    **Awards:** Winning alliance
 
-[Previous season, 2024–25 · **INTO THE DEEP**](https://mercury26413.org/seasons/2024-2025.html) [This season, 2026–27 · **BIOBUZZ**](https://mercury26413.org/seasons/2026-2027.html)
+[Previous season, 2024–25 · **INTO THE DEEP**](https://mercury26413.org/seasons/2024-2025.html) · [This season, 2026–27 · **BIOBUZZ**](https://mercury26413.org/seasons/2026-2027.html)
 
 
 <!-- page: https://mercury26413.org/seasons/2024-2025.html -->
@@ -390,33 +396,33 @@ From our Into the Deep portfolio
 
 We prototyped a basket-focused robot with wooden base plates and a sample chamber. A change in game strategy led to a new chassis, an intake for collecting samples, and a lift arm for hanging specimens. These images and design notes come from our Into the Deep portfolio.
 
-![Mercury’s earlier basket-focused robot prototype](https://mercury26413.org/images/into-the-deep-prototype.png)
-
 ### Early prototype
+
+![Mercury’s earlier basket-focused robot prototype](https://mercury26413.org/images/into-the-deep-prototype.png)
 
 Our first concept used wooden base plates and a chamber for samples. We later changed the chassis and scoring strategy.
 
-![Three stages of Mercury’s Into the Deep intake development](https://mercury26413.org/images/into-the-deep-intake-iterations.webp)
-
 ### Intake iterations
+
+![Three stages of Mercury’s Into the Deep intake development](https://mercury26413.org/images/into-the-deep-intake-iterations.webp)
 
 We moved from a rubber wheel concept to a claw that can grip samples from different orientations. A wrist helps the intake reach over the submersible.
 
-![Close-up of the lift arm’s specimen gripper](https://mercury26413.org/images/into-the-deep-specimen-gripper.png)
-
 ### Specimen gripper
+
+![Close-up of the lift arm’s specimen gripper](https://mercury26413.org/images/into-the-deep-specimen-gripper.png)
 
 A modified gripper gained a wooden alignment piece and a second claw to help keep specimens oriented for hanging.
 
-![Mercury’s specimen lift arm and gripper](https://mercury26413.org/images/into-the-deep-lift-arm.png)
-
 ### Lift arm
+
+![Mercury’s specimen lift arm and gripper](https://mercury26413.org/images/into-the-deep-lift-arm.png)
 
 The lift arm picks up and hangs specimens. We added a wrist so the gripper could adjust its angle.
 
-![Worm gear used in Mercury’s lift mechanism](https://mercury26413.org/images/into-the-deep-worm-gear.png)
-
 ### Worm gear
+
+![Worm gear used in Mercury’s lift mechanism](https://mercury26413.org/images/into-the-deep-worm-gear.png)
 
 A 1:28 gear ratio helps keep the lift from dropping under its own weight when power is removed.
 
@@ -448,11 +454,11 @@ Our portfolio describes a planned route that scores the starting specimen, moves
 
 9 students and 4 coaches from Weston, MA.
 
+## Team mission
+
 ![GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship](https://mercury26413.org/images/team.webp)
 
 *The team at the Ryken RoboBowl, December 2025.*
-
-## Team mission
 
 We aim to promote and grow FIRST values in our community, both inside and outside of Weston. We strive to teach every member CAD and coding, and to mentor FLL teams along the way.
 
@@ -460,9 +466,9 @@ We aim to promote and grow FIRST values in our community, both inside and outsid
 
 GNCE stands for Galactic Narwhal Chicken Effect. Mercury is one of its FIRST Tech Challenge teams, founded in Weston, Massachusetts, in 2024. At the Ryken RoboBowl we were the winning alliance’s first pick, which sent us to the state championship. At the WNEU Qualifier we won the Sustain Award. Our members have competed and won awards at international events.
 
-![Andy Ding, GNCE Mercury’s founder and co-captain](https://mercury26413.org/images/team/andy.jpg?v=2)
-
 ## Andy Ding
+
+![Andy Ding, GNCE Mercury’s founder and co-captain](https://mercury26413.org/images/team/andy.jpg?v=2)
 
 Founder and team co-captain
 
@@ -473,9 +479,9 @@ CAD, Build, Outreach, Game Strategy
 - New England Invitational · 1st place Inspire Award and winning alliance captain with GNCE Diamond
 - 2026 · Qualified for the Massachusetts State Championship
 
-![Arnie Sreeram, GNCE Mercury’s co-captain](https://mercury26413.org/images/team/arnie.jpg)
-
 ## Arnie Sreeram
+
+![Arnie Sreeram, GNCE Mercury’s co-captain](https://mercury26413.org/images/team/arnie.jpg)
 
 Software lead and team co-captain
 
@@ -488,9 +494,9 @@ Software, Game Strategy
 
 ## Members
 
-![Andy Ding](https://mercury26413.org/images/team/andy.jpg?v=2)
-
 ### Andy Ding
+
+![Andy Ding](https://mercury26413.org/images/team/andy.jpg?v=2)
 
 4th year in FTC
 
@@ -500,9 +506,9 @@ CAD · Build · Outreach · Game Strategy · Website
 
 > I started Mercury with a toolbox, a dream, and no idea how mecanum wheels worked. Three seasons later, look at us.
 
-![Arnie Sreeram](https://mercury26413.org/images/team/arnie.jpg)
-
 ### Arnie Sreeram
+
+![Arnie Sreeram](https://mercury26413.org/images/team/arnie.jpg)
 
 4th year in FTC
 
@@ -512,9 +518,9 @@ Game Strategy · Website
 
 > I want to have the best code in all of FTC for the second year in a row.
 
-![Zade Parks](https://mercury26413.org/images/team/zade.jpg)
-
 ### Zade “Suzie” Parks
+
+![Zade Parks](https://mercury26413.org/images/team/zade.jpg)
 
 3rd year in FTC
 
@@ -531,9 +537,9 @@ Build · Electrical · Game Strategy
 
 > Is the custom version cheaper?
 
-![Ethan Xie](https://mercury26413.org/images/team/ethan.jpg)
-
 ### Ethan Xie
+
+![Ethan Xie](https://mercury26413.org/images/team/ethan.jpg)
 
 3rd year in FTC
 
@@ -546,9 +552,9 @@ CAD · Game Strategy
 
 > If it moves and it isn’t supposed to move, use duct tape. If it doesn’t move and it’s supposed to move, use WD-40.
 
-![Reynah Chowrira](https://mercury26413.org/images/team/reynah.jpg)
-
 ### Reynah Chowrira
+
+![Reynah Chowrira](https://mercury26413.org/images/team/reynah.jpg)
 
 2nd year in FTC
 
@@ -558,9 +564,9 @@ Outreach Lead
 
 > I love problem-solving, learning new skills, and connecting with others to explore what’s possible beyond our robot!
 
-![Margaret Yang](https://mercury26413.org/images/team/margaret.jpg)
-
 ### Margaret Yang
+
+![Margaret Yang](https://mercury26413.org/images/team/margaret.jpg)
 
 Rookie
 
@@ -575,9 +581,9 @@ CAD · Outreach
 
 [Email Margaret about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury)
 
-![Tucker Cashel](https://mercury26413.org/images/team/tucker.jpg)
-
 ### Tucker Cashel
+
+![Tucker Cashel](https://mercury26413.org/images/team/tucker.jpg)
 
 2nd year in FTC
 
@@ -587,9 +593,9 @@ Build
 
 > Job finished? I don’t think so.
 
-![Kai Kassekert](https://mercury26413.org/images/team/kai.jpg)
-
 ### Kai Kassekert
+
+![Kai Kassekert](https://mercury26413.org/images/team/kai.jpg)
 
 Rookie
 
@@ -597,9 +603,9 @@ CAD · Build
 
 > There’s no problem a few more hours in CAD can’t solve.
 
-![Avo Bell](https://mercury26413.org/images/team/avo.jpg)
-
 ### Avo Bell
+
+![Avo Bell](https://mercury26413.org/images/team/avo.jpg)
 
 Rookie
 
@@ -631,9 +637,9 @@ Camps, coaching, and demonstrations, sorted by season.
 
 ## Third-year outreach
 
-![Team members gathered in front of a foil-wrapped vacuum chamber in a research lab at MIT](https://mercury26413.org/images/mit_lab_1.jpg) ![Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench](https://mercury26413.org/images/mit_lab_2.jpg) ![Our host holds up copper Bitter magnet plates for team members](https://mercury26413.org/images/mit_lab_3.jpg) ![A team member points at a vintage instrument rack while our host explains it](https://mercury26413.org/images/mit_lab_4.jpg)
-
 ### Francis Bitter Magnet Laboratory at MIT
+
+![Team members gathered in front of a foil-wrapped vacuum chamber in a research lab at MIT](https://mercury26413.org/images/mit_lab_1.jpg) · ![Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench](https://mercury26413.org/images/mit_lab_2.jpg) · ![Our host holds up copper Bitter magnet plates for team members](https://mercury26413.org/images/mit_lab_3.jpg) · ![A team member points at a vintage instrument rack while our host explains it](https://mercury26413.org/images/mit_lab_4.jpg)
 
 Oct 9, 2026 · MIT, Cambridge
 
@@ -643,9 +649,9 @@ He showed us copper plates from the lab’s Bitter magnets and walked us through
 
 Thank you to Dr. Moodera for hosting us.
 
-![Six GNCE Mercury members in the lobby at VulcanForms, in front of the company’s logo wall](https://mercury26413.org/images/vulcanforms_1.jpg)
-
 ### Touring VulcanForms
+
+![Six GNCE Mercury members in the lobby at VulcanForms, in front of the company’s logo wall](https://mercury26413.org/images/vulcanforms_1.jpg)
 
 Oct 31, 2026 · Metal 3D printing
 
@@ -653,11 +659,11 @@ We toured **VulcanForms**, a Massachusetts company that makes metal parts with 3
 
 Tours like this show us how engineers work outside of FTC. Thank you to VulcanForms for having us.
 
+### Mentoring Phuthanang Youth Trust
+
 ![Video call grid from our meeting with Phuthanang Youth Trust, with members of our team and PYT on camera](https://mercury26413.org/images/pyt_call.jpg)
 
-![Slide from our call: a map tracing a line from Boston to South Africa, titled “STEM Connects Us” and “GNCE Mercury FTC Team × Phuthanang Youth Trust (PYT)”](https://mercury26413.org/images/pyt_1.jpg) ![Slide from our call explaining FIRST Tech Challenge: the yearly game, the robot, the pit area, and the skills students build](https://mercury26413.org/images/pyt_2.jpg)
-
-### Mentoring Phuthanang Youth Trust
+![Slide from our call: a map tracing a line from Boston to South Africa, titled “STEM Connects Us” and “GNCE Mercury FTC Team × Phuthanang Youth Trust (PYT)”](https://mercury26413.org/images/pyt_1.jpg) · ![Slide from our call explaining FIRST Tech Challenge: the yearly game, the robot, the pit area, and the skills students build](https://mercury26413.org/images/pyt_2.jpg)
 
 Ongoing · Online, South Africa
 
@@ -667,13 +673,11 @@ On our first call we explained how an FTC season works: a new game every year, a
 
 We’ll keep meeting with them to answer questions and share what our first 2 seasons taught us.
 
+### Robotics and engineering summer camp
+
 [Video: A camper’s VEX IQ robot scoring on the field](https://mercury26413.org/images/fll_camp_video.mp4)
 
-*A camper’s VEX IQ robot scoring on the field*
-
-![Campers and families gathered around the FLL table for the Friday showcase](https://mercury26413.org/images/fll_camp_1.jpg) ![A camper driving a VEX IQ robot on the competition field](https://mercury26413.org/images/fll_camp_2.jpg) ![Team members helping campers troubleshoot a VEX IQ robot](https://mercury26413.org/images/fll_camp_3.jpg) ![Programming a VEX IQ robot with block code on a laptop](https://mercury26413.org/images/fll_camp_5.jpg)
-
-### Robotics and engineering summer camp
+![Campers and families gathered around the FLL table for the Friday showcase](https://mercury26413.org/images/fll_camp_1.jpg) · ![A camper driving a VEX IQ robot on the competition field](https://mercury26413.org/images/fll_camp_2.jpg) · ![Team members helping campers troubleshoot a VEX IQ robot](https://mercury26413.org/images/fll_camp_3.jpg) · ![Programming a VEX IQ robot with block code on a laptop](https://mercury26413.org/images/fll_camp_5.jpg)
 
 Week of Aug 17, 2026
 
@@ -685,9 +689,9 @@ On Friday, the last day, campers showed off their robots to their families at a 
 
 ## Second-year outreach
 
-![GNCE Mercury members coaching young students at an FLL table](https://mercury26413.org/images/fll_camp_4.jpg)
-
 ### Coaching Weston’s FLL teams
+
+![GNCE Mercury members coaching young students at an FLL table](https://mercury26413.org/images/fll_camp_4.jpg)
 
 Sep 23, 2025 · 2025–26 FLL season
 
@@ -697,15 +701,15 @@ On Sep 23 we ran a **practice scrimmage** so the teams could get a feel for a re
 
 > “The FLL season for the elementary teams would not have been a success if not for the support and guidance from the high school FTC 26413 team.”
 >
-> Jessie Chan, lead coach, Field School FLL
+> — Jessie Chan, lead coach, Field School FLL
 
 > “It was so well organized. The teams learned a lot today.”
 >
-> FLL coach, after the scrimmage
-
-![GNCE Mercury members showing our robot to visitors at the Clark University robotics showcase](https://mercury26413.org/images/cus_1.webp) ![Team members explaining the robot to a visitor at Clark University](https://mercury26413.org/images/cus_2.webp) ![Team member demonstrating the robot to students at Clark University](https://mercury26413.org/images/cus_3.webp)
+> — FLL coach, after the scrimmage
 
 ### Clark University Robotics Showcase
+
+![GNCE Mercury members showing our robot to visitors at the Clark University robotics showcase](https://mercury26413.org/images/cus_1.webp) · ![Team members explaining the robot to a visitor at Clark University](https://mercury26413.org/images/cus_2.webp) · ![Team member demonstrating the robot to students at Clark University](https://mercury26413.org/images/cus_3.webp)
 
 Feb 2026
 
@@ -713,17 +717,17 @@ We mentored and took part in a robotics showcase at Clark University hosted by *
 
 ## Rookie-year outreach
 
-![Mercury members talking with visitors at the Cambridge Science Festival](https://mercury26413.org/images/2024-cambridge-science-festival.jpg)
-
 ### Cambridge Science Festival
+
+![Mercury members talking with visitors at the Cambridge Science Festival](https://mercury26413.org/images/2024-cambridge-science-festival.jpg)
 
 Sep 29, 2024
 
 We ran FTC robot demonstrations with our sister team, GNCE Diamond, and explained FIRST to visitors.
 
-![FLL teams practicing a robot game at Mercury’s mock qualifier](https://mercury26413.org/images/2024-fll-mock-qualifier.jpg)
-
 ### FLL mock qualifier
+
+![FLL teams practicing a robot game at Mercury’s mock qualifier](https://mercury26413.org/images/2024-fll-mock-qualifier.jpg)
 
 Nov 23, 2024
 
@@ -736,9 +740,9 @@ We hosted a practice qualifier for 5 Weston FIRST LEGO League teams. We ran robo
 
 Thank-yous to our sponsors and updates from the team, newest first.
 
-![VulcanForms logo](https://mercury26413.org/images/sponsors/vulcanforms-banner.png)
-
 ## Thank you, VulcanForms
+
+![VulcanForms logo](https://mercury26413.org/images/sponsors/vulcanforms-banner.png)
 
 Nov 3, 2026 · Sponsors
 
@@ -750,11 +754,11 @@ Sponsorship funds cover robot parts and tools, registration and travel, and our 
 
 Thank you to everyone at VulcanForms for supporting our students.
 
-[Visit VulcanForms](https://www.vulcanforms.com/) [Read about our tour](https://mercury26413.org/outreach.html#vulcanforms-tour) [See the sponsorship tiers](https://mercury26413.org/partners.html#tiers)
-
-[Video: The hive tips during a BIOBUZZ match and its balls spill onto the field](https://mercury26413.org/images/hive-tip-match-2.mp4)
+[Visit VulcanForms](https://www.vulcanforms.com/) · [Read about our tour](https://mercury26413.org/outreach.html#vulcanforms-tour) · [See the sponsorship tiers](https://mercury26413.org/partners.html#tiers)
 
 ## First hive tip of the season
+
+[Video: The hive tips during a BIOBUZZ match and its balls spill onto the field](https://mercury26413.org/images/hive-tip-match-2.mp4)
 
 Oct 25, 2026 · Competition
 
@@ -769,11 +773,11 @@ GNCE Mercury (FTC team 26413) is a student-led high school robotics team in West
 
 Four sponsorship tiers for the 2026–27 season, from $500 to $7,500 and up.
 
-[Email Margaret about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury) [Download the package PDF, 1.8 MB](https://mercury26413.org/docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf)
+[Email Margaret about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury) · [Download the package PDF, 1.8 MB](https://mercury26413.org/docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf)
 
 Supported by **VulcanForms, SolidWorks, Weston Owl and WEEFC**
 
-**Margaret Yang** Head of sponsorship [margaret@mercury26413.org](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury)
+**Margaret Yang** · Head of sponsorship · [margaret@mercury26413.org](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury)
 
 ## Sponsorship tiers
 
@@ -783,7 +787,7 @@ To fund a specific need, or to donate parts, fabrication or mentoring time, emai
 
 **What each sponsorship tier includes, 2026–27. Amounts are per season.**
 
-| Benefit | Bronze $500+ | Silver $1,500+ | Gold $3,000+ | Platinum $7,500+ |
+| Benefit | Bronze · $500+ | Silver · $1,500+ | Gold · $3,000+ | Platinum · $7,500+ |
 | --- | --- | --- | --- | --- |
 | Name and link on our website | Included | Included | Included | Included |
 | Quarterly financial report | Included | Included | Included | Included |
@@ -822,23 +826,23 @@ Shares match our sponsorship package, rounded to add up to 100%.
 
 - [VulcanForms](https://www.vulcanforms.com/)
 
-  Platinum $7,500+
+  Platinum · $7,500+
 
   [Read our thank-you](https://mercury26413.org/news.html#vulcanforms-platinum)
 
 ## What you would be supporting
 
+### What is FIRST Tech Challenge?
+
 ![GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship](https://mercury26413.org/images/team.webp)
 
 *The team at the Ryken RoboBowl, December 2025.*
-
-### What is FIRST Tech Challenge?
 
 The FIRST Tech Challenge (FTC) is an international student robotics challenge organized by FIRST, a non-profit STEM education organization. Every season, middle and high school teams design, build and program a robot, autonomous and driver-controlled, for a new challenge, and compete in alliances with other teams.
 
 > “The FLL season for the elementary teams would not have been a success if not for the support and guidance from the high school FTC 26413 team.”
 >
-> Jessie Chan, lead coach, Field School FLL
+> — Jessie Chan, lead coach, Field School FLL
 
 ### 3 robots in 3 seasons
 
@@ -877,12 +881,12 @@ Email Margaret Yang, our head of sponsorship, at [margaret@mercury26413.org](mai
 
 We thank every sponsor in the footer of every page of this site.
 
-[Email Margaret about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury) [Download the package PDF, 1.8 MB](https://mercury26413.org/docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf)
+[Email Margaret about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury) · [Download the package PDF, 1.8 MB](https://mercury26413.org/docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf)
 
 ### Other ways to help
 
 - **Give parts, fabrication or mentoring time** · [Tell us](mailto:margaret@mercury26413.org?subject=In-kind%20support) what you could offer instead of money.
-- **Host a student visit**We tour engineering firms and research labs so our students can see how professional engineers work. So far we have visited VulcanForms and MIT’s Francis Bitter Magnet Laboratory. If your organization could host a visit, we would love to come. [Offer a visit](mailto:margaret@mercury26413.org?subject=Hosting%20a%20student%20visit) or [see our visits](https://mercury26413.org/outreach.html).
+- **Host a student visit** · We tour engineering firms and research labs so our students can see how professional engineers work. So far we have visited VulcanForms and MIT’s Francis Bitter Magnet Laboratory. If your organization could host a visit, we would love to come. [Offer a visit](mailto:margaret@mercury26413.org?subject=Hosting%20a%20student%20visit) or [see our visits](https://mercury26413.org/outreach.html).
 
 
 <!-- page: https://mercury26413.org/resources.html -->
@@ -955,7 +959,7 @@ Help us build, compete, and teach. Sponsorship funds cover:
 
 We thank every sponsor in the footer of every page of this site.
 
-[See the sponsorship tiers](https://mercury26413.org/partners.html#tiers) [Email us about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsorship)
+[See the sponsorship tiers](https://mercury26413.org/partners.html#tiers) · [Email us about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsorship)
 
 
 <!-- page: https://mercury26413.org/terms.html -->

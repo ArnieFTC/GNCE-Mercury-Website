@@ -10,9 +10,9 @@ Camps, coaching, and demonstrations, sorted by season.
 
 ## Third-year outreach
 
-![Team members gathered in front of a foil-wrapped vacuum chamber in a research lab at MIT](https://mercury26413.org/images/mit_lab_1.jpg) ![Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench](https://mercury26413.org/images/mit_lab_2.jpg) ![Our host holds up copper Bitter magnet plates for team members](https://mercury26413.org/images/mit_lab_3.jpg) ![A team member points at a vintage instrument rack while our host explains it](https://mercury26413.org/images/mit_lab_4.jpg)
-
 ### Francis Bitter Magnet Laboratory at MIT
+
+![Team members gathered in front of a foil-wrapped vacuum chamber in a research lab at MIT](https://mercury26413.org/images/mit_lab_1.jpg) · ![Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench](https://mercury26413.org/images/mit_lab_2.jpg) · ![Our host holds up copper Bitter magnet plates for team members](https://mercury26413.org/images/mit_lab_3.jpg) · ![A team member points at a vintage instrument rack while our host explains it](https://mercury26413.org/images/mit_lab_4.jpg)
 
 Oct 9, 2026 · MIT, Cambridge
 
@@ -22,9 +22,9 @@ He showed us copper plates from the lab’s Bitter magnets and walked us through
 
 Thank you to Dr. Moodera for hosting us.
 
-![Six GNCE Mercury members in the lobby at VulcanForms, in front of the company’s logo wall](https://mercury26413.org/images/vulcanforms_1.jpg)
-
 ### Touring VulcanForms
+
+![Six GNCE Mercury members in the lobby at VulcanForms, in front of the company’s logo wall](https://mercury26413.org/images/vulcanforms_1.jpg)
 
 Oct 31, 2026 · Metal 3D printing
 
@@ -32,11 +32,11 @@ We toured **VulcanForms**, a Massachusetts company that makes metal parts with 3
 
 Tours like this show us how engineers work outside of FTC. Thank you to VulcanForms for having us.
 
+### Mentoring Phuthanang Youth Trust
+
 ![Video call grid from our meeting with Phuthanang Youth Trust, with members of our team and PYT on camera](https://mercury26413.org/images/pyt_call.jpg)
 
-![Slide from our call: a map tracing a line from Boston to South Africa, titled “STEM Connects Us” and “GNCE Mercury FTC Team × Phuthanang Youth Trust (PYT)”](https://mercury26413.org/images/pyt_1.jpg) ![Slide from our call explaining FIRST Tech Challenge: the yearly game, the robot, the pit area, and the skills students build](https://mercury26413.org/images/pyt_2.jpg)
-
-### Mentoring Phuthanang Youth Trust
+![Slide from our call: a map tracing a line from Boston to South Africa, titled “STEM Connects Us” and “GNCE Mercury FTC Team × Phuthanang Youth Trust (PYT)”](https://mercury26413.org/images/pyt_1.jpg) · ![Slide from our call explaining FIRST Tech Challenge: the yearly game, the robot, the pit area, and the skills students build](https://mercury26413.org/images/pyt_2.jpg)
 
 Ongoing · Online, South Africa
 
@@ -46,13 +46,11 @@ On our first call we explained how an FTC season works: a new game every year, a
 
 We’ll keep meeting with them to answer questions and share what our first 2 seasons taught us.
 
+### Robotics and engineering summer camp
+
 [Video: A camper’s VEX IQ robot scoring on the field](https://mercury26413.org/images/fll_camp_video.mp4)
 
-*A camper’s VEX IQ robot scoring on the field*
-
-![Campers and families gathered around the FLL table for the Friday showcase](https://mercury26413.org/images/fll_camp_1.jpg) ![A camper driving a VEX IQ robot on the competition field](https://mercury26413.org/images/fll_camp_2.jpg) ![Team members helping campers troubleshoot a VEX IQ robot](https://mercury26413.org/images/fll_camp_3.jpg) ![Programming a VEX IQ robot with block code on a laptop](https://mercury26413.org/images/fll_camp_5.jpg)
-
-### Robotics and engineering summer camp
+![Campers and families gathered around the FLL table for the Friday showcase](https://mercury26413.org/images/fll_camp_1.jpg) · ![A camper driving a VEX IQ robot on the competition field](https://mercury26413.org/images/fll_camp_2.jpg) · ![Team members helping campers troubleshoot a VEX IQ robot](https://mercury26413.org/images/fll_camp_3.jpg) · ![Programming a VEX IQ robot with block code on a laptop](https://mercury26413.org/images/fll_camp_5.jpg)
 
 Week of Aug 17, 2026
 
@@ -64,9 +62,9 @@ On Friday, the last day, campers showed off their robots to their families at a 
 
 ## Second-year outreach
 
-![GNCE Mercury members coaching young students at an FLL table](https://mercury26413.org/images/fll_camp_4.jpg)
-
 ### Coaching Weston’s FLL teams
+
+![GNCE Mercury members coaching young students at an FLL table](https://mercury26413.org/images/fll_camp_4.jpg)
 
 Sep 23, 2025 · 2025–26 FLL season
 
@@ -76,15 +74,15 @@ On Sep 23 we ran a **practice scrimmage** so the teams could get a feel for a re
 
 > “The FLL season for the elementary teams would not have been a success if not for the support and guidance from the high school FTC 26413 team.”
 >
-> Jessie Chan, lead coach, Field School FLL
+> — Jessie Chan, lead coach, Field School FLL
 
 > “It was so well organized. The teams learned a lot today.”
 >
-> FLL coach, after the scrimmage
-
-![GNCE Mercury members showing our robot to visitors at the Clark University robotics showcase](https://mercury26413.org/images/cus_1.webp) ![Team members explaining the robot to a visitor at Clark University](https://mercury26413.org/images/cus_2.webp) ![Team member demonstrating the robot to students at Clark University](https://mercury26413.org/images/cus_3.webp)
+> — FLL coach, after the scrimmage
 
 ### Clark University Robotics Showcase
+
+![GNCE Mercury members showing our robot to visitors at the Clark University robotics showcase](https://mercury26413.org/images/cus_1.webp) · ![Team members explaining the robot to a visitor at Clark University](https://mercury26413.org/images/cus_2.webp) · ![Team member demonstrating the robot to students at Clark University](https://mercury26413.org/images/cus_3.webp)
 
 Feb 2026
 
@@ -92,17 +90,17 @@ We mentored and took part in a robotics showcase at Clark University hosted by *
 
 ## Rookie-year outreach
 
-![Mercury members talking with visitors at the Cambridge Science Festival](https://mercury26413.org/images/2024-cambridge-science-festival.jpg)
-
 ### Cambridge Science Festival
+
+![Mercury members talking with visitors at the Cambridge Science Festival](https://mercury26413.org/images/2024-cambridge-science-festival.jpg)
 
 Sep 29, 2024
 
 We ran FTC robot demonstrations with our sister team, GNCE Diamond, and explained FIRST to visitors.
 
-![FLL teams practicing a robot game at Mercury’s mock qualifier](https://mercury26413.org/images/2024-fll-mock-qualifier.jpg)
-
 ### FLL mock qualifier
+
+![FLL teams practicing a robot game at Mercury’s mock qualifier](https://mercury26413.org/images/2024-fll-mock-qualifier.jpg)
 
 Nov 23, 2024
 
@@ -110,10 +108,12 @@ We hosted a practice qualifier for 5 Weston FIRST LEGO League teams. We ran robo
 
 * * *
 
-**GNCE Mercury**, FIRST Tech Challenge team 26413, Weston, MA, founded 2024.
+**GNCE Mercury** (GNCE (Galactic Narwhal Chicken Effect)), FIRST Tech Challenge team 26413, Weston, MA, founded 2024.
 
-Sponsors and supporters: VulcanForms, SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
+Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
 
-Email [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com) · Sponsorship [margaret@mercury26413.org](mailto:margaret@mercury26413.org) · [Instagram @gnce\_mercury](https://www.instagram.com/gnce_mercury/)
+Email [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com) · Sponsorship [margaret@mercury26413.org](mailto:margaret@mercury26413.org) · [Instagram @gnce\_mercury](https://www.instagram.com/gnce_mercury/) · [Join the team](https://mercury26413.org/contact.html?topic=join#contact-form)
 
-Pages: [Home](https://mercury26413.org/) · [Seasons](https://mercury26413.org/seasons.html) · [Team](https://mercury26413.org/team.html) · [Outreach](https://mercury26413.org/outreach.html) · [News](https://mercury26413.org/news.html) · [Partners](https://mercury26413.org/partners.html) · [Resources](https://mercury26413.org/resources.html) · [Contact](https://mercury26413.org/contact.html) · [Terms and privacy](https://mercury26413.org/terms.html)
+Pages: [Home](https://mercury26413.org/) · [Seasons](https://mercury26413.org/seasons.html) · [Team](https://mercury26413.org/team.html) · [Outreach](https://mercury26413.org/outreach.html) · [News](https://mercury26413.org/news.html) · [Partners](https://mercury26413.org/partners.html) · [Resources](https://mercury26413.org/resources.html) · [Contact](https://mercury26413.org/contact.html)
+
+[About](https://mercury26413.org/team.html#about) · [Contact](https://mercury26413.org/contact.html) · [Terms and privacy](https://mercury26413.org/terms.html)

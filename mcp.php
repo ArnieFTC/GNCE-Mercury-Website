@@ -247,7 +247,10 @@ function search(string $query, int $limit): array
             }
             $score += 4 * $matched;
             $plain = preg_replace('/!\[[^\]]*\]\([^)]*\)|\[([^\]]*)\]\([^)]*\)/', '$1', $section);
-            $plain = trim(preg_replace('/[*#>|`_\\\\]+|\s+/', ' ', $plain));
+            $plain = preg_replace('/^\s*(#{1,6}|>|-|\d+\.)\s+/m', '', $plain);
+            $plain = preg_replace('/\*\*|(?<!\\\\)\*|`|\|/', '', $plain);
+            $plain = preg_replace('/\\\\([\\\\`*_\[\]])/', '$1', $plain);
+            $plain = trim(preg_replace('/\s+/', ' ', $plain));
             $pos = strpos(lower($plain), $terms[0]);
             $start = max(0, ($pos === false ? 0 : $pos) - 120);
             $snippet = function_exists('mb_strcut') ? mb_strcut($plain, $start, 360, 'UTF-8') : substr($plain, $start, 360);

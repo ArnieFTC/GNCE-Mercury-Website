@@ -617,7 +617,9 @@ part("webmcp", () => {
             if (!matched) continue;
             const score = 4 * matched + (low.includes(q) ? 10 : 0) + terms.reduce((s, t) => s + Math.min(low.split(t).length - 1, 5), 0);
             const heading = (section.match(/^#{1,3} (.+)$/m) || [])[1] || p.title;
-            const plain = section.replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]*)\]\([^)]*\)/g, "$1").replace(/[*#>|`_\\]+|\s+/g, " ").trim();
+            const plain = section.replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+              .replace(/^\s*(#{1,6}|>|-|\d+\.)\s+/gm, "").replace(/\*\*|(?<!\\)\*|`|\|/g, "")
+              .replace(/\\([\\`*_[\]])/g, "$1").replace(/\s+/g, " ").trim();
             const at = Math.max(0, plain.toLowerCase().indexOf(terms[0] || q) - 120);
             hits.push({ score, page: p.slug, pageTitle: p.title, section: heading, url: p.url, snippet: (at ? "…" : "") + plain.slice(at, at + 360) + (plain.length > at + 360 ? "…" : "") });
           }

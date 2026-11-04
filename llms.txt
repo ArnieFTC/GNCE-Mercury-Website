@@ -2,7 +2,7 @@
 
 > GNCE Mercury is FIRST Tech Challenge (FTC) team 26413, a high school robotics team in Weston, Massachusetts, founded in 2024. We build a new competition robot every season and coach younger students in FIRST LEGO League.
 
-Every page is also available as Markdown: add `.md` to its address (for example https://mercury26413.org/team.html.md), or request any page with the header `Accept: text/markdown`. Read-only tools for agents: the MCP server described at https://mercury26413.org/.well-known/mcp/server-card.json, and WebMCP tools registered on every page.
+Every page is also available as Markdown: add `.md` to a page's `.html` address (for example https://mercury26413.org/team.html.md; the home page is https://mercury26413.org/index.html.md), or request any page with the header `Accept: text/markdown`. Read-only tools for agents: the MCP server at <https://mercury26413.org/mcp> (server card: <https://mercury26413.org/.well-known/mcp/server-card.json>), and WebMCP tools registered on every page.
 
 - General questions and joining the team: gncemercury26413@gmail.com
 - Sponsorship: margaret@mercury26413.org (Margaret Yang, head of sponsorship)
