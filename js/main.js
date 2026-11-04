@@ -583,7 +583,7 @@ part("contact", () => {
   if (asked && form.elements.topic) form.elements.topic.value = asked;
   // A one-line prompt under "Message" for each topic: what's useful for us to know
   const HINTS = {
-    "Joining the team": "Rookies are part of the team from day one. Tell us what you’d like to work on (building, coding, CAD, or outreach) and anything you want to ask.",
+    "Joining the team": "We have had multiple rookies join our team each season. Tell us what you’d like to work on (building, coding, CAD, or outreach) and anything you want to ask.",
     "Sponsorship": "Tell us who you are and how you’d like to help.",
     "Outreach / collaboration": "Tell us about your event, school or group.",
   };
