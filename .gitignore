@@ -7,3 +7,6 @@ Thumbs.db
 
 # Impeccable live-preview server state (local only)
 .impeccable/live/
+
+# scratch downloads (curl -o x.tmp) never belong in the site
+*.tmp
