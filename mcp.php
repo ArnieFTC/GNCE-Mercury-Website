@@ -200,7 +200,10 @@ function call_tool(string $name, array $args): array
                 return ['isError' => true, 'content' => text_content('Say which page to read in "page", one of: ' . slugs() . '.')];
             }
             $slug = preg_replace('/\.html(\.md)?$/', '', trim($args['page'], " /"));
-            if ($slug === '' || $slug === 'home') {
+            if ($slug === '') {
+                return ['isError' => true, 'content' => text_content('Say which page to read in "page", one of: ' . slugs() . '.')];
+            }
+            if ($slug === 'home') {
                 $slug = 'index';
             }
             $page = page_by_slug($slug);

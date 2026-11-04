@@ -521,7 +521,8 @@ class Converter:
 # ---------------------------------------------------------------- site data from js/main.js
 def read_main_js():
     js = (ROOT / "js/main.js").read_text(encoding="utf-8")
-    js_nc = "\n".join(l for l in js.split("\n") if not l.strip().startswith("//"))
+    js_nc = re.sub(r"/\*.*?\*/", "", js, flags=re.S)                       # /* block comments */
+    js_nc = re.sub(r"(^|[\s,\[{(;])//[^\n]*", r"\1", js_nc, flags=re.M)     # // comments (not https://)
 
     def const_str(name):
         m = re.search(rf'const {name} = "([^"]+)";', js_nc)
@@ -538,7 +539,14 @@ def read_main_js():
 
     season = block("SEASON", "{", "}")
     kickoff = re.search(r'kickoff:\s*"(\d{4}-\d{2}-\d{2})"', season)
-    events = re.findall(r'\{\s*name:\s*"([^"]+)",\s*date:\s*"(\d{4}-\d{2}-\d{2})"\s*\}', season)
+    events_src = re.search(r"events:\s*\[(.*?)\]", season, re.S)
+    events = []
+    for obj in re.findall(r"\{[^{}]*\}", events_src.group(1) if events_src else ""):
+        name = re.search(r"""name:\s*(["'])(.+?)\1""", obj)
+        when = re.search(r"""date:\s*(["'])(\d{4}-\d{2}-\d{2})\1""", obj)
+        if not name or not when:
+            sys.exit(f"agent_files: a SEASON event in js/main.js needs a name and a YYYY-MM-DD date: {obj.strip()}")
+        events.append((name.group(2), when.group(2)))
     if not kickoff:
         sys.exit("agent_files: SEASON.kickoff not found in js/main.js")
     def array(name):
@@ -607,7 +615,9 @@ def org_node(site, full):
              "email": site["sponsor_email"], "availableLanguage": "en", "url": BASE + "partners.html"},
         ],
         "parentOrganization": {"@type": "Organization", "name": ORG["parent"]},
-        "memberOf": {"@type": "Organization", "name": "FIRST Tech Challenge", "url": "https://www.firstinspires.org/robotics/ftc"},
+        "memberOf": {"@type": "ProgramMembership", "programName": "FIRST Tech Challenge",
+                     "url": "https://www.firstinspires.org/programs/ftc/",
+                     "hostingOrganization": {"@type": "Organization", "name": "FIRST", "url": "https://www.firstinspires.org/"}},
         "sameAs": site["same_as"],
     })
     return node
@@ -641,8 +651,12 @@ def jsonld(page, title, desc, site, root):
             img = art.find(lambda n: n.tag == "img")
             vid = art.find(lambda n: n.tag == "video")
             pid = art.attrs.get("id", "")
+            if not pid:
+                sys.exit(f"agent_files: every <article class=\"post\"> in {page['path']} needs an id (see the comment above the posts)")
+            if vid is not None and not vid.attrs.get("poster"):
+                sys.exit(f"agent_files: the video in post #{pid} needs a poster image")
             post = {"@type": "BlogPosting", "@id": f"{url}#{pid}", "url": f"{url}#{pid}",
-                    "headline": ws(h.text()).strip() if h else "", "mainEntityOfPage": {"@id": url + "#webpage"},
+                    "headline": ws(h.text()).strip() if h else "", "isPartOf": {"@id": url + "#webpage"},
                     "author": {"@id": BASE + "#organization"}, "publisher": {"@id": BASE + "#organization"},
                     "inLanguage": "en-US"}
             if t is not None and t.attrs.get("datetime"):
@@ -685,8 +699,8 @@ def footer_md(site):
     pages = " · ".join(f"[{label}]({page_url(href)})" for label, href in [("Home", "index.html")] + site["nav"])
     return "\n\n".join([
         "* * *",
-        f"**{ORG['name']}** ({ORG['parent']}), FIRST Tech Challenge team {ORG['teamNumber']}, Weston, MA, "
-        f"founded {ORG['foundingDate']}.",
+        f"**{ORG['name']}**, FIRST Tech Challenge team {ORG['teamNumber']} from Weston, MA, founded "
+        f"{ORG['foundingDate']}. One of the teams of {ORG['parent']}.",
         f"Sponsors and supporters: {and_list(names)}. [Become a sponsor]({BASE}partners.html)." if names else
         f"[Become a sponsor]({BASE}partners.html).",
         f"Email [{site['team_email']}](mailto:{site['team_email']}) · Sponsorship [{site['sponsor_email']}](mailto:{site['sponsor_email']}) · "
@@ -722,10 +736,12 @@ def convert(page, site):
 # ---------------------------------------------------------------- site files
 def lastmod(path):
     try:
-        dirty = subprocess.run(["git", "status", "--porcelain", "--", path], cwd=ROOT, capture_output=True, text=True)
+        dirty = subprocess.run(["git", "status", "--porcelain", "--", path], cwd=ROOT, capture_output=True, text=True,
+                               encoding="utf-8")
         if dirty.returncode == 0 and dirty.stdout.strip():
             return date.today().isoformat()
-        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", path], cwd=ROOT, capture_output=True, text=True)
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", path], cwd=ROOT, capture_output=True, text=True,
+                             encoding="utf-8")
         if out.returncode == 0 and out.stdout.strip():
             return out.stdout.strip()
     except OSError:
@@ -817,7 +833,7 @@ def server_card(pages_json_text):
         (tmp / "agent").mkdir()
         (tmp / "agent/pages.json").write_text(pages_json_text, encoding="utf-8")
         (tmp / "mcp.php").write_text((ROOT / "mcp.php").read_text(encoding="utf-8"), encoding="utf-8")
-        out = subprocess.run([php, str(tmp / "mcp.php"), "--card"], capture_output=True, text=True)
+        out = subprocess.run([php, str(tmp / "mcp.php"), "--card"], capture_output=True, text=True, encoding="utf-8")
     if out.returncode != 0 or not out.stdout.startswith("{"):
         sys.exit("agent_files: php mcp.php --card failed:\n" + out.stdout + out.stderr)
     return out.stdout
@@ -829,7 +845,9 @@ def main():
     site["same_as"] = [site["instagram"]] + EXTRA_SAME_AS
 
     listed = {p["path"] for p in PAGES}
-    found = {str(p.relative_to(ROOT)) for p in list(ROOT.glob("*.html")) + list(ROOT.glob("seasons/*.html"))}
+    skip_dirs = {"tools", "docs", "node_modules", "agent"}
+    found = {p.relative_to(ROOT).as_posix() for p in ROOT.rglob("*.html")
+             if not any(part.startswith(".") or part in skip_dirs for part in p.relative_to(ROOT).parts[:-1])}
     if found - listed:
         sys.exit("agent_files: add these pages to PAGES in tools/agent_files.py: " + ", ".join(sorted(found - listed)))
     if listed - found:
@@ -883,7 +901,8 @@ def main():
             stale.append(rel)
             if not check:
                 path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_text(content, encoding="utf-8")
+                with open(path, "w", encoding="utf-8", newline="\n") as fh:
+                    fh.write(content)
     if check:
         if stale:
             print("agent_files: out of date (run python3 tools/agent_files.py): " + ", ".join(stale))

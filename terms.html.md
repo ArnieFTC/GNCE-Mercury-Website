@@ -24,7 +24,7 @@ You’re welcome to link to any page and to quote short passages with a link bac
 
 The text, photos, videos and robot CAD renders on this site are ours. Please ask us before reusing a photo or video: many of them show our students. Sponsor names and logos belong to their owners.
 
-FIRST®, FIRST® Tech Challenge and FIRST® LEGO® League are trademarks of FIRST (For Inspiration and Recognition of Science and Technology). LEGO® is a trademark of the LEGO Group.
+FIRST® and FIRST® Tech Challenge are trademarks of FIRST (For Inspiration and Recognition of Science and Technology). FIRST® LEGO® League is a trademark held jointly by FIRST and the LEGO Group, and LEGO® is a trademark of the LEGO Group.
 
 ## Search engines and AI
 
@@ -42,7 +42,7 @@ Email [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com) about anyt
 
 * * *
 
-**GNCE Mercury** (GNCE (Galactic Narwhal Chicken Effect)), FIRST Tech Challenge team 26413, Weston, MA, founded 2024.
+**GNCE Mercury**, FIRST Tech Challenge team 26413 from Weston, MA, founded 2024. One of the teams of GNCE (Galactic Narwhal Chicken Effect).
 
 Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
 

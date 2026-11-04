@@ -539,7 +539,7 @@ part("contact", () => {
     location.href = url;
     // An AI agent filled the form through WebMCP (toolname on the <form>): tell it what happened
     if (e.agentInvoked && typeof e.respondWith === "function") {
-      e.respondWith(Promise.resolve(`Opened an email draft to ${to} in the visitor's email app. Nothing is sent until the visitor presses Send there.`));
+      e.respondWith(Promise.resolve(`Asked the visitor's browser to open an email draft to ${to}. Nothing is sent unless the visitor presses Send in their email app; if no email app opened, the address is ${to}.`));
     }
     if (status) status.textContent = url.length > 1900
       ? `Opening your email app… Long messages can get cut short in some email apps, so check the whole message is in the draft. If it isn’t, email us at ${to}.`
@@ -591,7 +591,9 @@ part("webmcp", () => {
       inputSchema: { type: "object", properties: { page: { type: "string", description: "The page to read, e.g. \"index\", \"team\" or \"seasons/2025-2026\" (list_pages gives them all)." } }, required: ["page"], additionalProperties: false },
       annotations: readOnly,
       execute: async ({ page: slug } = {}) => {
-        const want = String(slug || "index").replace(/^\/+|\/+$/g, "").replace(/\.html(\.md)?$/, "") || "index";
+        if (typeof slug !== "string" || !slug.trim()) return { error: "Say which page to read in \"page\", e.g. \"index\" or \"team\" (list_pages lists them)." };
+        let want = slug.trim().replace(/^\/+|\/+$/g, "").replace(/\.html(\.md)?$/, "");
+        if (want === "home") want = "index";
         const p = (await getSite()).pages.find(x => x.slug === want);
         if (!p) return { error: `No page called "${slug}". Use list_pages to see the pages.` };
         return { page: p.slug, url: p.url, markdown: await getText(p.markdownFile) };
@@ -620,8 +622,8 @@ part("webmcp", () => {
             const score = 4 * matched + (low.includes(q) ? 10 : 0) + terms.reduce((s, t) => s + Math.min(low.split(t).length - 1, 5), 0);
             const heading = (section.match(/^#{1,3} (.+)$/m) || [])[1] || p.title;
             const plain = section.replace(/!\[[^\]]*\]\([^)]*\)/g, "").replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
-              .replace(/^\s*(#{1,6}|>|-|\d+\.)\s+/gm, "").replace(/\*\*|(?<!\\)\*|`|\|/g, "")
-              .replace(/\\([\\`*_[\]])/g, "$1").replace(/\s+/g, " ").trim();
+              .replace(/^\s*(#{1,6}|>|-|\d+\.)\s+/gm, "").replace(/\\\*/g, "\u0001").replace(/\*|`|\|/g, "")
+              .replace(/\u0001/g, "*").replace(/\\([\\`*_[\]])/g, "$1").replace(/\s+/g, " ").trim();
             const at = Math.max(0, plain.toLowerCase().indexOf(terms[0] || q) - 120);
             hits.push({ score, page: p.slug, pageTitle: p.title, section: heading, url: p.url, snippet: (at ? "…" : "") + plain.slice(at, at + 360) + (plain.length > at + 360 ? "…" : "") });
           }
