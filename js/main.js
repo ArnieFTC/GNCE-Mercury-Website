@@ -20,8 +20,8 @@ const NAV = [
   { label: "Seasons",   href: "seasons.html",   page: "seasons" },
   { label: "Team",      href: "team.html",      page: "team" },
   { label: "Outreach",  href: "outreach.html",  page: "outreach" },
-  { label: "Partners",  href: "partners.html",  page: "partners" },
   { label: "News",      href: "news.html",      page: "news" },
+  { label: "Partners",  href: "partners.html",  page: "partners" },
   { label: "Resources", href: "resources.html", page: "resources" },
   { label: "Contact",   href: "contact.html",   page: "contact" },
 ];
