@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#0B0A0F">
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=216">
+  <link rel="stylesheet" href="css/style.css?v=217">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="news">
@@ -35,6 +35,7 @@
     <!-- POSTS: one <article class="post"> per post, newest first (put a new post above the others).
          - id="…": a short name for the post, so others can link to news.html#that-name.
          - <figure class="post-media">: one picture, with width and height (the file's real size) and alt text.
+           A video works too: copy the hive-tip post (preload="none", a poster image, an aria-label).
            Only the top post's picture gets fetchpriority="high"; move it to the new post when you add one.
            Sponsor files go in images/sponsors/.
          - The <h2> is the title; the dateline holds the date (<time class="d" datetime="YYYY-MM-DD">) and a topic.
@@ -64,6 +65,19 @@
               <a class="text-link" href="outreach.html#vulcanforms-tour">Read about our tour</a>
               <a class="text-link" href="partners.html#tiers">See the sponsorship tiers</a>
             </p>
+          </div>
+        </article>
+
+        <article class="post" id="first-hive-tip" aria-labelledby="post-hive-tip">
+          <figure class="post-media">
+            <video controls muted playsinline preload="none" poster="images/hive-tip-match-2-poster.jpg" width="1920" height="1080" aria-label="The hive tips during a BIOBUZZ match and its balls spill onto the field">
+              <source src="images/hive-tip-match-2.mp4" type="video/mp4">
+            </video>
+          </figure>
+          <div class="post-text">
+            <h2 id="post-hive-tip">First hive tip of the season</h2>
+            <p class="dateline"><time class="d" datetime="2026-10-25">Oct 25, 2026</time><span>Competition</span></p>
+            <p class="post-lead">We got our first hive tip of the season!</p>
           </div>
         </article>
 
