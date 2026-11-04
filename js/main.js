@@ -606,7 +606,9 @@ part("webmcp", () => {
       execute: async ({ query = "", limit = 5 } = {}) => {
         const q = String(query).trim().toLowerCase();
         if (q.length < 2) return { error: "Give a query of at least 2 characters." };
-        const terms = q.split(/[^\p{L}\p{N}$+.\-]+/u).filter(t => t.length >= 2);
+        const STOP = new Set(["the", "a", "an", "and", "or", "is", "are", "was", "of", "in", "on", "at", "to", "for", "me", "my", "you", "your", "our", "about", "what", "who", "when", "where", "how", "did", "does", "do", "tell", "with", "this", "that"]);
+        const words = q.split(/[^\p{L}\p{N}$+.\-]+/u).map(t => t.replace(/^[.+-]+|[.+-]+$/g, "")).filter(t => t.length >= 2);
+        const terms = words.some(t => !STOP.has(t)) ? words.filter(t => !STOP.has(t)) : words;
         const { pages } = await getSite();
         const hits = [];
         for (const p of pages) {

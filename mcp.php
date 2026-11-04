@@ -18,10 +18,13 @@ const SITE = 'https://mercury26413.org/';
 // Browser pages allowed to call this server (MCP asks servers to check Origin). Server-side clients send none.
 const ALLOWED_ORIGINS = ['https://mercury26413.org', 'https://www.mercury26413.org', 'https://arnieftc.github.io'];
 // Newest first. The first one is offered when a client asks for a version we don't know.
-const PROTOCOL_VERSIONS = ['2025-11-25', '2025-06-18', '2025-03-26', '2024-11-05'];
+const PROTOCOL_VERSIONS = ['2025-11-25', '2025-06-18', '2025-03-26'];
+// Old clients may still send a few messages as one JSON array (allowed only before 2025-06-18).
+const MAX_BATCH = 10;
 const MAX_BODY = 262144;
 
 if (PHP_SAPI !== 'cli') {
+    header_remove('X-Powered-By');
     header('X-Content-Type-Options: nosniff');
     header('X-Robots-Tag: noindex');
 }
@@ -74,12 +77,26 @@ function page_by_slug(string $slug): ?array
 
 function page_markdown(array $page): string
 {
-    $file = __DIR__ . '/' . $page['markdownFile'];
-    $text = @file_get_contents($file);
-    if ($text === false) {
-        throw new RuntimeException('That page is missing on the server.');
+    static $cache = [];
+    $file = $page['markdownFile'];
+    if (!isset($cache[$file])) {
+        $text = @file_get_contents(__DIR__ . '/' . $file);
+        if ($text === false) {
+            throw new RuntimeException('That page is missing on the server.');
+        }
+        $cache[$file] = $text;
     }
-    return $text;
+    return $cache[$file];
+}
+
+function length(string $s): int
+{
+    return function_exists('mb_strlen') ? mb_strlen($s, 'UTF-8') : strlen($s);
+}
+
+function slugs(): string
+{
+    return implode(', ', array_map(function ($p) { return $p['slug']; }, site()['pages']));
 }
 
 function lower(string $s): string
@@ -179,8 +196,10 @@ function call_tool(string $name, array $args): array
             return ['content' => text_content(as_json(['pages' => $pages])), 'structuredContent' => ['pages' => $pages]];
 
         case 'read_page':
-            $slug = isset($args['page']) && is_string($args['page']) ? trim($args['page'], " /") : '';
-            $slug = preg_replace('/\.html(\.md)?$/', '', $slug);
+            if (!isset($args['page']) || !is_string($args['page'])) {
+                return ['isError' => true, 'content' => text_content('Say which page to read in "page", one of: ' . slugs() . '.')];
+            }
+            $slug = preg_replace('/\.html(\.md)?$/', '', trim($args['page'], " /"));
             if ($slug === '' || $slug === 'home') {
                 $slug = 'index';
             }
@@ -194,10 +213,17 @@ function call_tool(string $name, array $args): array
 
         case 'search_site':
             $query = isset($args['query']) && is_string($args['query']) ? trim($args['query']) : '';
-            if (strlen($query) < 2 || strlen($query) > 200) {
-                return ['isError' => true, 'content' => text_content('Give a query of 2 to 200 characters.')];
+            if (length($query) < 2 || length($query) > 200) {
+                return ['isError' => true, 'content' => text_content('Give a "query" of 2 to 200 characters.')];
             }
-            $limit = isset($args['limit']) && is_int($args['limit']) ? max(1, min(10, $args['limit'])) : 5;
+            $limit = 5;
+            if (array_key_exists('limit', $args)) {
+                $l = $args['limit'];
+                if (!(is_int($l) || (is_float($l) && floor($l) === $l)) || $l < 1 || $l > 10) {
+                    return ['isError' => true, 'content' => text_content('"limit" must be a whole number from 1 to 10.')];
+                }
+                $limit = (int) $l;
+            }
             $results = search($query, $limit);
             $payload = ['query' => $query, 'results' => $results];
             if (!$results) {
@@ -215,15 +241,23 @@ function call_tool(string $name, array $args): array
 function search(string $query, int $limit): array
 {
     $q = lower($query);
-    $terms = array_values(array_filter(preg_split('/[^\p{L}\p{N}$+.\-]+/u', $q) ?: [], function ($t) {
-        return strlen($t) >= 2;
-    }));
+    $stop = ['the', 'a', 'an', 'and', 'or', 'is', 'are', 'was', 'of', 'in', 'on', 'at', 'to', 'for', 'me', 'my', 'you',
+        'your', 'our', 'about', 'what', 'who', 'when', 'where', 'how', 'did', 'does', 'do', 'tell', 'with', 'this', 'that'];
+    $words = array_values(array_filter(array_map(function ($t) { return trim($t, '.-+'); },
+        preg_split('/[^\p{L}\p{N}$+.\-]+/u', $q) ?: []), function ($t) { return length($t) >= 2; }));
+    $terms = array_values(array_filter($words, function ($t) use ($stop) { return !in_array($t, $stop, true); }));
     if (!$terms) {
-        $terms = [$q];
+        $terms = $words ?: [$q];
     }
+    $q = trim($q, " .?!");
     $hits = [];
     foreach (site()['pages'] as $page) {
-        $md = preg_replace('/\A---\n.*?\n---\n/s', '', page_markdown($page));
+        try {
+            $md = page_markdown($page);
+        } catch (RuntimeException $e) {
+            continue;
+        }
+        $md = preg_replace('/\A---\n.*?\n---\n/s', '', $md);
         $md = explode("\n* * *\n", $md)[0];
         $sections = preg_split('/\n(?=#{1,3} )/', "\n" . $md);
         foreach ($sections as $section) {
@@ -322,7 +356,7 @@ function server_info(): array
 {
     return ['name' => SERVER_NAME, 'title' => SERVER_TITLE, 'version' => SERVER_VERSION,
         'description' => SERVER_DESCRIPTION, 'websiteUrl' => SITE,
-        'icons' => [['src' => SITE . 'images/logo-mark.png', 'mimeType' => 'image/png', 'sizes' => ['any']]]];
+        'icons' => [['src' => SITE . 'images/logo-mark.png', 'mimeType' => 'image/png', 'sizes' => ['473x505']]]];
 }
 
 function capabilities(): array
@@ -369,16 +403,24 @@ function instructions(): string
 // ------------------------------------------------------------------ JSON-RPC
 function handle($msg, ?string &$negotiated)
 {
+    $validId = function ($id) { return is_string($id) || is_int($id); };
     if (!is_array($msg) || ($msg['jsonrpc'] ?? null) !== '2.0' || !isset($msg['method']) || !is_string($msg['method'])) {
-        $isResponse = is_array($msg) && (isset($msg['result']) || isset($msg['error']));
-        return $isResponse ? null : rpc_error($msg['id'] ?? null, -32600, 'Invalid Request');
+        $isResponse = is_array($msg) && (array_key_exists('result', $msg) || array_key_exists('error', $msg));
+        $id = is_array($msg) && isset($msg['id']) && $validId($msg['id']) ? $msg['id'] : null;
+        return $isResponse ? null : rpc_error($id, -32600, 'Invalid Request');
     }
     $isNotification = !array_key_exists('id', $msg);
-    $id = $msg['id'] ?? null;
-    $params = isset($msg['params']) && is_array($msg['params']) ? $msg['params'] : [];
     if ($isNotification) {
         return null; // notifications/initialized, notifications/cancelled, ...: nothing to answer
     }
+    $id = $msg['id'];
+    if (!$validId($id)) {
+        return rpc_error(null, -32600, 'Invalid Request: id must be a string or an integer');
+    }
+    if (array_key_exists('params', $msg) && !is_array($msg['params'])) {
+        return rpc_error($id, -32602, 'params must be an object');
+    }
+    $params = $msg['params'] ?? [];
     try {
         switch ($msg['method']) {
             case 'initialize':
@@ -400,7 +442,10 @@ function handle($msg, ?string &$negotiated)
                 if (!in_array($name, $known, true)) {
                     return rpc_error($id, -32602, 'Unknown tool: ' . $name);
                 }
-                $args = isset($params['arguments']) && is_array($params['arguments']) ? $params['arguments'] : [];
+                $args = $params['arguments'] ?? [];
+                if (!is_array($args) || ($args !== [] && array_keys($args) === range(0, count($args) - 1))) {
+                    return rpc_error($id, -32602, 'arguments must be an object');
+                }
                 return rpc_result($id, call_tool($name, $args));
             case 'resources/list':
                 return rpc_result($id, ['resources' => resources()]);
@@ -439,7 +484,14 @@ if (isset($_GET['card'])) {
         http_response_code(204);
         exit;
     }
-    $json = json_encode(card(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "\n";
+    try {
+        $json = json_encode(card(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "\n";
+    } catch (Throwable $e) {
+        $json = @file_get_contents(__DIR__ . '/.well-known/mcp/server-card.json');
+        if ($json === false) {
+            send_json(503, ['error' => 'Server card unavailable']);
+        }
+    }
     $etag = '"' . substr(sha1($json), 0, 20) . '"';
     header('Cache-Control: public, max-age=3600');
     header('ETag: ' . $etag);
@@ -460,8 +512,9 @@ if ($origin !== '') {
     }
     header('Access-Control-Allow-Origin: ' . $origin);
     header('Vary: Origin');
-    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Methods: POST, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Accept, Authorization, MCP-Protocol-Version, Mcp-Session-Id, Mcp-Method, Mcp-Name, Last-Event-ID');
+    header('Access-Control-Max-Age: 86400');
 }
 if ($method === 'OPTIONS') {
     http_response_code(204);
@@ -490,8 +543,12 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 }
 $negotiated = null;
 if (is_array($msg) && array_keys($msg) === range(0, count($msg) - 1) && $msg !== []) {
+    if (($version !== '' && $version >= '2025-06-18') || count($msg) > MAX_BATCH) {
+        send_json(400, rpc_error(null, -32600, 'Send one JSON-RPC message per request (batches are not supported here)'));
+    }
     $answers = array_values(array_filter(array_map(function ($m) use (&$negotiated) { return handle($m, $negotiated); }, $msg)));
     if (!$answers) {
+        header('Content-Type: application/json');
         http_response_code(202);
         exit;
     }
@@ -499,6 +556,7 @@ if (is_array($msg) && array_keys($msg) === range(0, count($msg) - 1) && $msg !==
 }
 $answer = handle($msg, $negotiated);
 if ($answer === null) {
+    header('Content-Type: application/json');
     http_response_code(202);
     exit;
 }
