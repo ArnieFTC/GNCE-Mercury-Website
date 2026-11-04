@@ -44,48 +44,49 @@
     Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 
-  # Every page points agents to the site guide (llms.txt) and the MCP server card
+  # Every page points agents to the site guide (llms.txt) and the MCP server card. Values with quotes inside are
+  # wrapped in single quotes: LiteSpeed (Hostinger) keeps backslashes in "...\"..." literally.
   <FilesMatch "\.html$">
-    Header append Link "<https://mercury26413.org/llms.txt>; rel=\"describedby\"; type=\"text/plain\""
-    Header append Link "<https://mercury26413.org/.well-known/mcp/server-card.json>; rel=\"service-desc\"; type=\"application/json\""
+    Header append Link '<https://mercury26413.org/llms.txt>; rel="describedby"; type="text/plain"'
+    Header append Link '<https://mercury26413.org/.well-known/mcp/server-card.json>; rel="service-desc"; type="application/json"'
   </FilesMatch>
 
   # agent:begin: each page points to its Markdown version
   <Files "index.html">
-    Header append Link "<https://mercury26413.org/index.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/index.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "seasons.html">
-    Header append Link "<https://mercury26413.org/seasons.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/seasons.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "2026-2027.html">
-    Header append Link "<https://mercury26413.org/seasons/2026-2027.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/seasons/2026-2027.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "2025-2026.html">
-    Header append Link "<https://mercury26413.org/seasons/2025-2026.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/seasons/2025-2026.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "2024-2025.html">
-    Header append Link "<https://mercury26413.org/seasons/2024-2025.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/seasons/2024-2025.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "team.html">
-    Header append Link "<https://mercury26413.org/team.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/team.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "outreach.html">
-    Header append Link "<https://mercury26413.org/outreach.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/outreach.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "news.html">
-    Header append Link "<https://mercury26413.org/news.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/news.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "partners.html">
-    Header append Link "<https://mercury26413.org/partners.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/partners.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "resources.html">
-    Header append Link "<https://mercury26413.org/resources.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/resources.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "contact.html">
-    Header append Link "<https://mercury26413.org/contact.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/contact.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   <Files "terms.html">
-    Header append Link "<https://mercury26413.org/terms.html.md>; rel=\"alternate\"; type=\"text/markdown\""
+    Header append Link '<https://mercury26413.org/terms.html.md>; rel="alternate"; type="text/markdown"'
   </Files>
   # agent:end
 </IfModule>

@@ -855,7 +855,7 @@ def main():
     hta = (ROOT / ".htaccess").read_text(encoding="utf-8")
     hblock = "\n".join(
         f'  <Files "{p["path"].rsplit("/", 1)[-1]}">\n'
-        f'    Header append Link "<{md_url(p["path"])}>; rel=\\"alternate\\"; type=\\"text/markdown\\""\n'
+        f"    Header append Link '<{md_url(p['path'])}>; rel=\"alternate\"; type=\"text/markdown\"'\n"
         "  </Files>" for p in PAGES)
     hmark = re.compile(r"  # agent:begin.*?  # agent:end", re.S)
     if not hmark.search(hta):
