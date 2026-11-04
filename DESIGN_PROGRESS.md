@@ -57,7 +57,7 @@ not confirmed as final, so the post says "applying to sponsor" and promises no d
   from Andy's image: black on transparent, so it sits on the footer's white tiles; links to vulcanforms.com). It
   shows in every footer and in the "Supported by" lines (home and partners).
 - **News page** (`news.html`, new, in the main nav after Outreach and in every page's no-JS nav): the first post,
-  "Thank you, VulcanForms" (Nov 4, 2026), with Andy's banner image: thanks them for applying to sponsor at the
+  "Thank you, VulcanForms" (Nov 3, 2026), with Andy's banner image: thanks them for applying to sponsor at the
   Platinum level ($7,500+). Facts only from Andy, the package (what sponsorship funds cover) and the outreach
   page (the tour, now linked straight to `outreach.html#vulcanforms-tour`).
 - **Review** (3 lenses, each finding re-checked by a skeptic): 6 confirmed and fixed (the post had stated the
