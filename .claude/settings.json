@@ -1,0 +1,41 @@
+{
+  "enabledPlugins": {
+    "hallmark@hallmark": true,
+    "tastemaker@codeswithroh": true,
+    "taste-skill@taste-skill": true,
+    "accesslint@accesslint": true,
+    "chrome-devtools-mcp@chrome-devtools-plugins": true
+  },
+  "extraKnownMarketplaces": {
+    "hallmark": {
+      "source": {
+        "source": "github",
+        "repo": "nutlope/hallmark"
+      }
+    },
+    "codeswithroh": {
+      "source": {
+        "source": "github",
+        "repo": "codeswithroh/tastemaker"
+      }
+    },
+    "taste-skill": {
+      "source": {
+        "source": "github",
+        "repo": "Leonxlnx/taste-skill"
+      }
+    },
+    "accesslint": {
+      "source": {
+        "source": "github",
+        "repo": "accesslint/skills"
+      }
+    },
+    "chrome-devtools-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "ChromeDevTools/chrome-devtools-mcp"
+      }
+    }
+  }
+}
