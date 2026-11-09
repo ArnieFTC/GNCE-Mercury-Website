@@ -131,7 +131,15 @@ part("header", () => {
   // the header's real height (it grows with enlarged text spacing or a bigger default font) sets the page's
   // scroll padding and the header controls' scroll margin in css/style.css; without JavaScript the CSS fallback holds
   if ("ResizeObserver" in window) {
-    new ResizeObserver(() => document.documentElement.style.setProperty("--header-real", header.offsetHeight + "px")).observe(header);
+    // when it changes, a #target still sitting where the old padding put it (the browser's own jump to the address's
+    // #fragment while the page loads) is lined up again under the new height
+    const html = document.documentElement;
+    new ResizeObserver(() => {
+      const target = document.querySelector(":target");
+      const lined = target && Math.abs(target.getBoundingClientRect().top - parseFloat(getComputedStyle(html).scrollPaddingTop)) < 1;
+      html.style.setProperty("--header-real", header.offsetHeight + "px");
+      if (lined) target.scrollIntoView();
+    }).observe(header);
   }
 
   const btn = header.querySelector(".menu-btn");

@@ -1199,12 +1199,12 @@ h1 .lite, h2 .lite { display: block; font-weight: 400; color: var(--steel); }
 }
 /* short laptop screens (1100px+ wide, 920px tall or less): less room above the name and a smaller name, so the
    partner strip stays inside the first screen (moved here from round 7's block, where the rules above overrode it);
-   from 1240px wide and 880px tall there is room for a little more air under the bar */
+   from 1240px wide (1200px when 881-920px tall) there is room for a little more air under the bar */
 @media (min-width: 1100px) and (max-height: 920px) {
   .launch { padding-top: 16px; }
   .launch-head h1 { font-size: clamp(2.75rem, 1rem + 4.4vw, 4.5rem); }
 }
-@media (min-width: 1240px) and (max-height: 880px) { .launch { padding-top: 32px; } }
+@media (min-width: 1240px) and (max-height: 920px), (min-width: 1200px) and (min-height: 881px) and (max-height: 920px) { .launch { padding-top: 32px; } }
 .site-header :focus-visible { outline-color: var(--ink); }
 .brand, .brand:hover { color: var(--ink); }
 .brand-name small { color: var(--steel); }

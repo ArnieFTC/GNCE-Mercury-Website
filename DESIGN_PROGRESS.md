@@ -78,8 +78,10 @@ started with a filler word ("Contact / us", "Parts / of the robot") single-line,
   and their skeptics): 34 of the 37 fixed, the other three now no worse than the live site had them; 16 new small
   findings (11 after overlaps), fixed in a fourth pass. Final check: every h1 and h2 on the 12 pages breaks cleanly
   at 320-414 (no mid-word split, no line ending in "&", no overflow), and the header and menu behave from 320 to
-  1920. Three last polish items follow in the next commit. Not possible here: Safari, Firefox, real phones, screen
-  readers.
+  1920. The three small things it found are fixed in the commit after: 32px of air under the bar on 881-920px-tall
+  screens too (it was 24px there), "INTO THE DEEP" kept off a line ending in "THE" on the home and Seasons cards,
+  and a #target re-lined when the header grows after the browser's jump to it. Not possible here: Safari,
+  Firefox, real phones, screen readers.
 
 ## Round 8: after McLaren F1 (2026-11-09)
 
