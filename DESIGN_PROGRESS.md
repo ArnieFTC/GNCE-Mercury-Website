@@ -3,10 +3,12 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-03. **Round 3** rebuilt the Partners page as the sponsorship package's "sheet" (colour
-tier chart and budget donut), put outreach two programs per row, and removed every scroll-triggered motion;
-see "Round 3" below. **Round 2 ("Keynote stage")** set the colour world, type and surfaces. Work is committed
-straight to `main`, Andy's standing instruction; `main` is the live site._
+_Last updated: 2026-11-09. **Round 8** restyled the site after mclaren.com/racing/formula-1 (square corners, a
+floating white header bar, page and section headings in capitals with a lighter second line, square buttons with
+a drawn arrow), then fixed what a dual-agent Impeccable critique and two adversarial review rounds found; see
+"Round 8 follow-up" below. The four sponsorship tiers wear the colours of their names (Andy asked for that the
+same day); everything else, the budget included, stays black, white and grey. Work is committed straight to `main`,
+Andy's standing instruction; `main` is the live site._
 
 ## What happened
 
@@ -24,6 +26,60 @@ straight to `main`, Andy's standing instruction; `main` is the live site._
 4. **Round 2 (same day).** Andy: the colour "is so AI-like", the site "feels too static"; the boxes and
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
+
+## Round 8 follow-up: critique and adversarial review (2026-11-09)
+
+The Impeccable critique of round 8 (index, partners, team; two isolated reviewers, snapshot
+`.impeccable/critique/2026-11-09T05-19-09Z__index-html.md`) scored 20/28 (three heuristics n/a; 28/40 on the old
+scale) and found that the 8% wider capitals broke narrow columns, the floating bar showed slices of the page
+above it once scrolled, the light heading line was a formula, capitals and arrows were everywhere, and the
+photos stayed small. Fixed in a second pass:
+- Breakage: the partners h1 read "GNCE MERCU / RY" at 320 (now a normal space and a vw cap); "SPONSORSHIP" ran
+  32-44px into the tier table at 1100-1440 (the tiers h2 now spans the sheet); "ABOUT GNCE MERCURY" overflowed
+  its box (now a card heading, `h2.h3`, as is contact's "Joining the team"); "2026– / 27" splits (word joiners).
+- Header: flush and full-width under 720px; from 720px it floats lined up with the content (logo and button on
+  the content edges); scrolled, the 10px strip above it stays black; the open menu has a shadow, a scrim over
+  the page (a click on it closes the menu) and no second "Partner with us" from 561px.
+- Headings: the light line is Steel (Stage Light 2 on the stage); a heading splits only where it has a natural
+  first line ("Our 2026–27 / sponsors", "From 4 to 17 / FIRST LEGO League teams in Weston"; the old split put
+  the payoff "to 17" in the quiet line); every section-opening heading has the bar, no heading in a box does.
+  Game names were back to 125% (round 8 had squeezed them to 108%); captain names and post titles sentence case.
+- Capitals only on headings and buttons: the nav and text links are sentence case, like McLaren's. No arrow on
+  mail links and submit buttons; a down arrow on downloads. Square focus rings; a skip link visible on the bar.
+- Photos: the home outreach section now leads with its two photos side by side at one height (702x502 and
+  502x502 at 1440, half their pixel width), unboxed. A full content-width photo band was not done (see Next).
+- Smaller: reading width capped beside photos; results-table robot links underlined; Margaret's link a 24px
+  target; a rule between a closing stage band and the black footer; "Ryken RoboBowl" no longer grey in the
+  DECODE card (an older selector bug).
+
+Adversarial review (a workflow: five reviewers, each followed by a skeptic who had to reproduce every finding):
+37 confirmed, none refuted. The ones that mattered: the footer's VulcanForms logo link had an invisible focus
+ring on every page (light ring on its white tile; older than round 8); the menu's scrim missed the footer in
+browsers without `pagereveal`; focusing a header control mid-page made the page jump about 450px; the new
+reading-width cap squeezed the season spec-sheet title row; BIOBUZZ split "BIOBUZ / Z" at 900-968; Margaret's
+address split mid-word at 900-1097; the short-laptop stage rules had been dead since round 7 (overridden later
+in the file). Third pass fixed all of them except the photo-band decision, and made 14 headings whose second line
+started with a filler word ("Contact / us", "Parts / of the robot") single-line, with the same words.
+- Tier colours (Andy, during this round: "also have more color like the sponsorship category should be the color
+  of the tier name"): Bronze #C2814E, Silver #B9BEC6, Gold #E3BC59, Platinum #EAE8E1, softened from the package's
+  metals, on the tier header blocks, the ticks in each column and the sponsor-card tier tags only. Picked from
+  three rendered options (classic, softened, muted). Unlike the version Andy found AI-looking, the columns stay
+  neutral and the budget donut stays grey. Ink on the blocks 5.7:1 (Bronze) to 14.9:1; ticks 5.5:1 or better.
+- Skills that ran: Impeccable (critique with two isolated sub-agents, detector, craft floor), /vercel (live
+  guidelines, unchanged since round 8: passes; the header bar's shadow fades with a box-shadow transition, a
+  small paint cost kept on purpose), emil-design-eng (scrim fade, no motion on keyboard actions),
+  workflow-based adversarial verification. frontend-design is not installed in this session.
+
+- Verified (Playwright Chromium, the local static and Apache servers): interaction tests 67/67 and agent-readiness
+  tests 57/57 after every pass; agent files up to date (`tools/agent_files.py --check`); detector clean on all 12
+  pages (the config's file-only ignores each carry the reason they are false positives; rendered scans of partners
+  and team report nothing). Review round 1: five reviewers and five skeptics, sweeps of 219 page loads at 18
+  widths, 3,384 text measurements, 721 focus stops; 37 findings confirmed, none refuted. Round 2 (three re-checkers
+  and their skeptics): 34 of the 37 fixed, the other three now no worse than the live site had them; 16 new small
+  findings (11 after overlaps), fixed in a fourth pass. Final check: every h1 and h2 on the 12 pages breaks cleanly
+  at 320-414 (no mid-word split, no line ending in "&", no overflow), and the header and menu behave from 320 to
+  1920. Three last polish items follow in the next commit. Not possible here: Safari, Firefox, real phones, screen
+  readers.
 
 ## Round 8: after McLaren F1 (2026-11-09)
 
@@ -497,6 +553,13 @@ server):
 
 ## Next action
 
+0. Round 8 follow-up, open: (a) Andy's call on one content-width photo band (critique issue 5; e.g.
+   `fll_camp_3.jpg` or `mit_lab_1.jpg`, 1400px files, at most 1240px wide) on the home, Team or Outreach page;
+   (b) more colour, if Andy wants it beyond the tiers: only where it carries meaning (each season's game
+   colours, for example), never as an accent; (c) check on real devices what this machine cannot: iOS Safari (tapping the menu's scrim, the black strip
+   under rubber-band scrolling), Firefox (the `page-enter` fallback), Windows High Contrast, a screen reader on
+   the skip link and the menu; (d) with WCAG text spacing at 320, the outreach year tabs scroll sideways and the
+   tier header cells overflow (both older than round 8).
 1. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
    joining facts, States results, a sharp wide team photo, coach photos, and the package questions (B12–B14:
    the QR code's target, what "Growth" and "Can request media" mean, matching gifts), and B15 (is the

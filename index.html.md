@@ -69,7 +69,7 @@ Every qualifier and championship we have competed at, from our first qualifier i
 **Raised for parts, travel, and outreach:** [$20,000+](https://mercury26413.org/partners.html)  
 **Students reached:** [100,000+](https://www.instagram.com/gnce_mercury/)
 
-## The 2026–27 season so far
+## Our 2026–27 season calendar
 
 [Follow the build of The Mercinator](https://mercury26413.org/seasons/2026-2027.html)
 
@@ -94,7 +94,7 @@ In the summer we run a robotics camp, and during the school year we coach Weston
 
 [Meet the team](https://mercury26413.org/team.html) · [Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
 
-## From 4 FIRST LEGO League teams in Weston to 17
+## From 4 to 17 FIRST LEGO League teams in Weston
 
 [See all our outreach](https://mercury26413.org/outreach.html)
 

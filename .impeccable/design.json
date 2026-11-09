@@ -1,52 +1,37 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-03T00:00:00Z",
+  "generatedAt": "2026-11-09T00:00:00Z",
   "title": "Design System: GNCE Mercury",
   "extensions": {
     "colorMeta": {
-      "ink": {
-        "role": "primary",
-        "displayName": "Logo Outline Ink",
-        "canonical": "#16141C",
-        "tonalRamp": [
-          "#16141C",
-          "#2A2733",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#B8B6C2",
-          "#DCDBE2",
-          "#F1F1F4"
-        ]
-      },
       "stage": {
         "role": "neutral",
         "displayName": "Stage Black",
         "canonical": "#0B0A0F",
         "tonalRamp": [
-          "#0B0A0F",
-          "#18161F",
-          "#2A2733",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#DCDBE2",
-          "#F1F1F4"
+          "#121116",
+          "#2E2D32",
+          "#4D4C51",
+          "#6F6E73",
+          "#929195",
+          "#B7B7BA",
+          "#DBDADC",
+          "#F5F5F6"
         ]
       },
       "stage-raise": {
         "role": "neutral",
         "displayName": "Stage Step",
-        "canonical": "#18161F",
+        "canonical": "#201E29",
         "tonalRamp": [
-          "#0B0A0F",
-          "#18161F",
-          "#2A2733",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#DCDBE2",
-          "#F1F1F4"
+          "#12101A",
+          "#2E2C38",
+          "#4D4B57",
+          "#6F6D77",
+          "#92919A",
+          "#B7B6BE",
+          "#DBDAE0",
+          "#F5F4F9"
         ]
       },
       "on-stage": {
@@ -54,29 +39,29 @@
         "displayName": "Stage Light",
         "canonical": "#EFEEF3",
         "tonalRamp": [
-          "#2A2733",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#A09DAC",
-          "#CFCDD8",
-          "#EFEEF3",
-          "#FFFFFF"
+          "#121112",
+          "#2E2D2F",
+          "#4D4D4F",
+          "#6F6E71",
+          "#929195",
+          "#B7B7BB",
+          "#DBDADF",
+          "#F5F4F9"
         ]
       },
       "on-stage-2": {
         "role": "neutral",
-        "displayName": "Stage Dim",
-        "canonical": "#A09DAC",
+        "displayName": "Stage Light 2",
+        "canonical": "#C2BFCD",
         "tonalRamp": [
-          "#2A2733",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#A09DAC",
-          "#CFCDD8",
-          "#EFEEF3",
-          "#FFFFFF"
+          "#121115",
+          "#2E2D33",
+          "#4D4C54",
+          "#6F6D77",
+          "#93909D",
+          "#B8B5C3",
+          "#DBD8E7",
+          "#F6F3FF"
         ]
       },
       "paper": {
@@ -84,156 +69,216 @@
         "displayName": "Paper",
         "canonical": "#FFFFFF",
         "tonalRamp": [
-          "#16141C",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#DCDBE2",
-          "#E3E2E8",
-          "#F1F1F4",
-          "#FFFFFF"
+          "#121212",
+          "#2E2E2E",
+          "#4D4D4D",
+          "#6F6F6F",
+          "#929292",
+          "#B7B7B7",
+          "#DBDBDB",
+          "#F5F5F5"
         ]
       },
       "alu": {
         "role": "neutral",
         "displayName": "Aluminium",
-        "canonical": "#F1F1F4",
+        "canonical": "#E9E9EE",
         "tonalRamp": [
-          "#16141C",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#DCDBE2",
-          "#E3E2E8",
-          "#F1F1F4",
-          "#FFFFFF"
+          "#111112",
+          "#2E2E2F",
+          "#4D4D4F",
+          "#6E6E71",
+          "#929295",
+          "#B7B7BB",
+          "#DADADF",
+          "#F4F4FA"
         ]
       },
       "alu-deep": {
         "role": "neutral",
         "displayName": "Aluminium Deep",
-        "canonical": "#E3E2E8",
+        "canonical": "#DAD9E1",
         "tonalRamp": [
-          "#16141C",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#DCDBE2",
-          "#E3E2E8",
-          "#F1F1F4",
-          "#FFFFFF"
+          "#121113",
+          "#2E2D30",
+          "#4D4C50",
+          "#6E6E73",
+          "#929198",
+          "#B7B6BE",
+          "#DBDAE2",
+          "#F5F4FC"
         ]
       },
       "line": {
         "role": "neutral",
         "displayName": "Data Line",
-        "canonical": "#DCDBE2",
+        "canonical": "#CDCCD6",
         "tonalRamp": [
-          "#16141C",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#CBC9D3",
-          "#DCDBE2",
-          "#F1F1F4",
-          "#FFFFFF"
+          "#111114",
+          "#2E2D31",
+          "#4D4C52",
+          "#6E6E74",
+          "#929199",
+          "#B7B6C0",
+          "#DAD9E3",
+          "#F5F4FE"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Logo Outline Ink",
+        "canonical": "#16141C",
+        "tonalRamp": [
+          "#121018",
+          "#2E2C35",
+          "#4E4C54",
+          "#6F6D75",
+          "#929197",
+          "#B8B6BC",
+          "#DBDADE",
+          "#F5F4F8"
         ]
       },
       "steel": {
         "role": "neutral",
         "displayName": "Steel",
-        "canonical": "#5C5967",
+        "canonical": "#4A4755",
         "tonalRamp": [
-          "#16141C",
-          "#2A2733",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#B8B6C2",
-          "#DCDBE2",
-          "#F1F1F4"
+          "#12101A",
+          "#2E2C38",
+          "#4E4B59",
+          "#6F6C7B",
+          "#93909D",
+          "#B8B5C1",
+          "#DBD9E3",
+          "#F5F4FC"
         ]
       },
       "quiet": {
         "role": "neutral",
         "displayName": "Quiet",
-        "canonical": "#8B8896",
+        "canonical": "#7F7C8A",
         "tonalRamp": [
-          "#16141C",
-          "#2A2733",
-          "#45424F",
-          "#5C5967",
-          "#8B8896",
-          "#B8B6C2",
-          "#DCDBE2",
-          "#F1F1F4"
+          "#121017",
+          "#2E2C35",
+          "#4E4B57",
+          "#6F6C7A",
+          "#93909E",
+          "#B8B5C3",
+          "#DBD9E5",
+          "#F6F3FE"
+        ]
+      },
+      "box-line": {
+        "role": "neutral",
+        "displayName": "Box Line",
+        "canonical": "#C4C3CC",
+        "tonalRamp": [
+          "#111114",
+          "#2E2D31",
+          "#4D4C51",
+          "#6E6E74",
+          "#929199",
+          "#B7B6BF",
+          "#DAD9E3",
+          "#F5F4FD"
+        ]
+      },
+      "ink-lift": {
+        "role": "neutral",
+        "displayName": "Ink Lift",
+        "canonical": "#2C2935",
+        "tonalRamp": [
+          "#12101A",
+          "#2F2C38",
+          "#4E4B57",
+          "#6F6D78",
+          "#93909B",
+          "#B8B6BF",
+          "#DBD9E0",
+          "#F5F4FA"
+        ]
+      },
+      "on-stage-3": {
+        "role": "neutral",
+        "displayName": "Stage Dim",
+        "canonical": "#A09DAC",
+        "tonalRamp": [
+          "#121116",
+          "#2E2C34",
+          "#4D4B56",
+          "#6F6D79",
+          "#93909F",
+          "#B8B5C4",
+          "#DBD8E7",
+          "#F6F3FF"
         ]
       },
       "bronze": {
         "role": "tertiary",
         "displayName": "Bronze",
-        "canonical": "#C27A3A",
+        "canonical": "#C2814E",
         "tonalRamp": [
-          "#3E2410",
-          "#5F3818",
-          "#844F24",
-          "#C27A3A",
-          "#D39563",
-          "#E2B48E",
-          "#F0D5BD",
-          "#FAF0E6"
+          "#240800",
+          "#482200",
+          "#703F14",
+          "#9A5E2C",
+          "#C2814E",
+          "#E9A775",
+          "#FFCDA1",
+          "#FFE9C1"
         ]
       },
       "silver": {
         "role": "tertiary",
         "displayName": "Silver",
-        "canonical": "#C3C7CF",
+        "canonical": "#B9BEC6",
         "tonalRamp": [
-          "#2C2C32",
-          "#4A4D54",
-          "#6E727A",
-          "#999DA6",
-          "#C3C7CF",
-          "#D6D9DF",
-          "#E7E9ED",
-          "#F5F6F8"
+          "#101214",
+          "#2C2E31",
+          "#4A4D52",
+          "#6B6F75",
+          "#8E929A",
+          "#B3B8C0",
+          "#D6DBE3",
+          "#F1F5FD"
         ]
       },
       "gold": {
         "role": "tertiary",
         "displayName": "Gold",
-        "canonical": "#D9AC3C",
+        "canonical": "#E3BC59",
         "tonalRamp": [
-          "#302717",
-          "#5A4513",
-          "#87661B",
-          "#B38A28",
-          "#D9AC3C",
-          "#E5C26E",
-          "#F0DAA4",
-          "#FAF2DD"
+          "#1B0F00",
+          "#3C2B00",
+          "#604A04",
+          "#876A1A",
+          "#B08D2F",
+          "#D9B24F",
+          "#FED674",
+          "#FFF197"
         ]
       },
       "platinum": {
         "role": "tertiary",
         "displayName": "Platinum",
-        "canonical": "#E6E6E4",
+        "canonical": "#EAE8E1",
         "tonalRamp": [
-          "#323235",
-          "#55555A",
-          "#7D7D80",
-          "#A8A8A9",
-          "#CFCFCB",
-          "#E6E6E4",
-          "#F0F0EE",
-          "#FAFAF9"
+          "#121210",
+          "#2E2E2C",
+          "#4E4D4A",
+          "#706F6A",
+          "#94928D",
+          "#B9B7B1",
+          "#DDDBD4",
+          "#F7F5EE"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "Home h1 \"GNCE Mercury\" only (--fs-hero)."
+        "purpose": "Home h1 \"GNCE Mercury\" only: 800, capitals, 108% width, 2.75-5rem, with a 400 second line \"FTC team 26413\"."
       },
       "machine-name": {
         "displayName": "Machine name",
@@ -241,11 +286,11 @@
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Inner page and partners head h1 (--fs-xl), normal width."
+        "purpose": "Inner page and partners head h1 (--fs-xl, capped at 10.2vw on phones): 700, capitals, 108% width, the 28x4 bar above."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Section h2 (--fs-lg)."
+        "purpose": "Section h2 (--fs-lg): 700, capitals, 108% width; a lighter Steel second line only where the heading has a natural first line; the 28x4 bar before section openers, never in a box."
       },
       "subtitle": {
         "displayName": "Subtitle",
@@ -257,7 +302,7 @@
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Buttons, nav, spec terms, dates, captions; tabular lining figures for every number."
+        "purpose": "Spec terms, dates, captions; buttons in capitals 0.8125rem tracked 0.04em; nav and text links sentence case; tabular lining figures for every number."
       }
     },
     "shadows": [
@@ -277,14 +322,19 @@
         "purpose": "Part markers over the DECODE render."
       },
       {
-        "name": "chosen-segment",
-        "value": "0 1px 2px rgba(22, 20, 28, 0.08), 0 4px 14px rgba(22, 20, 28, 0.08)",
-        "purpose": "The selected outreach year pill only."
+        "name": "focus-halo",
+        "value": "0 0 0 3px rgba(22, 20, 28, 0.14)",
+        "purpose": "Focused form fields only (buttons have no hover ring since round 8)."
       },
       {
-        "name": "hover-halo",
-        "value": "0 0 0 3px rgba(22, 20, 28, 0.14)",
-        "purpose": "Ring on hovered pill buttons and focused fields; rgba(239, 238, 243, 0.28) on the stage."
+        "name": "header-bar",
+        "value": "0 8px 24px rgba(11, 10, 15, 0.18)",
+        "purpose": "The floating white header bar once the page scrolls (eases in over 200ms)."
+      },
+      {
+        "name": "menu-panel",
+        "value": "0 24px 48px rgba(11, 10, 15, 0.35)",
+        "purpose": "The open phone/tablet menu panel, clipped so it never falls on the bar; a 55% stage scrim dims the page."
       }
     ],
     "motion": [
@@ -305,8 +355,8 @@
       },
       {
         "name": "header-menu",
-        "value": "320ms",
-        "purpose": "Header tint on scroll, mobile menu drops in 8px."
+        "value": "200-320ms",
+        "purpose": "The bar's shadow eases in over 200ms once the page scrolls; the menu drops in 8px over 320ms over a 200ms scrim fade."
       },
       {
         "name": "panel-in",
@@ -331,7 +381,7 @@
       {
         "name": "no-scroll-motion",
         "value": "none",
-        "purpose": "Nothing moves, fades, pins or changes while scrolling (Andy, round 3); only the header tint reacts to scroll."
+        "purpose": "Nothing moves, fades, pins or changes while scrolling (Andy, round 3); only the header bar's shadow reacts to scroll."
       },
       {
         "name": "donut-highlight",
@@ -360,15 +410,15 @@
       },
       {
         "name": "phone-wide",
-        "value": "559/560px"
+        "value": "559/560/561px"
       },
       {
         "name": "pager",
         "value": "700px"
       },
       {
-        "name": "tablet-narrow",
-        "value": "720px"
+        "name": "floating-header",
+        "value": "719/720px"
       },
       {
         "name": "entries-2",
@@ -408,7 +458,7 @@
       },
       {
         "name": "short-screen",
-        "value": "max-height 880px"
+        "value": "max-height 920px (32px of air from 1240px wide and 880px tall)"
       },
       {
         "name": "short-screen-specs",
@@ -416,7 +466,7 @@
       },
       {
         "name": "tall-screen",
-        "value": "min-height 881px"
+        "value": "min-height 921px"
       },
       {
         "name": "contact-list",
@@ -429,25 +479,25 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Ink pill for the main action on light grounds.",
+      "description": "Square ink button for the main action on light grounds: capitals, ending in a drawn north-east arrow (none on mail links, a down arrow on downloads).",
       "html": "<a class=\"ds-btn\" href=\"#\">Email us about sponsoring</a>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:999px;background:var(--ink,#16141C);color:#fff;border:1.5px solid var(--ink,#16141C);font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),transform 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{background:#0B0A0F;border-color:#0B0A0F;box-shadow:0 0 0 3px rgba(22,20,28,0.14)}.ds-btn:active{transform:scale(0.97)}.ds-btn:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
+      "css": ".ds-btn{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:var(--ink,#16141C);color:#fff;border:1.5px solid var(--ink,#16141C);font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),transform 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{background:#2C2935;border-color:#2C2935}.ds-btn:active{transform:scale(0.97)}.ds-btn:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
     },
     {
       "name": "Line Button",
       "kind": "button",
       "refersTo": "button-line",
-      "description": "Secondary pill on light grounds; fills ink on hover.",
+      "description": "Secondary square button on light grounds; fills ink on hover.",
       "html": "<a class=\"ds-btn-line\" href=\"#\">Download the package</a>",
-      "css": ".ds-btn-line{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:999px;background:transparent;color:#16141C;border:1.5px solid #BAB8C4;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),color 200ms}.ds-btn-line:hover{background:#16141C;border-color:#16141C;color:#fff}.ds-btn-line:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
+      "css": ".ds-btn-line{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:transparent;color:#16141C;border:1.5px solid #BAB8C4;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),color 200ms}.ds-btn-line:hover{background:#16141C;border-color:#16141C;color:#fff}.ds-btn-line:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
     },
     {
       "name": "Stage Button",
       "kind": "button",
       "refersTo": "button-light",
-      "description": "Main action on the stage: Stage Light pill, ink text.",
+      "description": "Main action on the stage: square Stage Light button, ink text, capitals.",
       "html": "<div class=\"ds-stage\"><a class=\"ds-btn-light\" href=\"#\">Partner with us</a></div>",
-      "css": ".ds-stage{background:#0B0A0F;padding:24px;border-radius:14px}.ds-btn-light{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:999px;background:#EFEEF3;color:#16141C;border:1.5px solid #EFEEF3;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-light:hover{background:#fff;border-color:#fff;box-shadow:0 0 0 3px rgba(239,238,243,0.28)}.ds-btn-light:focus-visible{outline:2px solid #EFEEF3;outline-offset:3px}"
+      "css": ".ds-stage{background:#0B0A0F;padding:24px;border-radius:0}.ds-btn-light{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:#EFEEF3;color:#16141C;border:1.5px solid #EFEEF3;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-light:hover{background:#fff;border-color:#fff}.ds-btn-light:focus-visible{outline:2px solid #EFEEF3;outline-offset:3px}"
     },
     {
       "name": "Toggle",
@@ -455,7 +505,7 @@
       "refersTo": "toggle",
       "description": "Crew filter and part buttons; pressed = ink.",
       "html": "<div class=\"ds-toggles\"><button class=\"ds-toggle\" aria-pressed=\"true\">All</button><button class=\"ds-toggle\" aria-pressed=\"false\">CAD</button></div>",
-      "css": ".ds-toggles{display:flex;gap:8px}.ds-toggle{min-height:42px;padding:8px 18px;border-radius:999px;background:#fff;border:1px solid #DCDBE2;color:#16141C;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;cursor:pointer;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),border-color 200ms}.ds-toggle:hover{border-color:#16141C}.ds-toggle[aria-pressed=true]{background:#16141C;border-color:#16141C;color:#fff}.ds-toggle:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
+      "css": ".ds-toggles{display:flex;gap:8px}.ds-toggle{min-height:42px;padding:8px 18px;border-radius:0;background:#fff;border:1px solid #DCDBE2;color:#16141C;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;cursor:pointer;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),border-color 200ms}.ds-toggle:hover{border-color:#16141C}.ds-toggle[aria-pressed=true]{background:#16141C;border-color:#16141C;color:#fff}.ds-toggle:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
     },
     {
       "name": "Text Field",
@@ -463,23 +513,23 @@
       "refersTo": "text-field",
       "description": "Contact form field with label above.",
       "html": "<label class=\"ds-field\"><span>Email</span><input type=\"email\"></label>",
-      "css": ".ds-field{display:grid;gap:6px;font-family:var(--font,Archivo,sans-serif)}.ds-field span{font-weight:600;font-size:0.9375rem}.ds-field input{min-height:50px;padding:13px 16px;background:#fff;border:1px solid #CBC9D3;border-radius:10px;color:#16141C;font:inherit;font-size:1rem;transition:border-color 160ms cubic-bezier(0.16,1,0.3,1),box-shadow 160ms}.ds-field input:hover{border-color:#5C5967}.ds-field input:focus-visible{outline:none;border-color:#16141C;box-shadow:0 0 0 3px rgba(22,20,28,0.14)}"
+      "css": ".ds-field{display:grid;gap:6px;font-family:var(--font,Archivo,sans-serif)}.ds-field span{font-weight:600;font-size:0.9375rem}.ds-field input{min-height:50px;padding:13px 16px;background:#fff;border:1px solid #CBC9D3;border-radius:0;color:#16141C;font:inherit;font-size:1rem;transition:border-color 160ms cubic-bezier(0.16,1,0.3,1),box-shadow 160ms}.ds-field input:hover{border-color:#5C5967}.ds-field input:focus-visible{outline:none;border-color:#16141C;box-shadow:0 0 0 3px rgba(22,20,28,0.14)}"
     },
     {
       "name": "Navigation",
       "kind": "nav",
       "refersTo": "",
-      "description": "Stage-black header with pill links and the Partner pill.",
+      "description": "A white bar floating over the dark page heads (flush on phones): ink logo name, sentence-case links, the current page underlined 3px, an ink Partner button in capitals.",
       "html": "<nav class=\"ds-nav\"><b>GNCE Mercury</b><a href=\"#\">Seasons</a><a href=\"#\" aria-current=\"page\">Partners</a><a class=\"ds-cta\" href=\"#\">Partner with us</a></nav>",
-      "css": ".ds-nav{display:flex;align-items:center;gap:2px;height:56px;padding:0 16px;background:#0B0A0F;font-family:var(--font,Archivo,sans-serif)}.ds-nav b{color:#EFEEF3;margin-right:auto;font-weight:600}.ds-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 12px;border-radius:999px;color:#CFCDD8;font-weight:500;font-size:0.875rem;text-decoration:none;transition:color 160ms,background-color 160ms}.ds-nav a:hover{color:#fff;background:rgba(239,238,243,0.08)}.ds-nav a[aria-current=page]{color:#fff;background:rgba(239,238,243,0.12)}.ds-nav a.ds-cta{min-height:36px;padding:7px 16px;margin-left:12px;background:#EFEEF3;color:#16141C;font-weight:600}.ds-nav a:focus-visible{outline:2px solid #EFEEF3;outline-offset:3px}"
+      "css": ".ds-nav{display:flex;align-items:center;gap:2px;height:56px;padding:0 16px;background:#fff;box-shadow:0 8px 24px rgba(11,10,15,0.18);font-family:var(--font,Archivo,sans-serif)}.ds-nav b{color:#16141C;margin-right:auto;font-weight:600}.ds-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 12px;border-radius:0;color:#16141C;font-weight:500;font-size:0.9375rem;text-decoration:none;transition:background-color 160ms}.ds-nav a:hover{background:#E9E9EE}.ds-nav a[aria-current=page]{font-weight:600;box-shadow:inset 0 -3px 0 #16141C}.ds-nav a.ds-cta{min-height:36px;padding:7px 16px;margin-left:12px;background:#16141C;color:#fff;font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase}.ds-nav a:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
     },
     {
       "name": "Tile",
       "kind": "card",
       "refersTo": "tile-on-white",
-      "description": "Flat filled tile, opposite ground to its band, no shadow.",
+      "description": "A square box: paper with a 1px Box Line on white and aluminium bands, no shadow.",
       "html": "<div class=\"ds-tile\"><h3>Host a student visit</h3><p>We organize tours of engineering firms and research labs.</p></div>",
-      "css": ".ds-tile{background:#F1F1F4;border-radius:14px;padding:28px;color:#16141C;font-family:var(--font,Archivo,sans-serif);max-width:360px}.ds-tile h3{margin:0 0 8px;font-size:1.3125rem;font-weight:600;letter-spacing:-0.006em}.ds-tile p{margin:0;line-height:1.55}"
+      "css": ".ds-tile{background:#fff;border:1px solid #C4C3CC;border-radius:0;padding:28px;color:#16141C;font-family:var(--font,Archivo,sans-serif);max-width:360px}.ds-tile h3{margin:0 0 8px;font-size:1.3125rem;font-weight:600;letter-spacing:-0.006em}.ds-tile p{margin:0;line-height:1.55}"
     },
     {
       "name": "Season Bay",
@@ -487,25 +537,33 @@
       "refersTo": "",
       "description": "Signature: robot in a spotlight on the stage floor, wide machine name below.",
       "html": "<div class=\"ds-bay\"><div class=\"ds-bay-stage\"><div class=\"ds-robot\"></div></div><div class=\"ds-bay-no\"><i></i>2025–26</div><div class=\"ds-bay-name\">DECODE</div></div>",
-      "css": ".ds-bay{background:#0B0A0F;color:#EFEEF3;padding:20px;text-align:center;font-family:var(--font,Archivo,sans-serif);border-radius:18px;width:260px}.ds-bay-stage{position:relative;height:160px;display:flex;align-items:flex-end;justify-content:center;border-bottom:1px solid rgba(239,238,243,0.16)}.ds-bay-stage::before{content:'';position:absolute;inset:-20% -12% -2px;background:radial-gradient(45% 16% at 50% 94%,rgba(255,255,255,0.22),transparent 72%),linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,0.07) 55%,rgba(255,255,255,0));clip-path:polygon(38% 0,62% 0,100% 100%,0 100%)}.ds-robot{position:relative;width:90px;height:100px;margin-bottom:14px;border-radius:10px;background:linear-gradient(160deg,#9AA0A8,#45424F);filter:drop-shadow(0 22px 22px rgba(0,0,0,0.6))}.ds-bay-no{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:12px;font-size:0.875rem;font-variant-numeric:tabular-nums}.ds-bay-no i{width:6px;height:6px;border-radius:50%;background:#EFEEF3}.ds-bay-name{font-stretch:125%;font-weight:700;font-size:1.25rem}"
+      "css": ".ds-bay{background:#0B0A0F;color:#EFEEF3;padding:20px;text-align:center;font-family:var(--font,Archivo,sans-serif);border-radius:0;width:260px}.ds-bay-stage{position:relative;height:160px;display:flex;align-items:flex-end;justify-content:center;border-bottom:1px solid rgba(239,238,243,0.16)}.ds-bay-stage::before{content:'';position:absolute;inset:-20% -12% -2px;background:radial-gradient(45% 16% at 50% 94%,rgba(255,255,255,0.22),transparent 72%),linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,0.07) 55%,rgba(255,255,255,0));clip-path:polygon(38% 0,62% 0,100% 100%,0 100%)}.ds-robot{position:relative;width:90px;height:100px;margin-bottom:14px;border-radius:0;background:linear-gradient(160deg,#9AA0A8,#45424F);filter:drop-shadow(0 22px 22px rgba(0,0,0,0.6))}.ds-bay-no{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:12px;font-size:0.875rem;font-variant-numeric:tabular-nums}.ds-bay-no i{width:6px;height:6px;border-radius:50%;background:#EFEEF3}.ds-bay-name{font-stretch:125%;font-weight:700;font-size:1.25rem}"
+    },
+    {
+      "name": "Tier Headers",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Partners tier chart: four solid header blocks, each in the colour of its tier's name, ink text; neutral columns under them with ticks in the metal.",
+      "html": "<div class=\"ds-tiers\"><b style=\"background:#C2814E\">Bronze<span>$500+</span></b><b style=\"background:#B9BEC6\">Silver<span>$1,500+</span></b><b style=\"background:#E3BC59\">Gold<span>$3,000+</span></b><b style=\"background:#EAE8E1\">Platinum<span>$7,500+</span></b></div>",
+      "css": ".ds-tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:#0B0A0F;padding:16px;font-family:var(--font,Archivo,sans-serif);width:520px}.ds-tiers b{display:grid;justify-items:center;padding:12px 8px 11px;color:#16141C;font-weight:600;font-size:0.9375rem}.ds-tiers span{font-size:1.375rem;letter-spacing:-0.01em;font-variant-numeric:tabular-nums}"
     },
     {
       "name": "Budget Donut Legend",
       "kind": "custom",
       "refersTo": "",
-      "description": "Partners budget: the real table is the donut's legend; a 12px swatch in the line's colour, the line, its tabular amount and share, on the stage.",
-      "html": "<table class=\"ds-budget\"><tr><th><i style=\"background:#895012\"></i>Travel</th><td class=\"a\">$19,950</td><td class=\"p\">38%</td></tr><tr><th><i style=\"background:#BC8647\"></i>Robot parts and electronics</th><td class=\"a\">$11,950</td><td class=\"p\">23%</td></tr></table>",
-      "css": ".ds-budget{background:#0B0A0F;color:#EFEEF3;border-collapse:collapse;font-family:var(--font,Archivo,sans-serif);font-size:15px;width:420px}.ds-budget th,.ds-budget td{padding:8px 12px;border-top:1px solid rgba(239,238,243,0.14);text-align:left;font-weight:500}.ds-budget i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:10px;vertical-align:-1px}.ds-budget .a{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}.ds-budget .p{text-align:right;color:#A09DAC;font-variant-numeric:tabular-nums}"
+      "description": "Partners budget: the real table is the donut's legend; a 12px grey swatch per line (largest brightest), the line, its tabular amount and share, on the stage.",
+      "html": "<table class=\"ds-budget\"><tr><th><i style=\"background:#F2F1F5\"></i>Travel</th><td class=\"a\">$19,950</td><td class=\"p\">38%</td></tr><tr><th><i style=\"background:#CFCDD6\"></i>Robot parts and electronics</th><td class=\"a\">$11,950</td><td class=\"p\">23%</td></tr></table>",
+      "css": ".ds-budget{background:#0B0A0F;color:#EFEEF3;border-collapse:collapse;font-family:var(--font,Archivo,sans-serif);font-size:15px;width:420px}.ds-budget th,.ds-budget td{padding:8px 12px;border-top:1px solid rgba(239,238,243,0.14);text-align:left;font-weight:500}.ds-budget i{display:inline-block;width:12px;height:12px;border-radius:0;margin-right:10px;vertical-align:-1px}.ds-budget .a{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}.ds-budget .p{text-align:right;color:#C2BFCD;font-variant-numeric:tabular-nums}"
     }
   ],
   "narrative": {
-    "northStar": "The Keynote Stage",
-    "overview": "Each season's robot is launched the way a hardware company launches a product: the machine alone on an almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners. Light is the accent. There is no brand hue: colour comes only from the robots, the photos, the Mercury logo (kept as-is) and, on the partners page, the sponsorship package's four tier metals and the budget donut's validated palette (Andy asked for that page to be colourful, like the package).\n\nTwo grounds carry the site. The stage (home launch, every season head, the partners package sheet (head, tier chart and budget donut), and the closing \"join or partner\" bands on the home, team and partners pages) and the reading ground (white, with aluminium-grey bands). Sections run the full width of the page and are separated by a change of ground, never by hairlines. Since round 7 (Andy: \"reference the VulcanForms website\") the things inside a section are boxes drawn like the cells of an engineering spec sheet: white, a 1px #C4C3CC line and near-square 6px corners (Stage Step with a light line on the stage). Nothing floats: the rounded panels on a grey ground from round 6 were removed because Andy said they looked \"so AI\". Buttons are pills, and nothing casts a shadow except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).\n\nThe neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple, TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.",
+    "northStar": "The Keynote Stage, after McLaren (round 8)",
+    "overview": "Each season's robot is launched the way a hardware company launches a product: the machine alone on an almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners. Light is the accent. There is no brand hue: colour comes only from the robots, the photos, the Mercury logo (kept as-is) and, on the partners page, the four sponsorship tiers in the colours of their names (Andy, 2026-11-09: \"the sponsorship category should be the color of the tier name\"); the budget donut is grey.\n\nTwo grounds carry the site. The stage (home launch, every season head, the partners package sheet (head, tier chart and budget donut), and the closing \"join or partner\" bands on the home, team and partners pages) and the reading ground (white, with aluminium-grey bands). Sections run the full width of the page and are separated by a change of ground, never by hairlines. Since round 7 (Andy: \"reference the VulcanForms website\") the things inside a section are boxes drawn like the cells of an engineering spec sheet: white, a 1px #C4C3CC line and near-square 6px corners (Stage Step with a light line on the stage). Nothing floats: the rounded panels on a grey ground from round 6 were removed because Andy said they looked \"so AI\". Buttons are pills, and nothing casts a shadow except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).\n\nThe neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple, TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.",
     "keyCharacteristics": [
       "Two grounds: the near-black stage for launches and closing calls, white and aluminium grey for reading.",
-      "No brand hue; light, robots, photos, the logo carry the colour, plus the tier metals and the budget palette on the partners page.",
-      "Archivo only: normal width at 700 for h1 and h2 (600 below), 125% width at 700 for robot names, uppercase tracked 600 menu links, tabular figures for every number.",
-      "Full-width sections; every item (a write-up, a member, a program, a season, a post, a table, a tile) is a white box with a 1px line and 6px corners. Pill buttons, no section hairlines, no shadows.",
+      "No brand hue; light, robots, photos and the logo carry the colour, and the four sponsorship tiers wear the colour of their names. The budget donut is grey.",
+      "Archivo only: page and section headings in capitals at 108% width and 700 (a lighter second line where the heading has a natural one), 125% width at 700 for robot and game names, sentence-case nav and text links, tabular figures for every number.",
+      "Full-width sections; every item (a write-up, a member, a program, a season, a post, a table, a tile) is a white box with a 1px line and square corners. Square buttons, no section hairlines, no shadows (except the floating header bar once the page scrolls, and the open menu).",
       "Selection shown as light brightening (the chosen robot steps into a spotlight), never as a sliding bar.",
       "One authored load moment on the stage; everything else answers a click, tap or key. Nothing moves, fades, pins or changes while scrolling."
     ],
@@ -517,17 +575,17 @@
       },
       {
         "name": "The Spec Box Rule",
-        "body": "Sections are full-width bands (white, aluminium or the stage); every inner page head is a stage band. Inside a section, each item is a box: paper fill, 1px `--box-line`, `--r-md` (6px) corners, on white and aluminium bands alike; on the stage, Stage Step with a 1px light line (`--box-line-stage`). Inside a box, quotes, chips and photo frames are filled aluminium, never boxed again (css/style.css \"Boxes\"). The footer is a stage band that closes every page the way the header opens it.",
+        "body": "Sections are full-width bands (white, aluminium or the stage); every inner page head is a stage band. Inside a section, each item is a box: paper fill, 1px `--box-line`, `--r-md` corners (0 since round 8), on white and aluminium bands alike; on the stage, Stage Step with a 1px light line (`--box-line-stage`). Inside a box, quotes, chips and photo frames are filled aluminium, never boxed again (css/style.css \"Boxes\"). The footer is a stage band that closes every page the way the header opens it.",
         "section": "colors"
       },
       {
-        "name": "The Metals Stay On The Partners Page Rule",
-        "body": "The tier metals and the budget palette colour the tier chart and the budget donut only. Text never wears them, except the tier names and amounts printed in ink on a metal fill; nowhere else on the site gets a brand colour from them.",
+        "name": "The Metals Name The Tiers Rule",
+        "body": "Each sponsorship tier wears the colour of its name, on its header block (ink text on it), the ticks in its column and its tag on a sponsor card. Nothing else on the site takes a metal: the column washes stay neutral, the budget donut stays grey, and text never wears one.",
         "section": "colors"
       },
       {
         "name": "The Width Is The Voice Rule",
-        "body": "Robot and game names go widest (125%, 700). Page and section headings go uppercase at 108% in two weights. Reading text stays at normal width in sentence case.",
+        "body": "Robot and game names go widest (125%, 700). Page and section headings go uppercase at 108%, in two weights where the heading has a natural first line. Reading text, nav and links stay at normal width in sentence case.",
         "section": "typography"
       },
       {
@@ -545,8 +603,8 @@
       "Do change colours, sizes, radii and spacing in `:root` in `css/style.css`, never in a component rule.",
       "Do use the stage only for a launch (home, season heads), the partners head with its tier and budget sheet, and the closing call to join or partner; put everything else on paper or aluminium.",
       "Do run sections the full width and put each item (a write-up, a member, a program, a season, a post, a table) in a white box with a 1px `--box-line` border, 6px corners and 16–24px padding.",
-      "Do keep every corner square, and end buttons and text links with the drawn arrow; use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.",
-      "Do set robot and game names at 125% width and 700, page and section headings uppercase at 108% in two weights (`<span class=\"lite\">` for the regular line), and everything else at normal width in sentence case.",
+      "Do keep every corner square, and end buttons and text links with the drawn arrow (none on mail links and submit buttons, a down arrow on downloads); use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.",
+      "Do set robot and game names at 125% width and 700, page and section headings uppercase at 108% (split into two weights with `<span class=\"lite\">` only where the heading has a natural first line), and everything else, nav and links included, at normal width in sentence case.",
       "Do give every date, amount, spec and result tabular figures.",
       "Do show a chosen state as light (brighter, full colour, filled dot) and write it to the URL when it is a view someone might share.",
       "Do let new content simply be there: no entrance animation for anything below the first screen.",
@@ -558,10 +616,10 @@
       "Don't add a brand hue, a purple or violet accent, or neon on black.",
       "Don't copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.",
       "Don't separate sections with hairlines; change the ground instead. Lines draw boxes and sit inside data, nowhere else.",
-      "Don't put shadows on boxes or buttons (the floating header bar's scrolled shadow is the one exception), round a corner, put a box inside a box, or float sections as rounded panels on a grey ground.",
-      "Don't bring colour back to the tier chart or the donut, or add an accent hue anywhere (Andy, 2026-11-09: \"just dont do the color it looks terrible\"); ink does the job McLaren's papaya does.",
+      "Don't put shadows on boxes or buttons (the floating header bar's scrolled shadow and the open menu are the exceptions), round a corner, put a box inside a box, or float sections as rounded panels on a grey ground.",
+      "Don't add an accent hue, colour the budget donut or tint the tier columns (Andy, 2026-11-09, on colour mockups: \"just dont do the color it looks terrible\"). The only colour beyond the content is the four tier metals, which he asked for later the same day (\"the sponsorship category should be the color of the tier name\"); ink does the job McLaren's papaya does.",
       "Don't add a second font family or system display faces.",
-      "Don't put small text labels (eyebrows) above headings or number the seasons 01/02/03; the 28×4px bar is the only mark above a heading.",
+      "Don't put small text labels (eyebrows) above headings or number the seasons 01/02/03; the 28×4px bar is the only mark above a heading, and it never goes on a heading inside a box.",
       "Don't add new load animations outside the stage, counters that tick up, or motion that ignores reduced motion.",
       "Don't generate or invent images, results, sponsors or numbers; leave \"TBD\" instead.",
       "Don't show a photo larger than its own pixels."

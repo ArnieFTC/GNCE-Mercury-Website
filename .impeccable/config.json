@@ -4,22 +4,13 @@
     "ignoreFiles": [],
     "ignoreValues": [
       {
-        "rule": "low-contrast",
-        "value": "*",
-        "files": [
-          "partners.html"
-        ],
-        "createdAt": "2026-11-03T19:51:31.316Z",
-        "reason": "File-only analysis misses the stage's inherited text colour (it reports #000 text, even on the h1); rendered detector and measured contrast scan pass: tier cells #EFEEF3 on their washes are 11-14:1"
-      },
-      {
         "rule": "cramped-padding",
         "value": "*",
         "files": [
           "partners.html"
         ],
         "createdAt": "2026-11-04T01:14:18.936Z",
-        "reason": "File-only analysis cannot evaluate clamp() padding: .band (clamp 44-76px block + container gutter) and .sponsor-card (clamp 20-28px / 20-36px) render well inset; the rendered detector passes"
+        "reason": "File-only analysis cannot evaluate clamp() padding: .band (clamp 44-76px block + container gutter), .sponsor-card (clamp 20-28px / 20-36px), the three .entries--ruled columns (16-24px inside their 1px line; text measured 17-27px in at 320 and 25-92px at 1440) and the .container row all render well inset; the rendered detector passes"
       },
       {
         "rule": "low-contrast",
@@ -77,6 +68,35 @@
         ],
         "createdAt": "2026-11-04T12:38:41.229Z",
         "reason": "File-only analysis misses padding: the static footer-legal row has padding-block 18px 28px under its 1px top rule, and .band/.resource-list li use clamp() padding; the rendered detector passes on both pages"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(0, 0, 0)",
+        "files": [
+          "index.html",
+          "seasons.html",
+          "seasons/2024-2025.html",
+          "seasons/2025-2026.html",
+          "seasons/2026-2027.html",
+          "team.html",
+          "outreach.html",
+          "news.html",
+          "partners.html",
+          "resources.html",
+          "contact.html",
+          "terms.html"
+        ],
+        "createdAt": "2026-11-09T11:46:34.000Z",
+        "reason": "File-only analysis cannot resolve the stage's inherited text colour and reads it as black: the page-head h1s render #EFEEF3 (DESIGN.md on-stage) and the season-head breadcrumb links #C2BFCD (on-stage-2), both on #0B0A0F; the rendered detector reports nothing (round 8 follow-up, 2026-11-09)"
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "team.html"
+        ],
+        "createdAt": "2026-11-09T11:46:34.000Z",
+        "reason": "File-only analysis takes the About card heading (h2.h3, 21px) as the h2 role; the section h2s render at 28-44px (--fs-lg) over 17px body text, and the rendered detector reports nothing (round 8 follow-up)"
       }
     ]
   }

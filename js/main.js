@@ -110,14 +110,29 @@ part("header", () => {
         <svg viewBox="0 0 18 18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M2 5h14M2 13h14"/></svg>
         <span>Menu</span>
       </button>
-      <nav class="nav" id="site-nav" aria-label="Main">${links}<a class="btn nav-cta" href="${root}partners.html">Partner with us</a></nav>
+      <nav class="nav" id="site-nav" aria-label="Main">${links}<a class="btn nav-cta" href="${root}partners.html"${page === "partners" ? ' aria-current="page"' : ""}>Partner with us</a></nav>
       <a class="btn header-cta" href="${root}partners.html"${page === "partners" ? ' aria-current="page"' : ""}>Partner with us</a>
     </div>`;
   const skip = document.createElement("a");
   skip.className = "skip-link";
   skip.href = "#main";
   skip.textContent = "Skip to content";
+  // the skip link moves keyboard focus into main, not only the view: main takes focus once, then lets it go
+  // (on blur, or on the next press inside it, so a later click and Tab carry on from where you clicked)
+  skip.addEventListener("click", e => {
+    const main = document.getElementById("main");
+    if (e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || !main || main.hasAttribute("tabindex")) return;
+    main.tabIndex = -1;
+    const drop = () => { main.removeAttribute("tabindex"); main.removeEventListener("blur", drop); main.removeEventListener("pointerdown", drop); };
+    main.addEventListener("blur", drop);
+    main.addEventListener("pointerdown", drop);
+  });
   document.body.prepend(skip, header);
+  // the header's real height (it grows with enlarged text spacing or a bigger default font) sets the page's
+  // scroll padding and the header controls' scroll margin in css/style.css; without JavaScript the CSS fallback holds
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(() => document.documentElement.style.setProperty("--header-real", header.offsetHeight + "px")).observe(header);
+  }
 
   const btn = header.querySelector(".menu-btn");
   const label = btn.querySelector("span");
@@ -130,15 +145,26 @@ part("header", () => {
   };
   btn.addEventListener("click", () => set(!header.classList.contains("is-open")));
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape" && header.classList.contains("is-open")) { set(false); btn.focus(); }
+    if (e.key === "Escape" && header.classList.contains("is-open")) { set(false); btn.focus({ preventScroll: true }); }
   });
   header.querySelector(".nav").addEventListener("click", e => { if (e.target.closest("a")) set(false); });
+  // the open menu dims the page; a click or tap anywhere outside the bar and its panel (the dimmed page, or the
+  // dark strip around a floating bar) closes it. A press that starts inside and is let go outside is not a click on the page.
+  const bar = header.querySelector(".bar");
+  let pressedInside = false;
+  document.addEventListener("pointerdown", e => { pressedInside = bar.contains(e.target); }, true);
+  document.addEventListener("click", e => {
+    // only a pointer click has a press of its own (detail > 0); a keyboard or scripted click never inherits an old one
+    const fromInside = pressedInside && e.detail > 0;
+    pressedInside = false;
+    if (header.classList.contains("is-open") && !fromInside && !bar.contains(e.target)) set(false);
+  });
   matchMedia("(min-width: 1081px)").addEventListener("change", e => { if (e.matches) set(false); });
   // the open menu covers the page, so it closes as soon as keyboard focus leaves the header
   header.addEventListener("focusout", e => {
     if (header.classList.contains("is-open") && e.relatedTarget && !header.contains(e.relatedTarget)) set(false);
   });
-  // once the page scrolls under it, the bar turns translucent so the content shows through
+  // once the page scrolls under it, the bar gains its shadow (and the strip beside it lets the page show)
   let ticking = false;
   const tint = () => { header.classList.toggle("is-scrolled", scrollY > 8); ticking = false; };
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(tint); } }, { passive: true });

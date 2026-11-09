@@ -6,8 +6,9 @@ After editing a page, run `python3 tools/agent_files.py` (see "AI agents" below)
 
 The look is a product keynote stage: each season's robot is launched alone on a black stage, lit like a
 product, and calm white and aluminium-grey pages explain it, the people and the partners. There is no brand
-colour: colour comes from the robots, the photos, the logo and the four tier metals. One typeface (Archivo,
-self-hosted in `fonts/`), near-square boxes with a thin line, pill buttons. `DESIGN.md` describes the system; `DESIGN_PROGRESS.md`
+colour: colour comes from the robots, the photos and the logo, and the four sponsorship tiers wear the colours of their names. One typeface
+(Archivo, self-hosted in `fonts/`); since round 8 (after mclaren.com) square boxes with a thin line, a floating white
+header bar, page and section headings in capitals, and square buttons with a drawn arrow. `DESIGN.md` describes the system; `DESIGN_PROGRESS.md`
 holds the history, open questions and next steps.
 
 ## Quick edit guide
@@ -41,8 +42,8 @@ so a pasted block can never break a page.
 | Block | What it does |
 |---|---|
 | `<section class="band">` (`band--grey`, `band--stage`) | A full-width section: white, aluminium grey, or the black stage. Sections are told apart by their ground, not by lines |
-| `.tile` | A rounded, flat, filled box (white on grey, grey on white). Never put a tile inside a tile |
-| Buttons | `btn` (black pill), `btn--line` (outline), and on the black stage `btn--light` (white pill) and `btn--outline-light` |
+| `.tile` | A square, flat box (white on grey, grey on white). Never put a tile inside a tile |
+| Buttons | `btn` (square, black, capitals, with a drawn arrow; none on mail links, a down arrow on downloads), `btn--line` (outline), and on the black stage `btn--light` (white) and `btn--outline-light` |
 | `<div class="lineup" data-lineup>` (home; `index.html?season=2024` opens a season) | The season line-up: three garage bays. Each `<a class="bay">` links to its season and names its card in `data-card`; with JavaScript the bays become tabs that light their robot and swap the card. Arrow keys move between seasons |
 | `<section class="season-head">` (season pages) | The season's launch: name, one line, the robot, and a row of facts (`<dl class="season-facts">`) |
 | `<dl class="spec">` | A spec sheet. Write `TBD` for anything not decided yet; it shows in grey |
