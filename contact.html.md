@@ -16,7 +16,7 @@ Form fields:
 - Topic: one of General question; Joining the team; Sponsorship; Outreach / collaboration
 - Message (required)
 
-The button opens your email app with this message filled in. You can also email us directly at [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com).
+Your message goes straight to our team from this website. You can also email us directly at [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com).
 
 ## Reach us
 

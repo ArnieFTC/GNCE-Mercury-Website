@@ -22,6 +22,7 @@ Content-Signal: search=yes, ai-input=yes, ai-train=no
 Disallow: /.claude/
 Disallow: /.impeccable/
 Disallow: /tools/
+Disallow: /contact.php
 Disallow: /CLAUDE.md
 Disallow: /DESIGN.md
 Disallow: /DESIGN_PROGRESS.md

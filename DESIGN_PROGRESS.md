@@ -3,7 +3,7 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-09. **Round 8** restyled the site after mclaren.com/racing/formula-1 (square corners, a
+_Last updated: 2026-11-09. The contact form now sends from the website (`contact.php`; see below). **Round 8** restyled the site after mclaren.com/racing/formula-1 (square corners, a
 floating white header bar, page and section headings in capitals with a lighter second line, square buttons with
 a drawn arrow), then fixed what a dual-agent Impeccable critique and two adversarial review rounds found; see
 "Round 8 follow-up" below. The four sponsorship tiers wear the colours of their names (Andy asked for that the
@@ -26,6 +26,36 @@ Andy's standing instruction; `main` is the live site._
 4. **Round 2 (same day).** Andy: the colour "is so AI-like", the site "feels too static"; the boxes and
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
+
+## Contact form sends from the website (2026-11-09)
+
+Andy: "can you make it so that you can send the email in the website". The form used to open the visitor's own
+email app. Now `contact.php` (PHP on Hostinger, like `mcp.php`) emails the message to the team email
+(Sponsorship to Margaret) from website@mercury26413.org with the sender as Reply-To, and keeps no copy. The page
+sends it with fetch and shows the result in the form; without JavaScript the browser posts to `contact.php` and
+gets a short result page; on GitHub Pages (no PHP), or if sending fails, the form opens the email app as before.
+Spam: a hidden trap field, a send in the first 3 seconds on the page is asked to press Send again, no links in
+the name, at most 3 links in the message, 5 messages an hour and 10 a day from one internet address (a whole IPv6
+network counts as one), and 5 a minute and 80 a day for the site (Hostinger allows PHP 10 emails a minute and 100
+a day). The WebMCP form tool is now `send_message_to_team` (the visitor still presses Send). Terms and privacy says
+what the form sends and keeps.
+
+Review (a workflow: security, browser and privacy reviewers, each finding reproduced by a skeptic before it
+counted) found 39 issues in the first version, fixed in a second pass: the limits are now one file changed under a
+lock, so posts arriving together can't all pass (30 at once from one address sent exactly 5); the sender key is
+the connecting address only (Hostinger's CDN docs: REMOTE_ADDR is already the visitor, and X-Forwarded-For can be
+forged), with a per-minute cap for Hostinger's 10 a minute; nothing is sent if the counts folder isn't this
+account's alone; the stored code is 4 characters of a salted hash that tens of thousands of addresses share; a
+message is counted before sending; the server's note leads the email body, bidi and zero-width characters are
+stripped, and Reply-To takes plain addresses only. In the page: an AI agent's send was reported to it as
+"cancelled by a form reset" (Chrome cancels a WebMCP call when its form resets; the form now empties after the
+answer); the trap field was a parameter of the WebMCP tool, so an agent filling it lost the message (now readonly,
+which keeps it out of the tool, and emptied for agents); the time check compared two clocks (now the page sends its
+own time on the page); field errors are written under the field and linked to it; a slow server no longer opens the
+email app (the message may have been sent); a 429 opens the email app instead of blaming the visitor; the
+leave-page warning comes back after the email app opens; the message box no longer cuts long pastes at 5,000
+characters without a word; long addresses wrap. Without JavaScript the error page says to use Back to keep the
+message. Tested locally with a captured-mail PHP server (no real email): 43 request cases and 33 browser cases.
 
 ## Round 8 follow-up: critique and adversarial review (2026-11-09)
 
@@ -397,7 +427,11 @@ Reduced motion makes every change instant.
 - ⊘ B2 Joining facts: who can join (grades/schools), meeting schedule, time commitment, cost.
 - ◐ B3 Sponsoring: tiers, budget, packet and contact (Margaret) now come from the 2026–27 package. Still missing:
   a donation link.
-- ⊘ B4 A form service (e.g. Formspree) so the contact form sends without a mail app; needs a team account.
+- ◐ B4 The contact form now sends from the website (`contact.php`, 2026-11-09). Needs the team, once: create the
+  mailbox website@mercury26413.org in hPanel → Emails (bounce notices go there; forward it to the team email), then
+  send one General and one Sponsorship test from the live form and check both arrive and aren't marked as spam.
+  PHP `mail()` can't confirm delivery, so "on its way" is all the form says. If messages go missing, Hostinger
+  recommends SMTP with a mailbox password instead of `mail()`; that needs a decision on where the password lives.
 - ◐ B5 Sources for "1,000 students directly impacted" and "100,000+ students reached". The amount raised is now $20,000+ (Andy, 2026-11-04).
 - ⊘ B6 Coach photos (the coaches are listed by name only).
 - ⊘ B7 Resources links: code, CAD, portfolio, build log.
@@ -555,7 +589,8 @@ server):
 
 ## Next action
 
-0. Round 8 follow-up, open: (a) Andy's call on one content-width photo band (critique issue 5; e.g.
+0. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
+   Round 8 follow-up, open: (a) Andy's call on one content-width photo band (critique issue 5; e.g.
    `fll_camp_3.jpg` or `mit_lab_1.jpg`, 1400px files, at most 1240px wide) on the home, Team or Outreach page;
    (b) more colour, if Andy wants it beyond the tiers: only where it carries meaning (each season's game
    colours, for example), never as an accent; (c) check on real devices what this machine cannot: iOS Safari (tapping the menu's scrim, the black strip

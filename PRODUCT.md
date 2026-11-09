@@ -40,8 +40,8 @@ mechanism changed, and teaches younger students through camps and FLL coaching.
 - Static HTML, CSS and JavaScript only. Self-hosted fonts. No frameworks, trackers or third-party scripts.
 - The **Our Sponsors & Supporters** strip appears in the footer of every page and is built once from
   `SPONSORS` / `SUPPORTERS` in `js/main.js` (see `CLAUDE.md`).
-- The contact form opens the visitor's email app (mailto). A form service needs a team account
-  (undecided).
+- The contact form sends from the website through `contact.php` (PHP `mail()` on Hostinger). Where PHP isn't
+  available (the GitHub Pages copy), or the website can't send, it opens the visitor's email app instead.
 - Every page has to work with keyboard, reduced motion and JavaScript off, from 320 px phones to desktop.
 
 ## Brand Commitments

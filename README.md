@@ -31,7 +31,7 @@ holds the history, open questions and next steps.
 | Sponsorship package PDF | `docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf` (replace the file to update every download link) |
 | Email, Instagram, the contact form | `contact.html` (the address itself is `TEAM_EMAIL` in `js/main.js`) |
 | Footer: About, Contact and Terms links and the © line | the `<footer class="site-footer">` at the bottom of every page (plain HTML; `js/main.js` adds the sponsors strip and page links above it) |
-| Terms and privacy | `terms.html` (keep it true: update it if the site ever adds cookies, analytics or a form service) |
+| Terms and privacy | `terms.html` (keep it true: update it if the site ever adds cookies or analytics, or changes what the contact form sends or keeps) |
 | Sponsorship email (margaret@mercury26413.org) | `SPONSOR_EMAIL` in `js/main.js` (used by the form's Sponsorship topic), plus the "Email us about sponsoring" buttons in `partners.html` and `contact.html` |
 
 `js/main.js` attaches behaviour by class name and quietly skips any block that's missing what it needs,
@@ -104,8 +104,15 @@ The site is set up so AI assistants and agents can read it without scraping:
 | Every page as Markdown (`team.html.md` …), `llms.txt`, `llms-full.txt`, `sitemap.xml`, `agent/pages.json`, and each page's canonical link and JSON-LD (the `agent:begin` … `agent:end` block in `<head>`) | written by `python3 tools/agent_files.py` from the pages and `js/main.js`. Never edit them by hand. Run it after every page edit; `--check` only reports what is out of date |
 | Team facts for the JSON-LD (founding year, location, verified profiles for `sameAs`) | `ORG` and `EXTRA_SAME_AS` at the top of `tools/agent_files.py` |
 | Markdown for `Accept: text/markdown`, Link headers, the `/mcp` address | `.htaccess` (Hostinger only; the per-page part is written by the script) |
+| MCP server (read-only tools: team info, pages, search, season schedule) and its server card | `mcp.php`, at https://mercury26413.org/mcp and `/.well-known/mcp/server-card.json` (built from `mcp.php`; the script saves a copy for hosts without PHP) |
+| WebMCP tools for agents in the browser, and the contact form as a tool | the `webmcp` part of `js/main.js`; `toolname` / `toolparamdescription` on the form in `contact.html` |
 
 To check the live server: `curl -sI -H 'Accept: text/markdown' https://mercury26413.org/` should answer
 `content-type: text/markdown; charset=utf-8`, and `curl -sI https://mercury26413.org/` should show a `link:` header.
-| MCP server (read-only tools: team info, pages, search, season schedule) and its server card | `mcp.php`, at https://mercury26413.org/mcp and `/.well-known/mcp/server-card.json` (built from `mcp.php`; the script saves a copy for hosts without PHP) |
-| WebMCP tools for agents in the browser, and the contact form as a tool | the `webmcp` part of `js/main.js`; `toolname` / `toolparamdescription` on the form in `contact.html` |
+
+The contact form sends from the website through `contact.php` (PHP `mail()` on Hostinger), to `TEAM_EMAIL`
+(Sponsorship to `SPONSOR_EMAIL`), with the sender as Reply-To. Its spam checks and limits are explained at its top:
+5 messages an hour and 10 a day from one internet address, 5 a minute and 80 a day for the site (Hostinger allows
+PHP 10 emails a minute and 100 a day). `FROM_EMAIL` (website@mercury26413.org) should be a real mailbox, so bounce
+notices have somewhere to go. Where PHP isn't available (GitHub Pages), or the website can't send, the form opens
+the visitor's email app instead.

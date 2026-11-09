@@ -496,9 +496,12 @@ class Converter:
         out = []
         fields = []
         action = n.attrs.get("action", "")
-        for c in n.iter():
-            if skipped(c):
-                continue
+        def walk(node):  # like n.iter(), but never inside a hidden part (the contact form's spam trap)
+            for c in node.children:
+                if isinstance(c, Node) and not skipped(c):
+                    yield c
+                    yield from walk(c)
+        for c in walk(n):
             if c.tag in ("h1", "h2", "h3", "h4") and not out:
                 out.extend(self.block(c))
             elif c.tag == "fieldset":
@@ -774,7 +777,8 @@ def llms_txt(infos, site):
         "Every page is also available as Markdown: add `.md` to a page's `.html` address (for example "
         f"{md_url('team.html')}; the home page is {md_url('index.html')}), or request any page with the header "
         f"`Accept: text/markdown`. Read-only tools for agents: the MCP server at <{BASE}mcp> (server card: "
-        f"<{BASE}.well-known/mcp/server-card.json>), and WebMCP tools registered on every page.",
+        f"<{BASE}.well-known/mcp/server-card.json>), and WebMCP tools registered on every page. On the contact page "
+        "the form is also a WebMCP tool (send_message_to_team): it fills in a message, and the visitor presses Send.",
         "",
         f"- General questions and joining the team: {site['team_email']}",
         f"- Sponsorship: {site['sponsor_email']} ({ORG['sponsorContact']})",

@@ -280,7 +280,7 @@ Square, after McLaren (round 8): every corner is 0 (`--r-sm`, `--r-md`, `--r-lg`
 
 ### Buttons
 Quiet square ink buttons; the stage versions invert.
-- **Shape:** square, 46px tall, 11px 24px padding, 1.5px border in the fill colour, uppercase 0.8125rem 600 tracked 0.04em, ending in a drawn north-east arrow (an SVG mask in `currentColor`, 0.72em) that nudges 2px up and right on hover with a mouse. A mail link (`mailto:`) or a submit button opens your mail app rather than a page, so it has no arrow; a download has a drawn down arrow that nudges 2px down. Header button 36px; phone partner credit 42px; open-menu button 52px.
+- **Shape:** square, 46px tall, 11px 24px padding, 1.5px border in the fill colour, uppercase 0.8125rem 600 tracked 0.04em, ending in a drawn north-east arrow (an SVG mask in `currentColor`, 0.72em) that nudges 2px up and right on hover with a mouse. A mail link (`mailto:`) opens your mail app and a submit button sends a form rather than opening a page, so neither has an arrow; a download has a drawn down arrow that nudges 2px down. Header button 36px; phone partner credit 42px; open-menu button 52px.
 - **Primary (`.btn`):** ink fill, white text. Hover: the lighter ink fill (Ink Lift), no halo since round 8; press scales to 0.97 (200ms).
 - **Line (`.btn--line`):** transparent, ink text, #BAB8C4 border; fills ink on hover.
 - **On the stage:** `.btn--light` (Stage Light fill, ink text, turns white on hover) for the main action; `.btn--outline-light` (40% on-stage border) for the second.
@@ -304,6 +304,7 @@ Quiet square ink buttons; the stage versions invert.
 - **Focus:** ink border plus the 3px soft halo; no outline.
 - **Choices:** topic radios are 50px square tiles; checked = ink edge (border plus 1px inset ring); radios take `accent-color: ink`.
 - **Error:** #B3261E text (secret-quote message only).
+- **Sending (contact form):** "Send message" posts the form to `contact.php`, which emails it from the website; the status line beside the button reads "Sending…", then the result ("Thanks, … Your message is on its way to the team …"). A problem with one field is written under that field in ink (600, no colour), linked to it for screen readers, and the cursor goes there; it clears when the field is edited. If the website can't send it, the visitor's email app opens with the message instead; with no answer after 30 seconds the line says the message may or may not have been sent. Email addresses in the line are links. A hidden trap field catches spam robots.
 
 ### Navigation
 - **Desktop:** sentence-case links (0.9375rem 500) in ink on the white bar, 40px tall, as McLaren's nav is; hover fills aluminium; the current page is 600 with a 3px ink underline (an underline in forced-colours mode).

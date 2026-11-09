@@ -142,7 +142,7 @@
   </script>
   <!-- agent:end -->
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=227">
+  <link rel="stylesheet" href="css/style.css?v=228">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="contact">
@@ -159,17 +159,20 @@
     <section class="band" aria-label="Write to us">
       <div class="container split">
 
-        <!-- CONTACT FORM: opens the visitor's email app with a message to the team email, filled in from the form.
-             To send messages straight from the site instead, sign up for a form service like Formspree and put its
-             address in action="…" (and remove method/enctype if the service says so).
-             Without JavaScript, the action below still hands the message to the email app.
-             Topics: one <label class="choice"> per topic. contact.html?topic=join, ?topic=sponsor or ?topic=outreach
-             picks a topic for the visitor; the short prompt under "Message" for each topic is in js/main.js (HINTS). -->
-        <form id="contact-form" class="form" action="mailto:gncemercury26413@gmail.com" method="post" enctype="text/plain" aria-labelledby="form-title"
-              toolname="draft_message_to_team" tooldescription="Write a message to GNCE Mercury, FIRST Tech Challenge team 26413. Submitting opens an email draft in the visitor's own email app (sponsorship messages go to our head of sponsorship); nothing is sent until the visitor presses Send there.">
+        <!-- CONTACT FORM: sends the message from this website. contact.php (on our Hostinger server) emails it to the
+             team email (Sponsorship messages to our head of sponsorship) with the sender as Reply-To. js/main.js posts it
+             with fetch and shows the result here; if the website can't send it (or on a copy of the site without PHP,
+             like GitHub Pages) it opens the visitor's email app with the message instead. Without JavaScript the
+             browser posts to contact.php and gets a short result page (on a copy without PHP, the host's error page).
+             Topics: one <label class="choice"> per topic; a new topic must also be added to TOPICS in contact.php.
+             contact.html?topic=join, ?topic=sponsor or ?topic=outreach picks a topic for the visitor; the short prompt
+             under "Message" for each topic is in js/main.js (HINTS). The "fax_only" field is a trap for spam robots:
+             people never see it (readonly also keeps it out of the form's WebMCP tool), so leave it as it is. -->
+        <form id="contact-form" class="form" action="contact.php" method="post" aria-labelledby="form-title"
+              toolname="send_message_to_team" tooldescription="Send a message to GNCE Mercury, FIRST Tech Challenge team 26413, from this website (sponsorship messages go to our head of sponsorship). The visitor checks the filled-in form and presses Send message; the team replies to the email address given.">
           <h2 id="form-title" style="margin-bottom: 4px">Send us a message</h2>
-          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required toolparamdescription="The sender's name"></div>
-          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" spellcheck="false" required toolparamdescription="The sender's email address, so we can reply"></div>
+          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required maxlength="100" toolparamdescription="The sender's name"></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" spellcheck="false" required maxlength="254" toolparamdescription="The sender's email address, so we can reply"></div>
           <fieldset class="field choices">
             <legend>Topic</legend>
             <label class="choice"><input type="radio" name="topic" value="General question" checked toolparamdescription="What the message is about"><span>General question</span></label>
@@ -178,11 +181,13 @@
             <label class="choice"><input type="radio" name="topic" value="Outreach / collaboration"><span>Outreach / collaboration</span></label>
           </fieldset>
           <div class="field"><label for="message">Message</label><p class="hint" id="message-hint"></p><textarea id="message" name="message" aria-describedby="message-hint" required toolparamdescription="The message to the team"></textarea></div>
+          <div class="trap" aria-hidden="true"><label for="fax_only">Leave this empty</label><input id="fax_only" name="fax_only" type="text" tabindex="-1" autocomplete="off" readonly></div>
+          <input type="hidden" name="t" value="">
           <div class="actions" style="align-items: center">
-            <button class="btn" type="submit">Open in your email app</button>
+            <button class="btn" type="submit">Send message</button>
             <p class="form-status" role="status"></p>
           </div>
-          <p class="note">The button opens your email app with this message filled in. You can also email us directly at <a href="mailto:gncemercury26413@gmail.com">gncemercury26413@gmail.com</a>.</p>
+          <p class="note">Your message goes straight to our team from this website. You can also email us directly at <a href="mailto:gncemercury26413@gmail.com">gncemercury26413<wbr>@gmail.com</a>.</p>
         </form>
 
         <div>
@@ -242,6 +247,6 @@
       <nav class="footer-links" aria-label="About and legal"><a href="team.html#about">About</a><a href="contact.html">Contact</a><a href="terms.html">Terms and privacy</a></nav>
     </div>
   </footer>
-  <script src="js/main.js?v=227"></script>
+  <script src="js/main.js?v=228"></script>
 </body>
 </html>

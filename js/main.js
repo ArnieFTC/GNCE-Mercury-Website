@@ -535,7 +535,9 @@ part("crew-filter", () => {
 });
 
 // ---------- Contact form (contact page) ----------
-// Opens the visitor's email app with the message addressed to the team email.
+// Sends the message from the website: contact.php emails it to the team (Sponsorship to SPONSOR_EMAIL). If the
+// website can't send it (no PHP on a copy of the site, the server is down, a limit is reached), the visitor's
+// email app opens with the message instead, as the form did before.
 part("contact", () => {
   const form = document.getElementById("contact-form");
   if (!form) return;
@@ -554,30 +556,124 @@ part("contact", () => {
   form.addEventListener("change", e => { if (e.target.name === "topic") showHint(); });
   showHint();
   const status = form.querySelector(".form-status");
+  const button = form.querySelector("button[type=submit]");
+  const f = form.elements;
   // a typed message is not lost by accident: the browser asks before leaving the page
   let dirty = false;
   const warn = e => { e.preventDefault(); e.returnValue = ""; };
-  form.addEventListener("input", () => {
-    const d = !!form.elements.message?.value.trim();
-    if (d !== dirty) { dirty = d; (d ? addEventListener : removeEventListener)("beforeunload", warn); }
-  });
+  const setDirty = d => { if (d !== dirty) { dirty = d; (d ? addEventListener : removeEventListener)("beforeunload", warn); } };
+  const hasMessage = () => !!f.message?.value.trim();
+
+  // the status line beside the button; email addresses in it are links
+  const mail = address => ({ href: `mailto:${address}`, text: address });
+  const say = (...parts) => {
+    if (!status) return;
+    status.replaceChildren(...parts.map(p => {
+      if (typeof p === "string") return p;
+      const a = document.createElement("a");
+      a.href = p.href;
+      a.textContent = p.text;
+      return a;
+    }));
+  };
+  // a problem with one field: shown under it and linked to it for screen readers, until the visitor edits it
+  const clearError = el => {
+    const err = el?.id && document.getElementById(`${el.id}-error`);
+    if (!err) return;
+    err.remove();
+    el.removeAttribute("aria-invalid");
+    const ids = (el.getAttribute("aria-describedby") || "").split(" ").filter(id => id && id !== err.id);
+    if (ids.length) el.setAttribute("aria-describedby", ids.join(" "));
+    else el.removeAttribute("aria-describedby");
+  };
+  const showError = (el, text) => {
+    clearError(el);
+    const err = document.createElement("p");
+    err.className = "field-error";
+    err.id = `${el.id}-error`;
+    err.textContent = text;
+    el.after(err);
+    el.setAttribute("aria-invalid", "true");
+    el.setAttribute("aria-describedby", [el.getAttribute("aria-describedby"), err.id].filter(Boolean).join(" "));
+  };
+  form.addEventListener("input", e => { clearError(e.target); setDirty(hasMessage()); });
+
+  const send = async () => {
+    const name = f.name.value.trim();
+    const email = f.email.value.trim();
+    const to = f.topic.value === "Sponsorship" ? SPONSOR_EMAIL : TEAM_EMAIL;
+    // when the website can't send it: the visitor's email app, with the message filled in
+    const draft = why => {
+      const subject = `${f.topic.value} from ${name}`;
+      const body = `${f.message.value}\n\n${name}\n${email}`;
+      const url = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setDirty(false);
+      location.href = url;
+      // the message is still only in this form: warn again before leaving the page
+      setTimeout(() => setDirty(hasMessage()), 500);
+      say(`${why} We’re opening it in your email app instead${url.length > 1900 ? " (check that the whole message is in the draft: long messages can get cut short)" : ""}. If nothing opens, email us at `, mail(to), ".");
+      return `Not sent from the website (${why}). The browser was asked to open the visitor's email app with a draft to ${to}; nothing is sent unless they press Send there.`;
+    };
+    // contact.php refuses a message sent within a few seconds of the page opening (it measures nothing itself)
+    if (f.t) f.t.value = String(Math.round(performance.now()));
+    say("Sending…");
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 30000);
+    let res, data;
+    try {
+      res = await fetch(`${root}contact.php`, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" }, signal: ctrl.signal });
+      data = await res.json().catch(err => { if (err.name === "AbortError") throw err; return null; });
+    } catch (err) {
+      if (err.name !== "AbortError") return draft("Your message couldn’t be sent from the website: there was no connection.");
+      // no answer in 30 seconds: the server may still have sent it, so don't offer to send it twice
+      say("Our website is taking a long time to answer, so your message may or may not have been sent. If you don’t hear from us in a few days, email us at ", mail(to), ".");
+      return `Unknown: the website didn't answer within 30 seconds, so the message may or may not have been sent. Don't send it again; if there is no reply in a few days, the visitor can email ${to}.`;
+    } finally {
+      clearTimeout(timer);
+    }
+    if (res.ok && data && data.ok === true) {
+      setDirty(false);
+      say(`Thanks${name ? ", " + name : ""}. Your message is on its way to the team, and we’ll reply to ${email}.`);
+      // Empty the form only after an agent has had its answer: Chrome cancels a WebMCP call when its form resets.
+      // For a moment a second press does nothing (no "Please fill out this field" on the emptied form).
+      quietUntil = performance.now() + 1500;
+      form.noValidate = true;
+      setTimeout(() => { form.noValidate = false; }, 1500);
+      setTimeout(() => { form.reset(); showHint(); }, 0);
+      return `Sent: the website passed the message to the team's email (${to}); they will reply to ${email}.`;
+    }
+    // something to fix in the form: say what, under the field, and put the cursor there
+    if (res.status === 400 && data && data.message) {
+      say(data.message);
+      const el = data.field && f[data.field];
+      if (el && el.id) {
+        showError(el, data.message);
+        el.focus();
+      }
+      return `Not sent: ${data.message}`;
+    }
+    // limits, a server error, or a copy of the site without PHP (GitHub Pages)
+    return draft("Our website couldn’t send your message.");
+  };
+
+  let sending = false, quietUntil = 0;
   form.addEventListener("submit", e => {
     e.preventDefault();
-    const f = form.elements;
-    const subject = `${f.topic.value} from ${f.name.value}`;
-    const body = `${f.message.value}\n\n${f.name.value}\n${f.email.value}`;
-    const to = f.topic.value === "Sponsorship" ? SPONSOR_EMAIL : TEAM_EMAIL;
-    const url = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    dirty = false;
-    removeEventListener("beforeunload", warn);
-    location.href = url;
-    // An AI agent filled the form through WebMCP (toolname on the <form>): tell it what happened
-    if (e.agentInvoked && typeof e.respondWith === "function") {
-      e.respondWith(Promise.resolve(`Asked the visitor's browser to open an email draft to ${to}. Nothing is sent unless the visitor presses Send in their email app; if no email app opened, the address is ${to}.`));
+    // An AI agent filled the form through WebMCP (toolname on the <form>): it is told what happened
+    const agent = e.agentInvoked && typeof e.respondWith === "function";
+    if (sending || performance.now() < quietUntil) {
+      if (agent) e.respondWith(Promise.resolve(sending ? "Not sent again: the form is already sending this message." : "Not sent again: this message was just sent."));
+      return;
     }
-    if (status) status.textContent = url.length > 1900
-      ? `Opening your email app… Long messages can get cut short in some email apps, so check the whole message is in the draft. If it isn’t, email us at ${to}.`
-      : `Opening your email app… If nothing opens, email us at ${to}.`;
+    // an agent never means to fill the trap for spam robots, which would drop the message
+    if (agent && f.fax_only) f.fax_only.value = "";
+    sending = true;
+    if (button) button.setAttribute("aria-disabled", "true");
+    const done = send().finally(() => {
+      sending = false;
+      if (button) button.removeAttribute("aria-disabled");
+    });
+    if (agent) e.respondWith(done);
   });
 });
 
