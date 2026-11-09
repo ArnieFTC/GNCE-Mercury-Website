@@ -25,6 +25,28 @@ straight to `main`, Andy's standing instruction; `main` is the live site._
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
 
+## Round 8: after McLaren F1 (2026-11-09)
+
+Andy: "https://www.mclaren.com/racing/formula-1/ like this is one i really like use all the skills with this as
+reference and make it", then "continue in max". Reference captured at 1440 and 390 (scratchpad refs/mclaren).
+Adopted from McLaren: sharp square corners everywhere; a floating white header bar over the dark heads; page and
+section headings in capitals, two weights (bold line, regular `.lite` line, as in "OUR 2026 / F1 DRIVER LINE-UP");
+a short bar above headings; square uppercase buttons and links with a drawn north-east arrow. Not adopted:
+papaya orange (Andy had just rejected colour mockups: ink does its job) and full-bleed photo heroes (the largest
+team photo is 1400px wide, so it would be shown larger than its pixels).
+- Skills that ran: extract-design-system (its Playwright needs a different browser build than this machine's, so
+  the tokens were measured from the captures instead); Impeccable (context, craft floor, critique with two
+  isolated reviewers, detector); emil-design-eng (arrow as a drawn icon, hover only with a mouse, no hover ring,
+  eased header shadow); /vercel guidelines audit (forced-colours fallback for the current-page marker and the
+  arrow). frontend-design is not installed in this session; Hallmark, tastemaker, Taste Skill, AccessLint and
+  Chrome DevTools MCP were installed at project scope and load from the next session.
+- Fixes found while checking: the wider capitals pushed "GNCE MERCURY" into the intro at 1440 (hero now
+  2.75–5rem); "FIRST LEGO League" was one unbreakable 297px word at 320 (it may now break after FIRST); the bar's
+  10px margin pushed the partner strip to 906px at 1440x900 (taken back from the stage padding); the home h1's
+  second line has a hidden comma so screen readers and the Markdown copy read "GNCE Mercury, FTC team 26413".
+- Verified: itest4 67/67, agent-test 57/57, layout audit of all 12 pages at 320/390/768/1440 (no overflow),
+  contrast scan AA, keyboard focus visible on the white bar, reduced motion.
+
 ## Partners page in greys (2026-11-09)
 
 Andy: the sponsorship tiers had "such AI colors" and the site felt monotone. Three single-colour directions

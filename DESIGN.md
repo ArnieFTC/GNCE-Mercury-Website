@@ -16,10 +16,10 @@ colors:
   box-line: "#C4C3CC"
   ink-lift: "#2C2935"
   on-stage-3: "#A09DAC"
-  bronze: "#C27A3A"
-  silver: "#C3C7CF"
-  gold: "#D9AC3C"
-  platinum: "#E6E6E4"
+  bronze: "#8E8B97"
+  silver: "#B4B1BC"
+  gold: "#D6D4DC"
+  platinum: "#FFFFFF"
 typography:
   display:
     fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
@@ -64,10 +64,10 @@ typography:
     lineHeight: 1.2
     fontFeature: "'tnum' 1, 'lnum' 1"
 rounded:
-  sm: "4px"
-  md: "6px"
-  lg: "8px"
-  pill: "999px"
+  sm: "0px"
+  md: "0px"
+  lg: "0px"
+  pill: "0px"
 spacing:
   gutter: "clamp(16px, 4vw, 44px)"
   section: "clamp(64px, 8vw, 128px)"
@@ -209,9 +209,9 @@ A cool, logo-tinted grey scale from near-black to white, with four metals for th
 - **Steel** (steel): secondary text on light (dates, captions, labels, hints); 6:1 on aluminium.
 - **Quiet** (quiet): non-text marks only (inactive explorer markers). Never text.
 
-### Tertiary: the tier metals and the budget palette
-- **Bronze** #C27A3A, **Silver** #C3C7CF, **Gold** #D9AC3C, **Platinum** #E6E6E4: the header fills of the tier table in the team's 2026–27 sponsorship package (`docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`, sampled from page 4), used as solid header blocks with ink text (5.3:1 to 14.6:1) and as each tier's tick colour. Each has a dark wash for its column on the stage (`--bronze-wash` #2C1E17, `--silver-wash` #2C2C32, `--gold-wash` #302717, `--platinum-wash` #323235); every tick is 4.7:1 or more on its wash.
-- **Budget palette** (`--budget-travel` … `--budget-first`): #895012, #BC8647, #9E440B, #08A29C, #AE7E02, #97463E, #3F87BD, #6B8E23, #CA7873, one per budget line in ring order. Built with the dataviz method in the package's copper/bronze/gold family, widened by two cool steps (verdigris, blued steel) and an olive for Tools to pass; validated in dark mode on Stage Black: every slice 3:1 or more, worst adjacent pair ΔE 8.4 colour-blind (FIRST/Tools) / 16.9 normal, including the wrap from the last slice to the first, and still passing with the 1% FIRST sliver treated as absent (so Tools and Travel count as neighbours). The package's own nine browns fail the validator, so they are not copied.
+### Tertiary: the tier greys and the budget greys
+- **Tier greys** (2026-11-09; Andy found the metal colours "AI"): Bronze #8E8B97, Silver #B4B1BC, Gold #D6D4DC, Platinum #FFFFFF, header blocks that get brighter with the tier, ink text on each; neutral column washes `--bronze-wash` #1A1820 to `--platinum-wash` #2A2832 on the stage. The token names stay `--bronze` … `--platinum`.
+- **Budget greys** (`--budget-travel` … `--budget-first`): #F2F1F5 down to #3A3842, the largest line brightest, in ring order. The 2px stage gaps between slices and the table beside the donut (with its own key squares) carry the identity; no hue.
 
 ### Named Rules
 **The Light Is The Accent Rule.** There is no brand colour. Emphasis on the stage is brightness (a spotlight, full colour against dimmed grey); on light pages it is ink and weight. Don't introduce a hue for links, buttons or highlights.
@@ -227,19 +227,19 @@ A cool, logo-tinted grey scale from near-black to white, with four metals for th
 
 Archivo is self-hosted as one variable file, `fonts/archivo-latin.woff2` (Google Fonts latin subset, SIL Open Font License), weight 100–900, width 62–125%. Width is set with `font-stretch`.
 
-**Character:** One quiet, engineered sans at normal width for everything a reader reads; the same face stretched to 125% and set at 700 becomes the team's voice for robot names.
+**Character:** One engineered sans. Since round 8 (after mclaren.com/racing/formula-1) page and section headings are set in capitals at 108% width, in two weights: a bold first line and a regular second line (`<span class="lite">`), the way McLaren sets "OUR 2026 / F1 DRIVER LINE-UP". Robot names stay the widest voice (125%, 700). Reading text stays at normal width and sentence case.
 
 ### Hierarchy
-- **Display** (600, `--fs-hero` 3–6rem, line-height 0.96, -0.025em): the home h1 "GNCE Mercury" only.
+- **Display** (800, uppercase, 108% width, 2.75–5rem): the home h1 "GNCE Mercury", with its second line "FTC team 26413" at 400 and 1.125–2.125rem.
 - **Machine name** (700, 125% width): season-head h1 (2.75–5.5rem), line-up card h2 (1.875–3rem), Seasons index rows (1.75–3rem), bay labels (0.875–1.25rem) and the pager (1.3125rem). Robot and game names only.
-- **Headline** (600, `--fs-xl` 2.5–4.5rem, line-height 1, -0.022em): inner page h1 and the partners head h1 (normal width there).
-- **Title** (600, `--fs-lg` 1.75–2.75rem, line-height 1.08, -0.016em): section h2.
+- **Headline** (700, uppercase, 108% width, `--fs-xl` 2.5–4.5rem, line-height 0.98): inner page h1 and the partners head h1; a 28×4px bar in the text colour sits above it.
+- **Title** (700, uppercase, 108% width, `--fs-lg` 1.75–2.75rem, line-height 0.98): section h2, usually split into a bold line and a regular `.lite` line; section-head and split h2s carry the same 28×4px bar. Card titles set as `h2.h3` stay in sentence case at 600.
 - **Subtitle** (600, `--fs-md` 1.3125rem, line-height 1.24): h3 and `.h3`. Lead paragraphs (`.lead`) use the same size at 400 in steel, line-height 1.42, 54ch.
 - **Body** (400, `--fs-base` 1.0625rem, line-height 1.55): running text, held to 62ch (`.prose`).
-- **Label** (`--fs-sm` 0.9375rem, or 0.875 / 0.8125rem; 600 for buttons and values, 500 for nav and table heads, 400 for terms and captions): buttons, nav, spec terms, dates, captions. Sentence case, no tracking.
+- **Label** (`--fs-sm` 0.9375rem, or 0.875 / 0.8125rem; 600 for values, 500 for table heads, 400 for terms and captions): spec terms, dates, captions in sentence case. Buttons, text links and the menu are uppercase, 0.8125rem 600, tracked 0.04–0.06em.
 
 ### Named Rules
-**The Width Is The Voice Rule.** Only robot and game names go wide (125%, 700). Page titles, section heads and reading text stay at normal width.
+**The Width Is The Voice Rule.** Robot and game names go widest (125%, 700). Page and section headings go uppercase at 108% in two weights. Reading text stays at normal width in sentence case.
 
 **The Fixed-Place Figures Rule.** Every date, amount, spec and result uses tabular lining figures (`<time>` and `.num` get them automatically; spec, facts, figures, budget and season-fact values set them).
 
@@ -249,7 +249,7 @@ Archivo is self-hosted as one variable file, `fonts/archivo-latin.woff2` (Google
 - **Vertical rhythm:** `.band` is padded by `--section` (64–128px); `.band--tight` by 44–76px. `.section-head` (heading left, short note right) sits 32–56px above its content.
 - **Grids:** `.split` runs 7:5 from 900px (`--flip` 5:7, `--even`, `--center`). `.entries--2/--3` go 1 → 2 columns at 760px → 3 at 1100px. Facts, figures and the calendar use `auto-fit` grids of tiles with a 12px gap; coaches use `auto-fill` (12px gap) and the season facts `auto-fit` with a 10px gap.
 - **Home stage (`.launch`):** h1 and team line (from 1200px the head uses the line-up's columns, so the team line starts on the season card's left edge), then the line-up: three bays with the chosen season's card to the right from 1100px; the chosen bay widens (1.7fr desktop, 1.9fr at 720px and under). Below 1100px the card drops under the bays and a short partner credit replaces the partner strip. On short laptops (1100px+ wide, 880px tall or less) the stage tightens, and at 760px tall or less the short plain-text spec list under the results hides, so "Supported by … / Partner with us" stays in the first screen.
-- **Header:** sticky, 56px, stage black; turns translucent (80% opacity) with an 18px blur once the page scrolls (a tint change, not movement; it is the only element that reacts to scrolling). The nav collapses into a Menu button at 1080px and under; the header "Partner with us" pill hides at 560px and under.
+- **Header:** a floating white bar (round 8, after McLaren): sticky, 56px tall, 10px down and in from the edges on a stage-black strip; ink logo name, uppercase nav, an ink "Partner with us" button. Once the page scrolls the strip goes transparent and the bar gains a soft shadow (0 8px 24px, 18%), easing over 200ms. The nav collapses into a Menu button at 1080px and under (a white panel of uppercase rows); the header button hides at 560px and under.
 - **Parts explorer (2025–26 page):** choose a part with its button, its marker or the arrow keys; scrolling never changes it and nothing pins.
 - **Breakpoints in use:** 359, 520, 559/560, 700, 720, 760, 800, 860, 900, 960, 1000, 1080 (the menu; 1081 in `js/main.js`), 1099/1100, 1200px; height queries at 760 and 880/881px; a 460px container query on the contact list. Check 320, 390, 768 and 1440px.
 - **Photos never larger than their pixels:** wrap a photo in `.photo` with `style="--w: <image width>px"`; entry images use `object-fit: scale-down` in a 16:10 mat unless `.cover`; `.on-black` puts black-background shots on #000.
@@ -263,20 +263,20 @@ The system is flat. Depth comes from the two grounds, from tiles one step lighte
 - **Spotlight** (a clipped cone `linear-gradient` plus `radial-gradient(45% 16% at 50% 94%, rgba(255,255,255,0.22), transparent 72%)`): the chosen bay; a softer fixed version sits behind the season-head robot and in Seasons index mats.
 - **Explorer marker** (`box-shadow: 0 0 0 3px #fff, 0 3px 10px rgba(0,0,0,0.3)`): part markers on the DECODE render, so they read over it.
 - **Chosen segment** (`box-shadow: 0 1px 2px rgba(22,20,28,0.08), 0 4px 14px rgba(22,20,28,0.08)`): the selected outreach year pill only.
-- **Hover halo** (`box-shadow: 0 0 0 3px rgba(22,20,28,0.14)`, on the stage `rgba(239,238,243,0.28)`): a ring, not a drop shadow, on hovered pill buttons and focused fields.
+- **Focus halo** (`box-shadow: 0 0 0 3px rgba(22,20,28,0.14)`): focused form fields only. Buttons have no hover ring since round 8; they darken or lighten instead.
 
 ### Named Rules
 **The Flat Tile Rule.** Boxes, menus and buttons never cast shadows, and a box never holds another box: inside a box, quotes, chips and photo frames take a flat aluminium fill instead.
 
 ## Shapes
 
-Near-square and consistent, after VulcanForms: 4px (`--r-sm`) for small images, the pager's robot mats, inputs, quotes and the part list (`.callouts`); 6px (`--r-md`) for every box (tiles, write-ups, members, programs, season rows, posts, facts, spec sheets, events, the results table); 8px (`--r-lg`) for stage media. Every button, toggle, tag, chip, segmented control and chart bar is a pill (`--pill`), as VulcanForms' own buttons are. Markers are small filled circles (`.dia`, 7px); in the line-up they are 6px, outlined when idle and filled when chosen. No section hairlines: 1px lines draw the boxes and sit inside data (tables, spec rows, results, lists), between the footer's parts and on the stage (floor line, partner-strip edge, menu rows). The one heavier line is the 2px ink rule over each column of `.entries--ruled` ("What you would be supporting" on the partners page; from 760 to 1099px a lone third column spans the row).
+Square, after McLaren (round 8): every corner is 0 (`--r-sm`, `--r-md`, `--r-lg` and `--pill` are all 0px), boxes, photos, buttons, toggles, tabs, tags and chips alike. Markers are small filled circles (`.dia`, 7px); in the line-up they are 6px, outlined when idle and filled when chosen. No section hairlines: 1px lines draw the boxes and sit inside data (tables, spec rows, results, lists), between the footer's parts and on the stage (floor line, partner-strip edge). The heavier marks are the 28×4px bar above page and section headings and the 2px ink rule over each column of `.entries--ruled`.
 
 ## Components
 
 ### Buttons
 Quiet ink pills; the stage versions invert.
-- **Shape:** pill, 46px tall, 11px 24px padding, 1.5px border in the fill colour, 600 at 0.9375rem. Header pill 36px; phone partner credit 42px; open-menu pill 52px.
+- **Shape:** square, 46px tall, 11px 24px padding, 1.5px border in the fill colour, uppercase 0.8125rem 600 tracked 0.04em, ending in a drawn north-east arrow (an SVG mask in `currentColor`, 0.72em) that nudges 2px up and right on hover with a mouse. Text links are uppercase too, with the same arrow. Header button 36px; phone partner credit 42px; open-menu button 52px.
 - **Primary (`.btn`):** ink fill, white text. Hover: stage-black fill plus a 3px soft halo; press scales to 0.97 (200ms).
 - **Line (`.btn--line`):** transparent, ink text, #BAB8C4 border; fills ink on hover.
 - **On the stage:** `.btn--light` (Stage Light fill, ink text, turns white on hover) for the main action; `.btn--outline-light` (40% on-stage border) for the second.
@@ -284,12 +284,12 @@ Quiet ink pills; the stage versions invert.
 - **Focus:** 2px outline, 3px offset, ink on light and Stage Light on the stage.
 
 ### Chips and toggles
-- **Toggles** (`.callout-btn`, `.crew-filter button`): paper pill with a 1px Data Line border (aluminium, borderless, on white bands); ink border on hover; pressed = ink fill, white text.
-- **Year tabs** (`.year-tabs`): a segmented control on aluminium; the chosen year is a white lifted pill.
-- **Lead tag** (`.lead-tag`): ink pill, white, 0.8125rem 600. **Subteam chip** (`.chip`): aluminium pill, ink, 500.
+- **Toggles** (`.callout-btn`, `.crew-filter button`): square paper buttons with a 1px Data Line border (aluminium, borderless, on white bands); ink border on hover; pressed = ink fill, white text.
+- **Year tabs** (`.year-tabs`): a square segmented control on aluminium; the chosen year is solid ink with white text.
+- **Lead tag** (`.lead-tag`): square ink tag, white, 0.8125rem 600. **Subteam chip** (`.chip`): square aluminium tag, ink, 500.
 
 ### Cards / Containers
-- **Corner Style:** 6px (`--r-md`) for every box.
+- **Corner Style:** square (0) for every box.
 - **Background:** paper with a 1px `--box-line` border on white and aluminium bands; Stage Step with a 1px `--box-line-stage` border on the stage. Inside a box, quotes, chips and photo frames are aluminium with no border.
 - **Shadow Strategy:** none (see Elevation & Depth).
 - **Border:** 1px `--box-line` (#C4C3CC) around the box; 1px Data Line between rows inside it.
@@ -302,8 +302,8 @@ Quiet ink pills; the stage versions invert.
 - **Error:** #B3261E text (secret-quote message only).
 
 ### Navigation
-- **Desktop:** pill links on the stage-black header, #CFCDD8 at 500, 40px tall; hover and current page brighten to white on an 8–12% light fill.
-- **Mobile (1080px and under):** a pill Menu button opens a translucent black panel of 56px rows at 1.5rem 600 with stage rules, ending in a full Stage Light "Partner with us" pill. Without JavaScript a plain link row (`.nojs-nav`) shows.
+- **Desktop:** uppercase links (0.8125rem 600, tracked 0.06em) in ink on the white bar, 40px tall; hover fills aluminium; the current page carries a 3px ink underline (an underline in forced-colours mode).
+- **Mobile (1080px and under):** a square Menu button opens a white panel under the bar: 56px uppercase rows divided by Data Lines, ending in a full-width ink "Partner with us" button. Without JavaScript a plain link row (`.nojs-nav`) shows.
 - **Breadcrumbs:** slash-separated, 0.9375rem, at the top of season heads.
 
 ### The Season Line-up (signature)
@@ -341,8 +341,8 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 - **Do** change colours, sizes, radii and spacing in `:root` in `css/style.css`, never in a component rule.
 - **Do** use the stage only for a launch (home, season heads), the partners head with its tier and budget sheet, and the closing call to join or partner; put everything else on paper or aluminium.
 - **Do** run sections the full width and put each item (a write-up, a member, a program, a season, a post, a table) in a white box with a 1px `--box-line` border, 6px corners and 16–24px padding.
-- **Do** make every button, toggle, tag and chip a pill; use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.
-- **Do** set only robot and game names at 125% width and 700; keep everything else at normal width.
+- **Do** keep every corner square, and end buttons and text links with the drawn arrow; use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.
+- **Do** set robot and game names at 125% width and 700, page and section headings uppercase at 108% in two weights (`<span class="lite">` for the regular line), and everything else at normal width in sentence case.
 - **Do** give every date, amount, spec and result tabular figures.
 - **Do** show a chosen state as light (brighter, full colour, filled dot) and write it to the URL when it is a view someone might share.
 - **Do** let new content simply be there: no entrance animation for anything below the first screen.
@@ -354,10 +354,10 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 - **Don't** add a brand hue, a purple or violet accent, or neon on black.
 - **Don't** copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.
 - **Don't** separate sections with hairlines; change the ground instead. Lines draw boxes and sit inside data, nowhere else.
-- **Don't** put shadows on boxes, buttons or menus, put a box inside a box, or float sections as rounded panels on a grey ground (round 6, removed in round 7 at Andy's request).
-- **Don't** use the tier metals or the budget palette outside the partners page's tier chart and donut, and don't set text in them.
+- **Don't** put shadows on boxes or buttons (the floating header bar's scrolled shadow is the one exception), round a corner, put a box inside a box, or float sections as rounded panels on a grey ground.
+- **Don't** bring colour back to the tier chart or the donut, or add an accent hue anywhere (Andy, 2026-11-09: "just dont do the color it looks terrible"); ink does the job McLaren's papaya does.
 - **Don't** add a second font family or system display faces.
-- **Don't** put small labels (eyebrows) above headings or number the seasons 01/02/03.
+- **Don't** put small text labels (eyebrows) above headings or number the seasons 01/02/03; the 28×4px bar is the only mark above a heading.
 - **Don't** add new load animations outside the stage, counters that tick up, or motion that ignores reduced motion.
 - **Don't** generate or invent images, results, sponsors or numbers; leave "TBD" instead.
 - **Don't** show a photo larger than its own pixels.

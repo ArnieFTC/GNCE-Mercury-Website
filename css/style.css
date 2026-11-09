@@ -1132,3 +1132,66 @@ html.is-scrolling main, html.is-scrolling .site-footer { pointer-events: none; }
   .budget .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .budget tfoot tr > * { border-top-color: #000; }
 }
+
+/* =========================================================
+   Round 8: after mclaren.com/racing/formula-1 (Andy: "like this is one i really like").
+   Sharp square corners everywhere; a floating white header bar over the dark heads; big uppercase
+   headings in two weights (bold first line, regular second, <span class="lite">); a short ink bar before
+   section headings; square buttons and links with a north-east arrow. No accent colour (Andy: "just dont
+   do the color"): ink does the job McLaren's papaya does.
+   ========================================================= */
+:root { --r-lg: 0px; --r-md: 0px; --r-sm: 0px; --pill: 0px; }
+
+/* headings: uppercase, wide, two weights */
+h1, h2:not(.h3) { text-transform: uppercase; font-stretch: 108%; letter-spacing: -0.012em; line-height: 0.98; }
+h1 .lite, h2 .lite { display: block; font-weight: 400; }
+.launch-head h1 { font-weight: 800; font-size: clamp(2.75rem, 0.6rem + 5.2vw, 5rem); }
+.launch-head h1 .lite { font-size: clamp(1.125rem, 0.6rem + 1.6vw, 2.125rem); letter-spacing: 0.01em; margin-top: 0.3em; }
+.season-card h2, .bay-name, .tier-name { text-transform: none; }
+.section-head h2::before, .split h2:first-child::before, .page-head h1::before, .partner-head h1::before {
+  content: ""; display: block; width: 28px; height: 4px; background: currentColor; margin-bottom: 18px;
+}
+
+/* the header: a white bar floating over the dark page heads, like McLaren's */
+.site-header { background: var(--stage); padding: 10px var(--gutter) 0; }
+/* the bar's 10px top margin comes out of the stage's own top padding, so the partner strip stays in the first screen */
+.launch { padding-top: calc(clamp(28px, 4.5vw, 64px) - 10px); }
+.site-header.is-scrolled { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.site-header .bar { background: #fff; color: var(--ink); max-width: none; padding-inline: 16px; box-shadow: 0 1px 0 rgba(22, 20, 28, 0.08); transition: box-shadow 200ms var(--ease); }
+.site-header.is-scrolled .bar { box-shadow: 0 8px 24px rgba(11, 10, 15, 0.18); }
+.site-header :focus-visible { outline-color: var(--ink); }
+.brand, .brand:hover { color: var(--ink); }
+.brand-name small { color: var(--steel); }
+.nav a { color: var(--ink); font-weight: 600; }
+.nav a:hover { color: var(--ink); background: var(--alu); }
+.nav a[aria-current="page"] { color: var(--ink); background: transparent; box-shadow: inset 0 -3px 0 var(--ink); }
+.header-cta, .header-cta:hover { background: var(--ink); border-color: var(--ink); color: #fff; box-shadow: none; }
+.header-cta:hover { background: var(--ink-lift); }
+.menu-btn { border-color: var(--ink); color: var(--ink); }
+.menu-btn[aria-expanded="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+@media (max-width: 1080px) {
+  .site-header.is-open { background: var(--stage); }
+  .site-header.is-open .nav { left: var(--gutter); right: var(--gutter); background: #fff; }
+  .site-header.is-open .nav a { color: var(--ink); border-bottom-color: var(--line); text-transform: uppercase; font-stretch: 108%; }
+  .site-header.is-open .nav a[aria-current="page"] { color: var(--ink); box-shadow: none; text-decoration: underline; text-underline-offset: 6px; }
+  .site-header.is-open .nav .nav-cta { color: #fff; background: var(--ink); }
+}
+.site-header .bar.container { width: auto; }
+
+/* buttons and links: square, uppercase, with a drawn north-east arrow (SVG mask, so it takes the text colour) */
+:root { --arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='black' stroke-width='1.6'%3E%3Cpath d='M3 9 9 3M4 3h5v5'/%3E%3C/svg%3E"); }
+.btn { text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.8125rem; }
+.btn:hover, .btn--light:hover, .header-cta:hover, .nav a.nav-cta:hover { box-shadow: none; }
+.btn::after, .text-link::after {
+  content: ""; display: inline-block; flex: none; width: 0.72em; height: 0.72em;
+  background: currentColor; -webkit-mask: var(--arrow) center / contain no-repeat; mask: var(--arrow) center / contain no-repeat;
+  transition: transform 160ms var(--ease);
+}
+.text-link::after { margin-left: 0.55em; vertical-align: -0.02em; }
+@media (hover: hover) and (pointer: fine) { .btn:hover::after, .text-link:hover::after { transform: translate(2px, -2px); } }
+.text-link { text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.8125rem; }
+@media (prefers-reduced-motion: reduce) { .btn:hover::after, .text-link:hover::after { transform: none; } }
+@media (forced-colors: active) {
+  .btn::after, .text-link::after { display: none; }
+  .nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
+}

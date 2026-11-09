@@ -527,7 +527,7 @@
       },
       {
         "name": "The Width Is The Voice Rule",
-        "body": "Only robot and game names go wide (125%, 700). Page titles, section heads and reading text stay at normal width.",
+        "body": "Robot and game names go widest (125%, 700). Page and section headings go uppercase at 108% in two weights. Reading text stays at normal width in sentence case.",
         "section": "typography"
       },
       {
@@ -545,8 +545,8 @@
       "Do change colours, sizes, radii and spacing in `:root` in `css/style.css`, never in a component rule.",
       "Do use the stage only for a launch (home, season heads), the partners head with its tier and budget sheet, and the closing call to join or partner; put everything else on paper or aluminium.",
       "Do run sections the full width and put each item (a write-up, a member, a program, a season, a post, a table) in a white box with a 1px `--box-line` border, 6px corners and 16–24px padding.",
-      "Do make every button, toggle, tag and chip a pill; use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.",
-      "Do set only robot and game names at 125% width and 700; keep everything else at normal width.",
+      "Do keep every corner square, and end buttons and text links with the drawn arrow; use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.",
+      "Do set robot and game names at 125% width and 700, page and section headings uppercase at 108% in two weights (`<span class=\"lite\">` for the regular line), and everything else at normal width in sentence case.",
       "Do give every date, amount, spec and result tabular figures.",
       "Do show a chosen state as light (brighter, full colour, filled dot) and write it to the URL when it is a view someone might share.",
       "Do let new content simply be there: no entrance animation for anything below the first screen.",
@@ -558,10 +558,10 @@
       "Don't add a brand hue, a purple or violet accent, or neon on black.",
       "Don't copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.",
       "Don't separate sections with hairlines; change the ground instead. Lines draw boxes and sit inside data, nowhere else.",
-      "Don't put shadows on boxes, buttons or menus, put a box inside a box, or float sections as rounded panels on a grey ground (round 6, removed in round 7 at Andy's request).",
-      "Don't use the tier metals or the budget palette outside the partners page's tier chart and donut, and don't set text in them.",
+      "Don't put shadows on boxes or buttons (the floating header bar's scrolled shadow is the one exception), round a corner, put a box inside a box, or float sections as rounded panels on a grey ground.",
+      "Don't bring colour back to the tier chart or the donut, or add an accent hue anywhere (Andy, 2026-11-09: \"just dont do the color it looks terrible\"); ink does the job McLaren's papaya does.",
       "Don't add a second font family or system display faces.",
-      "Don't put small labels (eyebrows) above headings or number the seasons 01/02/03.",
+      "Don't put small text labels (eyebrows) above headings or number the seasons 01/02/03; the 28×4px bar is the only mark above a heading.",
       "Don't add new load animations outside the stage, counters that tick up, or motion that ignores reduced motion.",
       "Don't generate or invent images, results, sponsors or numbers; leave \"TBD\" instead.",
       "Don't show a photo larger than its own pixels."

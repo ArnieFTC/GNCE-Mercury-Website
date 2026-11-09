@@ -4,7 +4,7 @@ description: "GNCE Mercury, FIRST Tech Challenge team 26413 from Weston, MA. 3 s
 url: https://mercury26413.org/
 ---
 
-# GNCE Mercury
+# GNCE Mercury, FTC team 26413
 
 A high school **FIRST Tech Challenge** team in Weston, Massachusetts: team 26413, founded in 2024. We build a new competition robot every year and teach younger students to do the same.
 
