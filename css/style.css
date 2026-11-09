@@ -34,29 +34,28 @@
   --quiet: #7F7C8A;          /* control edges, inactive markers, secondary bars (4.1:1 on white, 3.4:1 on aluminium) */
   --ink-lift: #2C2935;       /* the ink button's hover fill */
 
-  /* the four tier metals: the header fills of the 2026–27 sponsorship package (ink text on each, 5.3:1 or more),
-     and each one's wash for its column on the stage */
-  --bronze: #C27A3A;
-  --silver: #C3C7CF;
-  --gold: #D9AC3C;
-  --platinum: #E6E6E4;
-  --bronze-wash: #2C1E17;
-  --silver-wash: #2C2C32;
-  --gold-wash: #302717;
-  --platinum-wash: #323235;
+  /* the four tiers: grey steps that get brighter with the tier (ink text on each), and a neutral wash per column.
+     No metal colours: Andy wanted the partners page in the same black, white and grey as the rest of the site. */
+  --bronze: #8E8B97;
+  --silver: #B4B1BC;
+  --gold: #D6D4DC;
+  --platinum: #FFFFFF;
+  --bronze-wash: #1A1820;
+  --silver-wash: #1E1C25;
+  --gold-wash: #23212A;
+  --platinum-wash: #2A2832;
 
-  /* the budget donut on the stage: one colour per budget line, never by rank (dataviz validator, dark mode on
-     #0B0A0F: all slices 3:1 or more, worst adjacent pair 8.4 dE colour-blind (FIRST/Tools) / 16.9 normal; it also
-     passes with the 1% FIRST sliver treated as absent, so Tools and Travel count as neighbours) */
-  --budget-travel: #895012;
-  --budget-robot: #BC8647;
-  --budget-comp: #9E440B;
-  --budget-field: #08A29C;
-  --budget-growth: #AE7E02;
-  --budget-outreach: #97463E;
-  --budget-marketing: #3F87BD;
-  --budget-tools: #6B8E23;
-  --budget-first: #CA7873;
+  /* the budget donut on the stage: greys from bright to dim, largest line brightest; the 2px stage gaps
+     between slices and the table beside it (with its own key) carry the identity */
+  --budget-travel: #F2F1F5;
+  --budget-robot: #CFCDD6;
+  --budget-comp: #AEACB7;
+  --budget-field: #918F9B;
+  --budget-growth: #7A7884;
+  --budget-outreach: #66646F;
+  --budget-marketing: #55535E;
+  --budget-tools: #46444F;
+  --budget-first: #3A3842;
 
   --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --fs-sm: 0.9375rem;

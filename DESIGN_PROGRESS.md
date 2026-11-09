@@ -25,6 +25,14 @@ straight to `main`, Andy's standing instruction; `main` is the live site._
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
 
+## Partners page in greys (2026-11-09)
+
+Andy: the sponsorship tiers had "such AI colors" and the site felt monotone. Three single-colour directions
+(FTC orange, robot blue, brass) were mocked on the real page; Andy: "just dont do the color it looks terrible".
+So the colour went instead: the tier headers now step from mid grey (Bronze) to white (Platinum) over neutral
+column washes, and the budget donut runs from bright to dim grey by size, with the table as its key. The
+bronze/silver/gold token names stay in css/style.css so nothing else had to change. Contrast scan AA.
+
 ## Agent readiness (2026-11-04)
 
 Andy asked to fix 16 findings from an agent-readiness scan of mercury26413.org (robots.txt, Content Signals,
