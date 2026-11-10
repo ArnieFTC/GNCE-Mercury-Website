@@ -94,7 +94,7 @@
 
     <!-- SEASON HEAD: the season's launch. Never lazy-load the robot (the robot from the home page glides into it).
          The facts row under it: one <div> per result. -->
-    <section class="season-head" aria-labelledby="season-title">
+    <section class="season-head" data-season="2025" aria-labelledby="season-title">
       <div class="container">
         <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../seasons.html">Seasons</a></li><li aria-current="page">2025–&#8288;26</li></ol></nav>
         <div class="season-head-grid">
@@ -302,11 +302,11 @@
     <!-- OTHER SEASONS: one <a> per neighbouring season -->
     <nav class="band band--tight" aria-label="Other seasons">
       <div class="container"><div class="pager">
-        <a rel="prev" href="2024-2025.html">
+        <a rel="prev" href="2024-2025.html" data-season="2024">
           <span class="pager-media"><img src="../images/into-the-deep-robot-cut.webp" width="802" height="482" loading="lazy" alt="" style="view-transition-name: robot-itd"></span>
           <span><small>Previous season, 2024–&#8288;25</small><b translate="no">INTO THE DEEP</b></span>
         </a>
-        <a rel="next" href="2026-2027.html">
+        <a rel="next" href="2026-2027.html" data-season="2026">
           <span class="pager-media"><img src="../images/mercinator-v1-cut.webp" width="479" height="511" loading="lazy" alt="" style="view-transition-name: robot-mercinator"></span>
           <span><small>This season, 2026–&#8288;27</small><b translate="no">BIOBUZZ</b></span>
         </a>

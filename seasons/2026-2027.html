@@ -94,7 +94,7 @@
 
     <!-- SEASON HEAD: the season's launch. Never lazy-load the robot (the robot from the home page glides into it).
          The facts row under it: one <div> per fact or result. Add a <div> when a result comes in. -->
-    <section class="season-head" aria-labelledby="season-title">
+    <section class="season-head" data-season="2026" aria-labelledby="season-title">
       <div class="container">
         <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../seasons.html">Seasons</a></li><li aria-current="page">2026–&#8288;27</li></ol></nav>
         <div class="season-head-grid">
@@ -191,7 +191,7 @@
     <!-- OTHER SEASONS: one <a> per neighbouring season (rel="prev" for the one before, rel="next" for the one after) -->
     <nav class="band band--tight" aria-label="Other seasons">
       <div class="container"><div class="pager">
-        <a rel="prev" href="2025-2026.html">
+        <a rel="prev" href="2025-2026.html" data-season="2025">
           <span class="pager-media"><img src="../images/decode-robot-cad.webp" width="1165" height="1066" loading="lazy" alt="" style="view-transition-name: robot-decode"></span>
           <span><small>Previous season, 2025–&#8288;26, our&nbsp;second</small><b translate="no">DECODE</b></span>
         </a>

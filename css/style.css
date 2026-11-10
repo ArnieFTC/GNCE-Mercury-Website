@@ -946,7 +946,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .nojs-nav { display: flex; flex-wrap: wrap; gap: 4px 20px; padding-block: 14px; font-weight: 600; }
 
 /* =========================================================
-   Motion. The opening (the spotlight opens onto the home stage, once per visit), the stage lighting
+   Motion. The opening (the season line-up title card on the home page, once per visit), the stage lighting
    up, page transitions, and motion that answers choosing. Nothing moves on scroll. Everything is
    visible by default: these only run when the browser supports them and the visitor has not asked
    for reduced motion.
@@ -969,51 +969,83 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 @keyframes step-in { from { opacity: 0; transform: translateY(40px) scale(0.94); } }
 @keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-/* ---------- Opening (home page, first visit of a session): the spotlight opens onto the stage ----------
-   An inline script in index.html's <head> adds .intro and .intro-stage to <html> before the first paint, once
-   per browser session and never with reduced motion (add ?intro to the address to see it again). The light
-   comes up on the Mercury mark, the name rises under it, then the spotlight opens like an iris onto the page
-   (the page is already there underneath). A click, tap, wheel or key skips it (part "intro" in js/main.js).
-   Every layer ends hidden on its own, so a failed script can never leave the page covered. */
-@property --iris { syntax: "<length>"; inherits: false; initial-value: 0px; }
+/* ---------- Opening (home page, first visit of a session): the season line-up title card ----------
+   An inline script in index.html's <head> adds .intro to <html> before the first paint, once per browser
+   session and never with reduced motion (add ?intro to the address to see it again). The card is the
+   <div class="opening"> at the top of index.html: three colour fields rise, one per season, each with its robot
+   and game name; a black strap crosses them with the team's name. Then every piece flies to its own place on
+   the page underneath (the fields to the bays, the robots to theirs, the name to the h1, the logo to the header)
+   and the rest of the page comes up around them: part "intro" in js/main.js. A click, tap, wheel or key skips it.
+   It ends hidden on its own after 6s whatever happens to the scripts, so it can never leave the page covered. */
+.opening { display: none; }
 @media (prefers-reduced-motion: no-preference) {
-  html.intro::before, html.intro body::before, html.intro body::after { position: fixed; inset: 0; pointer-events: auto; }
-  html.intro::before { /* the dark stage, with a hole that opens from the mark */
-    content: ""; z-index: 1000; background: var(--stage);
-    -webkit-mask: radial-gradient(circle at 50% 46%, transparent var(--iris), #000 calc(var(--iris) + 1px));
-    mask: radial-gradient(circle at 50% 46%, transparent var(--iris), #000 calc(var(--iris) + 1px));
-    animation: intro-iris 640ms cubic-bezier(0.7, 0, 0.2, 1) 1040ms forwards, intro-gone 1ms 1700ms forwards;
+  html.intro .opening {
+    display: grid !important; position: fixed; inset: 0; z-index: 1000; overflow: hidden;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr);
+    color: var(--on-season); animation: op-safety 1ms 6s forwards;
   }
-  html.intro body::before { /* the light from above, and the mark coming up in it */
-    content: ""; z-index: 1001;
-    background: /* a length here places the image's top edge: the mark sits just above the 46% line */
-      url("../images/logo-mark.png") center calc(46vh - 122px) / 104px auto no-repeat,
-      radial-gradient(circle at 50% calc(46vh - 66px), rgba(239, 238, 243, 0.13), transparent min(30vmin, 220px)),
-      conic-gradient(from 166deg at 50% -30vh, transparent 0deg, rgba(239, 238, 243, 0.055) 9deg 19deg, transparent 28deg);
-    animation: intro-mark 760ms var(--ease) 80ms backwards, intro-out 220ms cubic-bezier(0.4, 0, 1, 1) 1000ms forwards;
-  }
-  html.intro body::after { /* the name under the mark */
-    content: "GNCE Mercury" / ""; z-index: 1002; display: flex; justify-content: center; align-items: flex-start;
-    padding-top: calc(46vh + 18px); color: var(--on-stage); font: 600 clamp(1.75rem, 1rem + 2.4vw, 2.75rem) / 1 var(--font);
-    letter-spacing: -0.022em;
-    animation: intro-word 760ms var(--ease) 300ms backwards, intro-out 220ms cubic-bezier(0.4, 0, 1, 1) 1000ms forwards;
-  }
-  html.intro.intro-skip::before, html.intro.intro-skip body::before, html.intro.intro-skip body::after { animation: intro-out 180ms ease-in forwards; }
+  .op-black { position: absolute; inset: 0; background: var(--stage); }
+  .op-field, .op-slot { grid-row: 1; min-width: 0; min-height: 0; }
+  :is(.op-field, .op-slot)[data-season="2024"] { grid-column: 1; }
+  :is(.op-field, .op-slot)[data-season="2025"] { grid-column: 2; }
+  :is(.op-field, .op-slot)[data-season="2026"] { grid-column: 3; }
+  .op-field { position: relative; background: var(--c); margin-right: -1px; transform: scaleY(0); transform-origin: 50% 100%; will-change: transform; }
+  .op-slot { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 0 9% clamp(96px, 15vh, 150px); }
+  .op-robot { width: auto; height: auto; max-width: 100%; max-height: 47vh; opacity: 0; filter: drop-shadow(0 22px 18px rgba(11, 10, 15, 0.42)); will-change: transform, opacity; }
+  .op-name { position: absolute; left: clamp(16px, 2.2vw, 32px); right: 14px; bottom: clamp(18px, 3.6vh, 36px); margin: 0; display: grid; gap: 3px; opacity: 0; }
+  .op-name span { font-size: 0.875rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .op-name b { font-stretch: 125%; font-weight: 700; font-size: clamp(1.125rem, 0.5rem + 1.7vw, 2rem); line-height: 1.04; letter-spacing: -0.01em; }
+  .op-strap { position: absolute; left: 0; right: 0; top: clamp(72px, 15vh, 150px); padding-block: clamp(14px, 2.4vh, 26px); color: var(--on-stage); clip-path: inset(0 100% 0 0); }
+  .op-strap::before { content: ""; position: absolute; inset: 0; background: var(--stage); transform-origin: 50% 0; transition: transform 760ms cubic-bezier(0.65, 0, 0.35, 1); }
+  html.op-go .op-strap.is-flying { clip-path: none; animation: none; }
+  .op-strap.is-flying::before { transform: var(--strap-to); }
+  .op-strap .container { position: relative; display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); }
+  .op-logo { width: clamp(52px, 6.4vw, 96px); height: auto; flex: none; transform-origin: 0 0; }
+  .op-strap p { margin: 0; display: grid; justify-items: start; min-width: 0; }
+  .op-word { display: block; font-weight: 800; font-stretch: 108%; letter-spacing: -0.012em; line-height: 0.98; font-size: clamp(2.5rem, 1rem + 6.6vw, 7.25rem); white-space: nowrap; }
+  .op-word span { display: inline-block; transform-origin: 0 0; } /* each word flies to its own place in the h1, on one line or two */
+  .op-sub { display: block; font-weight: 400; font-stretch: 108%; color: var(--on-stage-2); font-size: clamp(1rem, 0.6rem + 1.9vw, 2.5rem); letter-spacing: 0.01em; line-height: 1; margin-top: 0.3em; white-space: nowrap; transform-origin: 0 0; }
 
-  /* the home stage's own entrance waits for the spotlight to open (part "intro" pulls it forward on a skip) */
-  html.intro-stage .launch-head h1 { animation-delay: 1100ms; }
-  html.intro-stage .launch-head p { animation-delay: 1220ms; }
-  html.intro-stage .bays .bay:nth-child(1) .bay-stage img { animation-delay: 1320ms; }
-  html.intro-stage .bays .bay:nth-child(2) .bay-stage img { animation-delay: 1440ms; }
-  html.intro-stage .bays .bay:nth-child(3) .bay-stage img { animation-delay: 1560ms; }
-  html.intro-stage .bay-stage::after { animation-delay: 1300ms; }
-  html.intro-stage .bay-label, html.intro-stage .season-cards, html.intro-stage .partner-strip, html.intro-stage .lineup-credit { animation-delay: 1740ms; }
+  /* the card builds: fields, robots, names, then the strap */
+  html.op-go .op-field { animation: op-field 640ms var(--ease) forwards; }
+  html.op-go .op-field[data-season="2025"] { animation-delay: 80ms; }
+  html.op-go .op-field[data-season="2026"] { animation-delay: 160ms; }
+  html.op-go .op-robot { animation: op-robot 760ms var(--ease) 200ms forwards; }
+  html.op-go .op-slot[data-season="2025"] .op-robot { animation-delay: 280ms; }
+  html.op-go .op-slot[data-season="2026"] .op-robot { animation-delay: 360ms; }
+  html.op-go .op-name { animation: op-name 520ms var(--ease) 460ms forwards; }
+  html.op-go .op-slot[data-season="2025"] .op-name { animation-delay: 520ms; }
+  html.op-go .op-slot[data-season="2026"] .op-name { animation-delay: 580ms; }
+  html.op-go .op-strap { animation: op-strap 520ms var(--ease-in-out) 540ms forwards; }
+  html.op-go .op-strap p, html.op-go .op-logo { animation: op-name 620ms var(--ease) 700ms backwards; }
+
+  /* phones: the name on top, then one row per season */
+  @media (max-width: 720px) {
+    html.intro .opening { grid-template-columns: minmax(0, 1fr); grid-template-rows: 23% repeat(3, minmax(0, 1fr)); }
+    :is(.op-field, .op-slot)[data-season] { grid-column: 1; }
+    :is(.op-field, .op-slot)[data-season="2024"] { grid-row: 2; }
+    :is(.op-field, .op-slot)[data-season="2025"] { grid-row: 3; }
+    :is(.op-field, .op-slot)[data-season="2026"] { grid-row: 4; }
+    .op-field { margin-right: 0; margin-bottom: -1px; transform: scaleX(0); transform-origin: 0 50%; }
+    .op-slot { flex-direction: row; justify-content: flex-end; align-items: flex-end; padding: 0 16px 14px 0; }
+    .op-robot { max-height: 80%; max-width: 46%; }
+    .op-name { left: 16px; right: 50%; bottom: 16px; }
+    .op-name b { font-size: clamp(1.125rem, 5.6vw, 1.5rem); }
+    .op-strap { top: 0; height: 23%; padding-block: 0; display: flex; align-items: center; clip-path: none; }
+    .op-strap .container { gap: 12px; }
+    .op-logo { width: 44px; }
+    .op-word { font-size: min(13vw, 4rem); white-space: normal; }
+    .op-word span { display: block; }
+    .op-sub { font-size: min(5vw, 1.375rem); }
+  }
+  html.intro.intro-skip .opening { animation: intro-out 180ms cubic-bezier(0.4, 0, 1, 1) forwards; }
 }
-@keyframes intro-mark { from { opacity: 0; transform: scale(0.94); filter: brightness(0.3); } }
-@keyframes intro-word { from { opacity: 0; transform: translateY(14px); } }
+@keyframes op-field { to { transform: none; } }
+@keyframes op-robot { from { opacity: 0; transform: translateY(56px) scale(0.92); } to { opacity: 1; transform: none; } }
+@keyframes op-name { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes op-strap { to { clip-path: inset(0 0 0 0); } }
+@keyframes op-safety { to { visibility: hidden; opacity: 0; } }
 @keyframes intro-out { to { opacity: 0; visibility: hidden; } }
-@keyframes intro-iris { to { --iris: 150vmax; } }
-@keyframes intro-gone { to { visibility: hidden; } }
 
 /* ---------- Page transitions: the lights go down on the page you leave, the next one rises ----------
    Cross-page view transitions (Chrome, Edge, Safari 18.2+). The header keeps its own name so it stays put;
@@ -1132,7 +1164,7 @@ html.is-scrolling main, html.is-scrolling .site-footer { pointer-events: none; }
   .year-panel[hidden] { display: block !important; }
   .callouts[hidden] { display: grid !important; }
   .callout-note { display: none !important; }
-  html.intro::before, html.intro body::before, html.intro body::after { display: none !important; }
+  .opening { display: none !important; }
   .launch *, .season-head *, .band--stage * { color: #000 !important; }
   .tiers td { background: none !important; }
   .budget .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -1316,3 +1348,100 @@ main:focus, main:focus-visible { outline: none; }
 /* a closing call on the stage runs into the black footer: a line keeps the two apart */
 main:has(> .band--stage:last-child) + .site-footer { padding-top: 0; }
 main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top: 1px solid var(--rule-stage); padding-top: clamp(52px, 6vw, 84px); }
+
+
+/* =========================================================
+   Round 9: season liveries and a site that answers (Andy: "reference the mclaren page and build more
+   interactive and somewhat colorful page").
+   Colour, the McLaren way: one saturated colour in solid blocks at a few fixed places, and full-colour
+   pictures. Ours has a reason: every FTC season has a game, and each game has a colour. Each season wears its
+   game's colour wherever that season is shown (its bay on the home stage, its card, its page head, its rows).
+   This season's colour is also the site's one signal colour, like a racing livery repainted every year: the
+   sponsor action, the bar above section headings, the "next" marks and the previous/next controls.
+   To repaint the site for a new season: add the new game's colour below and point --season at it.
+   Never: colour as a page background behind reading text, tinted table columns, gradients of colour, violet.
+   ========================================================= */
+:root {
+  --itd: #3C8CF2;            /* INTO THE DEEP, 2024-25 */
+  --decode: #2EBD77;         /* DECODE, 2025-26 */
+  --biobuzz: #FFC21A;        /* BIOBUZZ, 2026-27 */
+  --season: var(--biobuzz);  /* THIS season: the site's signal colour */
+  --on-season: var(--stage); /* text on any season colour (ink: every season colour is a light one) */
+}
+[data-season="2024"] { --c: var(--itd); }
+[data-season="2025"] { --c: var(--decode); }
+[data-season="2026"] { --c: var(--biobuzz); }
+::selection { background: var(--season); color: var(--on-season); }
+
+/* ---------- Home stage: each robot stands on its season's colour; the chosen one is lit ---------- */
+.bays { gap: 6px; }
+.bay { padding: 0; }
+.bay-stage {
+  padding: 18px 7% 20px; overflow: hidden;
+  background-color: color-mix(in oklab, var(--c, var(--stage-raise)) 17%, var(--stage));
+  transition: background-color 520ms var(--ease);
+}
+.bay-stage::after { content: none; }
+.bay-stage::before { /* the light on a lit field: a pool at the robot's feet */
+  inset: 0; clip-path: none;
+  background: radial-gradient(72% 58% at 50% 104%, rgba(255, 255, 255, 0.36), transparent 70%);
+}
+.bay-stage img { filter: drop-shadow(0 16px 14px rgba(11, 10, 15, 0.4)); }
+.lineup.is-ready .bay[aria-selected="true"] .bay-stage { background-color: var(--c); }
+.lineup.is-ready .bay[aria-selected="false"] .bay-stage img { opacity: 0.55; filter: grayscale(0.8) brightness(0.72) drop-shadow(0 16px 14px rgba(11, 10, 15, 0.4)); transform: scale(0.94) translateY(6px); }
+@media (hover: hover) {
+  .lineup.is-ready .bay[aria-selected="false"]:hover .bay-stage { background-color: color-mix(in oklab, var(--c) 42%, var(--stage)); }
+  .lineup.is-ready .bay[aria-selected="false"]:hover .bay-stage img { opacity: 0.9; filter: grayscale(0.2) brightness(0.95) drop-shadow(0 16px 14px rgba(11, 10, 15, 0.4)); transform: scale(0.97); }
+}
+@media (scripting: none) { .bay-stage { background-color: var(--c); } .bay-stage::before { opacity: 1; } }
+.bay-label { flex: 1; align-content: start; justify-items: start; text-align: left; gap: 3px; padding: 12px 14px 14px; background: var(--stage-raise); transition: background-color 320ms var(--ease), color 320ms var(--ease); }
+.lineup.is-ready .bay[aria-selected="true"] .bay-label { background: #fff; color: var(--ink); }
+.lineup.is-ready .bay[aria-selected="true"] :is(.bay-no, .bay-status) { color: var(--steel); }
+.lineup.is-ready .bay[aria-selected="true"] .bay-no .dia { background: var(--c); box-shadow: inset 0 0 0 1px var(--ink); }
+.bay-no .dia { width: 8px; height: 8px; }
+.bay:focus-visible { outline-offset: 2px; }
+.season-card h2 { color: var(--c, var(--on-stage)); }
+
+/* the signal colour: the sponsor action */
+.header-cta, .header-cta:hover, .btn--season, .btn--season:hover { background: var(--season); border-color: var(--season); color: var(--on-season); }
+.header-cta:hover, .btn--season:hover { background: color-mix(in oklab, var(--season) 86%, var(--ink)); border-color: color-mix(in oklab, var(--season) 86%, var(--ink)); }
+.header-cta[aria-current="page"], .header-cta[aria-current="page"]:hover { background: transparent; border-color: var(--ink); color: var(--ink); }
+
+/* the bar above section headings, and the calendar's next event, wear this season's colour */
+:is(.page-head, .partner-head) h1::before,
+:is(.section-head, .sheet-grid, .rail, .year-panel) > h2:not(.h3)::before,
+.split > h2:not(.h3):first-child::before,
+.split > * > h2:not(.h3):first-child::before,
+.split > * > .prose > h2:not(.h3):first-child::before,
+.close-grid > div:first-child > h2:first-child::before,
+.band--stage > .container > h2:first-child::before,
+.terms > h2:not(.h3)::before { background: var(--season); }
+.calendar li.is-next, .calendar li.is-today { background: var(--season) !important; border-color: var(--season); color: var(--on-season); }
+.calendar li.is-next time, .calendar li.is-today time { color: var(--on-season); opacity: 0.78; }
+
+/* ---------- Seasons: each robot on its season's colour (the index rows, the season heads, the pagers, the record) ---------- */
+.season-row .sr-media { background: var(--c, var(--stage)); }
+.season-row .sr-media::before { background: radial-gradient(60% 50% at 50% 104%, rgba(255, 255, 255, 0.36), transparent 70%); }
+.season-row .sr-media img { filter: drop-shadow(0 14px 12px rgba(11, 10, 15, 0.4)); }
+.season-head-figure { background: var(--c, transparent); padding: clamp(20px, 3vw, 44px) clamp(16px, 3vw, 44px) clamp(18px, 2.4vw, 30px); overflow: hidden; }
+.season-head-figure::before { inset: 0; background: radial-gradient(64% 52% at 50% 104%, rgba(255, 255, 255, 0.36), transparent 70%); }
+.season-head-figure img { filter: drop-shadow(0 20px 16px rgba(11, 10, 15, 0.42)); }
+.pager-media { background: var(--c, var(--stage)); }
+.pager-media img { filter: drop-shadow(0 6px 6px rgba(11, 10, 15, 0.35)); }
+.results-table .r-season a::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 8px; background: var(--c, var(--ink)); box-shadow: inset 0 0 0 1px rgba(22, 20, 28, 0.4); }
+
+/* ---------- The site answers: hover and press ----------
+   Only with a mouse (fine pointer); keyboard focus shows the same states through :focus-visible where it matters.
+   Buttons step up 1px and press down; a card that is a link lifts 2px and its line darkens; a picture inside a
+   link grows a little inside its frame; arrows move (round 8). Nothing here runs because the page scrolled. */
+.btn { transition: background-color 150ms var(--ease), color 150ms var(--ease), border-color 150ms var(--ease), transform 150ms var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translateY(-1px); }
+  .lift { transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease); }
+  .lift:hover { transform: translateY(-2px); border-color: var(--ink); }
+  .zoom { overflow: hidden; }
+  .zoom img { transition: transform 600ms var(--ease); }
+  a:hover .zoom img, .zoom:hover img, a.zoom:hover img { transform: scale(1.03); }
+}
+.btn:active { transform: translateY(1px) scale(0.985); transition-duration: 90ms; }
+@media (prefers-reduced-motion: reduce) { .btn:hover, .btn:active, .lift:hover, .zoom:hover img, a:hover .zoom img { transform: none; } }

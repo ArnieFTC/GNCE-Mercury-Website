@@ -890,27 +890,103 @@ part("scroll-calm", () => {
 });
 
 // ---------- Opening ----------
-// index.html's <head> adds .intro (the overlay) and .intro-stage (the stage's entrance waits for it) on the
-// first visit of a session. Here: end it after its 1.7s, or at once on a click, tap, wheel or key, pulling the
-// stage's entrance forward by the time that was skipped so nothing sits waiting in the dark.
+// index.html's <head> adds .intro on the first visit of a session, and the <div class="opening"> title card builds
+// itself in CSS once its robots have loaded (the small script under it sets window.__opening and .op-go).
+// Here: after the card has stood for a moment, every piece flies to its own place on the page underneath (the
+// colour fields to the bays, the robots to theirs, the name to the h1, the logo to the header), then the card
+// fades and the page is simply there. A click, tap, wheel or key ends it at once.
 part("intro", () => {
   const rootEl = document.documentElement;
   if (!rootEl.classList.contains("intro")) return;
-  const t0 = performance.now();
-  const end = () => rootEl.classList.remove("intro");
-  let timer = setTimeout(end, 1750);
-  const skip = () => {
-    if (!rootEl.classList.contains("intro") || rootEl.classList.contains("intro-skip")) return;
+  const op = document.querySelector(".opening");
+  const done = () => rootEl.classList.remove("intro", "intro-skip", "op-go");
+  if (!op || !op.animate) return done();
+  const HOLD = 1560;   // from the card starting to build until the pieces fly
+  const FLY = 760;
+  const FADE = 300;
+  let over = false, timer = 0, flights = [];
+  // leave without the flight: a skip, or a page that is not where the flight expects it
+  const fade = () => {
+    if (over) return;
+    over = true;
     clearTimeout(timer);
-    const shift = Math.max(0, 1100 - (performance.now() - t0));
-    document.getAnimations().forEach(a => {
-      const el = a.effect && a.effect.target;
-      if (shift && el && el.closest && el.closest(".launch") && a.currentTime != null) a.currentTime += shift;
-    });
+    flights.forEach(a => a.cancel());
     rootEl.classList.add("intro-skip");
-    timer = setTimeout(end, 200);
+    setTimeout(done, 200);
   };
-  ["pointerdown", "keydown", "wheel"].forEach(t => addEventListener(t, skip, { once: true, passive: true }));
+  const textRect = node => { const r = document.createRange(); r.selectNodeContents(node); return r.getBoundingClientRect(); };
+  const land = () => {
+    if (over) return;
+    const lu = document.querySelector("[data-lineup].is-ready");
+    const h1 = document.getElementById("launch-title");
+    const brand = document.querySelector(".site-header .brand img");
+    if (!lu || !h1 || !brand || scrollY > 4) return fade();
+    const opts = { duration: FLY, easing: "cubic-bezier(0.65, 0, 0.35, 1)", fill: "forwards" };
+    // el goes from where it is to the rect `to`; `inner` is the part of el that has to land on it (default: all of it)
+    const fly = (el, to, inner) => {
+      const box = el.getBoundingClientRect();
+      const from = inner || box;
+      if (!from.width || !from.height || !to.width) return;
+      const sx = to.width / from.width, sy = inner ? sx : to.height / from.height;
+      const dx = to.left - box.left - sx * (from.left - box.left), dy = to.top - box.top - sy * (from.top - box.top);
+      el.style.transformOrigin = "0 0";
+      flights.push(el.animate({ transform: ["none", `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`] }, opts));
+    };
+    let bayTop = innerHeight;
+    op.querySelectorAll(".op-field").forEach(f => {
+      const stage = lu.querySelector(`.bay[data-season="${f.dataset.season}"] .bay-stage`);
+      if (!stage) return;
+      const to = stage.getBoundingClientRect();
+      bayTop = Math.min(bayTop, to.top);
+      fly(f, to);
+    });
+    op.querySelectorAll(".op-slot").forEach(s => {
+      const img = lu.querySelector(`.bay[data-season="${s.dataset.season}"] .bay-stage img`);
+      if (img) fly(s.querySelector(".op-robot"), img.getBoundingClientRect());
+      flights.push(s.querySelector(".op-name").animate({ opacity: [1, 0] }, { duration: 160, fill: "forwards" }));
+    });
+    // each word of the name lands on the same word of the h1 (which may have wrapped), the team line on the h1's
+    // second line, the logo on the header's
+    const name = h1.firstChild, sub = op.querySelector(".op-sub"), lite = h1.querySelector(".lite");
+    let textBottom = 0;
+    if (name && name.nodeType === 3) {
+      let at = 0;
+      const targets = name.nodeValue.trim().split(/\s+/).map(w => {
+        const i = name.nodeValue.indexOf(w, at);
+        at = i + w.length;
+        const r = document.createRange();
+        r.setStart(name, i);
+        r.setEnd(name, at);
+        return r.getBoundingClientRect();
+      });
+      op.querySelectorAll(".op-word span").forEach((w, i) => {
+        if (!targets[i]) return;
+        textBottom = Math.max(textBottom, targets[i].bottom);
+        fly(w, targets[i], textRect(w));
+      });
+    }
+    if (lite) { const to = textRect(lite); textBottom = Math.max(textBottom, to.bottom); fly(sub, to, textRect(sub)); }
+    fly(op.querySelector(".op-logo"), brand.getBoundingClientRect());
+    // the black strap rides up with the name: it closes over the top of the fields and stops above the bays
+    const strap = op.querySelector(".op-strap"), sr = strap.getBoundingClientRect();
+    const top = 0, bottom = Math.min(bayTop, (textBottom || bayTop) + 14);
+    strap.style.setProperty("--strap-to", `translateY(${top - sr.top}px) scaleY(${Math.max(0.05, (bottom - top) / sr.height)})`);
+    strap.classList.add("is-flying");
+    Promise.all(flights.map(a => a.finished)).then(() => {
+      if (over) return;
+      over = true;
+      // the rest of the page comes up around the pieces, which are now exactly where the real ones are
+      op.animate({ opacity: [1, 0] }, { duration: FADE, easing: "ease-out", fill: "forwards" }).finished.then(done);
+    }).catch(() => {});
+  };
+  const wait = () => {
+    if (over) return;
+    const t0 = window.__opening;
+    if (t0 == null) { timer = setTimeout(wait, 50); return; }
+    timer = setTimeout(land, Math.max(0, HOLD - (performance.now() - t0)));
+  };
+  wait();
+  ["pointerdown", "keydown", "wheel", "touchstart"].forEach(t => addEventListener(t, fade, { once: true, passive: true }));
 });
 
 // ---------- Robot morph ----------
