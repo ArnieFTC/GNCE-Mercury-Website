@@ -4,15 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>/* the opening (the season line-up title card): once per visit; never with reduced motion, on a screen
-     under 480px tall, or on a slow or data-saving connection (?intro shows it again). Also the page entrance
-     where cross-page view transitions are missing. See css/style.css "Opening" and "Page transitions". */
+     under 480px tall, on a slow or data-saving connection, or in a tab that is not showing (?intro shows it
+     again). When it plays, the page transition from the page before is dropped, so nothing is drawn over the
+     card. Also the page entrance where cross-page view transitions are missing. See css/style.css "Opening"
+     and "Page transitions". */
   (function (d) { try {
     if (!("onpagereveal" in window)) d.classList.add("page-enter");
     var s = sessionStorage, again = /[?&]intro\b/.test(location.search), c = navigator.connection;
     var slow = !!c && (c.saveData || /2g|3g/.test(c.effectiveType || ""));
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches || !matchMedia("(min-height: 480px)").matches) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches || !matchMedia("(min-height: 480px)").matches || document.hidden) return;
     if (again || (!s.getItem("mercury-intro") && !slow)) {
       d.classList.add("intro", "opened"); s.setItem("mercury-intro", "1");
+      addEventListener("pagereveal", function (e) { if (e.viewTransition) { e.viewTransition.ready.catch(function () {}); e.viewTransition.skipTransition(); } });
     }
   } catch (e) {} })(document.documentElement);</script>
   <title>GNCE Mercury | FTC 26413</title>
@@ -154,17 +157,33 @@
     <div class="op-slot" data-season="2026"><img class="op-robot" src="images/mercinator-v1-cut.webp" width="479" height="511" alt="" fetchpriority="high"><p class="op-name"><span>2026–&#8288;27</span><b>BIOBUZZ</b></p></div>
     <div class="op-strap"><div class="container"><img class="op-logo" src="images/logo-mark-240.webp" width="240" height="256" alt=""><p><b class="op-word"><span>GNCE</span> <span>MERCURY</span></b><span class="op-sub">FTC TEAM 26413</span></p></div></div>
   </div>
-  <script>/* the opening starts once its four pictures have loaded. If they are still on their way after 0.9s
+  <script>/* the opening starts once its four pictures and the typeface have loaded. If they are still on their way after 0.9s
      (a slow connection), there is no title card: the page shows. Any click, tap, wheel or key ends the card,
-     also when js/main.js (which flies the pieces into the page) has not arrived. */
+     also when js/main.js (which flies the pieces into the page) has not arrived. A press on the card ends it
+     and goes no further: it never also presses the link or button that lies under the card. */
   (function (d) { var r = d.documentElement; if (!r.classList.contains("intro")) return;
     var imgs = d.querySelectorAll(".opening img"), n = imgs.length, set = 0;
-    function end() { if (!r.classList.contains("intro")) return; r.classList.add("intro-skip"); setTimeout(function () { r.classList.remove("intro", "intro-skip", "op-go"); }, 200); }
-    function go() { if (set) return; set = 1; window.__opening = performance.now(); r.classList.add("op-go"); }
+    function clear() { r.classList.remove("intro", "intro-skip", "op-go", "op-landing"); }
+    function end() { if (!r.classList.contains("intro")) return; r.classList.add("intro-skip"); setTimeout(clear, 200); }
+    function go() { if (set) return; set = 1; window.__opening = performance.now(); r.classList.add("op-go");
+      setTimeout(function () { if (r.classList.contains("intro")) clear(); }, 3700); } /* after the stylesheet's own safety fade */
     function one() { if (--n <= 0) go(); }
+    function press(e) {
+      var t = e.target;
+      if (t && t.closest && t.closest(".opening")) { /* swallow the click this press would make (a tap's click lands on whatever is under the finger when it lifts) */
+        var eat = function (c) { c.preventDefault(); c.stopPropagation(); removeEventListener("click", eat, true); };
+        var off = function () { setTimeout(function () { removeEventListener("click", eat, true); }, 400); };
+        addEventListener("click", eat, true);
+        ["pointerup", "pointercancel", "touchend", "touchcancel"].forEach(function (u) { addEventListener(u, off, { once: true }); });
+      }
+      end();
+    }
+    n++; /* the fifth piece is the typeface: the name is set in it, and lands on the page's heading */
+    (d.fonts && d.fonts.load ? d.fonts.load("800 1em Archivo") : Promise.resolve()).then(one, one);
     for (var i = 0; i < imgs.length; i++) { if (imgs[i].complete) one(); else { imgs[i].addEventListener("load", one); imgs[i].addEventListener("error", one); } }
     setTimeout(function () { if (!set) { set = 1; end(); } }, 900);
-    ["pointerdown", "keydown", "wheel", "touchstart"].forEach(function (t) { addEventListener(t, end, { once: true, passive: true }); });
+    ["pointerdown", "touchstart"].forEach(function (t) { addEventListener(t, press, { once: true, passive: true }); });
+    ["keydown", "wheel"].forEach(function (t) { addEventListener(t, end, { once: true, passive: true }); });
   })(document);</script>
   <noscript><nav class="nojs-nav container" aria-label="Main"><a href="index.html">Home</a><a href="seasons.html">Seasons</a><a href="team.html">Team</a><a href="outreach.html">Outreach</a><a href="news.html">News</a><a href="partners.html">Partners</a><a href="resources.html">Resources</a><a href="contact.html">Contact</a></nav></noscript>
   <main id="main">
@@ -209,7 +228,7 @@
           </div>
 
           <!-- on phones and tablets the partner credit sits here, inside the first screen (the strip below is for desktops) -->
-          <p class="lineup-credit" data-md-skip><span>Supported by <b data-supporters>VulcanForms, SolidWorks, Weston Owl and WEEFC</b></span> <a class="btn btn--season" href="partners.html">Partner with us</a></p>
+          <p class="lineup-credit" data-md-skip><span>Supported by <b data-supporters>VulcanForms, SolidWorks, Weston Owl and WEEFC</b></span> <a class="btn btn--light btn--sponsor" href="partners.html">Partner with us</a></p>
 
           <div class="season-cards">
             <section class="season-card" id="card-2024" data-season="2024">
@@ -262,7 +281,7 @@
         <div class="container row">
           <p>Supported by <b data-supporters>VulcanForms, SolidWorks, Weston Owl and WEEFC</b></p>
           <div class="actions">
-            <a class="btn btn--season" href="partners.html">Partner with us</a>
+            <a class="btn btn--light btn--sponsor" href="partners.html">Partner with us</a>
             <a href="contact.html?topic=join#contact-form">Join as a student</a>
           </div>
         </div>
@@ -346,7 +365,7 @@
       <div class="container">
         <div class="section-head">
           <h2 id="team-title">9 students and 4 coaches</h2>
-          <p>We design, build, wire, and program one robot each season. Our members have competed at international events and won awards there.</p>
+          <p>We design, build, wire, and program one robot each season. Our members have competed at international events and won awards there. In the summer we run a robotics camp, and during the school year we coach Weston’s <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> teams.</p>
         </div>
         <div class="strip-bar">
           <div class="links">
@@ -398,7 +417,6 @@
           <span class="strip-label"><b>Avo Bell</b><span>CAD, Game Strategy</span></span>
         </a></li>
       </ul>
-      <div class="container"><p class="strip-foot">In the summer we run a robotics camp, and during the school year we coach Weston’s <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> teams.</p></div>
     </section>
 
     <!-- OUTREACH: four stories from outreach.html. On wide screens the stories are a column of rows beside one
@@ -412,8 +430,9 @@
         <div class="section-head">
           <h2 id="outreach-title">From 4 to 17 <span class="lite"><span translate="no">FIRST LEGO&nbsp;League</span> teams in Weston</span></h2>
           <p><a class="text-link" href="outreach.html">See all our outreach</a></p>
+          <div class="strip-nav" data-strip-nav="home-stories" data-label="stories"></div>
         </div>
-        <div class="stories" data-stories>
+        <div class="stories" id="home-stories" data-stories data-strip>
           <article class="story">
             <div class="story-photo">
               <img src="images/fll_camp_4.jpg" width="1400" height="1055" loading="lazy" alt="GNCE Mercury members coaching young students at an FLL table">
@@ -491,8 +510,8 @@
       </div>
     </section>
 
-    <!-- CLOSING: join or support. The sponsor box (class="ruled ruled--season") is one solid block of this
-         season's colour. -->
+    <!-- CLOSING: join or support, two equal boxes. The sponsor button (btn btn--light btn--sponsor) is a light
+         one here, because the header's yellow one is in view; on phones it takes the signal colour itself. -->
     <section class="band band--stage" aria-labelledby="closing-title">
       <div class="container">
         <h2 id="closing-title" style="max-width: 20ch; margin-bottom: clamp(28px, 4vw, 48px)">Build with us, <span class="lite">or help us get to the next event</span></h2>
@@ -502,10 +521,10 @@
             <p>Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.</p>
             <a class="btn btn--outline-light" href="contact.html?topic=join#contact-form">Join as a student</a>
           </div>
-          <div class="ruled ruled--season">
+          <div class="ruled">
             <h3>Families and sponsors</h3>
             <p>Donations pay for robot parts, competition registration, and travel.</p>
-            <a class="btn" href="partners.html">Partner with us</a>
+            <a class="btn btn--light btn--sponsor" href="partners.html">Partner with us</a>
           </div>
         </div>
       </div>

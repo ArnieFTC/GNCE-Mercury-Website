@@ -83,7 +83,7 @@ Season calendar, oldest first, in Massachusetts (Eastern) time. The next event i
 
 ## 9 students and 4 coaches
 
-We design, build, wire, and program one robot each season. Our members have competed at international events and won awards there.
+We design, build, wire, and program one robot each season. Our members have competed at international events and won awards there. In the summer we run a robotics camp, and during the school year we coach Weston’s FIRST LEGO League teams.
 
 [Meet the team](https://mercury26413.org/team.html) · [Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
 
@@ -97,8 +97,6 @@ We design, build, wire, and program one robot each season. Our members have comp
 - [**Tucker Cashel** · Build](https://mercury26413.org/team.html#tucker-cashel)
 - [**Kai Kassekert** · CAD, Build](https://mercury26413.org/team.html#kai-kassekert)
 - [**Avo Bell** · CAD, Game Strategy](https://mercury26413.org/team.html#avo-bell)
-
-In the summer we run a robotics camp, and during the school year we coach Weston’s FIRST LEGO League teams.
 
 ## From 4 to 17 FIRST LEGO League teams in Weston
 

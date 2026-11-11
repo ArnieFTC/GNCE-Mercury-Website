@@ -320,6 +320,36 @@ part("lineup", () => {
   const start = [asked, lu.dataset.default].map(v => bays.findIndex(b => b.dataset.season === v)).find(i => i >= 0);
   select(start ?? bays.length - 1);
   lu.classList.add("is-ready");
+  // A name wraps differently when its bay is the wide, chosen one, so the labels would be taller with one season
+  // chosen than with another and everything under the stage would move on a choice. The labels get the height of
+  // the tallest case (measured by trying each choice once, with the transitions off); the three cards already
+  // share one cell (css/style.css).
+  const labels = bays.map(b => b.querySelector(".bay-label"));
+  if (labels.every(Boolean)) {
+    let wide = 0;
+    const level = () => {
+      wide = innerWidth;
+      lu.classList.add("is-still");
+      list.style.removeProperty("--label-h");
+      let max = 0;
+      bays.forEach((_, i) => {
+        bays.forEach((b, j) => b.setAttribute("aria-selected", j === i));
+        max = Math.max(max, ...labels.map(l => l.getBoundingClientRect().height));
+      });
+      bays.forEach((b, j) => b.setAttribute("aria-selected", j === current));
+      list.style.setProperty("--label-h", Math.ceil(max) + "px");
+      void lu.offsetWidth;
+      lu.classList.remove("is-still");
+    };
+    level();
+    let queued = false;
+    addEventListener("resize", () => {
+      if (queued || innerWidth === wide) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; level(); });
+    }, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(level);
+  }
 });
 
 // ---------- Outreach year tabs ----------
@@ -917,7 +947,7 @@ const stripButtons = (nav, what, onGo) => {
 };
 part("strip", () => {
   document.querySelectorAll("[data-strip]").forEach(strip => {
-    const items = [...strip.children];
+    const items = [...strip.children]; // the cards as written in the page (the stories row is re-arranged on wide screens, where it does not scroll)
     const nav = strip.id && document.querySelector(`[data-strip-nav="${strip.id}"]`);
     if (items.length < 2) return;
     // each card's left edge in the row's own coordinates; the first one's is the row's left padding, which is
@@ -947,10 +977,18 @@ part("strip", () => {
       addEventListener("resize", queue, { passive: true });
       mark();
     }
+    // a card that takes the keyboard focus comes fully on screen (the browser leaves a half-shown one where it is)
+    strip.addEventListener("focusin", e => {
+      const li = items.find(x => x.contains(e.target));
+      if (!li || max() < 8 || !e.target.matches(":focus-visible")) return;
+      const box = strip.getBoundingClientRect(), r = li.getBoundingClientRect(), pad = Math.min(lefts()[0], 24);
+      const d = r.left < box.left + pad ? r.left - box.left - pad : r.right > box.right - pad ? r.right - box.right + pad : 0;
+      if (d) strip.scrollBy({ left: d, behavior: "instant" });
+    });
     // a mouse can drag the row; the press that ends a drag is not a click on a card
     let drag = null;
     strip.addEventListener("dragstart", e => e.preventDefault());
-    strip.addEventListener("pointerdown", e => { if (e.pointerType === "mouse" && e.button === 0) drag = { x: e.clientX, left: strip.scrollLeft, moved: false }; });
+    strip.addEventListener("pointerdown", e => { if (e.pointerType === "mouse" && e.button === 0 && max() >= 8) drag = { x: e.clientX, left: strip.scrollLeft, moved: false }; });
     addEventListener("pointermove", e => {
       if (!drag) return;
       const dx = e.clientX - drag.x;
@@ -993,6 +1031,7 @@ part("stories", () => {
     const titles = stories.map(s => s.querySelector("h3"));
     if (stories.length < 2 || [photos, texts, titles].some(list => list.some(x => !x))) return;
     const wide = matchMedia("(min-width: 900px)");
+    const paper = matchMedia("print"); // on paper every story is a card with its own photo and text
     const stage = document.createElement("div");
     stage.className = "story-stage";
     const notes = document.createElement("div");
@@ -1011,7 +1050,7 @@ part("stories", () => {
       box.querySelectorAll(".story-pick").forEach((b, j) => b.setAttribute("aria-pressed", j === i));
     };
     const arrange = () => {
-      if (wide.matches) {
+      if (wide.matches && !paper.matches) {
         photos.forEach(ph => stage.append(ph));
         noteOf.forEach((d, i) => { d.append(...bodies[i]); notes.append(d); });
         box.prepend(stage);
@@ -1041,6 +1080,7 @@ part("stories", () => {
       }
     };
     wide.addEventListener("change", arrange);
+    paper.addEventListener("change", arrange);
     arrange();
   });
 });
@@ -1098,7 +1138,7 @@ part("viewer", () => {
     dlg.innerHTML = `
       <div class="viewer-top"><span class="viewer-count" role="status"></span><button class="viewer-close" type="button">Close</button></div>
       <div class="viewer-stage"><img alt=""></div>
-      <div class="viewer-foot"><p class="viewer-cap"></p><div class="strip-nav"></div></div>`;
+      <div class="viewer-foot"><p class="viewer-cap" aria-hidden="true"></p><div class="strip-nav"></div></div>`;
     document.body.append(dlg);
     img = dlg.querySelector("img");
     cap = dlg.querySelector(".viewer-cap");
@@ -1149,17 +1189,19 @@ part("intro", () => {
   if (!rootEl.classList.contains("intro")) return;
   const op = document.querySelector(".opening");
   const lu = document.querySelector("[data-lineup]");
+  let onResize = null;
   const done = () => {
     rootEl.classList.remove("intro", "intro-skip", "op-go", "op-landing");
     if (lu) lu.classList.remove("is-arriving"); // the lights go down on the unchosen bays (their own transition)
+    if (onResize) removeEventListener("resize", onResize);
   };
   if (!op || !op.animate) return done();
   const HOLD = 1480;  // from the card starting to build until the pieces fly
   const FLY = 680;
   const SWAP = 140;   // the flown pieces give way to the real ones
+  const LATE = 400;   // this script may come that long after the flight was due; later than that, the card just leaves
+  const SAFETY = 3200; // css/style.css (op-safety-go): this long after it started, the card fades by itself in 300ms
   let over = false, timer = 0, flights = [];
-  // the card lands on a stage where every bay is lit: set at once, without the bays' own transitions
-  if (lu) { lu.classList.add("is-arriving", "is-still"); void lu.offsetWidth; lu.classList.remove("is-still"); }
   // leave without the flight (a skip, or a page that is not where the flight expects it); mid-flight the pieces
   // stop where they are and fade with the card
   const fade = () => {
@@ -1177,6 +1219,10 @@ part("intro", () => {
     const h1 = document.getElementById("launch-title");
     const brand = document.querySelector(".site-header .brand img");
     if (!lu || !lu.classList.contains("is-ready") || !h1 || !brand || scrollY > 4) return fade();
+    // the card lands on a stage where every bay is lit: set at once, without the bays' own transitions
+    lu.classList.add("is-arriving", "is-still");
+    void lu.offsetWidth;
+    lu.classList.remove("is-still");
     const opts = { duration: FLY, easing: "cubic-bezier(0.6, 0, 0.2, 1)", fill: "forwards" };
     // First every piece is measured, then every piece is set moving (no layout work between two starts).
     // el goes from where it is to the rect `to`; `inner` is the part of el that has to land on it (default: all of it)
@@ -1189,12 +1235,13 @@ part("intro", () => {
       const dx = to.left - box.left - sx * (from.left - box.left), dy = to.top - box.top - sy * (from.top - box.top);
       moves.push([el, `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`]);
     };
-    let bayTop = innerHeight;
+    let bayTop = innerHeight, bayRight = 0;
     op.querySelectorAll(".op-field").forEach(f => {
       const stage = lu.querySelector(`.bay[data-season="${f.dataset.season}"] .bay-stage`);
       if (!stage) return;
       const to = stage.getBoundingClientRect();
       bayTop = Math.min(bayTop, to.top);
+      bayRight = Math.max(bayRight, to.right);
       fly(f, to);
     });
     op.querySelectorAll(".op-slot").forEach(s => {
@@ -1225,11 +1272,12 @@ part("intro", () => {
     if (lite) { const to = textRect(lite); grow(to); fly(sub, to, textRect(sub)); }
     fly(op.querySelector(".op-logo"), brand.getBoundingClientRect());
     // the strap's black band closes down to a plate behind the name and rides with it, so the name is never read
-    // against a colour field; where it lands the stage is black too, so it simply is not there any more
+    // against a colour field; where it lands the stage is black too, so it simply is not there any more. It is as
+    // wide as the row of fields under it (they close to the bays), so no field shows beside it on the way
     const strap = op.querySelector(".op-strap"), sr = strap.getBoundingClientRect();
     let plate = "";
     if (text.right > text.left && sr.width && sr.height) {
-      const l = text.left - 16, t = text.top - 12, w = text.right - text.left + 44, h = Math.min(bayTop, text.bottom + 12) - t;
+      const l = text.left - 16, t = text.top - 12, w = Math.max(text.right + 28, bayRight) - l, h = Math.min(bayTop, text.bottom + 12) - t;
       plate = `translate(${l - sr.left}px, ${t - sr.top}px) scale(${w / sr.width}, ${Math.max(0.05, h / sr.height)})`;
     }
     // everything is measured: now the writes
@@ -1238,10 +1286,16 @@ part("intro", () => {
     op.querySelectorAll(".op-name").forEach(el => flights.push(el.animate({ opacity: [1, 0] }, { duration: 160, fill: "forwards" })));
     rootEl.classList.add("op-landing");  // the real pieces wait out of sight until the flown ones are on them
     op.classList.add("is-flying");
+    // the pieces are aimed at the page as it is laid out now: if the window changes size or turns, the card just leaves
+    const size = innerWidth + "x" + innerHeight;
+    onResize = () => { if (innerWidth + "x" + innerHeight !== size) fade(); };
+    addEventListener("resize", onResize);
     Promise.all(flights.map(a => a.finished)).then(() => {
       if (over) return;
       over = true;
       rootEl.classList.remove("op-landing");
+      op.classList.add("is-landed"); // what shows now is the page itself: presses go to it
+      lu.classList.remove("is-arriving"); // the lights go down on the unchosen bays as the flown pieces give way
       op.animate({ opacity: [1, 0] }, { duration: SWAP, easing: "linear", fill: "forwards" }).finished.then(done, done);
     }).catch(() => {});
   };
@@ -1250,10 +1304,23 @@ part("intro", () => {
     if (!rootEl.classList.contains("intro") || rootEl.classList.contains("intro-skip")) { over = true; setTimeout(done, 200); return; } // the script under the card ended it
     const t0 = window.__opening;
     if (t0 == null) { timer = setTimeout(wait, 50); return; }
-    timer = setTimeout(() => { try { land(); } catch (e) { fade(); } }, Math.max(0, HOLD - (performance.now() - t0)));
+    // this script can arrive late (a slow connection). Then there is no flight: while the card still stands it
+    // fades; once the stylesheet's safety fade has taken it, only the classes are left to clear
+    const late = performance.now() - t0;
+    if (late >= SAFETY - 50) { over = true; setTimeout(done, Math.max(0, SAFETY + 360 - late)); return; }
+    if (late > HOLD + LATE) return fade();
+    timer = setTimeout(() => { try { land(); } catch (e) { fade(); } }, Math.max(0, HOLD - late));
   };
   wait();
-  ["pointerdown", "keydown", "wheel", "touchstart"].forEach(t => addEventListener(t, fade, { once: true, passive: true }));
+  // any input ends it. Before the flight the card just leaves; during the flight every piece is put in its place
+  // at once (two half-flown copies fading over the real ones would look like a fault)
+  const skip = () => {
+    if (over) return;
+    if (!flights.length) return fade();
+    op.classList.add("is-skipped");
+    flights.forEach(a => a.finish());
+  };
+  ["pointerdown", "keydown", "wheel", "touchstart"].forEach(t => addEventListener(t, skip, { once: true, passive: true }));
 });
 
 // ---------- Robot morph ----------

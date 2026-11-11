@@ -283,17 +283,17 @@ h2.h3 { font-size: var(--fs-md); letter-spacing: -0.012em; }
     radial-gradient(45% 16% at 50% 94%, rgba(255, 255, 255, 0.22), transparent 72%),
     linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.07) 55%, rgba(255, 255, 255, 0) 100%);
   clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
-  opacity: 0; transition: opacity 600ms var(--ease);
+  opacity: 0; transition: opacity 320ms var(--ease);
   pointer-events: none;
 }
 .bay-stage img {
   position: relative; max-height: 100%; width: auto; max-width: 100%; object-fit: contain;
   filter: drop-shadow(0 22px 22px rgba(0, 0, 0, 0.6));
-  transition: opacity 600ms var(--ease), transform 700ms var(--ease);
+  transition: opacity 420ms var(--ease), transform 420ms var(--ease); /* a choice: colour, label and card in 320ms, the robots in 420ms */
 }
 .bay-label { display: grid; gap: 2px; padding-top: 12px; justify-items: center; }
 .bay-no { display: flex; align-items: center; gap: 8px; white-space: nowrap; font-size: 0.875rem; color: var(--on-stage-2); font-variant-numeric: tabular-nums; }
-.bay-no .dia { width: 6px; height: 6px; background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; transition: background-color 300ms var(--ease), box-shadow 300ms var(--ease); }
+.bay-no .dia { width: 6px; height: 6px; background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; transition: background-color 320ms var(--ease), box-shadow 320ms var(--ease); }
 .bay-name { font-stretch: 125%; font-weight: 700; font-size: clamp(0.875rem, 0.6rem + 0.85vw, 1.25rem); letter-spacing: 0; line-height: 1.12; }
 .bay-status { font-size: 0.8125rem; color: var(--on-stage-2); }
 .bay:focus-visible { outline: 2px solid var(--on-stage); outline-offset: -2px; }
@@ -319,7 +319,13 @@ h2.h3 { font-size: var(--fs-md); letter-spacing: -0.012em; }
 .season-card { display: grid; gap: 16px; align-content: start; }
 .season-card + .season-card { border-top: 1px solid var(--rule-stage); padding-top: 24px; margin-top: 24px; }
 .lineup.is-ready .season-card { border-top: 0; padding-top: 0; margin-top: 0; }
-.season-card.is-entering { animation: card-light 520ms var(--ease) both; }
+/* the three cards share one cell and the bay labels share one height (set by the script, part "lineup"), so the
+   stage is as tall with one season chosen as with another and nothing under it moves on a choice */
+.lineup.is-ready .season-cards { display: grid; }
+.lineup.is-ready .season-card { grid-area: 1 / 1; }
+.lineup.is-ready .season-card[hidden] { display: grid !important; visibility: hidden; }
+.lineup.is-ready .bay-label { min-height: var(--label-h, 0px); }
+.season-card.is-entering { animation: card-light 320ms var(--ease) both; }
 @keyframes card-light { from { opacity: 0; filter: blur(8px); } to { opacity: 1; filter: none; } }
 .season-card h2 { font-size: clamp(1.875rem, 1rem + 2.4vw, 3rem); font-stretch: 125%; font-weight: 700; letter-spacing: -0.01em; }
 .season-card .sc-sub { color: var(--on-stage-2); margin: -6px 0 0; }
@@ -425,7 +431,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .results-table .r-event { font-weight: 600; }
 .results-table .r-result .dia { margin-right: 10px; transform: translateY(-2px); }
 .results-table .r-season { font-weight: 600; font-size: 0.875rem; white-space: nowrap; }
-.results-table .r-season a { display: inline-block; padding-block: 4px; text-decoration: none; }
+.results-table .r-season a { display: inline-block; padding-block: 4px; margin-block: -4px; text-decoration: none; }
 .results-table .r-season a:hover { text-decoration: underline; }
 .results-table tbody tr { transition: background-color 160ms var(--ease); }
 @media (hover: hover) { .results-table tbody tr:hover td { background: var(--alu); } .results-table tbody tr:hover td:first-child { border-radius: 10px 0 0 10px; } }
@@ -1013,7 +1019,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
      hairlines across it in Chromium (seams between its solid tiles). */
   .op-field {
     position: relative; margin-right: -1px; transform: scaleY(0); transform-origin: 50% 100%; will-change: transform;
-    background: radial-gradient(72% 58% at 50% 104%, rgba(255, 255, 255, 0.36), transparent 70%), linear-gradient(var(--c), var(--c));
+    background: radial-gradient(72% 58% at 50% 104%, rgba(255, 255, 255, var(--pool, 0.36)), transparent 70%), linear-gradient(var(--c), var(--c));
   }
   .op-slot { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 0 9% var(--op-foot); }
   .op-robot {
@@ -1049,11 +1055,13 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
   html.op-go .op-strap { animation: op-strap 520ms var(--op-out) 600ms forwards; }
 
   /* the flight (part "intro" adds .is-flying and moves the pieces): the black behind the card clears while the
-     pieces are on their way, and the card stops taking clicks, so the page is usable the moment it shows.
+     pieces are on their way. The card keeps taking the pointer until every piece has landed (.is-landed): a
+     press on it ends the opening and never reaches what lies under it, which the visitor cannot see yet.
      The real pieces wait out of sight (html.op-landing) until the flown ones are on them. */
-  html.op-go .opening.is-flying { pointer-events: none; }
+  .opening.is-landed { pointer-events: none; }
   html.op-go .opening.is-flying .op-strap { transform: none; animation: none; }
-  .opening.is-flying .op-black { opacity: 0; transition: opacity 340ms linear 220ms; }
+  .opening.is-flying .op-black { opacity: 0; transition: opacity 240ms linear 440ms; } /* the pieces fly on black; the page comes up when they are nearly home */
+  .opening.is-skipped .op-black, .opening.is-skipped .op-strap::before { transition: none; } /* an input during the flight: everything is in place at once */
   .opening.is-flying .op-strap::before { transform: var(--strap-to, none); transition: transform 680ms var(--op-fly); } /* the band closes to a plate behind the name */
   html.op-landing :is(#launch-title, .site-header .brand img, .bay-stage) { visibility: hidden; }
 
@@ -1066,6 +1074,13 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
     :is(.op-field, .op-slot)[data-season="2026"] { grid-row: 4; }
     .op-field { margin-right: 0; margin-bottom: -1px; transform: scaleX(0); transform-origin: 0 50%; }
     .op-slot { flex-direction: row; justify-content: flex-end; align-items: flex-end; padding: 0 16px 14px 0; }
+    /* in the flight the three rows close into one band. The oldest season rides on top, so each robot stays on
+       its own colour while the fields pass over each other */
+    .op-field[data-season="2024"] { z-index: 3; }
+    .op-field[data-season="2025"] { z-index: 2; }
+    .op-field[data-season="2026"] { z-index: 1; }
+    .op-slot { z-index: 4; }
+    .op-strap { z-index: 5; }
     .op-robot { max-height: 80%; max-width: 46%; }
     .op-name { left: 16px; right: 50%; bottom: 16px; }
     .op-name b { font-size: clamp(1.125rem, 5.6vw, 1.5rem); }
@@ -1087,7 +1102,8 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
     html.op-go .op-slot[data-season="2025"] .op-name { animation-delay: 530ms; }
     html.op-go .op-slot[data-season="2026"] .op-name { animation-delay: 560ms; }
   }
-  html.intro.intro-skip .opening { animation: intro-out 180ms cubic-bezier(0.4, 0, 1, 1) forwards; pointer-events: none; }
+  /* leaving early: it still takes the pointer while it fades, so the tap that ended it cannot land on the page */
+  html.intro.intro-skip .opening { animation: intro-out 180ms cubic-bezier(0.4, 0, 1, 1) forwards; }
 }
 @keyframes op-field { to { transform: none; } }
 @keyframes op-robot { from { opacity: 0; transform: translateY(48px) scale(0.94); } }
@@ -1219,6 +1235,12 @@ html.is-scrolling main, html.is-scrolling .site-footer { pointer-events: none; }
   .tiers td { background: none !important; }
   .budget .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .budget tfoot tr > * { border-top-color: #000; }
+  /* the home page's rows: every card on the paper, none cut off at its edge; no controls */
+  .strip-nav, .play { display: none !important; }
+  .card-strip, .stories { flex-wrap: wrap; overflow: visible; margin-inline: 0; padding-inline: 0; }
+  .card-strip > li, .story { break-inside: avoid; }
+  .strip-card, .strip-card--wide { height: 190px; max-width: 100%; }
+  .story { flex: 0 0 calc(50% - 6px); }
 }
 
 /* =========================================================
@@ -1436,6 +1458,13 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 @supports (color: oklch(from red l c h)) {
   [data-season] { --c-dim: oklch(from var(--c) 0.3 calc(c * 0.55) h); --c-mid: oklch(from var(--c) 0.44 calc(c * 0.75) h); }
 }
+/* the pool of light at a robot's feet is white: on the yellow it can only wash the colour out, so it is weaker there */
+[data-season="2026"] { --pool: 0.14; }
+/* a darkened yellow is olive, which reads as a fault beside the deep blue and green: BIOBUZZ's field with the
+   lights down is the stage's own dark with a trace of its yellow */
+@supports (color: color-mix(in oklab, red, blue)) {
+  [data-season="2026"] { --c-dim: color-mix(in oklab, var(--c) 9%, var(--stage-raise)); --c-mid: color-mix(in oklab, var(--c) 38%, var(--stage)); }
+}
 ::selection { background: var(--season); color: var(--on-season); }
 
 /* ---------- Home stage: each robot stands on its season's colour; the chosen one is lit ---------- */
@@ -1444,12 +1473,12 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .bay-stage {
   padding: 18px 7% 20px; overflow: hidden;
   background-color: var(--c-dim, var(--stage-raise)); /* its own colour, lights down */
-  transition: background-color 520ms var(--ease);
+  transition: background-color 320ms var(--ease);
 }
 .bay-stage::after { content: none; }
 .bay-stage::before { /* the light on a lit field: a pool at the robot's feet */
   inset: 0; clip-path: none;
-  background: radial-gradient(72% 58% at 50% 104%, rgba(255, 255, 255, 0.36), transparent 70%);
+  background: radial-gradient(72% 58% at 50% 104%, rgba(255, 255, 255, var(--pool, 0.36)), transparent 70%);
 }
 .bay-stage img { filter: drop-shadow(0 16px 14px rgba(11, 10, 15, 0.4)); }
 .lineup.is-ready .bay[aria-selected="true"] .bay-stage { background-color: var(--c); }
@@ -1473,6 +1502,12 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 /* narrow phones: the three labels need 308px at full padding, more than a 320px screen has. Tighter labels keep
    all three bays inside the page and leave the chosen one the spare room */
 @media (max-width: 400px) { .bays { gap: 4px; } .bay-label { padding-inline: 8px; } }
+/* the narrowest phones: three equal bays (a wider chosen one leaves the other two no room for their names); the
+   chosen one is the lit one with the white label */
+@media (max-width: 360px) {
+  .lineup.is-ready .bays:has(> .bay:nth-child(n)[aria-selected="true"]) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .bay-name { font-size: 0.8125rem; font-stretch: 112%; overflow-wrap: anywhere; }
+}
 .season-card h2 { color: var(--c, var(--on-stage)); }
 
 /* the signal colour: the sponsor action. Every block of the signal colour carries an ink keyline, as the yellow
@@ -1480,12 +1515,16 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .header-cta, .header-cta:hover, .btn--season, .btn--season:hover { background: var(--season); border-color: var(--ink); color: var(--on-season); }
 @media (hover: hover) and (pointer: fine) { .header-cta:hover, .btn--season:hover { background: var(--season-press); } } /* a tap never leaves it darkened */
 .header-cta[aria-current="page"], .header-cta[aria-current="page"]:hover { background: transparent; border-color: var(--ink); color: var(--ink); }
+/* one signal button in view at a time. A sponsor button on the stage (btn btn--light btn--sponsor) is a light one
+   wherever the header shows the yellow one, and takes the signal colour on phones, where the header's is
+   inside the menu */
+@media (max-width: 560px) {
+  .btn--sponsor, .btn--sponsor:hover { background: var(--season); border-color: var(--ink); color: var(--on-season); box-shadow: none; }
+}
 
-/* one solid block of the signal colour per page at most: the sponsor box that closes the home page */
-.band--stage .ruled--season:not(.tile):not(.entry):not(.pull):not(.facts) { background: var(--season); border-color: var(--ink); color: var(--on-season); } /* outranks round 7's box rule for the stage */
-.band--stage .ruled--season :is(h3, p) { color: var(--on-season); }
-.split:has(> .ruled--season) { align-items: stretch; } /* the two closing boxes stand at one height */
-.ruled--season .btn:focus-visible { outline-color: var(--ink); }
+/* the home page's closing band: two plain boxes at one height. Neither is a box in the signal colour: a colour
+   behind a heading, a sentence and a button is what Andy turned down */
+.band--stage .split--even { align-items: stretch; }
 /* in the phone menu the sponsor action wears it too */
 @media (max-width: 1080px) { .site-header.is-open .nav .nav-cta { background: var(--season); color: var(--on-season); border: 1.5px solid var(--ink); } }
 
@@ -1504,10 +1543,10 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 
 /* ---------- Seasons: each robot on its season's colour (the index rows, the season heads, the pagers, the record) ---------- */
 .season-row .sr-media { background: var(--c, var(--stage)); }
-.season-row .sr-media::before { background: radial-gradient(60% 50% at 50% 104%, rgba(255, 255, 255, 0.36), transparent 70%); }
+.season-row .sr-media::before { background: radial-gradient(60% 50% at 50% 104%, rgba(255, 255, 255, var(--pool, 0.36)), transparent 70%); }
 .season-row .sr-media img { filter: drop-shadow(0 14px 12px rgba(11, 10, 15, 0.4)); }
 .season-head-figure { background: var(--c, transparent); padding: clamp(20px, 3vw, 44px) clamp(16px, 3vw, 44px) clamp(18px, 2.4vw, 30px); overflow: hidden; }
-.season-head-figure::before { inset: 0; background: radial-gradient(64% 52% at 50% 104%, rgba(255, 255, 255, 0.36), transparent 70%); }
+.season-head-figure::before { inset: 0; background: radial-gradient(64% 52% at 50% 104%, rgba(255, 255, 255, var(--pool, 0.36)), transparent 70%); }
 .season-head-figure img { filter: drop-shadow(0 20px 16px rgba(11, 10, 15, 0.42)); }
 .pager-media { background: var(--c, var(--stage)); }
 .pager-media img { filter: drop-shadow(0 6px 6px rgba(11, 10, 15, 0.35)); }
@@ -1526,7 +1565,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
   .zoom img { transition: transform 600ms var(--ease); }
   a:hover .zoom img, .zoom:hover img, a.zoom:hover img { transform: scale(1.03); }
 }
-.btn:active { transform: translateY(1px) scale(0.985); transition-duration: 90ms; }
+.btn:active { transform: scale(0.97); transition-duration: 90ms; }
 @media (prefers-reduced-motion: reduce) { .btn:hover, .btn:active, .lift:hover, .zoom:hover img, a:hover .zoom img { transform: none; } }
 
 /* ---------- Card strip: a row of cards the visitor moves (arrow buttons, drag, swipe, Tab); it never moves by
@@ -1544,8 +1583,9 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .band--grey .strip-btn[aria-disabled="true"] { background: var(--paper); }
 .viewer .strip-btn[aria-disabled="true"] { background: var(--stage-raise); color: var(--on-stage-3); }
 @media (hover: hover) and (pointer: fine) { .strip-btn:not([aria-disabled="true"]):hover { background: var(--season-press); } }
-.strip-btn:not([aria-disabled="true"]):active { transform: scale(0.94); transition-duration: 90ms; }
+.strip-btn:not([aria-disabled="true"]):active { transform: scale(0.97); transition-duration: 90ms; }
 .strip-nav[hidden] { display: none; }
+.section-head > .strip-nav { margin-left: auto; } /* the arrows of a row under a section heading sit at its right end */
 .card-strip {
   list-style: none; display: flex; gap: 10px; margin: 0; overflow-x: auto; overscroll-behavior-x: contain;
   /* the first card starts on the content's left edge; the row runs off the right edge of the screen */
@@ -1560,7 +1600,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .card-strip.is-dragging { cursor: grabbing; user-select: none; }
 .card-strip.is-dragging a { pointer-events: none; }
 .strip-card {
-  position: relative; display: block; height: clamp(280px, 28vw, 390px); aspect-ratio: 4 / 5; overflow: hidden;
+  position: relative; display: block; height: clamp(280px, 22vw, 320px); aspect-ratio: 4 / 5; overflow: hidden;
   background: var(--stage-raise); color: #fff; text-decoration: none;
 }
 .strip-card--wide { aspect-ratio: 927 / 626; max-width: min(927px, 100vw - 56px); }
@@ -1580,7 +1620,6 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
   .strip-card:hover img { transform: scale(1.03); }
   .strip-card:hover::after { transform: translate(2px, -2px); }
 }
-.strip-foot { margin: 14px 0 0; color: var(--steel); max-width: 62ch; }
 @media (forced-colors: active) { .strip-card::after { display: none; } }
 
 /* ---------- Stories (home outreach) ----------
@@ -1611,8 +1650,8 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
     gap: 0 clamp(20px, 2.6vw, 40px); align-items: stretch;
   }
   .stories.is-ready .story-stage { grid-column: 1; grid-row: 1 / span var(--stories, 4); position: relative; aspect-ratio: 4 / 3; min-height: 100%; overflow: hidden; background: var(--stage); }
-  .stories.is-ready .story-stage .story-photo { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 320ms var(--ease), visibility 0s linear 320ms; }
-  .stories.is-ready .story-stage .story-photo.is-on { opacity: 1; visibility: visible; transition: opacity 320ms var(--ease); }
+  .stories.is-ready .story-stage .story-photo { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 240ms var(--ease), visibility 0s linear 240ms; }
+  .stories.is-ready .story-stage .story-photo.is-on { opacity: 1; visibility: visible; transition: opacity 240ms var(--ease); }
   .stories.is-ready .story-stage img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
   /* the rows: equal shares of the frame's height, a line between them, the chosen one marked like a tab */
   .stories.is-ready .story {
@@ -1635,15 +1674,16 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
     .stories.is-ready .story:not(.is-on):hover::before { background: var(--quiet); }
   }
   .stories.is-ready .story-pick::after { content: ""; position: absolute; inset: 0; } /* the button is the whole row */
-  .stories.is-ready .story-pick:focus-visible { outline: none; }
-  .stories.is-ready .story:has(.story-pick:focus-visible) { outline: 2px solid var(--ink); outline-offset: -2px; }
+  @supports selector(:has(a)) { /* the ring goes round the whole row; a browser without :has() keeps the button's own ring */
+    .stories.is-ready .story-pick:focus-visible { outline: none; }
+    .stories.is-ready .story:has(.story-pick:focus-visible) { outline: 2px solid var(--ink); outline-offset: -2px; }
+  }
   /* under the frame: the chosen story's sentence and link. All the stories' notes share one cell, so the cell
      is as tall as the longest and choosing never moves the page */
   .stories.is-ready .story-notes { grid-column: 1; grid-row: calc(var(--stories, 4) + 1); display: grid; padding-top: 16px; }
   .stories.is-ready .story-note { grid-area: 1 / 1; display: grid; gap: 8px; justify-items: start; align-content: start; visibility: hidden; opacity: 0; transition: opacity 240ms var(--ease), visibility 0s linear 240ms; }
   .stories.is-ready .story-note.is-on { visibility: visible; opacity: 1; transition: opacity 240ms var(--ease); }
   .stories.is-ready .story-note p { margin: 0; max-width: 64ch; }
-  .stories.is-measuring, .stories.is-measuring * { transition: none !important; }
 }
 
 /* ---------- Latest news (home): two cards; a video card gets a play button over its poster ---------- */
@@ -1674,12 +1714,14 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 @media (hover: hover) and (pointer: fine) { [data-viewable]:hover { filter: brightness(1.08); } } /* a photo that opens answers the mouse */
 html:has(.viewer[open]) { overflow: hidden; } /* the page behind stays where it is */
 [data-viewable]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.viewer { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(11, 10, 15, 0.96); color: var(--on-stage); overflow: hidden; overscroll-behavior: contain; }
+.viewer { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--stage); color: var(--on-stage); overflow: hidden; overscroll-behavior: contain; }
 .viewer::backdrop { background: rgba(11, 10, 15, 0.6); }
 .viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; animation: fade 180ms var(--ease) both; }
-.viewer-top, .viewer-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px clamp(12px, 2vw, 24px); }
+.viewer-top, .viewer-foot { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px clamp(12px, 2vw, 24px); }
 .viewer-count { font-size: var(--fs-sm); color: var(--on-stage-2); font-variant-numeric: tabular-nums; }
-.viewer-stage { display: grid; place-items: center; min-height: 0; padding-inline: clamp(12px, 2vw, 24px); touch-action: pan-y pinch-zoom; } /* a sideways swipe is ours (next/previous photo); pinching still zooms */
+/* one track of the room that is left, so the photo's max-height has something definite to measure against: it
+   is shown whole, at most at its own size, between the bar above and the caption and arrows below */
+.viewer-stage { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; min-height: 0; padding-inline: clamp(12px, 2vw, 24px); touch-action: pan-y pinch-zoom; } /* a sideways swipe is ours (next/previous photo); pinching still zooms */
 .viewer-stage img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
 .viewer-stage img.is-in { animation: fade 220ms var(--ease) both; }
 .viewer-cap { margin: 0; font-size: var(--fs-sm); color: var(--on-stage-2); max-width: 72ch; }
@@ -1689,3 +1731,20 @@ html:has(.viewer[open]) { overflow: hidden; } /* the page behind stays where it 
 @media (hover: hover) and (pointer: fine) { .viewer-close:hover { background: var(--on-stage); color: var(--ink); } }
 .viewer-close:active { background: var(--on-stage); color: var(--ink); }
 @media (max-width: 600px) { .viewer-foot { flex-direction: column-reverse; align-items: stretch; } .viewer .strip-nav { justify-content: flex-end; } }
+
+
+/* reduced motion: the pictures and controls of round 9 do not change size under the pointer either */
+@media (prefers-reduced-motion: reduce) {
+  .strip-card:hover img, .strip-card:hover::after, .news-card:hover .news-media img,
+  .strip-btn:not([aria-disabled="true"]):active, .play:active { transform: none; }
+}
+
+/* forced colours (Windows High Contrast): fills and box-shadows are dropped there, so the states that round 9
+   shows with a colour or a keyline get an outline or a bar in the system's own colours */
+@media (forced-colors: active) {
+  .lineup.is-ready .bay[aria-selected="true"] .bay-label { outline: 2px solid CanvasText; outline-offset: -2px; }
+  .stories.is-ready .story.is-on::before { forced-color-adjust: none; background: CanvasText; box-shadow: none; }
+  .strip-btn, .play { outline: 1px solid ButtonText; outline-offset: -1px; }
+  .strip-btn[aria-disabled="true"] { color: GrayText; outline-color: GrayText; }
+  .calendar li.is-next, .calendar li.is-today { outline: 2px solid CanvasText; outline-offset: -2px; }
+}

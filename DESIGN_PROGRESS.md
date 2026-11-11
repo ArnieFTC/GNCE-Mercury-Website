@@ -3,12 +3,13 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-09. The contact form now sends from the website (`contact.php`; see below). **Round 8** restyled the site after mclaren.com/racing/formula-1 (square corners, a
-floating white header bar, page and section headings in capitals with a lighter second line, square buttons with
-a drawn arrow), then fixed what a dual-agent Impeccable critique and two adversarial review rounds found; see
-"Round 8 follow-up" below. The four sponsorship tiers wear the colours of their names (Andy asked for that the
-same day); everything else, the budget included, stays black, white and grey. Work is committed straight to `main`,
-Andy's standing instruction; `main` is the live site._
+_Last updated: 2026-11-11. **Round 9** gave each season its game's colour (from FIRST's style guides), made this
+season's colour the site's one signal colour, replaced the home page's opening with a title card that flies into
+the page, and added parts the visitor moves: a team strip, outreach stories, latest news and a photo viewer; see
+"Round 9" below. Before it: the contact form sends from the website (`contact.php`), and **Round 8** restyled the
+site after mclaren.com/racing/formula-1 (square corners, a floating white header bar, page and section headings in
+capitals with a lighter second line, square buttons with a drawn arrow). The four sponsorship tiers wear the
+colours of their names. Work is committed straight to `main`, Andy's standing instruction; `main` is the live site._
 
 ## What happened
 
@@ -26,6 +27,104 @@ Andy's standing instruction; `main` is the live site._
 4. **Round 2 (same day).** Andy: the colour "is so AI-like", the site "feels too static"; the boxes and
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
+
+## Round 9: season colours, a new opening, parts the visitor moves (2026-11-11)
+
+Andy: "once again reference the mclaren page and build more interactive and somewhat colorful page. Use all the
+different skills that is good to make a super nice design page", and about the opening: "make the like loading
+into it page a lot cooler use your imagination the one rn look terrible".
+
+**Colour.** Round 8 ended with no brand colour, because one accent on the buttons had looked terrible. This round
+the colour comes from the subject. Each season wears its game's colour, read from FIRST's one-page style guide for
+that game: INTO THE DEEP `#0083AE` (PMS 7704 C), DECODE `#92DBAC` (PMS 353 C), BIOBUZZ `#F7E326` (PMS 102 C).
+`data-season="2024|2025|2026"` on a block sets `--c`. This season's colour (`--season`) is the site's one signal
+colour, used the way McLaren uses papaya (measured on their page: about 1.5% of the screen, always a solid block, a
+thin bar or an arrow): the header's sponsor button, the 28×8px tag above section headings, the next event in the
+calendar, the chosen story's marker, the arrow buttons, the play tab. Every block of it carries an ink keyline, as
+the yellow shapes in the BIOBUZZ logo do; that also keeps a light colour's edge clear on white. It is never a
+page or section background behind reading text (the next event's tile, with a date and a name on it, is the
+largest block of it), and only one signal button is in view at a time (the sponsor buttons on the stage are light
+ones; on phones, where the header's button is inside the menu, the stage's takes the colour). On a season page
+the tags take that season's colour. Off switch, if Andy dislikes it again:
+`--season: var(--ink); --on-season: #fff;` in the "Round 9" block of `css/style.css` turns every signal block black.
+
+**The opening** (home page, first visit of a session; replaces round 5's spotlight and iris). A title card: three
+colour fields rise, one per season, each with its robot and game name, and a black strap carries the logo and the
+team's name across them. Then every piece flies to its own place on the page underneath (the fields become the
+three bays, the name becomes the heading, the logo goes to the header); they fly on black, and the page comes up
+around them as they arrive. Measured from the page load: the flight starts at about 1.6 s and the card is gone
+by about 2.4 s; any click, tap, wheel or key ends it within 0.2 s, and a press on the card never also presses what
+lies under it. It never plays with reduced motion, without JavaScript, in a window under 480px tall, on a slow or
+data-saving connection, in a tab that is not showing, or when its four pictures and the typeface are not in within
+0.9 s; if `js/main.js` is late or never runs it still ends by itself. `index.html?intro` replays it.
+
+**Parts the visitor moves** (none of them moves by itself, and nothing moves because of scrolling):
+- the home line-up: each bay stands on its season's colour; the chosen one is lit, the others hold a deep shade of
+  their own colour (BIOBUZZ's goes to a neutral dark: a darkened yellow is olive). The stage is as tall with one
+  season chosen as with another, so nothing below it moves on a choice;
+- a team strip on the home page (arrow buttons, mouse drag, swipe, Tab): the team photo and one card per member,
+  the same members and order as `team.html`;
+- outreach stories on the home page: from 900px one frame, the stories as rows beside it, the chosen story's
+  sentence and link under the frame (the rows never move); under 900px a row of cards with the same arrow buttons;
+- latest news on the home page: the two newest posts; a video gets a "Play video" tab that hands over to the
+  video's own controls;
+- a photo viewer (`<dialog>`: arrows, swipe, Esc, caption from the alt text) for the galleries on the outreach and
+  season pages.
+
+**Also:** the header and footer logo is a 240px WebP (17.7 KB; the 235 KB PNG stays for the icon, sharing image and
+JSON-LD); a colour square before each season in the results table; hover and press states gated to real pointers;
+forced-colours and print rules for the new parts.
+
+**How round 9 was researched and reviewed.** The account's usage limit cut two of the agent runs short, so this is
+what actually happened:
+
+- Start of the round: a research workflow (McLaren's page: where its papaya sits and how much of it there is, how
+  its modules behave; the team's own colour sources; the old opening) and a design panel with judges that settled
+  the colour system, the modules and the opening's idea.
+- A second study (frame captures of about 40 sites' openings, closer measurements of McLaren's modules) hit the
+  usage limit before its four agents reported. The raw measurements of two of them were recovered from their
+  transcripts and used. The three season colours were then checked by hand against FIRST's style guides.
+- Final review, first try: four reviewers (break-tester, code reviewer, design critic, motion critic) hit the usage
+  limit again and none reported. The break-tester had left 15 test reports and 498 screenshots of the opening on
+  disk; those were read and used.
+- Final review, second try: a design critic (Impeccable's critique method, score 28 of 40 before the fixes) and a
+  motion critic (the choreograph and emil-design-eng skills) each worked alone from screenshots, frame sheets and
+  the code, and both finished: 12 and 10 findings. The code review and the break tests of everything but the
+  opening were done by the author (two scripts, 108 checks). After the fixes no second independent critique was
+  run; the fixes were checked by tests and by looking at new captures.
+
+**What the review found, all fixed unless noted:**
+- Photo viewer on a desktop: the photo was laid out wider than the room it had, so it was cut off at the bottom and
+  covered its caption and arrows (the stage's grid track was not definite). Found by the design critic and by the
+  author's break test independently. Now 232 photo openings at 8 window sizes all fit.
+- On a touch screen the tap that ended the opening also pressed what lay under the finger: it opened the sponsor
+  page, switched the season or opened the menu (from the break-tester's reports). The card now keeps the pointer
+  until its pieces have landed, and the press's click is swallowed.
+- Arriving at Home from another page, the cross-page transition drew the header and three ghost robots over the
+  title card for 0.8 s. The transition is dropped on a load where the opening plays.
+- Choosing a season changed the stage's height (69px on a desktop, up to 151px on a phone), so everything below
+  jumped. The three cards now share one cell and the labels one height: 0px at 13 widths.
+- If `js/main.js` came late, the flight ran into the stylesheet's safety fade and the title and bays vanished for
+  up to 0.8 s. A late script now means no flight.
+- The frames in the middle of the flight showed the page's text sliced by the passing colour fields, and a yellow
+  notch beside the name. The pieces now fly on black, the page comes up when they are nearly home, and the name's
+  plate is as wide as the fields.
+- The yellow sponsor button stood twice in one screen, and the closing band put a yellow box behind a heading, a
+  sentence and a button, which is the use of colour Andy had turned down. The stage's sponsor buttons are light
+  again and the closing band is two equal boxes, as on the old site.
+- Story cards under 900px had no buttons and a hidden scrollbar (a mouse could not reach three of the four). They
+  have the card strip's arrow buttons and drag now.
+- Smaller things: a window resized in mid-flight; an input in mid-flight left two half-flown copies fading over the
+  real pieces; the lights went down as a third beat; on phones two robots flew over the wrong colour; the card did
+  not wait for the typeface; a tab opened in the background spent the opening unseen; BIOBUZZ's bay turned olive
+  with the lights down and the light pool washed its yellow out; the team cards were 390px tall; a sentence was
+  left alone under the strip; the viewer was see-through; the bays were uneven at 320px; the season link in the
+  results table sat 3px low; three press depths and five durations answered one click; pictures still changed size
+  under the pointer with reduced motion; a team card could take the keyboard focus half off the screen; on paper
+  three of the four stories lost their text and seven team cards were cut off; in forced colours the chosen bay and
+  story could not be told apart; with WCAG text spacing the third bay left a 320px screen.
+- Not changed: early in the flight a 2–6px sliver of the colour fields shows above the name's plate for about
+  0.15 s (the strap crosses the fields in the card's layout, and the two edges only meet at the end).
 
 ## Contact form sends from the website (2026-11-09)
 
@@ -420,6 +519,27 @@ Reduced motion makes every change instant.
 - **Without JavaScript** every page shows a plain nav (`<noscript>`); the footer and sponsor strip are still
   built by `js/main.js` so that `SPONSORS` stays a single list.
 - **"Join as a student"** stays the student action everywhere; "Partner with us" is the sponsor action.
+- **Colour comes from the seasons (round 9).** The three season colours are FIRST's own (the one-page style guide
+  of each game); nothing else on the site is coloured except the sponsorship tiers. This season's colour doubles as
+  the signal colour. When a new season starts: add its colour, put `data-season` on its blocks and point `--season`
+  at it (README, "Start a new season").
+- **The signal colour and its off switch.** It marks one action (sponsoring) and "next" or "chosen", always as a
+  solid block with an ink keyline, never as text, never as a tint and never as a page or section background
+  behind reading text.
+  One signal button is in view at a time: the header's. A first version closed the home page with a yellow box
+  around the sponsor text; the design critic pointed out that this was the use of colour Andy had turned down in
+  round 8, so the closing band is two equal boxes again. If the colour has to go altogether:
+  `--season: var(--ink); --on-season: #fff;` in the "Round 9" block.
+- **The opening is decoration and gives way to everything:** any input, reduced motion, a window under 480px tall,
+  a slow or data-saving connection, a tab that is not showing, pictures or a typeface that take more than 0.9 s, a
+  late or missing script, a window that changes size. Once per browser session.
+- **The home strip shows only the members `team.html` shows** (that page hides some on purpose; see its comments).
+  A test compares the two pages.
+- **Nothing on the home page reflows on a choice:** the stage keeps its height whichever season is chosen, and
+  choosing a story changes the photo and the text under the frame while the rows keep their place (McLaren's news
+  module behaves the same way). The price on a phone: under a short season card there is empty stage.
+- **Left as they were after the guideline review:** `theme-color` stays the stage black, and people's names carry
+  no `translate="no"` (as on `team.html`).
 
 ## Blocked: needs facts, assets or accounts from the team
 
@@ -451,8 +571,46 @@ Reduced motion makes every change instant.
   "applying to sponsor" and shows $7,500+; once it is final, change its lead to "signing on to sponsor".
 - ⊘ B11 Which other members code: the Software filter shows only Arnie (Software Lead) until members get a
   Software chip.
+- ⊘ B16 Round 9 on real hardware: the opening, the strip's swipe and the photo viewer have only run in Chromium on
+  the build machine. Someone should open the home page on an iPhone (Safari) and an Android phone, and in Safari and
+  Firefox on a computer, and say if anything looks or feels off.
 
 ## Skills and checks actually used
+
+**Round 9:**
+- **Workflows (ultracode):** four runs. A research workflow and a design panel with judges at the start (both
+  finished). A second study and the first final review (four agents each) were cut off by the account's usage
+  limit before any agent reported; what they had written to disk or to their transcripts was read and used. A last
+  workflow with two critics finished (see "How round 9 was researched and reviewed" above). The code review and
+  most of the break testing were therefore done by the author, not by independent agents.
+- **Impeccable 4.8.0:** craft floor, colorize and animate read before the UI edits; the detector hook ran after
+  every edit; the rendered detector on all 12 pages of the final build at 1280×800 and 390×844: 0 findings with
+  the project's exceptions. Without them it reports four names over the team strip's photos as 1.0:1 (it does not
+  composite the dark scrim over the photo; measured against the real pixels the worst is 7.8:1, at 320px wide) and
+  the sponsor's name repeated inside one article on the outreach page and one on the news page. An independent
+  critic followed `reference/critique.md` on screenshots of 9 pages at two widths and
+  24 captures of the parts in use: 28 of 40 before the fixes, 12 findings.
+- **choreograph and emil-design-eng:** applied by the author to the opening, and used by the independent motion
+  critic on exact frames of it (desktop and phone) and its measured timeline: 10 findings. Its verdict on Andy's
+  request: the new opening "earns a lot cooler".
+- **/vercel:** the live guidelines were fetched (identical to the bundled copy) and the changed files reviewed
+  against them by the author: 5 fixes. The review fixes were read against the same copy again before the push:
+  nothing new. An independent pass was part of the review that the usage limit cut off.
+- **taste-skill (design-taste-frontend) and tastemaker:** invoked; tastemaker's scripts (`check_contrast.py
+  --matrix`, `audit_motion.py`, `anti_slop_scan.py`) ran on the build and found no real issue.
+- **mobile-native:** applied: hover only for real pointers, `touch-action` on the swipe surfaces,
+  `overscroll-behavior` on the rows and the viewer, no text selection on controls. Not checked on a real phone.
+- **AccessLint:** `audit_live` on all 12 pages of the final build, and on four in-use states set up inside the
+  checker's own browser: a season chosen and the stories row stepped in a 420px window; a story and a season
+  chosen, the team strip stepped and the video playing; the photo viewer open on the outreach page and on a season
+  page. Fixed from it during the round: the header logo link's name now contains its visible text, and the season
+  cards are `<section>` (role `tabpanel` is not allowed on `<article>`). Left: its `landmarks/region` note on the
+  `<noscript>` fallback menu (it is a `<nav>` when it renders) and on the open photo viewer (a modal dialog is not
+  a landmark and needs none; while it is open the rest of the page is inert). It also reports "low contrast" on a
+  page title whenever it samples the title during its 0.9 s fade-in; on a settled tab it reports none, and the
+  titles measure 17.1:1 from the pixels.
+- **frontend-design:** not installed; its guidance applied directly. **Hallmark:** not used (it must not be used on
+  an existing design).
 
 **Round 3:**
 - **Workflows (ultracode):** a design panel (three critics: design director, data editor, sponsor journey; a
@@ -508,6 +666,42 @@ Reduced motion makes every change instant.
   reviewed their work.
 
 ## Latest verification
+
+**Round 9, 2026-11-11** (Playwright Chromium on the final build; a local static server, Apache + PHP for the agent
+files, and a PHP server that writes mail to files for the contact form):
+- Interaction suite: 168 passed, 0 failed. 64 of them are on the opening: once per session, every way of ending
+  it, a tap on a touch screen not reaching the page under the card, a late and a missing `js/main.js`, a window
+  resized in mid-flight, arrival from another page, a tab opened in the background, reduced motion, a slow
+  connection, a short window.
+- The author's break tests of the new parts (two scripts): 108 checks, all pass.
+- Photo viewer: 232 photo openings at 8 window sizes (1920×1080 down to 320×640, and 844×390 on its side): every
+  photo is shown whole between the bar above and the caption and arrows below.
+- Line-up: with each of the three seasons chosen the stage is the same height, at 13 widths from 320 to 1920px
+  (0px difference).
+- Page audit, 12 pages at 320, 390, 768 and 1440px: no sideways page scroll, one `h1` per page, no skipped heading
+  level, no script error, no failed request. Reported and intended: the team strip's cards beyond the screen edge
+  (they are in its own scroller), the contact form's off-screen spam trap, text links inside sentences (19px tall)
+  and the radio buttons' 18px dots (the labels are the targets).
+- Contrast scan (text against its real background), 12 pages: nothing under WCAG AA. The names over the team
+  strip's photos, measured against the pixels behind them: 7.8:1 or better at 320, 390, 768 and 1440px.
+- Keyboard: every focus stop of the home page (65 at 1440px, 58 at 390px), the outreach page (41) and the BIOBUZZ
+  page (23 at 390px) is on screen, clear of the header and has a visible ring; the skip link is painted on top of
+  the header.
+- Reduced motion (1440 and 390px): no opening, and nothing animates on a load, a season choice, a story choice, a
+  strip step or in the photo viewer: 14 checks pass.
+- Impeccable detector and AccessLint: see "Skills and checks actually used".
+- Pixel comparison of the 11 pages other than Home, before and after the review fixes, at 1440 and 390px:
+  identical (the one difference is the browser's own loading spinner on a video).
+- The opening with the processor slowed down 4× and 6× (phone size): during the flight the frames stay 17 ms
+  apart (worst 33 ms); the long tasks of the page starting up fall in the first 0.7 s, while the card builds. This
+  machine draws in software, so a real phone can differ.
+- Agent files: `python3 tools/agent_files.py --check` is clean; 57 checks of `robots.txt`, `llms.txt`, the
+  Markdown copies, the `Link` header, the sitemap and `mcp.php` pass under Apache.
+- Contact form (not changed this round): 43 request cases and 33 browser cases pass against the server that
+  captures mail. No real email was sent.
+- Not tested: real iPhones and Android phones, Safari, Firefox, screen readers, Windows High Contrast (its rules
+  are written from the specification), a real slow network (the tests hold requests back locally), paper (print
+  was checked in Chromium's print layout only).
 
 **Round 3, 2026-11-03** (Playwright Chromium, local static server):
 - Interaction tests: **57 of 57 pass**. New ones: the DECODE explorer changes only on click and arrow keys and
@@ -589,22 +783,23 @@ server):
 
 ## Next action
 
-0. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
-   Round 8 follow-up, open: (a) Andy's call on one content-width photo band (critique issue 5; e.g.
-   `fll_camp_3.jpg` or `mit_lab_1.jpg`, 1400px files, at most 1240px wide) on the home, Team or Outreach page;
-   (b) more colour, if Andy wants it beyond the tiers: only where it carries meaning (each season's game
-   colours, for example), never as an accent; (c) check on real devices what this machine cannot: iOS Safari (tapping the menu's scrim, the black strip
-   under rubber-band scrolling), Firefox (the `page-enter` fallback), Windows High Contrast, a screen reader on
-   the skip link and the menu; (d) with WCAG text spacing at 320, the outreach year tabs scroll sideways and the
-   tier header cells overflow (both older than round 8).
-1. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
-   joining facts, States results, a sharp wide team photo, coach photos, and the package questions (B12–B14:
-   the QR code's target, what "Growth" and "Can request media" mean, matching gifts), and B15 (is the
-   VulcanForms Platinum sponsorship final, and the amount).
-2. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
-3. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events.
-4. For every change: check at 320/390/768/1440 with keyboard and reduced motion, run `/vercel` on the changed
-   files, push to `main`.
+0. Andy's verdict on round 9: the colour (its off switch is under "Decisions and conflicts"), the opening
+   (`index.html?intro` replays it) and the new parts of the home page. Then B16: a look on real phones and in
+   Safari and Firefox.
+1. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
+2. Still open from round 8: with WCAG text spacing at 320, the outreach year tabs scroll sideways and the tier
+   header cells overflow; Windows High Contrast and a screen reader on the skip link and the menu are unchecked.
+3. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
+   joining facts, States results, a sharp wide team photo, coach photos, the package questions (B12–B14: the QR
+   code's target, what "Growth" and "Can request media" mean, matching gifts) and B15 (is the VulcanForms Platinum
+   sponsorship final, and the amount).
+4. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
+5. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events. When the next
+   game is announced, give the new season its colour (README, "Start a new season").
+6. For every change: check at 320/390/768/1440 with keyboard and reduced motion, run `/vercel` on the changed
+   files, run `python3 tools/agent_files.py`, bump `?v=` on the stylesheet and the script, push to `main`.
 
-The scratchpad test scripts (`audit.js`, `itest3.js`, `cscan.js`, `states2.js`, `full.js`, `fixcheck.js`) live outside
-the repo and won't survive a new session. Recreate them from the checks listed above if needed.
+The scratchpad test scripts (`itest5.js`, `mb1.js`, `mb2.js`, `viewerfit.js`, `lineup_h.js`, `audit.js`,
+`cscan.js`, `kbd.js`, `rm.js`, `labelpx.js`, and for the opening `stepflight.js`, `optime.js` and `perf_open.js`)
+live outside the repo and won't survive a new session. Recreate them from the checks listed under "Latest
+verification" if needed.
