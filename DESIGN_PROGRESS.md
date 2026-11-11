@@ -861,6 +861,10 @@ Apache + PHP for the agent files, and a PHP server that writes mail to files for
   checks pass; `python3 tools/agent_files.py --check` clean.
 - By eye: all 12 pages at 1440 and 390px, the in-use states (scrolled header, open menu, focus rings, the photo
   viewer, the form) at 1440, 768, 390 and 320px, and every spot the second pass changed.
+- Live site after the push to `main` (2026-11-11, 17:22 UTC): all 12 pages in one browser session: `v=230`, each
+  page in its colours (head, header strip, header button), the orange row from edge to edge, the sponsor strip
+  with its four names, no script error, no failed request, no sideways scroll. The session's first answer was
+  again Hostinger's check page (HTTP 403), which gave way to the site by itself after 3 s (B17).
 - Not possible here: Safari, Firefox and real phones (B16), and whether Hostinger's check page shows to ordinary
   visitors (B17).
 
