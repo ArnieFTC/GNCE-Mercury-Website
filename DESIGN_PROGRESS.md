@@ -3,10 +3,13 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-11. **Round 9** gave each season its game's colour (from FIRST's style guides), made this
-season's colour the site's one signal colour, replaced the home page's opening with a title card that flies into
-the page, and added parts the visitor moves: a team strip, outreach stories, latest news and a photo viewer; see
-"Round 9" below. Before it: the contact form sends from the website (`contact.php`), and **Round 8** restyled the
+_Last updated: 2026-11-11. **Round 10** put the FTC games' official colour palettes on whole pages: every page
+wears one game's colours from its header to its footer (this season's on the site-wide pages, each season's on its
+own page; home and Seasons, which show all three, keep a black head), and FIRST Tech Challenge's orange marks the
+programme. Two independent reviewers went over it and it was corrected the same day; see "Round 10" below.
+**Round 9** (the same day) gave each season its game's colour, replaced the home page's opening with a title card
+that flies into the page, and added parts the visitor moves: a team strip, outreach stories, latest news and a
+photo viewer. Before them: the contact form sends from the website (`contact.php`), and **Round 8** restyled the
 site after mclaren.com/racing/formula-1 (square corners, a floating white header bar, page and section headings in
 capitals with a lighter second line, square buttons with a drawn arrow). The four sponsorship tiers wear the
 colours of their names. Work is committed straight to `main`, Andy's standing instruction; `main` is the live site._
@@ -27,6 +30,109 @@ colours of their names. Work is committed straight to `main`, Andy's standing in
 4. **Round 2 (same day).** Andy: the colour "is so AI-like", the site "feels too static"; the boxes and
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
+
+## Round 10: season liveries, wall to wall (2026-11-11)
+
+Andy, after round 9: "i think you can make the entire pages color scene with some respect to the ftc colors".
+Read as: the colour scheme of the whole page, not only small accents, should come from the FTC colours.
+
+**The official colours** (the only named colours on the site besides the tier metals; all from FIRST):
+- FIRST Tech Challenge, the programme: orange `#F57E25` (PMS 158), with black. From FIRST's brand guidelines
+  (firstinspires.org/hubfs/web/about/policy/first-brand-guidelines.pdf).
+- Each game's palette, from the "Color Palette" row of its one-page style guide: BIOBUZZ `#F7E326` yellow,
+  `#EEE9A5` pale yellow, `#BBA13E` gold; DECODE `#92DBAC` mint, `#EA572E` vermilion, `#E5AE32` amber, `#598290` slate
+  teal; INTO THE DEEP `#0083AE` blue, `#ABD8E7` pale blue, `#F5E565` yellow; each with black. Round 9 used one colour
+  from each; round 10 uses all of them except DECODE's amber, and no colour that is not in a palette.
+
+**What "the FTC colors" could mean, and what was built.** Two readings: the games' colours (which round 9's report
+had just described to him as coming from FIRST's style guides) or the programme's own orange. The site wears the
+games' colours as whole-page liveries, and the programme's orange in two fixed places, so both are respected; an
+all-orange scheme was also designed and is kept ready (see below). Which one Andy meant is an open question (B18).
+
+**A livery** is six jobs, filled by the members of one game's palette (six tokens on `<body>`, round 10 block at the
+end of `css/style.css`): the field (page heads, closing calls, the strip the header bar floats on: one flat colour
+with black type, as on the opening's title card), the ground (the alternate bands, where aluminium grey was, and
+the small fills inside boxes), the line (box outlines), the mark (the signal: the header's sponsor action, "next",
+the arrow buttons, the play tab), the tag (above headings) and the glow (the colour as type on black, in the
+footer). Black stays for type, the home stage, the Seasons page's head, the partners sheets and the footer; white
+is the reading ground.
+- Site-wide pages and the BIOBUZZ page: yellow field, pale yellow ground, gold lines, yellow mark and tags.
+- DECODE page (`<body data-livery="2025">`): mint field and ground (the palette has no pale member, and its mint is
+  as light as the other two games' pale colours), slate teal lines, vermilion mark and tags.
+- INTO THE DEEP page (`data-livery="2024"`): blue field, pale blue ground, blue lines, yellow mark and tags.
+
+**What changed on the pages.**
+- Every inner page head is a field with a black title; on a season page the robot stands straight on the field.
+  The white header bar has a black keyline and floats on a strip of the field colour. The two pages that show all
+  three games side by side, home and Seasons, keep a black head, so the three colours stand on black.
+- Grey bands are the livery's ground colour; box outlines are the livery's line colour; a picture inside a box
+  stands on white.
+- The header's "Partner with us" is the mark with black type where the bar floats on black, mint or blue. On the
+  yellow pages a yellow button over the yellow strip read as a window onto the field: there the button is black
+  and the colour is its type.
+- Home: the stage stays black (the three bays need the dark); "FTC team 26413" is FTC orange; on wide screens the
+  strip that closes the stage ("Supported by …") is a yellow field with a black button; the closing "Build with us"
+  band is a yellow field with two white boxes. The team and partners pages close on a field the same way.
+- Seasons page: each season's row is a field of its own colour with black type.
+- Footer: black, an 8px stripe of the field on its top edge, headings in the livery's colour, and a full-width
+  FTC-orange last row ("FIRST Tech Challenge team 26413, founded 2024") with black type.
+- The greys lost their violet cast (it fought the yellow): black `#0A0A0A`, ink `#111111`, plain greys. The tier
+  washes, the budget donut greys, the scrollbar, the transfer-time bars and the explorer's markers were
+  neutralised the same way; the four tier metals are untouched.
+- `theme-color` is white (on a phone the top of every page is the white header bar).
+- Not changed: layout, type, spacing, content, motion. In the opening only the "FTC TEAM 26413" line changed (to
+  orange, so it matches the heading it lands on).
+
+**To undo or change it.** Delete the round 10 block in `css/style.css` to get round 9's small blocks of colour back
+(the `data-livery` attributes are then unused). A new season: README, "Adding a new season", step 4.
+
+**The other scheme, kept ready: "Programme orange".** FTC orange, black and white as the frame of every page, the
+way McLaren's site is papaya, black and white: orange page heads with black titles, an orange strip under the home
+stage, an orange calendar band, an orange sponsor band in the footer, orange as the signal colour; the season
+colours stay where a season is shown and colour the bands of that season's page. Its override file is
+`.impeccable/alternatives/round10-ftc-orange.css` (designed against the round 9 stylesheet: to use it, delete the
+round 10 block and append the file, then re-run every check: it was contrast-clean at rest at 1440 and 390px, but
+hover, focus, the open menu and the narrow widths were never checked). Two shortcuts in it are a mock-up's and
+should be replaced first: a box-shadow spread carries its full-width footer rows (the technique that left the built
+scheme's orange row with a two-tone top edge at 125% zoom) and `:has(.calendar)` finds the calendar band.
+`round10-compare.webp` next to it shows the built scheme and this one side by side on six views.
+
+**How it was designed.** A panel of three designers, each with a different angle (season livery; programme orange;
+a calm tinted version), was to be followed by three judges. Two designers finished (livery and orange), each with
+a rendered, contrast-clean scheme; the usage limit stopped the third designer and all three judges before they
+ran. The choice between the two was made by the author, from their screenshots and from two probes of the
+author's own, not by independent judges. Taken from the livery designer: the six jobs, the yellow strip and closing
+bands, the field rows on the Seasons page, the footer stripe and the orange programme marks. Taken from both
+designers: greys without the violet cast.
+
+**How it was reviewed (second pass, same day).** The judging the panel never got was done on the built pages
+instead, by two independent reviewers in one workflow, and by a new check of the author's:
+- A design critic followed Impeccable's `reference/critique.md` on 24 pictures of the build (the pages at 1440,
+  768, 390 and 320px and the parts in use), with round 9 and the orange scheme beside them. Verdict: the build
+  answers the request on the likelier reading and nothing in it is what Andy has called AI-looking; ship the
+  livery, not the orange. Score 17 of 24 on the six heuristics a still picture can show; 11 findings (6 medium,
+  5 small). All 11 were acted on. Changed against the critic's own fix in two: the robots keep their shadow, which
+  now fades out on the field (the critic would have removed it; it was the cut at the picture's box that showed),
+  and INTO THE DEEP keeps FIRST's blue exactly, with a black title (the critic preferred a deeper blue with white
+  type).
+- A code reviewer read the block against the whole stylesheet and measured in a browser: hover, selection,
+  print, forced colours, no JavaScript, the open menu, the opening, a census of every computed colour. Five
+  defects, all confirmed and fixed: the DECODE header button dropped to 4.1:1 under the pointer; the transfer-time
+  bars were 1.3:1 on their track; black buttons on a field printed as black blocks when backgrounds are printed;
+  selected text did not show inside pale quotes and the year tabs; the scrollbar and the explorer's markers were
+  still the old violet greys.
+- The author's contrast scan only sees a page at rest, so a sweep was written that moves the pointer onto every
+  control and gives each one keyboard focus (793 controls under the pointer, 829 focused, at two widths). It found
+  the DECODE button as well, and one more: the focus ring on a photo that stands on black was ink on black.
+- What the second pass changed: one type colour on every field (the INTO THE DEEP title is black); the Seasons
+  page's black head; the header button on the yellow pages; DECODE's ground is its mint, not a half tint, and its
+  tag is its mark; under 1100px the home line-up's credit box is a dark box again (as a yellow slab it came between
+  the bays and the card they control); skill chips are white with a line; the next event has its black keyline
+  (a round 7 rule had outweighed it since round 9); a photograph on a field has a black line; the footer has no
+  seam under a closing field, its open sponsor slot is white, and the orange row is one surface.
+- Left as it is, on purpose: the home page's first screen is still mostly the black stage (the critic notes that
+  judged from that screen alone the change looks small). The three bays are the page's signature and need the
+  dark; the opening's title card and the yellow strip under the stage carry the colour there.
 
 ## Round 9: season colours, a new opening, parts the visitor moves (2026-11-11)
 
@@ -519,16 +625,26 @@ Reduced motion makes every change instant.
 - **Without JavaScript** every page shows a plain nav (`<noscript>`); the footer and sponsor strip are still
   built by `js/main.js` so that `SPONSORS` stays a single list.
 - **"Join as a student"** stays the student action everywhere; "Partner with us" is the sponsor action.
-- **Colour comes from the seasons (round 9).** The three season colours are FIRST's own (the one-page style guide
-  of each game); nothing else on the site is coloured except the sponsorship tiers. This season's colour doubles as
-  the signal colour. When a new season starts: add its colour, put `data-season` on its blocks and point `--season`
-  at it (README, "Start a new season").
-- **The signal colour and its off switch.** It marks one action (sponsoring) and "next" or "chosen", always as a
-  solid block with an ink keyline, never as text, never as a tint and never as a page or section background
-  behind reading text.
-  One signal button is in view at a time: the header's. A first version closed the home page with a yellow box
-  around the sponsor text; the design critic pointed out that this was the use of colour Andy had turned down in
-  round 8, so the closing band is two equal boxes again. If the colour has to go altogether:
+- **Colour comes from FIRST (rounds 9 and 10).** Besides black, white, the plain greys and the four tier metals,
+  every colour on the site is one FIRST publishes: the three games' palettes and the programme's orange (sources
+  under "Round 10"). A page wears one game's palette as its livery. When a new season starts: add its palette,
+  point the plain `body` livery at it and give the season's page a `data-livery` (README, "Adding a new season").
+- **Round 10 overrides a round 9 rule, on Andy's word.** Round 9 kept colour to small solid blocks and never used
+  it as a page or section background, because in round 8 Andy had turned down an accent on the buttons and tinted
+  table columns ("just dont do the color it looks terrible"). After seeing round 9 he asked for the colour scheme
+  of the entire page to come from the FTC colours, so page heads, closing bands, the alternate bands and the
+  Seasons rows are colour now. What still holds from his earlier verdicts: no violet, no tinted table columns, no
+  gradients of colour, no rounded panels, and nothing moves because the page scrolled. Colour is always flat, with
+  black type on it.
+- **Which "FTC colors" (B18).** Built: the games' palettes on whole pages, the programme's orange in two fixed
+  places. Ready as a file: the programme's orange as the frame of every page. See "Round 10".
+- **The signal colour and the off switches.** The mark (`--lv-mark`) is one action (sponsoring) and "next" or
+  "chosen", always a solid block with an ink keyline. It is type in two places only, both on black: the footer's
+  headings, and the header's sponsor button on the yellow pages, which is black with the colour as its type
+  (a yellow button over the yellow strip read as a window onto the field; on home, Seasons, DECODE and INTO THE
+  DEEP the button is the mark itself). To take the whole-page colour off: delete the round 10 block at the end of
+  `css/style.css` (round 9's small blocks of colour come back; nothing else depends on it). To take colour off
+  altogether after that:
   `--season: var(--ink); --on-season: #fff;` in the "Round 9" block.
 - **The opening is decoration and gives way to everything:** any input, reduced motion, a window under 480px tall,
   a slow or data-saving connection, a tab that is not showing, pictures or a typeface that take more than 0.9 s, a
@@ -538,8 +654,15 @@ Reduced motion makes every change instant.
 - **Nothing on the home page reflows on a choice:** the stage keeps its height whichever season is chosen, and
   choosing a story changes the photo and the text under the frame while the rows keep their place (McLaren's news
   module behaves the same way). The price on a phone: under a short season card there is empty stage.
-- **Left as they were after the guideline review:** `theme-color` stays the stage black, and people's names carry
-  no `translate="no"` (as on `team.html`).
+- **Kept on purpose in round 10:** secondary text on the pale grounds is a neutral dark grey, not a darkened
+  member of the palette (a darkened yellow reads olive); the home stage, the Seasons page's head and the partners
+  sheets stay black (three colours side by side, and the tier metals, need the dark); INTO THE DEEP's field is
+  FIRST's blue exactly, which carries pure black type only (4.9:1; the site's ink and white both fail on it for
+  small text), so its title is black like every other field's; DECODE's amber is the one palette member not used
+  (as a tag beside the vermilion mark it read as a stray yellow); selected text on a field, on the ground, in a
+  pale quote and on the orange bar is black with white type (the signal colour would not show).
+- **Left as they were after the guideline review:** people's names carry no `translate="no"` (as on
+  `team.html`). `theme-color` was the stage black until round 10; it is white now, the header bar's colour.
 
 ## Blocked: needs facts, assets or accounts from the team
 
@@ -578,8 +701,39 @@ Reduced motion makes every change instant.
   a first visit (about 3.5 s; see "Latest verification"). If people on ordinary phones and computers get it too, it
   delays the home page and its opening. It is a setting of Hostinger's CDN, not of the site's files. Andy: open the
   site in a private window on a phone on mobile data and say whether it appears.
+- ⊘ B18 Which "FTC colors" Andy meant in round 10: the games' palettes (built, live) or FIRST Tech Challenge's own
+  orange (designed and kept as `.impeccable/alternatives/round10-ftc-orange.css`, with a picture next to it). Andy:
+  look at the two pictures and say which, or "both as it is".
 
 ## Skills and checks actually used
+
+**Round 10:**
+- **Workflows (ultracode):** two runs. A design panel at the start (three designers, then three judges): two
+  designers finished; the account's usage limit stopped the third designer and all three judges, so the direction
+  was chosen by the author. After the build, a review workflow of two independent agents finished: a design critic
+  working from pictures and a code reviewer measuring in a browser (11 and 5 findings, all acted on; see "How it
+  was reviewed" under "Round 10"). The fixes were checked by the author's tests and scans, not by a third agent.
+- **frontend-design:** not installed. Its published guidance was applied directly, not invoked: one committed
+  direction, a dominant colour with sharp accents instead of a timid, evenly spread palette, colours through CSS
+  variables.
+- **Impeccable 4.8.0:** `colorize` and the craft floor read before the UI edits; the detector hook ran after every
+  edit; the independent critic followed `reference/critique.md`. Rendered detector on all 12 pages of the final
+  build at 1280×800 and 390×844: 0 findings with the project's exceptions. Without them it reports five labels over
+  the team strip's photos as 1.0:1 (it does not composite the dark scrim; against the real pixels the worst is
+  7.8:1) and the sponsor's name repeated inside one article on the outreach page and one on the news page. One
+  exception was added this round: the file-only hook reads the hover text of the black buttons on a field as
+  black on dark grey (1.5:1); with the pointer on each button the text measures white on `#2E2E2E` (13.6:1) or on
+  black, so its `low-contrast` rule is off for `team.html` and `partners.html` (the rendered detector and the
+  contrast scans still cover both).
+- **/vercel:** the live guidelines were fetched for each pass (identical to the bundled copy) and the changed files
+  read against them by the author. From it: `theme-color` is white, the colour of the header bar; every hover
+  state keeps its label at 4.5:1 or more (the DECODE button); the focus ring on a photo that stands on black.
+- **AccessLint:** `audit_live` on all 12 pages of the final build, each opened and left to settle in the
+  checker's own browser first, and on two in-use states there (the photo viewer open on the DECODE page; the menu
+  open on the team page in a 780px window). Nothing but its two known notes from round 9: `landmarks/region` on
+  the `<noscript>` fallback menu and on the open photo viewer. It does not look at hover or focus colours; the
+  author's sweep does (see "Latest verification").
+- **Hallmark:** not used (it must not be used on an existing design).
 
 **Round 9:**
 - **Workflows (ultracode):** four runs. A research workflow and a design panel with judges at the start (both
@@ -670,6 +824,45 @@ Reduced motion makes every change instant.
   reviewed their work.
 
 ## Latest verification
+
+**Round 10, 2026-11-11** (Playwright Chromium on the final build, after the second pass; a local static server,
+Apache + PHP for the agent files, and a PHP server that writes mail to files for the contact form):
+- Interaction suite: 187 passed, 0 failed. 19 of them are new this round: each page wears its game (the head,
+  the ground, the header button and its label, the tag), type on every field is black, the Seasons page keeps the
+  black head, the header button under the pointer stays 4.5:1 or more, the next event's keyline, the orange row
+  from edge to edge with its text in the page column, selected text on each kind of ground, the focus ring on a
+  photo on black, buttons on paper.
+- Page audit, 12 pages at 320, 390, 768 and 1440px: no sideways page scroll, one `h1` per page, no skipped heading
+  level, no script error, no failed request. Reported and intended, as in round 9: the team strip's cards beyond
+  the screen edge, the contact form's off-screen spam trap, text links inside sentences (19px tall) and the radio
+  buttons' 18px dots.
+- Contrast scan at rest (every piece of text against the solid colour behind it), 12 pages: 0 of 2,620 text runs
+  under WCAG AA at 1440 and 390px, 0 of 2,555 at 320 and 768px. Names over the team strip's photos, against the
+  real pixels: 8.8:1 at worst at 1440px, 7.8:1 at 320px.
+- Hover and keyboard focus (new this round; 12 pages at 1440 and 900px): the pointer was put on 833 controls and
+  829 were given keyboard focus, and 2,356 pieces of text were measured in those states. Nothing under AA, and
+  every focus ring is 3:1 or more against the ground it is drawn on. (A form field shows focus by its border
+  turning from `#6F6F6F` to `#111111`, 3.8:1 between the two, with a halo; a story's button rings its row and a
+  radio button its label; the skip link's white ring sits inside an ink one. The pointer cannot reach two kinds of
+  control, both off screen on purpose: the skip link until it has focus, and the form's spam trap.) Run before the
+  second pass, this sweep found two defects, both fixed: the DECODE header button at 4.1:1 under the pointer and
+  an ink focus ring on a photo that stands on black.
+- Keyboard: every focus stop of the home page (65 at 1440px, 58 at 390px), the outreach page (41), the BIOBUZZ
+  page (23 at 390px), the INTO THE DEEP page (34) and the partners page (44) is on screen, clear of the header
+  and has a ring; the skip link is painted on top of the header.
+- Reduced motion (1440 and 390px): 14 checks pass. Break tests of round 9's parts (two scripts): 108 checks pass.
+  (On the first pass the second script showed 5 failures, all from one phone tap that did not open a photo while
+  another job of the author's was loading the machine; alone it passed 56 of 56, three times.) Photo viewer: 232
+  openings at 8 window sizes, every photo whole. Line-up: the stage is the same height with each season chosen at
+  13 widths from 320 to 1920px.
+- The orange row's top edge at nine window sizes and zoom levels (100%, 125%, 200%, 300%): one colour from edge to
+  edge in every pixel row, and no sideways scroll.
+- Contact form in the browser (mail written to files, none sent): 33 checks pass. Agent files under Apache: 57
+  checks pass; `python3 tools/agent_files.py --check` clean.
+- By eye: all 12 pages at 1440 and 390px, the in-use states (scrolled header, open menu, focus rings, the photo
+  viewer, the form) at 1440, 768, 390 and 320px, and every spot the second pass changed.
+- Not possible here: Safari, Firefox and real phones (B16), and whether Hostinger's check page shows to ordinary
+  visitors (B17).
 
 **Round 9, 2026-11-11** (Playwright Chromium on the final build; a local static server, Apache + PHP for the agent
 files, and a PHP server that writes mail to files for the contact form):
@@ -798,9 +991,11 @@ server):
 
 ## Next action
 
-0. Andy's verdict on round 9: the colour (its off switch is under "Decisions and conflicts"), the opening
-   (`index.html?intro` replays it) and the new parts of the home page. Then B16: a look on real phones and in
-   Safari and Firefox, and B17: whether Hostinger's "Checking your browser" page shows for ordinary visitors.
+0. Andy's verdict on round 10: the season liveries on whole pages, and B18 (did "the ftc colors" mean the games'
+   colours, as built, or FIRST Tech Challenge's orange, which is ready as
+   `.impeccable/alternatives/round10-ftc-orange.css`). Still open from round 9: his verdict on the opening
+   (`index.html?intro` replays it) and the home page's new parts; B16, a look on real phones and in Safari and
+   Firefox; B17, whether Hostinger's "Checking your browser" page shows for ordinary visitors.
 1. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
 2. Still open from round 8: with WCAG text spacing at 320, the outreach year tabs scroll sideways and the tier
    header cells overflow; Windows High Contrast and a screen reader on the skip link and the menu are unchecked.
@@ -815,6 +1010,6 @@ server):
    files, run `python3 tools/agent_files.py`, bump `?v=` on the stylesheet and the script, push to `main`.
 
 The scratchpad test scripts (`itest5.js`, `mb1.js`, `mb2.js`, `viewerfit.js`, `lineup_h.js`, `audit.js`,
-`cscan.js`, `kbd.js`, `rm.js`, `labelpx.js`, and for the opening `stepflight.js`, `optime.js` and `perf_open.js`)
-live outside the repo and won't survive a new session. Recreate them from the checks listed under "Latest
-verification" if needed.
+`cscan.js`, `kbd.js`, `rm.js`, `labelpx.js`, round 10's `contrast.js`, `states.js` and `verify10.sh`, and for the
+opening `stepflight.js`, `optime.js` and `perf_open.js`) live outside the repo and won't survive a new session.
+Recreate them from the checks listed under "Latest verification" if needed.

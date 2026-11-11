@@ -4,7 +4,8 @@
    end of css/style.css, append this file there, and re-run every check (it was contrast-clean on 2026-11-11:
    0 text runs under WCAG AA on the 12 pages at 1440 and 390px; hover, focus, the open menu, 320 and 768px were
    not checked). Its mock-up shortcuts (a box-shadow spread for the full-width footer rows, :has(.calendar) to
-   find the calendar band) are listed in its designer's notes in DESIGN_PROGRESS.md.
+   find the calendar band) are listed in DESIGN_PROGRESS.md, "Round 10"; replace both before using it.
+   round10-compare.webp, next to this file, shows it beside the scheme that was built.
 
    Round 10, scheme "orange": the programme's colours.
    FIRST Tech Challenge orange #F57E25 (PMS 158) with FTC black #231F20 and white is the frame of every page,
