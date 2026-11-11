@@ -953,14 +953,15 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
    for reduced motion.
    ========================================================= */
 @media (prefers-reduced-motion: no-preference) {
-  /* the stage lights up: the name rises, the robots step into the light one after another */
-  .launch-head h1 { animation: rise 900ms var(--ease) backwards; }
-  .launch-head p { animation: rise 900ms 120ms var(--ease) backwards; }
-  .bays .bay:nth-child(1) .bay-stage img { animation: step-in 1100ms 220ms var(--ease) backwards; }
-  .bays .bay:nth-child(2) .bay-stage img { animation: step-in 1100ms 340ms var(--ease) backwards; }
-  .bays .bay:nth-child(3) .bay-stage img { animation: step-in 1100ms 460ms var(--ease) backwards; }
-  .bay-stage::after { animation: draw 1200ms 200ms var(--ease) backwards; }
-  .bay-label, .season-cards, .partner-strip, .lineup-credit { animation: fade 900ms 640ms var(--ease) backwards; }
+  /* the stage lights up: the name rises, the robots step into the light one after another. Not on a load where
+     the opening plays (html.opened, set with .intro): there the title card is the entrance, and its pieces
+     land on a stage that is standing still. */
+  html:not(.opened) .launch-head h1 { animation: rise 900ms var(--ease) backwards; }
+  html:not(.opened) .launch-head p { animation: rise 900ms 120ms var(--ease) backwards; }
+  html:not(.opened) .bays .bay:nth-child(1) .bay-stage img { animation: step-in 1100ms 220ms var(--ease) backwards; }
+  html:not(.opened) .bays .bay:nth-child(2) .bay-stage img { animation: step-in 1100ms 340ms var(--ease) backwards; }
+  html:not(.opened) .bays .bay:nth-child(3) .bay-stage img { animation: step-in 1100ms 460ms var(--ease) backwards; }
+  html:not(.opened) :is(.bay-label, .season-cards, .partner-strip, .lineup-credit) { animation: fade 900ms 640ms var(--ease) backwards; }
   .season-head h1, .page-head h1 { animation: rise 900ms var(--ease) backwards; }
   .season-head .lead, .page-head .lead { animation: rise 900ms 120ms var(--ease) backwards; }
   .season-head-figure img { animation: step-in 1200ms 200ms var(--ease) backwards; }
@@ -968,63 +969,97 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes step-in { from { opacity: 0; transform: translateY(40px) scale(0.94); } }
-@keyframes draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 /* ---------- Opening (home page, first visit of a session): the season line-up title card ----------
-   An inline script in index.html's <head> adds .intro to <html> before the first paint, once per browser
-   session and never with reduced motion (add ?intro to the address to see it again). The card is the
-   <div class="opening"> at the top of index.html: three colour fields rise, one per season, each with its robot
-   and game name; a black strap crosses them with the team's name. Then every piece flies to its own place on
-   the page underneath (the fields to the bays, the robots to theirs, the name to the h1, the logo to the header)
-   and the rest of the page comes up around them: part "intro" in js/main.js. A click, tap, wheel or key skips it.
-   It ends hidden on its own after 6s whatever happens to the scripts, so it can never leave the page covered. */
+   An inline script in index.html's <head> adds .intro to <html> before the first paint: once per browser
+   session, never with reduced motion, on a slow or data-saving connection, or on a screen under 480px tall
+   (add ?intro to the address to see it again). The card is the <div class="opening"> at the top of index.html.
+   The beats, in milliseconds after it starts (.op-go, set once its pictures have loaded):
+     0     three colour fields rise, one per season, 70 and 120 later for the second and third
+     150   each robot comes up on its field; from 380 its year and game name
+     600   a black strap slides across the fields, carrying the team's name and logo
+     1480  every piece flies to its own place on the page underneath (the fields to the bays, the robots to
+           theirs, the name to the h1, the logo to the header) while the black behind them clears, so the
+           rest of the page comes up around them
+     2160  the pieces are the page; the lights go down on the bays that are not chosen
+   The flight is part "intro" in js/main.js. A click, tap, wheel or key ends the card at once. If js/main.js
+   never runs, the card fades by itself 3.2s after it starts, so it can never leave the page covered. */
 .opening { display: none; }
 @media (prefers-reduced-motion: no-preference) {
   html.intro .opening {
     display: grid !important; position: fixed; inset: 0; z-index: 1000; overflow: hidden;
     grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr);
-    color: var(--stage); animation: op-safety 1ms 6s forwards;
+    color: var(--stage);
+    /* the card's measures. The name never grows past 15% of the screen's height, and the robots get the room
+       that is left between the strap and their names, so the strap never covers a robot on a short screen. */
+    --op-top: clamp(64px, 14vh, 150px);
+    --op-pad: clamp(12px, 2.2vh, 26px);
+    --op-word: min(clamp(2.5rem, 1rem + 6.6vw, 7.25rem), 15vh);
+    --op-sub: calc(var(--op-word) * 0.333);
+    --op-foot: clamp(84px, 14vh, 150px);
+    --op-strap-h: calc(2 * var(--op-pad) + 0.98 * var(--op-word) + 1.3 * var(--op-sub));
+    --op-out: cubic-bezier(0.22, 1, 0.36, 1); /* arriving */
+    --op-fly: cubic-bezier(0.6, 0, 0.2, 1);   /* moving across the screen */
+    animation: op-safety 300ms 2500ms forwards; /* the pictures never came and the script under the card did not run */
   }
+  html.intro.op-go .opening { animation: op-safety-go 300ms 3200ms forwards; } /* its own name, so its clock starts when the card does */
   .op-black { position: absolute; inset: 0; background: var(--stage); }
   .op-field, .op-slot { grid-row: 1; min-width: 0; min-height: 0; }
   :is(.op-field, .op-slot)[data-season="2024"] { grid-column: 1; }
   :is(.op-field, .op-slot)[data-season="2025"] { grid-column: 2; }
   :is(.op-field, .op-slot)[data-season="2026"] { grid-column: 3; }
-  .op-field { position: relative; background: var(--c); margin-right: -1px; transform: scaleY(0); transform-origin: 50% 100%; will-change: transform; }
-  .op-slot { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 0 9% clamp(96px, 15vh, 150px); }
-  .op-robot { width: auto; height: auto; max-width: 100%; max-height: 47vh; filter: drop-shadow(0 22px 18px rgba(11, 10, 15, 0.42)); will-change: transform, opacity; }
+  /* each field: its season's colour with the same pool of light at the robot's feet as the bay it lands on.
+     The colour is painted as a gradient, not as a background-color: a plain colour scaled in flight shows
+     hairlines across it in Chromium (seams between its solid tiles). */
+  .op-field {
+    position: relative; margin-right: -1px; transform: scaleY(0); transform-origin: 50% 100%; will-change: transform;
+    background: radial-gradient(72% 58% at 50% 104%, rgba(255, 255, 255, 0.36), transparent 70%), linear-gradient(var(--c), var(--c));
+  }
+  .op-slot { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding: 0 9% var(--op-foot); }
+  .op-robot {
+    width: auto; height: auto; max-width: 100%;
+    max-height: min(55%, calc(100% - var(--op-top) - var(--op-strap-h) - 24px)); /* of the slot above its name: 24px clear of the strap */
+    filter: drop-shadow(0 22px 18px rgba(11, 10, 15, 0.42)); will-change: transform, opacity;
+  }
   .op-name { position: absolute; left: clamp(16px, 2.2vw, 32px); right: 14px; bottom: clamp(18px, 3.6vh, 36px); margin: 0; display: grid; gap: 3px; }
   .op-name span { font-size: 0.875rem; font-weight: 500; font-variant-numeric: tabular-nums; }
   .op-name b { font-stretch: 125%; font-weight: 700; font-size: clamp(1.125rem, 0.5rem + 1.7vw, 2rem); line-height: 1.04; letter-spacing: -0.01em; }
-  .op-strap { position: absolute; left: 0; right: 0; top: clamp(72px, 15vh, 150px); padding-block: clamp(14px, 2.4vh, 26px); color: var(--on-stage); clip-path: inset(0 100% 0 0); }
-  .op-strap::before { content: ""; position: absolute; inset: 0; background: var(--stage); transform-origin: 50% 0; transition: transform 760ms cubic-bezier(0.65, 0, 0.35, 1); }
-  html.op-go .op-strap.is-flying { clip-path: none; animation: none; }
-  .op-strap.is-flying::before { transform: var(--strap-to); }
+  .op-strap { position: absolute; left: 0; right: 0; top: var(--op-top); padding-block: var(--op-pad); color: var(--on-stage); transform: translateX(-101%); }
+  .op-strap::before { content: ""; position: absolute; inset: 0; background: linear-gradient(var(--stage), var(--stage)); transform-origin: 0 0; }
   .op-strap .container { position: relative; display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); }
-  .op-logo { width: clamp(52px, 6.4vw, 96px); height: auto; flex: none; transform-origin: 0 0; }
+  .op-logo { width: calc(var(--op-word) * 0.83); height: auto; flex: none; transform-origin: 0 0; }
   .op-strap p { margin: 0; display: grid; justify-items: start; min-width: 0; }
-  .op-word { display: block; font-weight: 800; font-stretch: 108%; letter-spacing: -0.012em; line-height: 0.98; font-size: clamp(2.5rem, 1rem + 6.6vw, 7.25rem); white-space: nowrap; }
+  /* the name is set exactly as the page's h1 is (weight, width, letter-spacing), so when it lands it is the h1 */
+  .op-word { display: block; font-weight: 800; font-stretch: 108%; letter-spacing: -0.025em; line-height: 0.98; font-size: var(--op-word); white-space: nowrap; }
   .op-word span { display: inline-block; transform-origin: 0 0; } /* each word flies to its own place in the h1, on one line or two */
-  .op-sub { display: block; font-weight: 400; font-stretch: 108%; color: var(--on-stage-2); font-size: clamp(1rem, 0.6rem + 1.9vw, 2.5rem); letter-spacing: 0.01em; line-height: 1; margin-top: 0.3em; white-space: nowrap; transform-origin: 0 0; }
+  .op-sub { display: block; font-weight: 400; font-stretch: 108%; color: var(--on-stage-2); font-size: var(--op-sub); letter-spacing: 0.01em; line-height: 1; margin-top: 0.3em; white-space: nowrap; transform-origin: 0 0; }
 
-  /* the card builds: fields, robots, names, then the strap. Until it starts (its robots are still loading)
-     the pieces that would otherwise show early stay out of sight; each then arrives from its own start. */
+  /* the card builds. Until it starts, the pieces that would show early stay out of sight; each then arrives
+     once, from its own start: the strap's name and logo ride in on the strap. Only transforms and opacity move. */
   html.intro:not(.op-go) :is(.op-robot, .op-name) { visibility: hidden; }
-  html.op-go .op-field { animation: op-field 640ms var(--ease) forwards; }
-  html.op-go .op-field[data-season="2025"] { animation-delay: 80ms; }
-  html.op-go .op-field[data-season="2026"] { animation-delay: 160ms; }
-  html.op-go .op-robot { animation: op-robot 760ms var(--ease) 200ms backwards; }
-  html.op-go .op-slot[data-season="2025"] .op-robot { animation-delay: 280ms; }
-  html.op-go .op-slot[data-season="2026"] .op-robot { animation-delay: 360ms; }
-  html.op-go .op-name { animation: op-name 520ms var(--ease) 460ms backwards; }
-  html.op-go .op-slot[data-season="2025"] .op-name { animation-delay: 520ms; }
-  html.op-go .op-slot[data-season="2026"] .op-name { animation-delay: 580ms; }
-  html.op-go .op-strap { animation: op-strap 520ms var(--ease-in-out) 540ms forwards; }
-  html.op-go .op-strap p, html.op-go .op-logo { animation: op-name 620ms var(--ease) 700ms backwards; }
+  html.op-go .op-field { animation: op-field 520ms var(--op-out) forwards; }
+  html.op-go .op-field[data-season="2025"] { animation-delay: 70ms; }
+  html.op-go .op-field[data-season="2026"] { animation-delay: 120ms; }
+  html.op-go .op-robot { animation: op-robot 640ms var(--op-out) 150ms backwards; }
+  html.op-go .op-slot[data-season="2025"] .op-robot { animation-delay: 230ms; }
+  html.op-go .op-slot[data-season="2026"] .op-robot { animation-delay: 290ms; }
+  html.op-go .op-name { animation: op-name 420ms var(--op-out) 380ms backwards; }
+  html.op-go .op-slot[data-season="2025"] .op-name { animation-delay: 440ms; }
+  html.op-go .op-slot[data-season="2026"] .op-name { animation-delay: 480ms; }
+  html.op-go .op-strap { animation: op-strap 520ms var(--op-out) 600ms forwards; }
+
+  /* the flight (part "intro" adds .is-flying and moves the pieces): the black behind the card clears while the
+     pieces are on their way, and the card stops taking clicks, so the page is usable the moment it shows.
+     The real pieces wait out of sight (html.op-landing) until the flown ones are on them. */
+  html.op-go .opening.is-flying { pointer-events: none; }
+  html.op-go .opening.is-flying .op-strap { transform: none; animation: none; }
+  .opening.is-flying .op-black { opacity: 0; transition: opacity 340ms linear 220ms; }
+  .opening.is-flying .op-strap::before { transform: var(--strap-to, none); transition: transform 680ms var(--op-fly); } /* the band closes to a plate behind the name */
+  html.op-landing :is(#launch-title, .site-header .brand img, .bay-stage) { visibility: hidden; }
 
   /* phones: the name on top, then one row per season */
   @media (max-width: 720px) {
-    html.intro .opening { grid-template-columns: minmax(0, 1fr); grid-template-rows: 23% repeat(3, minmax(0, 1fr)); }
+    html.intro .opening { grid-template-columns: minmax(0, 1fr); grid-template-rows: 23% repeat(3, minmax(0, 1fr)); --op-word: min(13vw, 4rem); --op-sub: min(5vw, 1.375rem); }
     :is(.op-field, .op-slot)[data-season] { grid-column: 1; }
     :is(.op-field, .op-slot)[data-season="2024"] { grid-row: 2; }
     :is(.op-field, .op-slot)[data-season="2025"] { grid-row: 3; }
@@ -1034,20 +1069,32 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
     .op-robot { max-height: 80%; max-width: 46%; }
     .op-name { left: 16px; right: 50%; bottom: 16px; }
     .op-name b { font-size: clamp(1.125rem, 5.6vw, 1.5rem); }
-    .op-strap { top: 0; height: 23%; padding-block: 0; display: flex; align-items: center; clip-path: none; }
+    .op-strap { top: 0; height: 23%; padding-block: 0; display: flex; align-items: center; transform: none; }
     .op-strap .container { gap: 12px; }
     .op-logo { width: 44px; }
-    .op-word { font-size: min(13vw, 4rem); white-space: normal; }
+    .op-word { white-space: normal; }
     .op-word span { display: block; }
-    .op-sub { font-size: min(5vw, 1.375rem); }
+    /* the name is there first (it is at the top), then the rows run down the screen */
+    html.op-go .op-strap { animation: none; }
+    html.op-go .op-strap p, html.op-go .op-logo { animation: op-name 420ms var(--op-out) 40ms backwards; }
+    html.op-go .op-field { animation-delay: 120ms; }
+    html.op-go .op-field[data-season="2025"] { animation-delay: 190ms; }
+    html.op-go .op-field[data-season="2026"] { animation-delay: 240ms; }
+    html.op-go .op-robot { animation-delay: 270ms; }
+    html.op-go .op-slot[data-season="2025"] .op-robot { animation-delay: 340ms; }
+    html.op-go .op-slot[data-season="2026"] .op-robot { animation-delay: 390ms; }
+    html.op-go .op-name { animation-delay: 480ms; }
+    html.op-go .op-slot[data-season="2025"] .op-name { animation-delay: 530ms; }
+    html.op-go .op-slot[data-season="2026"] .op-name { animation-delay: 560ms; }
   }
-  html.intro.intro-skip .opening { animation: intro-out 180ms cubic-bezier(0.4, 0, 1, 1) forwards; }
+  html.intro.intro-skip .opening { animation: intro-out 180ms cubic-bezier(0.4, 0, 1, 1) forwards; pointer-events: none; }
 }
 @keyframes op-field { to { transform: none; } }
-@keyframes op-robot { from { opacity: 0; transform: translateY(56px) scale(0.92); } }
-@keyframes op-name { from { opacity: 0; transform: translateY(14px); } }
-@keyframes op-strap { to { clip-path: inset(0 0 0 0); } }
+@keyframes op-robot { from { opacity: 0; transform: translateY(48px) scale(0.94); } }
+@keyframes op-name { from { opacity: 0; transform: translateY(10px); } }
+@keyframes op-strap { to { transform: none; } }
 @keyframes op-safety { to { visibility: hidden; opacity: 0; } }
+@keyframes op-safety-go { to { visibility: hidden; opacity: 0; } }
 @keyframes intro-out { to { opacity: 0; visibility: hidden; } }
 
 /* ---------- Page transitions: the lights go down on the page you leave, the next one rises ----------
@@ -1156,7 +1203,7 @@ html.is-scrolling main, html.is-scrolling .site-footer { pointer-events: none; }
 
 /* ---------- Motion preferences ---------- */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
   @view-transition { navigation: none; }
 }
 
@@ -1366,9 +1413,11 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
    Never: colour as a page background behind reading text, tinted table columns, gradients of colour, violet.
    ========================================================= */
 :root {
-  --itd: #3C8CF2;            /* INTO THE DEEP, 2024-25 */
-  --decode: #2EBD77;         /* DECODE, 2025-26 */
-  --biobuzz: #FFC21A;        /* BIOBUZZ, 2026-27 */
+  /* each game's colour comes from FIRST's own style guide for that season (the colour palette on its one page):
+     firstinspires.org > Resources > Season brand downloads */
+  --itd: #0083AE;            /* INTO THE DEEP, 2024-25: the ocean blue (PMS 7704 C) */
+  --decode: #92DBAC;         /* DECODE, 2025-26: the green of its badge (PMS 353 C) */
+  --biobuzz: #F7E326;        /* BIOBUZZ, 2026-27: the yellow of its honeycomb (PMS 102 C) */
   --season: var(--biobuzz);  /* THIS season: the site's signal colour */
   --on-season: var(--stage); /* text on the signal colour (ink: every season colour so far is a light one) */
 }
@@ -1410,18 +1459,35 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
   .lineup.is-ready .bay[aria-selected="false"]:hover .bay-stage img { opacity: 0.9; filter: grayscale(0.2) brightness(0.95) drop-shadow(0 16px 14px rgba(11, 10, 15, 0.4)); transform: scale(0.97); }
 }
 @media (scripting: none) { .bay-stage { background-color: var(--c); } .bay-stage::before { opacity: 1; } }
+/* while the opening's card lands (part "intro"), every bay is lit; then the lights go down on the unchosen ones */
+.lineup.is-ready.is-arriving .bay[aria-selected] .bay-stage { background-color: var(--c); }
+.lineup.is-ready.is-arriving .bay[aria-selected] .bay-stage::before { opacity: 1; }
+.lineup.is-ready.is-arriving .bay[aria-selected] .bay-stage img { opacity: 1; filter: drop-shadow(0 16px 14px rgba(11, 10, 15, 0.4)); transform: none; }
+.lineup.is-still, .lineup.is-still *, .lineup.is-still *::before { transition: none !important; }
 .bay-label { flex: 1; align-content: start; justify-items: start; text-align: left; gap: 3px; padding: 12px 14px 14px; background: var(--stage-raise); transition: background-color 320ms var(--ease), color 320ms var(--ease); }
 .lineup.is-ready .bay[aria-selected="true"] .bay-label { background: #fff; color: var(--ink); }
 .lineup.is-ready .bay[aria-selected="true"] :is(.bay-no, .bay-status) { color: var(--steel); }
 .lineup.is-ready .bay[aria-selected="true"] .bay-no .dia { background: var(--c); box-shadow: inset 0 0 0 1px var(--ink); }
 .bay-no .dia { width: 8px; height: 8px; }
 .bay:focus-visible { outline-offset: 2px; }
+/* narrow phones: the three labels need 308px at full padding, more than a 320px screen has. Tighter labels keep
+   all three bays inside the page and leave the chosen one the spare room */
+@media (max-width: 400px) { .bays { gap: 4px; } .bay-label { padding-inline: 8px; } }
 .season-card h2 { color: var(--c, var(--on-stage)); }
 
-/* the signal colour: the sponsor action */
-.header-cta, .header-cta:hover, .btn--season, .btn--season:hover { background: var(--season); border-color: var(--season); color: var(--on-season); }
-.header-cta:hover, .btn--season:hover { background: var(--season-press); border-color: var(--season-press); }
+/* the signal colour: the sponsor action. Every block of the signal colour carries an ink keyline, as the yellow
+   shapes in the BIOBUZZ logo do; it also keeps a light colour's edge clear on white. */
+.header-cta, .header-cta:hover, .btn--season, .btn--season:hover { background: var(--season); border-color: var(--ink); color: var(--on-season); }
+@media (hover: hover) and (pointer: fine) { .header-cta:hover, .btn--season:hover { background: var(--season-press); } } /* a tap never leaves it darkened */
 .header-cta[aria-current="page"], .header-cta[aria-current="page"]:hover { background: transparent; border-color: var(--ink); color: var(--ink); }
+
+/* one solid block of the signal colour per page at most: the sponsor box that closes the home page */
+.band--stage .ruled--season:not(.tile):not(.entry):not(.pull):not(.facts) { background: var(--season); border-color: var(--ink); color: var(--on-season); } /* outranks round 7's box rule for the stage */
+.band--stage .ruled--season :is(h3, p) { color: var(--on-season); }
+.split:has(> .ruled--season) { align-items: stretch; } /* the two closing boxes stand at one height */
+.ruled--season .btn:focus-visible { outline-color: var(--ink); }
+/* in the phone menu the sponsor action wears it too */
+@media (max-width: 1080px) { .site-header.is-open .nav .nav-cta { background: var(--season); color: var(--on-season); border: 1.5px solid var(--ink); } }
 
 /* the bar above section headings, and the calendar's next event, wear this season's colour; on a season's own
    page (<main data-season="…">) the bars wear that season's */
@@ -1432,8 +1498,8 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .split > * > .prose > h2:not(.h3):first-child::before,
 .close-grid > div:first-child > h2:first-child::before,
 .band--stage > .container > h2:first-child::before,
-.terms > h2:not(.h3)::before { background: var(--c, var(--season)); }
-.calendar li.is-next, .calendar li.is-today { background: var(--season) !important; border-color: var(--season); color: var(--on-season); }
+.terms > h2:not(.h3)::before { background: var(--c, var(--season)); height: 8px; box-shadow: inset 0 0 0 1.5px var(--ink); margin-bottom: 14px; } /* 8 + 14: the same room as the 4px bar and its 18px had */
+.calendar li.is-next, .calendar li.is-today { background: var(--season) !important; border-color: var(--ink); box-shadow: inset 0 0 0 0.5px var(--ink); color: var(--on-season); }
 .calendar li.is-next time, .calendar li.is-today time { color: var(--on-season); opacity: 0.78; }
 
 /* ---------- Seasons: each robot on its season's colour (the index rows, the season heads, the pagers, the record) ---------- */
@@ -1445,7 +1511,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .season-head-figure img { filter: drop-shadow(0 20px 16px rgba(11, 10, 15, 0.42)); }
 .pager-media { background: var(--c, var(--stage)); }
 .pager-media img { filter: drop-shadow(0 6px 6px rgba(11, 10, 15, 0.35)); }
-.results-table .r-season a::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 8px; background: var(--c, var(--ink)); box-shadow: inset 0 0 0 1px rgba(22, 20, 28, 0.4); }
+.results-table .r-season a::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 8px; background: var(--c, var(--ink)); box-shadow: inset 0 0 0 1px var(--ink); }
 
 /* ---------- The site answers: hover and press ----------
    Only with a mouse (fine pointer); keyboard focus shows the same states through :focus-visible where it matters.
@@ -1463,32 +1529,36 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .btn:active { transform: translateY(1px) scale(0.985); transition-duration: 90ms; }
 @media (prefers-reduced-motion: reduce) { .btn:hover, .btn:active, .lift:hover, .zoom:hover img, a:hover .zoom img { transform: none; } }
 
-/* ---------- Strip: a row of cards the visitor moves (arrow buttons, drag, swipe, Tab); it never moves by itself ---------- */
+/* ---------- Card strip: a row of cards the visitor moves (arrow buttons, drag, swipe, Tab); it never moves by
+   itself. The row is <ul class="card-strip" data-strip> (.strip alone is the photo strip in the outreach galleries). ---------- */
 .strip-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin: -12px 0 22px; }
 .strip-nav { display: flex; gap: 6px; }
 .strip-btn {
   width: 46px; height: 46px; display: grid; place-items: center; padding: 0; border: 0; flex: none;
-  background: var(--season); color: var(--on-season);
+  background: var(--season); color: var(--on-season); box-shadow: inset 0 0 0 1.5px var(--ink);
   transition: background-color 150ms var(--ease), color 150ms var(--ease), transform 150ms var(--ease);
 }
 .strip-btn svg { width: 16px; height: 16px; }
-.strip-btn[aria-disabled="true"] { background: var(--alu-deep); color: var(--quiet); cursor: default; } /* at the end of the row; it keeps the focus */
+.strip-btn, .play, .story-pick, .viewer-close { -webkit-user-select: none; user-select: none; } /* a long press on a control never selects its label */
+.strip-btn[aria-disabled="true"] { background: var(--alu-deep); color: var(--quiet); box-shadow: none; cursor: default; } /* at the end of the row; it keeps the focus */
 .band--grey .strip-btn[aria-disabled="true"] { background: var(--paper); }
 .viewer .strip-btn[aria-disabled="true"] { background: var(--stage-raise); color: var(--on-stage-3); }
 @media (hover: hover) and (pointer: fine) { .strip-btn:not([aria-disabled="true"]):hover { background: var(--season-press); } }
 .strip-btn:not([aria-disabled="true"]):active { transform: scale(0.94); transition-duration: 90ms; }
 .strip-nav[hidden] { display: none; }
-.strip {
+.card-strip {
   list-style: none; display: flex; gap: 10px; margin: 0; overflow-x: auto; overscroll-behavior-x: contain;
   /* the first card starts on the content's left edge; the row runs off the right edge of the screen */
   padding: 4px max(var(--gutter), calc((100% - var(--max)) / 2)) 12px;
   scroll-padding-inline: max(var(--gutter), calc((100% - var(--max)) / 2));
   scrollbar-width: none;
 }
-.strip::-webkit-scrollbar { display: none; }
-.strip > li { flex: none; }
-.strip.is-dragging { cursor: grabbing; user-select: none; }
-.strip.is-dragging a { pointer-events: none; }
+.card-strip::-webkit-scrollbar { display: none; }
+.card-strip > li { flex: none; }
+/* under a finger the row comes to rest on a card's edge (a mouse drags it freely: part "strip" in js/main.js) */
+@media (pointer: coarse) { .card-strip { scroll-snap-type: x proximity; } .card-strip > li { scroll-snap-align: start; } }
+.card-strip.is-dragging { cursor: grabbing; user-select: none; }
+.card-strip.is-dragging a { pointer-events: none; }
 .strip-card {
   position: relative; display: block; height: clamp(280px, 28vw, 390px); aspect-ratio: 4 / 5; overflow: hidden;
   background: var(--stage-raise); color: #fff; text-decoration: none;
@@ -1513,73 +1583,103 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .strip-foot { margin: 14px 0 0; color: var(--steel); max-width: 62ch; }
 @media (forced-colors: active) { .strip-card::after { display: none; } }
 
-/* ---------- Stories (home outreach): on wide screens one big frame and the stories beside it (choosing a story
-   shows its photo); on phones cards to swipe through; without JavaScript each story keeps its own photo ---------- */
+/* ---------- Stories (home outreach) ----------
+   Phones and no JavaScript: one card per story (photo, title, date, a sentence, a link), swiped sideways on
+   phones. Wide screens with JavaScript (part "stories"): one big frame on the left, the stories as a column of
+   equal rows on the right, and under the frame the chosen story's sentence and link. Choosing a story changes
+   the photo and that text; the rows never move, so nothing shifts under the pointer or further down the page
+   (the text under the frame keeps the room of the longest story). */
 .stories {
   display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none;
   margin-inline: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; scroll-padding-inline: var(--gutter);
+  overscroll-behavior-x: contain; /* a swipe at the row's end never becomes the browser's Back */
 }
 .stories::-webkit-scrollbar { display: none; }
 .story { flex: 0 0 min(84%, 420px); scroll-snap-align: start; display: grid; gap: 14px; align-content: start; padding: 12px 12px 18px; background: var(--paper); border: 1px solid var(--box-line); }
+.story-photo { margin: 0; }
 .story-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-.story-photo figcaption { display: none; } /* the title under the photo already says it; the caption is for the big frame */
 .story-text { display: grid; gap: 6px; justify-items: start; padding-inline: 4px; }
 .story-text h3 { font-size: 1.1875rem; line-height: 1.22; margin: 0; }
+@media (min-width: 1200px) { .stories.is-ready .story-text h3 { font-size: 1.3125rem; } }
 .story-text .dateline { margin: 0; }
 .story-text > p { margin: 0; }
 .story-pick { font: inherit; color: inherit; letter-spacing: inherit; background: none; border: 0; padding: 0; margin: 0; text-align: left; cursor: pointer; }
 @media (min-width: 900px) {
   .stories { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; overflow: visible; margin-inline: 0; padding: 0; }
-  .stories.is-ready { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 10px clamp(20px, 2.6vw, 40px); align-items: start; }
-  .stories.is-ready .story-stage { grid-column: 1; grid-row: 1 / span 6; position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--stage); }
-  .stories.is-ready .story-stage .story-photo { position: absolute; inset: 0; margin: 0; opacity: 0; visibility: hidden; transition: opacity 320ms var(--ease), visibility 0s linear 320ms; }
+  .stories.is-ready {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); grid-template-rows: repeat(var(--stories, 4), minmax(min-content, 1fr)) auto;
+    gap: 0 clamp(20px, 2.6vw, 40px); align-items: stretch;
+  }
+  .stories.is-ready .story-stage { grid-column: 1; grid-row: 1 / span var(--stories, 4); position: relative; aspect-ratio: 4 / 3; min-height: 100%; overflow: hidden; background: var(--stage); }
+  .stories.is-ready .story-stage .story-photo { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity 320ms var(--ease), visibility 0s linear 320ms; }
   .stories.is-ready .story-stage .story-photo.is-on { opacity: 1; visibility: visible; transition: opacity 320ms var(--ease); }
   .stories.is-ready .story-stage img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
-  .stories.is-ready .story-stage figcaption { display: block; position: absolute; inset: auto 0 0 0; margin: 0; padding: 44px 18px 14px; color: #fff; background: linear-gradient(180deg, rgba(11, 10, 15, 0), rgba(11, 10, 15, 0.82)); }
-  .stories.is-ready .story { grid-column: 2; gap: 0; padding: 16px 20px 18px; background: transparent; border-color: transparent; cursor: pointer; transition: background-color 200ms var(--ease), border-color 200ms var(--ease); }
-  .stories.is-ready .story.is-on { background: var(--paper); border-color: var(--box-line); cursor: default; }
-  .stories.is-ready .story-text { padding-inline: 0; }
-  /* beside the frame only the chosen story is written out; the others show their title and date */
-  .stories.is-ready .story:not(.is-on) .story-text > :is(p:not(.dateline), .text-link) { display: none; }
-  /* the bar marks the chosen story, as it marks every heading that opens a section; its room is always there */
-  .stories.is-ready .story-text::before { content: ""; width: 28px; height: 4px; margin-bottom: 8px; background: transparent; transition: background-color 200ms var(--ease); }
-  .stories.is-ready .story.is-on .story-text::before { background: var(--season); }
-  @media (hover: hover) and (pointer: fine) { .stories.is-ready .story:not(.is-on):hover { border-color: var(--quiet); } }
-  .stories.is-ready .story-pick:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+  /* the rows: equal shares of the frame's height, a line between them, the chosen one marked like a tab */
+  .stories.is-ready .story {
+    grid-column: 2; position: relative; display: grid; align-content: center; gap: 0; padding: 12px 20px 12px 26px;
+    background: transparent; border: 0; border-top: 1px solid var(--box-line); cursor: pointer;
+    transition: background-color 200ms var(--ease);
+  }
+  .stories.is-ready .story:last-of-type { border-bottom: 1px solid var(--box-line); }
+  .stories.is-ready .story::before { /* the marker: this season's colour on the chosen row */
+    content: ""; position: absolute; left: 0; top: -1px; bottom: -1px; width: 8px; background: transparent;
+    transition: background-color 200ms var(--ease), box-shadow 200ms var(--ease);
+  }
+  .stories.is-ready .story.is-on { background: var(--paper); cursor: default; }
+  .stories.is-ready .story.is-on::before { background: var(--season); box-shadow: inset 0 0 0 1.5px var(--ink); }
+  .stories.is-ready .story-text { padding-inline: 0; gap: 4px; }
+  .stories.is-ready .story:not(.is-on) h3 { color: var(--steel); }
+  @media (hover: hover) and (pointer: fine) {
+    .stories.is-ready .story:not(.is-on):hover { background: color-mix(in srgb, var(--paper) 55%, transparent); }
+    .stories.is-ready .story:not(.is-on):hover h3 { color: var(--ink); }
+    .stories.is-ready .story:not(.is-on):hover::before { background: var(--quiet); }
+  }
+  .stories.is-ready .story-pick::after { content: ""; position: absolute; inset: 0; } /* the button is the whole row */
+  .stories.is-ready .story-pick:focus-visible { outline: none; }
+  .stories.is-ready .story:has(.story-pick:focus-visible) { outline: 2px solid var(--ink); outline-offset: -2px; }
+  /* under the frame: the chosen story's sentence and link. All the stories' notes share one cell, so the cell
+     is as tall as the longest and choosing never moves the page */
+  .stories.is-ready .story-notes { grid-column: 1; grid-row: calc(var(--stories, 4) + 1); display: grid; padding-top: 16px; }
+  .stories.is-ready .story-note { grid-area: 1 / 1; display: grid; gap: 8px; justify-items: start; align-content: start; visibility: hidden; opacity: 0; transition: opacity 240ms var(--ease), visibility 0s linear 240ms; }
+  .stories.is-ready .story-note.is-on { visibility: visible; opacity: 1; transition: opacity 240ms var(--ease); }
+  .stories.is-ready .story-note p { margin: 0; max-width: 64ch; }
+  .stories.is-measuring, .stories.is-measuring * { transition: none !important; }
 }
 
 /* ---------- Latest news (home): two cards; a video card gets a play button over its poster ---------- */
 .news-cards { display: grid; gap: clamp(28px, 3vw, 40px) clamp(20px, 2.6vw, 36px); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 760px) { .news-cards { grid-template-columns: 1fr 1fr; } }
 .news-card { display: grid; gap: 8px; align-content: start; }
+[data-video] { position: relative; }
 .news-media { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; margin: 0 0 8px; background: var(--stage); }
 .news-media img, .news-media video { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease); }
 .news-card .dateline { margin: 0; }
 .news-card h3 { font-size: clamp(1.25rem, 1rem + 0.8vw, 1.625rem); letter-spacing: -0.014em; line-height: 1.16; }
-.news-card h3 a { text-decoration: none; }
+.news-card h3 a { display: inline-block; padding-block: 3px; margin-block: -3px; text-decoration: none; } /* a 24px target without moving the line */
 .news-card h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.16em; }
 .news-card > p:last-child { margin: 0; color: var(--steel); max-width: 60ch; }
 @media (hover: hover) and (pointer: fine) { .news-card:hover .news-media img { transform: scale(1.03); } }
 .play {
   position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 20px 0 18px; border: 0;
-  background: var(--season); color: var(--on-season); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase;
+  background: var(--season); color: var(--on-season); box-shadow: inset 0 0 0 1.5px var(--ink); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase;
   transition: background-color 150ms var(--ease), transform 150ms var(--ease);
 }
 .play svg { width: 14px; height: 14px; }
 @media (hover: hover) and (pointer: fine) { .play:hover { background: var(--season-press); } }
 .play:active { transform: scale(0.97); transition-duration: 90ms; }
-.play:focus-visible { outline: 2px solid #fff; outline-offset: -5px; }
+.play:focus-visible { outline: 2px solid var(--ink); outline-offset: -6px; }
 
 /* ---------- Photo viewer: a photo in an outreach gallery opens large (arrows, swipe, Esc) ---------- */
-[data-viewable] { cursor: zoom-in; }
+[data-viewable] { cursor: zoom-in; touch-action: manipulation; transition: filter 160ms var(--ease); }
+@media (hover: hover) and (pointer: fine) { [data-viewable]:hover { filter: brightness(1.08); } } /* a photo that opens answers the mouse */
 html:has(.viewer[open]) { overflow: hidden; } /* the page behind stays where it is */
 [data-viewable]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.viewer { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(11, 10, 15, 0.96); color: var(--on-stage); overflow: hidden; }
+.viewer { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(11, 10, 15, 0.96); color: var(--on-stage); overflow: hidden; overscroll-behavior: contain; }
 .viewer::backdrop { background: rgba(11, 10, 15, 0.6); }
 .viewer[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; animation: fade 180ms var(--ease) both; }
 .viewer-top, .viewer-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px clamp(12px, 2vw, 24px); }
 .viewer-count { font-size: var(--fs-sm); color: var(--on-stage-2); font-variant-numeric: tabular-nums; }
-.viewer-stage { display: grid; place-items: center; min-height: 0; padding-inline: clamp(12px, 2vw, 24px); }
+.viewer-stage { display: grid; place-items: center; min-height: 0; padding-inline: clamp(12px, 2vw, 24px); touch-action: pan-y pinch-zoom; } /* a sideways swipe is ours (next/previous photo); pinching still zooms */
 .viewer-stage img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
 .viewer-stage img.is-in { animation: fade 220ms var(--ease) both; }
 .viewer-cap { margin: 0; font-size: var(--fs-sm); color: var(--on-stage-2); max-width: 72ch; }
@@ -1587,4 +1687,5 @@ html:has(.viewer[open]) { overflow: hidden; } /* the page behind stays where it 
 .viewer :focus-visible { outline-color: #fff; }
 .viewer-close { min-height: 46px; padding: 0 18px; border: 1.5px solid rgba(239, 238, 243, 0.62); background: transparent; color: var(--on-stage); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase; }
 @media (hover: hover) and (pointer: fine) { .viewer-close:hover { background: var(--on-stage); color: var(--ink); } }
+.viewer-close:active { background: var(--on-stage); color: var(--ink); }
 @media (max-width: 600px) { .viewer-foot { flex-direction: column-reverse; align-items: stretch; } .viewer .strip-nav { justify-content: flex-end; } }

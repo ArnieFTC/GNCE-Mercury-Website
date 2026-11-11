@@ -102,8 +102,8 @@ part("header", () => {
   const links = NAV.map(n => `<a href="${root}${n.href}"${n.page === page ? ' aria-current="page"' : ""}>${n.label}</a>`).join("");
   header.innerHTML = `
     <div class="container bar">
-      <a class="brand" href="${root}index.html" aria-label="GNCE Mercury, home">
-        <img src="${root}images/logo-mark.png" alt="" width="473" height="505">
+      <a class="brand" href="${root}index.html" aria-label="GNCE Mercury FTC team 26413, home">
+        <img src="${root}images/logo-mark-240.webp" alt="" width="240" height="256">
         <span class="brand-name"><b translate="no">GNCE Mercury</b><small>FTC team 26413</small></span>
       </a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
@@ -202,7 +202,7 @@ part("footer", () => {
     </div>
     <div class="container footer-main">
       <a class="footer-brand" href="${root}index.html">
-        <img src="${root}images/logo-mark.png" alt="" width="473" height="505" loading="lazy">
+        <img src="${root}images/logo-mark-240.webp" alt="" width="240" height="256" loading="lazy">
         <span><b translate="no">GNCE Mercury</b><small>FTC team 26413, Weston, MA</small></span>
       </a>
       <div class="footer-cols">
@@ -897,7 +897,7 @@ part("scroll-calm", () => {
 });
 
 // ---------- Strips: rows of cards the visitor moves ----------
-// <ul class="strip" data-strip id="…"> scrolls sideways on its own (swipe, trackpad, Tab). Here: the previous/next
+// <ul class="card-strip" data-strip id="…"> scrolls sideways on its own (swipe, trackpad, Tab). Here: the previous/next
 // buttons, put into the <div class="strip-nav" data-strip-nav="that id">, and dragging with a mouse.
 // Nothing here moves by itself.
 const chevron = dir => `<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="${dir < 0 ? "M10 3 5 8l5 5" : "M6 3l5 5-5 5"}"/></svg>`;
@@ -980,37 +980,49 @@ part("strip", () => {
 });
 
 // ---------- Home: outreach stories ----------
-// <div class="stories" data-stories> holds one <article class="story"> per story (its photo, then its text).
-// On wide screens the photos move into one big frame and each title becomes a button: choosing a story shows its
-// photo. On phones the stories stay as cards to swipe through, each with its own photo.
+// <div class="stories" data-stories> holds one <article class="story"> per story (its photo, then its text: a
+// title, a date line, a sentence and a link). On wide screens the photos move into one big frame, the stories
+// become a column of rows (each title a button), and each story's sentence and link move under the frame:
+// choosing a story shows its photo and its text there, and the rows stay where they are. On phones the stories
+// stay as cards to swipe through, each whole.
 part("stories", () => {
   document.querySelectorAll("[data-stories]").forEach((box, n) => {
     const stories = [...box.querySelectorAll(":scope > .story")];
     const photos = stories.map(s => s.querySelector(".story-photo"));
+    const texts = stories.map(s => s.querySelector(".story-text"));
     const titles = stories.map(s => s.querySelector("h3"));
-    if (stories.length < 2 || photos.some(x => !x) || titles.some(x => !x)) return;
+    if (stories.length < 2 || [photos, texts, titles].some(list => list.some(x => !x))) return;
     const wide = matchMedia("(min-width: 900px)");
     const stage = document.createElement("div");
     stage.className = "story-stage";
+    const notes = document.createElement("div");
+    notes.className = "story-notes";
+    // what goes under the frame: everything in a story's text after its title and date line
+    const bodies = texts.map(t => [...t.children].filter(el => el.tagName !== "H3" && !el.classList.contains("dateline")));
+    const noteOf = stories.map((s, i) => { const d = document.createElement("div"); d.className = "story-note"; d.id = `story-note-${n}-${i}`; return d; });
     photos.forEach((ph, i) => { if (!ph.id) ph.id = `story-photo-${n}-${i}`; });
+    box.style.setProperty("--stories", stories.length);
     let current = 0;
     const select = i => {
       current = i;
       stories.forEach((s, j) => s.classList.toggle("is-on", j === i));
       photos.forEach((ph, j) => ph.classList.toggle("is-on", j === i));
+      noteOf.forEach((d, j) => d.classList.toggle("is-on", j === i));
       box.querySelectorAll(".story-pick").forEach((b, j) => b.setAttribute("aria-pressed", j === i));
     };
-    stories.forEach((s, i) => s.addEventListener("click", e => { if (wide.matches && !e.target.closest("a")) select(i); }));
     const arrange = () => {
       if (wide.matches) {
         photos.forEach(ph => stage.append(ph));
+        noteOf.forEach((d, i) => { d.append(...bodies[i]); notes.append(d); });
         box.prepend(stage);
+        box.append(notes);
         titles.forEach((h, i) => {
           if (h.querySelector(".story-pick")) return;
           const b = document.createElement("button");
           b.type = "button";
           b.className = "story-pick";
-          b.setAttribute("aria-controls", photos[i].id);
+          b.setAttribute("aria-controls", `${photos[i].id} ${noteOf[i].id}`);
+          b.addEventListener("click", () => select(i)); // the button covers its whole row (css/style.css)
           b.append(...h.childNodes);
           h.append(b);
         });
@@ -1019,8 +1031,13 @@ part("stories", () => {
       } else {
         box.classList.remove("is-ready");
         titles.forEach(h => { const b = h.querySelector(".story-pick"); if (b) { h.append(...b.childNodes); b.remove(); } });
-        stories.forEach((s, i) => { s.prepend(photos[i]); s.classList.remove("is-on"); photos[i].classList.remove("is-on"); });
+        stories.forEach((s, i) => {
+          s.prepend(photos[i]);
+          texts[i].append(...bodies[i]);
+          [s, photos[i], noteOf[i]].forEach(el => el.classList.remove("is-on"));
+        });
         stage.remove();
+        notes.remove();
       }
     };
     wide.addEventListener("change", arrange);
@@ -1096,14 +1113,17 @@ part("viewer", () => {
       if (e.key === "ArrowRight") { e.preventDefault(); show(at + 1); }
       if (e.key === "ArrowLeft") { e.preventDefault(); show(at - 1); }
     });
-    let downX = null;
-    stage.addEventListener("pointerdown", e => { downX = e.clientX; });
+    // a sideways swipe with one finger (or a mouse) shows the next or previous photo; a second finger is a pinch
+    let down = null;
+    stage.addEventListener("pointerdown", e => { down = down ? { id: -1 } : { id: e.pointerId, x: e.clientX, y: e.clientY }; });
     stage.addEventListener("pointerup", e => {
-      if (downX == null || group.length < 2) return;
-      const dx = e.clientX - downX;
-      downX = null;
-      if (Math.abs(dx) > 48) show(at + (dx < 0 ? 1 : -1));
+      const d = down;
+      down = null;
+      if (!d || d.id !== e.pointerId || group.length < 2) return;
+      const dx = e.clientX - d.x, dy = e.clientY - d.y;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) show(at + (dx < 0 ? 1 : -1));
     });
+    stage.addEventListener("pointercancel", () => { down = null; });
     dlg.addEventListener("close", () => { if (opener) opener.focus({ preventScroll: true }); });
   };
   groups.forEach(g => g.forEach((el, i) => {
@@ -1119,46 +1139,55 @@ part("viewer", () => {
 
 // ---------- Opening ----------
 // index.html's <head> adds .intro on the first visit of a session, and the <div class="opening"> title card builds
-// itself in CSS once its robots have loaded (the small script under it sets window.__opening and .op-go).
+// itself in CSS once its pictures have loaded (the small script under it sets window.__opening and .op-go).
 // Here: after the card has stood for a moment, every piece flies to its own place on the page underneath (the
-// colour fields to the bays, the robots to theirs, the name to the h1, the logo to the header), then the card
-// fades and the page is simply there. A click, tap, wheel or key ends it at once.
+// colour fields to the bays, the robots to theirs, the name to the h1, the logo to the header) while the black
+// behind the card clears, so the page comes up around the pieces. When they land they are swapped for the real
+// ones, and the lights go down on the bays that are not chosen. A click, tap, wheel or key ends it at once.
 part("intro", () => {
   const rootEl = document.documentElement;
   if (!rootEl.classList.contains("intro")) return;
   const op = document.querySelector(".opening");
-  const done = () => rootEl.classList.remove("intro", "intro-skip", "op-go");
+  const lu = document.querySelector("[data-lineup]");
+  const done = () => {
+    rootEl.classList.remove("intro", "intro-skip", "op-go", "op-landing");
+    if (lu) lu.classList.remove("is-arriving"); // the lights go down on the unchosen bays (their own transition)
+  };
   if (!op || !op.animate) return done();
-  const HOLD = 1560;   // from the card starting to build until the pieces fly
-  const FLY = 760;
-  const FADE = 300;
+  const HOLD = 1480;  // from the card starting to build until the pieces fly
+  const FLY = 680;
+  const SWAP = 140;   // the flown pieces give way to the real ones
   let over = false, timer = 0, flights = [];
-  // leave without the flight: a skip, or a page that is not where the flight expects it
+  // the card lands on a stage where every bay is lit: set at once, without the bays' own transitions
+  if (lu) { lu.classList.add("is-arriving", "is-still"); void lu.offsetWidth; lu.classList.remove("is-still"); }
+  // leave without the flight (a skip, or a page that is not where the flight expects it); mid-flight the pieces
+  // stop where they are and fade with the card
   const fade = () => {
     if (over) return;
     over = true;
     clearTimeout(timer);
-    flights.forEach(a => a.cancel());
+    flights.forEach(a => a.pause());
+    rootEl.classList.remove("op-landing");
     rootEl.classList.add("intro-skip");
     setTimeout(done, 200);
   };
   const textRect = node => { const r = document.createRange(); r.selectNodeContents(node); return r.getBoundingClientRect(); };
   const land = () => {
     if (over) return;
-    const lu = document.querySelector("[data-lineup].is-ready");
     const h1 = document.getElementById("launch-title");
     const brand = document.querySelector(".site-header .brand img");
-    if (!lu || !h1 || !brand || scrollY > 4) return fade();
-    const opts = { duration: FLY, easing: "cubic-bezier(0.65, 0, 0.35, 1)", fill: "forwards" };
+    if (!lu || !lu.classList.contains("is-ready") || !h1 || !brand || scrollY > 4) return fade();
+    const opts = { duration: FLY, easing: "cubic-bezier(0.6, 0, 0.2, 1)", fill: "forwards" };
+    // First every piece is measured, then every piece is set moving (no layout work between two starts).
     // el goes from where it is to the rect `to`; `inner` is the part of el that has to land on it (default: all of it)
+    const moves = [];
     const fly = (el, to, inner) => {
       const box = el.getBoundingClientRect();
       const from = inner || box;
       if (!from.width || !from.height || !to.width) return;
       const sx = to.width / from.width, sy = inner ? sx : to.height / from.height;
       const dx = to.left - box.left - sx * (from.left - box.left), dy = to.top - box.top - sy * (from.top - box.top);
-      el.style.transformOrigin = "0 0";
-      flights.push(el.animate({ transform: ["none", `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`] }, opts));
+      moves.push([el, `translate(${dx}px, ${dy}px) scale(${sx}, ${sy})`]);
     };
     let bayTop = innerHeight;
     op.querySelectorAll(".op-field").forEach(f => {
@@ -1171,12 +1200,12 @@ part("intro", () => {
     op.querySelectorAll(".op-slot").forEach(s => {
       const img = lu.querySelector(`.bay[data-season="${s.dataset.season}"] .bay-stage img`);
       if (img) fly(s.querySelector(".op-robot"), img.getBoundingClientRect());
-      flights.push(s.querySelector(".op-name").animate({ opacity: [1, 0] }, { duration: 160, fill: "forwards" }));
     });
     // each word of the name lands on the same word of the h1 (which may have wrapped), the team line on the h1's
     // second line, the logo on the header's
     const name = h1.firstChild, sub = op.querySelector(".op-sub"), lite = h1.querySelector(".lite");
-    let textBottom = 0;
+    const text = { left: Infinity, top: Infinity, right: 0, bottom: 0 }; // where the name's lines end up
+    const grow = r => { text.left = Math.min(text.left, r.left); text.top = Math.min(text.top, r.top); text.right = Math.max(text.right, r.right); text.bottom = Math.max(text.bottom, r.bottom); };
     if (name && name.nodeType === 3) {
       let at = 0;
       const targets = name.nodeValue.trim().split(/\s+/).map(w => {
@@ -1189,29 +1218,39 @@ part("intro", () => {
       });
       op.querySelectorAll(".op-word span").forEach((w, i) => {
         if (!targets[i]) return;
-        textBottom = Math.max(textBottom, targets[i].bottom);
+        grow(targets[i]);
         fly(w, targets[i], textRect(w));
       });
     }
-    if (lite) { const to = textRect(lite); textBottom = Math.max(textBottom, to.bottom); fly(sub, to, textRect(sub)); }
+    if (lite) { const to = textRect(lite); grow(to); fly(sub, to, textRect(sub)); }
     fly(op.querySelector(".op-logo"), brand.getBoundingClientRect());
-    // the black strap rides up with the name: it closes over the top of the fields and stops above the bays
+    // the strap's black band closes down to a plate behind the name and rides with it, so the name is never read
+    // against a colour field; where it lands the stage is black too, so it simply is not there any more
     const strap = op.querySelector(".op-strap"), sr = strap.getBoundingClientRect();
-    const top = 0, bottom = Math.min(bayTop, (textBottom || bayTop) + 14);
-    strap.style.setProperty("--strap-to", `translateY(${top - sr.top}px) scaleY(${Math.max(0.05, (bottom - top) / sr.height)})`);
-    strap.classList.add("is-flying");
+    let plate = "";
+    if (text.right > text.left && sr.width && sr.height) {
+      const l = text.left - 16, t = text.top - 12, w = text.right - text.left + 44, h = Math.min(bayTop, text.bottom + 12) - t;
+      plate = `translate(${l - sr.left}px, ${t - sr.top}px) scale(${w / sr.width}, ${Math.max(0.05, h / sr.height)})`;
+    }
+    // everything is measured: now the writes
+    if (plate) strap.style.setProperty("--strap-to", plate);
+    moves.forEach(([el, to]) => { el.style.transformOrigin = "0 0"; flights.push(el.animate({ transform: ["none", to] }, opts)); });
+    op.querySelectorAll(".op-name").forEach(el => flights.push(el.animate({ opacity: [1, 0] }, { duration: 160, fill: "forwards" })));
+    rootEl.classList.add("op-landing");  // the real pieces wait out of sight until the flown ones are on them
+    op.classList.add("is-flying");
     Promise.all(flights.map(a => a.finished)).then(() => {
       if (over) return;
       over = true;
-      // the rest of the page comes up around the pieces, which are now exactly where the real ones are
-      op.animate({ opacity: [1, 0] }, { duration: FADE, easing: "ease-out", fill: "forwards" }).finished.then(done);
+      rootEl.classList.remove("op-landing");
+      op.animate({ opacity: [1, 0] }, { duration: SWAP, easing: "linear", fill: "forwards" }).finished.then(done, done);
     }).catch(() => {});
   };
   const wait = () => {
     if (over) return;
+    if (!rootEl.classList.contains("intro") || rootEl.classList.contains("intro-skip")) { over = true; setTimeout(done, 200); return; } // the script under the card ended it
     const t0 = window.__opening;
     if (t0 == null) { timer = setTimeout(wait, 50); return; }
-    timer = setTimeout(land, Math.max(0, HOLD - (performance.now() - t0)));
+    timer = setTimeout(() => { try { land(); } catch (e) { fade(); } }, Math.max(0, HOLD - (performance.now() - t0)));
   };
   wait();
   ["pointerdown", "keydown", "wheel", "touchstart"].forEach(t => addEventListener(t, fade, { once: true, passive: true }));

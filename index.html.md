@@ -82,37 +82,84 @@ Season calendar, oldest first, in Massachusetts (Eastern) time. The next event i
 
 ## 9 students and 4 coaches
 
-![GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship](https://mercury26413.org/images/team.webp)
-
-*The team at the Ryken RoboBowl, December 2025.*
-
-We design, build, wire, and program one robot each season.
-
-Our members have competed at international events and won awards there.
-
-In the summer we run a robotics camp, and during the school year we coach Weston’s FIRST LEGO League teams.
+We design, build, wire, and program one robot each season. Our members have competed at international events and won awards there.
 
 [Meet the team](https://mercury26413.org/team.html) · [Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
+
+- [**The team at the Ryken RoboBowl** · December 2025](https://mercury26413.org/team.html)
+- [**Andy Ding** · Founder, Co-Captain](https://mercury26413.org/team.html#andy-ding)
+- [**Arnie Sreeram** · Co-Captain, Software Lead](https://mercury26413.org/team.html#arnie-sreeram)
+- [**Zade “Suzie” Parks** · CAD Lead](https://mercury26413.org/team.html#zade-parks)
+- [**Ethan Xie** · Build Lead, Electrical Lead](https://mercury26413.org/team.html#ethan-xie)
+- [**Reynah Chowrira** · Outreach Lead](https://mercury26413.org/team.html#reynah-chowrira)
+- [**Margaret Yang** · Head of Sponsorship](https://mercury26413.org/team.html#margaret-yang)
+- [**Tucker Cashel** · Build](https://mercury26413.org/team.html#tucker-cashel)
+- [**Kai Kassekert** · CAD, Build](https://mercury26413.org/team.html#kai-kassekert)
+- [**Avo Bell** · CAD, Game Strategy](https://mercury26413.org/team.html#avo-bell)
+
+In the summer we run a robotics camp, and during the school year we coach Weston’s FIRST LEGO League teams.
 
 ## From 4 to 17 FIRST LEGO League teams in Weston
 
 [See all our outreach](https://mercury26413.org/outreach.html)
 
-### Coaching and camps
+### Coaching Weston’s FLL teams
+
+![GNCE Mercury members coaching young students at an FLL table](https://mercury26413.org/images/fll_camp_4.jpg)
+
+2025–26 FLL season
+
+We helped Weston’s FIRST LEGO League grow from 4 teams to 17 teams and 122 students, including 10 brand-new 4th and 5th grade teams at Field School.
+
+[Read the story](https://mercury26413.org/outreach.html#fll-coaching)
+
+### Robotics and engineering summer camp
 
 ![Team members helping campers troubleshoot a VEX IQ robot](https://mercury26413.org/images/fll_camp_3.jpg)
 
-*Our summer robotics camp, August 2026.*
+Week of Aug 17, 2026
 
-We helped Weston’s FIRST LEGO League grow from 4 teams to 17 teams and 122 students. In August we ran a week-long robotics and engineering camp for about 13 students in grades 4–8.
+We spent a week of the summer running a robotics and engineering camp for about 13 students in grades 4–8.
 
-### Learning from scientists and engineers
+[Read the story](https://mercury26413.org/outreach.html#summer-camp)
 
-![Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench](https://mercury26413.org/images/mit_lab_2.jpg)
+### Francis Bitter Magnet Laboratory at MIT
 
-*Francis Bitter Magnet Laboratory, MIT, October 9, 2026.*
+![Team members gathered in front of a foil-wrapped vacuum chamber in a research lab at MIT](https://mercury26413.org/images/mit_lab_1.jpg)
 
-We spent an afternoon at MIT’s Francis Bitter Magnet Laboratory, cooling a superconductor with liquid nitrogen, and toured VulcanForms to see how metal parts are 3D printed.
+Oct 9, 2026 · MIT, Cambridge
+
+We spent an afternoon at MIT’s Francis Bitter Magnet Laboratory and finished at a lab bench, cooling a superconductor with liquid nitrogen and testing it with small magnets.
+
+[Read the story](https://mercury26413.org/outreach.html#mit-lab)
+
+### Touring VulcanForms
+
+![Six GNCE Mercury members in the lobby at VulcanForms, in front of the company’s logo wall](https://mercury26413.org/images/vulcanforms_1.jpg)
+
+Oct 31, 2026 · Metal 3D printing
+
+We toured VulcanForms, a Massachusetts company that makes metal parts with 3D printing.
+
+[Read the story](https://mercury26413.org/outreach.html#vulcanforms-tour)
+
+## Latest news
+
+[All news](https://mercury26413.org/news.html)
+
+Nov 3, 2026 · Sponsors
+
+### [Thank you, VulcanForms](https://mercury26413.org/news.html#vulcanforms-platinum)
+
+Thank you to VulcanForms for applying to sponsor our 2026–27 season at the Platinum level ($7,500+), the highest of our four sponsorship tiers.
+
+[Video: The hive tips during a BIOBUZZ match and its balls spill onto the field](https://mercury26413.org/images/hive-tip-match-2.mp4)
+
+Oct 25, 2026 · Competition
+
+### [First hive tip of the season](https://mercury26413.org/news.html#first-hive-tip)
+
+We attended the scrimmage hosted by Ghost Robotics at Westford High School, and here we got our first in-competition hive tip of this season!
 
 ## Build with us, or help us get to the next event
 

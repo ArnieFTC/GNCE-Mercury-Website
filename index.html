@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>/* the opening (the season line-up title card), once per visit and never with reduced motion (?intro shows it
-     again), and the page entrance where cross-page view transitions are missing: css/style.css "Opening" and
-     "Page transitions" */
+  <script>/* the opening (the season line-up title card): once per visit; never with reduced motion, on a screen
+     under 480px tall, or on a slow or data-saving connection (?intro shows it again). Also the page entrance
+     where cross-page view transitions are missing. See css/style.css "Opening" and "Page transitions". */
   (function (d) { try {
     if (!("onpagereveal" in window)) d.classList.add("page-enter");
-    var s = sessionStorage, again = /[?&]intro\b/.test(location.search);
-    if (!matchMedia("(prefers-reduced-motion: reduce)").matches && (again || !s.getItem("mercury-intro"))) {
-      d.classList.add("intro"); s.setItem("mercury-intro", "1");
+    var s = sessionStorage, again = /[?&]intro\b/.test(location.search), c = navigator.connection;
+    var slow = !!c && (c.saveData || /2g|3g/.test(c.effectiveType || ""));
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches || !matchMedia("(min-height: 480px)").matches) return;
+    if (again || (!s.getItem("mercury-intro") && !slow)) {
+      d.classList.add("intro", "opened"); s.setItem("mercury-intro", "1");
     }
   } catch (e) {} })(document.documentElement);</script>
   <title>GNCE Mercury | FTC 26413</title>
@@ -133,7 +135,7 @@
   </script>
   <!-- agent:end -->
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=228">
+  <link rel="stylesheet" href="css/style.css?v=229">
   <link rel="icon" href="images/logo-mark.png">
 </head>
 <body data-page="index">
@@ -147,24 +149,28 @@
     <div class="op-field" data-season="2024"></div>
     <div class="op-field" data-season="2025"></div>
     <div class="op-field" data-season="2026"></div>
-    <div class="op-slot" data-season="2024"><img class="op-robot" src="images/into-the-deep-robot-cut.webp" width="802" height="482" alt=""><p class="op-name"><span>2024–&#8288;25</span><b>INTO THE DEEP</b></p></div>
-    <div class="op-slot" data-season="2025"><img class="op-robot" src="images/decode-robot-cad.webp" width="1165" height="1066" alt=""><p class="op-name"><span>2025–&#8288;26</span><b>DECODE</b></p></div>
-    <div class="op-slot" data-season="2026"><img class="op-robot" src="images/mercinator-v1-cut.webp" width="479" height="511" alt=""><p class="op-name"><span>2026–&#8288;27</span><b>BIOBUZZ</b></p></div>
-    <div class="op-strap"><div class="container"><img class="op-logo" src="images/logo-mark.png" width="473" height="505" alt=""><p><b class="op-word"><span>GNCE</span> <span>MERCURY</span></b><span class="op-sub">FTC TEAM 26413</span></p></div></div>
+    <div class="op-slot" data-season="2024"><img class="op-robot" src="images/into-the-deep-robot-cut.webp" width="802" height="482" alt="" fetchpriority="high"><p class="op-name"><span>2024–&#8288;25</span><b>INTO THE DEEP</b></p></div>
+    <div class="op-slot" data-season="2025"><img class="op-robot" src="images/decode-robot-cad.webp" width="1165" height="1066" alt="" fetchpriority="high"><p class="op-name"><span>2025–&#8288;26</span><b>DECODE</b></p></div>
+    <div class="op-slot" data-season="2026"><img class="op-robot" src="images/mercinator-v1-cut.webp" width="479" height="511" alt="" fetchpriority="high"><p class="op-name"><span>2026–&#8288;27</span><b>BIOBUZZ</b></p></div>
+    <div class="op-strap"><div class="container"><img class="op-logo" src="images/logo-mark-240.webp" width="240" height="256" alt=""><p><b class="op-word"><span>GNCE</span> <span>MERCURY</span></b><span class="op-sub">FTC TEAM 26413</span></p></div></div>
   </div>
-  <script>/* the opening starts once its three robots have loaded (or after 0.9s) */
+  <script>/* the opening starts once its four pictures have loaded. If they are still on their way after 0.9s
+     (a slow connection), there is no title card: the page shows. Any click, tap, wheel or key ends the card,
+     also when js/main.js (which flies the pieces into the page) has not arrived. */
   (function (d) { var r = d.documentElement; if (!r.classList.contains("intro")) return;
-    var imgs = d.querySelectorAll(".op-robot"), n = imgs.length;
-    function go() { if (go.done) return; go.done = 1; window.__opening = performance.now(); r.classList.add("op-go"); }
+    var imgs = d.querySelectorAll(".opening img"), n = imgs.length, set = 0;
+    function end() { if (!r.classList.contains("intro")) return; r.classList.add("intro-skip"); setTimeout(function () { r.classList.remove("intro", "intro-skip", "op-go"); }, 200); }
+    function go() { if (set) return; set = 1; window.__opening = performance.now(); r.classList.add("op-go"); }
     function one() { if (--n <= 0) go(); }
     for (var i = 0; i < imgs.length; i++) { if (imgs[i].complete) one(); else { imgs[i].addEventListener("load", one); imgs[i].addEventListener("error", one); } }
-    setTimeout(go, 900);
+    setTimeout(function () { if (!set) { set = 1; end(); } }, 900);
+    ["pointerdown", "keydown", "wheel", "touchstart"].forEach(function (t) { addEventListener(t, end, { once: true, passive: true }); });
   })(document);</script>
   <noscript><nav class="nojs-nav container" aria-label="Main"><a href="index.html">Home</a><a href="seasons.html">Seasons</a><a href="team.html">Team</a><a href="outreach.html">Outreach</a><a href="news.html">News</a><a href="partners.html">Partners</a><a href="resources.html">Resources</a><a href="contact.html">Contact</a></nav></noscript>
   <main id="main">
 
     <!-- LAUNCH: the first screen. Three garage bays hold the three robots; choosing a bay shows that
-         season's card on the right. One <a class="bay"> and one <article class="season-card"> per season,
+         season's card on the right. One <a class="bay"> and one <section class="season-card"> per season,
          oldest first. data-card on a bay is the id of its card; data-default on the line-up is the
          season shown first. The "Supported by" names are filled in from SUPPORTERS in js/main.js. -->
     <section class="launch" aria-labelledby="launch-title">
@@ -206,7 +212,7 @@
           <p class="lineup-credit" data-md-skip><span>Supported by <b data-supporters>VulcanForms, SolidWorks, Weston Owl and WEEFC</b></span> <a class="btn btn--season" href="partners.html">Partner with us</a></p>
 
           <div class="season-cards">
-            <article class="season-card" id="card-2024" data-season="2024">
+            <section class="season-card" id="card-2024" data-season="2024">
               <h2 translate="no">INTO THE&nbsp;DEEP</h2>
               <p class="sc-sub">2024–&#8288;25, our rookie season: an evolving robot built to collect samples and hang specimens.</p>
               <ul class="sc-results" aria-label="INTO THE DEEP results">
@@ -219,8 +225,8 @@
                 <div><dt>Lift drive</dt><dd>1:28 worm gear</dd></div>
               </dl>
               <a class="text-link" href="seasons/2024-2025.html">See how we built it</a>
-            </article>
-            <article class="season-card" id="card-2025" data-season="2025">
+            </section>
+            <section class="season-card" id="card-2025" data-season="2025">
               <h2 translate="no">DECODE</h2>
               <p class="sc-sub">2025–&#8288;26, our second season: Sustain Award, first pick on the winning alliance, and a trip to MA States.</p>
               <ul class="sc-results" aria-label="DECODE results">
@@ -234,8 +240,8 @@
                 <div><dt>Vision</dt><dd><span translate="no">Limelight</span>, PD tracking</dd></div>
               </dl>
               <a class="text-link" href="seasons/2025-2026.html">See how we built it</a>
-            </article>
-            <article class="season-card" id="card-2026" data-season="2026">
+            </section>
+            <section class="season-card" id="card-2026" data-season="2026">
               <h2 translate="no">BIOBUZZ</h2>
               <p class="sc-sub">2026–&#8288;27, this season: <span translate="no">The Mercinator</span> (version 1) is a pollen-only robot built on the same ideas as the DECODE robot we took to States.</p>
               <ul class="sc-results" aria-label="BIOBUZZ results">
@@ -247,7 +253,7 @@
                 <div><dt>Software</dt><dd><span translate="no">Pedro&nbsp;Pathing</span> 3.0</dd></div>
               </dl>
               <a class="text-link" href="seasons/2026-2027.html">Follow the build</a>
-            </article>
+            </section>
           </div>
         </div>
       </div>
@@ -331,7 +337,8 @@
 
     <!-- TEAM: a strip of cards the visitor moves with the arrow buttons, by dragging, by swiping or with Tab.
          The first card is the team photo; then one card per member, in the order of team.html: the portrait
-         (width and height are the file's real size), the name in <b> and the role line in <span>. Each card links
+         (width and height are the file's real size, alt="" because the label already says who it is), the name
+         in <b> and the role line in <span>. Each card links
          to that member on the team page (team.html#the-id-of-their-card). When someone joins or leaves, change
          team.html AND this strip, and show here only the members team.html shows (it hides some on purpose).
          A member without a photo yet gets class="strip-card strip-card--plain" and no <img>. -->
@@ -349,9 +356,9 @@
           <div class="strip-nav" data-strip-nav="team-strip" data-label="team members"></div>
         </div>
       </div>
-      <ul class="strip" id="team-strip" data-strip aria-label="The team">
+      <ul class="card-strip" id="team-strip" data-strip aria-label="The team">
         <li><a class="strip-card strip-card--wide" href="team.html">
-          <img src="images/team.webp" width="927" height="626" loading="lazy" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship">
+          <img src="images/team.webp" width="927" height="626" loading="lazy" alt="">
           <span class="strip-label"><b>The team at the <span translate="no">Ryken&nbsp;RoboBowl</span></b><span>December 2025</span></span>
         </a></li>
         <li><a class="strip-card" href="team.html#andy-ding">
@@ -394,11 +401,12 @@
       <div class="container"><p class="strip-foot">In the summer we run a robotics camp, and during the school year we coach Weston’s <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> teams.</p></div>
     </section>
 
-    <!-- OUTREACH: four stories from outreach.html. On wide screens choosing a story (its title is a button) shows
-         its photo in the big frame; on phones the stories are cards you swipe through; without JavaScript each
-         story keeps its photo above it. One <article class="story"> per story: the photo (4:3 or close, width and
-         height are the file's real size), then the title, the date line, one or two sentences from outreach.html
-         and a link to that program there (outreach.html#its-id). -->
+    <!-- OUTREACH: four stories from outreach.html. On wide screens the stories are a column of rows beside one
+         big frame: choosing a story (its title is a button) shows its photo in the frame and its sentence and
+         link under it. On phones the stories are cards you swipe through; without JavaScript each story keeps
+         its photo above it. One <article class="story"> per story: the photo (4:3 or close, width and height
+         are the file's real size), then the title, the date line, one sentence from outreach.html and a link to
+         that program there (outreach.html#its-id). -->
     <section class="band band--grey" aria-labelledby="outreach-title">
       <div class="container">
         <div class="section-head">
@@ -407,10 +415,9 @@
         </div>
         <div class="stories" data-stories>
           <article class="story">
-            <figure class="story-photo">
+            <div class="story-photo">
               <img src="images/fll_camp_4.jpg" width="1400" height="1055" loading="lazy" alt="GNCE Mercury members coaching young students at an FLL table">
-              <figcaption>Coaching Weston’s FLL teams, 2025–&#8288;26 FLL season.</figcaption>
-            </figure>
+            </div>
             <div class="story-text">
               <h3>Coaching Weston’s FLL teams</h3>
               <p class="dateline"><span class="d">2025–&#8288;26 FLL season</span></p>
@@ -419,10 +426,9 @@
             </div>
           </article>
           <article class="story">
-            <figure class="story-photo">
+            <div class="story-photo">
               <img src="images/fll_camp_3.jpg" width="1400" height="1050" loading="lazy" alt="Team members helping campers troubleshoot a VEX IQ robot">
-              <figcaption>Our summer robotics camp, August 2026.</figcaption>
-            </figure>
+            </div>
             <div class="story-text">
               <h3>Robotics and engineering summer camp</h3>
               <p class="dateline"><span>Week of <time class="d" datetime="2026-08-17">Aug 17, 2026</time></span></p>
@@ -431,10 +437,9 @@
             </div>
           </article>
           <article class="story">
-            <figure class="story-photo">
+            <div class="story-photo">
               <img src="images/mit_lab_1.jpg" width="1400" height="1050" loading="lazy" alt="Team members gathered in front of a foil-wrapped vacuum chamber in a research lab at MIT">
-              <figcaption><span translate="no">Francis Bitter</span> Magnet Laboratory, MIT, October&nbsp;9, 2026.</figcaption>
-            </figure>
+            </div>
             <div class="story-text">
               <h3><span translate="no">Francis Bitter</span> Magnet Laboratory at MIT</h3>
               <p class="dateline"><time class="d" datetime="2026-10-09">Oct 9, 2026</time><span>MIT, Cambridge</span></p>
@@ -443,10 +448,9 @@
             </div>
           </article>
           <article class="story">
-            <figure class="story-photo">
+            <div class="story-photo">
               <img src="images/vulcanforms_1.jpg" width="1400" height="1050" loading="lazy" alt="Six GNCE Mercury members in the lobby at VulcanForms, in front of the company’s logo wall">
-              <figcaption>At <span translate="no">VulcanForms</span>, October&nbsp;31, 2026.</figcaption>
-            </figure>
+            </div>
             <div class="story-text">
               <h3>Touring <span translate="no">VulcanForms</span></h3>
               <p class="dateline"><time class="d" datetime="2026-10-31">Oct 31, 2026</time><span>Metal 3D printing</span></p>
@@ -487,7 +491,8 @@
       </div>
     </section>
 
-    <!-- CLOSING: join or support -->
+    <!-- CLOSING: join or support. The sponsor box (class="ruled ruled--season") is one solid block of this
+         season's colour. -->
     <section class="band band--stage" aria-labelledby="closing-title">
       <div class="container">
         <h2 id="closing-title" style="max-width: 20ch; margin-bottom: clamp(28px, 4vw, 48px)">Build with us, <span class="lite">or help us get to the next event</span></h2>
@@ -497,10 +502,10 @@
             <p>Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.</p>
             <a class="btn btn--outline-light" href="contact.html?topic=join#contact-form">Join as a student</a>
           </div>
-          <div class="ruled">
+          <div class="ruled ruled--season">
             <h3>Families and sponsors</h3>
             <p>Donations pay for robot parts, competition registration, and travel.</p>
-            <a class="btn btn--season" href="partners.html">Partner with us</a>
+            <a class="btn" href="partners.html">Partner with us</a>
           </div>
         </div>
       </div>
@@ -516,6 +521,6 @@
       <nav class="footer-links" aria-label="About and legal"><a href="team.html#about">About</a><a href="contact.html">Contact</a><a href="terms.html">Terms and privacy</a></nav>
     </div>
   </footer>
-  <script src="js/main.js?v=228"></script>
+  <script src="js/main.js?v=229"></script>
 </body>
 </html>

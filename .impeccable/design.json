@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-09T00:00:00Z",
+  "generatedAt": "2026-11-11T00:00:00Z",
   "title": "Design System: GNCE Mercury",
   "extensions": {
     "colorMeta": {
@@ -273,6 +273,51 @@
           "#DDDBD4",
           "#F7F5EE"
         ]
+      },
+      "itd": {
+        "role": "secondary",
+        "displayName": "INTO THE DEEP Ocean",
+        "canonical": "#0083AE",
+        "tonalRamp": [
+          "#00152C",
+          "#003452",
+          "#00567C",
+          "#0079A4",
+          "#349ECB",
+          "#6FC3EB",
+          "#9FE6FF",
+          "#C1FFFF"
+        ]
+      },
+      "decode": {
+        "role": "secondary",
+        "displayName": "DECODE Green",
+        "canonical": "#92DBAC",
+        "tonalRamp": [
+          "#03160A",
+          "#163523",
+          "#2E573E",
+          "#477C5B",
+          "#63A37A",
+          "#82CA9C",
+          "#A5EFBF",
+          "#C2FFDA"
+        ]
+      },
+      "biobuzz": {
+        "role": "secondary",
+        "displayName": "BIOBUZZ Yellow",
+        "canonical": "#F7E326",
+        "tonalRamp": [
+          "#171200",
+          "#362E00",
+          "#584E00",
+          "#7D7000",
+          "#A59400",
+          "#CDBA00",
+          "#F2DE1A",
+          "#FFF94A"
+        ]
       }
     },
     "typographyMeta": {
@@ -307,14 +352,14 @@
     },
     "shadows": [
       {
-        "name": "robot-floor",
-        "value": "filter: drop-shadow(0 22px 22px rgba(0, 0, 0, 0.6))",
-        "purpose": "Robot cut-outs on the stage only (28px/0.65 on season heads, 16px on Seasons index rows)."
+        "name": "robot-on-field",
+        "value": "filter: drop-shadow(0 16px 14px rgba(11, 10, 15, 0.4))",
+        "purpose": "Robot cut-outs on their colour fields only (0 20px 16px / 0.42 on season heads, 0 14px 12px / 0.4 on Seasons index rows, 0 22px 18px / 0.42 in the opening)."
       },
       {
-        "name": "spotlight",
-        "value": "radial-gradient(45% 16% at 50% 94%, rgba(255,255,255,0.22), transparent 72%) + clipped cone linear-gradient",
-        "purpose": "The chosen bay's light; softer fixed versions behind season-head robots and in Seasons index mats."
+        "name": "light-pool",
+        "value": "radial-gradient(72% 58% at 50% 104%, rgba(255,255,255,0.36), transparent 70%)",
+        "purpose": "The light at the robot's feet on a lit colour field: the chosen bay, every field in the opening, season heads, Seasons index rows."
       },
       {
         "name": "explorer-marker",
@@ -345,8 +390,8 @@
       },
       {
         "name": "state",
-        "value": "160-200ms",
-        "purpose": "Colour, border and underline changes; button press scale 0.97."
+        "value": "150-200ms",
+        "purpose": "Colour, border and underline changes; a button steps up 1px on hover (150ms) and down 1px, scale 0.985, on press (90ms)."
       },
       {
         "name": "segment",
@@ -370,13 +415,23 @@
       },
       {
         "name": "bay-light",
-        "value": "600-700ms",
-        "purpose": "Spotlight, robot dim/scale in the line-up; photo hover zoom 1.03."
+        "value": "520-700ms",
+        "purpose": "A bay's colour field lights or dims (520ms) and its robot dims and steps back (600-700ms); photo hover zoom 1.03."
+      },
+      {
+        "name": "story-swap",
+        "value": "240-320ms",
+        "purpose": "Home outreach stories: the photo cross-fades (320ms) and the text under it swaps (240ms); the rows never move."
+      },
+      {
+        "name": "opening",
+        "value": "about 2.2s",
+        "purpose": "Home, first visit of a session: three season colour fields rise (520ms, 0/70/120ms), robots come up (640ms from 150ms), a black strap slides in with the name (520ms at 600ms); at 1480ms every piece flies to its place on the page (680ms, cubic-bezier(0.6, 0, 0.2, 1)) while the black behind clears; then the lights go down on the unchosen bays. Transforms and opacity only; any input ends it; never with reduced motion, a slow connection or a screen under 480px tall."
       },
       {
         "name": "stage-load",
-        "value": "900-1200ms",
-        "purpose": "Once on load, stage and heads only: h1 rises 26px, robots step in at 220/340/460ms, floor line draws, labels fade at 640ms."
+        "value": "900-1100ms",
+        "purpose": "Once on load, stage and heads only, and not on a load where the opening plays: h1 rises 26px, robots step in at 220/340/460ms, labels fade at 640ms."
       },
       {
         "name": "no-scroll-motion",
@@ -500,6 +555,14 @@
       "css": ".ds-stage{background:#0B0A0F;padding:24px;border-radius:0}.ds-btn-light{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:#EFEEF3;color:#16141C;border:1.5px solid #EFEEF3;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-light:hover{background:#fff;border-color:#fff}.ds-btn-light:focus-visible{outline:2px solid #EFEEF3;outline-offset:3px}"
     },
     {
+      "name": "Signal Button",
+      "kind": "button",
+      "refersTo": "button-season",
+      "description": "The sponsor action only (Partner with us): this season's colour with an ink keyline and Stage Black text, on the stage and in the header.",
+      "html": "<div class=\"ds-stage2\"><a class=\"ds-btn-season\" href=\"#\">Partner with us</a></div>",
+      "css": ".ds-stage2{background:#0B0A0F;padding:24px;border-radius:0}.ds-btn-season{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:#F7E326;color:#0B0A0F;border:1.5px solid #16141C;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;transition:background-color 150ms cubic-bezier(0.16,1,0.3,1),transform 150ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-season:hover{background:#D6C624;transform:translateY(-1px)}.ds-btn-season:active{transform:translateY(1px) scale(0.985)}.ds-btn-season:focus-visible{outline:2px solid #EFEEF3;outline-offset:3px}"
+    },
+    {
       "name": "Toggle",
       "kind": "chip",
       "refersTo": "toggle",
@@ -519,9 +582,9 @@
       "name": "Navigation",
       "kind": "nav",
       "refersTo": "",
-      "description": "A white bar floating over the dark page heads (flush on phones): ink logo name, sentence-case links, the current page underlined 3px, an ink Partner button in capitals.",
+      "description": "A white bar floating over the dark page heads (flush on phones): ink logo name, sentence-case links, the current page underlined 3px, a Partner button in the signal colour with an ink keyline, in capitals.",
       "html": "<nav class=\"ds-nav\"><b>GNCE Mercury</b><a href=\"#\">Seasons</a><a href=\"#\" aria-current=\"page\">Partners</a><a class=\"ds-cta\" href=\"#\">Partner with us</a></nav>",
-      "css": ".ds-nav{display:flex;align-items:center;gap:2px;height:56px;padding:0 16px;background:#fff;box-shadow:0 8px 24px rgba(11,10,15,0.18);font-family:var(--font,Archivo,sans-serif)}.ds-nav b{color:#16141C;margin-right:auto;font-weight:600}.ds-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 12px;border-radius:0;color:#16141C;font-weight:500;font-size:0.9375rem;text-decoration:none;transition:background-color 160ms}.ds-nav a:hover{background:#E9E9EE}.ds-nav a[aria-current=page]{font-weight:600;box-shadow:inset 0 -3px 0 #16141C}.ds-nav a.ds-cta{min-height:36px;padding:7px 16px;margin-left:12px;background:#16141C;color:#fff;font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase}.ds-nav a:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
+      "css": ".ds-nav{display:flex;align-items:center;gap:2px;height:56px;padding:0 16px;background:#fff;box-shadow:0 8px 24px rgba(11,10,15,0.18);font-family:var(--font,Archivo,sans-serif)}.ds-nav b{color:#16141C;margin-right:auto;font-weight:600}.ds-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 12px;border-radius:0;color:#16141C;font-weight:500;font-size:0.9375rem;text-decoration:none;transition:background-color 160ms}.ds-nav a:hover{background:#E9E9EE}.ds-nav a[aria-current=page]{font-weight:600;box-shadow:inset 0 -3px 0 #16141C}.ds-nav a.ds-cta{min-height:36px;padding:7px 16px;margin-left:12px;background:#F7E326;color:#0B0A0F;border:1.5px solid #16141C;font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase}.ds-nav a:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
     },
     {
       "name": "Tile",
@@ -535,9 +598,9 @@
       "name": "Season Bay",
       "kind": "custom",
       "refersTo": "",
-      "description": "Signature: robot in a spotlight on the stage floor, wide machine name below.",
+      "description": "Signature: the robot on a field of its season's colour (lit when chosen, a deep shade of the same colour when not), with its label in a Stage Step box below.",
       "html": "<div class=\"ds-bay\"><div class=\"ds-bay-stage\"><div class=\"ds-robot\"></div></div><div class=\"ds-bay-no\"><i></i>2025–26</div><div class=\"ds-bay-name\">DECODE</div></div>",
-      "css": ".ds-bay{background:#0B0A0F;color:#EFEEF3;padding:20px;text-align:center;font-family:var(--font,Archivo,sans-serif);border-radius:0;width:260px}.ds-bay-stage{position:relative;height:160px;display:flex;align-items:flex-end;justify-content:center;border-bottom:1px solid rgba(239,238,243,0.16)}.ds-bay-stage::before{content:'';position:absolute;inset:-20% -12% -2px;background:radial-gradient(45% 16% at 50% 94%,rgba(255,255,255,0.22),transparent 72%),linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,0.07) 55%,rgba(255,255,255,0));clip-path:polygon(38% 0,62% 0,100% 100%,0 100%)}.ds-robot{position:relative;width:90px;height:100px;margin-bottom:14px;border-radius:0;background:linear-gradient(160deg,#9AA0A8,#45424F);filter:drop-shadow(0 22px 22px rgba(0,0,0,0.6))}.ds-bay-no{display:flex;gap:8px;justify-content:center;align-items:center;margin-top:12px;font-size:0.875rem;font-variant-numeric:tabular-nums}.ds-bay-no i{width:6px;height:6px;border-radius:50%;background:#EFEEF3}.ds-bay-name{font-stretch:125%;font-weight:700;font-size:1.25rem}"
+      "css": ".ds-bay{background:#0B0A0F;color:#EFEEF3;padding:16px;font-family:var(--font,Archivo,sans-serif);border-radius:0;width:260px}.ds-bay-stage{position:relative;height:170px;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(72% 58% at 50% 104%,rgba(255,255,255,0.36),transparent 70%),#92DBAC}.ds-robot{position:relative;width:90px;height:100px;margin-bottom:18px;border-radius:0;background:linear-gradient(160deg,#9AA0A8,#45424F);filter:drop-shadow(0 16px 14px rgba(11,10,15,0.4))}.ds-bay-no{display:flex;gap:8px;align-items:center;padding:12px 14px 0;background:#fff;color:#4A4755;font-size:0.875rem;font-variant-numeric:tabular-nums}.ds-bay-no i{width:8px;height:8px;background:#92DBAC;box-shadow:inset 0 0 0 1px #16141C}.ds-bay-name{padding:3px 14px 14px;background:#fff;color:#16141C;font-stretch:125%;font-weight:700;font-size:1.25rem}"
     },
     {
       "name": "Tier Headers",
@@ -557,20 +620,30 @@
     }
   ],
   "narrative": {
-    "northStar": "The Keynote Stage, after McLaren (round 8)",
-    "overview": "Each season's robot is launched the way a hardware company launches a product: the machine alone on an almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners. Light is the accent. There is no brand hue: colour comes only from the robots, the photos, the Mercury logo (kept as-is) and, on the partners page, the four sponsorship tiers in the colours of their names (Andy, 2026-11-09: \"the sponsorship category should be the color of the tier name\"); the budget donut is grey.\n\nTwo grounds carry the site. The stage (home launch, every season head, the partners package sheet (head, tier chart and budget donut), and the closing \"join or partner\" bands on the home, team and partners pages) and the reading ground (white, with aluminium-grey bands). Sections run the full width of the page and are separated by a change of ground, never by hairlines. Since round 7 (Andy: \"reference the VulcanForms website\") the things inside a section are boxes drawn like the cells of an engineering spec sheet: white, a 1px #C4C3CC line and near-square 6px corners (Stage Step with a light line on the stage). Nothing floats: the rounded panels on a grey ground from round 6 were removed because Andy said they looked \"so AI\". Buttons are pills, and nothing casts a shadow except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).\n\nThe neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple, TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.",
+    "northStar": "The Keynote Stage in season liveries, after McLaren (rounds 8 and 9)",
+    "overview": "Each season's robot is launched the way a hardware company launches a product: the machine alone on an almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners.\n\n**Season liveries (round 9; Andy: \"reference the mclaren page and build more interactive and somewhat colorful page\").** Every FTC season has a game, and FIRST gives each game a colour palette. Each season wears its game's colour wherever that season is shown: its bay on the home stage, its card, its row on the Seasons page, its page head, its pager and its tag in the record. This season's colour is also the site's one signal colour, the way a racing team repaints its livery each year: the sponsor action, the tag above section headings, the next event in the calendar, the controls that move things. McLaren uses its papaya the same way (measured on mclaren.com/racing/formula-1: about 1.5% of the screen, in solid blocks, thin bars and arrows, never behind reading text). Beyond that, colour still comes only from the robots, the photos, the Mercury logo (kept as-is) and, on the partners page, the four sponsorship tiers in the colours of their names (Andy, 2026-11-09: \"the sponsorship category should be the color of the tier name\"); the budget donut is grey.\n\nTwo grounds carry the site. The stage (home launch, every season head, the partners package sheet (head, tier chart and budget donut), and the closing \"join or partner\" bands on the home, team and partners pages) and the reading ground (white, with aluminium-grey bands). Sections run the full width of the page and are separated by a change of ground, never by hairlines. Since round 7 (Andy: \"reference the VulcanForms website\") the things inside a section are boxes drawn like the cells of an engineering spec sheet: white, a 1px #C4C3CC line and near-square 6px corners (Stage Step with a light line on the stage). Nothing floats: the rounded panels on a grey ground from round 6 were removed because Andy said they looked \"so AI\". Buttons are pills, and nothing casts a shadow except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).\n\nThe neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple, TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.",
     "keyCharacteristics": [
       "Two grounds: the near-black stage for launches and closing calls, white and aluminium grey for reading.",
-      "No brand hue; light, robots, photos and the logo carry the colour, and the four sponsorship tiers wear the colour of their names. The budget donut is grey.",
+      "Season liveries: each season wears its game's colour (from FIRST's style guide for that game), and this season's colour is the one signal colour, always in solid blocks with an ink keyline. Robots, photos and the logo carry the rest; the four sponsorship tiers wear the colour of their names; the budget donut is grey.",
       "Archivo only: page and section headings in capitals at 108% width and 700 (a lighter second line where the heading has a natural one), 125% width at 700 for robot and game names, sentence-case nav and text links, tabular figures for every number.",
       "Full-width sections; every item (a write-up, a member, a program, a season, a post, a table, a tile) is a white box with a 1px line and square corners. Square buttons, no section hairlines, no shadows (except the floating header bar once the page scrolls, and the open menu).",
-      "Selection shown as light brightening (the chosen robot steps into a spotlight), never as a sliding bar.",
-      "One authored load moment on the stage; everything else answers a click, tap or key. Nothing moves, fades, pins or changes while scrolling."
+      "Selection shown as light: the chosen bay's field is lit in its season's colour, the others hold a deep shade of theirs; a chosen story row turns white with a signal-colour marker.",
+      "One authored opening (the line-up title card, once a visit) and one load moment on the stage; everything else answers a click, tap, drag or key. Nothing moves, fades, pins or changes while scrolling."
     ],
     "rules": [
       {
-        "name": "The Light Is The Accent Rule",
-        "body": "There is no brand colour. Emphasis on the stage is brightness (a spotlight, full colour against dimmed grey); on light pages it is ink and weight. Don't introduce a hue for links, buttons or highlights.",
+        "name": "The Season Livery Rule",
+        "body": "A season's colour appears only where that season is shown, and the signal colour only at its fixed places (listed above). Colour is always a solid block, a bar, a tag or an arrow: never a page or section background behind reading text, never a tinted table column, never a gradient between two colours, never a new hue for links or highlights. Violet stays out (Andy found it AI-like).",
+        "section": "colors"
+      },
+      {
+        "name": "The Keyline Rule",
+        "body": "Every block of the signal colour carries an ink keyline (a 1.5px ink border or inset line), as the yellow shapes in the BIOBUZZ logo do. It keeps a light colour's edge clear on white (yellow on white is 1.3:1 without it) and is invisible on the stage. Season fields (bays, heads, rows) have no keyline: they are surfaces, not controls.",
+        "section": "colors"
+      },
+      {
+        "name": "The Light Still Leads Rule",
+        "body": "On the stage, emphasis is light: the chosen bay is lit, the others turned down. On light pages it is ink and weight; the signal colour marks actions and the current thing, never ordinary links or text.",
         "section": "colors"
       },
       {
@@ -607,20 +680,23 @@
       "Do set robot and game names at 125% width and 700, page and section headings uppercase at 108% (split into two weights with `<span class=\"lite\">` only where the heading has a natural first line), and everything else, nav and links included, at normal width in sentence case.",
       "Do give every date, amount, spec and result tabular figures.",
       "Do show a chosen state as light (brighter, full colour, filled dot) and write it to the URL when it is a view someone might share.",
+      "Do give a season its game's colour wherever that season is shown (`data-season`), and take that colour from FIRST's style guide for the game.",
+      "Do keep the signal colour to its fixed places, always as a solid block with an ink keyline and Stage Black text.",
+      "Do let the visitor drive anything that moves: buttons, drag, swipe, keys. Give every gesture a button and a key.",
       "Do let new content simply be there: no entrance animation for anything below the first screen.",
       "Do set `--w` to the image's pixel width on every `.photo`.",
       "Do keep the sponsor strip in every footer, built from `SPONSORS` / `SUPPORTERS` in `js/main.js`.",
       "Do add raster images only as the team's own photos or CAD renders, and record how any edited one was made (Assets and Provenance below)."
     ],
     "donts": [
-      "Don't add a brand hue, a purple or violet accent, or neon on black.",
+      "Don't add a hue beyond the season colours and the tier metals; no purple or violet accent, no neon on black.",
       "Don't copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.",
       "Don't separate sections with hairlines; change the ground instead. Lines draw boxes and sit inside data, nowhere else.",
       "Don't put shadows on boxes or buttons (the floating header bar's scrolled shadow and the open menu are the exceptions), round a corner, put a box inside a box, or float sections as rounded panels on a grey ground.",
-      "Don't add an accent hue, colour the budget donut or tint the tier columns (Andy, 2026-11-09, on colour mockups: \"just dont do the color it looks terrible\"). The only colour beyond the content is the four tier metals, which he asked for later the same day (\"the sponsorship category should be the color of the tier name\"); ink does the job McLaren's papaya does.",
+      "Don't colour the budget donut or tint the tier columns, and don't put a colour behind reading text or on pill-shaped controls (Andy, 2026-11-09, on colour mockups that did those things: \"just dont do the color it looks terrible\"). The tier metals he asked for later the same day; the season colours and the signal colour came with round 9, when he asked for a \"somewhat colorful\" site after McLaren's.",
       "Don't add a second font family or system display faces.",
-      "Don't put small text labels (eyebrows) above headings or number the seasons 01/02/03; the 28×4px bar is the only mark above a heading, and it never goes on a heading inside a box.",
-      "Don't add new load animations outside the stage, counters that tick up, or motion that ignores reduced motion.",
+      "Don't put small text labels (eyebrows) above headings or number the seasons 01/02/03; the 28×8px tag is the only mark above a heading, and it never goes on a heading inside a box.",
+      "Don't add new load animations outside the stage, counters that tick up, anything that moves by itself (a carousel that advances, a ticker), or motion that ignores reduced motion.",
       "Don't generate or invent images, results, sponsors or numbers; leave \"TBD\" instead.",
       "Don't show a photo larger than its own pixels."
     ]

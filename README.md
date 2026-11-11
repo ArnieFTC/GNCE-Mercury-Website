@@ -4,12 +4,15 @@ Plain HTML/CSS/JS site. No build step: edit a file, commit to `main`, and it's l
 (Hostinger, which deploys `main` automatically and reads `.htaccess`; GitHub Pages keeps a mirror).
 After editing a page, run `python3 tools/agent_files.py` (see "AI agents" below).
 
-The look is a product keynote stage: each season's robot is launched alone on a black stage, lit like a
-product, and calm white and aluminium-grey pages explain it, the people and the partners. There is no brand
-colour: colour comes from the robots, the photos and the logo, and the four sponsorship tiers wear the colours of their names. One typeface
-(Archivo, self-hosted in `fonts/`); since round 8 (after mclaren.com) square boxes with a thin line, a floating white
-header bar, page and section headings in capitals, and square buttons with a drawn arrow. `DESIGN.md` describes the system; `DESIGN_PROGRESS.md`
-holds the history, open questions and next steps.
+The look is a product keynote stage: each season's robot is launched on a black stage, lit like a
+product, and calm white and aluminium-grey pages explain it, the people and the partners. Since round 9 each
+season wears its game's colour (taken from FIRST's style guide for that game: ocean blue for INTO THE DEEP,
+green for DECODE, yellow for BIOBUZZ), and this season's colour is the site's one signal colour: the sponsor
+button, the small tag above section headings, the next event. The four sponsorship tiers wear the colours of
+their names. One typeface (Archivo, self-hosted in `fonts/`); since round 8 (after mclaren.com) square boxes
+with a thin line, a floating white header bar, page and section headings in capitals, and square buttons with
+a drawn arrow. `DESIGN.md` describes the system; `DESIGN_PROGRESS.md` holds the history, open questions and
+next steps.
 
 ## Quick edit guide
 
@@ -20,12 +23,17 @@ holds the history, open questions and next steps.
 | News posts (sponsor thank-yous, team updates) | `news.html` → copy an `<article class="post">` above the others (newest first) |
 | This season's dates (home calendar, "next event" lines, footer) | `js/main.js` → `SEASON` (dates are `YYYY-MM-DD`, Eastern time) |
 | Colors, type sizes, spacing | `css/style.css` → `:root` at the top |
-| The three robots on the home page | `index.html` → one `<a class="bay">` per season plus its `<article class="season-card">` |
+| The season colours and the signal colour | `css/style.css` → the "Round 9" block near the end: `--itd`, `--decode`, `--biobuzz`, and `--season` (which season's colour is the signal colour) |
+| The opening on the home page (the title card that flies into the page) | `index.html` → `<div class="opening">` right under `<body>`: one `op-field` and one `op-slot` per season |
+| Home page: the team strip | `index.html` → `<ul class="card-strip">`: one card per member, in the order of `team.html`. Show only the members `team.html` shows |
+| Home page: the outreach stories | `index.html` → `<div class="stories">`: one `<article class="story">` each (photo, title, date line, one sentence from `outreach.html`, a link to it) |
+| Home page: latest news | `index.html` → the two `news-card`s: copy the newest posts from `news.html` and drop the oldest |
+| The three robots on the home page | `index.html` → one `<a class="bay">` per season plus its `<section class="season-card">` |
 | Which season the home page shows first | `index.html` → `data-default="2025"` on the `<div class="lineup">` |
 | Every competition result | `index.html` → the table under "The record so far" (one `<tr>` per event), and the season page's `events` list |
 | Season pages | `seasons/<year>.html` → `season-head` at the top, spec sheet (`<dl class="spec">`), mechanisms, `events` |
 | Season list | `seasons.html` → one `<li class="season-row">` per season |
-| Team members | `team.html` → copy/paste an `<article class="member">` |
+| Team members | `team.html` → copy/paste an `<article class="member">` and give it its own `id` (the home strip links to `team.html#that-id`); add or remove the same person in the home page's team strip |
 | Outreach events | `outreach.html` → copy/paste an `<article class="program">` into a year's `programs` |
 | Partner page | `partners.html` (tiers table, budget table and donut, other ways to help) |
 | Sponsorship package PDF | `docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf` (replace the file to update every download link) |
@@ -43,7 +51,12 @@ so a pasted block can never break a page.
 |---|---|
 | `<section class="band">` (`band--grey`, `band--stage`) | A full-width section: white, aluminium grey, or the black stage. Sections are told apart by their ground, not by lines |
 | `.tile` | A square, flat box (white on grey, grey on white). Never put a tile inside a tile |
-| Buttons | `btn` (square, black, capitals, with a drawn arrow; none on mail links, a down arrow on downloads), `btn--line` (outline), and on the black stage `btn--light` (white) and `btn--outline-light` |
+| Buttons | `btn` (square, black, capitals, with a drawn arrow; none on mail links, a down arrow on downloads), `btn--line` (outline), and on the black stage `btn--light` (white) and `btn--outline-light`. `btn btn--season` is the signal colour: only for the sponsor action ("Partner with us") |
+| `data-season="2024"` (or `2025`, `2026`) | Gives a block its season's colour (as `--c`): the bays and cards on the home page, the rows on `seasons.html`, the head and the pager links of a season page, a row's robot cell in the record. On a season page `<main data-season="…">` also paints the tags above its section headings |
+| `<ul class="card-strip" data-strip id="…">` + `<div class="strip-nav" data-strip-nav="that id" data-label="team members">` | A row of cards the visitor moves: the script adds the previous/next buttons to the `strip-nav`, and a mouse can drag the row. Cards are `<a class="strip-card">` (a `strip-card--wide` first card for a wide photo; `strip-card--plain` for a member without a photo), each with a `<span class="strip-label"><b>name</b><span>role</span></span>` |
+| `<div class="stories" data-stories>` | Stories with photos. On wide screens: one big frame, the stories as rows beside it, and the chosen story's sentence and link under the frame. On phones: cards to swipe. Each `<article class="story">` holds a `<div class="story-photo">` with the image, then a `<div class="story-text">` with an `<h3>`, a `<p class="dateline">`, a sentence and a link |
+| `<figure data-video>` around a `<video controls poster="…">` | Puts a "Play video" button on the poster; pressing it starts the video with its own controls |
+| `data-gallery` (and every `program-media` on the outreach page) | The pictures inside open large when clicked (arrows, swipe, Esc). The caption is the picture's `alt` text, so write a good one |
 | `<div class="lineup" data-lineup>` (home; `index.html?season=2024` opens a season) | The season line-up: three garage bays. Each `<a class="bay">` links to its season and names its card in `data-card`; with JavaScript the bays become tabs that light their robot and swap the card. Arrow keys move between seasons |
 | `<section class="season-head">` (season pages) | The season's launch: name, one line, the robot, and a row of facts (`<dl class="season-facts">`) |
 | `<dl class="spec">` | A spec sheet. Write `TBD` for anything not decided yet; it shows in grey |
@@ -70,14 +83,19 @@ Team portraits: `<img class="portrait" src="images/team/NAME.jpg" alt="NAME" wid
 
 ## Motion rules
 
-Opening: on the first visit of a session the home page opens with the spotlight coming up on the Mercury mark,
-then opening like an iris onto the stage (about 1.7s; any click or key skips it; add `?intro` to the address to
-see it again). Moving between pages, the page you leave dims and the next one rises into place (cross-page view
-transitions; the header stays put). Both are set up by a small script at the top of each page's `<head>`: keep
-it when you copy a page. When a page opens, its title rises and the robots step into the light one after another.
-After that, motion only answers a click, a tap or a key: choosing a season moves the spotlight and brings its
-card up; filters, tabs and parts swap their content; a robot glides into its season page in browsers that
-support it. **Nothing moves, fades, pins or changes while you scroll** (Andy's rule, round 3): no scroll
+Opening: on the first visit of a session the home page opens with a title card: three colour fields rise, one
+per season, each with its robot and game name; a black strap carries the team's name across them; then every
+piece flies to its own place on the page (the fields become the three bays, the name becomes the heading) while
+the rest of the page comes up around them. About 2.2s; any click, tap or key ends it; add `?intro` to the
+address to see it again. It does not play with reduced motion, on a slow connection, or on a very short screen.
+Moving between pages, the page you leave dims and the next one rises into place (cross-page view transitions;
+the header stays put). Both are set up by a small script at the top of each page's `<head>`: keep it when you
+copy a page. When a page opens without the title card, its title rises and the robots step into the light one
+after another.
+After that, motion only answers a click, a tap, a drag or a key: choosing a season lights its colour field and
+brings its card up; the team strip moves when you press its arrows or drag it; choosing an outreach story
+changes the photo; a gallery photo opens large; filters, tabs and parts swap their content; a robot glides
+into its season page in browsers that support it. Nothing moves by itself. **Nothing moves, fades, pins or changes while you scroll** (Andy's rule, round 3): no scroll
 reveals, no scroll-linked effects, no sticky sections other than the header. The only loop is the small
 pulse on the next event, and it stops after two beats. Everything is visible without the motion, and with
 reduced motion turned on it all changes instantly. Please keep it that way: no animation libraries.
@@ -90,9 +108,15 @@ look at that moment.
 
 1. Copy `seasons/2026-2027.html` → `seasons/2027-2028.html` and edit it.
 2. Add a `season-row` for it in `seasons.html`.
-3. On the home page add a `bay` and a `season-card` for it (and change `data-default` when its results come in).
-4. Update the pager links at the bottom of the neighbouring season page, and `SEASON` in `js/main.js`.
-5. Add the new page to `PAGES` in `tools/agent_files.py` and run `python3 tools/agent_files.py`.
+3. On the home page add a `bay` and a `season-card` for it (and change `data-default` when its results come in),
+   and an `op-field` and an `op-slot` for it in the opening (`<div class="opening">`). Four seasons in one row
+   get tight: drop the oldest from the home line-up and the opening when that happens.
+4. Give the new season its colour: look up the colour palette in FIRST's style guide for the new game
+   (firstinspires.org → Resources → Season brand downloads), add it to the "Round 9" block in `css/style.css`
+   (`--newgame: #…;` and `[data-season="2027"] { --c: var(--newgame); }`), put `data-season="2027"` on the
+   new blocks, and point `--season` at the new colour so the buttons and tags are repainted.
+5. Update the pager links at the bottom of the neighbouring season page, and `SEASON` in `js/main.js`.
+6. Add the new page to `PAGES` in `tools/agent_files.py` and run `python3 tools/agent_files.py`.
 
 ## AI agents
 
