@@ -97,6 +97,16 @@
         ],
         "createdAt": "2026-11-09T11:46:34.000Z",
         "reason": "File-only analysis takes the About card heading (h2.h3, 21px) as the h2 role; the section h2s render at 28-44px (--fs-lg) over 17px body text, and the rendered detector reports nothing (round 8 follow-up)"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "partners.html",
+          "team.html"
+        ],
+        "createdAt": "2026-11-11T16:00:41.734Z",
+        "reason": "Agent: file-only analysis reads the hover text of the buttons on a colour field as #000 (it does not resolve the round 10 rule ':is(field) :is(.btn--light, .btn--sponsor):hover { color: #fff }'). Measured in Chromium with the pointer on each button (round 10, 2026-11-11): #FFFFFF on #2E2E2E (13.6:1) and #FFFFFF on #000000 (21:1). The rendered detector and the round's contrast scan cover both pages"
       }
     ]
   }
