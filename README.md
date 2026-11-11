@@ -7,9 +7,10 @@ After editing a page, run `python3 tools/agent_files.py` (see "AI agents" below)
 The look is a product keynote stage in the colours of FIRST Tech Challenge. Each season's robot is launched
 on a black stage, and since round 10 every page wears one FTC game's official colour palette from its header to
 its footer, the way a race car wears a livery: the site-wide pages wear this season's game (BIOBUZZ: yellow, pale
-yellow, gold, black) and each season's page wears its own (DECODE: mint, vermilion, amber, slate teal; INTO THE
-DEEP: blue, pale blue, yellow). Page heads and closing calls are flat fields of the game's colour with black
-type; reading sections are white, with bands in the game's pale colour. FIRST Tech Challenge's own orange marks
+yellow, gold, black) and each season's page wears its own (DECODE: mint, vermilion, slate teal; INTO THE DEEP:
+blue, pale blue, yellow). Page heads and closing calls are flat fields of the game's colour with black type;
+reading sections are white, with bands in the game's light colour. The home page and the Seasons page, which
+show all three games, keep a black head. FIRST Tech Challenge's own orange marks
 "FTC team 26413" on the home page and the last row of every page. All colours are FIRST's published values (its
 brand guidelines and each game's style guide). The four sponsorship tiers wear the colours of their names. One typeface (Archivo, self-hosted in `fonts/`); since round 8 (after mclaren.com) square boxes
 with a thin line, a floating white header bar, page and section headings in capitals, and square buttons with
@@ -121,7 +122,12 @@ look at that moment.
    line, mark, tag, glow) with the selector `body, body[data-livery="2027"]`, and take the plain `body` off last
    season's block, so every site-wide page is repainted in the new game's colours while last season's page keeps
    its own. Put `data-livery="2027"` on the new page's `<body>` and `data-season="2027"` on the new blocks. Type
-   on a field is black: check that black on the new field colour is 4.5:1 or more.
+   on a field is black: check that black on the new field colour is 4.5:1 or more. A livery block has two more
+   lines, and the comments in the BIOBUZZ and DECODE blocks say how to choose them: which way the mark steps
+   under the pointer (`--lv-press-to`: `#000` for a light mark, `#fff` for a mid-tone one, so that black text
+   on the hovered button stays 4.5:1 or more), and the colours of the header's "Partner with us" button
+   (`--cta`, `--on-cta`, `--cta-press`: the mark with black type, or, when the mark is the field's own colour
+   as BIOBUZZ's yellow is, black with the mark as its type).
 5. Update the pager links at the bottom of the neighbouring season page, and `SEASON` in `js/main.js`.
 6. Add the new page to `PAGES` in `tools/agent_files.py` and run `python3 tools/agent_files.py`.
 
