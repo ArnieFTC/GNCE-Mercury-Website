@@ -1537,7 +1537,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .split > * > .prose > h2:not(.h3):first-child::before,
 .close-grid > div:first-child > h2:first-child::before,
 .band--stage > .container > h2:first-child::before,
-.terms > h2:not(.h3)::before { background: var(--c, var(--season)); height: 8px; box-shadow: inset 0 0 0 1.5px var(--ink); margin-bottom: 14px; } /* 8 + 14: the same room as the 4px bar and its 18px had */
+.terms > h2:not(.h3)::before { background: var(--lv-tag, var(--season)); height: 8px; box-shadow: inset 0 0 0 1.5px var(--ink); margin-bottom: 14px; } /* 8 + 14: the same room as the 4px bar and its 18px had. --lv-tag: the page's livery (round 10) */
 .calendar li.is-next, .calendar li.is-today { background: var(--season) !important; border-color: var(--ink); box-shadow: inset 0 0 0 0.5px var(--ink); color: var(--on-season); }
 .calendar li.is-next time, .calendar li.is-today time { color: var(--on-season); opacity: 0.78; }
 
@@ -1748,3 +1748,157 @@ html:has(.viewer[open]) { overflow: hidden; } /* the page behind stays where it 
   .strip-btn[aria-disabled="true"] { color: GrayText; outline-color: GrayText; }
   .calendar li.is-next, .calendar li.is-today { outline: 2px solid CanvasText; outline-offset: -2px; }
 }
+
+/* =========================================================
+   Round 10: season liveries, wall to wall (Andy: "i think you can make the entire pages color scene with
+   some respect to the ftc colors").
+   Round 9 put the season colours on a few blocks; this puts them on the page. Every page wears one FTC
+   game's official palette from its header to its footer, the way a race car wears a livery:
+     the site-wide pages wear THIS season's game (BIOBUZZ); each season page wears its own game.
+   A livery is six jobs, filled by the members of that game's palette:
+     --lv-field   the big flat field: page heads, closing calls, the strip the header bar floats on
+     --lv-ground  the alternate bands (where aluminium grey was) and the small fills inside white boxes
+     --lv-line    box outlines and separators
+     --lv-mark    the signal: the header action, "next", the arrow buttons, the play tab
+     --lv-tag     the 28x8px tag above headings
+     --lv-glow    the palette's colour as type on black (the footer's headings)
+   plus black (type, the home stage, the partners sheets, the footer) and white (the reading ground).
+   Type on a field is always black, as on the opening's title card.
+   FIRST Tech Challenge's own orange marks the programme where it is named: "FTC team 26413" on the home
+   stage and the last row of every page.
+   To repaint the site for a new season: add the new game's colours, write its livery block, move the
+   plain "body" selector to it and give last season's page its own data-livery (README, "Start a new season").
+   To go back to round 9's small blocks of colour: delete this block.
+   Never: a colour that is not in FIRST's palettes, gradients of colour, tinted table columns, violet.
+   ========================================================= */
+:root {
+  /* FIRST's colours as published. The programme: first-brand-guidelines.pdf (firstinspires.org/brand). The games:
+     the "Color Palette" row of each season's one-page style guide (round 9 took one colour from each) */
+  --ftc: #F57E25;                /* FIRST Tech Challenge, the programme's colour (PMS 158) */
+  --biobuzz-pale: #EEE9A5;       /* BIOBUZZ pale yellow (PMS 600 C) */
+  --biobuzz-gold: #BBA13E;       /* BIOBUZZ gold (PMS 7753 C) */
+  --decode-amber: #E5AE32;       /* DECODE amber (PMS 124 C) */
+  --decode-vermilion: #EA572E;   /* DECODE vermilion (PMS 172 C) */
+  --decode-teal: #598290;        /* DECODE slate teal (PMS 2212 C) */
+  --decode-pale: #C8EDD5;        /* DECODE has no pale member: its mint (PMS 353 C), half way to white */
+  --itd-pale: #ABD8E7;           /* INTO THE DEEP pale blue (PMS 635 C) */
+  --itd-yellow: #F5E565;         /* INTO THE DEEP yellow (PMS 106 C) */
+
+  /* black, white and greys with no colour of their own (the old ones leaned violet, which fought the yellow) */
+  --stage: #0A0A0A; --stage-raise: #1F1F1F;
+  --on-stage: #F4F4F4; --on-stage-2: #C9C9C9; --on-stage-3: #A8A8A8;
+  --rule-stage: rgba(244, 244, 244, 0.22); --box-line-stage: rgba(244, 244, 244, 0.28);
+  --ink: #111111; --ink-lift: #2E2E2E;
+  --steel: #474747;              /* 9.3:1 on white, 7.5:1 on the pale yellow, 6:1 on the pale blue */
+  --quiet: #6F6F6F;              /* control edges: 5:1 on white, 4:1 on the pale yellow, 3.2:1 on the pale blue */
+  --bronze-wash: #1A1A1A; --silver-wash: #1E1E1E; --gold-wash: #232323; --platinum-wash: #2A2A2A;
+  --budget-travel: #F2F2F2; --budget-robot: #CFCFCF; --budget-comp: #AEAEAE; --budget-field: #919191; --budget-growth: #7A7A7A;
+  --budget-outreach: #666666; --budget-marketing: #555555; --budget-tools: #464646; --budget-first: #3A3A3A;
+}
+
+/* the three liveries. Declared on <body> (a token is worked out where it is declared, so the tokens under
+   them are declared on <body> too) */
+body, body[data-livery="2026"] {   /* BIOBUZZ: every site-wide page and the BIOBUZZ page */
+  --lv-field: var(--biobuzz); --lv-ground: var(--biobuzz-pale); --lv-line: var(--biobuzz-gold);
+  --lv-mark: var(--biobuzz); --lv-tag: var(--biobuzz); --lv-glow: var(--biobuzz);
+}
+body[data-livery="2025"] {         /* DECODE */
+  --lv-field: var(--decode); --lv-ground: var(--decode-pale); --lv-line: var(--decode-teal);
+  --lv-mark: var(--decode-vermilion); --lv-tag: var(--decode-amber); --lv-glow: var(--decode);
+}
+body[data-livery="2024"] {         /* INTO THE DEEP (its blue carries pure black type only: 4.9:1) */
+  --lv-field: var(--itd); --lv-ground: var(--itd-pale); --lv-line: var(--itd);
+  --lv-mark: var(--itd-yellow); --lv-tag: var(--itd-yellow); --lv-glow: var(--itd-pale);
+}
+body {
+  --alu: var(--lv-ground);               /* alternate bands, fills inside boxes, the nav's hover */
+  --alu-deep: #DADADA; --line: #CFCFCF;  /* for browsers without color-mix(); replaced just below */
+  --box-line: var(--lv-line);
+  --season: var(--lv-mark); --season-press: var(--lv-mark); --on-season: #000;
+}
+@supports (color: color-mix(in oklab, red, blue)) {
+  body {
+    --alu-deep: color-mix(in oklab, var(--lv-ground) 70%, var(--lv-line));   /* tracks on the ground */
+    --line: color-mix(in oklab, var(--lv-line) 45%, #fff);                   /* separators inside data */
+    --season-press: color-mix(in oklab, var(--lv-mark) 86%, #000);
+  }
+}
+
+/* ---------- The field: page heads and closing calls are one flat field with black type ----------
+   The home stage (.launch) and the partners sheets (.sheet) stay black: the three lit bays and the four tier
+   metals need a dark ground. */
+.band--stage:not(.sheet), .season-head {
+  --stage: var(--lv-field);
+  --stage-raise: #fff;                 /* a box on a field is white inside a black keyline, like the header bar */
+  --on-stage: #000; --on-stage-2: #000; --on-stage-3: #000; --steel: #000;
+  --rule-stage: rgba(0, 0, 0, 0.4); --box-line-stage: #000;
+  --lv-tag: #000;                      /* the tag above a heading is black on a field */
+  background: var(--lv-field); color: #000;
+}
+/* buttons on a field: the black button and the black outline */
+:is(.band--stage:not(.sheet), .season-head) :is(.btn--light, .btn--sponsor) { background: #000; border-color: #000; color: #fff; }
+:is(.band--stage:not(.sheet), .season-head) :is(.btn--light, .btn--sponsor):hover { background: var(--ink-lift); border-color: var(--ink-lift); color: #fff; }
+:is(.band--stage:not(.sheet), .season-head) .btn--outline-light { background: transparent; border-color: #000; color: #000; }
+:is(.band--stage:not(.sheet), .season-head) .btn--outline-light:hover { background: #000; border-color: #000; color: #fff; }
+/* a season page's head: the robot stands straight on the field (a flat field has no pool of light) */
+.season-head-figure::before { content: none; }
+/* white is the title on the blue (large type, 4.3:1); the small type on it stays black */
+body[data-livery="2024"] .season-head h1 { color: #fff; }
+
+/* the home stage stays black; the strip that closes it ("Supported by ...", the sponsor action) is this season's
+   field: the supporters' names are written on the livery, as on a car */
+.launch .partner-strip, .lineup-credit {
+  --on-stage: #000; --on-stage-2: #000; --rule-stage: transparent;
+  background: var(--lv-field); color: #000; border-color: #000;
+}
+:is(.partner-strip, .lineup-credit) :is(.btn--light, .btn--sponsor) { background: #000; border-color: #000; color: #fff; }
+:is(.partner-strip, .lineup-credit) :is(.btn--light, .btn--sponsor):hover { background: var(--ink-lift); border-color: var(--ink-lift); color: #fff; }
+.launch :is(.partner-strip, .lineup-credit) a:not(.btn) { color: #000; }
+.launch :is(.partner-strip, .lineup-credit) :focus-visible { outline-color: #000; }
+
+/* ---------- The header: the white bar floats on the page's field, held by a black keyline ---------- */
+body:not([data-page="index"]) .site-header { --stage: var(--lv-field); }
+.site-header .bar, .site-header .bar.container { box-shadow: inset 0 -1.5px 0 #000; }
+@media (min-width: 720px) {
+  .site-header .bar, .site-header .bar.container { box-shadow: inset 0 0 0 1.5px #000; }
+  .site-header.is-scrolled .bar { box-shadow: inset 0 0 0 1.5px #000, 0 8px 24px rgba(11, 10, 15, 0.18); }
+}
+
+/* ---------- Inside boxes: a picture stands on white, a picture shot on black on black; never on a colour ---------- */
+:is(.member, .captain, .entry, .program, .post) :is(.entry-media:not(.on-black), .portrait) { background: #fff; }
+:is(.member, .captain, .entry, .program, .post) .entry-media.on-black { background: #000; }
+.program-media > .photo:first-child img, .program-media .strip.fit img, .post-media img { background: #fff; }
+/* an arrow button at the end of its row: the ground colour, not a darkened one */
+.strip-btn[aria-disabled="true"] { background: var(--alu); }
+
+/* ---------- The seasons index: each season's row is its own field (the title card, kept) ---------- */
+li.season-row[data-season]:not(.ruled):not(.ruled-strong):not(.tile):not(.entry) { background: var(--c); border-color: #000; color: #000; }
+.season-row[data-season] :is(p, a, h2 a) { color: #000; }
+.season-row[data-season] :focus-visible { outline-color: #000; }
+.season-row .sr-media::before { content: none; }
+
+/* ---------- The footer: black, with the livery as its second voice ---------- */
+.site-footer { box-shadow: inset 0 8px 0 var(--lv-field); }   /* the field's stripe closes the page */
+.footer-sponsors h2, .footer-cols h2 { color: var(--lv-glow); }
+.sponsor-row .open { box-shadow: inset 0 0 0 1.5px var(--lv-glow); }
+.sponsor-row .open a { color: var(--lv-glow); }
+
+/* ---------- FIRST Tech Challenge's orange: the programme's mark, only where the programme is named ----------
+   "FTC team 26413" on the home stage, and the last row of every page ("FIRST Tech Challenge team 26413"): a flat
+   orange bar with black type across the full width (the row is in a centred container: the shadow carries the
+   colour to both edges and the clip keeps it from spilling above and below) */
+.launch-head h1 .lite, .op-sub { color: var(--ftc); }   /* .op-sub: the same line on the opening's title card, which lands on it */
+.site-footer .footer-legal {
+  background: var(--ftc); color: #000; border-top: 0;
+  box-shadow: 0 0 0 100vmax var(--ftc); clip-path: inset(0 -100vmax);
+}
+.site-footer .footer-links a { color: #000; text-decoration-color: rgba(0, 0, 0, 0.5); }
+.site-footer .footer-links a:hover { color: #000; }
+.site-footer .footer-legal :focus-visible { outline-color: #000; }
+
+/* ---------- Selected text: the signal colour on white and on black (round 9); on a colour, black ----------
+   (the signal colour on a field of the same colour, or on the pale ground, would not show) */
+.band--grey ::selection,
+:is(.band--stage:not(.sheet), .season-head, .partner-strip, .lineup-credit, .season-row[data-season], .footer-legal) ::selection,
+:is(.header-cta, .calendar li.is-next, .calendar li.is-today)::selection,
+:is(.header-cta, .calendar li.is-next, .calendar li.is-today) ::selection { background: #000; color: #fff; }

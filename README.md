@@ -4,12 +4,14 @@ Plain HTML/CSS/JS site. No build step: edit a file, commit to `main`, and it's l
 (Hostinger, which deploys `main` automatically and reads `.htaccess`; GitHub Pages keeps a mirror).
 After editing a page, run `python3 tools/agent_files.py` (see "AI agents" below).
 
-The look is a product keynote stage: each season's robot is launched on a black stage, lit like a
-product, and calm white and aluminium-grey pages explain it, the people and the partners. Since round 9 each
-season wears its game's colour (taken from FIRST's style guide for that game: ocean blue for INTO THE DEEP,
-green for DECODE, yellow for BIOBUZZ), and this season's colour is the site's one signal colour: the sponsor
-button, the small tag above section headings, the next event. The four sponsorship tiers wear the colours of
-their names. One typeface (Archivo, self-hosted in `fonts/`); since round 8 (after mclaren.com) square boxes
+The look is a product keynote stage in the colours of FIRST Tech Challenge. Each season's robot is launched
+on a black stage, and since round 10 every page wears one FTC game's official colour palette from its header to
+its footer, the way a race car wears a livery: the site-wide pages wear this season's game (BIOBUZZ: yellow, pale
+yellow, gold, black) and each season's page wears its own (DECODE: mint, vermilion, amber, slate teal; INTO THE
+DEEP: blue, pale blue, yellow). Page heads and closing calls are flat fields of the game's colour with black
+type; reading sections are white, with bands in the game's pale colour. FIRST Tech Challenge's own orange marks
+"FTC team 26413" on the home page and the last row of every page. All colours are FIRST's published values (its
+brand guidelines and each game's style guide). The four sponsorship tiers wear the colours of their names. One typeface (Archivo, self-hosted in `fonts/`); since round 8 (after mclaren.com) square boxes
 with a thin line, a floating white header bar, page and section headings in capitals, and square buttons with
 a drawn arrow. `DESIGN.md` describes the system; `DESIGN_PROGRESS.md` holds the history, open questions and
 next steps.
@@ -23,7 +25,7 @@ next steps.
 | News posts (sponsor thank-yous, team updates) | `news.html` → copy an `<article class="post">` above the others (newest first) |
 | This season's dates (home calendar, "next event" lines, footer) | `js/main.js` → `SEASON` (dates are `YYYY-MM-DD`, Eastern time) |
 | Colors, type sizes, spacing | `css/style.css` → `:root` at the top |
-| The season colours and the signal colour | `css/style.css` → the "Round 9" block near the end: `--itd`, `--decode`, `--biobuzz`, and `--season` (which season's colour is the signal colour) |
+| The colours of a page (its livery) | `css/style.css` → the "Round 10" block at the end: each game's palette in `:root`, then one block of six `--lv-*` tokens per game (field, ground, line, mark, tag, glow). A season page says which livery it wears with `<body data-livery="2025">`; a page without it wears this season's |
 | The opening on the home page (the title card that flies into the page) | `index.html` → `<div class="opening">` right under `<body>`: one `op-field` and one `op-slot` per season |
 | Home page: the team strip | `index.html` → `<ul class="card-strip">`: one card per member, in the order of `team.html`. Show only the members `team.html` shows |
 | Home page: the outreach stories | `index.html` → `<div class="stories">`: one `<article class="story">` each (photo, title, date line, one sentence from `outreach.html`, a link to it) |
@@ -51,8 +53,8 @@ so a pasted block can never break a page.
 |---|---|
 | `<section class="band">` (`band--grey`, `band--stage`) | A full-width section: white, aluminium grey, or the black stage. Sections are told apart by their ground, not by lines |
 | `.tile` | A square, flat box (white on grey, grey on white). Never put a tile inside a tile |
-| Buttons | `btn` (square, black, capitals, with a drawn arrow; none on mail links, a down arrow on downloads), `btn--line` (outline), and on the black stage `btn--light` (white) and `btn--outline-light`. `btn btn--light btn--sponsor` is the sponsor button on the black stage ("Partner with us"): a light button where the header's yellow one is already in view, and yellow itself on phones, where the header's is inside the menu. `btn btn--season` is the signal colour by itself |
-| `data-season="2024"` (or `2025`, `2026`) | Gives a block its season's colour (as `--c`): the bays and cards on the home page, the rows on `seasons.html`, the head and the pager links of a season page, a row's robot cell in the record. On a season page `<main data-season="…">` also paints the tags above its section headings |
+| Buttons | `btn` (square, black, capitals, with a drawn arrow; none on mail links, a down arrow on downloads), `btn--line` (outline), and on the black stage `btn--light` (white) and `btn--outline-light`. On a colour field (a page head, the strip under the home stage, a closing band) `btn--light` and `btn--outline-light` turn black by themselves. `btn btn--light btn--sponsor` is the sponsor button there ("Partner with us"). `btn btn--season` is the signal colour by itself |
+| `data-season="2024"` (or `2025`, `2026`) | Gives a block its season's colour (as `--c`): the bays and cards on the home page, the rows on `seasons.html`, the head and the pager links of a season page, a row's robot cell in the record. A season page also has `<body data-livery="2025">` (its year): the whole page (head, bands, lines, buttons, footer) then wears that game's palette |
 | `<ul class="card-strip" data-strip id="…">` + `<div class="strip-nav" data-strip-nav="that id" data-label="team members">` | A row of cards the visitor moves: the script adds the previous/next buttons to the `strip-nav`, and a mouse can drag the row. Cards are `<a class="strip-card">` (a `strip-card--wide` first card for a wide photo; `strip-card--plain` for a member without a photo), each with a `<span class="strip-label"><b>name</b><span>role</span></span>` |
 | `<div class="stories" id="…" data-stories data-strip>` + `<div class="strip-nav" data-strip-nav="that id" data-label="stories">` in the section head | Stories with photos. On wide screens: one big frame, the stories as rows beside it, and the chosen story's sentence and link under the frame. Under 900px: a row of cards to swipe, drag or move with the previous/next buttons. Each `<article class="story">` holds a `<div class="story-photo">` with the image, then a `<div class="story-text">` with an `<h3>`, a `<p class="dateline">`, a sentence and a link |
 | `<figure data-video>` around a `<video controls poster="…">` | Puts a "Play video" button on the poster; pressing it starts the video with its own controls |
@@ -112,10 +114,14 @@ look at that moment.
 3. On the home page add a `bay` and a `season-card` for it (and change `data-default` when its results come in),
    and an `op-field` and an `op-slot` for it in the opening (`<div class="opening">`). Four seasons in one row
    get tight: drop the oldest from the home line-up and the opening when that happens.
-4. Give the new season its colour: look up the colour palette in FIRST's style guide for the new game
-   (firstinspires.org → Resources → Season brand downloads), add it to the "Round 9" block in `css/style.css`
-   (`--newgame: #…;` and `[data-season="2027"] { --c: var(--newgame); }`), put `data-season="2027"` on the
-   new blocks, and point `--season` at the new colour so the buttons and tags are repainted.
+4. Give the new season its livery. Look up the colour palette in FIRST's style guide for the new game
+   (firstinspires.org → Resources → Season brand downloads). In `css/style.css`: add the game's main colour to the
+   "Round 9" block (`--newgame: #…;` and `[data-season="2027"] { --c: var(--newgame); }`) and the rest of its
+   palette to the "Round 10" block. There, write a livery block for it (the six `--lv-*` tokens: field, ground,
+   line, mark, tag, glow) with the selector `body, body[data-livery="2027"]`, and take the plain `body` off last
+   season's block, so every site-wide page is repainted in the new game's colours while last season's page keeps
+   its own. Put `data-livery="2027"` on the new page's `<body>` and `data-season="2027"` on the new blocks. Type
+   on a field is black: check that black on the new field colour is 4.5:1 or more.
 5. Update the pager links at the bottom of the neighbouring season page, and `SEASON` in `js/main.js`.
 6. Add the new page to `PAGES` in `tools/agent_files.py` and run `python3 tools/agent_files.py`.
 

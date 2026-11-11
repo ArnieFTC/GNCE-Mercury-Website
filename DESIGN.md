@@ -1,21 +1,21 @@
 ---
 name: GNCE Mercury
-description: FTC team #26413, each season's robot launched on a black stage in its game's colour, then explained on calm light pages.
+description: FTC team #26413. Every page wears an FTC game's official palette from header to footer (this season's on the site-wide pages, each season's on its own page); the robots are launched on a black stage.
 colors:
-  stage: "#0B0A0F"
-  stage-raise: "#201E29"
-  on-stage: "#EFEEF3"
-  on-stage-2: "#C2BFCD"
+  stage: "#0A0A0A"
+  stage-raise: "#1F1F1F"
+  on-stage: "#F4F4F4"
+  on-stage-2: "#C9C9C9"
   paper: "#FFFFFF"
-  alu: "#E9E9EE"
-  alu-deep: "#DAD9E1"
-  line: "#CDCCD6"
-  ink: "#16141C"
-  steel: "#4A4755"
-  quiet: "#7F7C8A"
-  box-line: "#C4C3CC"
-  ink-lift: "#2C2935"
-  on-stage-3: "#A09DAC"
+  alu: "#EEE9A5"
+  alu-deep: "#DFD388"
+  line: "#E0D5AD"
+  ink: "#111111"
+  steel: "#474747"
+  quiet: "#6F6F6F"
+  box-line: "#BBA13E"
+  ink-lift: "#2E2E2E"
+  on-stage-3: "#A8A8A8"
   bronze: "#C2814E"
   silver: "#B9BEC6"
   gold: "#E3BC59"
@@ -23,6 +23,15 @@ colors:
   itd: "#0083AE"
   decode: "#92DBAC"
   biobuzz: "#F7E326"
+  biobuzz-pale: "#EEE9A5"
+  biobuzz-gold: "#BBA13E"
+  decode-amber: "#E5AE32"
+  decode-vermilion: "#EA572E"
+  decode-teal: "#598290"
+  decode-pale: "#C8EDD5"
+  itd-pale: "#ABD8E7"
+  itd-yellow: "#F5E565"
+  ftc: "#F57E25"
 typography:
   display:
     fontFamily: "Archivo, Helvetica Neue, Arial, sans-serif"
@@ -168,8 +177,10 @@ straight into rules: the greys #CFCDD8, #BAB8C4, #CBC9D3, #D6D4DE, #B8B6C2 and #
 #B3261E, #8B8896 for the inactive part markers, which repeats `--quiet`, and the smaller 0.875 / 0.8125rem
 label sizes.) Interactions (and the budget donut) live in `js/main.js`, each in its own `part("…")` block; the
 load animation and every keyframe are in the Motion section at the end of `css/style.css`. The sponsor strip is built in `js/main.js` from `SPONSORS` / `SUPPORTERS`, the season
-calendar from `SEASON`. The season colours (`--itd`, `--decode`, `--biobuzz`, and `--season`, which points at this
-season's) open the round 9 block at the end of `css/style.css`. Everything below describes the files as they ship
+calendar from `SEASON`. The season colours (`--itd`, `--decode`, `--biobuzz`) open the round 9 block near the end of `css/style.css`; the
+rest of each game's palette, FIRST Tech Challenge's orange (`--ftc`), the plain greys and the liveries (`--lv-field`,
+`--lv-ground`, `--lv-line`, `--lv-mark`, `--lv-tag`, `--lv-glow`, set on `<body>` for each page) are in the round 10
+block that ends the file. Everything below describes the files as they ship
 (round 2, "Keynote stage", with round 3's changes: no scroll motion, a coloured tier chart and budget donut on
 the partners page, two-column outreach); it replaces the earlier violet "Season Program" record entirely.
 
@@ -181,74 +192,84 @@ Each season's robot is launched the way a hardware company launches a product: t
 almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white
 and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners.
 
-**Season liveries (round 9; Andy: "reference the mclaren page and build more interactive and somewhat colorful
-page").** Every FTC season has a game, and FIRST gives each game a colour palette. Each season wears its game's
-colour wherever that season is shown: its bay on the home stage, its card, its row on the Seasons page, its
-page head, its pager and its tag in the record. This season's colour is also the site's one signal colour, the
-way a racing team repaints its livery each year: the sponsor action, the tag above section headings, the next
-event in the calendar, the controls that move things. McLaren uses its papaya the same way (measured on
-mclaren.com/racing/formula-1: about 1.5% of the screen, in solid blocks, thin bars and arrows, never behind
-reading text). Beyond that, colour still comes only from the robots, the photos, the Mercury logo (kept as-is)
-and, on the partners page, the four sponsorship tiers in the colours of their names (Andy, 2026-11-09: "the
-sponsorship category should be the color of the tier name"); the budget donut is grey.
+**Season liveries, wall to wall (round 10; Andy: "i think you can make the entire pages color scene with some
+respect to the ftc colors").** Every FTC season has a game, and FIRST gives each game a colour palette of three or
+four colours and black. Every page wears one game's palette from its header to its footer, the way a race car
+wears a livery that is repainted each year: the site-wide pages wear this season's game (BIOBUZZ: yellow, pale
+yellow, gold), and each season's page wears its own game (DECODE: mint, vermilion, amber, slate teal; INTO THE
+DEEP: blue, pale blue, yellow). A livery fills six jobs: the field (page heads and closing calls: one flat colour
+with black type, as on the opening's title card), the ground (the alternate bands), the line (box outlines), the
+mark (the signal: the sponsor action, "next", the controls that move things), the tag (above headings) and the
+glow (the colour as type on black, in the footer). FIRST Tech Challenge's own orange marks the programme where it
+is named: "FTC team 26413" on the home stage and the last row of every page. Round 9 (Andy: "reference the mclaren
+page and build more interactive and somewhat colorful page") had put one colour per season on a few blocks, about
+1.5% of the screen as on McLaren's page; round 10 puts the palettes on the page. Beyond the liveries, colour comes
+from the robots, the photos, the Mercury logo (kept as-is) and, on the partners page, the four sponsorship tiers in
+the colours of their names (Andy, 2026-11-09: "the sponsorship category should be the color of the tier name"); the
+budget donut is grey.
 
-Two grounds carry the site. The stage (home launch, every season head, the partners package sheet (head, tier
-chart and budget donut), and the closing
-"join or partner" bands on the home, team and partners pages) and the reading ground (white, with
-aluminium-grey bands). Sections run the full width of the page and are separated by a change of ground, never by hairlines.
-Since round 7 (Andy: "reference the VulcanForms website") the things inside a section are boxes drawn like the cells of an engineering spec sheet: white, a 1px #C4C3CC line and near-square 6px corners (Stage Step with a light line on the stage). Nothing floats: the rounded panels on a grey ground from round 6 were removed because Andy said they looked "so AI". Buttons are pills, and nothing casts a shadow
+Three grounds carry the site. The stage (near-black: the home launch, the partners tier chart and budget
+donut, the footer, the photo viewer), the field (the page's game colour, flat, with black type: every inner
+page head, every season head with its robot standing straight on it, the strip that closes the home stage, and
+the closing "join or partner" bands on the home, team and partners pages) and the reading ground (white, with
+bands in the livery's pale colour where aluminium grey used to be). Sections run the full width of the page and are separated by a change of ground, never by hairlines.
+Since round 7 (Andy: "reference the VulcanForms website") the things inside a section are boxes drawn like the cells of an engineering spec sheet: white, a 1px line in the livery's line colour and square corners (Stage Step with a light line on the stage, white with a black line on a field). Nothing floats: the rounded panels on a grey ground from round 6 were removed because Andy said they looked "so AI". Buttons are square, and nothing casts a shadow
 except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the
 halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).
 
-The neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple,
+The neutrals are plain: black, white and greys with no colour of their own (until round 10 they leaned violet,
+from the logo's outline, which fought the yellow). The reference study of Apple,
 TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact
 greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.
 
 **Key Characteristics:**
-- Two grounds: the near-black stage for launches and closing calls, white and aluminium grey for reading.
-- Season liveries: each season wears its game's colour (from FIRST's style guide for that game), and this season's colour is the one signal colour, always in solid blocks with an ink keyline. Robots, photos and the logo carry the rest; the four sponsorship tiers wear the colour of their names; the budget donut is grey.
+- Three grounds: the near-black stage (home launch, partners sheets, footer), the field in the page's game colour with black type (page heads, closing calls), and white with pale livery bands for reading.
+- Season liveries, wall to wall: every page wears one FTC game's official palette (this season's on the site-wide pages, each season's on its own page), always as flat solid colour; FIRST Tech Challenge's orange marks the programme in two places. Robots, photos and the logo carry the rest; the four sponsorship tiers wear the colour of their names; the budget donut is grey.
 - Archivo only: page and section headings in capitals at 108% width and 700 (a lighter second line where the heading has a natural one), 125% width at 700 for robot and game names, sentence-case nav and text links, tabular figures for every number.
-- Full-width sections; every item (a write-up, a member, a program, a season, a post, a table, a tile) is a white box with a 1px line and square corners. Square buttons, no section hairlines, no shadows (except the floating header bar once the page scrolls, and the open menu).
+- Full-width sections; every item (a write-up, a member, a program, a season, a post, a table, a tile) is a white box with a 1px line in the livery's line colour and square corners. Square buttons, no section hairlines, no shadows (except the floating header bar once the page scrolls, and the open menu).
 - Selection shown as light: the chosen bay's field is lit in its season's colour, the others hold a deep shade of theirs; a chosen story row turns white with a signal-colour marker.
 - One authored opening (the line-up title card, once a visit) and one load moment on the stage; everything else answers a click, tap, drag or key. Nothing moves, fades, pins or changes while scrolling.
 
 ## Colors
 
-A cool, logo-tinted grey scale from near-black to white; three season colours taken from FIRST's own game palettes, of which this season's is the signal colour; four metals for the sponsorship tiers (on the tier headers, ticks and tags only) and a grey budget scale, both on the partners page.
+Black, white and plain greys; the three FTC games' official palettes, worn as liveries (one per page); FIRST Tech Challenge's orange for the programme's mark; four metals for the sponsorship tiers (on the tier headers, ticks and tags only) and a grey budget scale, both on the partners page.
 
 ### Primary
-- **Logo Outline Ink** (ink): primary text on light grounds, primary buttons, pressed toggles, lead tags, the chosen calendar tile, the best bar in a chart, focus rings on light. It is tinted from the logo's near-black outline, so the "accent" on light pages is simply ink.
+- **Ink** (ink, #111111): primary text on light grounds, primary buttons, pressed toggles, lead tags, the best bar in a chart, keylines, focus rings on light. Type on a field is pure black (#000): on INTO THE DEEP's blue only pure black passes (4.9:1).
 
 ### Neutral
-- **Stage Black** (stage): the stage ground (`.launch`, `.season-head`, `.band--stage`), the header and the footer, the robot mats in the Seasons index and pager, and the hover fill of the primary button.
-- **Stage Step** (stage-raise): a step up on the stage: season-fact tiles, the `.ruled` tiles in the home page's closing stage band, the phone partner credit.
-- **Stage Light** (on-stage) and **Stage Dim** (on-stage-2): primary and secondary text on the stage (Stage Dim is 7.4:1 on Stage Black, 6.7:1 on Stage Step). Rules on the stage are on-stage at 14% (`--rule-stage`): the line-up card's results rows, the partner-strip top edge, the open menu's rows and, without JavaScript, the lines between the stacked season cards. The floor line is the same light at 16%.
+- **Stage Black** (stage, #0A0A0A): the dark ground: the home launch (`.launch`), the partners sheets (`.band--stage.sheet`), the footer, the photo viewer. Inside a field (`.band--stage:not(.sheet)`, `.season-head`) the same token is re-pointed at the livery's field colour, and the tokens for text on the stage at black.
+- **Stage Step** (stage-raise, #1F1F1F): a step up on the stage: the bay labels, tiles on the partners sheets. On a field it is white (a box on a field is white inside a black line: season-fact tiles, the two boxes of the home page's closing band).
+- **Stage Light** (on-stage) and **Stage Dim** (on-stage-2): primary and secondary text on the stage (Stage Dim, #A8A8A8, is 8.3:1 on Stage Black). Rules on the stage are on-stage at 14% (`--rule-stage`): the line-up card's results rows, the partner-strip top edge, the open menu's rows and, without JavaScript, the lines between the stacked season cards. The floor line is the same light at 16%.
 - **Paper** (paper): the default reading ground, form fields, tiles on grey bands, the sponsor tiles.
-- **Aluminium** (alu): alternate bands (`band--grey`), and quotes, chips and photo frames inside a box.
-- **Aluminium Deep** (alu-deep): chart tracks, the parts progress track, the pager hover fill.
+- **Ground** (alu; the token keeps its old name): the livery's pale colour (`--lv-ground`: BIOBUZZ pale yellow #EEE9A5, DECODE's mint half way to white #C8EDD5, INTO THE DEEP pale blue #ABD8E7): alternate bands (`band--grey`), quotes and chips inside a box, the nav's hover, the year tabs. A picture inside a box stands on white (a picture shot on black on black), never on the ground colour.
+- **Ground Deep** (alu-deep): the ground mixed 30% toward the line colour: chart tracks, the parts progress track, the pager hover fill.
 - **Data Line** (line): 1px separators inside data (table rows, spec rows, contact rows, record lists), the footer divisions, and the 1px borders of toggles and the Copy button.
-- **Steel** (steel): secondary text on light (dates, captions, labels, hints); 6:1 on aluminium.
-- **Quiet** (quiet): non-text marks only (inactive explorer markers). Never text.
+- **Steel** (steel, #474747): secondary text on light (dates, captions, labels, hints); 9.3:1 on white, 7.5:1 on the pale yellow, 6:1 on the pale blue. On a field it is black.
+- **Quiet** (quiet, #6F6F6F): control edges and non-text marks (5:1 on white, 4:1 on the pale yellow, 3.2:1 on the pale blue). Never text.
 
-### Secondary: the season colours
-- **INTO THE DEEP Ocean** (itd, #0083AE, PMS 7704 C), **DECODE Green** (decode, #92DBAC, PMS 353 C), **BIOBUZZ Yellow** (biobuzz, #F7E326, PMS 102 C): one colour per game, each taken from the colour palette in FIRST's one-page style guide for that game (see Assets and Provenance). Set once as `--itd`, `--decode`, `--biobuzz`; an element with `data-season="2024|2025|2026"` gets its season's colour as `--c`.
-- **Where a season wears its colour:** the field behind its robot (the home bay when chosen, the Seasons index row, the season page head, the pager thumbnail, the opening), the game name on its home card, the 10px square before its name in the record, and, on its own page (`<main data-season>`), the tags above the section headings.
-- **Lights down:** an unchosen bay holds a deep shade of its own colour, worked out from the colour itself (`--c-dim`: `oklch(from var(--c) 0.3 calc(c * 0.55) h)`; `--c-mid` for the hovered bay), so a new season needs one value. Browsers without relative colours fall back to a 17% mix, then to Stage Step. BIOBUZZ's yellow is the exception: a darkened yellow is olive, so its field with the lights down is the stage's own dark with a 9% trace of yellow. The white pool of light at a robot's feet is weaker on yellow too (`--pool: 0.14` against 0.36), because white can only wash a yellow out.
-- **The signal colour** (`--season`, this season's colour; `--on-season` is the text on it, Stage Black; `--season-press` its hover): the header's "Partner with us" (the sponsor buttons on the stage are light ones, so one signal button is in view at a time; on phones, where the header's button is inside the menu, the stage's takes the colour: `.btn--sponsor`), the 28×8px tag above page and section headings, the next event in the calendar, the previous/next buttons of the card strip and the photo viewer, the Play video tab, the marker on the chosen story row, the arrow on a strip card and text selection. Ink on it is 14.9:1 (on Ocean 4.5:1, on Green 12.1:1).
-- **To repaint for a new season:** add the new game's colour to `:root`, give its elements `data-season`, and point `--season` at it. To keep the seasons' colours but drop the signal colour: `--season: var(--ink); --on-season: #fff`.
+### Secondary: the three liveries and the programme's orange
+- **The palettes** (FIRST's one-page style guide for each game; see Assets and Provenance). BIOBUZZ, 2026–27: yellow #F7E326 (PMS 102 C), pale yellow #EEE9A5 (PMS 600 C), gold #BBA13E (PMS 7753 C). DECODE, 2025–26: mint #92DBAC (PMS 353 C), vermilion #EA572E (PMS 172 C), amber #E5AE32 (PMS 124 C), slate teal #598290 (PMS 2212 C). INTO THE DEEP, 2024–25: blue #0083AE (PMS 7704 C), pale blue #ABD8E7 (PMS 635 C), yellow #F5E565 (PMS 106 C). Each has black. Set once in `:root` (`--biobuzz`, `--biobuzz-pale`, `--biobuzz-gold`, `--decode`, `--decode-vermilion`, `--decode-amber`, `--decode-teal`, `--itd`, `--itd-pale`, `--itd-yellow`).
+- **A livery** is six tokens on `<body>`: `--lv-field` (page heads, closing calls, the strip the header bar floats on), `--lv-ground` (alternate bands and small fills), `--lv-line` (box outlines; separators are the line colour at 45% on white), `--lv-mark` (the signal colour), `--lv-tag` (the tag above headings), `--lv-glow` (the colour as type on black). BIOBUZZ (plain `body`, every site-wide page and the BIOBUZZ page): yellow / pale yellow / gold / yellow / yellow / yellow. DECODE (`body[data-livery="2025"]`): mint / pale mint #C8EDD5 (the palette has no pale member: its mint half way to white) / slate teal / vermilion / amber / mint. INTO THE DEEP (`body[data-livery="2024"]`): blue / pale blue / blue / yellow / yellow / pale blue.
+- **Type on a field** is black: 16:1 on the yellow, 13:1 on the mint, 4.9:1 on the blue (pure black only). The one exception is the INTO THE DEEP title, white on the blue (large type, 4.3:1). The white header bar, the fact tiles and the boxes on a field are white inside a black line.
+- **The programme's orange** (`--ftc`, #F57E25, PMS 158, from FIRST's brand guidelines): "FTC team 26413" on the home stage (7.4:1 on Stage Black) and the last row of every page, a full-width orange bar with black type (7.9:1). Nowhere else: it is the programme's colour, not the team's or the season's. It never carries white type (2.7:1) and is never type on white.
+- **One season's colour on another page**: an element with `data-season="2024|2025|2026"` still gets its season's main colour as `--c` (the home bays, the season cards, the rows of the Seasons page, each a field of its own colour with black type, the pagers, the squares in the record).
+- **Lights down:** an unchosen bay holds a deep shade of its own colour, worked out from the colour itself (`--c-dim`: `oklch(from var(--c) 0.3 calc(c * 0.55) h)`; `--c-mid` for the hovered bay), so a new season needs one value. Browsers without relative colours fall back to a 17% mix, then to Stage Step. BIOBUZZ's yellow is the exception: a darkened yellow is olive, so its field with the lights down is the stage's own dark with a 9% trace of yellow. The white pool of light at a robot's feet is weaker on yellow too (`--pool: 0.14` against 0.36), because white can only wash a yellow out. (The pool is on the home bays and in the opening only: a season head and a Seasons row are flat fields.)
+- **The signal colour** (`--season`, which is the page's `--lv-mark`; `--on-season` is the text on it, black; `--season-press` its hover): the header's "Partner with us", the next event in the calendar, the previous/next buttons of the card strip and the photo viewer, the Play video tab, the marker on the chosen story row, the arrow on a strip card and text selection on white and on black (on a field, on the pale ground and on the orange bar selected text is black with white type, because the signal colour would not show there). The 28×8px tag above headings is `--lv-tag` (the same colour, except amber on the DECODE page); on a field the tag is black. Sponsor buttons that stand on a field (the strip under the home stage, the closing bands) are black, so the header's is the one signal button in view.
+- **To repaint for a new season:** add the new game's colours to `:root`, write its livery block, move the plain `body` selector to it and give last season's page `data-livery` with its year (README, "Start a new season"). To go back to round 9's small blocks of colour, delete the round 10 block.
 
 ### Tertiary: the tier metals and the budget greys
-- **Tier metals** (2026-11-09, at Andy's request: each tier in the colour of its name): Bronze #C2814E, Silver #B9BEC6, Gold #E3BC59, Platinum #EAE8E1, softened from the sponsorship package's #C27A3A, #C3C7CF, #D9AC3C and #E6E6E4. Solid header blocks with ink text (5.7:1 on Bronze, 9.8:1 Silver, 10.1:1 Gold, 14.9:1 Platinum), ticks in the metal (5.5:1 or better on the washes) and the tier tags on sponsor cards. The column washes stay neutral, `--bronze-wash` #1A1820 to `--platinum-wash` #2A2832; a hovered column warms to 30% of its metal. The first metal version also tinted the columns and coloured the donut, and Andy found it AI-looking.
-- **Budget greys** (`--budget-travel` … `--budget-first`): #F2F1F5 down to #3A3842, the largest line brightest, in ring order. The 2px stage gaps between slices and the table beside the donut (with its own key squares) carry the identity; no hue.
+- **Tier metals** (2026-11-09, at Andy's request: each tier in the colour of its name): Bronze #C2814E, Silver #B9BEC6, Gold #E3BC59, Platinum #EAE8E1, softened from the sponsorship package's #C27A3A, #C3C7CF, #D9AC3C and #E6E6E4. Solid header blocks with ink text (5.7:1 on Bronze, 9.8:1 Silver, 10.1:1 Gold, 14.9:1 Platinum), ticks in the metal (5.5:1 or better on the washes) and the tier tags on sponsor cards. The column washes stay neutral, `--bronze-wash` #1A1A1A to `--platinum-wash` #2A2A2A; a hovered column warms to 30% of its metal. The first metal version also tinted the columns and coloured the donut, and Andy found it AI-looking.
+- **Budget greys** (`--budget-travel` … `--budget-first`): #F2F2F2 down to #3A3A3A, the largest line brightest, in ring order. The 2px stage gaps between slices and the table beside the donut (with its own key squares) carry the identity; no hue.
 
 ### Named Rules
-**The Season Livery Rule.** A season's colour appears only where that season is shown, and the signal colour only at its fixed places (listed above). Colour is always a solid block, a bar, a tag or an arrow: never a page or section background behind reading text, never a tinted table column, never a gradient between two colours, never a new hue for links or highlights. Violet stays out (Andy found it AI-like).
+**The Season Livery Rule.** Every colour on a page comes from FIRST's palettes: the page's own game for its field, ground, line, mark and tag; another season's main colour only where that season is shown; FTC orange only where the programme is named. Colour is always flat and solid: a whole field with black type, a whole band of the pale ground, a block, a bar, a tag or an arrow. Never a gradient between two colours, never a tint behind single cells or columns of a table, never coloured text on white, never a new hue for links or highlights. Violet stays out (Andy found it AI-like).
 
-**The Keyline Rule.** Every block of the signal colour carries an ink keyline (a 1.5px ink border or inset line), as the yellow shapes in the BIOBUZZ logo do. It keeps a light colour's edge clear on white (yellow on white is 1.3:1 without it) and is invisible on the stage. Season fields (bays, heads, rows) have no keyline: they are surfaces, not controls.
+**The Keyline Rule.** Every block of the signal colour carries an ink keyline (a 1.5px ink border or inset line), as the yellow shapes in the BIOBUZZ logo do. It keeps a light colour's edge clear on white and on the pale ground (yellow on white is 1.3:1 without it) and is invisible on the stage. What is white on a field has a black line too: the header bar, the fact tiles, the boxes of a closing band. Fields themselves (bays, heads, rows, bands) have no keyline: they are surfaces, not controls.
 
 **The Light Still Leads Rule.** On the stage, emphasis is light: the chosen bay is lit, the others turned down. On light pages it is ink and weight; the signal colour marks actions and the current thing, never ordinary links or text.
 
-**The Spec Box Rule.** Sections are full-width bands (white, aluminium or the stage); every inner page head is a stage band. Inside a section, each item is a box: paper fill, 1px `--box-line`, `--r-md` corners (0 since round 8), on white and aluminium bands alike; on the stage, Stage Step with a 1px light line (`--box-line-stage`). Inside a box, quotes, chips and photo frames are filled aluminium, never boxed again (css/style.css "Boxes"). The footer is a stage band that closes every page the way the header opens it.
+**The Spec Box Rule.** Sections are full-width bands (white, the livery's pale ground, a field or the stage); every inner page head is a field. Inside a section, each item is a box: paper fill, 1px `--box-line` (the livery's line colour: gold, slate teal or blue), `--r-md` corners (0 since round 8), on white and ground bands alike; on the stage, Stage Step with a 1px light line (`--box-line-stage`); on a field, white with a black line. Inside a box, quotes and chips are filled with the ground colour and photo frames are white, never boxed again (css/style.css "Boxes"). The footer is a stage band that closes every page: the field's 8px stripe on its top edge, its headings in the livery's glow colour, and FTC orange as its last row.
 
 **The Metals Name The Tiers Rule.** Each sponsorship tier wears the colour of its name, on its header block (ink text on it), the ticks in its column and its tag on a sponsor card. Nothing else on the site takes a metal: the column washes stay neutral, the budget donut stays grey, and text never wears one.
 
@@ -289,17 +310,17 @@ Archivo is self-hosted as one variable file, `fonts/archivo-latin.woff2` (Google
 
 ## Elevation & Depth
 
-The system is flat. Depth comes from the two grounds, from tiles one step lighter or darker than their band, and from light on the stage. Shadow is reserved for things that physically stand somewhere.
+The system is flat. Depth comes from the change of ground (stage, field, white, pale ground), from tiles one step lighter or darker than their band, and from light on the stage. Shadow is reserved for things that physically stand somewhere.
 
 ### Shadow Vocabulary
 - **Robot on its field** (`filter: drop-shadow(0 16px 14px rgba(11, 10, 15, 0.4))` in the bays; `0 20px 16px / 0.42` on season heads, `0 14px 12px / 0.4` on Seasons index rows, `0 22px 18px / 0.42` in the opening): robot cut-outs on their colour fields only.
-- **Light pool** (`radial-gradient(72% 58% at 50% 104%, rgba(255,255,255,0.36), transparent 70%)`): the light at the robot's feet on a lit colour field (the chosen bay, every field in the opening, season heads, Seasons index rows).
+- **Light pool** (`radial-gradient(72% 58% at 50% 104%, rgba(255,255,255,0.36), transparent 70%)`): the light at the robot's feet on a lit colour field: the chosen bay and every field in the opening. Season heads and Seasons index rows are flat fields without it (round 10).
 - **Explorer marker** (`box-shadow: 0 0 0 3px #fff, 0 3px 10px rgba(0,0,0,0.3)`): part markers on the DECODE render, so they read over it.
 - **Chosen segment** (`box-shadow: 0 1px 2px rgba(22,20,28,0.08), 0 4px 14px rgba(22,20,28,0.08)`): the selected outreach year pill only.
 - **Focus halo** (`box-shadow: 0 0 0 3px rgba(22,20,28,0.14)`): focused form fields only. Buttons have no hover ring since round 8; they darken or lighten instead.
 
 ### Named Rules
-**The Flat Tile Rule.** Boxes, menus and buttons never cast shadows, and a box never holds another box: inside a box, quotes, chips and photo frames take a flat aluminium fill instead.
+**The Flat Tile Rule.** Boxes, menus and buttons never cast shadows, and a box never holds another box: inside a box, quotes and chips take a flat fill of the ground colour and photo frames are white.
 
 ## Shapes
 
@@ -313,21 +334,22 @@ Quiet square ink buttons; the stage versions invert.
 - **Primary (`.btn`):** ink fill, white text. Hover: the lighter ink fill (Ink Lift), no halo since round 8; press scales to 0.97 (200ms).
 - **Line (`.btn--line`):** transparent, ink text, #BAB8C4 border; fills ink on hover.
 - **On the stage:** `.btn--light` (Stage Light fill, ink text, turns white on hover) for the main action; `.btn--outline-light` (40% on-stage border) for the second.
-- **Signal (`.btn--season`, and the header button):** the signal colour with an ink border and Stage Black text, for the sponsor action only ("Partner with us"). Hover (mouse only) darkens it 14% toward ink. A sponsor button on the stage is `btn btn--light btn--sponsor`: a light button wherever the header's signal button is in view, the signal colour at 560px and under, where that one is inside the menu.
+- **On a field:** the same two classes turn black: `.btn--light` is a black button with white text (Ink Lift on hover), `.btn--outline-light` a black outline with black text that fills black on hover.
+- **Signal (`.btn--season`, and the header button):** the signal colour (the page's mark: yellow, vermilion on the DECODE page) with an ink border and black text, for the sponsor action only ("Partner with us"). Hover (mouse only) darkens it 14% toward black. A sponsor button that stands on a field (`btn btn--light btn--sponsor`: the strip under the home stage, the closing bands) is a black button at every width.
 - **Hover and press (round 9):** with a mouse a button steps up 1px (150ms); pressed, any button, arrow or tab scales to 0.97 (90ms).
 - **Text link (`.text-link`):** sentence case, 0.9375rem 600, underlined 1.5px (3px on hover), ending in the drawn arrow (no arrow on a mail link), balanced so the arrow never sits alone on a line, for secondary actions ("Join as a student", "See how we built it").
-- **Focus:** a square 2px outline, 3px offset, ink on light and on the white header bar, Stage Light on the stage. The skip link is ink with white text and a white-then-ink double ring, so it shows over the white bar and the stage alike, and it moves keyboard focus into `main`, not only the view. The sponsor logos in the footer sit on white tiles, so their ring is ink.
+- **Focus:** a square 2px outline, 3px offset, ink on light and on the white header bar, Stage Light on the stage, black on a field. The skip link is ink with white text and a white-then-ink double ring, so it shows over the white bar and the stage alike, and it moves keyboard focus into `main`, not only the view. The sponsor logos in the footer sit on white tiles, so their ring is ink.
 
 ### Chips and toggles
 - **Toggles** (`.callout-btn`, `.crew-filter button`): square paper buttons with a 1px Data Line border (aluminium, borderless, on white bands); ink border on hover; pressed = ink fill, white text.
-- **Year tabs** (`.year-tabs`): a square segmented control on aluminium; the chosen year is solid ink with white text.
-- **Lead tag** (`.lead-tag`): square ink tag, white, 0.8125rem 600. **Subteam chip** (`.chip`): square aluminium tag, ink, 500.
+- **Year tabs** (`.year-tabs`): a square segmented control on the ground colour; the chosen year is solid ink with white text.
+- **Lead tag** (`.lead-tag`): square ink tag, white, 0.8125rem 600. **Subteam chip** (`.chip`): square tag in the ground colour, ink, 500.
 
 ### Cards / Containers
 - **Corner Style:** square (0) for every box.
-- **Background:** paper with a 1px `--box-line` border on white and aluminium bands; Stage Step with a 1px `--box-line-stage` border on the stage. Inside a box, quotes, chips and photo frames are aluminium with no border.
+- **Background:** paper with a 1px `--box-line` border on white and ground bands; Stage Step with a 1px `--box-line-stage` border on the stage; white with a black line on a field. Inside a box, quotes and chips are the ground colour and photo frames white, with no border.
 - **Shadow Strategy:** none (see Elevation & Depth).
-- **Border:** 1px `--box-line` (#C4C3CC) around the box; 1px Data Line between rows inside it.
+- **Border:** 1px `--box-line` (the livery's line colour: gold #BBA13E, slate teal #598290 or blue #0083AE) around the box; 1px Data Line (the line colour at 45% on white) between rows inside it.
 - **Internal Padding:** 18–36px; quotes, the part list and season-fact tiles use 12–18px.
 
 ### Inputs / Fields
@@ -338,7 +360,7 @@ Quiet square ink buttons; the stage versions invert.
 - **Sending (contact form):** "Send message" posts the form to `contact.php`, which emails it from the website; the status line beside the button reads "Sending…", then the result ("Thanks, … Your message is on its way to the team …"). A problem with one field is written under that field in ink (600, no colour), linked to it for screen readers, and the cursor goes there; it clears when the field is edited. If the website can't send it, the visitor's email app opens with the message instead; with no answer after 30 seconds the line says the message may or may not have been sent. Email addresses in the line are links. A hidden trap field catches spam robots.
 
 ### Navigation
-- **Desktop:** sentence-case links (0.9375rem 500) in ink on the white bar, 40px tall, as McLaren's nav is; hover fills aluminium; the current page is 600 with a 3px ink underline (an underline in forced-colours mode).
+- **Desktop:** sentence-case links (0.9375rem 500) in ink on the white bar, 40px tall, as McLaren's nav is; hover fills the ground colour; the current page is 600 with a 3px ink underline (an underline in forced-colours mode). The bar has a 1.5px black keyline (a bottom line on phones, where it is flush) and floats on a strip of the page's field colour (black on the home page); scrolled, 10px of that strip stay above it. The pages' `theme-color` is white, the colour of this bar, which is the top of every page on a phone.
 - **Mobile (1080px and under):** a square Menu button opens a white panel under the bar, aligned with it: 56px sentence-case rows (1.5rem 600) divided by Data Lines, with a shadow and a scrim over the page; a click on the scrim, Esc, or tabbing out closes it. Under 561px it ends in a full-width ink "PARTNER WITH US" button in the same capitals as every button (wider screens keep that button in the bar). Without JavaScript a plain link row (`.nojs-nav`) shows.
 - **Breadcrumbs:** slash-separated, 0.9375rem, at the top of season heads.
 
@@ -346,7 +368,7 @@ Quiet square ink buttons; the stage versions invert.
 Three bays hold the three robots side by side, oldest first, each on a field of its season's colour, 6px apart. Each label sits in a Stage Step box under its field: a small square and the season years, the machine name (125%, 700), a status line. With JavaScript the bays become tabs (arrow keys, Home/End): the chosen bay's field is lit in the season's full colour with a pool of light at the robot's feet, its label turns white with ink text, and its column widens; the others hold a deep shade of their own colour and their robots dim to 55% grey and step back (hovering one brings it half up). The season card beside them fades in from an 8px blur (320ms, like the colour, the label and the marker; the robots take 420ms), its game name in the season's colour. The stage is as tall with one season chosen as with another: the three cards share one grid cell and the labels take the height of the tallest case (the script tries each choice once), so nothing under the stage moves on a choice. At 360px and under the three bays are equal thirds (a wider chosen bay would leave the others no room for their names). The choice is written to the URL (`?season=2025`); the home page opens on `data-default`. Without JavaScript every field is lit and every season card shows, stacked.
 
 ### Season Head
-Stage ground, breadcrumb, machine name, lead, the robot cut-out on a field of the season's colour with the light pool, then a row of Stage Step fact tiles. The section tags on that page wear the season's colour (`<main data-season>`). Robots carry a `view-transition-name`, so in supporting browsers the robot morphs between the home bay, the Seasons index row, the season head and the pager (480ms).
+A field in the season's colour: breadcrumb, machine name, lead and the robot cut-out standing straight on the field (no pool of light, no inner block), then a row of white fact tiles with black lines. All type is black, except the INTO THE DEEP title, which is white. The whole page below wears that game's livery (`<body data-livery>`). Robots carry a `view-transition-name`, so in supporting browsers the robot morphs between the home bay, the Seasons index row, the season head and the pager (480ms).
 
 ### Card strip (home: the team)
 A row of cards the visitor moves: `<ul class="card-strip" data-strip>` running from the content's left edge off the right edge of the screen. The cards are 280–320px tall. The first card is the team photo (927:626), then one 4:5 portrait card per member the team page shows, each a link to that member (`team.html#their-id`): the photo fills the card, the name (600) and role sit on a dark gradient at the bottom with a signal-colour arrow. Above it, right: previous/next buttons (46px squares in the signal colour with a keyline; grey and `aria-disabled` at either end). A press moves the row by about one screenful and always stops with a card on the content's left edge; a mouse can drag the row (a drag is not a click on a card); a finger swipes it and it settles on a card's edge; Tab walks the cards, and a card that takes the focus half off the screen is brought fully on. It never moves by itself. On paper the cards wrap. (`.strip` alone is the older photo strip in the outreach galleries.)
@@ -372,7 +394,7 @@ Photos in the outreach galleries and the build photos on the season pages (`.pro
 - **Transfer bars (`.bars`):** grey bars on an aluminium track, the best value in ink.
 
 ### Partner Strip and Sponsor Row
-The home stage ends in a partner strip ("Supported by …", a Stage Light "Partner with us" pill, "Join as a student"). Every page's footer, on the stage, carries Our Sponsors & Supporters, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names in white tiles, 600), plus an outlined "Become a sponsor" tile. Never remove or move it. The footer's last row (©, team number, and small underlined About · Contact · Terms and privacy links in Stage Light 2) is plain HTML in every page, so it works without JavaScript; the script adds the sponsors strip and page links above it.
+The home stage ends in a partner strip in this season's field colour ("Supported by …" in black, a black "Partner with us" button, "Join as a student"): the supporters' names are written on the livery, as on a car. On phones and tablets the same credit is a field-coloured block under the line-up. Every page's footer, on the stage, carries Our Sponsors & Supporters, built once in `js/main.js` from `SPONSORS` (logos) and `SUPPORTERS` (names in white tiles, 600), plus a "Become a sponsor" tile outlined in the livery's glow colour; the footer's headings are in that colour and its top edge is an 8px stripe of the field. Never remove or move it. The footer's last row (©, "FIRST Tech Challenge team 26413, founded 2024", and small underlined About · Contact · Terms and privacy links) is a full-width bar in FTC orange with black type; it is plain HTML in every page, so it works without JavaScript; the script adds the sponsors strip and page links above it.
 
 ### Motion
 One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined in `:root` but unused).
@@ -388,14 +410,15 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 
 ### Do:
 - **Do** change colours, sizes, radii and spacing in `:root` in `css/style.css`, never in a component rule.
-- **Do** use the stage only for a launch (home, season heads), the partners head with its tier and budget sheet, and the closing call to join or partner; put everything else on paper or aluminium.
+- **Do** use the stage for the home launch, the partners tier and budget sheets and the footer; a field (the page's game colour, black type) for page heads, season heads and the closing call to join or partner; put everything else on white or the livery's pale ground.
 - **Do** run sections the full width and put each item (a write-up, a member, a program, a season, a post, a table) in a white box with a 1px `--box-line` border, 6px corners and 16–24px padding.
 - **Do** keep every corner square, and end buttons and text links with the drawn arrow (none on mail links and submit buttons, a down arrow on downloads); use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.
 - **Do** set robot and game names at 125% width and 700, page and section headings uppercase at 108% (split into two weights with `<span class="lite">` only where the heading has a natural first line), and everything else, nav and links included, at normal width in sentence case.
 - **Do** give every date, amount, spec and result tabular figures.
 - **Do** show a chosen state as light (brighter, full colour, filled dot) and write it to the URL when it is a view someone might share.
-- **Do** give a season its game's colour wherever that season is shown (`data-season`), and take that colour from FIRST's style guide for the game.
-- **Do** keep the signal colour to its fixed places, always as a solid block with an ink keyline and Stage Black text.
+- **Do** take every colour from FIRST's palettes (the page's game, another season's colour where that season is shown, FTC orange where the programme is named), and re-point the six `--lv-*` tokens rather than colouring components one by one.
+- **Do** set type on a field in black, and give anything white on a field a black line.
+- **Do** keep the signal colour to its fixed places, always as a solid block with an ink keyline and black text.
 - **Do** let the visitor drive anything that moves: buttons, drag, swipe, keys. Give every gesture a button and a key.
 - **Do** let new content simply be there: no entrance animation for anything below the first screen.
 - **Do** set `--w` to the image's pixel width on every `.photo`.
@@ -403,11 +426,11 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 - **Do** add raster images only as the team's own photos or CAD renders, and record how any edited one was made (Assets and Provenance below).
 
 ### Don't:
-- **Don't** add a hue beyond the season colours and the tier metals; no purple or violet accent, no neon on black.
+- **Don't** add a hue beyond FIRST's palettes (the three games and FTC orange) and the tier metals; no purple or violet accent, no neon on black. Don't use FTC orange for anything but the programme's two marks.
 - **Don't** copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.
 - **Don't** separate sections with hairlines; change the ground instead. Lines draw boxes and sit inside data, nowhere else.
 - **Don't** put shadows on boxes or buttons (the floating header bar's scrolled shadow and the open menu are the exceptions), round a corner, put a box inside a box, or float sections as rounded panels on a grey ground.
-- **Don't** colour the budget donut or tint the tier columns, and don't put a colour behind reading text or on pill-shaped controls (Andy, 2026-11-09, on colour mockups that did those things: "just dont do the color it looks terrible"). The tier metals he asked for later the same day; the season colours and the signal colour came with round 9, when he asked for a "somewhat colorful" site after McLaren's.
+- **Don't** colour the budget donut or tint the tier columns, and don't use weak tints, gradients or pill-shaped controls (Andy, 2026-11-09, on colour mockups with one accent on pill buttons and tinted table columns: "just dont do the color it looks terrible"). The tier metals he asked for later the same day; the season colours came with round 9, when he asked for a "somewhat colorful" site after McLaren's; whole fields and bands in the games' palettes came with round 10, when he asked for the colour scheme of the entire page to respect the FTC colours.
 - **Don't** add a second font family or system display faces.
 - **Don't** put small text labels (eyebrows) above headings or number the seasons 01/02/03; the 28×8px tag is the only mark above a heading, and it never goes on a heading inside a box.
 - **Don't** add new load animations outside the stage, counters that tick up, anything that moves by itself (a carousel that advances, a ticker), or motion that ignores reduced motion.
@@ -418,7 +441,7 @@ One easing, `--ease` `cubic-bezier(0.16, 1, 0.3, 1)` (`--ease-in-out` is defined
 
 - **Font:** Archivo variable (weight 100–900, width 62–125%), self-hosted latin subset `fonts/archivo-latin.woff2`, from Google Fonts, SIL Open Font License.
 - **Logo:** `images/logo-mark.png` is the emblem cut out onto transparency from `images/logo.png`, a screenshot with chat text and faded copies behind the emblem (commit d5e93d6), unchanged in colour. It stays the icon, the share image and the logo in the structured data. The header, the footer and the opening use `images/logo-mark-240.webp` (round 9): the same file scaled to 240×256 and saved as WebP at quality 92 (17 KB instead of 235 KB).
-- **Season colours:** from the "Color Palette" on FIRST's one-page style guide for each game: INTO THE DEEP (FT044: #ABD8E7, #0083AE, #F5E565, black), DECODE (FT045: #E5AE32, #EA572E, #92DBAC, #598290, black), BIOBUZZ (FT046: #EEE9A5, #BBA13E, #F7E326, black). The site uses one from each: #0083AE, #92DBAC, #F7E326. Guides: firstinspires.org/resources/library/season-brand-downloads; info.firstinspires.org/hubfs/2025%20Season/Season%20Assets/FIRST_DIVE-FTC-intothedeep-styleguide.pdf; info.firstinspires.org/hubfs/2026%20Season/Season%20Assets/FIRST_AGE-FTC-style-guide.pdf; firstinspires.org/hubfs/web/brand/season/2027/downloads/ftc-biobuzz-styleguide.pdf (read 2026-11-11). The game logos themselves are not used on the site.
+- **Season colours:** from the "Color Palette" on FIRST's one-page style guide for each game: INTO THE DEEP (FT044: #ABD8E7, #0083AE, #F5E565, black), DECODE (FT045: #E5AE32, #EA572E, #92DBAC, #598290, black), BIOBUZZ (FT046: #EEE9A5, #BBA13E, #F7E326, black). Round 9 used one from each (#0083AE, #92DBAC, #F7E326); since round 10 every member is used (DECODE's pale ground, #C8EDD5, is its mint half way to white, the one derived colour). FIRST Tech Challenge's orange #F57E25 (PMS 158) and FIRST's black are from FIRST's brand guidelines, firstinspires.org/hubfs/web/about/policy/first-brand-guidelines.pdf (read 2026-11-11). Guides: firstinspires.org/resources/library/season-brand-downloads; info.firstinspires.org/hubfs/2025%20Season/Season%20Assets/FIRST_DIVE-FTC-intothedeep-styleguide.pdf; info.firstinspires.org/hubfs/2026%20Season/Season%20Assets/FIRST_AGE-FTC-style-guide.pdf; firstinspires.org/hubfs/web/brand/season/2027/downloads/ftc-biobuzz-styleguide.pdf (read 2026-11-11). The game logos themselves are not used on the site.
 - **Tier metals:** the four tiers and their colours come from the team's 2026–27 sponsorship package (`docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`, Andy's Canva PDF). In round 3 the four hex values (#C27A3A, #C3C7CF, #D9AC3C, #E6E6E4) were sampled from the tier header fills on its page 4; since 2026-11-09 the site uses softened versions of them (#C2814E, #B9BEC6, #E3BC59, #EAE8E1) on the tier headers, ticks and tags only. The washes are the site's own, picked for 4.7:1 or better metal ticks. The budget palette is the site's own (dataviz-validated); the package's nine slice colours fail the validator and are not used.
 - **`images/into-the-deep-robot-cut.webp`:** made from `images/into-the-deep-robot.png` (the robot on black: an older rough cut-out, upscaled 2x in commit 24b928e by a method that is not recorded) with a flood-fill matte of the black background, enclosed gaps inside the robot cleared, leftover specks removed, and a 0.8px feathered alpha edge.
 - **`images/mercinator-v1-cut.webp`:** made from `images/mercinator_v1_fullybuilt.png` (team photo) with Canva's background remover; the mask was taken from Canva's preview, upscaled and applied to the original photo.

@@ -7,61 +7,61 @@
       "stage": {
         "role": "neutral",
         "displayName": "Stage Black",
-        "canonical": "#0B0A0F",
+        "canonical": "#0A0A0A",
         "tonalRamp": [
-          "#121116",
-          "#2E2D32",
-          "#4D4C51",
-          "#6F6E73",
-          "#929195",
-          "#B7B7BA",
-          "#DBDADC",
-          "#F5F5F6"
+          "#121212",
+          "#2E2E2E",
+          "#4D4D4D",
+          "#6F6F6F",
+          "#929292",
+          "#B7B7B7",
+          "#DBDBDB",
+          "#F5F5F5"
         ]
       },
       "stage-raise": {
         "role": "neutral",
         "displayName": "Stage Step",
-        "canonical": "#201E29",
+        "canonical": "#1F1F1F",
         "tonalRamp": [
-          "#12101A",
-          "#2E2C38",
-          "#4D4B57",
-          "#6F6D77",
-          "#92919A",
-          "#B7B6BE",
-          "#DBDAE0",
-          "#F5F4F9"
+          "#121212",
+          "#2E2E2E",
+          "#4D4D4D",
+          "#6F6F6F",
+          "#929292",
+          "#B7B7B7",
+          "#DBDBDB",
+          "#F5F5F5"
         ]
       },
       "on-stage": {
         "role": "neutral",
         "displayName": "Stage Light",
-        "canonical": "#EFEEF3",
+        "canonical": "#F4F4F4",
         "tonalRamp": [
-          "#121112",
-          "#2E2D2F",
-          "#4D4D4F",
-          "#6F6E71",
-          "#929195",
-          "#B7B7BB",
-          "#DBDADF",
-          "#F5F4F9"
+          "#121212",
+          "#2E2E2E",
+          "#4D4D4D",
+          "#6F6F6F",
+          "#929292",
+          "#B7B7B7",
+          "#DBDBDB",
+          "#F5F5F5"
         ]
       },
       "on-stage-2": {
         "role": "neutral",
         "displayName": "Stage Light 2",
-        "canonical": "#C2BFCD",
+        "canonical": "#C9C9C9",
         "tonalRamp": [
-          "#121115",
-          "#2E2D33",
-          "#4D4C54",
-          "#6F6D77",
-          "#93909D",
-          "#B8B5C3",
-          "#DBD8E7",
-          "#F6F3FF"
+          "#121212",
+          "#2E2E2E",
+          "#4D4D4D",
+          "#6F6F6F",
+          "#929292",
+          "#B7B7B7",
+          "#DBDBDB",
+          "#F5F5F5"
         ]
       },
       "paper": {
@@ -80,138 +80,138 @@
         ]
       },
       "alu": {
-        "role": "neutral",
-        "displayName": "Aluminium",
-        "canonical": "#E9E9EE",
+        "role": "secondary",
+        "displayName": "Ground (the BIOBUZZ livery's pale yellow)",
+        "canonical": "#EEE9A5",
         "tonalRamp": [
-          "#111112",
-          "#2E2E2F",
-          "#4D4D4F",
-          "#6E6E71",
-          "#929295",
-          "#B7B7BB",
-          "#DADADF",
-          "#F4F4FA"
+          "#131205",
+          "#312F19",
+          "#514F2F",
+          "#747148",
+          "#999561",
+          "#BFBB7C",
+          "#E3DE9B",
+          "#FEF9B4"
         ]
       },
       "alu-deep": {
         "role": "neutral",
-        "displayName": "Aluminium Deep",
-        "canonical": "#DAD9E1",
+        "displayName": "Ground Deep",
+        "canonical": "#DFD388",
         "tonalRamp": [
-          "#121113",
-          "#2E2D30",
-          "#4D4C50",
-          "#6E6E73",
-          "#929198",
-          "#B7B6BE",
-          "#DBDAE2",
-          "#F5F4FC"
+          "#151201",
+          "#332E10",
+          "#544E26",
+          "#78703C",
+          "#9E9455",
+          "#C5B96F",
+          "#E9DD92",
+          "#FFF8AD"
         ]
       },
       "line": {
         "role": "neutral",
         "displayName": "Data Line",
-        "canonical": "#CDCCD6",
+        "canonical": "#E0D5AD",
         "tonalRamp": [
-          "#111114",
-          "#2E2D31",
-          "#4D4C52",
-          "#6E6E74",
-          "#929199",
-          "#B7B6C0",
-          "#DAD9E3",
-          "#F5F4FE"
+          "#141208",
+          "#322E1F",
+          "#534D39",
+          "#766F54",
+          "#9B9272",
+          "#C2B790",
+          "#E6DBB3",
+          "#FFF5CD"
         ]
       },
       "ink": {
         "role": "primary",
-        "displayName": "Logo Outline Ink",
-        "canonical": "#16141C",
+        "displayName": "Ink",
+        "canonical": "#111111",
         "tonalRamp": [
-          "#121018",
-          "#2E2C35",
-          "#4E4C54",
-          "#6F6D75",
-          "#929197",
-          "#B8B6BC",
-          "#DBDADE",
-          "#F5F4F8"
+          "#121212",
+          "#2E2E2E",
+          "#4D4D4D",
+          "#6F6F6F",
+          "#929292",
+          "#B7B7B7",
+          "#DBDBDB",
+          "#F5F5F5"
         ]
       },
       "steel": {
         "role": "neutral",
         "displayName": "Steel",
-        "canonical": "#4A4755",
+        "canonical": "#474747",
         "tonalRamp": [
-          "#12101A",
-          "#2E2C38",
-          "#4E4B59",
-          "#6F6C7B",
-          "#93909D",
-          "#B8B5C1",
-          "#DBD9E3",
-          "#F5F4FC"
+          "#121212",
+          "#2E2E2E",
+          "#4D4D4D",
+          "#6F6F6F",
+          "#929292",
+          "#B7B7B7",
+          "#DBDBDB",
+          "#F5F5F5"
         ]
       },
       "quiet": {
         "role": "neutral",
         "displayName": "Quiet",
-        "canonical": "#7F7C8A",
+        "canonical": "#6F6F6F",
         "tonalRamp": [
-          "#121017",
-          "#2E2C35",
-          "#4E4B57",
-          "#6F6C7A",
-          "#93909E",
-          "#B8B5C3",
-          "#DBD9E5",
-          "#F6F3FE"
+          "#121212",
+          "#2E2E2E",
+          "#4D4D4D",
+          "#6F6F6F",
+          "#929292",
+          "#B7B7B7",
+          "#DBDBDB",
+          "#F5F5F5"
         ]
       },
       "box-line": {
-        "role": "neutral",
-        "displayName": "Box Line",
-        "canonical": "#C4C3CC",
+        "role": "secondary",
+        "displayName": "Box Line (the BIOBUZZ livery's gold)",
+        "canonical": "#BBA13E",
         "tonalRamp": [
-          "#111114",
-          "#2E2D31",
-          "#4D4C51",
-          "#6E6E74",
-          "#929199",
-          "#B7B6BF",
-          "#DAD9E3",
-          "#F5F4FD"
+          "#1B1000",
+          "#3B2C00",
+          "#5E4B00",
+          "#836D04",
+          "#AA902A",
+          "#D0B655",
+          "#F2DA84",
+          "#FFF5A8"
         ]
       },
       "ink-lift": {
         "role": "neutral",
         "displayName": "Ink Lift",
-        "canonical": "#2C2935",
+        "canonical": "#2E2E2E",
         "tonalRamp": [
-          "#12101A",
-          "#2F2C38",
-          "#4E4B57",
-          "#6F6D78",
-          "#93909B",
-          "#B8B6BF",
-          "#DBD9E0",
-          "#F5F4FA"
+          "#121212",
+          "#2E2E2E",
+          "#4D4D4D",
+          "#6F6F6F",
+          "#929292",
+          "#B7B7B7",
+          "#DBDBDB",
+          "#F5F5F5"
         ]
       },
       "on-stage-3": {
         "role": "neutral",
         "displayName": "Stage Dim",
-        "canonical": "#A09DAC",
+        "canonical": "#A8A8A8",
         "tonalRamp": [
-          "#121116",
-          "#2E2C34",
-          "#4D4B56",
-          "#6F6D79",
-          "#93909F",
-          "#B8B5C4",
-          "#DBD8E7",
-          "#F6F3FF"
+          "#121212",
+          "#2E2E2E",
+          "#4D4D4D",
+          "#6F6F6F",
+          "#929292",
+          "#B7B7B7",
+          "#DBDBDB",
+          "#F5F5F5"
         ]
       },
       "bronze": {
@@ -276,7 +276,7 @@
       },
       "itd": {
         "role": "secondary",
-        "displayName": "INTO THE DEEP Ocean",
+        "displayName": "INTO THE DEEP Blue",
         "canonical": "#0083AE",
         "tonalRamp": [
           "#00152C",
@@ -291,7 +291,7 @@
       },
       "decode": {
         "role": "secondary",
-        "displayName": "DECODE Green",
+        "displayName": "DECODE Mint",
         "canonical": "#92DBAC",
         "tonalRamp": [
           "#03160A",
@@ -317,6 +317,141 @@
           "#CDBA00",
           "#F2DE1A",
           "#FFF94A"
+        ]
+      },
+      "biobuzz-pale": {
+        "role": "secondary",
+        "displayName": "BIOBUZZ Pale Yellow",
+        "canonical": "#EEE9A5",
+        "tonalRamp": [
+          "#131205",
+          "#312F19",
+          "#514F2F",
+          "#747148",
+          "#999561",
+          "#BFBB7C",
+          "#E3DE9B",
+          "#FEF9B4"
+        ]
+      },
+      "biobuzz-gold": {
+        "role": "secondary",
+        "displayName": "BIOBUZZ Gold",
+        "canonical": "#BBA13E",
+        "tonalRamp": [
+          "#1B1000",
+          "#3B2C00",
+          "#5E4B00",
+          "#836D04",
+          "#AA902A",
+          "#D0B655",
+          "#F2DA84",
+          "#FFF5A8"
+        ]
+      },
+      "decode-amber": {
+        "role": "secondary",
+        "displayName": "DECODE Amber",
+        "canonical": "#E5AE32",
+        "tonalRamp": [
+          "#1F0D00",
+          "#422800",
+          "#684600",
+          "#916600",
+          "#BC8800",
+          "#E4AD31",
+          "#FFD160",
+          "#FFED8A"
+        ]
+      },
+      "decode-vermilion": {
+        "role": "secondary",
+        "displayName": "DECODE Vermilion",
+        "canonical": "#EA572E",
+        "tonalRamp": [
+          "#340000",
+          "#610000",
+          "#901600",
+          "#C33400",
+          "#EF5B33",
+          "#FF8760",
+          "#FFB390",
+          "#FFD2B2"
+        ]
+      },
+      "decode-teal": {
+        "role": "secondary",
+        "displayName": "DECODE Slate Teal",
+        "canonical": "#598290",
+        "tonalRamp": [
+          "#00151C",
+          "#14323C",
+          "#2F535F",
+          "#4D7683",
+          "#709AA8",
+          "#99BECC",
+          "#C0E1ED",
+          "#DEFBFF"
+        ]
+      },
+      "decode-pale": {
+        "role": "secondary",
+        "displayName": "DECODE Pale Mint (derived)",
+        "canonical": "#C8EDD5",
+        "tonalRamp": [
+          "#0C140F",
+          "#253129",
+          "#415247",
+          "#5F7567",
+          "#7E9A88",
+          "#9FC1AB",
+          "#C1E5CE",
+          "#DBFFE8"
+        ]
+      },
+      "itd-pale": {
+        "role": "secondary",
+        "displayName": "INTO THE DEEP Pale Blue",
+        "canonical": "#ABD8E7",
+        "tonalRamp": [
+          "#081417",
+          "#1F3137",
+          "#3A5159",
+          "#56747E",
+          "#7399A6",
+          "#93C0CE",
+          "#B6E3F3",
+          "#D1FEFF"
+        ]
+      },
+      "itd-yellow": {
+        "role": "secondary",
+        "displayName": "INTO THE DEEP Yellow",
+        "canonical": "#F5E565",
+        "tonalRamp": [
+          "#161200",
+          "#342F00",
+          "#564E0A",
+          "#7B701B",
+          "#A1942C",
+          "#C9BA3D",
+          "#EEDE5E",
+          "#FFF97A"
+        ]
+      },
+      "ftc": {
+        "role": "secondary",
+        "displayName": "FIRST Tech Challenge Orange",
+        "canonical": "#F57E25",
+        "tonalRamp": [
+          "#2C0000",
+          "#561400",
+          "#823000",
+          "#B24C00",
+          "#E16C00",
+          "#FF9240",
+          "#FFBB74",
+          "#FFD99A"
         ]
       }
     },
@@ -536,7 +671,7 @@
       "refersTo": "button-primary",
       "description": "Square ink button for the main action on light grounds: capitals, ending in a drawn north-east arrow (none on mail links, a down arrow on downloads).",
       "html": "<a class=\"ds-btn\" href=\"#\">Email us about sponsoring</a>",
-      "css": ".ds-btn{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:var(--ink,#16141C);color:#fff;border:1.5px solid var(--ink,#16141C);font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),transform 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{background:#2C2935;border-color:#2C2935}.ds-btn:active{transform:scale(0.97)}.ds-btn:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
+      "css": ".ds-btn{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:var(--ink,#111111);color:#fff;border:1.5px solid var(--ink,#111111);font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),transform 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn:hover{background:#2E2E2E;border-color:#2E2E2E}.ds-btn:active{transform:scale(0.97)}.ds-btn:focus-visible{outline:2px solid #111111;outline-offset:3px}"
     },
     {
       "name": "Line Button",
@@ -544,23 +679,23 @@
       "refersTo": "button-line",
       "description": "Secondary square button on light grounds; fills ink on hover.",
       "html": "<a class=\"ds-btn-line\" href=\"#\">Download the package</a>",
-      "css": ".ds-btn-line{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:transparent;color:#16141C;border:1.5px solid #BAB8C4;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),color 200ms}.ds-btn-line:hover{background:#16141C;border-color:#16141C;color:#fff}.ds-btn-line:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
+      "css": ".ds-btn-line{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:transparent;color:#111111;border:1.5px solid #BAB8C4;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),color 200ms}.ds-btn-line:hover{background:#111111;border-color:#111111;color:#fff}.ds-btn-line:focus-visible{outline:2px solid #111111;outline-offset:3px}"
     },
     {
       "name": "Stage Button",
       "kind": "button",
       "refersTo": "button-light",
-      "description": "Main action on the stage: square Stage Light button, ink text, capitals.",
+      "description": "Main action on the black stage: square Stage Light button, ink text, capitals. On a colour field the same class is a black button with white text.",
       "html": "<div class=\"ds-stage\"><a class=\"ds-btn-light\" href=\"#\">Partner with us</a></div>",
-      "css": ".ds-stage{background:#0B0A0F;padding:24px;border-radius:0}.ds-btn-light{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:#EFEEF3;color:#16141C;border:1.5px solid #EFEEF3;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-light:hover{background:#fff;border-color:#fff}.ds-btn-light:focus-visible{outline:2px solid #EFEEF3;outline-offset:3px}"
+      "css": ".ds-stage{background:#0A0A0A;padding:24px;border-radius:0}.ds-btn-light{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:#F4F4F4;color:#111111;border:1.5px solid #F4F4F4;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;text-decoration:none;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-light:hover{background:#fff;border-color:#fff}.ds-btn-light:focus-visible{outline:2px solid #F4F4F4;outline-offset:3px}"
     },
     {
       "name": "Signal Button",
       "kind": "button",
       "refersTo": "button-season",
-      "description": "The sponsor action only (Partner with us): this season's colour with an ink keyline and Stage Black text, on the stage and in the header.",
+      "description": "The sponsor action in the header (Partner with us): the page's mark colour (yellow; vermilion on the DECODE page) with an ink keyline and black text. Sponsor buttons that stand on a field are black.",
       "html": "<div class=\"ds-stage2\"><a class=\"ds-btn-season\" href=\"#\">Partner with us</a></div>",
-      "css": ".ds-stage2{background:#0B0A0F;padding:24px;border-radius:0}.ds-btn-season{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:#F7E326;color:#0B0A0F;border:1.5px solid #16141C;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;transition:background-color 150ms cubic-bezier(0.16,1,0.3,1),transform 150ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-season:hover{background:#D6C624;transform:translateY(-1px)}.ds-btn-season:active{transform:translateY(1px) scale(0.985)}.ds-btn-season:focus-visible{outline:2px solid #EFEEF3;outline-offset:3px}"
+      "css": ".ds-stage2{background:#0A0A0A;padding:24px;border-radius:0}.ds-btn-season{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;border-radius:0;background:#F7E326;color:#0A0A0A;border:1.5px solid #111111;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;transition:background-color 150ms cubic-bezier(0.16,1,0.3,1),transform 150ms cubic-bezier(0.16,1,0.3,1)}.ds-btn-season:hover{background:#D6C624;transform:translateY(-1px)}.ds-btn-season:active{transform:translateY(1px) scale(0.985)}.ds-btn-season:focus-visible{outline:2px solid #F4F4F4;outline-offset:3px}"
     },
     {
       "name": "Toggle",
@@ -568,7 +703,7 @@
       "refersTo": "toggle",
       "description": "Crew filter and part buttons; pressed = ink.",
       "html": "<div class=\"ds-toggles\"><button class=\"ds-toggle\" aria-pressed=\"true\">All</button><button class=\"ds-toggle\" aria-pressed=\"false\">CAD</button></div>",
-      "css": ".ds-toggles{display:flex;gap:8px}.ds-toggle{min-height:42px;padding:8px 18px;border-radius:0;background:#fff;border:1px solid #DCDBE2;color:#16141C;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;cursor:pointer;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),border-color 200ms}.ds-toggle:hover{border-color:#16141C}.ds-toggle[aria-pressed=true]{background:#16141C;border-color:#16141C;color:#fff}.ds-toggle:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
+      "css": ".ds-toggles{display:flex;gap:8px}.ds-toggle{min-height:42px;padding:8px 18px;border-radius:0;background:#fff;border:1px solid #DCDBE2;color:#111111;font-family:var(--font,Archivo,sans-serif);font-weight:600;font-size:0.9375rem;cursor:pointer;transition:background-color 200ms cubic-bezier(0.16,1,0.3,1),border-color 200ms}.ds-toggle:hover{border-color:#111111}.ds-toggle[aria-pressed=true]{background:#111111;border-color:#111111;color:#fff}.ds-toggle:focus-visible{outline:2px solid #111111;outline-offset:3px}"
     },
     {
       "name": "Text Field",
@@ -576,23 +711,31 @@
       "refersTo": "text-field",
       "description": "Contact form field with label above.",
       "html": "<label class=\"ds-field\"><span>Email</span><input type=\"email\"></label>",
-      "css": ".ds-field{display:grid;gap:6px;font-family:var(--font,Archivo,sans-serif)}.ds-field span{font-weight:600;font-size:0.9375rem}.ds-field input{min-height:50px;padding:13px 16px;background:#fff;border:1px solid #CBC9D3;border-radius:0;color:#16141C;font:inherit;font-size:1rem;transition:border-color 160ms cubic-bezier(0.16,1,0.3,1),box-shadow 160ms}.ds-field input:hover{border-color:#5C5967}.ds-field input:focus-visible{outline:none;border-color:#16141C;box-shadow:0 0 0 3px rgba(22,20,28,0.14)}"
+      "css": ".ds-field{display:grid;gap:6px;font-family:var(--font,Archivo,sans-serif)}.ds-field span{font-weight:600;font-size:0.9375rem}.ds-field input{min-height:50px;padding:13px 16px;background:#fff;border:1px solid #CBC9D3;border-radius:0;color:#111111;font:inherit;font-size:1rem;transition:border-color 160ms cubic-bezier(0.16,1,0.3,1),box-shadow 160ms}.ds-field input:hover{border-color:#5C5967}.ds-field input:focus-visible{outline:none;border-color:#111111;box-shadow:0 0 0 3px rgba(17,17,17,0.14)}"
     },
     {
       "name": "Navigation",
       "kind": "nav",
       "refersTo": "",
-      "description": "A white bar floating over the dark page heads (flush on phones): ink logo name, sentence-case links, the current page underlined 3px, a Partner button in the signal colour with an ink keyline, in capitals.",
+      "description": "A white bar with a black keyline floating on the page's field colour (flush on phones): ink logo name, sentence-case links, the current page underlined 3px, a Partner button in the signal colour with an ink keyline, in capitals.",
       "html": "<nav class=\"ds-nav\"><b>GNCE Mercury</b><a href=\"#\">Seasons</a><a href=\"#\" aria-current=\"page\">Partners</a><a class=\"ds-cta\" href=\"#\">Partner with us</a></nav>",
-      "css": ".ds-nav{display:flex;align-items:center;gap:2px;height:56px;padding:0 16px;background:#fff;box-shadow:0 8px 24px rgba(11,10,15,0.18);font-family:var(--font,Archivo,sans-serif)}.ds-nav b{color:#16141C;margin-right:auto;font-weight:600}.ds-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 12px;border-radius:0;color:#16141C;font-weight:500;font-size:0.9375rem;text-decoration:none;transition:background-color 160ms}.ds-nav a:hover{background:#E9E9EE}.ds-nav a[aria-current=page]{font-weight:600;box-shadow:inset 0 -3px 0 #16141C}.ds-nav a.ds-cta{min-height:36px;padding:7px 16px;margin-left:12px;background:#F7E326;color:#0B0A0F;border:1.5px solid #16141C;font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase}.ds-nav a:focus-visible{outline:2px solid #16141C;outline-offset:3px}"
+      "css": ".ds-nav{display:flex;align-items:center;gap:2px;height:56px;padding:0 16px;background:#fff;box-shadow:inset 0 0 0 1.5px #000,0 8px 24px rgba(11,10,15,0.18);font-family:var(--font,Archivo,sans-serif)}.ds-nav b{color:#111111;margin-right:auto;font-weight:600}.ds-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 12px;border-radius:0;color:#111111;font-weight:500;font-size:0.9375rem;text-decoration:none;transition:background-color 160ms}.ds-nav a:hover{background:#EEE9A5}.ds-nav a[aria-current=page]{font-weight:600;box-shadow:inset 0 -3px 0 #111111}.ds-nav a.ds-cta{min-height:36px;padding:7px 16px;margin-left:12px;background:#F7E326;color:#0A0A0A;border:1.5px solid #111111;font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase}.ds-nav a:focus-visible{outline:2px solid #111111;outline-offset:3px}"
     },
     {
       "name": "Tile",
       "kind": "card",
       "refersTo": "tile-on-white",
-      "description": "A square box: paper with a 1px Box Line on white and aluminium bands, no shadow.",
+      "description": "A square box: paper with a 1px line in the livery's line colour (gold, slate teal or blue) on white and ground bands, no shadow.",
       "html": "<div class=\"ds-tile\"><h3>Host a student visit</h3><p>We organize tours of engineering firms and research labs.</p></div>",
-      "css": ".ds-tile{background:#fff;border:1px solid #C4C3CC;border-radius:0;padding:28px;color:#16141C;font-family:var(--font,Archivo,sans-serif);max-width:360px}.ds-tile h3{margin:0 0 8px;font-size:1.3125rem;font-weight:600;letter-spacing:-0.006em}.ds-tile p{margin:0;line-height:1.55}"
+      "css": ".ds-tile{background:#fff;border:1px solid #BBA13E;border-radius:0;padding:28px;color:#111111;font-family:var(--font,Archivo,sans-serif);max-width:360px}.ds-tile h3{margin:0 0 8px;font-size:1.3125rem;font-weight:600;letter-spacing:-0.006em}.ds-tile p{margin:0;line-height:1.55}"
+    },
+    {
+      "name": "Field",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "A page head or a closing call: one flat field of the page's game colour (yellow, mint or blue) with black type, a black tag above the heading and black buttons; anything white on it has a black line.",
+      "html": "<div class=\"ds-field-band\"><i></i><h3>The team</h3><p>9 students and 4 coaches from Weston, MA.</p><a href=\"#\">Join as a student</a></div>",
+      "css": ".ds-field-band{background:#F7E326;color:#000;padding:28px 28px 30px;font-family:var(--font,Archivo,sans-serif);width:420px}.ds-field-band i{display:block;width:28px;height:8px;background:#000;margin-bottom:14px}.ds-field-band h3{margin:0 0 10px;font-size:2rem;font-weight:700;text-transform:uppercase;font-stretch:108%;letter-spacing:-0.012em;line-height:1}.ds-field-band p{margin:0 0 18px}.ds-field-band a{display:inline-flex;align-items:center;min-height:46px;padding:11px 24px;background:#000;color:#fff;border:1.5px solid #000;font-weight:600;font-size:0.8125rem;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none}.ds-field-band a:focus-visible{outline:2px solid #000;outline-offset:3px}"
     },
     {
       "name": "Season Bay",
@@ -600,7 +743,7 @@
       "refersTo": "",
       "description": "Signature: the robot on a field of its season's colour (lit when chosen, a deep shade of the same colour when not), with its label in a Stage Step box below.",
       "html": "<div class=\"ds-bay\"><div class=\"ds-bay-stage\"><div class=\"ds-robot\"></div></div><div class=\"ds-bay-no\"><i></i>2025–26</div><div class=\"ds-bay-name\">DECODE</div></div>",
-      "css": ".ds-bay{background:#0B0A0F;color:#EFEEF3;padding:16px;font-family:var(--font,Archivo,sans-serif);border-radius:0;width:260px}.ds-bay-stage{position:relative;height:170px;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(72% 58% at 50% 104%,rgba(255,255,255,0.36),transparent 70%),#92DBAC}.ds-robot{position:relative;width:90px;height:100px;margin-bottom:18px;border-radius:0;background:linear-gradient(160deg,#9AA0A8,#45424F);filter:drop-shadow(0 16px 14px rgba(11,10,15,0.4))}.ds-bay-no{display:flex;gap:8px;align-items:center;padding:12px 14px 0;background:#fff;color:#4A4755;font-size:0.875rem;font-variant-numeric:tabular-nums}.ds-bay-no i{width:8px;height:8px;background:#92DBAC;box-shadow:inset 0 0 0 1px #16141C}.ds-bay-name{padding:3px 14px 14px;background:#fff;color:#16141C;font-stretch:125%;font-weight:700;font-size:1.25rem}"
+      "css": ".ds-bay{background:#0A0A0A;color:#F4F4F4;padding:16px;font-family:var(--font,Archivo,sans-serif);border-radius:0;width:260px}.ds-bay-stage{position:relative;height:170px;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(72% 58% at 50% 104%,rgba(255,255,255,0.36),transparent 70%),#92DBAC}.ds-robot{position:relative;width:90px;height:100px;margin-bottom:18px;border-radius:0;background:linear-gradient(160deg,#9AA0A8,#45424F);filter:drop-shadow(0 16px 14px rgba(11,10,15,0.4))}.ds-bay-no{display:flex;gap:8px;align-items:center;padding:12px 14px 0;background:#fff;color:#474747;font-size:0.875rem;font-variant-numeric:tabular-nums}.ds-bay-no i{width:8px;height:8px;background:#92DBAC;box-shadow:inset 0 0 0 1px #111111}.ds-bay-name{padding:3px 14px 14px;background:#fff;color:#111111;font-stretch:125%;font-weight:700;font-size:1.25rem}"
     },
     {
       "name": "Tier Headers",
@@ -608,37 +751,37 @@
       "refersTo": "",
       "description": "Partners tier chart: four solid header blocks, each in the colour of its tier's name, ink text; neutral columns under them with ticks in the metal.",
       "html": "<div class=\"ds-tiers\"><b style=\"background:#C2814E\">Bronze<span>$500+</span></b><b style=\"background:#B9BEC6\">Silver<span>$1,500+</span></b><b style=\"background:#E3BC59\">Gold<span>$3,000+</span></b><b style=\"background:#EAE8E1\">Platinum<span>$7,500+</span></b></div>",
-      "css": ".ds-tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:#0B0A0F;padding:16px;font-family:var(--font,Archivo,sans-serif);width:520px}.ds-tiers b{display:grid;justify-items:center;padding:12px 8px 11px;color:#16141C;font-weight:600;font-size:0.9375rem}.ds-tiers span{font-size:1.375rem;letter-spacing:-0.01em;font-variant-numeric:tabular-nums}"
+      "css": ".ds-tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:#0A0A0A;padding:16px;font-family:var(--font,Archivo,sans-serif);width:520px}.ds-tiers b{display:grid;justify-items:center;padding:12px 8px 11px;color:#111111;font-weight:600;font-size:0.9375rem}.ds-tiers span{font-size:1.375rem;letter-spacing:-0.01em;font-variant-numeric:tabular-nums}"
     },
     {
       "name": "Budget Donut Legend",
       "kind": "custom",
       "refersTo": "",
       "description": "Partners budget: the real table is the donut's legend; a 12px grey swatch per line (largest brightest), the line, its tabular amount and share, on the stage.",
-      "html": "<table class=\"ds-budget\"><tr><th><i style=\"background:#F2F1F5\"></i>Travel</th><td class=\"a\">$19,950</td><td class=\"p\">38%</td></tr><tr><th><i style=\"background:#CFCDD6\"></i>Robot parts and electronics</th><td class=\"a\">$11,950</td><td class=\"p\">23%</td></tr></table>",
-      "css": ".ds-budget{background:#0B0A0F;color:#EFEEF3;border-collapse:collapse;font-family:var(--font,Archivo,sans-serif);font-size:15px;width:420px}.ds-budget th,.ds-budget td{padding:8px 12px;border-top:1px solid rgba(239,238,243,0.14);text-align:left;font-weight:500}.ds-budget i{display:inline-block;width:12px;height:12px;border-radius:0;margin-right:10px;vertical-align:-1px}.ds-budget .a{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}.ds-budget .p{text-align:right;color:#C2BFCD;font-variant-numeric:tabular-nums}"
+      "html": "<table class=\"ds-budget\"><tr><th><i style=\"background:#F2F2F2\"></i>Travel</th><td class=\"a\">$19,950</td><td class=\"p\">38%</td></tr><tr><th><i style=\"background:#CFCFCF\"></i>Robot parts and electronics</th><td class=\"a\">$11,950</td><td class=\"p\">23%</td></tr></table>",
+      "css": ".ds-budget{background:#0A0A0A;color:#F4F4F4;border-collapse:collapse;font-family:var(--font,Archivo,sans-serif);font-size:15px;width:420px}.ds-budget th,.ds-budget td{padding:8px 12px;border-top:1px solid rgba(244,244,244,0.14);text-align:left;font-weight:500}.ds-budget i{display:inline-block;width:12px;height:12px;border-radius:0;margin-right:10px;vertical-align:-1px}.ds-budget .a{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}.ds-budget .p{text-align:right;color:#C9C9C9;font-variant-numeric:tabular-nums}"
     }
   ],
   "narrative": {
-    "northStar": "The Keynote Stage in season liveries, after McLaren (rounds 8 and 9)",
-    "overview": "Each season's robot is launched the way a hardware company launches a product: the machine alone on an almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners.\n\n**Season liveries (round 9; Andy: \"reference the mclaren page and build more interactive and somewhat colorful page\").** Every FTC season has a game, and FIRST gives each game a colour palette. Each season wears its game's colour wherever that season is shown: its bay on the home stage, its card, its row on the Seasons page, its page head, its pager and its tag in the record. This season's colour is also the site's one signal colour, the way a racing team repaints its livery each year: the sponsor action, the tag above section headings, the next event in the calendar, the controls that move things. McLaren uses its papaya the same way (measured on mclaren.com/racing/formula-1: about 1.5% of the screen, in solid blocks, thin bars and arrows, never behind reading text). Beyond that, colour still comes only from the robots, the photos, the Mercury logo (kept as-is) and, on the partners page, the four sponsorship tiers in the colours of their names (Andy, 2026-11-09: \"the sponsorship category should be the color of the tier name\"); the budget donut is grey.\n\nTwo grounds carry the site. The stage (home launch, every season head, the partners package sheet (head, tier chart and budget donut), and the closing \"join or partner\" bands on the home, team and partners pages) and the reading ground (white, with aluminium-grey bands). Sections run the full width of the page and are separated by a change of ground, never by hairlines. Since round 7 (Andy: \"reference the VulcanForms website\") the things inside a section are boxes drawn like the cells of an engineering spec sheet: white, a 1px #C4C3CC line and near-square 6px corners (Stage Step with a light line on the stage). Nothing floats: the rounded panels on a grey ground from round 6 were removed because Andy said they looked \"so AI\". Buttons are pills, and nothing casts a shadow except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).\n\nThe neutrals are our own: tinted from the logo's dark outline, not copied. The reference study of Apple, TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.",
+    "northStar": "The Keynote Stage in season liveries, wall to wall (rounds 8 to 10)",
+    "overview": "Each season's robot is launched the way a hardware company launches a product: the machine alone on an almost-black stage, lit from above, standing on a thin floor line. Then the page steps out into calm white and aluminium-grey reading pages that explain the robot, the people, the outreach and the partners.\n\n**Season liveries, wall to wall (round 10; Andy: \"i think you can make the entire pages color scene with some respect to the ftc colors\").** Every FTC season has a game, and FIRST gives each game a colour palette of three or four colours and black. Every page wears one game's palette from its header to its footer, the way a race car wears a livery that is repainted each year: the site-wide pages wear this season's game (BIOBUZZ: yellow, pale yellow, gold), and each season's page wears its own game (DECODE: mint, vermilion, amber, slate teal; INTO THE DEEP: blue, pale blue, yellow). A livery fills six jobs: the field (page heads and closing calls: one flat colour with black type, as on the opening's title card), the ground (the alternate bands), the line (box outlines), the mark (the signal: the sponsor action, \"next\", the controls that move things), the tag (above headings) and the glow (the colour as type on black, in the footer). FIRST Tech Challenge's own orange marks the programme where it is named: \"FTC team 26413\" on the home stage and the last row of every page. Round 9 (Andy: \"reference the mclaren page and build more interactive and somewhat colorful page\") had put one colour per season on a few blocks, about 1.5% of the screen as on McLaren's page; round 10 puts the palettes on the page. Beyond the liveries, colour comes from the robots, the photos, the Mercury logo (kept as-is) and, on the partners page, the four sponsorship tiers in the colours of their names (Andy, 2026-11-09: \"the sponsorship category should be the color of the tier name\"); the budget donut is grey.\n\nThree grounds carry the site. The stage (near-black: the home launch, the partners tier chart and budget donut, the footer, the photo viewer), the field (the page's game colour, flat, with black type: every inner page head, every season head with its robot standing straight on it, the strip that closes the home stage, and the closing \"join or partner\" bands on the home, team and partners pages) and the reading ground (white, with bands in the livery's pale colour where aluminium grey used to be). Sections run the full width of the page and are separated by a change of ground, never by hairlines. Since round 7 (Andy: \"reference the VulcanForms website\") the things inside a section are boxes drawn like the cells of an engineering spec sheet: white, a 1px line in the livery's line colour and square corners (Stage Step with a light line on the stage, white with a black line on a field). Nothing floats: the rounded panels on a grey ground from round 6 were removed because Andy said they looked \"so AI\". Buttons are square, and nothing casts a shadow except a robot on its floor (the only other shadows are the small lift under the chosen outreach year and the halo around the part markers). One family, Archivo, does everything; robot names are set extra wide (125%).\n\nThe neutrals are plain: black, white and greys with no colour of their own (until round 10 they leaned violet, from the logo's outline, which fought the yellow). The reference study of Apple, TechCrunch, Vogue, The New York Times Company and Prada specifically warned against reusing Apple's exact greys (#F5F5F7, #A1A1A6) and its 28px cards, which is why the values and radii here differ.",
     "keyCharacteristics": [
-      "Two grounds: the near-black stage for launches and closing calls, white and aluminium grey for reading.",
-      "Season liveries: each season wears its game's colour (from FIRST's style guide for that game), and this season's colour is the one signal colour, always in solid blocks with an ink keyline. Robots, photos and the logo carry the rest; the four sponsorship tiers wear the colour of their names; the budget donut is grey.",
+      "Three grounds: the near-black stage (home launch, partners sheets, footer), the field in the page's game colour with black type (page heads, closing calls), and white with pale livery bands for reading.",
+      "Season liveries, wall to wall: every page wears one FTC game's official palette (this season's on the site-wide pages, each season's on its own page), always as flat solid colour; FIRST Tech Challenge's orange marks the programme in two places. Robots, photos and the logo carry the rest; the four sponsorship tiers wear the colour of their names; the budget donut is grey.",
       "Archivo only: page and section headings in capitals at 108% width and 700 (a lighter second line where the heading has a natural one), 125% width at 700 for robot and game names, sentence-case nav and text links, tabular figures for every number.",
-      "Full-width sections; every item (a write-up, a member, a program, a season, a post, a table, a tile) is a white box with a 1px line and square corners. Square buttons, no section hairlines, no shadows (except the floating header bar once the page scrolls, and the open menu).",
+      "Full-width sections; every item (a write-up, a member, a program, a season, a post, a table, a tile) is a white box with a 1px line in the livery's line colour and square corners. Square buttons, no section hairlines, no shadows (except the floating header bar once the page scrolls, and the open menu).",
       "Selection shown as light: the chosen bay's field is lit in its season's colour, the others hold a deep shade of theirs; a chosen story row turns white with a signal-colour marker.",
       "One authored opening (the line-up title card, once a visit) and one load moment on the stage; everything else answers a click, tap, drag or key. Nothing moves, fades, pins or changes while scrolling."
     ],
     "rules": [
       {
         "name": "The Season Livery Rule",
-        "body": "A season's colour appears only where that season is shown, and the signal colour only at its fixed places (listed above). Colour is always a solid block, a bar, a tag or an arrow: never a page or section background behind reading text, never a tinted table column, never a gradient between two colours, never a new hue for links or highlights. Violet stays out (Andy found it AI-like).",
+        "body": "Every colour on a page comes from FIRST's palettes: the page's own game for its field, ground, line, mark and tag; another season's main colour only where that season is shown; FTC orange only where the programme is named. Colour is always flat and solid: a whole field with black type, a whole band of the pale ground, a block, a bar, a tag or an arrow. Never a gradient between two colours, never a tint behind single cells or columns of a table, never coloured text on white, never a new hue for links or highlights. Violet stays out (Andy found it AI-like).",
         "section": "colors"
       },
       {
         "name": "The Keyline Rule",
-        "body": "Every block of the signal colour carries an ink keyline (a 1.5px ink border or inset line), as the yellow shapes in the BIOBUZZ logo do. It keeps a light colour's edge clear on white (yellow on white is 1.3:1 without it) and is invisible on the stage. Season fields (bays, heads, rows) have no keyline: they are surfaces, not controls.",
+        "body": "Every block of the signal colour carries an ink keyline (a 1.5px ink border or inset line), as the yellow shapes in the BIOBUZZ logo do. It keeps a light colour's edge clear on white and on the pale ground (yellow on white is 1.3:1 without it) and is invisible on the stage. What is white on a field has a black line too: the header bar, the fact tiles, the boxes of a closing band. Fields themselves (bays, heads, rows, bands) have no keyline: they are surfaces, not controls.",
         "section": "colors"
       },
       {
@@ -648,7 +791,7 @@
       },
       {
         "name": "The Spec Box Rule",
-        "body": "Sections are full-width bands (white, aluminium or the stage); every inner page head is a stage band. Inside a section, each item is a box: paper fill, 1px `--box-line`, `--r-md` corners (0 since round 8), on white and aluminium bands alike; on the stage, Stage Step with a 1px light line (`--box-line-stage`). Inside a box, quotes, chips and photo frames are filled aluminium, never boxed again (css/style.css \"Boxes\"). The footer is a stage band that closes every page the way the header opens it.",
+        "body": "Sections are full-width bands (white, the livery's pale ground, a field or the stage); every inner page head is a field. Inside a section, each item is a box: paper fill, 1px `--box-line` (the livery's line colour: gold, slate teal or blue), `--r-md` corners (0 since round 8), on white and ground bands alike; on the stage, Stage Step with a 1px light line (`--box-line-stage`); on a field, white with a black line. Inside a box, quotes and chips are filled with the ground colour and photo frames are white, never boxed again (css/style.css \"Boxes\"). The footer is a stage band that closes every page: the field's 8px stripe on its top edge, its headings in the livery's glow colour, and FTC orange as its last row.",
         "section": "colors"
       },
       {
@@ -668,20 +811,21 @@
       },
       {
         "name": "The Flat Tile Rule",
-        "body": "Boxes, menus and buttons never cast shadows, and a box never holds another box: inside a box, quotes, chips and photo frames take a flat aluminium fill instead.",
+        "body": "Boxes, menus and buttons never cast shadows, and a box never holds another box: inside a box, quotes and chips take a flat fill of the ground colour and photo frames are white.",
         "section": "elevation"
       }
     ],
     "dos": [
       "Do change colours, sizes, radii and spacing in `:root` in `css/style.css`, never in a component rule.",
-      "Do use the stage only for a launch (home, season heads), the partners head with its tier and budget sheet, and the closing call to join or partner; put everything else on paper or aluminium.",
+      "Do use the stage for the home launch, the partners tier and budget sheets and the footer; a field (the page's game colour, black type) for page heads, season heads and the closing call to join or partner; put everything else on white or the livery's pale ground.",
       "Do run sections the full width and put each item (a write-up, a member, a program, a season, a post, a table) in a white box with a 1px `--box-line` border, 6px corners and 16–24px padding.",
       "Do keep every corner square, and end buttons and text links with the drawn arrow (none on mail links and submit buttons, a down arrow on downloads); use `.btn` on light and `.btn--light` / `.btn--outline-light` on the stage.",
       "Do set robot and game names at 125% width and 700, page and section headings uppercase at 108% (split into two weights with `<span class=\"lite\">` only where the heading has a natural first line), and everything else, nav and links included, at normal width in sentence case.",
       "Do give every date, amount, spec and result tabular figures.",
       "Do show a chosen state as light (brighter, full colour, filled dot) and write it to the URL when it is a view someone might share.",
-      "Do give a season its game's colour wherever that season is shown (`data-season`), and take that colour from FIRST's style guide for the game.",
-      "Do keep the signal colour to its fixed places, always as a solid block with an ink keyline and Stage Black text.",
+      "Do take every colour from FIRST's palettes (the page's game, another season's colour where that season is shown, FTC orange where the programme is named), and re-point the six `--lv-*` tokens rather than colouring components one by one.",
+      "Do set type on a field in black, and give anything white on a field a black line.",
+      "Do keep the signal colour to its fixed places, always as a solid block with an ink keyline and black text.",
       "Do let the visitor drive anything that moves: buttons, drag, swipe, keys. Give every gesture a button and a key.",
       "Do let new content simply be there: no entrance animation for anything below the first screen.",
       "Do set `--w` to the image's pixel width on every `.photo`.",
@@ -689,11 +833,11 @@
       "Do add raster images only as the team's own photos or CAD renders, and record how any edited one was made (Assets and Provenance below)."
     ],
     "donts": [
-      "Don't add a hue beyond the season colours and the tier metals; no purple or violet accent, no neon on black.",
+      "Don't add a hue beyond FIRST's palettes (the three games and FTC orange) and the tier metals; no purple or violet accent, no neon on black. Don't use FTC orange for anything but the programme's two marks.",
       "Don't copy Apple's exact neutrals (#F5F5F7, #A1A1A6) or its 28px cards; use the tokens here.",
       "Don't separate sections with hairlines; change the ground instead. Lines draw boxes and sit inside data, nowhere else.",
       "Don't put shadows on boxes or buttons (the floating header bar's scrolled shadow and the open menu are the exceptions), round a corner, put a box inside a box, or float sections as rounded panels on a grey ground.",
-      "Don't colour the budget donut or tint the tier columns, and don't put a colour behind reading text or on pill-shaped controls (Andy, 2026-11-09, on colour mockups that did those things: \"just dont do the color it looks terrible\"). The tier metals he asked for later the same day; the season colours and the signal colour came with round 9, when he asked for a \"somewhat colorful\" site after McLaren's.",
+      "Don't colour the budget donut or tint the tier columns, and don't use weak tints, gradients or pill-shaped controls (Andy, 2026-11-09, on colour mockups with one accent on pill buttons and tinted table columns: \"just dont do the color it looks terrible\"). The tier metals he asked for later the same day; the season colours came with round 9, when he asked for a \"somewhat colorful\" site after McLaren's; whole fields and bands in the games' palettes came with round 10, when he asked for the colour scheme of the entire page to respect the FTC colours.",
       "Don't add a second font family or system display faces.",
       "Don't put small text labels (eyebrows) above headings or number the seasons 01/02/03; the 28×8px tag is the only mark above a heading, and it never goes on a heading inside a box.",
       "Don't add new load animations outside the stage, counters that tick up, anything that moves by itself (a carousel that advances, a ticker), or motion that ignores reduced motion.",

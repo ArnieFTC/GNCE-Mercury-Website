@@ -1,0 +1,145 @@
+/* =========================================================
+   NOT LOADED BY THE SITE. A second answer to round 10, kept for Andy's decision (DESIGN_PROGRESS.md, "Round 10").
+   It was designed as an override on top of the round 9 stylesheet: to use it, delete the "Round 10" block at the
+   end of css/style.css, append this file there, and re-run every check (it was contrast-clean on 2026-11-11:
+   0 text runs under WCAG AA on the 12 pages at 1440 and 390px; hover, focus, the open menu, 320 and 768px were
+   not checked). Its mock-up shortcuts (a box-shadow spread for the full-width footer rows, :has(.calendar) to
+   find the calendar band) are listed in its designer's notes in DESIGN_PROGRESS.md.
+
+   Round 10, scheme "orange": the programme's colours.
+   FIRST Tech Challenge orange #F57E25 (PMS 158) with FTC black #231F20 and white is the frame of every page,
+   the way McLaren's site is papaya, black and white. Orange is always a solid field with black type on it
+   (white on it is 2.7:1, so never). The season colours stay where one season is shown.
+   ========================================================= */
+
+/* ---------- 1. The palette ----------
+   --ftc: the official FTC orange. Neutrals lose their violet cast: every dark is FTC black #231F20 or a shade
+   of it, every grey is a shade of FIRST grey #9A989A (Cool Gray 7). */
+:root {
+  --ftc: #F57E25;            /* FTC orange, as published */
+  --ftc-black: #231F20;      /* FTC black, as published */
+
+  --stage: #100E0F;          /* FTC black, darkened: the dark grounds */
+  --stage-raise: #272324;    /* FTC black, a step lighter: boxes on the dark grounds */
+  --on-stage: #FFFFFF;
+  --on-stage-2: #CBC9CA;     /* FIRST grey, lightened */
+  --on-stage-3: #A7A5A7;     /* FIRST grey, lightened */
+  --rule-stage: rgba(255, 255, 255, 0.24);
+  --box-line-stage: rgba(255, 255, 255, 0.26);
+
+  --paper: #FFFFFF;
+  --alu: #ECEBEC;            /* FIRST grey, 15% on white: the alternate bands */
+  --alu-deep: #DDDCDD;       /* FIRST grey, lightened */
+  --line: #CFCECF;           /* FIRST grey, lightened */
+  --box-line: #C6C5C6;       /* FIRST grey, lightened */
+  --ink: #231F20;            /* FTC black: text, the dark button, keylines */
+  --ink-lift: #3B3637;       /* FTC black, lightened: the dark button under the mouse */
+  --steel: #4C4849;          /* FTC black, lightened: secondary text */
+  --quiet: #7C7A7C;          /* FIRST grey, darkened: control edges */
+
+  /* the tier columns' washes and the budget donut were violet-tinted darks and greys: the same steps, from
+     FTC black and FIRST grey. The four metals themselves are untouched. */
+  --bronze-wash: #1B1819;
+  --silver-wash: #1F1C1D;
+  --gold-wash: #242021;
+  --platinum-wash: #2B2728;
+  --budget-travel: #F3F2F3;
+  --budget-robot: #D1CFD1;
+  --budget-comp: #B0AEB0;
+  --budget-field: #939193;
+  --budget-growth: #7C7A7C;
+  --budget-outreach: #686668;
+  --budget-marketing: #575557;
+  --budget-tools: #484648;
+  --budget-first: #3C3A3C;
+
+  /* The signal colour is no longer this season's yellow: FTC orange takes that job on every page (the sponsor
+     action, the block above headings, the next event, arrow buttons, the play tab, the chosen story).
+     BIOBUZZ yellow is now only BIOBUZZ's season colour, like DECODE's green and INTO THE DEEP's blue. */
+  --season: var(--ftc);
+  --on-season: #000;
+
+  scrollbar-color: #B9B7B9 var(--alu);
+}
+
+/* the block above headings is a solid piece of orange, without the ink keyline the pale yellow needed (season
+   pages keep the keyline: their blocks wear the game's colour, and two of those are pale). The id is only to
+   outrank the round 9 rule from an appended file; in the real build that rule itself changes. */
+#main:not([data-season]) :is(h1, h2)::before { box-shadow: none; }
+.stories.is-ready .story.is-on::before { box-shadow: none; }
+
+/* ---------- 2. The top of every page: the strip that carries the white header bar is FTC orange ---------- */
+.site-header { --stage: var(--ftc); }
+/* where you are in the menu: an orange bar under the bold word (the weight carries the state too) */
+.nav a[aria-current="page"] { box-shadow: inset 0 -4px 0 var(--ftc); }
+
+/* ---------- 3. Page heads of the site-wide pages (seasons, team, outreach, news, partners, resources,
+   contact, terms): a solid field of FTC orange with the title in black capitals. Re-pointing the stage
+   tokens inside the head recolours everything in it. Season pages keep a black head: their colour is the
+   season's, on the robot's figure. ---------- */
+.page-band, .partner-head {
+  --stage: var(--ftc);
+  --on-stage: #000;
+  --on-stage-2: #231F20;     /* FTC black: 6.6:1 on the orange */
+  --on-stage-3: #231F20;
+  --rule-stage: rgba(0, 0, 0, 0.4);
+  --box-line-stage: rgba(0, 0, 0, 0.4);
+  --season: #000;            /* on orange the signal is black */
+  --on-season: #fff;
+}
+:is(.page-band, .partner-head) h1::before { background: #000; box-shadow: none; }
+/* buttons on the orange: black with white type, and a black outline */
+.partner-head .btn--light { background: #000; border-color: #000; color: #fff; }
+.partner-head .btn--light:hover { background: var(--ink-lift); border-color: var(--ink-lift); color: #fff; }
+.partner-head .btn--outline-light { border-color: #000; color: #000; }
+.partner-head .btn--outline-light:hover { background: #000; border-color: #000; color: #fff; }
+
+/* ---------- 4. Whole bands of solid colour in the body of a page (they were aluminium grey).
+   Home: the season calendar is a band of FTC orange. On a season's own page every alternate band is that
+   game's colour (BIOBUZZ yellow, DECODE green, INTO THE DEEP blue): the page leans on its game inside the
+   programme's frame. On any colour: black type, white blocks, and the signal turns black. ---------- */
+.band--grey:has(.calendar) { background: var(--ftc); }
+main[data-season] > .band--grey { background: var(--c); }
+.band--grey:has(.calendar), main[data-season] > .band--grey {
+  --season: #000;
+  --on-season: #fff;
+  --box-line: transparent;   /* a white block on a colour needs no outline */
+}
+:is(.band--grey:has(.calendar), main[data-season] > .band--grey) .section-head > h2:not(.h3)::before { background: #000; box-shadow: none; }
+:is(.band--grey:has(.calendar), main[data-season] > .band--grey) .section-head :is(h2, h2 .lite, p, .text-link) { color: #000; }
+:is(.band--grey:has(.calendar), main[data-season] > .band--grey) :focus-visible { outline-color: #000; }
+.calendar li.is-next time, .calendar li.is-today time { opacity: 1; }
+
+/* ---------- 5. On the black grounds orange is the lit colour: the programme's name on the home stage and the
+   main action of a closing band ---------- */
+.launch-head h1 .lite { color: var(--ftc); }
+/* the strap at the foot of the home stage (desktop) and the credit block under the line-up (phones): solid
+   orange, so the first screen is black framed by the programme's colour */
+.partner-strip, .lineup-credit {
+  background: var(--ftc); border-color: var(--ftc);
+  --on-stage: #000; --on-stage-2: #231F20; --rule-stage: transparent;
+  color: #000;
+}
+:is(.partner-strip, .lineup-credit) .btn--light,
+:is(.partner-strip, .lineup-credit) .btn--light:hover { background: #000; border-color: #000; color: #fff; box-shadow: none; }
+.band--stage:not(.page-band) .btn--light,
+.band--stage:not(.page-band) .btn--light:hover { background: var(--ftc); border-color: var(--ftc); color: #000; }
+@media (hover: hover) and (pointer: fine) { .band--stage:not(.page-band) .btn--light:hover { background: var(--season-press); border-color: var(--season-press); } }
+
+/* ---------- 6. The foot of every page: "Our sponsors" stands on FTC orange, sponsors on white blocks, then
+   the black footer. The footer's own ground becomes orange; the two rows under the strip are painted black
+   edge to edge (a full-width wrapper would do this in the real build). ---------- */
+.site-footer { background: var(--ftc); color: #000; }
+.footer-sponsors h2 { color: #000; }
+.footer-sponsors p { color: #231F20; }
+.footer-sponsors :focus-visible { outline-color: #000; }
+.sponsor-row .open { box-shadow: inset 0 0 0 1.5px #000; }
+.sponsor-row .open a { color: #000; }
+main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top-color: transparent; }
+.footer-main, .footer-legal {
+  background: var(--stage); color: var(--on-stage);
+  box-shadow: 0 0 0 100vmax var(--stage); clip-path: inset(0 -100vmax);
+}
+.footer-main { border-top-color: transparent; } /* the change from orange to black is the line */
+.footer-legal { color: var(--on-stage-2); }
+
