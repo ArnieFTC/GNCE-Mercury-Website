@@ -7,10 +7,10 @@
     "websiteUrl": "https://mercury26413.org/",
     "icons": [
         {
-            "src": "https://mercury26413.org/images/logo-mark.png",
+            "src": "https://mercury26413.org/icon-192.png",
             "mimeType": "image/png",
             "sizes": [
-                "473x505"
+                "192x192"
             ]
         }
     ],

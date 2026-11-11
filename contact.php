@@ -88,7 +88,7 @@ function answer(int $status, bool $ok, string $code, string $message, string $fi
     }
     echo '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
         . '<meta name="robots" content="noindex"><title>' . $e($title) . ' | GNCE Mercury</title>'
-        . '<link rel="stylesheet" href="css/style.css"><link rel="icon" href="images/logo-mark.png"></head>'
+        . '<link rel="stylesheet" href="css/style.css"><link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"></head>'
         . '<body><main id="main"><div class="band band--stage page-band"><div class="page-head container">'
         . '<h1>' . $e($title) . '</h1><p class="lead">' . $e($lead) . '</p></div></div>'
         . '<section class="band"><div class="container"><div class="prose">' . $more

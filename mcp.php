@@ -359,7 +359,7 @@ function server_info(): array
 {
     return ['name' => SERVER_NAME, 'title' => SERVER_TITLE, 'version' => SERVER_VERSION,
         'description' => SERVER_DESCRIPTION, 'websiteUrl' => SITE,
-        'icons' => [['src' => SITE . 'images/logo-mark.png', 'mimeType' => 'image/png', 'sizes' => ['473x505']]]];
+        'icons' => [['src' => SITE . 'icon-192.png', 'mimeType' => 'image/png', 'sizes' => ['192x192']]]];
 }
 
 function capabilities(): array
