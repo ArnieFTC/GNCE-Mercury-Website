@@ -574,6 +574,10 @@ Reduced motion makes every change instant.
 - ⊘ B16 Round 9 on real hardware: the opening, the strip's swipe and the photo viewer have only run in Chromium on
   the build machine. Someone should open the home page on an iPhone (Safari) and an Android phone, and in Safari and
   Firefox on a computer, and say if anything looks or feels off.
+- ⊘ B17 Hostinger's "Checking your browser" page: the test browser on the build machine got it before the site on
+  a first visit (about 3.5 s; see "Latest verification"). If people on ordinary phones and computers get it too, it
+  delays the home page and its opening. It is a setting of Hostinger's CDN, not of the site's files. Andy: open the
+  site in a private window on a phone on mobile data and say whether it appears.
 
 ## Skills and checks actually used
 
@@ -702,6 +706,17 @@ files, and a PHP server that writes mail to files for the contact form):
 - Not tested: real iPhones and Android phones, Safari, Firefox, screen readers, Windows High Contrast (its rules
   are written from the specification), a real slow network (the tests hold requests back locally), paper (print
   was checked in Chromium's print layout only).
+- The live site after the push (`main` at `0b0ad67`): all 12 pages answer 200 with `?v=229`; `css/style.css`,
+  `js/main.js`, the new logo file, four pages, `llms-full.txt` and `sitemap.xml` are byte-identical to the
+  repository; the agent files and the Markdown copy on `Accept: text/markdown` answer as before, and so do
+  `contact.php` (303 on a plain GET) and `mcp.php` (405 on a plain GET). In a browser the opening played with its
+  flight (a first visit and `?intro`, at 1440×900 and 390×844), a season choice, the team strip and the photo
+  viewer worked, and the 12 pages loaded without a script error or a failed request, each with the sponsor strip
+  in its footer.
+- Seen on the live host and not part of the site's files: Hostinger's CDN answered the test browser's first visit
+  with its own "Checking your browser before accessing" page (HTTP 403), which reloaded into the site after about
+  3.5 s; plain requests (curl) were served directly. Whether ordinary visitors get that page cannot be told from
+  the build machine (B17). A browser check of the live site has to wait for that page to pass.
 
 **Round 3, 2026-11-03** (Playwright Chromium, local static server):
 - Interaction tests: **57 of 57 pass**. New ones: the DECODE explorer changes only on click and arrow keys and
@@ -785,7 +800,7 @@ server):
 
 0. Andy's verdict on round 9: the colour (its off switch is under "Decisions and conflicts"), the opening
    (`index.html?intro` replays it) and the new parts of the home page. Then B16: a look on real phones and in
-   Safari and Firefox.
+   Safari and Firefox, and B17: whether Hostinger's "Checking your browser" page shows for ordinary visitors.
 1. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
 2. Still open from round 8: with WCAG text spacing at 320, the outreach year tabs scroll sideways and the tier
    header cells overflow; Windows High Contrast and a screen reader on the skip link and the menu are unchecked.
