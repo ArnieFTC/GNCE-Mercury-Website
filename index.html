@@ -329,51 +329,165 @@
       </div>
     </section>
 
-    <!-- TEAM: the team photo is shown no wider than its real size (927px). For a bigger photo,
-         swap the src, width and height, and change --w on the <figure> to its width. -->
+    <!-- TEAM: a strip of cards the visitor moves with the arrow buttons, by dragging, by swiping or with Tab.
+         The first card is the team photo; then one card per member, in the order of team.html: the portrait
+         (width and height are the file's real size), the name in <b> and the role line in <span>. Each card links
+         to that member on the team page (team.html#the-id-of-their-card). When someone joins or leaves, change
+         team.html AND this strip. A member without a photo yet gets class="strip-card strip-card--plain" and no <img>. -->
     <section class="band" aria-labelledby="team-title">
-      <div class="container split split--center">
-        <figure class="photo" style="--w: 927px">
-          <img src="images/team.webp" width="927" height="626" loading="lazy" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship">
-          <figcaption>The team at the <span translate="no">Ryken&nbsp;RoboBowl</span>, December 2025.</figcaption>
-        </figure>
-        <div>
+      <div class="container">
+        <div class="section-head">
           <h2 id="team-title">9 students and 4 coaches</h2>
-          <p>We design, build, wire, and program one robot each season.</p>
-          <p>Our members have competed at international events and won awards there.</p>
-          <p>In the summer we run a robotics camp, and during the school year we coach Weston’s <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> teams.</p>
-          <div class="links" style="margin-top: 24px">
+          <p>We design, build, wire, and program one robot each season. Our members have competed at international events and won awards there.</p>
+        </div>
+        <div class="strip-bar">
+          <div class="links">
             <a class="text-link" href="team.html">Meet the team</a>
             <a class="text-link" href="contact.html?topic=join#contact-form">Join as a student</a>
           </div>
+          <div class="strip-nav" data-strip-nav="team-strip" data-label="team members"></div>
         </div>
       </div>
+      <ul class="strip" id="team-strip" data-strip aria-label="The team">
+        <li><a class="strip-card strip-card--wide" href="team.html">
+          <img src="images/team.webp" width="927" height="626" loading="lazy" alt="GNCE Mercury team with our robot at the Ryken RoboBowl, advancing to the Massachusetts Championship">
+          <span class="strip-label"><b>The team at the <span translate="no">Ryken&nbsp;RoboBowl</span></b><span>December 2025</span></span>
+        </a></li>
+        <li><a class="strip-card" href="team.html#andy-ding">
+          <img src="images/team/andy.jpg?v=2" width="800" height="1000" loading="lazy" alt="">
+          <span class="strip-label"><b>Andy Ding</b><span>Founder, Co-Captain</span></span>
+        </a></li>
+        <li><a class="strip-card" href="team.html#arnie-sreeram">
+          <img src="images/team/arnie.jpg" width="800" height="1000" loading="lazy" alt="">
+          <span class="strip-label"><b>Arnie Sreeram</b><span>Co-Captain, Software Lead</span></span>
+        </a></li>
+        <li><a class="strip-card" href="team.html#zade-parks">
+          <img src="images/team/zade.jpg" width="800" height="1000" loading="lazy" alt="">
+          <span class="strip-label"><b>Zade &ldquo;Suzie&rdquo; Parks</b><span>CAD Lead</span></span>
+        </a></li>
+        <li><a class="strip-card" href="team.html#ethan-xie">
+          <img src="images/team/ethan.jpg" width="800" height="1000" loading="lazy" alt="">
+          <span class="strip-label"><b>Ethan Xie</b><span>Build Lead, Electrical Lead</span></span>
+        </a></li>
+        <li><a class="strip-card" href="team.html#reynah-chowrira">
+          <img src="images/team/reynah.jpg" width="800" height="1000" loading="lazy" alt="">
+          <span class="strip-label"><b>Reynah Chowrira</b><span>Outreach Lead</span></span>
+        </a></li>
+        <li><a class="strip-card" href="team.html#margaret-yang">
+          <img src="images/team/margaret.jpg" width="600" height="750" loading="lazy" alt="">
+          <span class="strip-label"><b>Margaret Yang</b><span>Head of Sponsorship</span></span>
+        </a></li>
+        <li><a class="strip-card" href="team.html#tucker-cashel">
+          <img src="images/team/tucker.jpg" width="800" height="1000" loading="lazy" alt="">
+          <span class="strip-label"><b>Tucker Cashel</b><span>Build</span></span>
+        </a></li>
+        <li><a class="strip-card" href="team.html#kai-kassekert">
+          <img src="images/team/kai.jpg" width="800" height="1000" loading="lazy" alt="">
+          <span class="strip-label"><b>Kai Kassekert</b><span>CAD, Build</span></span>
+        </a></li>
+        <li><a class="strip-card" href="team.html#avo-bell">
+          <img src="images/team/avo.jpg" width="800" height="1000" loading="lazy" alt="">
+          <span class="strip-label"><b>Avo Bell</b><span>CAD, Game Strategy</span></span>
+        </a></li>
+        <li><a class="strip-card strip-card--plain" href="team.html#noyee-cao">
+          <span class="strip-label"><b>Noyee Cao</b><span>CAD, Build</span></span>
+        </a></li>
+        <li><a class="strip-card" href="team.html#ashna-sreeram">
+          <img src="images/team/ashna.jpg" width="800" height="1000" loading="lazy" alt="">
+          <span class="strip-label"><b>Ashna Sreeram</b><span>CAD</span></span>
+        </a></li>
+      </ul>
+      <div class="container"><p class="strip-foot">In the summer we run a robotics camp, and during the school year we coach Weston’s <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> teams.</p></div>
     </section>
 
-    <!-- OUTREACH: two highlights from outreach.html. The photos lead, side by side at one height (entries--photos);
-         each is shown no larger than its real width (1400 and 900px). -->
+    <!-- OUTREACH: four stories from outreach.html. On wide screens choosing a story (its title is a button) shows
+         its photo in the big frame; on phones the stories are cards you swipe through; without JavaScript each
+         story keeps its photo above it. One <article class="story"> per story: the photo (4:3 or close, width and
+         height are the file's real size), then the title, the date line, one or two sentences from outreach.html
+         and a link to that program there (outreach.html#its-id). -->
     <section class="band band--grey" aria-labelledby="outreach-title">
       <div class="container">
         <div class="section-head">
           <h2 id="outreach-title">From 4 to 17 <span class="lite"><span translate="no">FIRST LEGO&nbsp;League</span> teams in Weston</span></h2>
           <p><a class="text-link" href="outreach.html">See all our outreach</a></p>
         </div>
-        <div class="entries entries--2 entries--photos">
-          <article class="entry">
-            <figure class="photo">
+        <div class="stories" data-stories>
+          <article class="story">
+            <figure class="story-photo">
+              <img src="images/fll_camp_4.jpg" width="1400" height="1055" loading="lazy" alt="GNCE Mercury members coaching young students at an FLL table">
+              <figcaption>Coaching Weston’s FLL teams, 2025–&#8288;26 FLL season.</figcaption>
+            </figure>
+            <div class="story-text">
+              <h3>Coaching Weston’s FLL teams</h3>
+              <p class="dateline"><span class="d">2025–&#8288;26 FLL season</span></p>
+              <p>We helped Weston’s <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> grow from 4 teams to 17 teams and 122 students, including 10 brand-new 4th and 5th grade teams at <span translate="no">Field&nbsp;School</span>.</p>
+              <a class="text-link" href="outreach.html#fll-coaching">Read the story</a>
+            </div>
+          </article>
+          <article class="story">
+            <figure class="story-photo">
               <img src="images/fll_camp_3.jpg" width="1400" height="1050" loading="lazy" alt="Team members helping campers troubleshoot a VEX IQ robot">
               <figcaption>Our summer robotics camp, August 2026.</figcaption>
             </figure>
-            <h3>Coaching and camps</h3>
-            <p>We helped Weston’s <span translate="no">FIRST&nbsp;LEGO&nbsp;League</span> grow from 4 teams to 17 teams and 122 students. In August we ran a week-long robotics and engineering camp for about 13 students in grades 4–&#8288;8.</p>
+            <div class="story-text">
+              <h3>Robotics and engineering summer camp</h3>
+              <p class="dateline"><span>Week of <time class="d" datetime="2026-08-17">Aug 17, 2026</time></span></p>
+              <p>We spent a week of the summer running a robotics and engineering camp for about 13 students in grades 4–&#8288;8.</p>
+              <a class="text-link" href="outreach.html#summer-camp">Read the story</a>
+            </div>
           </article>
-          <article class="entry">
-            <figure class="photo">
-              <img src="images/mit_lab_2.jpg" width="900" height="900" loading="lazy" alt="Team members laughing as they test a liquid-nitrogen-cooled superconductor with tweezers and small magnets at a lab bench">
+          <article class="story">
+            <figure class="story-photo">
+              <img src="images/mit_lab_1.jpg" width="1400" height="1050" loading="lazy" alt="Team members gathered in front of a foil-wrapped vacuum chamber in a research lab at MIT">
               <figcaption><span translate="no">Francis Bitter</span> Magnet Laboratory, MIT, October&nbsp;9, 2026.</figcaption>
             </figure>
-            <h3>Learning from scientists and engineers</h3>
-            <p>We spent an afternoon at MIT’s <span translate="no">Francis Bitter</span> Magnet Laboratory, cooling a superconductor with liquid nitrogen, and toured <span translate="no">VulcanForms</span> to see how metal parts are 3D printed.</p>
+            <div class="story-text">
+              <h3><span translate="no">Francis Bitter</span> Magnet Laboratory at MIT</h3>
+              <p class="dateline"><time class="d" datetime="2026-10-09">Oct 9, 2026</time><span>MIT, Cambridge</span></p>
+              <p>We spent an afternoon at MIT’s <span translate="no">Francis Bitter</span> Magnet Laboratory and finished at a lab bench, cooling a superconductor with liquid nitrogen and testing it with small magnets.</p>
+              <a class="text-link" href="outreach.html#mit-lab">Read the story</a>
+            </div>
+          </article>
+          <article class="story">
+            <figure class="story-photo">
+              <img src="images/vulcanforms_1.jpg" width="1400" height="1050" loading="lazy" alt="Six GNCE Mercury members in the lobby at VulcanForms, in front of the company’s logo wall">
+              <figcaption>At <span translate="no">VulcanForms</span>, October&nbsp;31, 2026.</figcaption>
+            </figure>
+            <div class="story-text">
+              <h3>Touring <span translate="no">VulcanForms</span></h3>
+              <p class="dateline"><time class="d" datetime="2026-10-31">Oct 31, 2026</time><span>Metal 3D printing</span></p>
+              <p>We toured <span translate="no">VulcanForms</span>, a Massachusetts company that makes metal parts with 3D printing.</p>
+              <a class="text-link" href="outreach.html#vulcanforms-tour">Read the story</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWS: the two newest posts from news.html, newest first. When you add a post there, copy its picture (or
+         video), date line, title and first paragraph here and drop the oldest card. -->
+    <section class="band" aria-labelledby="news-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="news-title">Latest news</h2>
+          <p><a class="text-link" href="news.html">All news</a></p>
+        </div>
+        <div class="news-cards">
+          <article class="news-card">
+            <a class="news-media" href="news.html#vulcanforms-platinum" tabindex="-1" aria-hidden="true"><img src="images/sponsors/vulcanforms-banner.png" width="1200" height="630" loading="lazy" alt=""></a>
+            <p class="dateline"><time class="d" datetime="2026-11-03">Nov 3, 2026</time><span>Sponsors</span></p>
+            <h3><a href="news.html#vulcanforms-platinum">Thank you, <span translate="no">VulcanForms</span></a></h3>
+            <p>Thank you to <span translate="no">VulcanForms</span> for applying to sponsor our 2026–&#8288;27 season at the Platinum level ($7,500+), the highest of our four sponsorship tiers.</p>
+          </article>
+          <article class="news-card">
+            <figure class="news-media" data-video>
+              <video controls muted playsinline preload="none" poster="images/hive-tip-match-2-poster.jpg" width="1920" height="1080" aria-label="The hive tips during a BIOBUZZ match and its balls spill onto the field">
+                <source src="images/hive-tip-match-2.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <p class="dateline"><time class="d" datetime="2026-10-25">Oct 25, 2026</time><span>Competition</span></p>
+            <h3><a href="news.html#first-hive-tip">First hive tip of the season</a></h3>
+            <p>We attended the scrimmage hosted by <span translate="no">Ghost Robotics</span> at Westford High School, and here we got our first in-competition hive tip of this season!</p>
           </article>
         </div>
       </div>

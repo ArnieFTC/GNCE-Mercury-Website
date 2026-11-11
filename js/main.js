@@ -378,12 +378,19 @@ part("year-tabs", () => {
     e.preventDefault();
     select((keys[e.key] + tabs.length) % tabs.length, { focus: true, user: true });
   });
-  const fromHash = panels.findIndex(p => "#" + p.id === location.hash);
-  select(fromHash >= 0 ? fromHash : 0);
-  addEventListener("hashchange", () => {
-    const j = panels.findIndex(p => "#" + p.id === location.hash);
-    if (j >= 0) select(j);
-  });
+  // the address can name a year (#year-2) or anything inside one (#summer-camp): that year opens, and the page goes
+  // to the thing named (the browser could not, while its year was hidden)
+  const target = () => { try { return document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (e) { return null; } };
+  const open = () => {
+    const el = location.hash.length > 1 ? target() : null;
+    const j = el ? panels.findIndex(p => p === el || p.contains(el)) : -1;
+    if (j < 0) return false;
+    select(j);
+    if (el !== panels[j]) el.scrollIntoView();
+    return true;
+  };
+  if (!open()) select(0);
+  addEventListener("hashchange", open);
 });
 
 // ---------- Robot callouts (season pages) ----------
@@ -887,6 +894,218 @@ part("scroll-calm", () => {
     clearTimeout(t);
     t = setTimeout(() => { rootEl.classList.remove("is-scrolling"); t = 0; }, 160);
   }, { passive: true });
+});
+
+// ---------- Strips: rows of cards the visitor moves ----------
+// <ul class="strip" data-strip id="…"> scrolls sideways on its own (swipe, trackpad, Tab). Here: the previous/next
+// buttons, put into the <div class="strip-nav" data-strip-nav="that id">, and dragging with a mouse.
+// Nothing here moves by itself.
+const chevron = dir => `<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="${dir < 0 ? "M10 3 5 8l5 5" : "M6 3l5 5-5 5"}"/></svg>`;
+const stripButtons = (nav, what, onGo) => {
+  const make = dir => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "strip-btn";
+    b.setAttribute("aria-label", `${dir < 0 ? "Previous" : "Next"} ${what}`);
+    b.innerHTML = chevron(dir);
+    b.addEventListener("click", () => { if (b.getAttribute("aria-disabled") !== "true") onGo(dir); });
+    return b;
+  };
+  const prev = make(-1), next = make(1);
+  nav.append(prev, next);
+  return { prev, next };
+};
+part("strip", () => {
+  document.querySelectorAll("[data-strip]").forEach(strip => {
+    const items = [...strip.children];
+    const nav = strip.id && document.querySelector(`[data-strip-nav="${strip.id}"]`);
+    if (items.length < 2) return;
+    const pad = () => parseFloat(getComputedStyle(strip).scrollPaddingLeft) || 0;
+    const starts = () => { const x0 = strip.getBoundingClientRect().left - strip.scrollLeft + pad(); return items.map(li => li.getBoundingClientRect().left - x0); };
+    const max = () => strip.scrollWidth - strip.clientWidth;
+    // the row moves by about one screenful of cards, and always stops with a card on the content's left edge
+    const go = dir => {
+      const left = strip.scrollLeft, page = (strip.clientWidth - 2 * pad()) * 0.82, s = starts();
+      let to;
+      if (dir > 0) to = [...s].reverse().find(x => x > left + 4 && x <= left + page) ?? s.find(x => x > left + 4) ?? max();
+      else to = s.find(x => x < left - 4 && x >= left - page) ?? [...s].reverse().find(x => x < left - 4) ?? 0;
+      strip.scrollTo({ left: Math.max(0, Math.min(to, max())), behavior: RM ? "auto" : "smooth" });
+    };
+    if (nav) {
+      const { prev, next } = stripButtons(nav, nav.dataset.label || "cards", go);
+      let ticking = false;
+      const mark = () => {
+        ticking = false;
+        nav.hidden = max() < 8;
+        prev.setAttribute("aria-disabled", strip.scrollLeft < 4);
+        next.setAttribute("aria-disabled", strip.scrollLeft > max() - 4);
+      };
+      const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(mark); } };
+      strip.addEventListener("scroll", queue, { passive: true });
+      addEventListener("resize", queue, { passive: true });
+      mark();
+    }
+    // a mouse can drag the row; the press that ends a drag is not a click on a card
+    let drag = null;
+    strip.addEventListener("dragstart", e => e.preventDefault());
+    strip.addEventListener("pointerdown", e => { if (e.pointerType === "mouse" && e.button === 0) drag = { x: e.clientX, left: strip.scrollLeft, moved: false }; });
+    addEventListener("pointermove", e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) < 6) return;
+      if (!drag.moved) { drag.moved = true; strip.classList.add("is-dragging"); }
+      strip.scrollLeft = drag.left - dx;
+    });
+    const drop = () => {
+      if (!drag) return;
+      const moved = drag.moved;
+      drag = null;
+      if (!moved) return;
+      const stop = e => { e.preventDefault(); e.stopPropagation(); };
+      strip.addEventListener("click", stop, { capture: true, once: true });
+      setTimeout(() => { strip.removeEventListener("click", stop, { capture: true }); strip.classList.remove("is-dragging"); }, 0);
+    };
+    addEventListener("pointerup", drop);
+    addEventListener("pointercancel", drop);
+  });
+});
+
+// ---------- Home: outreach stories ----------
+// <div class="stories" data-stories> holds one <article class="story"> per story (its photo, then its text).
+// On wide screens the photos move into one big frame and each title becomes a button: choosing a story shows its
+// photo. On phones the stories stay as cards to swipe through, each with its own photo.
+part("stories", () => {
+  document.querySelectorAll("[data-stories]").forEach((box, n) => {
+    const stories = [...box.querySelectorAll(":scope > .story")];
+    const photos = stories.map(s => s.querySelector(".story-photo"));
+    const titles = stories.map(s => s.querySelector("h3"));
+    if (stories.length < 2 || photos.some(x => !x) || titles.some(x => !x)) return;
+    const wide = matchMedia("(min-width: 900px)");
+    const stage = document.createElement("div");
+    stage.className = "story-stage";
+    photos.forEach((ph, i) => { if (!ph.id) ph.id = `story-photo-${n}-${i}`; });
+    let current = 0;
+    const select = i => {
+      current = i;
+      stories.forEach((s, j) => s.classList.toggle("is-on", j === i));
+      photos.forEach((ph, j) => ph.classList.toggle("is-on", j === i));
+      box.querySelectorAll(".story-pick").forEach((b, j) => b.setAttribute("aria-pressed", j === i));
+    };
+    stories.forEach((s, i) => s.addEventListener("click", e => { if (wide.matches && !e.target.closest("a")) select(i); }));
+    const arrange = () => {
+      if (wide.matches) {
+        photos.forEach(ph => stage.append(ph));
+        box.prepend(stage);
+        titles.forEach((h, i) => {
+          if (h.querySelector(".story-pick")) return;
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "story-pick";
+          b.setAttribute("aria-controls", photos[i].id);
+          b.append(...h.childNodes);
+          h.append(b);
+        });
+        box.classList.add("is-ready");
+        select(current);
+      } else {
+        box.classList.remove("is-ready");
+        titles.forEach(h => { const b = h.querySelector(".story-pick"); if (b) { h.append(...b.childNodes); b.remove(); } });
+        stories.forEach((s, i) => { s.prepend(photos[i]); s.classList.remove("is-on"); photos[i].classList.remove("is-on"); });
+        stage.remove();
+      }
+    };
+    wide.addEventListener("change", arrange);
+    arrange();
+  });
+});
+
+// ---------- Video cards ----------
+// <figure data-video> around a <video controls poster>: the poster gets a "Play video" button; pressing it starts
+// the video with its own controls. Without JavaScript the video simply has its controls.
+part("video-tile", () => {
+  document.querySelectorAll("[data-video]").forEach(box => {
+    const v = box.querySelector("video");
+    if (!v || !v.hasAttribute("controls") || !v.hasAttribute("poster")) return;
+    v.removeAttribute("controls");
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "play";
+    b.innerHTML = `<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 1l11 6-11 6z" fill="currentColor"/></svg><span>Play video</span>`;
+    const about = v.getAttribute("aria-label");
+    if (about) b.setAttribute("aria-label", `Play video: ${about}`);
+    b.addEventListener("click", () => {
+      v.setAttribute("controls", "");
+      b.remove();
+      v.focus({ preventScroll: true });
+      const playing = v.play();
+      if (playing && playing.catch) playing.catch(() => {});
+    });
+    box.append(b);
+  });
+});
+
+// ---------- Photo viewer ----------
+// Photos in an outreach gallery (<div class="program-media">, or anything marked data-gallery) open large:
+// previous/next buttons, the arrow keys, a swipe, and Esc or Close to leave. The caption is the photo's alt text.
+part("viewer", () => {
+  if (!window.HTMLDialogElement) return;
+  const groups = [...document.querySelectorAll(".program-media, [data-gallery]")].map(g => [...g.querySelectorAll("img")]).filter(g => g.length);
+  if (!groups.length) return;
+  let dlg = null, img, cap, count, nav, group = [], at = 0, opener = null;
+  const show = i => {
+    at = (i + group.length) % group.length;
+    const from = group[at];
+    img.classList.remove("is-in");
+    img.src = from.currentSrc || from.src;
+    img.alt = from.alt;
+    if (from.naturalWidth) { img.width = from.naturalWidth; img.height = from.naturalHeight; }
+    if (!RM) { void img.offsetWidth; img.classList.add("is-in"); }
+    cap.textContent = from.alt;
+    count.textContent = `${at + 1} of ${group.length}`;
+    nav.hidden = group.length < 2;
+  };
+  const build = () => {
+    if (dlg) return;
+    dlg = document.createElement("dialog");
+    dlg.className = "viewer";
+    dlg.setAttribute("aria-label", "Photo viewer");
+    dlg.innerHTML = `
+      <div class="viewer-top"><span class="viewer-count" role="status"></span><button class="viewer-close" type="button">Close</button></div>
+      <div class="viewer-stage"><img alt=""></div>
+      <div class="viewer-foot"><p class="viewer-cap"></p><div class="strip-nav"></div></div>`;
+    document.body.append(dlg);
+    img = dlg.querySelector("img");
+    cap = dlg.querySelector(".viewer-cap");
+    count = dlg.querySelector(".viewer-count");
+    nav = dlg.querySelector(".strip-nav");
+    stripButtons(nav, "photo", dir => show(at + dir));
+    const stage = dlg.querySelector(".viewer-stage");
+    dlg.querySelector(".viewer-close").addEventListener("click", () => dlg.close());
+    stage.addEventListener("click", e => { if (e.target === stage) dlg.close(); });
+    dlg.addEventListener("keydown", e => {
+      if (group.length < 2) return;
+      if (e.key === "ArrowRight") { e.preventDefault(); show(at + 1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); show(at - 1); }
+    });
+    let downX = null;
+    stage.addEventListener("pointerdown", e => { downX = e.clientX; });
+    stage.addEventListener("pointerup", e => {
+      if (downX == null || group.length < 2) return;
+      const dx = e.clientX - downX;
+      downX = null;
+      if (Math.abs(dx) > 48) show(at + (dx < 0 ? 1 : -1));
+    });
+    dlg.addEventListener("close", () => { if (opener) opener.focus({ preventScroll: true }); });
+  };
+  groups.forEach(g => g.forEach((el, i) => {
+    el.dataset.viewable = "";
+    el.tabIndex = 0;
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-label", `View larger: ${el.alt}`);
+    const open = () => { build(); group = g; opener = el; show(i); dlg.showModal(); };
+    el.addEventListener("click", open);
+    el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+  }));
 });
 
 // ---------- Opening ----------
