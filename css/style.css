@@ -2,8 +2,9 @@
    GNCE Mercury 26413: site styles
    Direction: a product keynote stage. Each season's robot is launched alone on a black stage,
    lit; calm white and aluminium-grey pages explain it, the people and the partners.
-   No brand hue: colour comes from the robots, the photos, the logo and the four tier metals.
-   Colours, type and radii live in :root below; change them there, not in the components.
+   Colour comes from the robots, the photos, the logo, the four tier metals and (round 9, at the end of
+   this file) the season colours: each FTC season wears its game's colour, and this season's colour is the
+   site's one signal colour. Colours, type and radii live in :root; change them there, not in the components.
    ========================================================= */
 
 @font-face {
@@ -982,7 +983,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
   html.intro .opening {
     display: grid !important; position: fixed; inset: 0; z-index: 1000; overflow: hidden;
     grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr);
-    color: var(--on-season); animation: op-safety 1ms 6s forwards;
+    color: var(--stage); animation: op-safety 1ms 6s forwards;
   }
   .op-black { position: absolute; inset: 0; background: var(--stage); }
   .op-field, .op-slot { grid-row: 1; min-width: 0; min-height: 0; }
@@ -1361,6 +1362,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
    This season's colour is also the site's one signal colour, like a racing livery repainted every year: the
    sponsor action, the bar above section headings, the "next" marks and the previous/next controls.
    To repaint the site for a new season: add the new game's colour below and point --season at it.
+   To keep the seasons' colours but drop the signal colour: --season: var(--ink); --on-season: #fff.
    Never: colour as a page background behind reading text, tinted table columns, gradients of colour, violet.
    ========================================================= */
 :root {
@@ -1368,11 +1370,23 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
   --decode: #2EBD77;         /* DECODE, 2025-26 */
   --biobuzz: #FFC21A;        /* BIOBUZZ, 2026-27 */
   --season: var(--biobuzz);  /* THIS season: the site's signal colour */
-  --on-season: var(--stage); /* text on any season colour (ink: every season colour is a light one) */
+  --on-season: var(--stage); /* text on the signal colour (ink: every season colour so far is a light one) */
 }
 [data-season="2024"] { --c: var(--itd); }
 [data-season="2025"] { --c: var(--decode); }
 [data-season="2026"] { --c: var(--biobuzz); }
+/* shades worked out from the colours above, so a new season needs one value only:
+   --c-dim / --c-mid: a season's colour with the lights down (an unchosen bay) and half up (that bay under the mouse);
+   --season-press: the signal colour's hover. Browsers without these colour functions get plain values. */
+:root { --season-press: var(--season); }
+[data-season] { --c-dim: var(--stage-raise); --c-mid: var(--stage-raise); }
+@supports (color: color-mix(in oklab, red, blue)) {
+  :root { --season-press: color-mix(in oklab, var(--season) 86%, var(--ink)); }
+  [data-season] { --c-dim: color-mix(in oklab, var(--c) 17%, var(--stage)); --c-mid: color-mix(in oklab, var(--c) 42%, var(--stage)); }
+}
+@supports (color: oklch(from red l c h)) {
+  [data-season] { --c-dim: oklch(from var(--c) 0.3 calc(c * 0.55) h); --c-mid: oklch(from var(--c) 0.44 calc(c * 0.75) h); }
+}
 ::selection { background: var(--season); color: var(--on-season); }
 
 /* ---------- Home stage: each robot stands on its season's colour; the chosen one is lit ---------- */
@@ -1380,7 +1394,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .bay { padding: 0; }
 .bay-stage {
   padding: 18px 7% 20px; overflow: hidden;
-  background-color: color-mix(in oklab, var(--c, var(--stage-raise)) 17%, var(--stage));
+  background-color: var(--c-dim, var(--stage-raise)); /* its own colour, lights down */
   transition: background-color 520ms var(--ease);
 }
 .bay-stage::after { content: none; }
@@ -1392,7 +1406,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .lineup.is-ready .bay[aria-selected="true"] .bay-stage { background-color: var(--c); }
 .lineup.is-ready .bay[aria-selected="false"] .bay-stage img { opacity: 0.55; filter: grayscale(0.8) brightness(0.72) drop-shadow(0 16px 14px rgba(11, 10, 15, 0.4)); transform: scale(0.94) translateY(6px); }
 @media (hover: hover) {
-  .lineup.is-ready .bay[aria-selected="false"]:hover .bay-stage { background-color: color-mix(in oklab, var(--c) 42%, var(--stage)); }
+  .lineup.is-ready .bay[aria-selected="false"]:hover .bay-stage { background-color: var(--c-mid); }
   .lineup.is-ready .bay[aria-selected="false"]:hover .bay-stage img { opacity: 0.9; filter: grayscale(0.2) brightness(0.95) drop-shadow(0 16px 14px rgba(11, 10, 15, 0.4)); transform: scale(0.97); }
 }
 @media (scripting: none) { .bay-stage { background-color: var(--c); } .bay-stage::before { opacity: 1; } }
@@ -1406,10 +1420,11 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 
 /* the signal colour: the sponsor action */
 .header-cta, .header-cta:hover, .btn--season, .btn--season:hover { background: var(--season); border-color: var(--season); color: var(--on-season); }
-.header-cta:hover, .btn--season:hover { background: color-mix(in oklab, var(--season) 86%, var(--ink)); border-color: color-mix(in oklab, var(--season) 86%, var(--ink)); }
+.header-cta:hover, .btn--season:hover { background: var(--season-press); border-color: var(--season-press); }
 .header-cta[aria-current="page"], .header-cta[aria-current="page"]:hover { background: transparent; border-color: var(--ink); color: var(--ink); }
 
-/* the bar above section headings, and the calendar's next event, wear this season's colour */
+/* the bar above section headings, and the calendar's next event, wear this season's colour; on a season's own
+   page (<main data-season="…">) the bars wear that season's */
 :is(.page-head, .partner-head) h1::before,
 :is(.section-head, .sheet-grid, .rail, .year-panel) > h2:not(.h3)::before,
 .split > h2:not(.h3):first-child::before,
@@ -1417,7 +1432,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .split > * > .prose > h2:not(.h3):first-child::before,
 .close-grid > div:first-child > h2:first-child::before,
 .band--stage > .container > h2:first-child::before,
-.terms > h2:not(.h3)::before { background: var(--season); }
+.terms > h2:not(.h3)::before { background: var(--c, var(--season)); }
 .calendar li.is-next, .calendar li.is-today { background: var(--season) !important; border-color: var(--season); color: var(--on-season); }
 .calendar li.is-next time, .calendar li.is-today time { color: var(--on-season); opacity: 0.78; }
 
@@ -1460,7 +1475,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .strip-btn[aria-disabled="true"] { background: var(--alu-deep); color: var(--quiet); cursor: default; } /* at the end of the row; it keeps the focus */
 .band--grey .strip-btn[aria-disabled="true"] { background: var(--paper); }
 .viewer .strip-btn[aria-disabled="true"] { background: var(--stage-raise); color: var(--on-stage-3); }
-@media (hover: hover) and (pointer: fine) { .strip-btn:not([aria-disabled="true"]):hover { background: color-mix(in oklab, var(--season) 86%, var(--ink)); } }
+@media (hover: hover) and (pointer: fine) { .strip-btn:not([aria-disabled="true"]):hover { background: var(--season-press); } }
 .strip-btn:not([aria-disabled="true"]):active { transform: scale(0.94); transition-duration: 90ms; }
 .strip-nav[hidden] { display: none; }
 .strip {
@@ -1507,7 +1522,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .stories::-webkit-scrollbar { display: none; }
 .story { flex: 0 0 min(84%, 420px); scroll-snap-align: start; display: grid; gap: 14px; align-content: start; padding: 12px 12px 18px; background: var(--paper); border: 1px solid var(--box-line); }
 .story-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-.story-photo figcaption { margin-top: 8px; }
+.story-photo figcaption { display: none; } /* the title under the photo already says it; the caption is for the big frame */
 .story-text { display: grid; gap: 6px; justify-items: start; padding-inline: 4px; }
 .story-text h3 { font-size: 1.1875rem; line-height: 1.22; margin: 0; }
 .story-text .dateline { margin: 0; }
@@ -1520,7 +1535,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
   .stories.is-ready .story-stage .story-photo { position: absolute; inset: 0; margin: 0; opacity: 0; visibility: hidden; transition: opacity 320ms var(--ease), visibility 0s linear 320ms; }
   .stories.is-ready .story-stage .story-photo.is-on { opacity: 1; visibility: visible; transition: opacity 320ms var(--ease); }
   .stories.is-ready .story-stage img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; }
-  .stories.is-ready .story-stage figcaption { position: absolute; inset: auto 0 0 0; margin: 0; padding: 44px 18px 14px; color: #fff; background: linear-gradient(180deg, rgba(11, 10, 15, 0), rgba(11, 10, 15, 0.82)); }
+  .stories.is-ready .story-stage figcaption { display: block; position: absolute; inset: auto 0 0 0; margin: 0; padding: 44px 18px 14px; color: #fff; background: linear-gradient(180deg, rgba(11, 10, 15, 0), rgba(11, 10, 15, 0.82)); }
   .stories.is-ready .story { grid-column: 2; gap: 0; padding: 16px 20px 18px; background: transparent; border-color: transparent; cursor: pointer; transition: background-color 200ms var(--ease), border-color 200ms var(--ease); }
   .stories.is-ready .story.is-on { background: var(--paper); border-color: var(--box-line); cursor: default; }
   .stories.is-ready .story-text { padding-inline: 0; }
@@ -1551,7 +1566,7 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
   transition: background-color 150ms var(--ease), transform 150ms var(--ease);
 }
 .play svg { width: 14px; height: 14px; }
-@media (hover: hover) and (pointer: fine) { .play:hover { background: color-mix(in oklab, var(--season) 86%, var(--ink)); } }
+@media (hover: hover) and (pointer: fine) { .play:hover { background: var(--season-press); } }
 .play:active { transform: scale(0.97); transition-duration: 90ms; }
 .play:focus-visible { outline: 2px solid #fff; outline-offset: -5px; }
 

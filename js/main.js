@@ -920,12 +920,14 @@ part("strip", () => {
     const items = [...strip.children];
     const nav = strip.id && document.querySelector(`[data-strip-nav="${strip.id}"]`);
     if (items.length < 2) return;
-    const pad = () => parseFloat(getComputedStyle(strip).scrollPaddingLeft) || 0;
-    const starts = () => { const x0 = strip.getBoundingClientRect().left - strip.scrollLeft + pad(); return items.map(li => li.getBoundingClientRect().left - x0); };
+    // each card's left edge in the row's own coordinates; the first one's is the row's left padding, which is
+    // where the content's left edge is (measured, because the padding is written with max() and a percentage)
+    const lefts = () => { const x0 = strip.getBoundingClientRect().left - strip.scrollLeft; return items.map(li => li.getBoundingClientRect().left - x0); };
     const max = () => strip.scrollWidth - strip.clientWidth;
     // the row moves by about one screenful of cards, and always stops with a card on the content's left edge
     const go = dir => {
-      const left = strip.scrollLeft, page = (strip.clientWidth - 2 * pad()) * 0.82, s = starts();
+      const l = lefts(), pad = l[0], s = l.map(x => x - pad);
+      const left = strip.scrollLeft, page = (strip.clientWidth - 2 * pad) * 0.82;
       let to;
       if (dir > 0) to = [...s].reverse().find(x => x > left + 4 && x <= left + page) ?? s.find(x => x > left + 4) ?? max();
       else to = s.find(x => x < left - 4 && x >= left - page) ?? [...s].reverse().find(x => x < left - 4) ?? 0;
@@ -952,8 +954,15 @@ part("strip", () => {
     addEventListener("pointermove", e => {
       if (!drag) return;
       const dx = e.clientX - drag.x;
-      if (!drag.moved && Math.abs(dx) < 6) return;
-      if (!drag.moved) { drag.moved = true; strip.classList.add("is-dragging"); }
+      if (!drag.moved) {
+        if (Math.abs(dx) < 6) return;
+        drag.moved = true;
+        strip.classList.add("is-dragging");
+        strip.scrollTo({ left: strip.scrollLeft, behavior: "instant" }); // a drag takes over from a row that is still gliding
+        drag.x = e.clientX;
+        drag.left = strip.scrollLeft;
+        return;
+      }
       strip.scrollLeft = drag.left - dx;
     });
     const drop = () => {
