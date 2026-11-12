@@ -37,11 +37,18 @@ colours of their names. Work is committed straight to `main`, Andy's standing in
 Andy sent a screenshot of a Google result for mercury26413.org with Google's plain globe where a site's icon goes:
 "fix the logo so that on web page like this it is clear".
 
-**Why the globe (the likely cause).** Every page named `images/logo-mark.png` as its icon, and that file is
-473×505. Google's rules require a square icon, so it did not qualify, and there was no other: the site had no
-`favicon.ico` either (the live site answered 404). That this alone caused the globe is not proven: Google's page does
-not say what it shows instead, and what its image crawler gets from the host could not be tested (B17).
-`robots.txt` blocked neither the home page nor the icon file.
+**Why the globe, and why only sometimes.** Google keeps one icon per hostname, and the site answered at two:
+`mercury26413.org` and `www.mercury26413.org`, which served the same pages without redirecting. Andy's second
+screenshot (2026-11-12) shows both in one result list: the www results with the old icon, the whole logo
+(`images/logo-mark.png`, which every page has named as its icon since 2026-10-25), and the others with the globe.
+So Google did accept the 473×505 file, although its rules ask for a square one, and the globe is most likely an old
+record: before 2026-10-25 the site named no icon and had no `favicon.ico` (the live site answered 404 for it), and
+Google re-reads a site's icon on its own schedule. What its image crawler gets from the host could not be tested
+(B17). `robots.txt` blocked neither the home page nor the icon file.
+
+**One address (2026-11-12).** The first rule in `.htaccess` now sends `www.mercury26413.org` to `mercury26413.org`
+with a permanent redirect (the path and the query string are kept), so Google keeps one icon and one set of results
+for the site. Every page already named `mercury26413.org` as its canonical address.
 
 **Google's rules** (developers.google.com/search/docs/appearance/favicon-in-search, read 2026-11-11): the icon must
 be square and at least 8×8px, and Google recommends larger than 48×48px; the formats are BMP, GIF, ICO, PNG, JPEG,
@@ -804,6 +811,8 @@ Reduced motion makes every change instant.
 - **/vercel:** the live guidelines were fetched (identical to the bundled copy) and the changed lines read against
   them by the author. They have no rule about a site's icon; what they do cover in `<head>` (`theme-color`, the font
   preload) is unchanged.
+- **The www redirect (2026-11-12):** no agents and no skills; the author tested the rule under Apache and ran the
+  agent-file tests (see "Latest verification").
 
 **Round 10:**
 - **Workflows (ultracode):** two runs. A design panel at the start (three designers, then three judges): two
@@ -947,6 +956,10 @@ Reduced motion makes every change instant.
   in 8 requests, 5 got the new file and 3 (two Boston servers) the first version, cached 3.4 hours before. The
   files carry `max-age=604800`, so those copies can last up to a week; flushing the CDN's cache in hPanel ends it at
   once. Both versions are square icons of the head, so Google gets a valid icon either way.
+- The www redirect (no page changed): under Apache, `www.mercury26413.org` in any letter case answers 301 to the
+  same path on `mercury26413.org`, query kept, for a page, `favicon.ico`, `/mcp` and a Markdown request;
+  `mercury26413.org`, `localhost` and a host that only contains "www" answer as before (200, Markdown when asked, 404
+  for a missing page). Agent-file tests 57 of 57; `tools/agent_files.py --check` clean.
 
 **Round 10, 2026-11-11** (Playwright Chromium on the final build, after the second pass; a local static server,
 Apache + PHP for the agent files, and a PHP server that writes mail to files for the contact form):
@@ -1124,7 +1137,8 @@ server):
    (`index.html?intro` replays it) and the home page's new parts; B16, a look on real phones and in Safari and
    Firefox; B17, whether Hostinger's "Checking your browser" page shows for ordinary visitors.
 1. The site icon: flush the CDN's cache in hPanel (some of its servers still hand out the first version of
-   `favicon.ico`), ask Google to read the home page again (B19) and look at a Google result in a few weeks. Andy's
+   `favicon.ico`), ask Google to read the home page again (B19) and look at a Google result in a few weeks (the www
+   results move to `mercury26413.org` as Google follows the new redirect). Andy's
    word on the picture: the head from the logo, as built, or the whole logo.
 2. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
 3. Still open from round 8: with WCAG text spacing at 320, the outreach year tabs scroll sideways and the tier

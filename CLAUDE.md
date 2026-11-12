@@ -41,5 +41,6 @@ When a task is about improving the website's design, UX, copy, accessibility or 
   `icon-192.png`, `apple-touch-icon.png`), written by `tools/site_icons.py` from `images/logo-mark.png` (needs
   Pillow; `--check` exits 1 if they no longer match the logo). Every page and `contact.php` name them in `<head>`.
 - Keep those three addresses, and never point `rel="icon"` at an image that is not square: Google's rules
-  require a square icon (in November 2026, when the icon was the 473×505 logo file, Google's results showed a
-  plain globe beside the site).
+  require a square icon.
+- Keep the first rule in `.htaccess`, which sends `www.mercury26413.org` to `mercury26413.org`: Google keeps one
+  icon per hostname, and in November 2026 it showed the old logo beside www results and a plain globe beside the rest.

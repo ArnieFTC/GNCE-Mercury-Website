@@ -9,10 +9,9 @@ team's logo, images/logo-mark.png.
 Needs Pillow (pip install pillow). Run it again only if the logo itself changes.
 
 Why the icon is not simply the logo file: Google's rules require a square icon
-(developers.google.com/search/docs/appearance/favicon-in-search) and the logo file is 473 x 505, so it did not
-qualify; in November 2026 Google's results showed a plain globe beside the site. A browser tab also draws the icon
-at 16 pixels (32 on a sharp screen), where the whole logo (Mercury, the staff, the diamond) is a smudge. So the icon
-is the logo's clearest part: Mercury's head and winged helmet, on the logo's own purple.
+(developers.google.com/search/docs/appearance/favicon-in-search), and the logo file is 473 x 505. A browser tab
+also draws the icon at 16 pixels (32 on a sharp screen), where the whole logo (Mercury, the staff, the diamond) is a
+smudge. So the icon is the logo's clearest part: Mercury's head and winged helmet, on the logo's own purple.
 
 Nothing is redrawn. The icon is one square cut from images/logo-mark.png (HEAD below, 174 x 174 pixels) and scaled
 to each size, with a little sharpening at the three smallest. Inside the square, these are filled with the

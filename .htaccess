@@ -1,6 +1,7 @@
 # mercury26413.org runs on Hostinger, which reads this file (Apache syntax).
-# Everything here helps AI agents read the site; every block is inside <IfModule>, so a server without
-# a module skips that block instead of failing. GitHub Pages ignores this file.
+# The first rule sends www.mercury26413.org to mercury26413.org; the rest helps AI agents read the site. Every block
+# is inside <IfModule>, so a server without a module skips that block instead of failing. GitHub Pages ignores
+# this file.
 # The block between "agent:begin" and "agent:end" is written by tools/agent_files.py: don't edit it by hand.
 
 <IfModule mod_mime.c>
@@ -14,6 +15,13 @@
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # One address for the site. www.mercury26413.org shows the same pages, but search engines count it as a second
+  # site, with its own results and its own icon (in November 2026 Google showed the old logo beside www results
+  # and a plain globe beside the others). Send it to mercury26413.org, the address every page names as canonical;
+  # the path and the query string are kept.
+  RewriteCond %{HTTP_HOST} ^www\.mercury26413\.org$ [NC]
+  RewriteRule ^(.*)$ https://mercury26413.org/$1 [R=301,L]
 
   # The MCP server (mcp.php) answers at /mcp. Its server card is the file .well-known/mcp/server-card.json
   # (written by tools/agent_files.py from mcp.php), also at /mcp/server-card.
