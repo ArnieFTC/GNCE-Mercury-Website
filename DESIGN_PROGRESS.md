@@ -959,7 +959,10 @@ Reduced motion makes every change instant.
 - The www redirect (no page changed): under Apache, `www.mercury26413.org` in any letter case answers 301 to the
   same path on `mercury26413.org`, query kept, for a page, `favicon.ico`, `/mcp` and a Markdown request;
   `mercury26413.org`, `localhost` and a host that only contains "www" answer as before (200, Markdown when asked, 404
-  for a missing page). Agent-file tests 57 of 57; `tools/agent_files.py --check` clean.
+  for a missing page). Agent-file tests 57 of 57; `tools/agent_files.py --check` clean. Live, right after the push
+  (`eb9be3a`, plain requests): www answers 301 to `mercury26413.org` for the home page, a page, a query and
+  `favicon.ico`; `http://www.` takes two hops (Hostinger's own redirect to https, then this one) and lands with 200;
+  `mercury26413.org` answers 200 as before, with Markdown when asked, its Link headers and the MCP server card.
 
 **Round 10, 2026-11-11** (Playwright Chromium on the final build, after the second pass; a local static server,
 Apache + PHP for the agent files, and a PHP server that writes mail to files for the contact form):
