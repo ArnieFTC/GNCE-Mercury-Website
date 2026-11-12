@@ -44,6 +44,7 @@ next steps.
 | Footer: About, Contact and Terms links and the © line | the `<footer class="site-footer">` at the bottom of every page (plain HTML; `js/main.js` adds the sponsors strip and page links above it) |
 | Terms and privacy | `terms.html` (keep it true: update it if the site ever adds cookies or analytics, or changes what the contact form sends or keeps) |
 | Sponsorship email (margaret@mercury26413.org) | `SPONSOR_EMAIL` in `js/main.js` (used by the form's Sponsorship topic), plus the "Email us about sponsoring" buttons in `partners.html` and `contact.html` |
+| The site icon (the picture in a browser tab and beside the site in Google's results) | `favicon.ico`, `icon-192.png` and `apple-touch-icon.png` at the top of the site: Mercury's head from `images/logo-mark.png`, written by `python3 tools/site_icons.py` (needs Pillow: `pip install pillow`). Keep the three file names: Google asks for a stable icon address, and its rules require a square icon. Run the script again only if the logo changes; `python3 tools/site_icons.py --check` says whether the files still match it |
 
 `js/main.js` attaches behaviour by class name and quietly skips any block that's missing what it needs,
 so a pasted block can never break a page.

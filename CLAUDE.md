@@ -34,3 +34,12 @@ When a task is about improving the website's design, UX, copy, accessibility or 
   static `<footer class="site-footer">` row that every page has.
 - `.htaccess` runs on the live host (Hostinger). A broken line there can take the whole site down, so test
   changes to it with Apache before pushing, and check https://mercury26413.org/ right after.
+
+## Site icon
+
+- The icon in browser tabs and in Google's results is three files at the top of the site (`favicon.ico`,
+  `icon-192.png`, `apple-touch-icon.png`), written by `tools/site_icons.py` from `images/logo-mark.png` (needs
+  Pillow; `--check` exits 1 if they no longer match the logo). Every page and `contact.php` name them in `<head>`.
+- Keep those three addresses, and never point `rel="icon"` at an image that is not square: Google's rules
+  require a square icon (in November 2026, when the icon was the 473×505 logo file, Google's results showed a
+  plain globe beside the site).

@@ -3,7 +3,8 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-11. **Round 10** put the FTC games' official colour palettes on whole pages: every page
+_Last updated: 2026-11-12. The **site icon** was rebuilt after Andy's screenshot of a Google result with a plain
+globe beside the site: see "Site icon" below. **Round 10** (2026-11-11) put the FTC games' official colour palettes on whole pages: every page
 wears one game's colours from its header to its footer (this season's on the site-wide pages, each season's on its
 own page; home and Seasons, which show all three, keep a black head), and FIRST Tech Challenge's orange marks the
 programme. Two independent reviewers went over it and it was corrected the same day; see "Round 10" below.
@@ -30,6 +31,65 @@ colours of their names. Work is committed straight to `main`, Andy's standing in
 4. **Round 2 (same day).** Andy: the colour "is so AI-like", the site "feels too static"; the boxes and
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
+
+## Site icon: the logo in Google's results and in the browser tab (2026-11-11 and 12)
+
+Andy sent a screenshot of a Google result for mercury26413.org with Google's plain globe where a site's icon goes:
+"fix the logo so that on web page like this it is clear".
+
+**Why the globe (the likely cause).** Every page named `images/logo-mark.png` as its icon, and that file is
+473×505. Google's rules require a square icon, so it did not qualify, and there was no other: the site had no
+`favicon.ico` either (the live site answered 404). That this alone caused the globe is not proven: Google's page does
+not say what it shows instead, and what its image crawler gets from the host could not be tested (B17).
+`robots.txt` blocked neither the home page nor the icon file.
+
+**Google's rules** (developers.google.com/search/docs/appearance/favicon-in-search, read 2026-11-11): the icon must
+be square and at least 8×8px, and Google recommends larger than 48×48px; the formats are BMP, GIF, ICO, PNG, JPEG,
+PPM and TIFF (SVG is not on the list); a `<link rel="icon">` in the home page's `<head>`; a stable address;
+Googlebot must be able to crawl the home page and Googlebot-Image the icon file; one icon per hostname. Google takes
+the icon from the home page when it crawls it again. It says "crawling can take anywhere from several days to several
+weeks" and names no time for the icon itself to change. Asking for the home page to be indexed again, in Search
+Console's URL Inspection tool, is its way to hurry that. Showing an icon is not guaranteed, even when every rule is met.
+
+**What was built.**
+- Three files at the top of the site: `favicon.ico` (16, 32 and 48px, classic 32-bit bitmaps), `icon-192.png` and
+  `apple-touch-icon.png` (180px). All 12 pages and `contact.php`'s result page name them in `<head>` (the season pages
+  with `../`), and the MCP server card's icon is `icon-192.png`. The addresses are relative, so the GitHub Pages
+  mirror works too. Google does not say which of the links it takes; each is square, and the smallest holds 48px.
+- The picture is Mercury's head and winged helmet from the team's logo, on the logo's own purple (#473867), not the
+  whole logo. At 16 to 32px the whole logo (the figure, the staff, the diamond) is a smudge, and on a dark page its
+  dark diamond all but disappears; the head reads as a head. Five versions were drawn first at 16 to 96px (as a sharp
+  screen draws them, enlarged), on a light and a dark page: the whole logo with clear corners, on white and on its
+  purple, the head, and a cut with the shoulder and the staff.
+- Nothing is redrawn. The icon is one square cut from `images/logo-mark.png` (the crop box 204, 127, 378, 301:
+  columns 204–377 and rows 127–300, 174×174 pixels) and scaled to each size. Filled with the purple, and nothing
+  else changed: the square's top right corner, which lies outside the diamond; the cut-out's dark fringe along the
+  diamond's edge; and the starry background behind the head (two stars, four dots and two pieces of the orbit band),
+  which at icon size reads as specks and scratches. The three smallest sizes are sharpened a little.
+- `tools/site_icons.py` writes the files (it needs Pillow); `--check` exits 1 if a file is missing, is not an opaque
+  square picture of the right sizes and format, or is no longer what the logo gives. `images/logo-mark.png` itself is
+  unchanged and stays the share image and the logo in the structured data.
+- The purple is the logo's. Andy turned violet down as a colour for the site in round 2 and kept the logo; the icon
+  is a piece of the logo, and the purple appears nowhere else.
+
+**How it was reviewed.** After the first version went live (`90f6a0b`, which still had the stars, dots and orbit band
+inside the square, less the three marks its edge cut), three judges who were not told which icon was on the site
+each compared four cuts of the logo at real size, in a different order on each sheet: the head as built, a closer
+cut of the face, and the whole logo with clear corners and on its purple. Two picked the head as built and one the
+closer cut; all three put the two whole-logo versions last, and all three asked for the streak and the specks behind
+the head to go, which the second version does. A code review and a fact check of this record against Google's pages
+found 16 things between them; see "Skills and checks actually used".
+
+**Not built.** A web app manifest (only needed to install the site as an app). An SVG icon (the logo exists only as
+a raster cut-out, and Google does not list SVG). A simplified drawing for the smallest sizes: all three judges
+suggested merging the feather lines into a few bold shapes for 16 to 18px, which means redrawing the team's logo, so
+it is the team's call. An icon of the whole logo: if Andy prefers it, it is a change in `tools/site_icons.py` (the
+whole file made square), and the three addresses stay.
+
+**Not checked.** How the icon looks in Safari and Firefox and on a phone's home screen (B16). What Google's image
+crawler gets from the host's check page (B17): Google's result carried the home page's own title, so Googlebot
+reaches the page, but its request for the icon cannot be tested from the build machine. When Google will show the
+icon (B19).
 
 ## Round 10: season liveries, wall to wall (2026-11-11)
 
@@ -177,7 +237,7 @@ data-saving connection, in a tab that is not showing, or when its four pictures 
 - a photo viewer (`<dialog>`: arrows, swipe, Esc, caption from the alt text) for the galleries on the outreach and
   season pages.
 
-**Also:** the header and footer logo is a 240px WebP (17.7 KB; the 235 KB PNG stays for the icon, sharing image and
+**Also:** the header and footer logo is a 240px WebP (17.7 KB; the 235 KB PNG stays for the icon (until the site icon of 2026-11-11), sharing image and
 JSON-LD); a colour square before each season in the results table; hover and press states gated to real pointers;
 forced-colours and print rules for the new parts.
 
@@ -613,6 +673,11 @@ Reduced motion makes every change instant.
 
 ## Decisions and conflicts
 
+- **The site icon is the logo's head, not the whole logo (2026-11-11).** Google's rules require a square icon,
+  and at 16 to 32px the whole logo is a smudge. The head and winged helmet are cut from the logo file and stand on
+  its purple, with the starry background left out; nothing is redrawn. Three blind judges agreed (two picked this
+  cut, one a closer one; all three put the whole logo last). Whatever the picture, keep the three icon addresses
+  (`favicon.ico`, `icon-192.png`, `apple-touch-icon.png`): Google asks for a stable icon URL. See "Site icon".
 - **Default season in the line-up:** DECODE (2025–26), because it carries the dated record sponsors look
   for. Switch `data-default` to 2026 when BIOBUZZ has results.
 - **Section numbers vs the direction contract:** the contract mentioned numbered tabs; the craft floor
@@ -704,8 +769,41 @@ Reduced motion makes every change instant.
 - ⊘ B18 Which "FTC colors" Andy meant in round 10: the games' palettes (built, live) or FIRST Tech Challenge's own
   orange (designed and kept as `.impeccable/alternatives/round10-ftc-orange.css`, with a picture next to it). Andy:
   look at the two pictures and say which, or "both as it is".
+- ⊘ B19 The icon in Google's results. Google takes a site's icon from the home page when it crawls it again. By
+  its own account crawling alone can take several days to several weeks; it names no time for the icon to change
+  and does not promise to show one. An owner or full user of the site in Google Search Console can ask for the
+  crawl: URL Inspection → `https://mercury26413.org/` → Request indexing. Once is enough: Google says asking again
+  does not make it faster. If the site is not in Search Console yet, add it and prove ownership first, with a DNS
+  record at the domain's provider (a Domain property) or Google's HTML tag in `index.html`'s `<head>` (a URL-prefix
+  property; then run `tools/agent_files.py`), not with Google's HTML file: an extra `.html` file at the top of the
+  site makes `tools/agent_files.py` stop. If the globe is still there a month later, look in Search Console: URL
+  Inspection shows when Google last crawled the home page, and Settings → Crawl stats shows the answers Google's
+  image crawler got (Googlebot type "Image"), which may list the three icon files. An answer other than OK (200)
+  points to the host's check page (B17). The live test in URL Inspection cannot show this: it fetches as
+  Google-InspectionTool, not as Googlebot-Image.
 
 ## Skills and checks actually used
+
+**Site icon (2026-11-11 and 12):**
+- **Workflows (ultracode):** one review run of eight agents, after the first version went live. Three blind judges
+  (see "How it was reviewed" under "Site icon"); their shared request, the streak and the specks behind the head
+  gone, is the second version. A code review, 6 findings, all acted on: `--check` passed a transparent icon or a file
+  in the wrong format, any argument but `--check` rewrote the files, the orbit band's tip was left on the right edge,
+  `favicon.ico`'s bitmaps lacked the masks their headers counted (the script now writes the file itself, in the
+  classic layout), and two inexact sentences in the script and two in the documents. A fact check of this record
+  against Google's pages, 10 findings, all corrected before it was written here: chiefly, the cause of the globe is
+  likely, not proven; Google's "several days to several weeks" is about crawling, not the icon; and B19 now says who
+  can ask Google and which report shows what its image crawler got. The account's usage limit stopped the other
+  three agents (the live check and the two that were to verify the findings), so the author checked each finding
+  before acting on it. Before the build, one lookup agent read Google's page on icons.
+- **frontend-design:** not installed and not invoked. The visual decision (which part of the logo, on what ground)
+  was made from five versions drawn at 16 to 96px, then put to the blind judges.
+- **Impeccable:** not invoked for the icon, which changes no layout. Its rendered detector ran on all 12 pages after
+  the first version, in the check chain: 0 findings at 1280×800 and 390×844 with the project's exceptions, the same
+  7 known ones without them.
+- **/vercel:** the live guidelines were fetched (identical to the bundled copy) and the changed lines read against
+  them by the author. They have no rule about a site's icon; what they do cover in `<head>` (`theme-color`, the font
+  preload) is unchanged.
 
 **Round 10:**
 - **Workflows (ultracode):** two runs. A design panel at the start (three designers, then three judges): two
@@ -824,6 +922,27 @@ Reduced motion makes every change instant.
   reviewed their work.
 
 ## Latest verification
+
+**Site icon, 2026-11-11 and 12** (the same tools as round 10):
+- First version (`90f6a0b`), with every page changed in `<head>`, so the whole chain of round 10 ran again: suite
+  187 passed, 0 failed; page audit 48 rows (12 pages at 320, 390, 768 and 1440px) with no sideways scroll, one `h1`
+  each, no skipped heading level, no script error and no failed request; contrast 0 of 2,620 text runs under AA at
+  1440 and 390px and 0 of 2,555 at 320 and 768px; the keyboard walks as before (the skip link is painted over the
+  header by design); reduced motion 14 of 14; break tests 52 and 56 passed; photo viewer 232 openings, 0 with a
+  problem; line-up jump 0; labels over photos 8.8:1 and 7.8:1 at worst; detector 0 findings with the project's
+  exceptions; contact form 33 of 33 with captured mail; agent files 57 of 57 under Apache and `--check` clean. Live, a
+  few minutes after the push (plain requests): the three files answered 200 (`image/x-icon`, `image/png`) with the
+  repository's pictures (Hostinger's CDN re-compresses PNG files, so their bytes differ) and
+  `cache-control: public, max-age=604800`; the home page, a season page and the contact page carried the three links;
+  the server card named the new icon; `http://` redirects to `https://`, and `www.` answers too.
+- Second version (the starry background left out, `favicon.ico` written in the classic layout; no page changed):
+  `tools/site_icons.py --check` passes, and fails as it should on a transparent icon and on a JPEG named `.png`;
+  `--help` and a mistyped option exit 1 and write nothing. ImageMagick and Pillow read the three frames of
+  `favicon.ico` (15,086 bytes: three 32-bit bitmaps, each with its mask). In the square the icons are scaled from,
+  only the neck and the lavender ribbon behind it touch an edge, and where the eight removed marks were every pixel
+  is the purple. On all 12 pages the three links resolve to square images of the sizes they state, and all 36 decode
+  in Chromium with no failed request; Apache serves the three files with their own bytes and content types, also
+  when asked with `Accept: text/markdown`.
 
 **Round 10, 2026-11-11** (Playwright Chromium on the final build, after the second pass; a local static server,
 Apache + PHP for the agent files, and a PHP server that writes mail to files for the contact form):
@@ -1000,17 +1119,19 @@ server):
    `.impeccable/alternatives/round10-ftc-orange.css`). Still open from round 9: his verdict on the opening
    (`index.html?intro` replays it) and the home page's new parts; B16, a look on real phones and in Safari and
    Firefox; B17, whether Hostinger's "Checking your browser" page shows for ordinary visitors.
-1. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
-2. Still open from round 8: with WCAG text spacing at 320, the outreach year tabs scroll sideways and the tier
+1. The site icon: ask Google to read the home page again (B19) and look at a Google result in a few weeks. Andy's
+   word on the picture: the head from the logo, as built, or the whole logo.
+2. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
+3. Still open from round 8: with WCAG text spacing at 320, the outreach year tabs scroll sideways and the tier
    header cells overflow; Windows High Contrast and a screen reader on the skip link and the menu are unchecked.
-3. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
+4. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
    joining facts, States results, a sharp wide team photo, coach photos, the package questions (B12–B14: the QR
    code's target, what "Growth" and "Can request media" mean, matching gifts) and B15 (is the VulcanForms Platinum
    sponsorship final, and the amount).
-4. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
-5. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events. When the next
+5. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
+6. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events. When the next
    game is announced, give the new season its colour (README, "Start a new season").
-6. For every change: check at 320/390/768/1440 with keyboard and reduced motion, run `/vercel` on the changed
+7. For every change: check at 320/390/768/1440 with keyboard and reduced motion, run `/vercel` on the changed
    files, run `python3 tools/agent_files.py`, bump `?v=` on the stylesheet and the script, push to `main`.
 
 The scratchpad test scripts (`itest5.js`, `mb1.js`, `mb2.js`, `viewerfit.js`, `lineup_h.js`, `audit.js`,
