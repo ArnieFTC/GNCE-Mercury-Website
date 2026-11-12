@@ -942,7 +942,11 @@ Reduced motion makes every change instant.
   only the neck and the lavender ribbon behind it touch an edge, and where the eight removed marks were every pixel
   is the purple. On all 12 pages the three links resolve to square images of the sizes they state, and all 36 decode
   in Chromium with no failed request; Apache serves the three files with their own bytes and content types, also
-  when asked with `Accept: text/markdown`.
+  when asked with `Accept: text/markdown`. Live after the push (`08789fb`, plain requests): `icon-192.png` and
+  `apple-touch-icon.png` show the new pictures, but `favicon.ico` depends on which of Hostinger's CDN servers answers:
+  in 8 requests, 5 got the new file and 3 (two Boston servers) the first version, cached 3.4 hours before. The
+  files carry `max-age=604800`, so those copies can last up to a week; flushing the CDN's cache in hPanel ends it at
+  once. Both versions are square icons of the head, so Google gets a valid icon either way.
 
 **Round 10, 2026-11-11** (Playwright Chromium on the final build, after the second pass; a local static server,
 Apache + PHP for the agent files, and a PHP server that writes mail to files for the contact form):
@@ -1119,7 +1123,8 @@ server):
    `.impeccable/alternatives/round10-ftc-orange.css`). Still open from round 9: his verdict on the opening
    (`index.html?intro` replays it) and the home page's new parts; B16, a look on real phones and in Safari and
    Firefox; B17, whether Hostinger's "Checking your browser" page shows for ordinary visitors.
-1. The site icon: ask Google to read the home page again (B19) and look at a Google result in a few weeks. Andy's
+1. The site icon: flush the CDN's cache in hPanel (some of its servers still hand out the first version of
+   `favicon.ico`), ask Google to read the home page again (B19) and look at a Google result in a few weeks. Andy's
    word on the picture: the head from the logo, as built, or the whole logo.
 2. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
 3. Still open from round 8: with WCAG text spacing at 320, the outreach year tabs scroll sideways and the tier
