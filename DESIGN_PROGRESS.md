@@ -1055,6 +1055,10 @@ anew in this session, scratchpad `r11/mine/`: `audit.js`, `checks.js`, `anchors.
 - Not possible here: Safari, Firefox, real phones, screen readers. The earlier rounds' test scripts (`itest5.js` and
   others) were not in this session, so their 187 interaction tests did not run again; the parts this round touched were
   checked with the scripts above.
+- Live site after the push to `main` (`9097cbb`, 2026-11-13, 18:48 UTC): `css/style.css`, `js/main.js`, the DECODE page and
+  the team page byte-identical to the repository; in one browser session all 12 pages on `v=231` with the first-frame
+  hold, the header built, the doors on the three season pages (1, 2, 1), the closing call on the six pages that have
+  it and the sponsor strip in every footer; a door on the DECODE page opens BIOBUZZ; no script error, no failed request.
 
 **Site icon, 2026-11-11 and 12** (the same tools as round 10):
 - First version (`90f6a0b`), with every page changed in `<head>`, so the whole chain of round 10 ran again: suite
