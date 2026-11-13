@@ -3,7 +3,9 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-12. The **site icon** was rebuilt after Andy's screenshot of a Google result with a plain
+_Last updated: 2026-11-13. **Round 11** made the site flow: related sections share a band (chapters), every page ends by
+handing the visitor on (season doors, a closing call), and a page change never shows two pages at once; see "Round 11"
+below. Before it, on 2026-11-12, the **site icon** was rebuilt after Andy's screenshot of a Google result with a plain
 globe beside the site: see "Site icon" below. **Round 10** (2026-11-11) put the FTC games' official colour palettes on whole pages: every page
 wears one game's colours from its header to its footer (this season's on the site-wide pages, each season's on its
 own page; home and Seasons, which show all three, keep a black head), and FIRST Tech Challenge's orange marks the
@@ -31,6 +33,73 @@ colours of their names. Work is committed straight to `main`, Andy's standing in
 4. **Round 2 (same day).** Andy: the colour "is so AI-like", the site "feels too static"; the boxes and
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
+
+## Round 11: flow (2026-11-13)
+
+Andy: "can you work on just making everything on the website flow better like it looks pretty good bu tjust research
+other really good websites and improve on it", then: "it is the mercury website main".
+
+**What was wrong.** The site looked finished but did not flow. Measured before the round, at 1440px:
+- every section was its own full-width band, the ground changed at every boundary (6 of 6 on the home page) and every
+  gap between sections was 230–260px, so each page read as a stack of posters;
+- six pages ended straight into the footer: Seasons, Outreach, News, Resources, Team (its call to join came before the
+  coaches) and BIOBUZZ, the current season, which ended on "Previous season"; the season pages ended on two small boxes
+  after ~190px of white;
+- the page change crossfaded the two pages, so for about 150ms one page's heading and photos were printed over the
+  other's (a black home stage over a yellow head made an olive smear); the arriving page was captured before
+  `js/main.js` had built its header, so it jumped 40px when the header came; and the season robot vanished in mid-flight,
+  because the arriving head's own entrance ran inside the transition and its field was drawn over the robot.
+
+**Research.** Two sub-agents with Playwright, measuring at 1440 and 390px:
+- stripe.com, linear.app, apple.com (iPhone, MacBook Pro), rivian.com, teenage.engineering. Apple's iPhone page uses this
+  site's own heading pattern but changes its ground every second section: 92–152px inside a band, 236–377px at a
+  change. Stripe changes strongly twice in 14,000px; Linear never. All of them end a page with a next step before the
+  footer (Rivian's "Keep exploring" tiles, Linear's row of sibling pages, Apple's directory). Their gaps between
+  sections on phones are 78–109px; this site's were 108–140px.
+- FRC 254, 1678, 971 and 118, FTC 8565 (TechnicBots) and 23511 (Seattle Solvers), williamsf1.com and redbullracing.com.
+  No robot or car page leads anywhere at its end (254, 1678, Williams' FW48, Red Bull's RB22). Seattle Solvers ends a
+  season page on its previous season and a sponsor ask tied to the robot. 254's robot pages list their sections at the
+  top. Robonauts and 254 link every result to its event. On the six robotics sites, links from a member to their robot
+  work and from outreach to a season: none.
+
+**What changed.**
+- **Page transitions** (every page). The old page clears (150ms) before the new one rises (340ms, 12px): never two
+  pages at once. The header stays, and its colours now change with the page, not at the click. A page head of the same
+  colour stays too (team → news: the yellow head holds and only its words change); between two colours the head turns
+  from one to the other while its words leave and arrive with the pages; the robot glides above it all. Every page holds
+  its first frame until `js/main.js` has built the header (`<link rel="expect" href="#mercury-ready" blocking="render">`
+  and a marker after the script). A page that arrives through a transition skips its own entrance (`html.vt-arrived`),
+  so the robot lands whole, and coming back to Home no longer empties the bays and steps the robots in again. A
+  transition now finishes in 590–680ms (the crossfade took about 820ms). Details: DESIGN.md, Motion.
+- **Chapters.** `band--cont` lets a section carry on in the band before it. Home: the record and the calendar
+  (white), the team and the outreach (the pale ground), the news (white), the closing call. DECODE: the robot and its
+  parts (white), mechanisms and software (the ground), events and the doors (white). INTO THE DEEP: the robot and how it
+  changed, then autonomous strategy and events. BIOBUZZ: next event and events share a band. Resources: one band. Inside
+  a chapter sections are 115px apart at 1440px, between chapters 230px. On phones `--section` is 56px (it was 64).
+- **Season doors.** The small pager boxes became a door per neighbouring season: a field in that season's colour, its
+  robot standing on it, the season page's lead and its link under the name. The robot glides from the door into the next
+  season's head (it used to fly from an 88px thumbnail).
+- **The closing call** ("Build with us, or help us get to the next event") now also ends Seasons, Outreach, News,
+  Resources and BIOBUZZ, as it ended Home. On Outreach its sponsor box says that sponsorship funds the camp and FLL
+  coaching (contact page). On BIOBUZZ, that from the Silver tier ($1,500+) the sponsor's logo goes on our robot and in our
+  team pit (the package's tier table).
+- **Team.** The coaches close the members band and the call to join ends the page (round 10's record said the team page
+  closed on a field; the coaches band had come after it). Members in three columns from 900px (3 + 3 + 3; it was
+  4 + 4 + 1); the four coaches share their row (it was 4 in 5 columns).
+- **Cross-links.** The home line-up's season names open their pages (a bay chooses, the name opens; on a phone the old
+  "See how we built it" lay 1,138px down an 844px screen after a tap). Every event in "The record so far" links to its
+  entry on its season page (`#event-YYYY-MM-DD`). The two long season pages list their sections under the head. The
+  hive-tip post links to the BIOBUZZ page. "Become a sponsor" on Partners offers the site's own form (it reaches
+  Margaret) besides the email buttons.
+- **Small.** A season head's robot frame lost its own background (it is the field's colour, and in the transition it
+  doubled over the field); a jump to a continuing section leaves its heading room under the header.
+
+**Not changed, on purpose:** the visual world (colours, type, shapes, the stage, the liveries), the content and its
+order, and the rule that nothing moves on scroll. **Not done, asked of Andy instead**, because each changes content he
+approved: Outreach as one continuous page instead of three year tabs (Home leads with the FLL story, which Outreach
+keeps on its second tab); dropping the co-captains from the members grid (they appear twice on the team page); cutting
+the DECODE page's repeated figures ("0.34 s" appears six times); whether Resources earns its place in the nav (two links
+and four "on the way" items); Partners with the team before the tiers, in the package's order.
 
 ## Site icon: the logo in Google's results and in the browser tab (2026-11-11 and 12)
 
@@ -680,6 +749,17 @@ Reduced motion makes every change instant.
 
 ## Decisions and conflicts
 
+- **Chapters, not a new ground at every section (round 11).** Sections that belong together share a band
+  (`band--cont`); the ground changes when the subject does. The boxes inside sections (Andy's "defined boxes",
+  round 6) are unchanged. Two sections on one ground are one `--section` apart, two chapters twice that.
+- **Page changes clear, then rise (round 11).** Round 5's crossfade showed two pages at once; a plain fade through
+  white blinked between two yellow heads. So the old page clears before the new one rises, and the page head, the
+  header and the clicked robot carry across. The cost of holding the first frame until `js/main.js` has run: the first
+  paint of every page waits for the script at its end (one file, cached after the first page). Kept, because otherwise
+  the arriving page was captured without its header and jumped when it came.
+- **One closing call, copied (round 11).** The call that ends Home is plain HTML at the bottom of six pages, not built by
+  the script, so it works without JavaScript and appears in the Markdown copies. README says to change all six together.
+
 - **The site icon is the logo's head, not the whole logo (2026-11-11).** Google's rules require a square icon,
   and at 16 to 32px the whole logo is a smudge. The head and winged helmet are cut from the logo file and stand on
   its purple, with the starry background left out; nothing is redrawn. Three blind judges agreed (two picked this
@@ -790,6 +870,25 @@ Reduced motion makes every change instant.
   Google-InspectionTool, not as Googlebot-Image.
 
 ## Skills and checks actually used
+
+**Round 11:**
+- **frontend-design:** installed in this session and invoked, for the first time on this project. Its two-pass method
+  ran: a plan (chapters, doors, the closing call, transitions, with the doors and the robot's glide as the one bold
+  place), then a review against the brief (no new colour, type, shape or motion vocabulary; copy only from the site and
+  the package).
+- **Impeccable** (launcher 0.1.18): `impeccable context`; a critique with two isolated sub-agents, A (design review,
+  29/40, two P1s: pages with no next step, transitions that show two pages) and B (the detector and the browser overlay:
+  clean with the project's exceptions, the two known `design-system-color` advisories, layout scope empty), saved as
+  `.impeccable/critique/2026-11-13T18-27-13Z__index-html.md`; the layout and animate references and the craft floor
+  read before the edits; the detector after the build: exit 0, the same two advisories, layout scope empty. The
+  critique's closing questions were skipped: Andy had set the priority (flow), and the open questions are under
+  "Next action". B also found two exception reasons in `.impeccable/config.json` that no longer describe what they hide
+  (index low-contrast; the rgb(0,0,0) note): not changed this round. DESIGN.md now lists the field's pure black as a
+  colour (`field-ink`).
+- **/vercel:** the live guidelines were fetched (identical to the bundled copy) and the changed files read against
+  them; one fix (room under the header for jumps to a continuing section). Noted, not changed: a door's link names its
+  label, name, lead and link text together (a card link).
+- **Research:** two sub-agents (product sites; robotics and F1 sites), above. No workflow ran this round.
 
 **Site icon (2026-11-11 and 12):**
 - **Workflows (ultracode):** one review run of eight agents, after the first version went live. Three blind judges
@@ -931,6 +1030,31 @@ Reduced motion makes every change instant.
   reviewed their work.
 
 ## Latest verification
+
+**Round 11, 2026-11-13** (Playwright Chromium on the final build, a local static server; the checks were written
+anew in this session, scratchpad `r11/mine/`: `audit.js`, `checks.js`, `anchors.js`, `opening.js`, `nojs.js`, and
+`vtalign.js` for the transitions):
+- Page audit, 12 pages at 320, 390, 768 and 1440px: no sideways scroll, one `h1` per page, no skipped heading level, no
+  script error, no failed request. Every page ends on the closing call, its own call or the doors, except Contact and
+  Terms.
+- Contrast of the new text (doors, page index, closing calls, coaches, the new links) at 1440 and 390px: lowest 4.86:1
+  (black on FIRST's blue, as documented), all others 9.3:1 or more.
+- Keyboard: every focus stop of the DECODE page (31 at 1440px, 24 at 390px), the team page (21) and the Seasons page
+  (11 at 390px) is on screen, clear of the header and has a ring. Every page-index link and the home record's event links
+  land below the header (36–125px).
+- Reduced motion: no running animation after load on Home, DECODE, team and News; view transitions are off.
+- Without JavaScript: the pages show at once (105–185ms) with their doors and closing calls; the first-frame hold does
+  not wait.
+- The opening: plays on a first visit and with `?intro` at 1440 and 390px, gone by 2.25 s, no error.
+- Page transitions, frames captured against the transition's own events: team → News (the head holds, its words swap),
+  Home → team, team → Seasons, Seasons → DECODE (the robot glides from its row), the DECODE door → BIOBUZZ (the robot
+  glides from the door), Home → DECODE ("See how we built it"), News → Home (the stage arrives whole), Back from DECODE
+  to Seasons. In no frame are two pages on screen at once; each finishes in 590–680ms.
+- Impeccable detector: exit 0 with the two known advisories; layout scope empty. Agent files: `python3
+  tools/agent_files.py --check` clean.
+- Not possible here: Safari, Firefox, real phones, screen readers. The earlier rounds' test scripts (`itest5.js` and
+  others) were not in this session, so their 187 interaction tests did not run again; the parts this round touched were
+  checked with the scripts above.
 
 **Site icon, 2026-11-11 and 12** (the same tools as round 10):
 - First version (`90f6a0b`), with every page changed in `<head>`, so the whole chain of round 10 ran again: suite
@@ -1134,26 +1258,29 @@ server):
 
 ## Next action
 
-0. Andy's verdict on round 10: the season liveries on whole pages, and B18 (did "the ftc colors" mean the games'
+0. Andy's verdict on round 11 (the flow), and his word on the questions it leaves: Outreach as one continuous page;
+   the co-captains appearing twice on the team page; the DECODE page's repeated figures; Resources in the nav; Partners
+   in the package's order (team first). Then:
+1. Andy's verdict on round 10: the season liveries on whole pages, and B18 (did "the ftc colors" mean the games'
    colours, as built, or FIRST Tech Challenge's orange, which is ready as
    `.impeccable/alternatives/round10-ftc-orange.css`). Still open from round 9: his verdict on the opening
    (`index.html?intro` replays it) and the home page's new parts; B16, a look on real phones and in Safari and
    Firefox; B17, whether Hostinger's "Checking your browser" page shows for ordinary visitors.
-1. The site icon: flush the CDN's cache in hPanel (some of its servers still hand out the first version of
+2. The site icon: flush the CDN's cache in hPanel (some of its servers still hand out the first version of
    `favicon.ico`), ask Google to read the home page again (B19) and look at a Google result in a few weeks (the www
    results move to `mercury26413.org` as Google follows the new redirect). Andy's
    word on the picture: the head from the logo, as built, or the whole logo.
-2. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
-3. Still open from round 8: with WCAG text spacing at 320, the outreach year tabs scroll sideways and the tier
+3. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
+4. Still open from round 8: with WCAG text spacing at 320, the outreach year tabs scroll sideways and the tier
    header cells overflow; Windows High Contrast and a screen reader on the skip link and the menu are unchecked.
-4. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
+5. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
    joining facts, States results, a sharp wide team photo, coach photos, the package questions (B12–B14: the QR
    code's target, what "Growth" and "Can request media" mean, matching gifts) and B15 (is the VulcanForms Platinum
    sponsorship final, and the amount).
-5. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
-6. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events. When the next
+6. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
+7. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events. When the next
    game is announced, give the new season its colour (README, "Start a new season").
-7. For every change: check at 320/390/768/1440 with keyboard and reduced motion, run `/vercel` on the changed
+8. For every change: check at 320/390/768/1440 with keyboard and reduced motion, run `/vercel` on the changed
    files, run `python3 tools/agent_files.py`, bump `?v=` on the stylesheet and the script, push to `main`.
 
 The scratchpad test scripts (`itest5.js`, `mb1.js`, `mb2.js`, `viewerfit.js`, `lineup_h.js`, `audit.js`,

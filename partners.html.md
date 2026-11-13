@@ -120,6 +120,8 @@ We thank every sponsor in the footer of every page of this site.
 
 [Email Margaret about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury) · [Download the package PDF, 1.8 MB](https://mercury26413.org/docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf)
 
+[Or send Margaret a message from this site](https://mercury26413.org/contact.html?topic=sponsor#contact-form)
+
 ### Other ways to help
 
 - **Give parts, fabrication or mentoring time** · [Tell us](mailto:margaret@mercury26413.org?subject=In-kind%20support) what you could offer instead of money.

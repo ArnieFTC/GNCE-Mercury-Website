@@ -85,7 +85,8 @@
   </script>
   <!-- agent:end -->
   <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../css/style.css?v=230">
+  <link rel="stylesheet" href="../css/style.css?v=231">
+  <link rel="expect" href="#mercury-ready" blocking="render">
   <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
@@ -118,7 +119,7 @@
     <!-- ROBOT: the two photos sit side by side as squares, never bigger than their real size (the column is
          narrower than either photo). Use nearly square photos here. One <div> per row of the spec sheet;
          a row that says TBD is greyed out automatically. -->
-    <section class="band" aria-labelledby="robot-title">
+    <section class="band" id="robot" aria-labelledby="robot-title">
       <div class="container">
         <div class="split">
           <div>
@@ -181,7 +182,7 @@
         </li>
       </ol>
     -->
-    <section class="band" aria-labelledby="events-title">
+    <section class="band band--grey band--cont" id="events" aria-labelledby="events-title">
       <div class="container">
         <div class="section-head">
           <h2 id="events-title">Events</h2>
@@ -190,15 +191,42 @@
       </div>
     </section>
 
-    <!-- OTHER SEASONS: one <a> per neighbouring season (rel="prev" for the one before, rel="next" for the one after) -->
-    <nav class="band band--tight" aria-label="Other seasons">
+    <!-- OTHER SEASONS: one <a> per neighbouring season (rel="prev" for the one before, rel="next" for the one after).
+         Each is a door in that season's colour with its robot standing on it (round 11); the robot glides into that
+         season's head when the door opens. The line under the name is that season page's own lead. -->
+    <nav class="band season-doors" aria-label="Other seasons">
       <div class="container"><div class="pager">
         <a rel="prev" href="2025-2026.html" data-season="2025">
+          <span class="pager-text">
+            <small>Previous season, 2025–&#8288;26, our&nbsp;second</small>
+            <b translate="no">DECODE</b>
+            <span class="pager-lead">Our second season: Sustain Award and a trip to States.</span>
+            <span class="pager-cta">See how we built it</span>
+          </span>
           <span class="pager-media"><img src="../images/decode-robot-cad.webp" width="1165" height="1066" loading="lazy" alt="" style="view-transition-name: robot-decode"></span>
-          <span><small>Previous season, 2025–&#8288;26, our&nbsp;second</small><b translate="no">DECODE</b></span>
         </a>
       </div></div>
     </nav>
+
+    <!-- CLOSING: join or support, two equal boxes, the same call as at the end of the home page (round 11: the pages
+         that used to stop after their last section end on it). Change the words in all of them together. -->
+    <section class="band band--stage" aria-labelledby="closing-title">
+      <div class="container">
+        <h2 id="closing-title" style="max-width: 20ch; margin-bottom: clamp(28px, 4vw, 48px)">Build with us, <span class="lite">or help us get to the next event</span></h2>
+        <div class="split split--even">
+          <div class="ruled">
+            <h3>Students</h3>
+            <p>Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.</p>
+            <a class="btn btn--outline-light" href="../contact.html?topic=join#contact-form">Join as a student</a>
+          </div>
+          <div class="ruled">
+            <h3>Families and sponsors</h3>
+            <p>Donations pay for robot parts, competition registration, and travel. From the Silver tier ($1,500+), your logo goes on our robot and in our team pit.</p>
+            <a class="btn btn--light btn--sponsor" href="../partners.html#tiers">Partner with us</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </main>
   <!-- FOOTER: js/main.js adds the sponsors strip and the page links above this row (SPONSORS / SUPPORTERS there).
@@ -210,6 +238,8 @@
       <nav class="footer-links" aria-label="About and legal"><a href="../team.html#about">About</a><a href="../contact.html">Contact</a><a href="../terms.html">Terms and privacy</a></nav>
     </div>
   </footer>
-  <script src="../js/main.js?v=230"></script>
+  <script src="../js/main.js?v=231"></script>
+  <!-- the page shows its first frame once the parser gets here, so js/main.js has built the header (see "Page transitions" in css/style.css) -->
+  <div id="mercury-ready" hidden></div>
 </body>
 </html>

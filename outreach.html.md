@@ -106,6 +106,20 @@ Nov 23, 2024
 
 We hosted a practice qualifier for 5 Weston FIRST LEGO League teams. We ran robot matches and judged each team the way a real qualifier would.
 
+## Build with us, or help us get to the next event
+
+### Students
+
+Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.
+
+[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
+
+### Families and sponsors
+
+Sponsorship funds cover outreach like our summer camp and FLL coaching, as well as robot parts and travel.
+
+[Partner with us](https://mercury26413.org/partners.html)
+
 * * *
 
 **GNCE Mercury**, FIRST Tech Challenge team 26413 from Weston, MA, founded 2024. One of the teams of GNCE (Galactic Narwhal Chicken Effect).

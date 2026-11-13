@@ -169,18 +169,18 @@ CAD · Game Strategy
 
 > If at first you don’t succeed, use a little duct tape.
 
-## We recruit new members every season
-
-Rookies are part of the team from day one. Tell us what you’re into, whether that’s building, coding, CAD, or outreach, and we’ll get back to you.
-
-[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
-
 ## Mentors & coaches
 
 - **Cary Gumbert** · Coach / mentor
 - **Chris de la Rosa** · Coach / mentor
 - **Ken Huang** · Coach / mentor
 - **Tiao Xie** · Coach / mentor
+
+## We recruit new members every season
+
+Rookies are part of the team from day one. Tell us what you’re into, whether that’s building, coding, CAD, or outreach, and we’ll get back to you.
+
+[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
 
 * * *
 

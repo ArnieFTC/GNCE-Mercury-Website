@@ -24,6 +24,20 @@ Pick a season to see that year’s robot and every qualifier we competed at.
 
    [See how we built it](https://mercury26413.org/seasons/2024-2025.html)
 
+## Build with us, or help us get to the next event
+
+### Students
+
+Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.
+
+[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
+
+### Families and sponsors
+
+Donations pay for robot parts, competition registration, and travel.
+
+[Partner with us](https://mercury26413.org/partners.html)
+
 * * *
 
 **GNCE Mercury**, FIRST Tech Challenge team 26413 from Weston, MA, founded 2024. One of the teams of GNCE (Galactic Narwhal Chicken Effect).

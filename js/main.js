@@ -1326,17 +1326,30 @@ part("intro", () => {
 // ---------- Robot morph ----------
 // Robots carry style="view-transition-name: …". Only the robot you are heading to (or coming back
 // from) keeps its name, so it is the one that glides between pages in browsers that support it.
+// The page head keeps its place across a page change (css "Page transitions") only while it is on screen and
+// the link opens the top of the next page; otherwise it leaves with the rest of the page. A page that arrives
+// through a page transition skips its own entrance (html.vt-arrived): the transition is the entrance.
 part("morph", () => {
   const named = [...document.querySelectorAll('img[style*="view-transition-name"]')];
-  if (!named.length) return;
   named.forEach(el => { el.dataset.vt = el.style.viewTransitionName; });
+  const head = document.querySelector(".page-band, .season-head, .partner-head");
+  const holdHead = hold => [head, head?.querySelector(":scope > .container")].forEach(el => { if (el) el.style.viewTransitionName = hold ? "" : "none"; });
   addEventListener("pageswap", e => {
     const to = e.activation?.entry?.url;
     const back = e.activation?.navigationType === "traverse";
+    if (head) {
+      const r = head.getBoundingClientRect();
+      holdHead(r.bottom > 0 && r.top < innerHeight && !back && !(to && new URL(to).hash));
+    }
     const keep = (back && named.find(el => el.closest(".season-head"))) || named.find(el => to && el.closest("a[href]")?.href === to);
     named.forEach(el => { el.style.viewTransitionName = el === keep ? el.dataset.vt : "none"; });
   });
-  addEventListener("pageshow", e => { if (e.persisted) named.forEach(el => { el.style.viewTransitionName = el.dataset.vt; }); });
+  addEventListener("pagereveal", e => { if (e.viewTransition) document.documentElement.classList.add("vt-arrived"); });
+  addEventListener("pageshow", e => {
+    if (!e.persisted) return;
+    named.forEach(el => { el.style.viewTransitionName = el.dataset.vt; });
+    holdHead(true);
+  });
 });
 
 window.__mercury = true;

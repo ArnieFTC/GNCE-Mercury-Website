@@ -79,7 +79,8 @@
   </script>
   <!-- agent:end -->
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=230">
+  <link rel="stylesheet" href="css/style.css?v=231">
+  <link rel="expect" href="#mercury-ready" blocking="render">
   <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -139,6 +140,26 @@
       </div>
     </section>
 
+    <!-- CLOSING: join or support, two equal boxes, the same call as at the end of the home page (round 11: the pages
+         that used to stop after their last section end on it). Change the words in all of them together. -->
+    <section class="band band--stage" aria-labelledby="closing-title">
+      <div class="container">
+        <h2 id="closing-title" style="max-width: 20ch; margin-bottom: clamp(28px, 4vw, 48px)">Build with us, <span class="lite">or help us get to the next event</span></h2>
+        <div class="split split--even">
+          <div class="ruled">
+            <h3>Students</h3>
+            <p>Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.</p>
+            <a class="btn btn--outline-light" href="contact.html?topic=join#contact-form">Join as a student</a>
+          </div>
+          <div class="ruled">
+            <h3>Families and sponsors</h3>
+            <p>Donations pay for robot parts, competition registration, and travel.</p>
+            <a class="btn btn--light btn--sponsor" href="partners.html">Partner with us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
   <!-- FOOTER: js/main.js adds the sponsors strip and the page links above this row (SPONSORS / SUPPORTERS there).
        This row is plain HTML so the About, Contact and Terms links work without JavaScript. -->
@@ -149,6 +170,8 @@
       <nav class="footer-links" aria-label="About and legal"><a href="team.html#about">About</a><a href="contact.html">Contact</a><a href="terms.html">Terms and privacy</a></nav>
     </div>
   </footer>
-  <script src="js/main.js?v=230"></script>
+  <script src="js/main.js?v=231"></script>
+  <!-- the page shows its first frame once the parser gets here, so js/main.js has built the header (see "Page transitions" in css/style.css) -->
+  <div id="mercury-ready" hidden></div>
 </body>
 </html>

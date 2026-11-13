@@ -10,7 +10,7 @@ A high school **FIRST Tech Challenge** team in Weston, Massachusetts: team 26413
 
 [2024–25 · INTO THE DEEP · Rookie season](https://mercury26413.org/seasons/2024-2025.html) · [2025–26 · DECODE · Second season](https://mercury26413.org/seasons/2025-2026.html) · [2026–27 · BIOBUZZ · This season, in progress](https://mercury26413.org/seasons/2026-2027.html)
 
-## INTO THE DEEP
+## [INTO THE DEEP](https://mercury26413.org/seasons/2024-2025.html)
 
 2024–25, our rookie season: an evolving robot built to collect samples and hang specimens.
 
@@ -23,7 +23,7 @@ A high school **FIRST Tech Challenge** team in Weston, Massachusetts: team 26413
 
 [See how we built it](https://mercury26413.org/seasons/2024-2025.html)
 
-## DECODE
+## [DECODE](https://mercury26413.org/seasons/2025-2026.html)
 
 2025–26, our second season: Sustain Award, first pick on the winning alliance, and a trip to MA States.
 
@@ -37,7 +37,7 @@ A high school **FIRST Tech Challenge** team in Weston, Massachusetts: team 26413
 
 [See how we built it](https://mercury26413.org/seasons/2025-2026.html)
 
-## BIOBUZZ
+## [BIOBUZZ](https://mercury26413.org/seasons/2026-2027.html)
 
 2026–27, this season: The Mercinator (version 1) is a pollen-only robot built on the same ideas as the DECODE robot we took to States.
 
@@ -59,11 +59,11 @@ Every qualifier and championship we have competed at, from our first qualifier i
 
 | Date | Event | Result | Robot |
 | --- | --- | --- | --- |
-| Mar 15, 2026 | Massachusetts State Championship | Competed after qualifying through our Ryken RoboBowl result | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
-| Jan 24, 2026 | WNEU Qualifier | Sustain Award | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
-| Dec 14, 2025 | Ryken RoboBowl Qualifier | Winning alliance, 1st pick | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
-| Feb 23, 2025 | WNEU Qualifier | Think Award, made playoffs | [INTO THE DEEP](https://mercury26413.org/seasons/2024-2025.html) |
-| Feb 22, 2025 | MA Hawk Nest Havoc! Xaverian Qualifier | Competed | [INTO THE DEEP](https://mercury26413.org/seasons/2024-2025.html) |
+| Mar 15, 2026 | [Massachusetts State Championship](https://mercury26413.org/seasons/2025-2026.html#event-2026-03-15) | Competed after qualifying through our Ryken RoboBowl result | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
+| Jan 24, 2026 | [WNEU Qualifier](https://mercury26413.org/seasons/2025-2026.html#event-2026-01-24) | Sustain Award | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
+| Dec 14, 2025 | [Ryken RoboBowl Qualifier](https://mercury26413.org/seasons/2025-2026.html#event-2025-12-14) | Winning alliance, 1st pick | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
+| Feb 23, 2025 | [WNEU Qualifier](https://mercury26413.org/seasons/2024-2025.html#event-2025-02-23) | Think Award, made playoffs | [INTO THE DEEP](https://mercury26413.org/seasons/2024-2025.html) |
+| Feb 22, 2025 | [MA Hawk Nest Havoc! Xaverian Qualifier](https://mercury26413.org/seasons/2024-2025.html#event-2025-02-22) | Competed | [INTO THE DEEP](https://mercury26413.org/seasons/2024-2025.html) |
 
 **Students directly impacted:** [1,000](https://mercury26413.org/outreach.html)  
 **Raised for parts, travel, and outreach:** [$20,000+](https://mercury26413.org/partners.html)  

@@ -75,7 +75,7 @@
 
   --gutter: clamp(16px, 4vw, 44px);
   --max: 1240px;
-  --section: clamp(64px, 8vw, 128px);
+  --section: clamp(56px, 8vw, 128px);  /* round 11: 56px under 700px (was 64) */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --header-h: 56px;
@@ -641,7 +641,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .quote:empty { display: none; }
 .quote::before { content: "\201C"; }
 .quote::after { content: "\201D"; }
-.coaches { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 12px; }
+.coaches { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 12px; }
 .coaches li { padding: 18px 20px; border-radius: var(--r-md); background: var(--alu); }
 .band--grey .coaches li { background: var(--paper); }
 .coaches b { display: block; font-weight: 600; font-size: 1.125rem; }
@@ -961,16 +961,18 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 @media (prefers-reduced-motion: no-preference) {
   /* the stage lights up: the name rises, the robots step into the light one after another. Not on a load where
      the opening plays (html.opened, set with .intro): there the title card is the entrance, and its pieces
-     land on a stage that is standing still. */
-  html:not(.opened) .launch-head h1 { animation: rise 900ms var(--ease) backwards; }
-  html:not(.opened) .launch-head p { animation: rise 900ms 120ms var(--ease) backwards; }
-  html:not(.opened) .bays .bay:nth-child(1) .bay-stage img { animation: step-in 1100ms 220ms var(--ease) backwards; }
-  html:not(.opened) .bays .bay:nth-child(2) .bay-stage img { animation: step-in 1100ms 340ms var(--ease) backwards; }
-  html:not(.opened) .bays .bay:nth-child(3) .bay-stage img { animation: step-in 1100ms 460ms var(--ease) backwards; }
-  html:not(.opened) :is(.bay-label, .season-cards, .partner-strip, .lineup-credit) { animation: fade 900ms 640ms var(--ease) backwards; }
-  .season-head h1, .page-head h1 { animation: rise 900ms var(--ease) backwards; }
-  .season-head .lead, .page-head .lead { animation: rise 900ms 120ms var(--ease) backwards; }
-  .season-head-figure img { animation: step-in 1200ms 200ms var(--ease) backwards; }
+     land on a stage that is standing still. And not when the page arrives through a page transition
+     (html.vt-arrived, set by part "morph" in js/main.js; round 11): there the transition is the entrance, and
+     coming back to a page never replays it. A page typed in, reloaded or opened from elsewhere still has it. */
+  html:not(.opened):not(.vt-arrived) .launch-head h1 { animation: rise 900ms var(--ease) backwards; }
+  html:not(.opened):not(.vt-arrived) .launch-head p { animation: rise 900ms 120ms var(--ease) backwards; }
+  html:not(.opened):not(.vt-arrived) .bays .bay:nth-child(1) .bay-stage img { animation: step-in 1100ms 220ms var(--ease) backwards; }
+  html:not(.opened):not(.vt-arrived) .bays .bay:nth-child(2) .bay-stage img { animation: step-in 1100ms 340ms var(--ease) backwards; }
+  html:not(.opened):not(.vt-arrived) .bays .bay:nth-child(3) .bay-stage img { animation: step-in 1100ms 460ms var(--ease) backwards; }
+  html:not(.opened):not(.vt-arrived) :is(.bay-label, .season-cards, .partner-strip, .lineup-credit) { animation: fade 900ms 640ms var(--ease) backwards; }
+  html:not(.vt-arrived) :is(.season-head, .page-head) h1 { animation: rise 900ms var(--ease) backwards; }
+  html:not(.vt-arrived) :is(.season-head, .page-head) .lead { animation: rise 900ms 120ms var(--ease) backwards; }
+  html:not(.vt-arrived) .season-head-figure img { animation: step-in 1200ms 200ms var(--ease) backwards; }
 }
 @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
@@ -1113,18 +1115,41 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 @keyframes op-safety-go { to { visibility: hidden; opacity: 0; } }
 @keyframes intro-out { to { opacity: 0; visibility: hidden; } }
 
-/* ---------- Page transitions: the lights go down on the page you leave, the next one rises ----------
-   Cross-page view transitions (Chrome, Edge, Safari 18.2+). The header keeps its own name so it stays put;
-   season robots keep theirs (part "morph" in js/main.js) and glide between pages. Browsers without them get
-   a short entrance instead (.page-enter, set in each page's <head>). */
+/* ---------- Page transitions: the page you leave clears, then the next one rises (round 11) ----------
+   Cross-page view transitions (Chrome, Edge, Safari 18.2+). Until round 11 the two pages crossfaded, which for
+   about 150ms printed one page's heading and photos over the other's. Now the old page clears completely
+   (150ms) before the new one rises (340ms), so two pages are never on screen at once. What carries across:
+   - the header (its own name, on top of everything). The new header comes in with the new page, so its colours
+     change with the page, not before it;
+   - the page head (.page-band, .season-head, .partner-head: "page-head"). Between two pages with the same head
+     colour it simply stays; between two colours it turns from one to the other. Its words ("page-head-text")
+     leave and arrive with the pages, so two headings never overlap. Part "morph" in js/main.js lets the head
+     go with the page when it has scrolled out of sight, when the link opens a #section, and on Back/Forward;
+   - the season robots (their own names, part "morph"; class "robot"): they glide between pages above
+     everything but the header.
+   Anything that is on only one of the two pages leaves with the old one or arrives with the new one. A page
+   that arrives this way skips its own entrance (html.vt-arrived, Motion above). Browsers without cross-page
+   transitions get a short entrance instead (.page-enter, set in each page's <head>). Every page holds its first
+   frame until js/main.js has built the header (<link rel="expect" href="#mercury-ready" blocking="render">), so
+   the arriving page is never captured without it. */
 @view-transition { navigation: auto; }
 .site-header { view-transition-name: site-header; }
+.page-band, .season-head, .partner-head { view-transition-name: page-head; }
+:is(.page-band, .season-head, .partner-head) > .container { view-transition-name: page-head-text; }
+img[style*="view-transition-name"] { view-transition-class: robot; }
+.season-head .season-head-figure { background: none; } /* it is the field's own colour; inside the head's words it doubled over the field while both came in */
 ::view-transition-group(*) { animation-duration: 480ms; animation-timing-function: var(--ease); }
-::view-transition-old(root) { animation: vt-down 240ms cubic-bezier(0.4, 0, 1, 1) both; }
-::view-transition-new(root) { animation: vt-rise 520ms var(--ease) 90ms both; }
-::view-transition-old(site-header), ::view-transition-new(site-header) { animation-duration: 200ms; }
-@keyframes vt-down { to { opacity: 0; transform: scale(0.985); filter: brightness(0.5); } }
-@keyframes vt-rise { from { opacity: 0; transform: translateY(18px); } }
+::view-transition-group(*.robot) { z-index: 2; }
+::view-transition-group(site-header) { z-index: 3; }
+::view-transition-group(page-head) { animation-duration: 340ms; }
+::view-transition-group(page-head-text) { animation: none; }
+::view-transition-old(root), ::view-transition-old(*):only-child, ::view-transition-old(page-head-text) { animation: vt-out 150ms cubic-bezier(0.4, 0, 1, 1) both; }
+::view-transition-new(root), ::view-transition-new(*):only-child, ::view-transition-new(page-head-text) { animation: vt-rise 340ms var(--ease) 150ms both; }
+::view-transition-old(site-header) { animation: none; }
+::view-transition-new(site-header) { animation: vt-fade 340ms var(--ease) 150ms both; }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-fade { from { opacity: 0; } }
+@keyframes vt-rise { from { opacity: 0; transform: translateY(12px); } }
 @media (prefers-reduced-motion: no-preference) {
   html.page-enter main { animation: vt-rise 520ms var(--ease) backwards; } /* no fill after it ends: a lasting transform would trap the menu's fixed scrim inside main */
 }
@@ -1961,3 +1986,77 @@ body[data-page="seasons"]:not([data-livery]) .page-band ::selection { background
   .launch .btn, .season-head .btn, .band--stage .btn { background: none !important; border-color: #000 !important; }
   .bay-label, .lineup-credit { background: none !important; }
 }
+
+/* =========================================================
+   Round 11: flow (Andy: "making everything on the website flow better ... research other really good websites
+   and improve on it"). After a study of stripe.com, linear.app, apple.com, rivian.com and teenage.engineering,
+   and of the sites of FRC 254, 1678, 971 and 118, FTC 8565 and 23511, Williams and Red Bull Racing:
+   - chapters: related sections share a band, so the ground changes when the subject changes;
+   - every page ends by handing the visitor on (season doors, a closing call), as no robot page did on the
+     robotics sites studied;
+   - page changes never show two pages at once (Page transitions, in the Motion section).
+   Nothing here moves because the page scrolled.
+   ========================================================= */
+
+/* Chapters. A band with .band--cont carries on from the band before it, on the same ground (give it the same
+   band--grey or none): the sections inside a chapter are one --section apart, two chapters two. Before round
+   11 the ground changed at every section (6 times on the home page), so every gap weighed the same; apple.com's
+   iPhone page, with this site's own heading pattern, changes its ground every second section. */
+.band--cont { padding-top: 0; scroll-margin-top: clamp(16px, 3vw, 40px); } /* a jump to it (#parts) leaves its heading some room under the header */
+
+/* Season doors: how every season page ends. Each neighbouring season is a door in its own colour with its
+   robot standing on it and its page's lead under the name, like a row of the Seasons page; opening it, the
+   robot glides into that season's head (Page transitions). The selector outranks the round 7 box rule, as
+   the Seasons rows do. */
+.season-doors .pager { gap: 12px; }
+@media (min-width: 760px) {
+  .season-doors .pager { grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); }
+  .season-doors .pager a[rel="next"] { grid-column: auto; }
+}
+.season-doors .pager a[data-season]:not(.ruled):not(.tile) {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(120px, 42%); align-items: end; gap: 16px clamp(16px, 2vw, 28px);
+  min-height: clamp(240px, 22vw, 300px); padding: clamp(20px, 2.4vw, 32px); text-align: left;
+  background: var(--c); color: #000; border: 1px solid #000; text-decoration: none;
+}
+.season-doors .pager-text { display: grid; gap: 10px; align-self: stretch; align-content: space-between; }
+.season-doors .pager small { color: #000; font-size: var(--fs-sm); font-weight: 500; }
+.season-doors .pager b { font-size: min(clamp(1.75rem, 1rem + 2.2vw, 2.75rem), 9vw); line-height: 1.02; letter-spacing: -0.01em; }
+.season-doors .pager-lead { font-size: var(--fs-base); line-height: 1.45; max-width: 34ch; }
+.season-doors .pager-cta { font-size: var(--fs-sm); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 0.22em; }
+.season-doors .pager a .pager-media, .season-doors .pager a[rel="next"] .pager-media {
+  order: 0; height: clamp(160px, 17vw, 236px); padding: 0; background: none; display: flex; align-items: flex-end; justify-content: center;
+}
+.season-doors .pager-media img { max-height: 100%; max-width: 100%; width: auto; height: auto; filter: drop-shadow(0 14px 12px rgba(11, 10, 15, 0.4)); transition: transform 600ms var(--ease); }
+.season-doors .pager a:focus-visible { outline-color: #000; }
+.season-doors .pager a:hover b { text-decoration: none; }
+@media (hover: hover) and (pointer: fine) {
+  .season-doors .pager a:hover .pager-media img { transform: translateY(-6px) scale(1.02); }
+  .season-doors .pager a:hover .pager-cta { text-decoration-thickness: 3px; }
+}
+@media (max-width: 520px) {
+  .season-doors .pager a[data-season]:not(.ruled):not(.tile) { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .season-doors .pager a .pager-media, .season-doors .pager a[rel="next"] .pager-media { order: -1; height: 150px; justify-content: flex-start; }
+}
+.season-doors .pager ::selection { background: #000; color: #fff; }
+@media (prefers-reduced-motion: reduce) { .season-doors .pager-media img { transform: none !important; } }
+
+/* On this page: the long season pages list their sections under the head's facts (as team254.com's robot pages
+   do), plain links, no tracking of the scroll. */
+.page-index { margin-top: clamp(16px, 2vw, 22px); padding-bottom: clamp(24px, 3vw, 40px); } /* it takes over the head's bottom room from the facts row */
+.season-facts:has(+ .page-index) { padding-bottom: 0; }
+.page-index ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; padding: 0; }
+.page-index a { color: #000; font-size: var(--fs-sm); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 0.22em; }
+.page-index a:hover { text-decoration-thickness: 3px; }
+
+/* The home line-up: the chosen season's name is also the way into its page (the bays choose; the name opens) */
+.season-card h2 a { color: inherit; text-decoration: none; }
+.season-card h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.12em; }
+
+/* The home record: each event opens its entry on its season's page (the robot column opens the page itself) */
+.results-table .r-event a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
+.results-table .r-event a:hover { text-decoration-thickness: 2px; }
+
+/* Team: nine members in three rows of three from 900px (it was 4 + 4 + 1, with the last card alone); the
+   coaches close the members band, before the call to join that ends the page. */
+@media (min-width: 900px) { .members { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.coaches-block { margin-top: clamp(64px, 7vw, 104px); }

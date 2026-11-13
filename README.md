@@ -36,6 +36,8 @@ next steps.
 | Every competition result | `index.html` → the table under "The record so far" (one `<tr>` per event), and the season page's `events` list |
 | Season pages | `seasons/<year>.html` → `season-head` at the top, spec sheet (`<dl class="spec">`), mechanisms, `events` |
 | Season list | `seasons.html` → one `<li class="season-row">` per season |
+| The end of a season page (a door to each neighbouring season) | `seasons/<year>.html` → `<nav class="… season-doors">`: one `<a>` per neighbouring season (`rel="prev"` or `rel="next"`), with its robot, its years, its name and that page's lead |
+| The call at the end of a page ("Build with us, or help us get to the next event": Students and Families and sponsors) | the `CLOSING` section at the bottom of `index.html`, `seasons.html`, `outreach.html`, `news.html`, `resources.html` and `seasons/2026-2027.html`. It is the same call on every page (the outreach and current-season versions say one more thing about sponsoring): change them together |
 | Team members | `team.html` → copy/paste an `<article class="member">` and give it its own `id` (the home strip links to `team.html#that-id`); add or remove the same person in the home page's team strip |
 | Outreach events | `outreach.html` → copy/paste an `<article class="program">` into a year's `programs` |
 | Partner page | `partners.html` (tiers table, budget table and donut, other ways to help) |
@@ -53,7 +55,10 @@ so a pasted block can never break a page.
 
 | Block | What it does |
 |---|---|
-| `<section class="band">` (`band--grey`, `band--stage`) | A full-width section: white, aluminium grey, or the black stage. Sections are told apart by their ground, not by lines |
+| `<section class="band">` (`band--grey`, `band--stage`) | A full-width section: white, the page's pale colour, or a colour field / the black stage. Sections are told apart by their ground, not by lines |
+| `band--cont` | A section that carries on in the band before it (same ground, no space on top): two sections that belong together, like the record and the calendar on the home page, form one chapter. Give it the same ground as the section before it (`band band--cont`, or `band band--grey band--cont`) |
+| `<nav class="band season-doors">` (season pages) | The doors to the neighbouring seasons at the end of a season page: each `<a>` is a field in that season's colour (from its `data-season`) with its robot; the robot glides into that season's page when the door is opened |
+| `<nav class="page-index">` (long season pages) | The list of the page's sections under the head's facts: plain links to the sections' `id`s |
 | `.tile` | A square, flat box (white on grey, grey on white). Never put a tile inside a tile |
 | Buttons | `btn` (square, black, capitals, with a drawn arrow; none on mail links, a down arrow on downloads), `btn--line` (outline), and on the black stage `btn--light` (white) and `btn--outline-light`. On a colour field (a page head, the strip under the home stage, a closing band) `btn--light` and `btn--outline-light` turn black by themselves. `btn btn--light btn--sponsor` is the sponsor button there ("Partner with us"). `btn btn--season` is the signal colour by itself |
 | `data-season="2024"` (or `2025`, `2026`) | Gives a block its season's colour (as `--c`): the bays and cards on the home page, the rows on `seasons.html`, the head and the pager links of a season page, a row's robot cell in the record. A season page also has `<body data-livery="2025">` (its year): the whole page (head, bands, lines, buttons, footer) then wears that game's palette |
@@ -93,10 +98,14 @@ piece flies to its own place on the page (the fields become the three bays, the 
 the rest of the page comes up around them. About 2.2s; any click, tap or key ends it; add `?intro` to the
 address to see it again. It does not play with reduced motion, on a slow connection, on a very short screen, or in
 a tab that is not showing. A press on the card only ends it: it never also presses a link under the card.
-Moving between pages, the page you leave dims and the next one rises into place (cross-page view transitions;
-the header stays put). Both are set up by a small script at the top of each page's `<head>`: keep it when you
-copy a page. When a page opens without the title card, its title rises and the robots step into the light one
-after another.
+Moving between pages, the page you leave clears and then the next one rises into place, so two pages are never on
+screen at once (cross-page view transitions). The header stays put, a page head of the same colour stays put too,
+and a robot you click on glides into its season page. Both are set up by a small script at the top of each page's
+`<head>`: keep it when you copy a page, and keep the `<link rel="expect" href="#mercury-ready" blocking="render">`
+line under the stylesheet and the `<div id="mercury-ready" hidden></div>` line after `js/main.js`: together they make
+the page wait for the script to build the header before it shows. When a page is opened directly (typed in,
+reloaded, from a search result) its title rises and the robots step into the light one after another; arriving
+from another page of the site, the page change is the entrance.
 After that, motion only answers a click, a tap, a drag or a key: choosing a season lights its colour field and
 brings its card up; the team strip moves when you press its arrows or drag it; choosing an outreach story
 changes the photo; a gallery photo opens large; filters, tabs and parts swap their content; a robot glides
@@ -129,7 +138,10 @@ look at that moment.
    on the hovered button stays 4.5:1 or more), and the colours of the header's "Partner with us" button
    (`--cta`, `--on-cta`, `--cta-press`: the mark with black type, or, when the mark is the field's own colour
    as BIOBUZZ's yellow is, black with the mark as its type).
-5. Update the pager links at the bottom of the neighbouring season page, and `SEASON` in `js/main.js`.
+5. Give last season's page a door to the new one: copy an `<a>` in its `<nav class="… season-doors">`, with
+   `rel="next"`, the new page's address, `data-season`, robot, years, name and lead. Give the new page a door back
+   (`rel="prev"`). The current season's page ends on the closing call: keep it on the new page, and take it off
+   last season's page if you like. Update `SEASON` in `js/main.js`.
 6. Add the new page to `PAGES` in `tools/agent_files.py` and run `python3 tools/agent_files.py`.
 
 ## AI agents

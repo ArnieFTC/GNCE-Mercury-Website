@@ -11,7 +11,7 @@ A high school **FIRST Tech Challenge** team in Weston, Massachusetts: team 26413
 
 [2024–25 · INTO THE DEEP · Rookie season](https://mercury26413.org/seasons/2024-2025.html) · [2025–26 · DECODE · Second season](https://mercury26413.org/seasons/2025-2026.html) · [2026–27 · BIOBUZZ · This season, in progress](https://mercury26413.org/seasons/2026-2027.html)
 
-## INTO THE DEEP
+## [INTO THE DEEP](https://mercury26413.org/seasons/2024-2025.html)
 
 2024–25, our rookie season: an evolving robot built to collect samples and hang specimens.
 
@@ -24,7 +24,7 @@ A high school **FIRST Tech Challenge** team in Weston, Massachusetts: team 26413
 
 [See how we built it](https://mercury26413.org/seasons/2024-2025.html)
 
-## DECODE
+## [DECODE](https://mercury26413.org/seasons/2025-2026.html)
 
 2025–26, our second season: Sustain Award, first pick on the winning alliance, and a trip to MA States.
 
@@ -38,7 +38,7 @@ A high school **FIRST Tech Challenge** team in Weston, Massachusetts: team 26413
 
 [See how we built it](https://mercury26413.org/seasons/2025-2026.html)
 
-## BIOBUZZ
+## [BIOBUZZ](https://mercury26413.org/seasons/2026-2027.html)
 
 2026–27, this season: The Mercinator (version 1) is a pollen-only robot built on the same ideas as the DECODE robot we took to States.
 
@@ -60,11 +60,11 @@ Every qualifier and championship we have competed at, from our first qualifier i
 
 | Date | Event | Result | Robot |
 | --- | --- | --- | --- |
-| Mar 15, 2026 | Massachusetts State Championship | Competed after qualifying through our Ryken RoboBowl result | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
-| Jan 24, 2026 | WNEU Qualifier | Sustain Award | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
-| Dec 14, 2025 | Ryken RoboBowl Qualifier | Winning alliance, 1st pick | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
-| Feb 23, 2025 | WNEU Qualifier | Think Award, made playoffs | [INTO THE DEEP](https://mercury26413.org/seasons/2024-2025.html) |
-| Feb 22, 2025 | MA Hawk Nest Havoc! Xaverian Qualifier | Competed | [INTO THE DEEP](https://mercury26413.org/seasons/2024-2025.html) |
+| Mar 15, 2026 | [Massachusetts State Championship](https://mercury26413.org/seasons/2025-2026.html#event-2026-03-15) | Competed after qualifying through our Ryken RoboBowl result | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
+| Jan 24, 2026 | [WNEU Qualifier](https://mercury26413.org/seasons/2025-2026.html#event-2026-01-24) | Sustain Award | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
+| Dec 14, 2025 | [Ryken RoboBowl Qualifier](https://mercury26413.org/seasons/2025-2026.html#event-2025-12-14) | Winning alliance, 1st pick | [DECODE](https://mercury26413.org/seasons/2025-2026.html) |
+| Feb 23, 2025 | [WNEU Qualifier](https://mercury26413.org/seasons/2024-2025.html#event-2025-02-23) | Think Award, made playoffs | [INTO THE DEEP](https://mercury26413.org/seasons/2024-2025.html) |
+| Feb 22, 2025 | [MA Hawk Nest Havoc! Xaverian Qualifier](https://mercury26413.org/seasons/2024-2025.html#event-2025-02-22) | Competed | [INTO THE DEEP](https://mercury26413.org/seasons/2024-2025.html) |
 
 **Students directly impacted:** [1,000](https://mercury26413.org/outreach.html)  
 **Raised for parts, travel, and outreach:** [$20,000+](https://mercury26413.org/partners.html)  
@@ -209,6 +209,20 @@ Pick a season to see that year’s robot and every qualifier we competed at.
 
    [See how we built it](https://mercury26413.org/seasons/2024-2025.html)
 
+## Build with us, or help us get to the next event
+
+### Students
+
+Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.
+
+[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
+
+### Families and sponsors
+
+Donations pay for robot parts, competition registration, and travel.
+
+[Partner with us](https://mercury26413.org/partners.html)
+
 
 <!-- page: https://mercury26413.org/seasons/2026-2027.html -->
 
@@ -259,7 +273,21 @@ Season calendar, oldest first, in Massachusetts (Eastern) time. The next event i
 
 No qualifiers yet this season. Results will show up here after our first event.
 
-[Previous season, 2025–26, our second · **DECODE**](https://mercury26413.org/seasons/2025-2026.html)
+[Previous season, 2025–26, our second · **DECODE** · Our second season: Sustain Award and a trip to States. · See how we built it](https://mercury26413.org/seasons/2025-2026.html)
+
+## Build with us, or help us get to the next event
+
+### Students
+
+Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.
+
+[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
+
+### Families and sponsors
+
+Donations pay for robot parts, competition registration, and travel. From the Silver tier ($1,500+), your logo goes on our robot and in our team pit.
+
+[Partner with us](https://mercury26413.org/partners.html#tiers)
 
 
 <!-- page: https://mercury26413.org/seasons/2025-2026.html -->
@@ -277,6 +305,12 @@ Our second season: Sustain Award and a trip to States.
 **Ryken RoboBowl, Dec 14, 2025:** Winning alliance, 1st pick  
 **WNEU Qualifier, Jan 24, 2026:** Sustain Award  
 **Mar 15, 2026:** MA State Championship
+
+- [The robot](https://mercury26413.org/seasons/2025-2026.html#robot)
+- [Parts of the robot](https://mercury26413.org/seasons/2025-2026.html#parts)
+- [Mechanisms & iterations](https://mercury26413.org/seasons/2025-2026.html#mechanisms)
+- [Software & autonomous](https://mercury26413.org/seasons/2025-2026.html#software)
+- [Events](https://mercury26413.org/seasons/2025-2026.html#events)
 
 ## The robot
 
@@ -403,7 +437,7 @@ Our code is organized into subsystems, and we tune our turret, flywheel, and aut
    **Alliance:** Winning alliance, 1st pick  
    **Awards:** Winning alliance
 
-[Previous season, 2024–25 · **INTO THE DEEP**](https://mercury26413.org/seasons/2024-2025.html) · [This season, 2026–27 · **BIOBUZZ**](https://mercury26413.org/seasons/2026-2027.html)
+[Previous season, 2024–25 · **INTO THE DEEP** · Our rookie season: an evolving robot built to collect samples and hang specimens. · See how we built it](https://mercury26413.org/seasons/2024-2025.html) · [This season, 2026–27 · **BIOBUZZ** · Our third season, now in progress, with The Mercinator. · Follow the build](https://mercury26413.org/seasons/2026-2027.html)
 
 
 <!-- page: https://mercury26413.org/seasons/2024-2025.html -->
@@ -419,6 +453,11 @@ Our rookie season: an evolving robot built to collect samples and hang specimens
 
 **Season:** 2024–25, our rookie season  
 **WNEU Qualifier, Feb 23, 2025:** Think Award, made playoffs
+
+- [The robot](https://mercury26413.org/seasons/2024-2025.html#robot)
+- [How the robot changed](https://mercury26413.org/seasons/2024-2025.html#changes)
+- [Autonomous strategy](https://mercury26413.org/seasons/2024-2025.html#autonomous)
+- [Events](https://mercury26413.org/seasons/2024-2025.html#events)
 
 ## The robot
 
@@ -490,7 +529,7 @@ Our portfolio describes a planned route that scores the starting specimen, moves
    **Alliance:** Not recorded  
    **Awards:** Not recorded
 
-[Next season, 2025–26, our second · **DECODE**](https://mercury26413.org/seasons/2025-2026.html)
+[Next season, 2025–26, our second · **DECODE** · Our second season: Sustain Award and a trip to States. · See how we built it](https://mercury26413.org/seasons/2025-2026.html)
 
 
 <!-- page: https://mercury26413.org/team.html -->
@@ -660,18 +699,18 @@ CAD · Game Strategy
 
 > If at first you don’t succeed, use a little duct tape.
 
-## We recruit new members every season
-
-Rookies are part of the team from day one. Tell us what you’re into, whether that’s building, coding, CAD, or outreach, and we’ll get back to you.
-
-[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
-
 ## Mentors & coaches
 
 - **Cary Gumbert** · Coach / mentor
 - **Chris de la Rosa** · Coach / mentor
 - **Ken Huang** · Coach / mentor
 - **Tiao Xie** · Coach / mentor
+
+## We recruit new members every season
+
+Rookies are part of the team from day one. Tell us what you’re into, whether that’s building, coding, CAD, or outreach, and we’ll get back to you.
+
+[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
 
 
 <!-- page: https://mercury26413.org/outreach.html -->
@@ -778,6 +817,20 @@ Nov 23, 2024
 
 We hosted a practice qualifier for 5 Weston FIRST LEGO League teams. We ran robot matches and judged each team the way a real qualifier would.
 
+## Build with us, or help us get to the next event
+
+### Students
+
+Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.
+
+[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
+
+### Families and sponsors
+
+Sponsorship funds cover outreach like our summer camp and FLL coaching, as well as robot parts and travel.
+
+[Partner with us](https://mercury26413.org/partners.html)
+
 
 <!-- page: https://mercury26413.org/news.html -->
 
@@ -808,6 +861,22 @@ Thank you to everyone at VulcanForms for supporting our students.
 Oct 25, 2026 · Competition
 
 We attended the scrimmage hosted by Ghost Robotics at Westford High School, and here we got our first in-competition hive tip of this season!
+
+[Follow the build of The Mercinator](https://mercury26413.org/seasons/2026-2027.html)
+
+## Build with us, or help us get to the next event
+
+### Students
+
+Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.
+
+[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
+
+### Families and sponsors
+
+Donations pay for robot parts, competition registration, and travel.
+
+[Partner with us](https://mercury26413.org/partners.html)
 
 
 <!-- page: https://mercury26413.org/partners.html -->
@@ -928,6 +997,8 @@ We thank every sponsor in the footer of every page of this site.
 
 [Email Margaret about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury) · [Download the package PDF, 1.8 MB](https://mercury26413.org/docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf)
 
+[Or send Margaret a message from this site](https://mercury26413.org/contact.html?topic=sponsor#contact-form)
+
 ### Other ways to help
 
 - **Give parts, fabrication or mentoring time** · [Tell us](mailto:margaret@mercury26413.org?subject=In-kind%20support) what you could offer instead of money.
@@ -963,6 +1034,20 @@ How our robots work and how they changed, written up so other teams can learn fr
 - ### Build log
 
   Notes and photos from build sessions as each robot comes together.
+
+## Build with us, or help us get to the next event
+
+### Students
+
+Rookies are full members of the team. Tell us whether you want to build, code, design in CAD, or run outreach.
+
+[Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
+
+### Families and sponsors
+
+Donations pay for robot parts, competition registration, and travel.
+
+[Partner with us](https://mercury26413.org/partners.html)
 
 
 <!-- page: https://mercury26413.org/contact.html -->

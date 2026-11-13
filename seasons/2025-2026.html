@@ -85,7 +85,8 @@
   </script>
   <!-- agent:end -->
   <link rel="preload" href="../fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../css/style.css?v=230">
+  <link rel="stylesheet" href="../css/style.css?v=231">
+  <link rel="expect" href="#mercury-ready" blocking="render">
   <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
@@ -114,6 +115,15 @@
           <div><dt>WNEU Qualifier, Jan&nbsp;24,&nbsp;2026</dt><dd>Sustain Award</dd></div>
           <div><dt>Mar&nbsp;15,&nbsp;2026</dt><dd>MA State Championship</dd></div>
         </dl>
+        <nav class="page-index" aria-label="On this page">
+          <ul>
+            <li><a href="#robot">The robot</a></li>
+            <li><a href="#parts">Parts of the robot</a></li>
+            <li><a href="#mechanisms">Mechanisms &amp; iterations</a></li>
+            <li><a href="#software">Software &amp; autonomous</a></li>
+            <li><a href="#events">Events</a></li>
+          </ul>
+        </nav>
       </div>
     </section>
 
@@ -160,7 +170,7 @@
          data-card is the id of that part under "Mechanisms and iterations";
          data-label="below" puts the part's name under its marker instead of above;
          data-link is how the part is named in "More on the …" when it isn't lowercase. -->
-    <section class="band band--grey" aria-labelledby="parts-title">
+    <section class="band band--cont" id="parts" aria-labelledby="parts-title">
       <div class="container">
         <div class="section-head">
           <h2 id="parts-title">Parts of&nbsp;the&nbsp;robot</h2>
@@ -186,7 +196,7 @@
 
     <!-- MECHANISMS: one <article class="entry"> per mechanism. The id is what the parts above link to.
          data-gallery on the grid: a click on a picture opens it large and uncropped (js/main.js, part "viewer"). -->
-    <section class="band" id="mechanisms" aria-labelledby="mech-title">
+    <section class="band band--grey" id="mechanisms" aria-labelledby="mech-title">
       <div class="container">
         <div class="section-head">
           <h2 id="mech-title">Mechanisms &amp;&nbsp;iterations</h2>
@@ -231,7 +241,7 @@
       </div>
     </section>
 
-    <section class="band band--grey" aria-labelledby="software-title">
+    <section class="band band--grey band--cont" id="software" aria-labelledby="software-title">
       <div class="container">
         <div class="section-head">
           <h2 id="software-title">Software &amp;&nbsp;autonomous</h2>
@@ -258,13 +268,13 @@
     </section>
 
     <!-- EVENTS: one <li class="event"> per qualifier or event, newest first. For anything not recorded, copy the "—" value as it is (screen readers hear "Not recorded"). -->
-    <section class="band" aria-labelledby="events-title">
+    <section class="band" id="events" aria-labelledby="events-title">
       <div class="container">
         <div class="section-head">
           <h2 id="events-title">Events</h2>
         </div>
         <ol class="events">
-          <li class="event">
+          <li class="event" id="event-2026-03-15">
             <time datetime="2026-03-15">Mar 15, 2026</time>
             <div>
               <h3>Massachusetts State Championship</h3>
@@ -275,7 +285,7 @@
               <div><dt>Awards</dt><dd><span aria-hidden="true">—</span><span class="visually-hidden">Not recorded</span></dd></div>
             </dl>
           </li>
-          <li class="event">
+          <li class="event" id="event-2026-01-24">
             <time datetime="2026-01-24">Jan 24, 2026</time>
             <div>
               <h3>WNEU Qualifier</h3>
@@ -286,7 +296,7 @@
               <div><dt>Awards</dt><dd><span class="dia" aria-hidden="true"></span>Sustain Award</dd></div>
             </dl>
           </li>
-          <li class="event">
+          <li class="event" id="event-2025-12-14">
             <time datetime="2025-12-14">Dec 14, 2025</time>
             <div>
               <h3><span translate="no">Ryken&nbsp;RoboBowl</span> Qualifier</h3>
@@ -302,16 +312,28 @@
       </div>
     </section>
 
-    <!-- OTHER SEASONS: one <a> per neighbouring season -->
-    <nav class="band band--tight" aria-label="Other seasons">
+    <!-- OTHER SEASONS: one <a> per neighbouring season (rel="prev" for the one before, rel="next" for the one after).
+         Each is a door in that season's colour with its robot standing on it (round 11); the robot glides into that
+         season's head when the door opens. The line under the name is that season page's own lead. -->
+    <nav class="band band--cont season-doors" aria-label="Other seasons">
       <div class="container"><div class="pager">
         <a rel="prev" href="2024-2025.html" data-season="2024">
+          <span class="pager-text">
+            <small>Previous season, 2024–&#8288;25</small>
+            <b translate="no">INTO THE&nbsp;DEEP</b>
+            <span class="pager-lead">Our rookie season: an evolving robot built to collect samples and hang specimens.</span>
+            <span class="pager-cta">See how we built it</span>
+          </span>
           <span class="pager-media"><img src="../images/into-the-deep-robot-cut.webp" width="802" height="482" loading="lazy" alt="" style="view-transition-name: robot-itd"></span>
-          <span><small>Previous season, 2024–&#8288;25</small><b translate="no">INTO THE DEEP</b></span>
         </a>
         <a rel="next" href="2026-2027.html" data-season="2026">
+          <span class="pager-text">
+            <small>This season, 2026–&#8288;27</small>
+            <b translate="no">BIOBUZZ</b>
+            <span class="pager-lead">Our third season, now in progress, with <span translate="no">The&nbsp;Mercinator</span>.</span>
+            <span class="pager-cta">Follow the build</span>
+          </span>
           <span class="pager-media"><img src="../images/mercinator-v1-cut.webp" width="479" height="511" loading="lazy" alt="" style="view-transition-name: robot-mercinator"></span>
-          <span><small>This season, 2026–&#8288;27</small><b translate="no">BIOBUZZ</b></span>
         </a>
       </div></div>
     </nav>
@@ -326,6 +348,8 @@
       <nav class="footer-links" aria-label="About and legal"><a href="../team.html#about">About</a><a href="../contact.html">Contact</a><a href="../terms.html">Terms and privacy</a></nav>
     </div>
   </footer>
-  <script src="../js/main.js?v=230"></script>
+  <script src="../js/main.js?v=231"></script>
+  <!-- the page shows its first frame once the parser gets here, so js/main.js has built the header (see "Page transitions" in css/style.css) -->
+  <div id="mercury-ready" hidden></div>
 </body>
 </html>
