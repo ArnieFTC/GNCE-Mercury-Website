@@ -11,8 +11,8 @@ const SEASON = {
   kickoff: "2026-09-12",
   events: [
     { name: "Ghost Scrimmage", date: "2026-10-25" },
-    { name: "Wolfpack Scrimmage", date: "2026-11-15" },
-    { name: "Windsor Scrimmage", date: "2026-12-06" },
+    { name: "WNEU Qualifier 1", date: "2026-12-13" },
+    { name: "Coastal Current Clash Qualifier", date: "2027-01-23" },
   ],
 };
 
@@ -83,7 +83,7 @@ const seasonPoints = () => {
     return { ...p, past, today, next, days: Math.ceil((p.day - now) / DAY) };
   });
 };
-// "Today: …", "Wolfpack Scrimmage, Saturday, November 15 (in 12 days)", or null once the season is over
+// "Today: …", "WNEU Qualifier 1, Sunday, December 13 (in 12 days)", or null once the season is over
 const nextEvent = () => {
   const pts = seasonPoints().slice(1);
   const today = pts.find(p => p.today);

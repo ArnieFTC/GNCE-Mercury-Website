@@ -77,8 +77,8 @@ Season calendar, oldest first, in Massachusetts (Eastern) time. The next event i
 
 - Saturday, September 12, 2026: Season kickoff
 - Sunday, October 25, 2026: Ghost Scrimmage
-- Sunday, November 15, 2026: Wolfpack Scrimmage
-- Sunday, December 6, 2026: Windsor Scrimmage
+- Sunday, December 13, 2026: WNEU Qualifier 1
+- Saturday, January 23, 2027: Coastal Current Clash Qualifier
 
 ## 9 students and 4 coaches
 
