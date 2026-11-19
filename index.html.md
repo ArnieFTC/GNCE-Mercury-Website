@@ -149,7 +149,7 @@ Nov 3, 2026 · Sponsors
 
 ### [Thank you, VulcanForms](https://mercury26413.org/news.html#vulcanforms-platinum)
 
-Thank you to VulcanForms for applying to sponsor our 2026–27 season at the Platinum level ($7,500+), the highest of our four sponsorship tiers.
+Thank you to VulcanForms for applying to sponsor our 2026–27 season with $10,000 at the Platinum level, the highest of our four sponsorship tiers.
 
 [Video: The hive tips during a BIOBUZZ match and its balls spill onto the field](https://mercury26413.org/images/hive-tip-match-2.mp4)
 

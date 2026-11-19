@@ -3,7 +3,8 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-13. **Round 11** made the site flow: related sections share a band (chapters), every page ends by
+_Last updated: 2026-11-19. VulcanForms' sponsorship now shows its amount, $10,000 (Andy); see "VulcanForms amount" below.
+On 2026-11-13 **Round 11** made the site flow: related sections share a band (chapters), every page ends by
 handing the visitor on (season doors, a closing call), and a page change never shows two pages at once; see "Round 11"
 below. Before it, on 2026-11-12, the **site icon** was rebuilt after Andy's screenshot of a Google result with a plain
 globe beside the site: see "Site icon" below. **Round 10** (2026-11-11) put the FTC games' official colour palettes on whole pages: every page
@@ -33,6 +34,19 @@ colours of their names. Work is committed straight to `main`, Andy's standing in
 4. **Round 2 (same day).** Andy: the colour "is so AI-like", the site "feels too static"; the boxes and
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
+
+## VulcanForms amount (2026-11-19)
+
+Andy: "make the vulcan work sponsor money 10000". VulcanForms' sponsorship had been shown as the Platinum tier's
+range, "$7,500+", because the amount was not known (B15). It now reads $10,000 in the three places that name it: the
+thank-you post on News ("for applying to sponsor our 2026–27 season with $10,000 at the Platinum level, the highest
+of our four sponsorship tiers"), the same sentence on the home page's latest-news card, and the sponsor card on
+Partners (the Platinum tag, then $10,000). The Platinum tier itself is still $7,500+ (the package). The rule that a
+sponsor's amount is never printed became "only when the team says so", in the editors' notes on the partners and news
+pages and in DESIGN.md; PRODUCT.md now lists VulcanForms as a sponsor, with its amount. (The news page's old note made
+printing depend on the sponsor agreeing to share the amount; Andy's word is taken as that agreement.) The post still says "applying to sponsor": Andy gave the amount,
+not word that the sponsorship is final (B15). The agent files were written again (the Markdown copies, `llms-full.txt`,
+the post's JSON-LD).
 
 ## Round 11: flow (2026-11-13)
 
@@ -842,8 +856,9 @@ Reduced motion makes every change instant.
 - ⊘ B13 One line each on what "Growth" (budget) and "Can request media" (Platinum) mean, and WEEFC's full name.
 - ⊘ B14 Matching gifts and gifts under $500: who receives payment and how, so a parent at a company with a
   matching program can act (the page sends those questions to Margaret for now).
-- ⊘ B15 VulcanForms: confirm the Platinum sponsorship is final and what the amount is. Until then the post says
-  "applying to sponsor" and shows $7,500+; once it is final, change its lead to "signing on to sponsor".
+- ◐ B15 VulcanForms: the amount is $10,000 (Andy, 2026-11-19), shown on the News post, the home page's news card and the
+  Partners sponsor card. Still to confirm: is the sponsorship final? Until then the post says "applying to sponsor";
+  once it is final, change its lead (and the home card's copy of it) to "signing on to sponsor".
 - ⊘ B11 Which other members code: the Software filter shows only Arnie (Software Lead) until members get a
   Software chip.
 - ⊘ B16 Round 9 on real hardware: the opening, the strip's swipe and the photo viewer have only run in Chromium on
@@ -1280,7 +1295,7 @@ server):
 5. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
    joining facts, States results, a sharp wide team photo, coach photos, the package questions (B12–B14: the QR
    code's target, what "Growth" and "Can request media" mean, matching gifts) and B15 (is the VulcanForms Platinum
-   sponsorship final, and the amount).
+   sponsorship final; the amount, $10,000, came on 2026-11-19).
 6. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
 7. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events. When the next
    game is announced, give the new season its colour (README, "Start a new season").

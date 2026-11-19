@@ -14,7 +14,7 @@ Thank-yous to our sponsors and updates from the team, newest first.
 
 Nov 3, 2026 · Sponsors
 
-Thank you to VulcanForms for applying to sponsor our 2026–27 season at the Platinum level ($7,500+), the highest of our four sponsorship tiers.
+Thank you to VulcanForms for applying to sponsor our 2026–27 season with $10,000 at the Platinum level, the highest of our four sponsorship tiers.
 
 VulcanForms is a Massachusetts company that makes metal parts with 3D printing, on laser powder bed fusion machines it designs and builds itself. We toured VulcanForms on October 31, 2026.
 

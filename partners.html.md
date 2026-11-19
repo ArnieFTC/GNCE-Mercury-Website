@@ -63,7 +63,7 @@ Shares match our sponsorship package, rounded to add up to 100%.
 
 - [VulcanForms](https://www.vulcanforms.com/)
 
-  Platinum · $7,500+
+  Platinum · $10,000
 
   [Read our thank-you](https://mercury26413.org/news.html#vulcanforms-platinum)
 

@@ -86,7 +86,9 @@ mechanism changed, and teaches younger students through camps and FLL coaching.
   - Coach quotes from the FLL coaching.
 - **Numbers on the home page:** 1,000 students directly impacted, $20,000+ raised (Andy, 2026-11-04), 100,000+ students reached.
   The team has not yet given sources for these.
-- **Supporters:** SolidWorks, Weston Owl and WEEFC, as names only. There are no logos and no other sponsors.
+- **Sponsor:** VulcanForms, Platinum, 2026–27: $10,000 (Andy, 2026-11-19). The thank-you post says "applying to
+  sponsor" until the team confirms the sponsorship is final.
+- **Supporters:** SolidWorks, Weston Owl and WEEFC, as names only, with no logos.
 - **Sponsorship package 2026–27** (Andy's Canva PDF, `docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`):
   - tiers per season: Bronze $500+, Silver $1,500+, Gold $3,000+, Platinum $7,500+, and what each includes;
   - season budget of up to $52,000 across nine lines (travel up to $19,950 is the largest; travel depends on
