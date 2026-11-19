@@ -72,7 +72,7 @@ Game Strategy · Website
 
 > I want to have the best code in all of FTC for the second year in a row.
 
-### Zade “Suzie” Parks
+### Zade Parks
 
 ![Zade Parks](https://mercury26413.org/images/team/zade.jpg)
 
@@ -85,11 +85,7 @@ Build · Electrical · Game Strategy
 - Qualified for Massachusetts States
 - First pick on the winning alliance at the Ryken RoboBowl
 
-> Oh wait, it was working. I just didn’t turn it on this whole time.
-
-> If it’s open 24/7, it means it doesn’t close.
-
-> Is the custom version cheaper?
+> The king of aura
 
 ### Ethan Xie
 

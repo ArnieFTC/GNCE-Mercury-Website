@@ -89,7 +89,7 @@ We design, build, wire, and program one robot each season. Our members have comp
 - [**The team at the Ryken RoboBowl** · December 2025](https://mercury26413.org/team.html)
 - [**Andy Ding** · Founder, Co-Captain](https://mercury26413.org/team.html#andy-ding)
 - [**Arnie Sreeram** · Co-Captain, Software Lead](https://mercury26413.org/team.html#arnie-sreeram)
-- [**Zade “Suzie” Parks** · CAD Lead](https://mercury26413.org/team.html#zade-parks)
+- [**Zade Parks** · CAD Lead](https://mercury26413.org/team.html#zade-parks)
 - [**Ethan Xie** · Build Lead, Electrical Lead](https://mercury26413.org/team.html#ethan-xie)
 - [**Reynah Chowrira** · Outreach Lead](https://mercury26413.org/team.html#reynah-chowrira)
 - [**Margaret Yang** · Head of Sponsorship](https://mercury26413.org/team.html#margaret-yang)
