@@ -10,3 +10,7 @@ Thumbs.db
 
 # scratch downloads (curl -o x.tmp) never belong in the site
 *.tmp
+
+# Python bytecode: importing tools/*.py writes it
+__pycache__/
+*.pyc
