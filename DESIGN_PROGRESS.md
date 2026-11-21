@@ -936,8 +936,8 @@ Reduced motion makes every change instant.
   one like VulcanForms'. (c) A logo file from Latent Tech (SVG or a large PNG), sharper than the upload.
 - ⊘ B21 Weston Owl's logo. The blog closed in summer 2025 and its site is private; online there is only its 2021
   launch banner, which it replaced in December 2021 (see "Supporter logos"). A logo file from the team, or from the
-  Owl's founder through the team, goes in as `images/sponsors/weston-owl-logo.png` (black on transparent, 144px
-  tall) with an entry like WEEFC's in `SUPPORTERS`; no link (its site is private).
+  Owl's founder through the team, goes in as `images/sponsors/weston-owl-logo.png` (its own colours, 144px tall or
+  more) with an entry like WEEFC's in `SUPPORTERS`; no link (its site is private).
 - ⊘ B11 Which other members code: the Software filter shows only Arnie (Software Lead) until members get a
   Software chip.
 - ⊘ B16 Round 9 on real hardware: the opening, the strip's swipe and the photo viewer have only run in Chromium on
