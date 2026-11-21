@@ -31,14 +31,22 @@ const NAV = [
 //   { name: "Acme", logo: "images/acme.png", width: 240, height: 80, url: "https://acme.com" }
 // (width and height are the logo file's real size in pixels). Leave out url for a sponsor without a website:
 // its logo is then shown without a link.
-// SUPPORTERS are named (no logo) until we have their logos. A "Become a sponsor" link is always shown.
+// SUPPORTERS: a supporter is shown as its logo, written like a sponsor ({ name, logo, width, height, url }; no tier),
+// or as its name in type (a plain "Name") until we have its logo. A "Become a sponsor" link is always shown.
 const SPONSORS = [
   // Platinum, 2026–27 (thank-you post: news.html#vulcanforms-platinum)
   { name: "VulcanForms", logo: "images/sponsors/vulcanforms-logo.png", width: 782, height: 164, url: "https://www.vulcanforms.com/" },
   // 2026–27, tier not given yet (thank-you post: news.html#latent-tech); no website (Andy, 2026-11-20)
   { name: "Latent Tech", logo: "images/sponsors/latent-tech-logo.png", width: 877, height: 144 },
 ];
-const SUPPORTERS = ["SolidWorks", "Weston Owl", "WEEFC"];
+const SUPPORTERS = [
+  // CAD access (2024–25 portfolio). The official SOLIDWORKS logo (3ds.com's, as on solidworks.com), in its red
+  { name: "SolidWorks", logo: "images/sponsors/solidworks-logo.png", width: 776, height: 144, url: "https://www.solidworks.com/" },
+  // Local coverage (2024–25 portfolio): a Weston news blog, closed in summer 2025. A name until the team has its logo file (B21)
+  "Weston Owl",
+  // Weston Education Enrichment Fund Committee: support for Weston FLL and FTC (2024–25 portfolio). Its brush-paint logo, in colour
+  { name: "WEEFC", logo: "images/sponsors/weefc-logo.png", width: 502, height: 288, url: "https://www.westonschools.org/education-enrichment-fund-committee-weefc/" },
+];
 const TEAM_EMAIL = "gncemercury26413@gmail.com";
 // Sponsorship emails (the "Email us about sponsoring" buttons and the contact form's Sponsorship topic) go here.
 // The buttons on partners.html and contact.html have this address written in them too: change both together.
@@ -189,14 +197,16 @@ part("footer", () => {
   const legal = document.querySelector(".site-footer .footer-legal");
   const footer = legal ? legal.parentElement : document.createElement("footer");
   footer.className = "site-footer";
+  // a logo (a link when there is a website; without one, the logo alone), or a supporter's name in type
+  const logoTile = s => {
+    const logo = `<img src="${root}${esc(s.logo)}" alt="${esc(s.name)}"${s.width ? ` width="${s.width}" height="${s.height}"` : ""} loading="lazy">`;
+    return s.url
+      ? `<li><a class="sponsor" href="${esc(s.url)}" target="_blank" rel="noopener" translate="no">${logo}</a></li>`
+      : `<li translate="no">${logo}</li>`;
+  };
   const sponsorItems = [
-    ...SPONSORS.map(s => {
-      const logo = `<img src="${root}${esc(s.logo)}" alt="${esc(s.name)}"${s.width ? ` width="${s.width}" height="${s.height}"` : ""} loading="lazy">`;
-      return s.url
-        ? `<li><a class="sponsor" href="${esc(s.url)}" target="_blank" rel="noopener" translate="no">${logo}</a></li>`
-        : `<li translate="no">${logo}</li>`;   // no website: the logo alone
-    }),
-    ...SUPPORTERS.map(n => `<li class="named" translate="no">${esc(n)}</li>`),
+    ...SPONSORS.map(logoTile),
+    ...SUPPORTERS.map(s => typeof s === "string" ? `<li class="named" translate="no">${esc(s)}</li>` : logoTile(s)),
     `<li class="open"><a href="${root}partners.html">Become a sponsor</a></li>`,
   ].join("");
   const next = nextEvent();
@@ -248,7 +258,7 @@ part("footer", () => {
 
 // "Supported by …" lines (home page strip, partners page) read the same list as the footer
 part("supporters", () => {
-  const names = [...SPONSORS.map(s => s.name), ...SUPPORTERS];
+  const names = [...SPONSORS, ...SUPPORTERS].map(s => typeof s === "string" ? s : s.name);
   if (!names.length) return;
   const text = names.length > 1 ? names.slice(0, -1).join(", ") + " and " + names[names.length - 1] : names[0];
   const html = names.map(n => `<span translate="no">${esc(n)}</span>`);

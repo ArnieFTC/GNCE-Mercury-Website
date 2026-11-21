@@ -3,8 +3,10 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-20. Latent Tech is a new sponsor (Andy): its logo is in every footer, with a thank-you post;
-see "Latent Tech" below. On 2026-11-19 VulcanForms' sponsorship began to show its amount, $10,000 (Andy).
+_Last updated: 2026-11-21. SolidWorks and WEEFC now show their logos in every footer instead of their names (Andy);
+Weston Owl stays a name until the team has its logo (B21); see "Supporter logos" below. On 2026-11-20 Latent Tech
+became a sponsor (Andy): its logo is in every footer, with a thank-you post; see "Latent Tech" below. On 2026-11-19
+VulcanForms' sponsorship began to show its amount, $10,000 (Andy).
 On 2026-11-13 **Round 11** made the site flow: related sections share a band (chapters), every page ends by
 handing the visitor on (season doors, a closing call), and a page change never shows two pages at once; see "Round 11"
 below. Before it, on 2026-11-12, the **site icon** was rebuilt after Andy's screenshot of a Google result with a plain
@@ -35,6 +37,35 @@ colours of their names. Work is committed straight to `main`, Andy's standing in
 4. **Round 2 (same day).** Andy: the colour "is so AI-like", the site "feels too static"; the boxes and
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
+
+## Supporter logos (2026-11-21)
+
+Andy: "commit it also please find solidworks logo online and the weston weefc logo online and put it in not the
+placeholders". The footer showed the three supporters as typed names. The team's 2024–25 portfolio, as the site
+quoted it in September 2026 (commit bd84fa4), names them: SolidWorks (CAD access), Weston Owl (local coverage) and
+WEEFC (support for Weston FLL and FTC programs). A research workflow (one researcher per supporter; two skeptics
+each, who downloaded every file again and checked who the organisation is, where the file comes from and whether it
+is fit to show) found:
+
+- **SolidWorks:** Dassault Systèmes' CAD software (FIRST teams get it free through SOLIDWORKS Education; the company
+  is in Waltham, next to Weston). Its current logo is the 3DS mark followed by SOLIDWORKS, the file solidworks.com's
+  own header uses (www.3ds.com/assets/3ds-navigation/3DS_corporate-logo_solidworks.svg). Cropped to the drawing and
+  rendered in its own red: `images/sponsors/solidworks-logo.png`,
+  776×144. It links to solidworks.com. Both skeptics upheld it.
+- **WEEFC:** the Weston Education Enrichment Fund Committee, a subcommittee of the Weston School Committee (set up
+  by Town Meeting in 1985); Weston Public Schools' robotics page thanks it as the program's "program level
+  sponsor". Its logo since 2019 is a brush-paint patch in four colours with white WEEFC letters; The footer shows that
+  colour logo (Andy: "i want the actual color of all the logos"), cropped from WEEFC's own 1049×592 file on
+  westonschools.org: `images/sponsors/weefc-logo.png`, 502×288. It links to WEEFC's page on westonschools.org. Both skeptics upheld it.
+  (B13 asked for WEEFC's full name: that is it.)
+- **Weston Owl stays a name (B21).** It was a local news blog for Weston, from 2021 until it closed in summer
+  2025; its site is now private. The only copy of its logo online is its 2021 launch banner, on another news site,
+  and the Owl replaced that banner with a condensed one in December 2021, a file that can no longer be fetched.
+  Both skeptics refuted the 2021 file: not current, and not from the Owl itself.
+
+In `js/main.js` a supporter can now be written like a sponsor (`{ name, logo, width, height, url }`, no tier) and
+then shows as its logo; a plain "Name" stays type. `tools/agent_files.py` reads both, and the Markdown footer links
+SolidWorks and WEEFC. The script's `?v=` is now 234 (the stylesheet did not change).
 
 ## Latent Tech (2026-11-20)
 
@@ -883,15 +914,16 @@ Reduced motion makes every change instant.
 - ⊘ B6 Coach photos (the coaches are listed by name only).
 - ⊘ B7 Resources links: code, CAD, portfolio, build log.
 - ⊘ B8 2026 MA States results (alliance and awards show "—").
-- ◐ B9 Partner logos: VulcanForms has its logo (round 4). SolidWorks, Weston Owl and WEEFC are still typeset names until logo files arrive; also one true
-  sentence per partner about what they gave.
+- ◐ B9 Partner logos: VulcanForms (round 4), Latent Tech (2026-11-20), SolidWorks and WEEFC (2026-11-21) show their
+  logos; Weston Owl is still a typeset name (B21). Also one true sentence per partner about what they gave.
 - ⊘ B10 Better robot images: a clean side-on photo of each robot on a plain background would make the
   line-up sharper (the INTO THE DEEP cut-out comes from an older rough cut-out; the Mercinator one from an
   upscaled mask).
 - ◐ B12 Sponsorship package: the email is now a clickable link in `docs/` (added to the PDF directly, pages
   unchanged; redo it after a new Canva export, or turn the email into a link in Canva). Still to confirm: where
   the QR code points.
-- ⊘ B13 One line each on what "Growth" (budget) and "Can request media" (Platinum) mean, and WEEFC's full name.
+- ⊘ B13 One line each on what "Growth" (budget) and "Can request media" (Platinum) mean. (WEEFC's full name, asked
+  for here too, is on Weston Public Schools' site: the Weston Education Enrichment Fund Committee.)
 - ⊘ B14 Matching gifts and gifts under $500: who receives payment and how, so a parent at a company with a
   matching program can act (the page sends those questions to Margaret for now).
 - ◐ B15 VulcanForms: the amount is $10,000 (Andy, 2026-11-19), shown on the News post, the home page's news card and the
@@ -902,6 +934,10 @@ Reduced motion makes every change instant.
   a tier tag with the range on its Partners card, and the tier in its comment on `SPONSORS`; print an amount only
   if the team says so. (b) One true sentence from the team on what Latent Tech is or does, if the post should have
   one like VulcanForms'. (c) A logo file from Latent Tech (SVG or a large PNG), sharper than the upload.
+- ⊘ B21 Weston Owl's logo. The blog closed in summer 2025 and its site is private; online there is only its 2021
+  launch banner, which it replaced in December 2021 (see "Supporter logos"). A logo file from the team, or from the
+  Owl's founder through the team, goes in as `images/sponsors/weston-owl-logo.png` (black on transparent, 144px
+  tall) with an entry like WEEFC's in `SUPPORTERS`; no link (its site is private).
 - ⊘ B11 Which other members code: the Software filter shows only Arnie (Software Lead) until members get a
   Software chip.
 - ⊘ B16 Round 9 on real hardware: the opening, the strip's swipe and the photo viewer have only run in Chromium on
@@ -1335,7 +1371,7 @@ server):
 3. Contact form (B4): the team creates website@mercury26413.org and sends two test messages from the live form.
 4. Still open from round 8: with WCAG text spacing at 320, the outreach year tabs scroll sideways and the tier
    header cells overflow; Windows High Contrast and a screen reader on the skip link and the menu are unchecked.
-5. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
+5. Ask Andy for what is still blocked: a donation link, Weston Owl's logo (B21), sources for the three impact figures,
    joining facts, States results, a sharp wide team photo, coach photos, the package questions (B12–B14: the QR
    code's target, what "Growth" and "Can request media" mean, matching gifts), B15 (is the VulcanForms Platinum
    sponsorship final; the amount, $10,000, came on 2026-11-19) and B20 (Latent Tech's tier, a sentence on what it

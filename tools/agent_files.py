@@ -562,11 +562,22 @@ def read_main_js():
     sponsors = [re.search(r'name:\s*"([^"]+)"', o).group(1) for o in sponsor_objs if re.search(r'name:\s*"', o)]
     sponsor_urls = {re.search(r'name:\s*"([^"]+)"', o).group(1): re.search(r'url:\s*"([^"]+)"', o).group(1)
                     for o in sponsor_objs if re.search(r'name:\s*"', o) and re.search(r'url:\s*"', o)}
-    supporters = re.findall(r'"([^"]+)"', array("SUPPORTERS"))
+    supporters, supporter_urls = [], {}                  # a supporter is "Name" or { name: "Name", logo: …, url: … }
+    for m in re.finditer(r'\{[^{}]*\}|"([^"]+)"', array("SUPPORTERS")):
+        if m.group(1) is not None:
+            supporters.append(m.group(1))
+            continue
+        name = re.search(r'name:\s*"([^"]+)"', m.group(0))
+        if name:
+            supporters.append(name.group(1))
+            url = re.search(r'url:\s*"([^"]+)"', m.group(0))
+            if url:
+                supporter_urls[name.group(1)] = url.group(1)
     nav = re.findall(r'label:\s*"([^"]+)",\s*href:\s*"([^"]+)"', array("NAV"))
     return {
         "kickoff": kickoff.group(1), "events": [{"name": n, "date": d} for n, d in events],
-        "sponsors": sponsors, "sponsor_urls": sponsor_urls, "supporters": supporters, "nav": nav,
+        "sponsors": sponsors, "sponsor_urls": sponsor_urls, "supporters": supporters,
+        "supporter_urls": supporter_urls, "nav": nav,
         "team_email": const_str("TEAM_EMAIL"), "sponsor_email": const_str("SPONSOR_EMAIL"),
         "instagram": const_str("INSTAGRAM"),
     }
@@ -698,7 +709,7 @@ def head_block(page, title, desc, site, root):
 
 def footer_md(site):
     names = [f"[{n}]({site['sponsor_urls'][n]})" if n in site["sponsor_urls"] else n for n in site["sponsors"]]
-    names += site["supporters"]
+    names += [f"[{n}]({site['supporter_urls'][n]})" if n in site["supporter_urls"] else n for n in site["supporters"]]
     pages = " · ".join(f"[{label}]({page_url(href)})" for label, href in [("Home", "index.html")] + site["nav"])
     return "\n\n".join([
         "* * *",

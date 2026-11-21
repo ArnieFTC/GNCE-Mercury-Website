@@ -90,7 +90,10 @@ mechanism changed, and teaches younger students through camps and FLL coaching.
   sponsor" until the team confirms the sponsorship is final.
 - **Sponsor:** Latent Tech, 2026–27 (Andy, 2026-11-20): logo from Andy (the Mercury portfolio in Canva); no website;
   tier not given yet, so the thank-you post only thanks them for sponsoring the season.
-- **Supporters:** SolidWorks, Weston Owl and WEEFC, as names only, with no logos.
+- **Supporters** (2024–25 portfolio): SolidWorks (CAD access) and WEEFC (the Weston Education Enrichment Fund
+  Committee, a subcommittee of the Weston School Committee: support for Weston FLL and FTC), shown with their own
+  logos since 2026-11-21; Weston Owl (local coverage; a Weston news blog, closed in summer 2025), shown as a name
+  until the team has its logo file.
 - **Sponsorship package 2026–27** (Andy's Canva PDF, `docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`):
   - tiers per season: Bronze $500+, Silver $1,500+, Gold $3,000+, Platinum $7,500+, and what each includes;
   - season budget of up to $52,000 across nine lines (travel up to $19,950 is the largest; travel depends on

@@ -132,7 +132,7 @@ We thank every sponsor in the footer of every page of this site.
 
 **GNCE Mercury**, FIRST Tech Challenge team 26413 from Weston, MA, founded 2024. One of the teams of GNCE (Galactic Narwhal Chicken Effect).
 
-Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), Latent Tech, SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
+Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), Latent Tech, [SolidWorks](https://www.solidworks.com/), Weston Owl and [WEEFC](https://www.westonschools.org/education-enrichment-fund-committee-weefc/). [Become a sponsor](https://mercury26413.org/partners.html).
 
 Email [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com) · Sponsorship [margaret@mercury26413.org](mailto:margaret@mercury26413.org) · [Instagram @gnce\_mercury](https://www.instagram.com/gnce_mercury/) · [Join the team](https://mercury26413.org/contact.html?topic=join#contact-form)
 
