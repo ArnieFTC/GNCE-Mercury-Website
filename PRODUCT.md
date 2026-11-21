@@ -89,7 +89,7 @@ mechanism changed, and teaches younger students through camps and FLL coaching.
 - **Sponsor:** VulcanForms, Platinum, 2026–27: $10,000 (Andy, 2026-11-19). The thank-you post says "applying to
   sponsor" until the team confirms the sponsorship is final.
 - **Sponsor:** Latent Tech, 2026–27 (Andy, 2026-11-20): logo from Andy (the Mercury portfolio in Canva); no website;
-  tier not given yet, so the thank-you post only thanks them for sponsoring the season.
+  Platinum, $7,500 (Andy, 2026-11-21).
 - **Supporters** (2024–25 portfolio): SolidWorks (CAD access) and WEEFC (the Weston Education Enrichment Fund
   Committee, a subcommittee of the Weston School Committee: support for Weston FLL and FTC), shown with their own
   logos since 2026-11-21; Weston Owl (local coverage; a Weston news blog, closed in summer 2025), shown as a name
@@ -109,8 +109,7 @@ mechanism changed, and teaches younger students through camps and FLL coaching.
   - coach photos, and a high-resolution wide team photo;
   - testimonials beyond the existing quotes;
   - any statistic not listed above;
-  - anything about Latent Tech beyond its name, its logo and its 2026–27 sponsorship (what it does, its tier, an
-    amount).
+  - anything about Latent Tech beyond its name, its logo and its 2026–27 sponsorship (what it does).
 
 ## Product Principles
 

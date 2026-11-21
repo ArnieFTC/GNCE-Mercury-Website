@@ -149,7 +149,7 @@ Nov 20, 2026 · Sponsors
 
 ### [Thank you, Latent Tech](https://mercury26413.org/news.html#latent-tech)
 
-Thank you to Latent Tech for sponsoring our 2026–27 season.
+Thank you to Latent Tech for sponsoring our 2026–27 season with $7,500 at the Platinum level, the highest of our four sponsorship tiers.
 
 Nov 3, 2026 · Sponsors
 

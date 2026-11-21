@@ -36,7 +36,7 @@ const NAV = [
 const SPONSORS = [
   // Platinum, 2026–27 (thank-you post: news.html#vulcanforms-platinum)
   { name: "VulcanForms", logo: "images/sponsors/vulcanforms-logo.png", width: 782, height: 164, url: "https://www.vulcanforms.com/" },
-  // 2026–27, tier not given yet (thank-you post: news.html#latent-tech); no website (Andy, 2026-11-20)
+  // Platinum, $7,500, 2026–27 (Andy, 2026-11-21; thank-you post: news.html#latent-tech); no website (Andy, 2026-11-20)
   { name: "Latent Tech", logo: "images/sponsors/latent-tech-logo.png", width: 877, height: 144 },
 ];
 const SUPPORTERS = [

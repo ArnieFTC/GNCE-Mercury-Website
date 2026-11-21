@@ -3,7 +3,7 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-21. SolidWorks and WEEFC now show their logos in every footer instead of their names (Andy);
+_Last updated: 2026-11-21. Latent Tech's sponsorship: Platinum, $7,500 (Andy). SolidWorks and WEEFC now show their logos in every footer instead of their names (Andy);
 Weston Owl stays a name until the team has its logo (B21); see "Supporter logos" below. On 2026-11-20 Latent Tech
 became a sponsor (Andy): its logo is in every footer, with a thank-you post; see "Latent Tech" below. On 2026-11-19
 VulcanForms' sponsorship began to show its amount, $10,000 (Andy).
@@ -929,7 +929,7 @@ Reduced motion makes every change instant.
 - ◐ B15 VulcanForms: the amount is $10,000 (Andy, 2026-11-19), shown on the News post, the home page's news card and the
   Partners sponsor card. Still to confirm: is the sponsorship final? Until then the post says "applying to sponsor";
   once it is final, change its lead (and the home card's copy of it) to "signing on to sponsor".
-- ⊘ B20 Latent Tech (Andy, 2026-11-20). (a) Its tier, which Andy will give: add it with its range to the post's
+- ◐ B20 Latent Tech (Andy, 2026-11-20). (a) Done 2026-11-21: Platinum, $7,500 (Andy), in the post, the home card, the Partners card and SPONSORS. Was: add it with its range to the post's
   first sentence and the home card's copy of it ("…for sponsoring our 2026–27 season at the [tier] level ($…+)"),
   a tier tag with the range on its Partners card, and the tier in its comment on `SPONSORS`; print an amount only
   if the team says so. (b) One true sentence from the team on what Latent Tech is or does, if the post should have

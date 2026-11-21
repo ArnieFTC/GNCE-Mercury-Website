@@ -66,7 +66,11 @@ Shares match our sponsorship package, rounded to add up to 100%.
   Platinum · $10,000
 
   [Read our thank-you to VulcanForms](https://mercury26413.org/news.html#vulcanforms-platinum)
-- ![Latent Tech](https://mercury26413.org/images/sponsors/latent-tech-logo.png) · [Read our thank-you to Latent Tech](https://mercury26413.org/news.html#latent-tech)
+- ![Latent Tech](https://mercury26413.org/images/sponsors/latent-tech-logo.png)
+
+  Platinum · $7,500
+
+  [Read our thank-you to Latent Tech](https://mercury26413.org/news.html#latent-tech)
 
 ## What you would be supporting
 
