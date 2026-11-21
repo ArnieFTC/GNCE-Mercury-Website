@@ -49,7 +49,7 @@ A high school **FIRST Tech Challenge** team in Weston, Massachusetts: team 26413
 
 [Follow the build](https://mercury26413.org/seasons/2026-2027.html)
 
-Supported by **VulcanForms, SolidWorks, Weston Owl and WEEFC**
+Supported by **VulcanForms, Latent Tech, SolidWorks, Weston Owl and WEEFC**
 
 [Partner with us](https://mercury26413.org/partners.html) · [Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
 
@@ -145,19 +145,17 @@ We toured VulcanForms, a Massachusetts company that makes metal parts with 3D pr
 
 [All news](https://mercury26413.org/news.html)
 
+Nov 20, 2026 · Sponsors
+
+### [Thank you, Latent Tech](https://mercury26413.org/news.html#latent-tech)
+
+Thank you to Latent Tech for sponsoring our 2026–27 season.
+
 Nov 3, 2026 · Sponsors
 
 ### [Thank you, VulcanForms](https://mercury26413.org/news.html#vulcanforms-platinum)
 
 Thank you to VulcanForms for applying to sponsor our 2026–27 season with $10,000 at the Platinum level, the highest of our four sponsorship tiers.
-
-[Video: The hive tips during a BIOBUZZ match and its balls spill onto the field](https://mercury26413.org/images/hive-tip-match-2.mp4)
-
-Oct 25, 2026 · Competition
-
-### [First hive tip of the season](https://mercury26413.org/news.html#first-hive-tip)
-
-We attended the scrimmage hosted by Ghost Robotics at Westford High School, and here we got our first in-competition hive tip of this season!
 
 ## Build with us, or help us get to the next event
 
@@ -177,7 +175,7 @@ Donations pay for robot parts, competition registration, and travel.
 
 **GNCE Mercury**, FIRST Tech Challenge team 26413 from Weston, MA, founded 2024. One of the teams of GNCE (Galactic Narwhal Chicken Effect).
 
-Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
+Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), Latent Tech, SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
 
 Email [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com) · Sponsorship [margaret@mercury26413.org](mailto:margaret@mercury26413.org) · [Instagram @gnce\_mercury](https://www.instagram.com/gnce_mercury/) · [Join the team](https://mercury26413.org/contact.html?topic=join#contact-form)
 

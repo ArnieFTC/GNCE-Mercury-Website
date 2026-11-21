@@ -12,7 +12,7 @@ Four sponsorship tiers for the 2026–27 season, from $500 to $7,500 and up.
 
 [Email Margaret about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury) · [Download the package PDF, 1.8 MB](https://mercury26413.org/docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf)
 
-Supported by **VulcanForms, SolidWorks, Weston Owl and WEEFC**
+Supported by **VulcanForms, Latent Tech, SolidWorks, Weston Owl and WEEFC**
 
 **Margaret Yang** · Head of sponsorship · [margaret@mercury26413.org](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury)
 
@@ -65,7 +65,8 @@ Shares match our sponsorship package, rounded to add up to 100%.
 
   Platinum · $10,000
 
-  [Read our thank-you](https://mercury26413.org/news.html#vulcanforms-platinum)
+  [Read our thank-you to VulcanForms](https://mercury26413.org/news.html#vulcanforms-platinum)
+- ![Latent Tech](https://mercury26413.org/images/sponsors/latent-tech-logo.png) · [Read our thank-you to Latent Tech](https://mercury26413.org/news.html#latent-tech)
 
 ## What you would be supporting
 
@@ -131,7 +132,7 @@ We thank every sponsor in the footer of every page of this site.
 
 **GNCE Mercury**, FIRST Tech Challenge team 26413 from Weston, MA, founded 2024. One of the teams of GNCE (Galactic Narwhal Chicken Effect).
 
-Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
+Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), Latent Tech, SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
 
 Email [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com) · Sponsorship [margaret@mercury26413.org](mailto:margaret@mercury26413.org) · [Instagram @gnce\_mercury](https://www.instagram.com/gnce_mercury/) · [Join the team](https://mercury26413.org/contact.html?topic=join#contact-form)
 

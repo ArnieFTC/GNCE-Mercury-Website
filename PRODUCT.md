@@ -88,6 +88,8 @@ mechanism changed, and teaches younger students through camps and FLL coaching.
   The team has not yet given sources for these.
 - **Sponsor:** VulcanForms, Platinum, 2026–27: $10,000 (Andy, 2026-11-19). The thank-you post says "applying to
   sponsor" until the team confirms the sponsorship is final.
+- **Sponsor:** Latent Tech, 2026–27 (Andy, 2026-11-20): logo from Andy (the Mercury portfolio in Canva); no website;
+  tier not given yet, so the thank-you post only thanks them for sponsoring the season.
 - **Supporters:** SolidWorks, Weston Owl and WEEFC, as names only, with no logos.
 - **Sponsorship package 2026–27** (Andy's Canva PDF, `docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf`):
   - tiers per season: Bronze $500+, Silver $1,500+, Gold $3,000+, Platinum $7,500+, and what each includes;
@@ -103,7 +105,9 @@ mechanism changed, and teaches younger students through camps and FLL coaching.
   - States results;
   - coach photos, and a high-resolution wide team photo;
   - testimonials beyond the existing quotes;
-  - any statistic not listed above.
+  - any statistic not listed above;
+  - anything about Latent Tech beyond its name, its logo and its 2026–27 sponsorship (what it does, its tier, an
+    amount).
 
 ## Product Principles
 

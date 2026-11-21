@@ -8,6 +8,20 @@ url: https://mercury26413.org/news.html
 
 Thank-yous to our sponsors and updates from the team, newest first.
 
+## Thank you, Latent Tech
+
+![Latent Tech logo](https://mercury26413.org/images/sponsors/latent-tech-banner.png)
+
+Nov 20, 2026 · Sponsors
+
+Thank you to Latent Tech for sponsoring our 2026–27 season.
+
+Sponsorship funds cover robot parts and tools, registration and travel, and our summer camp and FLL coaching.
+
+Thank you to everyone at Latent Tech for supporting our students.
+
+[See the sponsorship tiers](https://mercury26413.org/partners.html#tiers)
+
 ## Thank you, VulcanForms
 
 ![VulcanForms logo](https://mercury26413.org/images/sponsors/vulcanforms-banner.png)
@@ -52,7 +66,7 @@ Donations pay for robot parts, competition registration, and travel.
 
 **GNCE Mercury**, FIRST Tech Challenge team 26413 from Weston, MA, founded 2024. One of the teams of GNCE (Galactic Narwhal Chicken Effect).
 
-Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
+Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), Latent Tech, SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
 
 Email [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com) · Sponsorship [margaret@mercury26413.org](mailto:margaret@mercury26413.org) · [Instagram @gnce\_mercury](https://www.instagram.com/gnce_mercury/) · [Join the team](https://mercury26413.org/contact.html?topic=join#contact-form)
 

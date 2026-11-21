@@ -50,7 +50,7 @@ A high school **FIRST Tech Challenge** team in Weston, Massachusetts: team 26413
 
 [Follow the build](https://mercury26413.org/seasons/2026-2027.html)
 
-Supported by **VulcanForms, SolidWorks, Weston Owl and WEEFC**
+Supported by **VulcanForms, Latent Tech, SolidWorks, Weston Owl and WEEFC**
 
 [Partner with us](https://mercury26413.org/partners.html) · [Join as a student](https://mercury26413.org/contact.html?topic=join#contact-form)
 
@@ -146,19 +146,17 @@ We toured VulcanForms, a Massachusetts company that makes metal parts with 3D pr
 
 [All news](https://mercury26413.org/news.html)
 
+Nov 20, 2026 · Sponsors
+
+### [Thank you, Latent Tech](https://mercury26413.org/news.html#latent-tech)
+
+Thank you to Latent Tech for sponsoring our 2026–27 season.
+
 Nov 3, 2026 · Sponsors
 
 ### [Thank you, VulcanForms](https://mercury26413.org/news.html#vulcanforms-platinum)
 
 Thank you to VulcanForms for applying to sponsor our 2026–27 season with $10,000 at the Platinum level, the highest of our four sponsorship tiers.
-
-[Video: The hive tips during a BIOBUZZ match and its balls spill onto the field](https://mercury26413.org/images/hive-tip-match-2.mp4)
-
-Oct 25, 2026 · Competition
-
-### [First hive tip of the season](https://mercury26413.org/news.html#first-hive-tip)
-
-We attended the scrimmage hosted by Ghost Robotics at Westford High School, and here we got our first in-competition hive tip of this season!
 
 ## Build with us, or help us get to the next event
 
@@ -178,7 +176,7 @@ Donations pay for robot parts, competition registration, and travel.
 
 **GNCE Mercury**, FIRST Tech Challenge team 26413 from Weston, MA, founded 2024. One of the teams of GNCE (Galactic Narwhal Chicken Effect).
 
-Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
+Sponsors and supporters: [VulcanForms](https://www.vulcanforms.com/), Latent Tech, SolidWorks, Weston Owl and WEEFC. [Become a sponsor](https://mercury26413.org/partners.html).
 
 Email [gncemercury26413@gmail.com](mailto:gncemercury26413@gmail.com) · Sponsorship [margaret@mercury26413.org](mailto:margaret@mercury26413.org) · [Instagram @gnce\_mercury](https://www.instagram.com/gnce_mercury/) · [Join the team](https://mercury26413.org/contact.html?topic=join#contact-form)
 
@@ -838,6 +836,20 @@ Sponsorship funds cover outreach like our summer camp and FLL coaching, as well 
 
 Thank-yous to our sponsors and updates from the team, newest first.
 
+## Thank you, Latent Tech
+
+![Latent Tech logo](https://mercury26413.org/images/sponsors/latent-tech-banner.png)
+
+Nov 20, 2026 · Sponsors
+
+Thank you to Latent Tech for sponsoring our 2026–27 season.
+
+Sponsorship funds cover robot parts and tools, registration and travel, and our summer camp and FLL coaching.
+
+Thank you to everyone at Latent Tech for supporting our students.
+
+[See the sponsorship tiers](https://mercury26413.org/partners.html#tiers)
+
 ## Thank you, VulcanForms
 
 ![VulcanForms logo](https://mercury26413.org/images/sponsors/vulcanforms-banner.png)
@@ -889,7 +901,7 @@ Four sponsorship tiers for the 2026–27 season, from $500 to $7,500 and up.
 
 [Email Margaret about sponsoring](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury) · [Download the package PDF, 1.8 MB](https://mercury26413.org/docs/GNCE-Mercury-Sponsorship-Package-2026-27.pdf)
 
-Supported by **VulcanForms, SolidWorks, Weston Owl and WEEFC**
+Supported by **VulcanForms, Latent Tech, SolidWorks, Weston Owl and WEEFC**
 
 **Margaret Yang** · Head of sponsorship · [margaret@mercury26413.org](mailto:margaret@mercury26413.org?subject=Sponsoring%20GNCE%20Mercury)
 
@@ -942,7 +954,8 @@ Shares match our sponsorship package, rounded to add up to 100%.
 
   Platinum · $10,000
 
-  [Read our thank-you](https://mercury26413.org/news.html#vulcanforms-platinum)
+  [Read our thank-you to VulcanForms](https://mercury26413.org/news.html#vulcanforms-platinum)
+- ![Latent Tech](https://mercury26413.org/images/sponsors/latent-tech-logo.png) · [Read our thank-you to Latent Tech](https://mercury26413.org/news.html#latent-tech)
 
 ## What you would be supporting
 

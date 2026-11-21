@@ -903,7 +903,10 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 /* sponsors this season (partners): a white card per sponsor with its logo, tier and thank-you */
 .sponsor-cards { list-style: none; display: grid; gap: 10px; }
 .sponsor-card { display: grid; gap: 14px 32px; align-items: center; padding: clamp(20px, 2.6vw, 28px) clamp(20px, 3vw, 36px); border-radius: var(--r-md); background: var(--paper); }
-@media (min-width: 760px) { .sponsor-card { grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto; } }
+@media (min-width: 760px) {
+  .sponsor-card { grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto; }
+  .sponsor-card > .text-link { grid-column: 3; }   /* also when a card has no tier line yet */
+}
 .sponsor-card-logo { display: inline-block; justify-self: start; padding-block: 4px; }
 .sponsor-card-logo img { height: clamp(36px, 3.4vw, 48px); width: auto; max-width: 100%; }
 .sponsor-card p { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; color: var(--steel); }
@@ -930,7 +933,7 @@ figcaption { font-size: 0.875rem; color: var(--steel); margin-top: 12px; line-he
 .sponsor-row { list-style: none; display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; }
 .sponsor-row li { display: flex; align-items: center; min-height: 76px; padding: 14px 26px; border-radius: var(--r-md); background: var(--paper); }
 .sponsor-row .named { font-weight: 600; font-size: clamp(1.125rem, 0.9rem + 0.8vw, 1.5rem); letter-spacing: -0.02em; }
-.sponsor-row img { max-height: 48px; width: auto; }
+.sponsor-row img { height: 48px; width: auto; object-fit: contain; } /* a fixed height: the tile keeps its size while a lazy logo loads */
 .sponsor-row .open { background: transparent; box-shadow: inset 0 0 0 1px var(--quiet); }
 .sponsor-row .open a { font-weight: 600; }
 .footer-main { display: grid; gap: 32px 48px; grid-template-columns: minmax(0, 1fr); padding-block: 32px 40px; border-top: 1px solid var(--line); }
@@ -1724,6 +1727,10 @@ main:has(> .band--stage:last-child) + .site-footer .footer-sponsors { border-top
 .news-card h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.16em; }
 .news-card > p:last-child { margin: 0; color: var(--steel); max-width: 60ch; }
 @media (hover: hover) and (pointer: fine) { .news-card:hover .news-media img { transform: scale(1.03); } }
+/* a picture made on white (a sponsor's logo on white): a white mat and the box line, so the card keeps its edge
+   on the white band (a picture made on black needs neither) */
+.news-media.on-white { background: #fff; }
+.news-media.on-white::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--box-line); pointer-events: none; }
 .play {
   position: absolute; left: 0; bottom: 0; display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 20px 0 18px; border: 0;
   background: var(--season); color: var(--on-season); box-shadow: inset 0 0 0 1.5px var(--ink); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase;
@@ -1772,6 +1779,9 @@ html:has(.viewer[open]) { overflow: hidden; } /* the page behind stays where it 
   .strip-btn, .play { outline: 1px solid ButtonText; outline-offset: -1px; }
   .strip-btn[aria-disabled="true"] { color: GrayText; outline-color: GrayText; }
   .calendar li.is-next, .calendar li.is-today { outline: 2px solid CanvasText; outline-offset: -2px; }
+  /* sponsor logos are black artwork on transparent: a dark theme would turn their white tiles black */
+  .sponsor-row li:not(.named):not(.open), .sponsor-card-logo { forced-color-adjust: none; background: #fff; }
+  .sponsor-card-logo { padding-inline: 8px; }
 }
 
 /* =========================================================

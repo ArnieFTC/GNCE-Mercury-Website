@@ -3,7 +3,8 @@
 Checkpoint for website design work. Read this before starting, update it after each round.
 (Reading it is a convention set in `CLAUDE.md`; nothing loads it automatically.)
 
-_Last updated: 2026-11-19. VulcanForms' sponsorship now shows its amount, $10,000 (Andy); see "VulcanForms amount" below.
+_Last updated: 2026-11-20. Latent Tech is a new sponsor (Andy): its logo is in every footer, with a thank-you post;
+see "Latent Tech" below. On 2026-11-19 VulcanForms' sponsorship began to show its amount, $10,000 (Andy).
 On 2026-11-13 **Round 11** made the site flow: related sections share a band (chapters), every page ends by
 handing the visitor on (season doors, a closing call), and a page change never shows two pages at once; see "Round 11"
 below. Before it, on 2026-11-12, the **site icon** was rebuilt after Andy's screenshot of a Google result with a plain
@@ -34,6 +35,43 @@ colours of their names. Work is committed straight to `main`, Andy's standing in
 4. **Round 2 (same day).** Andy: the colour "is so AI-like", the site "feels too static"; the boxes and
    placement are fine; make it nicer but still professional, like Apple, TechCrunch, Vogue, The New York Times
    Company and Prada; use every skill. He also sent the 2026–27 sponsorship package (PDF) to add to the site.
+
+## Latent Tech (2026-11-20)
+
+Andy: "please add a new sponsor onto our page" (the logo on the first page of the Mercury portfolio in Canva), then,
+with the logo attached: "no website also ill let you know the sponsorship tier in a bit but craft up a simialr thak
+you note like vulcan", and earlier "show me the image beofre you commit tho".
+
+- **Logo.** Canva would not export the portfolio (downloads are off for that design), so the logo is Andy's upload:
+  374×77, black on white, the logo itself 350×58. Enlarged plainly it would be soft on phones and the post, so its
+  edges were rebuilt (the ink enlarged 8× with bicubic interpolation, cut at the middle of each anti-aliased edge,
+  then scaled down): the shapes are the upload's, the edges sharp. `images/sponsors/latent-tech-logo.png` is black on
+  transparent, 877×144 (3× the 48px it is shown at); `images/sponsors/latent-tech-banner.png` is the post picture,
+  1200×630, the logo 720px wide (60%; VulcanForms' fills 64%) on white, the ground it came on. A logo file from
+  Latent Tech (SVG or a large PNG) would still be better: swap the two files and keep the sizes.
+- **Where it shows.** `SPONSORS` in `js/main.js` (every footer, after VulcanForms; without a `url` the tile is the
+  logo alone, no link), a card on Partners ("Our 2026–27 sponsors", no tier line yet; its thank-you link keeps the
+  last column), the "Supported by" lines (the static text before the script runs too), a post on top of News
+  ("Thank you, Latent Tech", Nov 20, 2026, Sponsors), and the home page's latest news, which shows the two newest
+  posts (README): Latent Tech and VulcanForms, so the hive-tip card left the home page (the post stays on News).
+  The VulcanForms post picture is no longer the top one, so it lost `fetchpriority="high"` and is lazy.
+- **The picture on white.** In the post it sits in the post's white box, whose line frames it (DESIGN.md: a picture
+  inside a box stands on white). The home page's news cards are not boxes, so on the white band it had no edge and
+  the logo floated beside VulcanForms' black block: `news-media on-white` gives it a white mat and the box line.
+- **The post says only what is known:** thank you for sponsoring the 2026–27 season, what sponsorship funds cover
+  (the package), thank you to everyone at Latent Tech. No company sentence (nothing is known about the company;
+  web searches find several businesses called Latent and nothing that ties one to the team) and no "Visit" link.
+- **Open:** the tier, a sentence on what the company does, a logo file from Latent Tech (B20).
+- **Checks.** At 320, 390, 768 and 1440px, with the keyboard and with reduced motion: no sideways scroll, no
+  console errors, the unlinked logo is not a tab stop. An independent review (three reviewers: facts and copy, code
+  and markup, the rendered pages; two skeptics on each finding) found, and this round fixed: the `?v=` numbers on
+  the stylesheet and the script had not been raised (returning visitors would have kept a footer without Latent
+  Tech for up to a week: now style.css?v=232, main.js?v=233); in a dark Windows high-contrast theme the black
+  sponsor logos vanished on the tiles the theme turned black (VulcanForms' already did): they now keep a white
+  plate there; the two "Read our thank-you" links on Partners now say whose post each is to screen readers; the
+  footer logos are lazy and now keep their tiles' size while they load (a fixed 48px height; before, the row
+  jumped when they arrived); the editors' notes and B20 say what to do when the tier comes. `/vercel` (the live
+  guidelines, fetched 2026-11-21) on the changed parts: the lazy footer logos were the only finding.
 
 ## VulcanForms amount (2026-11-19)
 
@@ -859,6 +897,11 @@ Reduced motion makes every change instant.
 - ◐ B15 VulcanForms: the amount is $10,000 (Andy, 2026-11-19), shown on the News post, the home page's news card and the
   Partners sponsor card. Still to confirm: is the sponsorship final? Until then the post says "applying to sponsor";
   once it is final, change its lead (and the home card's copy of it) to "signing on to sponsor".
+- ⊘ B20 Latent Tech (Andy, 2026-11-20). (a) Its tier, which Andy will give: add it with its range to the post's
+  first sentence and the home card's copy of it ("…for sponsoring our 2026–27 season at the [tier] level ($…+)"),
+  a tier tag with the range on its Partners card, and the tier in its comment on `SPONSORS`; print an amount only
+  if the team says so. (b) One true sentence from the team on what Latent Tech is or does, if the post should have
+  one like VulcanForms'. (c) A logo file from Latent Tech (SVG or a large PNG), sharper than the upload.
 - ⊘ B11 Which other members code: the Software filter shows only Arnie (Software Lead) until members get a
   Software chip.
 - ⊘ B16 Round 9 on real hardware: the opening, the strip's swipe and the photo viewer have only run in Chromium on
@@ -1294,8 +1337,9 @@ server):
    header cells overflow; Windows High Contrast and a screen reader on the skip link and the menu are unchecked.
 5. Ask Andy for what is still blocked: a donation link, partner logos, sources for the three impact figures,
    joining facts, States results, a sharp wide team photo, coach photos, the package questions (B12–B14: the QR
-   code's target, what "Growth" and "Can request media" mean, matching gifts) and B15 (is the VulcanForms Platinum
-   sponsorship final; the amount, $10,000, came on 2026-11-19).
+   code's target, what "Growth" and "Can request media" mean, matching gifts), B15 (is the VulcanForms Platinum
+   sponsorship final; the amount, $10,000, came on 2026-11-19) and B20 (Latent Tech's tier, a sentence on what it
+   does, a logo file).
 6. Confirm the DECODE engineering portfolio also says 12 balls before it is published next to the site.
 7. When BIOBUZZ has results, switch `data-default` on the home line-up to 2026 and add its events. When the next
    game is announced, give the new season its colour (README, "Start a new season").

@@ -57,6 +57,9 @@
         },
         "hasPart": [
           {
+            "@id": "https://mercury26413.org/news.html#latent-tech"
+          },
+          {
             "@id": "https://mercury26413.org/news.html#vulcanforms-platinum"
           },
           {
@@ -81,6 +84,25 @@
             "item": "https://mercury26413.org/news.html"
           }
         ]
+      },
+      {
+        "@type": "BlogPosting",
+        "@id": "https://mercury26413.org/news.html#latent-tech",
+        "url": "https://mercury26413.org/news.html#latent-tech",
+        "headline": "Thank you, Latent Tech",
+        "isPartOf": {
+          "@id": "https://mercury26413.org/news.html#webpage"
+        },
+        "author": {
+          "@id": "https://mercury26413.org/#organization"
+        },
+        "publisher": {
+          "@id": "https://mercury26413.org/#organization"
+        },
+        "inLanguage": "en-US",
+        "datePublished": "2026-11-20",
+        "description": "Thank you to Latent Tech for sponsoring our 2026–27 season.",
+        "image": "https://mercury26413.org/images/sponsors/latent-tech-banner.png"
       },
       {
         "@type": "BlogPosting",
@@ -133,7 +155,7 @@
   </script>
   <!-- agent:end -->
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=231">
+  <link rel="stylesheet" href="css/style.css?v=232">
   <link rel="expect" href="#mercury-ready" blocking="render">
   <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -159,14 +181,38 @@
          - The <h2> is the title; the dateline holds the date (<time class="d" datetime="YYYY-MM-DD">) and a topic.
          - Only write what is true and agreed with the team. For a sponsor, print what they gave only when the
            team says so (VulcanForms' $10,000: Andy, 2026-11-19); otherwise name the tier and its range from the
-           package (e.g. "Platinum ($7,500+)"). Describe the deal only as far as it is settled (e.g. "applying to
-           sponsor" until it is final). The same rule is in partners.html ("Our sponsors") and DESIGN.md. -->
+           package (e.g. "Platinum ($7,500+)"); until the team gives the tier, thank the sponsor for the season
+           and name no tier (Latent Tech, 2026-11-20). Describe the deal only as far as it is settled (e.g.
+           "applying to sponsor" until it is final). The same rule is in partners.html ("Our sponsors") and
+           DESIGN.md. -->
     <section class="band band--tight" aria-label="Posts">
       <div class="container posts">
 
+        <!-- Latent Tech (Andy, 2026-11-20): no website, so no "Visit" link. When the team gives the tier, add it
+             with its range to the first sentence ("…for sponsoring our 2026–27 season at the [tier] level ($…+)";
+             an amount only if the team says so), here and in the home page's news card (index.html), and add a
+             tier tag on its partners.html card and the tier to its comment in SPONSORS (js/main.js). -->
+        <article class="post" id="latent-tech" aria-labelledby="post-latent-tech">
+          <figure class="post-media">
+            <img src="images/sponsors/latent-tech-banner.png" width="1200" height="630" fetchpriority="high" alt="Latent Tech logo">
+          </figure>
+          <div class="post-text">
+            <h2 id="post-latent-tech">Thank you, <span translate="no">Latent Tech</span></h2>
+            <p class="dateline"><time class="d" datetime="2026-11-20">Nov 20, 2026</time><span>Sponsors</span></p>
+            <p class="post-lead">Thank you to <span translate="no">Latent Tech</span> for sponsoring our
+            2026–&#8288;27 season.</p>
+            <p>Sponsorship funds cover robot parts and tools, registration and travel, and our summer camp and FLL
+            coaching.</p>
+            <p>Thank you to everyone at <span translate="no">Latent Tech</span> for supporting our students.</p>
+            <p class="links">
+              <a class="text-link" href="partners.html#tiers">See the sponsorship tiers</a>
+            </p>
+          </div>
+        </article>
+
         <article class="post" id="vulcanforms-platinum" aria-labelledby="post-vulcanforms">
           <figure class="post-media">
-            <img src="images/sponsors/vulcanforms-banner.png" width="1200" height="630" fetchpriority="high" alt="VulcanForms logo">
+            <img src="images/sponsors/vulcanforms-banner.png" width="1200" height="630" loading="lazy" alt="VulcanForms logo">
           </figure>
           <div class="post-text">
             <h2 id="post-vulcanforms">Thank you, <span translate="no">VulcanForms</span></h2>
@@ -236,7 +282,7 @@
       <nav class="footer-links" aria-label="About and legal"><a href="team.html#about">About</a><a href="contact.html">Contact</a><a href="terms.html">Terms and privacy</a></nav>
     </div>
   </footer>
-  <script src="js/main.js?v=232"></script>
+  <script src="js/main.js?v=233"></script>
   <!-- the page shows its first frame once the parser gets here, so js/main.js has built the header (see "Page transitions" in css/style.css) -->
   <div id="mercury-ready" hidden></div>
 </body>

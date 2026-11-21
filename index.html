@@ -138,7 +138,7 @@
   </script>
   <!-- agent:end -->
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=231">
+  <link rel="stylesheet" href="css/style.css?v=232">
   <link rel="expect" href="#mercury-ready" blocking="render">
   <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -231,7 +231,7 @@
           </div>
 
           <!-- on phones and tablets the partner credit sits here, inside the first screen (the strip below is for desktops) -->
-          <p class="lineup-credit" data-md-skip><span>Supported by <b data-supporters>VulcanForms, SolidWorks, Weston Owl and WEEFC</b></span> <a class="btn btn--light btn--sponsor" href="partners.html">Partner with us</a></p>
+          <p class="lineup-credit" data-md-skip><span>Supported by <b data-supporters>VulcanForms, Latent Tech, SolidWorks, Weston Owl and WEEFC</b></span> <a class="btn btn--light btn--sponsor" href="partners.html">Partner with us</a></p>
 
           <div class="season-cards">
             <section class="season-card" id="card-2024" data-season="2024">
@@ -282,7 +282,7 @@
 
       <div class="partner-strip">
         <div class="container row">
-          <p>Supported by <b data-supporters>VulcanForms, SolidWorks, Weston Owl and WEEFC</b></p>
+          <p>Supported by <b data-supporters>VulcanForms, Latent Tech, SolidWorks, Weston Owl and WEEFC</b></p>
           <div class="actions">
             <a class="btn btn--light btn--sponsor" href="partners.html">Partner with us</a>
             <a href="contact.html?topic=join#contact-form">Join as a student</a>
@@ -486,7 +486,8 @@
     </section>
 
     <!-- NEWS: the two newest posts from news.html, newest first. When you add a post there, copy its picture (or
-         video), date line, title and first paragraph here and drop the oldest card. -->
+         video), date line, title and first paragraph here and drop the oldest card. A picture made on white (a logo
+         on white) gets class="news-media on-white", which frames it so it does not melt into the white band. -->
     <section class="band" aria-labelledby="news-title">
       <div class="container">
         <div class="section-head">
@@ -495,20 +496,16 @@
         </div>
         <div class="news-cards">
           <article class="news-card">
+            <a class="news-media on-white" href="news.html#latent-tech" tabindex="-1" aria-hidden="true"><img src="images/sponsors/latent-tech-banner.png" width="1200" height="630" loading="lazy" alt=""></a>
+            <p class="dateline"><time class="d" datetime="2026-11-20">Nov 20, 2026</time><span>Sponsors</span></p>
+            <h3><a href="news.html#latent-tech">Thank you, <span translate="no">Latent Tech</span></a></h3>
+            <p>Thank you to <span translate="no">Latent Tech</span> for sponsoring our 2026–&#8288;27 season.</p>
+          </article>
+          <article class="news-card">
             <a class="news-media" href="news.html#vulcanforms-platinum" tabindex="-1" aria-hidden="true"><img src="images/sponsors/vulcanforms-banner.png" width="1200" height="630" loading="lazy" alt=""></a>
             <p class="dateline"><time class="d" datetime="2026-11-03">Nov 3, 2026</time><span>Sponsors</span></p>
             <h3><a href="news.html#vulcanforms-platinum">Thank you, <span translate="no">VulcanForms</span></a></h3>
             <p>Thank you to <span translate="no">VulcanForms</span> for applying to sponsor our 2026–&#8288;27 season with $10,000 at the Platinum level, the highest of our four sponsorship tiers.</p>
-          </article>
-          <article class="news-card">
-            <figure class="news-media" data-video>
-              <video controls muted playsinline preload="none" poster="images/hive-tip-match-2-poster.jpg" width="1920" height="1080" aria-label="The hive tips during a BIOBUZZ match and its balls spill onto the field">
-                <source src="images/hive-tip-match-2.mp4" type="video/mp4">
-              </video>
-            </figure>
-            <p class="dateline"><time class="d" datetime="2026-10-25">Oct 25, 2026</time><span>Competition</span></p>
-            <h3><a href="news.html#first-hive-tip">First hive tip of the season</a></h3>
-            <p>We attended the scrimmage hosted by <span translate="no">Ghost Robotics</span> at Westford High School, and here we got our first in-competition hive tip of this season!</p>
           </article>
         </div>
       </div>
@@ -544,7 +541,7 @@
       <nav class="footer-links" aria-label="About and legal"><a href="team.html#about">About</a><a href="contact.html">Contact</a><a href="terms.html">Terms and privacy</a></nav>
     </div>
   </footer>
-  <script src="js/main.js?v=232"></script>
+  <script src="js/main.js?v=233"></script>
   <!-- the page shows its first frame once the parser gets here, so js/main.js has built the header (see "Page transitions" in css/style.css) -->
   <div id="mercury-ready" hidden></div>
 </body>

@@ -29,11 +29,14 @@ const NAV = [
 // SPONSORS: shown in the footer of EVERY page (and named in the strip on the home page).
 // Keep this on all pages. To add a sponsor with a logo:
 //   { name: "Acme", logo: "images/acme.png", width: 240, height: 80, url: "https://acme.com" }
-// (width and height are the logo file's real size in pixels).
+// (width and height are the logo file's real size in pixels). Leave out url for a sponsor without a website:
+// its logo is then shown without a link.
 // SUPPORTERS are named (no logo) until we have their logos. A "Become a sponsor" link is always shown.
 const SPONSORS = [
   // Platinum, 2026–27 (thank-you post: news.html#vulcanforms-platinum)
   { name: "VulcanForms", logo: "images/sponsors/vulcanforms-logo.png", width: 782, height: 164, url: "https://www.vulcanforms.com/" },
+  // 2026–27, tier not given yet (thank-you post: news.html#latent-tech); no website (Andy, 2026-11-20)
+  { name: "Latent Tech", logo: "images/sponsors/latent-tech-logo.png", width: 877, height: 144 },
 ];
 const SUPPORTERS = ["SolidWorks", "Weston Owl", "WEEFC"];
 const TEAM_EMAIL = "gncemercury26413@gmail.com";
@@ -187,7 +190,12 @@ part("footer", () => {
   const footer = legal ? legal.parentElement : document.createElement("footer");
   footer.className = "site-footer";
   const sponsorItems = [
-    ...SPONSORS.map(s => `<li><a class="sponsor" href="${esc(s.url)}" target="_blank" rel="noopener" translate="no"><img src="${root}${esc(s.logo)}" alt="${esc(s.name)}"${s.width ? ` width="${s.width}" height="${s.height}"` : ""}></a></li>`),
+    ...SPONSORS.map(s => {
+      const logo = `<img src="${root}${esc(s.logo)}" alt="${esc(s.name)}"${s.width ? ` width="${s.width}" height="${s.height}"` : ""} loading="lazy">`;
+      return s.url
+        ? `<li><a class="sponsor" href="${esc(s.url)}" target="_blank" rel="noopener" translate="no">${logo}</a></li>`
+        : `<li translate="no">${logo}</li>`;   // no website: the logo alone
+    }),
     ...SUPPORTERS.map(n => `<li class="named" translate="no">${esc(n)}</li>`),
     `<li class="open"><a href="${root}partners.html">Become a sponsor</a></li>`,
   ].join("");
