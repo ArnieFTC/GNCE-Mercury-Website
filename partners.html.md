@@ -55,7 +55,7 @@ Every line is a maximum: travel depends on which events we qualify for. Every sp
 | Marketing and media | $2,500 | 5% |
 | Tools and machinery | $2,000 | 4% |
 | FIRST registration | $500 | 1% |
-| Total, all lines | $52,000 | 100% |
+| Total | $52,000 | 100% |
 
 Shares match our sponsorship package, rounded to add up to 100%.
 
